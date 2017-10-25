@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Firestorm.Endpoints</id>
+    <version>$(FsVersion)</version>
+    <title>Firestorm Endpoints Base</title>
+    <description>Base package for Firestorm Endpoint technologies.</description>
+    <tags>firestorm rest api endpoints</tags>
+
+    <authors>Connell Watkins</authors>
+    <copyright>Copyright © Connell Watkins 2017</copyright>
+    <projectUrl>https://github.com/connellw/Firestorm</projectUrl>
+    <licenseUrl>https://github.com/connellw/Firestorm/blob/master/LICENSE.txt</licenseUrl>
+    <iconUrl>https://github.com/connellw/Firestorm/raw/master/nuget/icon.png</iconUrl>
+
+    <dependencies>
+      <dependency id="Firestorm.Core" version="$(FsVersion)" />
+      <dependency id="Newtonsoft.Json" version="10.0" />
+    </dependencies>
+    
+    <references>
+      <reference file="Firestorm.Core.Web.dll" />
+      <reference file="Firestorm.Endpoints.dll" />
+      <reference file="Firestorm.Endpoints.Start.dll" />
+      <reference file="Firestorm.Endpoints.Formatting.dll" />
+    </references>
+  </metadata>
+  <files>
+    <file src="..\..\src\Firestorm.Endpoints.Start\bin\$(FsConfiguration)\net45\*.dll" target="lib\net45\"  />
+    <file src="..\..\src\Firestorm.Endpoints.Start\bin\$(FsConfiguration)\netstandard2.0\*.dll" target="lib\netstandard2.0\"  />
+    <file src="..\..\src\Firestorm.Endpoints.Formatting\bin\$(FsConfiguration)\net45\*.dll" target="lib\net45\"  />
+    <file src="..\..\src\Firestorm.Endpoints.Formatting\bin\$(FsConfiguration)\netstandard2.0\*.dll" target="lib\netstandard2.0\"  />
+  </files>
+</package>

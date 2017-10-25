@@ -1,0 +1,36 @@
+﻿using System;
+using System.Diagnostics;
+using System.Linq.Expressions;
+using System.Reflection;
+using Firestorm.Stems.Attributes.Analysis;
+
+namespace Firestorm.Stems.Basic.Resolvers
+{
+    public class AuthorizeAttributeResolver : FieldAttributeResolverBase
+    {
+        private readonly Func<IRestUser, bool> _isAuthorized;
+
+        public AuthorizeAttributeResolver(Func<IRestUser, bool> isAuthorized)
+        {
+            _isAuthorized = isAuthorized;
+        }
+
+        public override void IncludeMember(MemberInfo member)
+        {
+            SetFieldDefinition(member);
+            FieldDefinition.AuthorizePredicate = _isAuthorized;
+        }
+
+        protected override void AddExpressionToDefinition(LambdaExpression expression)
+        {
+            Debug.Fail("Shouldn't get here due to override of IncludeMember.");
+            throw new StemAttributeSetupException("Cannot apply AuthorizeAttriute to this member.");
+        }
+
+        protected override Type AddMethodToDefinition(MethodInfo method)
+        {
+            Debug.Fail("Shouldn't get here due to override of IncludeMember.");
+            throw new StemAttributeSetupException("Cannot apply AuthorizeAttriute to this member.");
+        }
+    }
+}

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\packages\MSTest.TestAdapter.1.1.18\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\..\..\packages\MSTest.TestAdapter.1.1.18\build\net45\MSTest.TestAdapter.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3312904B-E11E-4934-8752-DBC0250D61E5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Firestorm.Tests.Functionality.Stems</RootNamespace>
+    <AssemblyName>Firestorm.Tests.Functionality.Stems</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.abstractions.2.0.1\lib\net35\xunit.abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.assert, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.assert.2.2.0\lib\netstandard1.1\xunit.assert.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.core, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.extensibility.core.2.2.0\lib\netstandard1.1\xunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.execution.desktop, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.extensibility.execution.2.2.0\lib\net452\xunit.execution.desktop.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ComplexFieldGettersTests.cs" />
+    <Compile Include="IdentifierAdvancedTests.cs" />
+    <Compile Include="IdentifierCombinedTests.cs" />
+    <Compile Include="IdentifierUpsertTests.cs" />
+    <Compile Include="Models\ArtistAlbumsStem.cs" />
+    <Compile Include="Models\ArtistsRoot.cs" />
+    <Compile Include="Models\ArtistsStem.cs" />
+    <Compile Include="Models\StemTestUtility.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StemBehaviorTests.cs" />
+    <Compile Include="StemCollectionTests.cs" />
+    <Compile Include="SubstemTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Firestorm.Engine.Implementation\Firestorm.Engine.Implementation.csproj">
+      <Project>{908d22e4-1cc9-4b96-a470-9c79ee529d78}</Project>
+      <Name>Firestorm.Engine.Implementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Core\Firestorm.Core.csproj">
+      <Project>{8A8BFE0E-1545-4152-96FC-23E72F1D0DF2}</Project>
+      <Name>Firestorm.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Endpoints\Firestorm.Endpoints.csproj">
+      <Project>{B629974F-C31F-4E05-8AD7-CD137DC84505}</Project>
+      <Name>Firestorm.Endpoints</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Engine\Firestorm.Engine.csproj">
+      <Project>{AAE9E7FF-8EE5-4CA0-87CF-7E0026E62CC7}</Project>
+      <Name>Firestorm.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Attributes.Basic\Firestorm.Stems.Attributes.Basic.csproj">
+      <Project>{9c349e42-67d8-4700-aafc-88e639f230b5}</Project>
+      <Name>Firestorm.Stems.Attributes.Basic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Attributes\Firestorm.Stems.Attributes.csproj">
+      <Project>{dd9a1f60-dc62-40f8-9d2c-13053e5f6072}</Project>
+      <Name>Firestorm.Stems.Attributes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Fuel\Firestorm.Stems.Fuel.csproj">
+      <Project>{5203a93d-8bb7-4852-b38c-1b867d00c005}</Project>
+      <Name>Firestorm.Stems.Fuel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.Derive\Firestorm.Stems.Roots.Derive.csproj">
+      <Project>{DBA378A2-D68D-4A6A-82A7-6BF793F082BB}</Project>
+      <Name>Firestorm.Stems.Roots.Derive</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.DataSource\Firestorm.Stems.Roots.DataSource.csproj">
+      <Project>{09c0522b-057b-4b2c-a983-8f9cf5103ae5}</Project>
+      <Name>Firestorm.Stems.Roots.DataSource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.Start\Firestorm.Stems.Roots.Start.csproj">
+      <Project>{f1660ca3-bbbe-42a1-b108-8d37f37cc6b0}</Project>
+      <Name>Firestorm.Stems.Roots.Start</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Roots\Firestorm.Stems.Roots.csproj">
+      <Project>{B98E059F-AF65-4064-BE81-0D01B3EB0D9E}</Project>
+      <Name>Firestorm.Stems.Roots</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems\Firestorm.Stems.csproj">
+      <Project>{6984B285-11D0-418B-A973-7D98C81A39E2}</Project>
+      <Name>Firestorm.Stems</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Firestorm.Tests.Endpoints\Firestorm.Tests.Endpoints.csproj">
+      <Project>{03A1DD60-2BA4-4388-92DB-BBC84DFFEDBB}</Project>
+      <Name>Firestorm.Tests.Endpoints</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Firestorm.Tests.Engine\Firestorm.Tests.Engine.csproj">
+      <Project>{03F2D555-53FA-43D5-BAAC-0E9B01AE2A86}</Project>
+      <Name>Firestorm.Tests.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Firestorm.Tests.Models\Firestorm.Tests.Models.csproj">
+      <Project>{28B146D0-3785-4386-BD4F-55DD29A1C76D}</Project>
+      <Name>Firestorm.Tests.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+  </Target>
+</Project>

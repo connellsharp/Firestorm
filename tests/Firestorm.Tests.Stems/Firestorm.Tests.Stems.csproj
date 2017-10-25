@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{39A546B6-B99F-440E-B30C-456F947676BE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Firestorm.Tests.Stems</RootNamespace>
+    <AssemblyName>Firestorm.Tests.Stems</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.abstractions.2.0.1\lib\net35\xunit.abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.assert, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.assert.2.2.0\lib\netstandard1.1\xunit.assert.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.core, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.extensibility.core.2.2.0\lib\netstandard1.1\xunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.execution.desktop, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.extensibility.execution.2.2.0\lib\net452\xunit.execution.desktop.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise />
+  </Choose>
+  <ItemGroup>
+    <Compile Include="Attributes\AuthorizeAttributeTests.cs" />
+    <Compile Include="AttributeFieldProviderTests.cs" />
+    <Compile Include="Substems\SubCollectionFieldWriterTests.cs" />
+    <Compile Include="FieldWriterTestExtensions.cs" />
+    <Compile Include="NamingConventionSwitcherTests.cs" />
+    <Compile Include="TestStartAxis.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Substems\SubItemFieldWriterTests.cs" />
+    <Compile Include="StemFieldDictionary.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Firestorm.Engine.Implementation\Firestorm.Engine.Implementation.csproj">
+      <Project>{908d22e4-1cc9-4b96-a470-9c79ee529d78}</Project>
+      <Name>Firestorm.Engine.Implementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Core\Firestorm.Core.csproj">
+      <Project>{8A8BFE0E-1545-4152-96FC-23E72F1D0DF2}</Project>
+      <Name>Firestorm.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Engine\Firestorm.Engine.csproj">
+      <Project>{AAE9E7FF-8EE5-4CA0-87CF-7E0026E62CC7}</Project>
+      <Name>Firestorm.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Attributes.Basic\Firestorm.Stems.Attributes.Basic.csproj">
+      <Project>{9c349e42-67d8-4700-aafc-88e639f230b5}</Project>
+      <Name>Firestorm.Stems.Attributes.Basic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Attributes\Firestorm.Stems.Attributes.csproj">
+      <Project>{dd9a1f60-dc62-40f8-9d2c-13053e5f6072}</Project>
+      <Name>Firestorm.Stems.Attributes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Fuel.Essential\Firestorm.Stems.Fuel.Essential.csproj">
+      <Project>{C3B73A29-DC9A-43A0-B18E-47F2115FA18A}</Project>
+      <Name>Firestorm.Stems.Fuel.Essential</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Fuel.Substems\Firestorm.Stems.Fuel.Substems.csproj">
+      <Project>{4EE0EC1C-87E2-4B90-ACDE-4B78801353E2}</Project>
+      <Name>Firestorm.Stems.Fuel.Substems</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Fuel\Firestorm.Stems.Fuel.csproj">
+      <Project>{5203A93D-8BB7-4852-B38C-1B867D00C005}</Project>
+      <Name>Firestorm.Stems.Fuel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems\Firestorm.Stems.csproj">
+      <Project>{6984B285-11D0-418B-A973-7D98C81A39E2}</Project>
+      <Name>Firestorm.Stems</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Firestorm.Tests.Engine\Firestorm.Tests.Engine.csproj">
+      <Project>{03F2D555-53FA-43D5-BAAC-0E9B01AE2A86}</Project>
+      <Name>Firestorm.Tests.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Firestorm.Tests.Models\Firestorm.Tests.Models.csproj">
+      <Project>{28B146D0-3785-4386-BD4F-55DD29A1C76D}</Project>
+      <Name>Firestorm.Tests.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

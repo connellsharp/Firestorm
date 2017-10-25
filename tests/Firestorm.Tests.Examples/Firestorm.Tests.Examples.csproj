@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{306B8FC0-EF02-423E-8D6B-6BCE8141FF52}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Firestorm.Tests.Examples</RootNamespace>
+    <AssemblyName>Firestorm.Tests.Examples</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JetBrains.Annotations, Version=11.0.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\JetBrains.Annotations.11.0.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.HttpListener, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Host.HttpListener.3.1.0\lib\net45\Microsoft.Owin.Host.HttpListener.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Hosting, Version=2.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Hosting.2.0.2\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.abstractions.2.0.1\lib\net35\xunit.abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.assert, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.assert.2.2.0\lib\netstandard1.1\xunit.assert.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.core, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.extensibility.core.2.2.0\lib\netstandard1.1\xunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.execution.desktop, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.extensibility.execution.2.2.0\lib\net452\xunit.execution.desktop.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise />
+  </Choose>
+  <ItemGroup>
+    <Compile Include="Basics\ComplexFieldGettersTests.cs" />
+    <Compile Include="Basics\AuthoriseByRelatedTests.cs" />
+    <Compile Include="Basics\HomeDirectoryTests.cs" />
+    <Compile Include="Basics\AutoMapTests.cs" />
+    <Compile Include="Basics\GettersAndQueryTests.cs" />
+    <Compile Include="Basics\SubstemTests.cs" />
+    <Compile Include="Basics\IdentifierTests.cs" />
+    <Compile Include="Basics\OptionsTests.cs" />
+    <Compile Include="Basics\SettersTests.cs" />
+    <Compile Include="Data\Models\Album.cs" />
+    <Compile Include="Data\Models\Artist.cs" />
+    <Compile Include="Data\ExampleModelInitializer.cs" />
+    <Compile Include="Data\ExampleDataContext.cs" />
+    <Compile Include="Data\Models\LikedTrack.cs" />
+    <Compile Include="Data\Models\Track.cs" />
+    <Compile Include="Data\Models\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\ExampleItegrationSuite.cs" />
+    <Compile Include="Web\ExampleFixture.cs" />
+    <Compile Include="Web\SpoofUserMiddleware.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Firestorm.Core\Firestorm.Core.csproj">
+      <Project>{8A8BFE0E-1545-4152-96FC-23E72F1D0DF2}</Project>
+      <Name>Firestorm.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Endpoints.Owin\Firestorm.Endpoints.Owin.csproj">
+      <Project>{BE5C7EC3-7379-4D87-89EB-F3705182B873}</Project>
+      <Name>Firestorm.Endpoints.Owin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Endpoints.Start\Firestorm.Endpoints.Start.csproj">
+      <Project>{fffe6b9a-5753-460f-81b2-823c23bc4a3c}</Project>
+      <Name>Firestorm.Endpoints.Start</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Endpoints.WebApi2\Firestorm.Endpoints.WebApi2.csproj">
+      <Project>{44FBE17A-1E96-4E43-A20F-B1806DB6AF98}</Project>
+      <Name>Firestorm.Endpoints.WebApi2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Endpoints\Firestorm.Endpoints.csproj">
+      <Project>{B629974F-C31F-4E05-8AD7-CD137DC84505}</Project>
+      <Name>Firestorm.Endpoints</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Engine.Data\Firestorm.Engine.Data.csproj">
+      <Project>{16B05383-6F76-470C-BAB4-6FE8DE61EBAA}</Project>
+      <Name>Firestorm.Engine.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Engine.EntityFramework\Firestorm.Engine.EntityFramework.csproj">
+      <Project>{CD4E5183-CB9C-433D-86DF-FC0F5A16B94B}</Project>
+      <Name>Firestorm.Engine.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Engine\Firestorm.Engine.csproj">
+      <Project>{AAE9E7FF-8EE5-4CA0-87CF-7E0026E62CC7}</Project>
+      <Name>Firestorm.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Attributes.Basic\Firestorm.Stems.Attributes.Basic.csproj">
+      <Project>{9c349e42-67d8-4700-aafc-88e639f230b5}</Project>
+      <Name>Firestorm.Stems.Attributes.Basic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Attributes\Firestorm.Stems.Attributes.csproj">
+      <Project>{dd9a1f60-dc62-40f8-9d2c-13053e5f6072}</Project>
+      <Name>Firestorm.Stems.Attributes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.DataSource\Firestorm.Stems.Roots.DataSource.csproj">
+      <Project>{09C0522B-057B-4B2C-A983-8F9CF5103AE5}</Project>
+      <Name>Firestorm.Stems.Roots.DataSource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.Start\Firestorm.Stems.Roots.Start.csproj">
+      <Project>{f1660ca3-bbbe-42a1-b108-8d37f37cc6b0}</Project>
+      <Name>Firestorm.Stems.Roots.Start</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Roots\Firestorm.Stems.Roots.csproj">
+      <Project>{B98E059F-AF65-4064-BE81-0D01B3EB0D9E}</Project>
+      <Name>Firestorm.Stems.Roots</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems\Firestorm.Stems.csproj">
+      <Project>{6984B285-11D0-418B-A973-7D98C81A39E2}</Project>
+      <Name>Firestorm.Stems</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Firestorm.Tests.Integration.Http.Base\Firestorm.Tests.Integration.Http.Base.csproj">
+      <Project>{FC008C16-D570-450B-8A62-6064E80595EB}</Project>
+      <Name>Firestorm.Tests.Integration.Http.Base</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\ExampleDatabase.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

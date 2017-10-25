@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Firestorm.Engine.EntityFramework</id>
+    <version>$(FsVersion)</version>
+    <title>Firestorm with Entity Framework</title>
+    <description>Use Entity Framework as a data source for Firestorm APIs</description>
+    <tags>firestorm rest api entityframework orm</tags>
+
+    <authors>Connell Watkins</authors>
+    <copyright>Copyright © Connell Watkins 2017</copyright>
+    <projectUrl>https://github.com/connellw/Firestorm</projectUrl>
+    <licenseUrl>https://github.com/connellw/Firestorm/blob/master/LICENSE.txt</licenseUrl>
+    <iconUrl>https://github.com/connellw/Firestorm/raw/master/nuget/icon.png</iconUrl>
+
+    <dependencies>
+      <dependency id="Firestorm.Core" version="$(FsVersion)" />
+      <dependency id="EntityFramework" version = "6.1.3" />
+    </dependencies>
+    
+    <references>
+      <reference file="Firestorm.Engine.dll" />
+      <reference file="Firestorm.Engine.Additives.dll" />
+      <reference file="Firestorm.Engine.Data.dll" />
+      <reference file="Firestorm.Engine.EntityFramework.dll" />
+    </references>
+  </metadata>
+  <files>
+    <file src="..\..\src\Firestorm.Engine.EntityFramework\bin\$(FsConfiguration)\*.dll" target="lib\net45\"  />
+    <!--file src="..\..\src\Firestorm.Engine.EntityFramework\bin\$(FsConfiguration)\netstandard2.0\*.dll" target="lib\netstandard2.0\"  /-->
+  </files>
+</package>
