@@ -61,4 +61,4 @@ It's still in active development. I have so many feature ideas for future versio
 Copyright © 2017 Connell Watkins
 
 #### License
-Firestorm is licensed under [MIT](). Refer to [LICENSE.txt]() for detailed information.
+Firestorm is licensed under MIT. Refer to [LICENSE.txt](https://github.com/connellw/Firestorm/blob/master/LICENSE.txt) for detailed information.
