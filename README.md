@@ -49,7 +49,7 @@ PM> Install-Package Firestorm.Endpoints.AspNetCore
 PM> Install-Package Firestorm.Engine.EntityFramework
 ```
 
-See the [Getting Started]() section for more detailed setup information.
+See the [Installation](wiki/Installation) section for more detailed setup information.
 
 ## About
 
