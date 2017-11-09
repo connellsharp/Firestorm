@@ -125,6 +125,7 @@
     <Compile Include="Data\Models\Track.cs" />
     <Compile Include="Data\Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\ExampleConfiguration.cs" />
     <Compile Include="Web\ExampleItegrationSuite.cs" />
     <Compile Include="Web\ExampleFixture.cs" />
     <Compile Include="Web\SpoofUserMiddleware.cs" />

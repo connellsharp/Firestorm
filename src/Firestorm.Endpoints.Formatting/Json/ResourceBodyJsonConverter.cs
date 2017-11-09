@@ -43,7 +43,8 @@ namespace Firestorm.Endpoints.Formatting.Json
                     var items = from JObject jObject in jBody
                         select Converter.ConvertObject(jObject);
 
-                    return new CollectionBody(items);
+                    var collectionData = new RestCollectionData(items);
+                    return new CollectionBody(collectionData);
 
                 case JTokenType.Object:
                     Debug.Assert(jBody is JObject, "jBody is JObject");

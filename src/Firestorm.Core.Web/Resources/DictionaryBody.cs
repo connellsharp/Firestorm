@@ -1,22 +1,19 @@
-using System.Collections.Generic;
-
 namespace Firestorm.Core.Web
 {
     /// <remarks>
     /// Similar to <see cref="CollectionBody"/>
     /// </remarks>
-    public class DictionaryBody : ResourceBody
+    public class DictionaryBody : ResourceBody, IPagedResourceBody
     {
         public DictionaryBody(RestDictionaryData dictionary)
         {
             Items = dictionary.Items;
+            PageDetails = dictionary.PageDetails;
         }
 
-        public DictionaryBody(IEnumerable<KeyValuePair<string, object>> items)
-            : this(new RestDictionaryData(items))
-        { }
-
         public RestItemData Items { get; }
+
+        public PageDetails PageDetails { get; }
 
         public override ResourceType ResourceType { get; } = ResourceType.Dictionary;
 

@@ -38,7 +38,8 @@ namespace Firestorm.Tests.Endpoints
 
             var newItemData = new RestItemData();
             var strategy = new AddToCollectionStrategy();
-            await strategy.ExecuteAsync(Collection, new TestEndpointContext(), new CollectionBody(new [] { newItemData, newItemData, newItemData }));
+            var collectionData = new RestCollectionData(new[] { newItemData, newItemData, newItemData });
+            await strategy.ExecuteAsync(Collection, new TestEndpointContext(), new CollectionBody(collectionData));
 
             int afterCount = Collection.Count;
             Assert.Equal(startCount + 3, afterCount);

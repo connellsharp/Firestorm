@@ -45,6 +45,7 @@ namespace Firestorm.Endpoints
         {
             IRestCollectionQuery query = Context.GetQuery();
             QueryValidationUtility.EnsureValidQuery(query);
+
             RestCollectionData items = await Collection.QueryDataAsync(query);
             return new CollectionBody(items);
         }

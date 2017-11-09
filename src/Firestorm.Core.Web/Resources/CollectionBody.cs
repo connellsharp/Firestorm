@@ -2,18 +2,17 @@ using System.Collections.Generic;
 
 namespace Firestorm.Core.Web
 {
-    public class CollectionBody : ResourceBody
+    public class CollectionBody : ResourceBody, IPagedResourceBody
     {
         public CollectionBody(RestCollectionData collection)
         {
             Items = collection.Items;
+            PageDetails = collection.PageDetails;
         }
 
-        public CollectionBody(IEnumerable<RestItemData> items)
-            : this(new RestCollectionData(items))
-        { }
-
         public IEnumerable<RestItemData> Items { get; }
+
+        public PageDetails PageDetails { get; }
 
         public override ResourceType ResourceType { get; } = ResourceType.Collection;
 

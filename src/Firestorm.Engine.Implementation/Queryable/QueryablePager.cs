@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 namespace Firestorm.Engine.Queryable
@@ -14,15 +15,29 @@ namespace Firestorm.Engine.Queryable
 
         public IQueryable<TItem> ApplyPagination(IQueryable<TItem> items)
         {
-            // TODO need to know sort order to get page=end
-
-            if(_pageInstruction == null)
-                return items.Take(100);
+            if (_pageInstruction == null)
+                return items.Take(100); // TODO default? where from?
 
             if (_pageInstruction.Offset.HasValue)
-                items = items.Take(_pageInstruction.Offset.Value);
+            {
+                if (_pageInstruction.Offset < 0)
+                {
+                    items = items.Reverse();
 
-            items = items.Take(_pageInstruction.Size);
+                    if (_pageInstruction.Offset != 0)
+                        items = items.Skip(Math.Abs(_pageInstruction.Offset.Value));
+
+                    items = items.Take(_pageInstruction.Size);
+                    items = items.Reverse();
+                }
+                else
+                {
+                    if (_pageInstruction.Offset != 0)
+                        items = items.Skip(_pageInstruction.Offset.Value);
+
+                    items = items.Take(_pageInstruction.Size);
+                }
+            }
 
             return items;
         }

@@ -91,6 +91,17 @@ namespace Firestorm.Endpoints.Query
         public string[] PageNumberQueryKeys { get; set; } = new[] { "page" };
 
         /// <summary>
+        /// Special page strings that can be translated in page numbers.
+        /// </summary>
+        public Dictionary<string, int> SpecialPageNumbers { get; } = new Dictionary<string, int>
+        {
+            { "first", 1 },
+            { "start", 1 },
+            { "last", -1 },
+            { "end", -1 },
+        };
+
+        /// <summary>
         /// A prefix that when applied to an identifier in the URL can return an <see cref="IRestDictionary"/> rather than a single item.
         /// </summary>
         public string DictionaryReferencePrefix { get; set; } = "by_";

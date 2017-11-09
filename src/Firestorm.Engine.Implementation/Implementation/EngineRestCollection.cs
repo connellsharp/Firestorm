@@ -31,7 +31,6 @@ namespace Firestorm.Engine
             
             var fieldAuth = new FieldAuthChecker<TItem>(_context.Fields, _context.AuthorizationChecker, null);
             IEnumerable<string> fields = fieldAuth.GetOrEnsureFields(query?.SelectFields, 1);
-
             var selector = new QueryableFieldSelector<TItem>(_context.Fields.GetReaders(fields));
 
             IEnumerable<RestItemData> queriedData = await selector.SelectFieldsOnlyAsync(items, _context.Repository.ForEachAsync);
