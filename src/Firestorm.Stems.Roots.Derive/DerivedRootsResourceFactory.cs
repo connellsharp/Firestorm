@@ -14,21 +14,21 @@ namespace Firestorm.Stems.Roots.Derive
 
         public string RootsNamespace { get; set; }
 
-        internal NamedTypeDictionary RootTypeDictionary;
+        private NamedTypeDictionary _rootTypeDictionary;
 
-        internal readonly ConcurrentDictionary<string, IRootCollectionCreator> Creators = new ConcurrentDictionary<string, IRootCollectionCreator>();
+        private readonly CollectionCreatorCache _creators = new CollectionCreatorCache();
 
         public IEnumerable<Type> GetStemTypes()
         {
-            RootTypeDictionary = new SuffixedDerivedTypeDictionary(typeof(Root), "Root");
+            _rootTypeDictionary = new SuffixedDerivedTypeDictionary(typeof(Root), "Root");
 
             if (RootTypes != null)
-                RootTypeDictionary.AddTypes(RootTypes);
+                _rootTypeDictionary.AddTypes(RootTypes);
 
             if (RootsNamespace != null)
-                RootTypeDictionary.AddNamespace(RootsNamespace);
+                _rootTypeDictionary.AddNamespace(RootsNamespace);
 
-            return RootTypeDictionary.GetAllTypes().Select(GetStemFromRoot);
+            return _rootTypeDictionary.GetAllTypes().Select(GetStemFromRoot);
         }
 
         private static Type GetStemFromRoot(Type rootType)
@@ -39,7 +39,7 @@ namespace Firestorm.Stems.Roots.Derive
 
         public IRestResource GetStartResource(IRootRequest request, IStemConfiguration configuration)
         {
-            return new RootsDirectory(request, this, configuration);
+            return new RootsDirectory(configuration, request, _rootTypeDictionary, _creators);
         }
     }
 }

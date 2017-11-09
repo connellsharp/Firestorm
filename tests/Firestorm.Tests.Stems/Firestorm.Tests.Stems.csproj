@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Web" />
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\xunit.abstractions.2.0.1\lib\net35\xunit.abstractions.dll</HintPath>
     </Reference>
@@ -61,7 +62,9 @@
     <Compile Include="Attributes\AuthorizeAttributeTests.cs" />
     <Compile Include="AttributeFieldProviderTests.cs" />
     <Compile Include="Attributes\TestRestUser.cs" />
-    <Compile Include="Roots\WnspointRootRequestTests.cs" />
+    <Compile Include="Roots\EndpointRootRequestTests.cs" />
+    <Compile Include="Roots\RootsDirectoryTests.cs" />
+    <Compile Include="Roots\TestEndpointContext.cs" />
     <Compile Include="Substems\SubCollectionFieldWriterTests.cs" />
     <Compile Include="FieldWriterTestExtensions.cs" />
     <Compile Include="NamingConventionSwitcherTests.cs" />
@@ -107,9 +110,17 @@
       <Project>{5203A93D-8BB7-4852-B38C-1B867D00C005}</Project>
       <Name>Firestorm.Stems.Fuel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.Derive\Firestorm.Stems.Roots.Derive.csproj">
+      <Project>{DBA378A2-D68D-4A6A-82A7-6BF793F082BB}</Project>
+      <Name>Firestorm.Stems.Roots.Derive</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.Start\Firestorm.Stems.Roots.Start.csproj">
       <Project>{F1660CA3-BBBE-42A1-B108-8D37F37CC6B0}</Project>
       <Name>Firestorm.Stems.Roots.Start</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Roots\Firestorm.Stems.Roots.csproj">
+      <Project>{B98E059F-AF65-4064-BE81-0D01B3EB0D9E}</Project>
+      <Name>Firestorm.Stems.Roots</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Firestorm.Stems\Firestorm.Stems.csproj">
       <Project>{6984B285-11D0-418B-A973-7D98C81A39E2}</Project>

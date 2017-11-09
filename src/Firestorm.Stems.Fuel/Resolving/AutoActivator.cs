@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using Firestorm.Stems.Fuel.Resolving.Exceptions;
+using JetBrains.Annotations;
 
 namespace Firestorm.Stems.Fuel.Resolving
 {
@@ -23,7 +25,7 @@ namespace Firestorm.Stems.Fuel.Resolving
             return (T) CreateInstance(typeof(T));
         }
 
-        public object CreateInstance(Type type)
+        public object CreateInstance([NotNull] Type type)
         {
             object[] constructorArgs = GetConstructorArguments(type).ToArray();
 

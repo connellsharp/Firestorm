@@ -11,14 +11,20 @@ namespace Firestorm.Stems.Roots.Derive
     /// </summary>
     public class RootsDirectory : IRestDirectory
     {
-        private readonly DerivedRootsResourceFactory _parentFactory;
-        private readonly IRootRequest _request;
         private readonly IStemConfiguration _configuration;
+        private readonly IRootRequest _request;
+        private readonly NamedTypeDictionary _rootTypeDictionary;
+        private readonly CollectionCreatorCache _creatorCache;
 
-        public RootsDirectory(IRootRequest request, DerivedRootsResourceFactory parentFactory, IStemConfiguration configuration)
+        public RootsDirectory(IStemConfiguration configuration, IRootRequest request, NamedTypeDictionary rootTypeDictionary)
+            : this(configuration, request, rootTypeDictionary, new CollectionCreatorCache())
+        { }
+
+        internal RootsDirectory(IStemConfiguration configuration, IRootRequest request, NamedTypeDictionary rootTypeDictionary, CollectionCreatorCache creatorCache)
         {
             _request = request;
-            _parentFactory = parentFactory;
+            _rootTypeDictionary = rootTypeDictionary;
+            _creatorCache = creatorCache;
             _configuration = configuration;
         }
 
@@ -26,17 +32,20 @@ namespace Firestorm.Stems.Roots.Derive
         {
             var autoActivator = new AutoActivator(_configuration.DependencyResolver);
 
-            Type rootType = _parentFactory.RootTypeDictionary.GetType(startResourceName);
+            Type rootType = _rootTypeDictionary.GetType(startResourceName);
             var root = (Root)autoActivator.CreateInstance(rootType);
 
             root.Configuration = _configuration;
             root.User = _request.User;
             _request.OnDispose += delegate { root.Dispose(); };
 
+            if (root.StartStemType == null)
+                throw new ArgumentNullException(nameof(root.StartStemType), "Root class StartStemType cannot be null.");
+
             var stem = (Stem)autoActivator.CreateInstance(root.StartStemType);
             stem.SetParent(root);
             
-            IRootCollectionCreator creator = _parentFactory.Creators.GetOrAdd(startResourceName, delegate
+            IRootCollectionCreator creator = _creatorCache.GetOrAdd(startResourceName, delegate
             {
                 Type genericRootType = rootType.GetGenericSubclass(typeof(Root<>));
                 Debug.Assert(genericRootType != null, "Weakly-typed root was somehow created.");
@@ -50,7 +59,7 @@ namespace Firestorm.Stems.Roots.Derive
 
         public Task<RestDirectoryInfo> GetInfoAsync()
         {
-            return Task.FromResult(_parentFactory.RootTypeDictionary.CreateDirectoryInfo(_configuration.NamingConventionSwitcher));
+            return Task.FromResult(_rootTypeDictionary.CreateDirectoryInfo(_configuration.NamingConventionSwitcher));
         }
     }
 }
