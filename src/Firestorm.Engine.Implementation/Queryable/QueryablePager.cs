@@ -16,7 +16,10 @@ namespace Firestorm.Engine.Queryable
         {
             // TODO need to know sort order to get page=end
 
-            if(_pageInstruction.Offset.HasValue)
+            if(_pageInstruction == null)
+                return items.Take(100);
+
+            if (_pageInstruction.Offset.HasValue)
                 items = items.Take(_pageInstruction.Offset.Value);
 
             items = items.Take(_pageInstruction.Size);

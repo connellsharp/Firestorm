@@ -60,6 +60,8 @@
   <ItemGroup>
     <Compile Include="Attributes\AuthorizeAttributeTests.cs" />
     <Compile Include="AttributeFieldProviderTests.cs" />
+    <Compile Include="Attributes\TestRestUser.cs" />
+    <Compile Include="Roots\WnspointRootRequestTests.cs" />
     <Compile Include="Substems\SubCollectionFieldWriterTests.cs" />
     <Compile Include="FieldWriterTestExtensions.cs" />
     <Compile Include="NamingConventionSwitcherTests.cs" />
@@ -69,6 +71,10 @@
     <Compile Include="StemFieldDictionary.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Firestorm.Endpoints\Firestorm.Endpoints.csproj">
+      <Project>{B629974F-C31F-4E05-8AD7-CD137DC84505}</Project>
+      <Name>Firestorm.Endpoints</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Firestorm.Engine.Implementation\Firestorm.Engine.Implementation.csproj">
       <Project>{908d22e4-1cc9-4b96-a470-9c79ee529d78}</Project>
       <Name>Firestorm.Engine.Implementation</Name>
@@ -100,6 +106,10 @@
     <ProjectReference Include="..\..\src\Firestorm.Stems.Fuel\Firestorm.Stems.Fuel.csproj">
       <Project>{5203A93D-8BB7-4852-B38C-1B867D00C005}</Project>
       <Name>Firestorm.Stems.Fuel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.Start\Firestorm.Stems.Roots.Start.csproj">
+      <Project>{F1660CA3-BBBE-42A1-B108-8D37F37CC6B0}</Project>
+      <Name>Firestorm.Stems.Roots.Start</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Firestorm.Stems\Firestorm.Stems.csproj">
       <Project>{6984B285-11D0-418B-A973-7D98C81A39E2}</Project>
