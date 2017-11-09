@@ -2,9 +2,10 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using Firestorm.Stems.Attributes.Analysis;
+using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
 
-namespace Firestorm.Stems.Basic.Resolvers
+namespace Firestorm.Stems.Attributes.Basic.Resolvers
 {
     /// <summary>
     /// Reflection methods for building <see cref="FieldDefinition" /> objects from reading <see cref="FieldAttribute" />s on a type.

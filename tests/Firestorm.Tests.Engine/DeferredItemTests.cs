@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Engine;
 using Firestorm.Engine.Additives.Identifiers;
+using Firestorm.Engine.Deferring;
 using Firestorm.Tests.Engine.Models;
 using Firestorm.Tests.Models;
 using Xunit;

@@ -1,10 +1,9 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Firestorm.Engine.Fields;
 using JetBrains.Annotations;
 
-namespace Firestorm.Engine
+namespace Firestorm.Engine.Deferring
 {
     /// <summary>
     /// A single item's repository and identifier. Contains methods to lazily fetch the item from the repository.

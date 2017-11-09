@@ -1,4 +1,5 @@
 ﻿using Firestorm.Stems;
+using Firestorm.Stems.Attributes.Basic.Attributes;
 using Xunit;
 
 namespace Firestorm.Tests.Stems.Attributes

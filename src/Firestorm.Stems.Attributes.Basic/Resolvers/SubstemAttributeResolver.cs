@@ -2,7 +2,7 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Firestorm.Stems.Basic.Resolvers
+namespace Firestorm.Stems.Attributes.Basic.Resolvers
 {
     public class SubstemAttributeResolver : FieldAttributeResolverBase
     {

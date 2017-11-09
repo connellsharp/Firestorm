@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using Firestorm.Engine.Fields;
-using Firestorm.Engine.Queryable.Exceptions;
 using JetBrains.Annotations;
 
 namespace Firestorm.Engine.Queryable

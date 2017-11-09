@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Firestorm.Engine.Additives.Identifiers;
 using Firestorm.Engine.Identifiers;
+using Firestorm.Stems.Attributes;
 using Firestorm.Stems.Attributes.Analysis;
 using JetBrains.Annotations;
 

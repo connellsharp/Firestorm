@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Firestorm.Engine.Fields;
-using Firestorm.Engine.Queryable.Exceptions;
 using JetBrains.Annotations;
 
-namespace Firestorm.Engine.Queryable.Helpers
+namespace Firestorm.Engine.Queryable
 {
     // TODO consider if this should this be in the engine? Only used from outside, but uses internal members
     // especially now we  MemberInitExpressionBuilder is its own class. Perhaps that could take constructor overloads?

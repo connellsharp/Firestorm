@@ -1,4 +1,4 @@
-namespace Firestorm.Engine
+namespace Firestorm.Engine.Deferring
 {
     /// <summary>
     /// The lazy-loaded item state of a <see cref="DeferredItemBase{TItem}"/>.

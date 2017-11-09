@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Firestorm.Engine
+namespace Firestorm.Engine.Defaults
 {
     public abstract class MemoryRepository<TItem> : IEngineRepository<TItem>
         where TItem : class, new()

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Stems;
+using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Tests.Engine.Implementation;
 using Firestorm.Tests.Functionality.Stems.Models;
 using Firestorm.Tests.Models;

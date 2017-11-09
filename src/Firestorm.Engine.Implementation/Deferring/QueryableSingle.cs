@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Firestorm.Engine
+namespace Firestorm.Engine.Deferring
 {
     internal class QueryableSingle<T> : IQueryableSingle<T>
     {

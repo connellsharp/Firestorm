@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Firestorm.Engine
+namespace Firestorm.Engine.Deferring
 {
     /// <summary>
     /// A deferred item for the Engine, which has in fact already been loaded into memory.

@@ -1,6 +1,7 @@
 ﻿using System;
 using Firestorm.Core;
 using Firestorm.Endpoints.Query;
+using Firestorm.Endpoints.Start;
 using Microsoft.Owin;
 
 namespace Firestorm.Endpoints.Owin

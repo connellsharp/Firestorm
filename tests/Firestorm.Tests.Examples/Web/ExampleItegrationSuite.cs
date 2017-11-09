@@ -2,6 +2,7 @@
 using System.Net.Http;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Owin;
+using Firestorm.Endpoints.Start;
 using Firestorm.Tests.Integration.Http.Base;
 using Microsoft.Owin.Hosting;
 using Owin;

@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 
-namespace Firestorm.Engine.Queryable.Helpers
+namespace Firestorm.Engine.Queryable
 {
     /// <summary>
     /// Taken and refactored from http://stackoverflow.com/a/723018/369247

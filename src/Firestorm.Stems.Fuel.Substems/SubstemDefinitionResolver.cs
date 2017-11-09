@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Firestorm.Engine;
 using Firestorm.Engine.Fields;
+using Firestorm.Stems.Attributes;
 using Firestorm.Stems.Attributes.Analysis;
 using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.Fuel.Fields;

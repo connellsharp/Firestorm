@@ -1,4 +1,5 @@
 using System;
+using Firestorm.Stems.Attributes.Attributes;
 
 namespace Firestorm.Stems.Attributes.Analysis
 {

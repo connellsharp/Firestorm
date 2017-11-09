@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Firestorm.Engine
+namespace Firestorm.Engine.Deferring
 {
     /// <summary>
     /// Provides similar functionality to <see cref="SemaphoreSlim"/> but does not use an unmanged manual wait handle and therefore doesn't need disposing.

@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Firestorm.Stems.Attributes.Analysis;
 
-namespace Firestorm.Stems.Basic.Resolvers
+namespace Firestorm.Stems.Attributes.Basic.Resolvers
 {
     public class AuthorizeAttributeResolver : FieldAttributeResolverBase
     {

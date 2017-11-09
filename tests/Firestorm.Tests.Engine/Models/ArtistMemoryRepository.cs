@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Firestorm.Engine;
+using Firestorm.Engine.Defaults;
 using Firestorm.Tests.Models;
 
 namespace Firestorm.Tests.Engine.Models

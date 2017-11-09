@@ -1,11 +1,11 @@
 using System;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Firestorm.Stems.Attributes.Analysis;
+using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
 
-namespace Firestorm.Stems.Basic.Resolvers
+namespace Firestorm.Stems.Attributes.Basic.Resolvers
 {
     /// <summary>
     /// Adds information about a Stem member with the <see cref="GetAttribute"/> to the <see cref="FieldDefinition"/>.

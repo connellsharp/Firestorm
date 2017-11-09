@@ -6,7 +6,6 @@ using Firestorm.Stems.Fuel.Resolving;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 using Firestorm.Stems.Fuel.Substems.Handlers;
 using JetBrains.Annotations;
-using Firestorm.Stems.Power.Substems;
 
 namespace Firestorm.Stems.Fuel.Substems.Factories
 {

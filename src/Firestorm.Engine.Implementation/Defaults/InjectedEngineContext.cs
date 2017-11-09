@@ -3,7 +3,7 @@ using Firestorm.Engine.Fields;
 using Firestorm.Engine.Identifiers;
 using JetBrains.Annotations;
 
-namespace Firestorm.Engine
+namespace Firestorm.Engine.Defaults
 {
     /// <summary>
     /// <see cref="IEngineContext{TItem}"/> where all dependencies are passed into the constructor.

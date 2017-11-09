@@ -1,7 +1,7 @@
 using System;
 using Firestorm.Engine.Identifiers;
 
-namespace Firestorm.Engine
+namespace Firestorm.Engine.Defaults
 {
     public class SingleIdentifierProvider<TItem> : IIdentifierProvider<TItem>
     {

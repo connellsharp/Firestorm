@@ -1,4 +1,4 @@
-namespace Firestorm.Engine.Queryable.Exceptions
+namespace Firestorm.Engine.Queryable
 {
     internal class IdentifierNotFoundException : RestApiException
     {

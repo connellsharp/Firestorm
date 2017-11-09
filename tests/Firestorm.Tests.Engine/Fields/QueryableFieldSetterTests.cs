@@ -1,13 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using Firestorm.Engine;
-using Firestorm.Engine.Fields;
+﻿using System.Threading.Tasks;
+using Firestorm.Engine.Deferring;
 using Firestorm.Engine.Queryable;
 using Firestorm.Tests.Engine.Models;
 using Firestorm.Tests.Models;
 using Xunit;
 
-namespace Firestorm.Tests.Engine
+namespace Firestorm.Tests.Engine.Fields
 {
     public class QueryableFieldSetterTests
     {

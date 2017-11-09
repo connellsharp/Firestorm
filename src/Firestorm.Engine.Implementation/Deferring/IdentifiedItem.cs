@@ -3,7 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Firestorm.Engine.Identifiers;
 
-namespace Firestorm.Engine
+namespace Firestorm.Engine.Deferring
 {
     /// <summary>
     /// A single item's repository and identifier.

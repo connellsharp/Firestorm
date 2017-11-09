@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Firestorm.Stems.Attributes.Analysis;
-using Firestorm.Stems.Basic.Resolvers;
+using Firestorm.Stems.Attributes.Basic.Resolvers;
 
-namespace Firestorm.Stems
+namespace Firestorm.Stems.Attributes.Basic.Attributes
 {
     /// <summary>
     /// 

@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using Firestorm.Stems.Attributes.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.AutoMap;
 using JetBrains.Annotations;

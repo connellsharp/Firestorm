@@ -1,8 +1,9 @@
 using Firestorm.Stems.Attributes.Analysis;
-using Firestorm.Stems.Basic.Resolvers;
+using Firestorm.Stems.Attributes.Attributes;
+using Firestorm.Stems.Attributes.Basic.Resolvers;
 using JetBrains.Annotations;
 
-namespace Firestorm.Stems
+namespace Firestorm.Stems.Attributes.Basic.Attributes
 {
     [MeansImplicitUse]
     public class IdentifierAttribute : StemAttribute

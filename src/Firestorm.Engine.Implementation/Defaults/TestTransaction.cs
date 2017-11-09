@@ -1,8 +1,7 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace Firestorm.Engine
+namespace Firestorm.Engine.Defaults
 {
     /// <summary>
     /// A dummy <see cref="IDataTransaction"/> implementation that does nothing.

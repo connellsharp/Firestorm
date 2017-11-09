@@ -1,4 +1,5 @@
 ﻿using System;
+using Firestorm.Endpoints.Start;
 using Microsoft.AspNetCore.Builder;
 
 namespace Firestorm.Endpoints.AspNetCore

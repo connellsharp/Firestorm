@@ -2,7 +2,7 @@ using System;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Identifiers;
 
-namespace Firestorm.Engine
+namespace Firestorm.Engine.Defaults
 {
     public abstract class LazyEngineContext<TItem> : IEngineContext<TItem>
         where TItem : class

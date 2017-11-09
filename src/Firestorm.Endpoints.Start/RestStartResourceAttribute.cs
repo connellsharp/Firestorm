@@ -1,7 +1,7 @@
 using System;
 using JetBrains.Annotations;
 
-namespace Firestorm.Endpoints
+namespace Firestorm.Endpoints.Start
 {
     [MeansImplicitUse]
     [AttributeUsage(AttributeTargets.Class)]

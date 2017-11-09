@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using Firestorm.Stems.Attributes.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
 
 namespace Firestorm.Stems.Attributes.Analysis
