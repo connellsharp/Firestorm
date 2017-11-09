@@ -4,9 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Firestorm.Engine.Fields;
 using JetBrains.Annotations;
 
-namespace Firestorm.Engine.Fields
+namespace Firestorm.Engine.Queryable.Helpers
 {
     /// <summary>
     /// Builds <see cref="MemberInitExpression"/> objects for a dynamic type.

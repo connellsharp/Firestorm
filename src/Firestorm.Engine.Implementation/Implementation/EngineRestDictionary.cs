@@ -6,6 +6,8 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Identifiers;
+using Firestorm.Engine.Queryable;
+using Firestorm.Engine.Queryable.Helpers;
 
 namespace Firestorm.Engine
 {

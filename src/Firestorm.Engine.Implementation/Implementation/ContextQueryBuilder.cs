@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using System.Linq;
 using Firestorm.Engine.Fields;
+using Firestorm.Engine.Queryable;
 
 namespace Firestorm.Engine
 {
@@ -33,7 +33,8 @@ namespace Firestorm.Engine
             var sorter = new QueryableFieldSorter<TItem>(fieldProvider, _query.SortIntructions);
             items = sorter.ApplySortOrder(items);
 
-            items = items.Take(_query.PageSize);
+            var pager = new QueryablePager<TItem>(_query.PageInstruction);
+            items = pager.ApplyPagination(items);
 
             return items;
         }

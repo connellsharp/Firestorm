@@ -1,4 +1,4 @@
-﻿namespace Firestorm.Engine.Fields
+﻿namespace Firestorm.Engine.Queryable.Exceptions
 {
     internal class FieldOperationNotAllowedException : RestApiException
     {

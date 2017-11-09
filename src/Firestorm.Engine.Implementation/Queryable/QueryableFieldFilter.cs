@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Firestorm.Engine.Fields;
+using Firestorm.Engine.Queryable.Exceptions;
 using JetBrains.Annotations;
 
-namespace Firestorm.Engine.Fields
+namespace Firestorm.Engine.Queryable
 {
     public class QueryableFieldFilter<TItem>
         where TItem : class

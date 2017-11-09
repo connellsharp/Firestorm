@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using Firestorm.Engine.Fields;
+using Firestorm.Engine.Queryable.Helpers;
 using Firestorm.Stems.Fuel.Resolving;
 
 namespace Firestorm.Stems.Fuel.Substems

@@ -1,6 +1,6 @@
 using System;
 
-namespace Firestorm.Engine.Fields
+namespace Firestorm.Engine.Queryable.Exceptions
 {
     internal class FieldCannotFilterException : RestApiException
     {

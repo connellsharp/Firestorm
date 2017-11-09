@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Firestorm.Engine;
 using Firestorm.Engine.Additives.Readers;
 using Firestorm.Engine.Fields;
+using Firestorm.Engine.Queryable;
 using Firestorm.Tests.Models;
 using Xunit;
 

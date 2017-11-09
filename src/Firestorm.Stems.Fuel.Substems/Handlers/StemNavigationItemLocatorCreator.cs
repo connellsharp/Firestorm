@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Engine;
 using Firestorm.Engine.Fields;
+using Firestorm.Engine.Queryable;
 using Firestorm.Stems.Fuel.Fields;
 using Firestorm.Stems.Fuel.Substems.Repositories;
 

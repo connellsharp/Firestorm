@@ -17,6 +17,6 @@ namespace Firestorm
         [CanBeNull]
         IEnumerable<SortIntruction> SortIntructions { get; }
 
-        int PageSize { get; }
+        PageInstruction PageInstruction { get; }
     }
 }

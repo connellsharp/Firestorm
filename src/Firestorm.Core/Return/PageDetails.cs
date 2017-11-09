@@ -5,6 +5,8 @@ namespace Firestorm
     /// </summary>
     public class PageDetails
     {
-        // TODO implement
+        public string NextPath { get; }
+
+        public string PreviousPath { get; }
     }
 }

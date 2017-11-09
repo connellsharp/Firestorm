@@ -54,6 +54,6 @@ namespace Firestorm.Tests.Engine.Implementation
 
         public IEnumerable<SortIntruction> SortIntructions { get; set; }
 
-        public int PageSize { get; } = 100;
+        public PageInstruction PageInstruction { get; set; }
     }
 }

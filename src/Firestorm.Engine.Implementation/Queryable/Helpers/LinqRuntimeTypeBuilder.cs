@@ -4,9 +4,8 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
-using System.Threading;
 
-namespace Firestorm.Engine.Fields
+namespace Firestorm.Engine.Queryable.Helpers
 {
     /// <summary>
     /// Taken and refactored from http://stackoverflow.com/a/723018/369247

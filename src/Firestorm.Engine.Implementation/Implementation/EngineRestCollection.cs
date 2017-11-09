@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Identifiers;
+using Firestorm.Engine.Queryable;
+using Firestorm.Engine.Queryable.Exceptions;
+using Firestorm.Engine.Queryable.Helpers;
 using JetBrains.Annotations;
 
 namespace Firestorm.Engine

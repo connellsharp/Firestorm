@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Firestorm.Engine.Fields;
+using Firestorm.Engine.Queryable;
 using Firestorm.Tests.Engine.Models;
 using Firestorm.Tests.Models;
 using Xunit;

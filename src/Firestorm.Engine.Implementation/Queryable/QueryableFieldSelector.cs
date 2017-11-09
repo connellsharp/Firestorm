@@ -7,9 +7,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
+using Firestorm.Engine.Fields;
+using Firestorm.Engine.Queryable.Helpers;
 using JetBrains.Annotations;
 
-namespace Firestorm.Engine.Fields
+namespace Firestorm.Engine.Queryable
 {
     internal class QueryableFieldSelector<TItem>
         where TItem : class

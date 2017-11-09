@@ -76,9 +76,19 @@ namespace Firestorm.Endpoints.Query
         };
 
         /// <summary>
-        /// The number of items to return in a collection.
+        /// The querystring keys used to specify the number of items to return per page.
         /// </summary>
-        public int FixedPageSize { get; } = 100;
+        public string[] PageSizeQueryKeys { get; set; } = new[] { "limit", "take", "size" };
+
+        /// <summary>
+        /// The querystring keys used to specify how many items to skip to get to the start of this page.
+        /// </summary>
+        public string[] PageOffsetQueryKeys { get; set; } = new[] { "offset", "skip" };
+
+        /// <summary>
+        /// The querystring keys used to specify the page number.
+        /// </summary>
+        public string[] PageNumberQueryKeys { get; set; } = new[] { "page" };
 
         /// <summary>
         /// A prefix that when applied to an identifier in the URL can return an <see cref="IRestDictionary"/> rather than a single item.

@@ -17,16 +17,28 @@ namespace Firestorm.Endpoints.Query
         private List<string> _selectFields;
         private List<FilterInstruction> _filterInstructions;
         private List<SortIntruction> _sortIntructions;
+        private PageInstruction _pageInstruction;
 
         public QueryStringCollectionQuery([NotNull] CollectionQueryStringConfiguration configuration, [CanBeNull] string query)
         {
             _configuration = configuration;
+            AddQueryString(query);
+        }
 
+        public QueryStringCollectionQuery([NotNull] CollectionQueryStringConfiguration configuration, [NotNull] NameValueCollection query)
+        {
+            _configuration = configuration;
+            AddQueryCollection(query);
+
+        }
+
+        private void AddQueryString(string query)
+        {
             if (string.IsNullOrEmpty(query)) return;
 
             query = query.TrimStart("?");
 
-            string[] querySplit = query.Split(new[] {'&'}, StringSplitOptions.RemoveEmptyEntries);
+            string[] querySplit = query.Split(new[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (string queryPart in querySplit)
             {
                 string[] equalSplit = queryPart.Split(new[] { '=' }, 2);
@@ -41,10 +53,8 @@ namespace Firestorm.Endpoints.Query
             }
         }
 
-        public QueryStringCollectionQuery([NotNull] CollectionQueryStringConfiguration configuration, [NotNull] NameValueCollection query)
+        private void AddQueryCollection(NameValueCollection query)
         {
-            _configuration = configuration;
-
             foreach (string key in query.AllKeys)
             {
                 if (TryAddValue(key, () => query[key]))
@@ -73,6 +83,7 @@ namespace Firestorm.Endpoints.Query
 
                 string[] fieldNames = getValue().Split(_configuration.SelectFieldDelimiters);
                 _selectFields.AddRange(fieldNames);
+
                 return true;
             }
 
@@ -81,6 +92,7 @@ namespace Firestorm.Endpoints.Query
                 // TODO what about separators like ?where=start>2016-01-01,end<2017-01-01 ?
                 var filter = new QueryFilterInstruction(_configuration, getValue());
                 AddToList(ref _filterInstructions, filter);
+
                 return true;
             }
 
@@ -92,6 +104,28 @@ namespace Firestorm.Endpoints.Query
                     var sort = new QuerySortInstruction(_configuration, sortString);
                     AddToList(ref _sortIntructions, sort);
                 }
+
+                return true;
+            }
+
+            if (_configuration.PageSizeQueryKeys.Contains(key))
+            {
+                int size = PrepareNumberForPaging(getValue(), "size");
+                PageInstruction.Size = size;
+                return true;
+            }
+
+            if (_configuration.PageOffsetQueryKeys.Contains(key))
+            {
+                int offset = PrepareNumberForPaging(getValue(), "offset");
+                PageInstruction.Offset = offset;
+                return true;
+            }
+
+            if (_configuration.PageNumberQueryKeys.Contains(key))
+            {
+                int pageNumber = PrepareNumberForPaging(getValue(), "number");
+                PageInstruction.Offset = (pageNumber - 1) * PageInstruction.Size;
                 return true;
             }
 
@@ -104,6 +138,17 @@ namespace Firestorm.Endpoints.Query
                 list = new List<T>();
 
             list.Add(item);
+        }
+
+        private int PrepareNumberForPaging(string numberStr, string paramName)
+        {
+            if (_pageInstruction == null)
+                _pageInstruction = new PageInstruction { Size = 100 }; // TODO get default from somewhere
+
+            if (!int.TryParse(numberStr, out int number))
+                throw new FormatException("Page " + paramName + " argument cannot be parsed as an integer.");
+
+            return number;
         }
 
         public IEnumerable<string> SelectFields
@@ -120,10 +165,10 @@ namespace Firestorm.Endpoints.Query
         {
             get { return _sortIntructions; }
         }
-
-        public int PageSize
+        
+        public PageInstruction PageInstruction
         {
-            get { return _configuration.FixedPageSize; }
+            get { return _pageInstruction; }
         }
     }
 }
