@@ -124,8 +124,8 @@ namespace Firestorm.Endpoints.Query
 
             if (_configuration.PageNumberQueryKeys.Contains(key))
             {
-                int pageNumber = PrepareNumberForPaging(getValue(), "number");
-                PageInstruction.Offset = (pageNumber - 1) * PageInstruction.Size;
+                int pageNumber = PrepareNumberForPaging(getValue(), "number", _configuration.SpecialPageNumbers);
+                PageInstruction.PageNumber = pageNumber;
                 return true;
             }
 
@@ -140,10 +140,13 @@ namespace Firestorm.Endpoints.Query
             list.Add(item);
         }
 
-        private int PrepareNumberForPaging(string numberStr, string paramName)
+        private int PrepareNumberForPaging(string numberStr, string paramName, IReadOnlyDictionary<string, int> specialValues = null)
         {
             if (_pageInstruction == null)
-                _pageInstruction = new PageInstruction { Size = 100 }; // TODO get default from somewhere
+                _pageInstruction = new PageInstruction();
+
+            if (specialValues != null && specialValues.ContainsKey(numberStr))
+                return specialValues[numberStr];
 
             if (!int.TryParse(numberStr, out int number))
                 throw new FormatException("Page " + paramName + " argument cannot be parsed as an integer.");
