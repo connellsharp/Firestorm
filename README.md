@@ -4,7 +4,7 @@
 
 Firestorm is a REST API framework for .NET. The aim is to provide a neat and easy ways to write standardised APIs with more of the leg-work taken care of.
 
-_Using **[Stems]()** to describe your API_
+_Using **[Stems](../../wiki/Stems)** to describe your API_
 
 ```csharp
 public class ArtistsStem : Stem<Artist>
@@ -49,16 +49,16 @@ PM> Install-Package Firestorm.Endpoints.AspNetCore
 PM> Install-Package Firestorm.Engine.EntityFramework
 ```
 
-See the [Getting Started]() section for more detailed setup information.
+See the [Installation](../../wiki/Installation) section for more detailed setup information.
 
 ## About
 
 Firestorm is a bit of an experiment that grew into something I feel other developers could use. It was never a clearly defined project, but I decided to set some milestones and make it my first open-source project.
 
-It's still in active development. I have so many feature ideas for future versions!
+It's still in active development. I have so many feature ideas for future versions! Over the months, I want to take this project to great places, advancing my skills and (hopefully) benefitting the community whilst doing so!
 
 #### Copyright
-Copyright © 2017 Connell Watkins
+Copyright Â© 2017 Connell Watkins
 
 #### License
-Firestorm is licensed under [MIT](). Refer to [LICENSE.txt]() for detailed information.
+Firestorm is licensed under MIT. Refer to [LICENSE.txt](LICENSE.txt) for detailed information.
