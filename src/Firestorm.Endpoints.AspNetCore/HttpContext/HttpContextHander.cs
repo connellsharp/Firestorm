@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Firestorm.Endpoints.AspNetCore
 {
-    public class HttpContextHander : IHttpRequestHandler
+    internal class HttpContextHander : IHttpRequestHandler
     {
         private readonly HttpContext _httpContext;
 

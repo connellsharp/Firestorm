@@ -1,7 +1,8 @@
 namespace Firestorm.Endpoints.Start
 {
     /// <summary>
-    /// The configuration required to setup a Firestorm REST API server.
+    /// The services and options required to setup a Firestorm REST API server.
+    /// Only one object should be created in the application.
     /// </summary>
     public class FirestormConfiguration
     {

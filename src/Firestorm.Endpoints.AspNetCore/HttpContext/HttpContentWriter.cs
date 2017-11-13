@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Firestorm.Endpoints.AspNetCore
 {
-    public class HttpContentWriter : IContentWriter
+    internal class HttpContentWriter : IContentWriter
     {
         private readonly HttpContext _httpContext;
 
