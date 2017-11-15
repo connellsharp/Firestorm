@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Firestorm.Engine.Data;
 using Firestorm.Stems.Attributes;
 using Firestorm.Stems.Fuel.Resolving;
 
@@ -8,20 +9,24 @@ namespace Firestorm.Stems.Roots.DataSource
     internal class DataSourceDirectory : IRestDirectory
     {
         private readonly IRootRequest _request;
-        private readonly DataSourceRootResourceFactory _parentFactory;
+        private readonly NamedTypeDictionary _stemTypeDictionary;
         private readonly IStemConfiguration _configuration;
+        private readonly CollectionCreatorCache _creatorCache;
+        private readonly IDataSource _dataSource;
 
-        internal DataSourceDirectory(IRootRequest request, DataSourceRootResourceFactory parentFactory, IStemConfiguration configuration)
+        internal DataSourceDirectory(IStemConfiguration configuration, IRootRequest request, NamedTypeDictionary stemTypeDictionary, CollectionCreatorCache creatorCache, IDataSource dataSource)
         {
-            _request = request;
-            _parentFactory = parentFactory;
             _configuration = configuration;
+            _request = request;
+            _stemTypeDictionary = stemTypeDictionary;
+            _creatorCache = creatorCache;
+            _dataSource = dataSource;
         }
 
         public IRestResource GetChild(string startResourceName)
         {
             var autoActivator = new AutoActivator(_configuration.DependencyResolver);
-            Type stemType = _parentFactory.StemTypeDictionary.GetType(startResourceName);
+            Type stemType = _stemTypeDictionary.GetType(startResourceName);
             var stem = (Stem)autoActivator.CreateInstance(stemType);
 
             Type stemGenericBaseType = stemType.GetGenericSubclass(typeof(Stem<>));
@@ -40,10 +45,10 @@ namespace Firestorm.Stems.Roots.DataSource
 
             stem.SetParent(vase);
 
-            IDataSourceCollectionCreator creator = _parentFactory.Creators.GetOrAdd(startResourceName, delegate
+            IDataSourceCollectionCreator creator = _creatorCache.GetOrAdd(startResourceName, delegate
             {
                 Type creatorType = typeof(DataSourceCollectionCreator<>).MakeGenericType(entityType);
-                return (IDataSourceCollectionCreator)Activator.CreateInstance(creatorType, _parentFactory.DataSource);
+                return (IDataSourceCollectionCreator)Activator.CreateInstance(creatorType, _dataSource);
             });
 
             return creator.GetRestCollection(stem);
@@ -51,7 +56,7 @@ namespace Firestorm.Stems.Roots.DataSource
 
         public Task<RestDirectoryInfo> GetInfoAsync()
         {
-            return Task.FromResult(_parentFactory.StemTypeDictionary.CreateDirectoryInfo(_configuration.NamingConventionSwitcher));
+            return Task.FromResult(_stemTypeDictionary.CreateDirectoryInfo(_configuration.NamingConventionSwitcher));
         }
     }
 }
