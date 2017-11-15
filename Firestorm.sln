@@ -121,9 +121,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Stems.Roots", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Stems.Attributes.Basic", "src\Firestorm.Stems.Attributes.Basic\Firestorm.Stems.Attributes.Basic.csproj", "{9C349E42-67D8-4700-AAFC-88E639F230B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Stems.Fuel.Substems", "src\Firestorm.Stems.Fuel.Substems\Firestorm.Stems.Fuel.Substems.csproj", "{4EE0EC1C-87E2-4B90-ACDE-4B78801353E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Stems.Fuel.Substems", "src\Firestorm.Stems.Fuel.Substems\Firestorm.Stems.Fuel.Substems.csproj", "{4EE0EC1C-87E2-4B90-ACDE-4B78801353E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Stems.Roots.Start", "src\Firestorm.Stems.Roots.Start\Firestorm.Stems.Roots.Start.csproj", "{F1660CA3-BBBE-42A1-B108-8D37F37CC6B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Stems.Roots.Start", "src\Firestorm.Stems.Roots.Start\Firestorm.Stems.Roots.Start.csproj", "{F1660CA3-BBBE-42A1-B108-8D37F37CC6B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{A2CE7430-F7EA-4165-89A1-E3341B8FBFF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Extensions.AspNetCore", "Firestorm.Extensions.AspNetCore\Firestorm.Extensions.AspNetCore.csproj", "{A4BCDB29-0A1C-48A2-90E5-1FE9123E7BAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -287,6 +291,10 @@ Global
 		{F1660CA3-BBBE-42A1-B108-8D37F37CC6B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1660CA3-BBBE-42A1-B108-8D37F37CC6B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1660CA3-BBBE-42A1-B108-8D37F37CC6B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4BCDB29-0A1C-48A2-90E5-1FE9123E7BAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4BCDB29-0A1C-48A2-90E5-1FE9123E7BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4BCDB29-0A1C-48A2-90E5-1FE9123E7BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4BCDB29-0A1C-48A2-90E5-1FE9123E7BAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -344,6 +352,8 @@ Global
 		{9C349E42-67D8-4700-AAFC-88E639F230B5} = {C7F0DB78-F8D7-4074-A2D7-A14490AAA398}
 		{4EE0EC1C-87E2-4B90-ACDE-4B78801353E2} = {C7F0DB78-F8D7-4074-A2D7-A14490AAA398}
 		{F1660CA3-BBBE-42A1-B108-8D37F37CC6B0} = {C7F0DB78-F8D7-4074-A2D7-A14490AAA398}
+		{A2CE7430-F7EA-4165-89A1-E3341B8FBFF8} = {C2F6430A-4C2E-495B-9556-7EF1A3A1C2B8}
+		{A4BCDB29-0A1C-48A2-90E5-1FE9123E7BAD} = {A2CE7430-F7EA-4165-89A1-E3341B8FBFF8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E07ED662-9390-431F-B4D6-BDA65FE4169A}

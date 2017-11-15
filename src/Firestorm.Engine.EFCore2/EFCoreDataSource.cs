@@ -7,16 +7,16 @@ namespace Firestorm.Engine.EFCore2
     public class EFCoreDataSource<TDatabase> : IDataSource
         where TDatabase : DbContext
     {
-        private readonly IServiceProvider _servicerProvider;
+        private readonly Func<TDatabase> _getServiceFunc;
 
-        public EFCoreDataSource(IServiceProvider servicerProvider)
+        public EFCoreDataSource(Func<TDatabase> getServiceFunc)
         {
-            _servicerProvider = servicerProvider;
+            _getServiceFunc = getServiceFunc;
         }
 
         public IDataTransaction CreateTransaction()
         {
-            var database = (TDatabase)_servicerProvider.GetService(typeof(TDatabase));
+            TDatabase database = _getServiceFunc();
             return new EFCoreDataTransaction<TDatabase>(database);
         }
 
