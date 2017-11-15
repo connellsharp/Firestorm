@@ -90,7 +90,7 @@ namespace Firestorm.Endpoints.WebApi2
 
         private IHttpActionResult GetResultFromFeedback(Feedback feedback)
         {
-            var converter = new FeedbackToResponseConverter(Config.EndpointConfiguration.ResponseContentGenerator, feedback);
+            var converter = new FeedbackToResponseConverter(feedback, Config.EndpointConfiguration);
 
             object responseBody = converter.GetBody();
             var statusCode = converter.GetStatusCode();

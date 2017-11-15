@@ -117,8 +117,7 @@ namespace Firestorm.Endpoints.Start
 
         private async Task WriteFeedbackToResponse(Feedback feedback)
         {
-            RestEndpointConfiguration endpointConfig = _configuration.EndpointConfiguration;
-            var converter = new FeedbackToResponseConverter(feedback, endpointConfig.ResponseContentGenerator, endpointConfig.ShowDeveloperErrors);
+            var converter = new FeedbackToResponseConverter(feedback, _configuration.EndpointConfiguration);
 
             HttpStatusCode status = converter.GetStatusCode();
             _requestHandler.SetStatusCode(status);

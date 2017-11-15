@@ -12,6 +12,10 @@ namespace Firestorm.Endpoints.Responses
         private readonly IResponseContentGenerator _responseContentGenerator;
         private readonly bool _showDeveoperErrors;
 
+        public FeedbackToResponseConverter(Feedback feedback, RestEndpointConfiguration endpointConfiguration)
+            : this(feedback, endpointConfiguration.ResponseContentGenerator, endpointConfiguration.ShowDeveloperErrors)
+        { }
+
         public FeedbackToResponseConverter(Feedback feedback, IResponseContentGenerator responseContentGenerator, bool showDeveoperErrors)
         {
             _feedback = feedback;

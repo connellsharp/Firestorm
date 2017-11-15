@@ -18,7 +18,7 @@ namespace Firestorm.Endpoints.WebApi2.ErrorHandling
             IResponseContentGenerator contentGenerator = controller.Config.EndpointConfiguration.ResponseContentGenerator;
 
             var exceptionInfo = new ExceptionErrorInfo(context.Exception);
-            object content = contentGenerator.GetFromError(exceptionInfo);
+            object content = contentGenerator.GetFromError(exceptionInfo, false);
 
             context.Response = context.Request.CreateResponse((HttpStatusCode) exceptionInfo.ErrorStatus, content);
         }
