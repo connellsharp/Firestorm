@@ -11,6 +11,12 @@ namespace Firestorm.Endpoints
     public class RestEndpointConfiguration
     {
         /// <summary>
+        /// Set to true to enable details exception messages in the error responses.
+        /// This should not be used in production.
+        /// </summary>
+        public bool ShowDeveloperErrors { get; set; } = false;
+
+        /// <summary>
         /// Gets the objects to return in the response body from the return values from <see cref="IRestEndpoint"/> implementations.
         /// </summary>
         public IResponseContentGenerator ResponseContentGenerator { get; set; } = new DirectResponseContentGenerator();

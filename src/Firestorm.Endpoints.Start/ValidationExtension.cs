@@ -1,9 +1,15 @@
+using System;
+using JetBrains.Annotations;
+
 namespace Firestorm.Endpoints.Start
 {
     public static class ValidationExtension
     {
-        public static void EnsureValid(this FirestormConfiguration configuration)
+        public static void EnsureValid([NotNull] this FirestormConfiguration configuration)
         {
+            if (configuration == null)
+                throw new FirestormConfigurationException("FirestormConfiguration cannot be null.");
+
             if (configuration.StartResourceFactory == null)
                 throw new FirestormConfigurationException("StartResourceFactory cannot be null.");
 

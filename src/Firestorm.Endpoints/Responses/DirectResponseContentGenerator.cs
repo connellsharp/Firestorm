@@ -15,11 +15,9 @@ namespace Firestorm.Endpoints.Responses
             return null;
         }
 
-        public bool ShowDeveloperErrors { get; set; }
-
-        public object GetFromError(ErrorInfo error)
+        public object GetFromError(ErrorInfo error, bool showDeveloperDetails)
         {
-            return ErrorRestItemUtility.GetErrorData(error, ShowDeveloperErrors);
+            return ErrorRestItemUtility.GetErrorData(error, showDeveloperDetails);
         }
 
         public object GetFromOptions(Options options)

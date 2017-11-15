@@ -13,7 +13,7 @@ namespace Firestorm.Endpoints.Responses
 
         object GetFromAcknowledgment(Acknowledgment acknowledgment);
 
-        object GetFromError(ErrorInfo error);
+        object GetFromError(ErrorInfo error, bool showDeveloperDetails);
 
         object GetFromOptions(Options options);
     }

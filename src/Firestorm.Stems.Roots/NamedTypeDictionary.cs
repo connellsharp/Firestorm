@@ -69,6 +69,7 @@ namespace Firestorm.Stems.Roots
             // idea from http://stackoverflow.com/a/17680332/369247
 
             return from domainAssembly in AppDomain.CurrentDomain.GetAssemblies()
+                   where !domainAssembly.IsDynamic
                    where !domainAssembly.FullName.StartsWith("Firestorm.")
                    from assemblyType in domainAssembly.GetExportedTypes()
                    where IsValidType(assemblyType)

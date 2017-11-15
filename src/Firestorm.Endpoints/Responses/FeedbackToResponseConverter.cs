@@ -2,20 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using Firestorm.Core;
 using Firestorm.Core.Web;
 
 namespace Firestorm.Endpoints.Responses
 {
     public class FeedbackToResponseConverter
     {
-        private readonly IResponseContentGenerator _responseContentGenerator;
         private readonly Feedback _feedback;
+        private readonly IResponseContentGenerator _responseContentGenerator;
+        private readonly bool _showDeveoperErrors;
 
-        public FeedbackToResponseConverter(IResponseContentGenerator responseContentGenerator, Feedback feedback)
+        public FeedbackToResponseConverter(Feedback feedback, IResponseContentGenerator responseContentGenerator, bool showDeveoperErrors)
         {
-            _responseContentGenerator = responseContentGenerator;
             _feedback = feedback;
+            _responseContentGenerator = responseContentGenerator;
+            _showDeveoperErrors = showDeveoperErrors;
         }
 
         public object GetBody()
@@ -36,7 +37,7 @@ namespace Firestorm.Endpoints.Responses
 
                 case FeedbackType.Error:
                     ErrorInfo error = ((ErrorFeedback)feedback).Error;
-                    return _responseContentGenerator.GetFromError(error);
+                    return _responseContentGenerator.GetFromError(error, _showDeveoperErrors);
 
                 case FeedbackType.MultiResponse:
                     IEnumerable<Feedback> items = ((MultiFeedback)feedback).FeedbackItems;

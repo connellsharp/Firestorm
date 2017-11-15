@@ -110,13 +110,15 @@ namespace Firestorm.Endpoints.Start
 
             _requestHandler.SetStatusCode((HttpStatusCode) errorInfo.ErrorStatus);
 
-            object responseBody = _configuration.EndpointConfiguration.ResponseContentGenerator.GetFromError(errorInfo);
+            RestEndpointConfiguration endpointConfig = _configuration.EndpointConfiguration;
+            object responseBody = endpointConfig.ResponseContentGenerator.GetFromError(errorInfo, endpointConfig.ShowDeveloperErrors);
             await _requestHandler.SetResponseBody(responseBody);
         }
 
         private async Task WriteFeedbackToResponse(Feedback feedback)
         {
-            var converter = new FeedbackToResponseConverter(_configuration.EndpointConfiguration.ResponseContentGenerator, feedback);
+            RestEndpointConfiguration endpointConfig = _configuration.EndpointConfiguration;
+            var converter = new FeedbackToResponseConverter(feedback, endpointConfig.ResponseContentGenerator, endpointConfig.ShowDeveloperErrors);
 
             HttpStatusCode status = converter.GetStatusCode();
             _requestHandler.SetStatusCode(status);

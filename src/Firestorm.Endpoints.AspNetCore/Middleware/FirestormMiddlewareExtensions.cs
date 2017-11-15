@@ -13,8 +13,23 @@ namespace Firestorm.Endpoints.AspNetCore
         /// </summary>
         public static IApplicationBuilder UseFirestorm(this IApplicationBuilder app)
         {
-            FirestormConfiguration config = app.GetConfig(null);
-            config.EnsureValid();
+            var config = app.GetScopedService<FirestormConfiguration>();
+
+            //app.UseMiddleware<FirestormMiddleware>(); // this should mean the IoC creates a new config object.
+            app.UseFirestorm(config);
+            return app;
+        }
+
+        /// <summary>
+        /// Configures Firestorm using the services and options configured in the app.
+        /// </summary>
+        public static IApplicationBuilder UseFirestorm(this IApplicationBuilder app, RestEndpointConfiguration endpointConfiguration)
+        {
+            var config = new FirestormConfiguration
+            {
+                EndpointConfiguration = endpointConfiguration,
+                StartResourceFactory = app.GetScopedService<IStartResourceFactory>()
+            };
 
             //app.UseMiddleware<FirestormMiddleware>(); // this should mean the IoC creates a new config object.
             app.UseFirestorm(config);
@@ -26,8 +41,8 @@ namespace Firestorm.Endpoints.AspNetCore
         /// </summary>
         public static IApplicationBuilder UseFirestorm(this IApplicationBuilder app, Action<FirestormConfiguration> configureAction)
         {
-            FirestormConfiguration config = app.GetConfig(configureAction);
-            config.EnsureValid();
+            var config = app.GetScopedService<FirestormConfiguration>() ?? new FirestormConfiguration();
+            configureAction(config);
             
             app.UseFirestorm(config);
             return app;
@@ -44,7 +59,7 @@ namespace Firestorm.Endpoints.AspNetCore
             return app;
         }
 
-        private static FirestormConfiguration GetConfig(this IApplicationBuilder app, Action<FirestormConfiguration> configureAction)
+        private static TService GetScopedService<TService>(this IApplicationBuilder app)
         {
             var scopeFactory = app.ApplicationServices.GetService<IServiceScopeFactory>();
 
@@ -52,12 +67,7 @@ namespace Firestorm.Endpoints.AspNetCore
             {
                 IServiceProvider services = scope.ServiceProvider;
 
-                var configCreator = new ConfigurationGenerator(services);
-
-                if (configureAction != null)
-                    configCreator.Configure(configureAction);
-
-                return configCreator.Create();
+                return services.GetService<TService>();
             }
         }
     }

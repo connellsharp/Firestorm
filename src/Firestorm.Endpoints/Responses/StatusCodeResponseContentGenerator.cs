@@ -43,14 +43,12 @@ namespace Firestorm.Endpoints.Responses
             }
         }
 
-        public bool ShowDeveloperErrors { get; set; } = false;
-
-        public object GetFromError(ErrorInfo error)
+        public object GetFromError(ErrorInfo error, bool showDeveloperDetails)
         {
             var data = new RestItemData();
             string status = error.ErrorStatus.ToString().SeparateCamelCase("_", true);
             data.Add("status", status);
-            ErrorRestItemUtility.AddErrorData(data, error, ShowDeveloperErrors);
+            ErrorRestItemUtility.AddErrorData(data, error, showDeveloperDetails);
             return data;
         }
 
