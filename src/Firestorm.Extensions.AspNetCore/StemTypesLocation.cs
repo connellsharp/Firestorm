@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Firestorm.Stems.Roots;
 
 namespace Firestorm.Extensions.AspNetCore
 {
@@ -11,6 +12,11 @@ namespace Firestorm.Extensions.AspNetCore
         {
             Assembly = assembly;
             BaseNamespace = baseNamespace;
+        }
+
+        internal ITypeGetter GetTypeGetter()
+        {
+            return new AssemblyTypeGetter(Assembly, BaseNamespace);
         }
     }
 }

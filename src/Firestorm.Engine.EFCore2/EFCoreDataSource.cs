@@ -14,6 +14,11 @@ namespace Firestorm.Engine.EFCore2
             _getServiceFunc = getServiceFunc;
         }
 
+        public EFCoreDataSource(IServiceProvider serviceProvider)
+        {
+            _getServiceFunc = () => (TDatabase)serviceProvider.GetService(typeof(TDatabase));
+        }
+
         public IDataTransaction CreateTransaction()
         {
             TDatabase database = _getServiceFunc();
