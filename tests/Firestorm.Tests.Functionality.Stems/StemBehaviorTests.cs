@@ -17,7 +17,10 @@ namespace Firestorm.Tests.Functionality.Stems
             var endpointContext = new TestEndpointContext();
             var stemStartResources = new StemsStartResourceFactory
             {
-                RootResourceFactory = new DerivedRootsResourceFactory { RootTypes = new[] { typeof(DisposableRoot) } }
+                RootResourceFactory = new DerivedRootsResourceFactory
+                {
+                    RootTypeGetter = new ManualTypeGetter(typeof(DisposableRoot))
+                }
             };
             
             var directory = (IRestDirectory)stemStartResources.GetStartResource(endpointContext);

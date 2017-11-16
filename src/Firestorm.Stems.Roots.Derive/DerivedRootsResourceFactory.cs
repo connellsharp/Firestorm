@@ -9,9 +9,7 @@ namespace Firestorm.Stems.Roots.Derive
     /// </summary>
     public class DerivedRootsResourceFactory : IRootResourceFactory
     {
-        public IEnumerable<Type> RootTypes { get; set; }
-
-        public string RootsNamespace { get; set; }
+        public ITypeGetter RootTypeGetter { get; set; }
 
         private NamedTypeDictionary _rootTypeDictionary;
 
@@ -20,13 +18,7 @@ namespace Firestorm.Stems.Roots.Derive
         public IEnumerable<Type> GetStemTypes()
         {
             _rootTypeDictionary = new SuffixedDerivedTypeDictionary(typeof(Root), "Root");
-
-            if (RootTypes != null)
-                _rootTypeDictionary.AddTypes(RootTypes);
-
-            if (RootsNamespace != null)
-                _rootTypeDictionary.AddNamespace(RootsNamespace);
-
+            _rootTypeDictionary.AddVaidTypes(RootTypeGetter);
             return _rootTypeDictionary.GetAllTypes().Select(GetStemFromRoot);
         }
 

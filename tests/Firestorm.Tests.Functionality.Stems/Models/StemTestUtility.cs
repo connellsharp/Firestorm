@@ -15,7 +15,9 @@ namespace Firestorm.Tests.Functionality.Stems.Models
         {
             var stemStartResources = new StemsStartResourceFactory
             {
-                RootResourceFactory = new DerivedRootsResourceFactory { RootTypes = rootTypes },
+                RootResourceFactory = new DerivedRootsResourceFactory {
+                    RootTypeGetter = new ManualTypeGetter(rootTypes)
+                },
                 StemConfiguration = new DefaultStemConfiguration
                 {
                     NamingConventionSwitcher = null

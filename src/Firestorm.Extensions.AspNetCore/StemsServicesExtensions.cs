@@ -1,4 +1,5 @@
-﻿using Firestorm.Endpoints.Start;
+﻿using System.Reflection;
+using Firestorm.Endpoints.Start;
 using Firestorm.Engine.EFCore2;
 using Firestorm.Stems;
 using Firestorm.Stems.Roots;
@@ -17,6 +18,22 @@ namespace Firestorm.Extensions.AspNetCore
         /// </summary>
         public static IFirestormServicesBuilder AddStems(this IFirestormServicesBuilder builder)
         {
+            return builder.AddStems(Assembly.GetEntryAssembly());
+        }
+
+        /// <summary>
+        /// Configures Firestorm Stems.
+        /// </summary>
+        public static IFirestormServicesBuilder AddStems(this IFirestormServicesBuilder builder, Assembly assembly)
+        {
+            return builder.AddStems(assembly, assembly.GetName().Name);
+        }
+
+        /// <summary>
+        /// Configures Firestorm Stems.
+        /// </summary>
+        public static IFirestormServicesBuilder AddStems(this IFirestormServicesBuilder builder, Assembly assembly, string baseNamespace)
+        {
             builder.Services.AddSingleton<IStartResourceFactory>(sp => new StemsStartResourceFactory
             {
                 StemConfiguration = new DefaultStemConfiguration
@@ -25,6 +42,8 @@ namespace Firestorm.Extensions.AspNetCore
                 },
                 RootResourceFactory = sp.GetService<IRootResourceFactory>()
             });
+
+            builder.Services.AddSingleton(new StemTypesLocation(assembly, baseNamespace));
 
             return builder;
         }
@@ -38,11 +57,12 @@ namespace Firestorm.Extensions.AspNetCore
             builder.Services.AddSingleton<IRootResourceFactory>(sp =>
             {
                 var contextAccessor = sp.GetService<IHttpContextAccessor>();
+                var stemTypesLocation = sp.GetService<StemTypesLocation>();
 
                 return new DataSourceRootResourceFactory
                 {
                     DataSource = new EFCoreDataSource<TDbContext>(() => contextAccessor.HttpContext.RequestServices.GetService<TDbContext>()),
-                    StemsNamespace = "TestingFirestorm.AspNetCore.Stems",
+                    StemTypeGetter = new AssemblyTypeGetter(stemTypesLocation.Assembly, stemTypesLocation.BaseNamespace)
                 };
             });
 

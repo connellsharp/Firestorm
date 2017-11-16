@@ -103,14 +103,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{BF8FB258
 		nuget\base\Firestorm.Client.nuspec = nuget\base\Firestorm.Client.nuspec
 		nuget\base\Firestorm.Core.nuspec = nuget\base\Firestorm.Core.nuspec
 		nuget\base\Firestorm.Endpoints.AspNetCore.nuspec = nuget\base\Firestorm.Endpoints.AspNetCore.nuspec
+		nuget\base\Firestorm.Endpoints.nuspec = nuget\base\Firestorm.Endpoints.nuspec
 		nuget\base\Firestorm.Endpoints.Owin.nuspec = nuget\base\Firestorm.Endpoints.Owin.nuspec
 		nuget\base\Firestorm.Endpoints.WebApi2.nuspec = nuget\base\Firestorm.Endpoints.WebApi2.nuspec
 		nuget\base\Firestorm.Engine.EFCore2.nuspec = nuget\base\Firestorm.Engine.EFCore2.nuspec
 		nuget\base\Firestorm.Engine.EntityFramework.nuspec = nuget\base\Firestorm.Engine.EntityFramework.nuspec
 		nuget\base\Firestorm.nuspec = nuget\base\Firestorm.nuspec
+		nuget\base\Firestorm.Stems.All.nuspec = nuget\base\Firestorm.Stems.All.nuspec
 		nuget\base\Firestorm.Stems.nuspec = nuget\base\Firestorm.Stems.nuspec
 		nuget\base\Firestorm.Stems.Roots.DataSource.nuspec = nuget\base\Firestorm.Stems.Roots.DataSource.nuspec
 		nuget\base\Firestorm.Stems.Roots.Derive.nuspec = nuget\base\Firestorm.Stems.Roots.Derive.nuspec
+		nuget\base\Firestorm.Stems.Roots.nuspec = nuget\base\Firestorm.Stems.Roots.nuspec
+		nuget\base\Firestorm.Stems.Roots.Start.nuspec = nuget\base\Firestorm.Stems.Roots.Start.nuspec
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Engine.EFCore2", "src\Firestorm.Engine.EFCore2\Firestorm.Engine.EFCore2.csproj", "{619EA714-F180-4D6E-81DE-8611275B2FDB}"
@@ -127,7 +131,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Stems.Roots.Start
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{A2CE7430-F7EA-4165-89A1-E3341B8FBFF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Extensions.AspNetCore", "Firestorm.Extensions.AspNetCore\Firestorm.Extensions.AspNetCore.csproj", "{A4BCDB29-0A1C-48A2-90E5-1FE9123E7BAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Extensions.AspNetCore", "src\Firestorm.Extensions.AspNetCore\Firestorm.Extensions.AspNetCore.csproj", "{1739D264-AB2A-417A-ADF8-9BD1A19FF789}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -291,10 +295,10 @@ Global
 		{F1660CA3-BBBE-42A1-B108-8D37F37CC6B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1660CA3-BBBE-42A1-B108-8D37F37CC6B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1660CA3-BBBE-42A1-B108-8D37F37CC6B0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4BCDB29-0A1C-48A2-90E5-1FE9123E7BAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4BCDB29-0A1C-48A2-90E5-1FE9123E7BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4BCDB29-0A1C-48A2-90E5-1FE9123E7BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4BCDB29-0A1C-48A2-90E5-1FE9123E7BAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1739D264-AB2A-417A-ADF8-9BD1A19FF789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1739D264-AB2A-417A-ADF8-9BD1A19FF789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1739D264-AB2A-417A-ADF8-9BD1A19FF789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1739D264-AB2A-417A-ADF8-9BD1A19FF789}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -353,7 +357,7 @@ Global
 		{4EE0EC1C-87E2-4B90-ACDE-4B78801353E2} = {C7F0DB78-F8D7-4074-A2D7-A14490AAA398}
 		{F1660CA3-BBBE-42A1-B108-8D37F37CC6B0} = {C7F0DB78-F8D7-4074-A2D7-A14490AAA398}
 		{A2CE7430-F7EA-4165-89A1-E3341B8FBFF8} = {C2F6430A-4C2E-495B-9556-7EF1A3A1C2B8}
-		{A4BCDB29-0A1C-48A2-90E5-1FE9123E7BAD} = {A2CE7430-F7EA-4165-89A1-E3341B8FBFF8}
+		{1739D264-AB2A-417A-ADF8-9BD1A19FF789} = {A2CE7430-F7EA-4165-89A1-E3341B8FBFF8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E07ED662-9390-431F-B4D6-BDA65FE4169A}

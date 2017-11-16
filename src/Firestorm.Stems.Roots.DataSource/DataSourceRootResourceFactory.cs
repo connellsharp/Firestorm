@@ -6,11 +6,9 @@ namespace Firestorm.Stems.Roots.DataSource
 {
     public class DataSourceRootResourceFactory : IRootResourceFactory
     {
-        public IEnumerable<Type> StemTypes { get; set; }
-
-        public string StemsNamespace { get; set; }
-
         public IDataSource DataSource { get; set; }
+
+        public ITypeGetter StemTypeGetter { get; set; }
 
         private NamedTypeDictionary _stemTypeDictionary;
 
@@ -18,17 +16,11 @@ namespace Firestorm.Stems.Roots.DataSource
 
         public IEnumerable<Type> GetStemTypes()
         {
-            if (DataSource == null)
-                throw new StemStartSetupException("DataSource must be provided.");
+            if (DataSource == null) throw new StemStartSetupException("DataSource must be provided.");
+            if (StemTypeGetter == null) throw new StemStartSetupException("StemTypeLocaator must be provided.");
 
             _stemTypeDictionary = new AttributedSuffixedDerivedTypeDictionary(typeof(Stem), "Stem", typeof(DataSourceRootAttribute));
-
-            if (StemTypes != null)
-                _stemTypeDictionary.AddTypes(StemTypes);
-
-            if (StemsNamespace != null)
-                _stemTypeDictionary.AddNamespace(StemsNamespace);
-
+            _stemTypeDictionary.AddVaidTypes(StemTypeGetter);
             return _stemTypeDictionary.GetAllTypes();
         }
 

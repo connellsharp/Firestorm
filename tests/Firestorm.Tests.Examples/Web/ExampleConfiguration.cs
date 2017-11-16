@@ -28,7 +28,7 @@ namespace Firestorm.Tests.Examples.Web
                 {
                     RootResourceFactory = new DataSourceRootResourceFactory
                     {
-                        StemTypes = typeof(TTest).GetNestedTypes(BindingFlags.Public),
+                        StemTypeGetter = new NestedTypeGetter(typeof(TTest)),
                         DataSource = new EntitiesDataSource<ExampleDataContext>(),
                     },
                     StemConfiguration = new DefaultStemConfiguration

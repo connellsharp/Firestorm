@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using JetBrains.Annotations;
 
 namespace Firestorm.Stems.Roots
 {
@@ -11,21 +9,6 @@ namespace Firestorm.Stems.Roots
     public class NamedTypeDictionary
     {
         private readonly Dictionary<string, Type> _loadedTypes = new Dictionary<string, Type>(); // todo thread-safe?
-
-        public void AddAll()
-        {
-            AddTypes(FindAllValidTypes());
-        }
-
-        public void AddNamespace([CanBeNull] string @namespace)
-        {
-            IEnumerable<Type> types = FindAllValidTypes();
-
-            if (@namespace != null)
-                types = types.Where(t => t.Namespace != null && t.Namespace.StartsWith(@namespace));
-
-            AddTypes(types);
-        }
 
         public void AddTypes(IEnumerable<Type> types)
         {
@@ -40,6 +23,20 @@ namespace Firestorm.Stems.Roots
             if (!IsValidType(type))
                 throw new StemStartSetupException(type.Name + " is not a valid type to use in this dictionary.");
 
+            AddTypeInternal(type);
+        }
+
+        public void AddVaidTypes(ITypeGetter typeGetter)
+        {
+            foreach (Type type in typeGetter.GetAvailableTypes())
+            {
+                if (IsValidType(type))
+                    AddTypeInternal(type);
+            }
+        }
+
+        private void AddTypeInternal(Type type)
+        {
             string name = GetName(type).ToUpperInvariant();
             _loadedTypes.Add(name, type);
         }
@@ -62,18 +59,6 @@ namespace Firestorm.Stems.Roots
         public IEnumerable<Type> GetAllTypes()
         {
             return _loadedTypes.Values;
-        }
-         
-        protected virtual IEnumerable<Type> FindAllValidTypes()
-        {
-            // idea from http://stackoverflow.com/a/17680332/369247
-
-            return from domainAssembly in AppDomain.CurrentDomain.GetAssemblies()
-                   where !domainAssembly.IsDynamic
-                   where !domainAssembly.FullName.StartsWith("Firestorm.")
-                   from assemblyType in domainAssembly.GetExportedTypes()
-                   where IsValidType(assemblyType)
-                   select assemblyType;
         }
 
         protected virtual string GetName(Type type)
