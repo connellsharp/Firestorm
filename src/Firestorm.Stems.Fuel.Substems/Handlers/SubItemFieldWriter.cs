@@ -11,7 +11,7 @@ namespace Firestorm.Stems.Fuel.Substems.Handlers
 {
     internal class SubItemFieldWriter<TItem, TNav> : IFieldWriter<TItem>
         where TItem : class
-        where TNav : class, new()
+        where TNav : class
     {
         private readonly Expression<Func<TItem, TNav>> _navigationExpression;
         private readonly StemEngineSubContext<TNav> _engineSubContext;

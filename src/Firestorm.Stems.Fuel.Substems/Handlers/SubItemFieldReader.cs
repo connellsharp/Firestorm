@@ -5,9 +5,9 @@ using Firestorm.Engine.Fields;
 
 namespace Firestorm.Stems.Fuel.Substems.Handlers
 {
-    internal class SubItemFieldReader<TItem, TNav> : SubItemFieldHandler<TItem, TNav>, IFieldReader<TItem>
+    internal class SubItemFieldReader<TItem, TNav> : SubItemFieldHandlerBase<TItem, TNav>, IFieldReader<TItem>
         where TItem : class
-        where TNav : class, new()
+        where TNav : class
     {
         public SubItemFieldReader(Expression<Func<TItem, TNav>> navigationExpression, StemEngineSubContext<TNav> engineSubContext)
             : base(navigationExpression, engineSubContext)

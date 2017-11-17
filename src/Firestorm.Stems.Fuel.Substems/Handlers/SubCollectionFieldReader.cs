@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -7,20 +8,21 @@ using Firestorm.Engine.Fields;
 
 namespace Firestorm.Stems.Fuel.Substems.Handlers
 {
-    internal class SubCollectionFieldReader<TItem, TNav> : IFieldReader<TItem>
+    internal class SubCollectionFieldReader<TItem, TProperty, TNav> : IFieldReader<TItem>
         where TItem : class
         where TNav : class, new()
+        where TProperty : IEnumerable<TNav>
     {
-        private readonly Expression<Func<TItem, IEnumerable<TNav>>> _navigationExpression;
+        private readonly Expression<Func<TItem, TProperty>> _navigationExpression;
         private readonly StemEngineSubContext<TNav> _substemSubContext;
 
-        public SubCollectionFieldReader(Expression<Func<TItem, IEnumerable<TNav>>> navigationExpression, StemEngineSubContext<TNav> substemSubContext)
+        public SubCollectionFieldReader(Expression<Func<TItem, TProperty>> navigationExpression, StemEngineSubContext<TNav> substemSubContext)
         {
             _navigationExpression = navigationExpression;
             _substemSubContext = substemSubContext;
         }
 
-        public Type FieldType => typeof(object); // TODO maybe enumerable ?
+        public Type FieldType => typeof(IEnumerable); // TODO maybe just object ?
 
         public Expression GetSelectExpression(ParameterExpression itemPram)
         {

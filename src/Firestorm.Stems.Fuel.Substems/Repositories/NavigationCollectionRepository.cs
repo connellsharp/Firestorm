@@ -10,16 +10,19 @@ namespace Firestorm.Stems.Fuel.Substems.Repositories
     /// <summary>
     /// An engine repository for a navigation collection property.
     /// </summary>
-    public class NavigationCollectionRepository<TParent, TNav> : IEngineRepository<TNav>
+    public class NavigationCollectionRepository<TParent, TCollection, TNav> : IEngineRepository<TNav>
         where TNav : class, new()
+        where TCollection : IEnumerable<TNav>
     {
         private readonly IDeferredItem<TParent> _parentItem;
-        private readonly Expression<Func<TParent, IEnumerable<TNav>>> _navigationExpression;
+        private readonly Expression<Func<TParent, TCollection>> _navigationExpression;
+        private readonly Expression<Func<TParent, IEnumerable<TNav>>> _castedExpression;
 
-        public NavigationCollectionRepository(IDeferredItem<TParent> parentItem, Expression<Func<TParent, IEnumerable<TNav>>> navigationExpression)
+        public NavigationCollectionRepository(IDeferredItem<TParent> parentItem, Expression<Func<TParent, TCollection>> navigationExpression)
         {
             _parentItem = parentItem;
             _navigationExpression = navigationExpression;
+            _castedExpression = Expression.Lambda<Func<TParent, IEnumerable<TNav>>>(_navigationExpression.Body, _navigationExpression.Parameters);
         }
 
         public async Task InitializeAsync()
@@ -30,7 +33,7 @@ namespace Firestorm.Stems.Fuel.Substems.Repositories
 
         public IQueryable<TNav> GetAllItems()
         {
-            return _parentItem.Query.SelectMany(_navigationExpression);
+            return _parentItem.Query.SelectMany(_castedExpression);
         }
 
         public TNav CreateAndAttachItem()

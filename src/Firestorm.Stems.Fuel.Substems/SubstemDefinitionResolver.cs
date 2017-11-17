@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
-using Firestorm.Engine;
 using Firestorm.Engine.Fields;
-using Firestorm.Stems.Attributes;
 using Firestorm.Stems.Attributes.Analysis;
 using Firestorm.Stems.Attributes.Definitions;
-using Firestorm.Stems.Fuel.Fields;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 using Firestorm.Stems.Fuel.Substems.Factories;
@@ -29,43 +27,81 @@ namespace Firestorm.Stems.Fuel.Substems
             if (getterExpression == null)
                 throw new StemAttributeSetupException("Substem types must be on an expression property.");
 
-            Type navPropertyType = GetNavPropertyType<TItem>(ref getterExpression);
+            var typeArgs = new HandlerFactoryTypeArguments();
+            typeArgs.LoadExpression<TItem>(getterExpression);
 
-            var fullFactoryType = typeof(SubstemFieldFullResourceFactory<,,>).MakeGenericType(typeof(TItem), navPropertyType, FieldDefinition.SubstemType);
-            var fullFactory = (IFactory<IFieldResourceGetter<TItem>, TItem>)Activator.CreateInstance(fullFactoryType, getterExpression);
-            implementations.FullResourceFactories.Add(FieldDefinition.FieldName, fullFactory);
-            
-            Type readerFactoryType = typeof(SubstemFieldReaderFactory<,,>).MakeGenericType(typeof(TItem), navPropertyType, FieldDefinition.SubstemType);
-            var readerFactory = (IFactory<IFieldReader<TItem>, TItem>)Activator.CreateInstance(readerFactoryType, getterExpression);
-            implementations.ReaderFactories.Add(FieldDefinition.FieldName, readerFactory);
-
-            var writerFactoryType = typeof(SubstemFieldWriterFactory<,,>).MakeGenericType(typeof(TItem), navPropertyType, FieldDefinition.SubstemType);
-            var writerFactory = (IFactory<IFieldWriter<TItem>, TItem>)Activator.CreateInstance(writerFactoryType, getterExpression);
-            implementations.WriterFactories.Add(FieldDefinition.FieldName, writerFactory);
+            AddFactory(implementations.FullResourceFactories, HandlerTypes.FullResource, typeArgs);
+            AddFactory(implementations.ReaderFactories, HandlerTypes.Reader, typeArgs);
+            AddFactory(implementations.WriterFactories, HandlerTypes.Writer, typeArgs);
         }
 
-        private static Type GetNavPropertyType<TItem>(ref LambdaExpression getterExpression)
+        /// <summary>
+        /// Dynamically creates a factory of<see cref="THandler"/>s and adds to the given <see cref="dictionary"/>.
+        /// </summary>
+        private void AddFactory<THandler, TItem>
+        (
+            IDictionary<string, IFactory<THandler, TItem>> dictionary,
+            HandlerTypes handlerType,
+            HandlerFactoryTypeArguments typeArgs
+        )
+            where THandler : IFieldHandler<TItem>
+            where TItem : class
         {
-            Type propertyValueType = ResolverTypeUtility.GetPropertyLambdaReturnType<TItem>(getterExpression.GetType());
-
-            Type navPropertyType = propertyValueType;
-            Type enumerableType = GetEnumerableType(navPropertyType);
-
-            if (enumerableType != null)
+            try
             {
-                navPropertyType = navPropertyType.GetGenericArguments()[0];
-                getterExpression = getterExpression.CastBody(enumerableType);
-            }
+                Type typeDefinition = GetFactoryTypeDefinition(handlerType, typeArgs.IsCollection);
+                Type factoryType = typeDefinition.MakeGenericType(GetFactoryTypeArgs<TItem>(typeArgs).ToArray());
 
-            return navPropertyType;
+                var factory = (IFactory<THandler, TItem>) Activator.CreateInstance(factoryType, typeArgs.GetterExpression);
+
+                dictionary.Add(FieldDefinition.FieldName, factory);
+            }
+            catch(Exception ex)
+            {
+                string message = "Cannot add " + handlerType + " factory for this " + (typeArgs.IsCollection ? "collection" : "item");
+                throw new StemAttributeSetupException(message, ex);
+            }
         }
 
-        private static Type GetEnumerableType(Type navPropertyType)
+        private Type GetFactoryTypeDefinition(HandlerTypes fullResource, bool isCollection)
         {
-            if (navPropertyType == typeof(string))
-                return null;
+            // There's some weird stuff going on here with generics. I'm not sure it's all necessary..
 
-            return navPropertyType.GetGenericInterface(typeof(IEnumerable<>));
+            switch (fullResource)
+            {
+                case HandlerTypes.FullResource:
+                    return isCollection ? typeof(SubCollectionFieldFullResourceFactory<,,,>) : typeof(SubItemFieldFullResourceFactory<,,>);
+
+                case HandlerTypes.Reader:
+                    return isCollection ? typeof(SubCollectionFieldReaderFactory<,,,>) : typeof(SubItemFieldReaderFactory<,,>);
+
+                case HandlerTypes.Writer:
+                    return isCollection ? typeof(SubCollectionFieldWriterFactory<,,,>) : typeof(SubItemFieldWriterFactory<,,>);
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(fullResource), fullResource, null);
+            }
+        }
+
+        private IEnumerable<Type> GetFactoryTypeArgs<TItem>(HandlerFactoryTypeArguments typeArgs)
+        {
+            yield return typeof(TItem);
+
+            yield return typeArgs.PropertyValueType;
+
+            // By convention, all the collection types have 4 generic type parameters.
+            // The 3rd parameter is the TNav, because the property type above becomes TCollection.
+            if (typeArgs.IsCollection)
+                yield return typeArgs.EnumerableTypeArgument;
+
+            yield return FieldDefinition.SubstemType;
+        }
+
+        private enum HandlerTypes
+        {
+            FullResource,
+            Reader,
+            Writer
         }
     }
 }

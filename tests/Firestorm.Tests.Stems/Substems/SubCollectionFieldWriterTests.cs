@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Firestorm.Engine;
 using Firestorm.Engine.Defaults;
 using Firestorm.Stems;
@@ -22,7 +23,7 @@ namespace Firestorm.Tests.Stems.Substems
             subStem.SetParent(new TestStartAxis());
 
             StemEngineSubContext<Album> engineSubContext = new StemEngineSubContext<Album>(subStem);
-            NameFieldWriter = new SubCollectionFieldWriter<Artist, Album>(a => a.Albums, engineSubContext);
+            NameFieldWriter = new SubCollectionFieldWriter<Artist, IEnumerable<Album>, Album>(a => a.Albums, engineSubContext);
         }
 
         public class ArtistAlbumsStem : Stem<Album>
@@ -35,10 +36,10 @@ namespace Firestorm.Tests.Stems.Substems
             public static Expression<Func<Album, string>> Name { get; } = a => a.Name;
         }
 
-        private SubCollectionFieldWriter<Artist, Album> NameFieldWriter { get; set; }
+        private SubCollectionFieldWriter<Artist, IEnumerable<Album>, Album> NameFieldWriter { get; set; }
 
         [Fact]
-        public void ArtistWithNoAlbums_SetWithoutIDs_CreatesNew()
+        public async Task ArtistWithNoAlbums_SetWithoutIDs_CreatesNew()
         {
             var artist = new Artist() { Albums = new List<Album>() };
 
@@ -48,7 +49,7 @@ namespace Firestorm.Tests.Stems.Substems
                 new { name = "Last album" },
             };
 
-            NameFieldWriter.SetValueAsync(artist, albumsPostedObj, new TestTransaction());
+            await NameFieldWriter.SetValueAsync(artist, albumsPostedObj, new TestTransaction());
 
             Assert.Equal(2, artist.Albums.Count);
             Assert.Equal("First album", artist.Albums.First().Name);
@@ -56,7 +57,7 @@ namespace Firestorm.Tests.Stems.Substems
         }
 
         [Fact]
-        public void ArtistWithAlbums_SetWithLocatorIDs_Updates()
+        public async Task ArtistWithAlbums_SetWithLocatorIDs_Updates()
         {
             // note - test relies on IDs having the locator attribute, which they don't
 
@@ -75,7 +76,7 @@ namespace Firestorm.Tests.Stems.Substems
                 new { id = 2, name = "Last album" },
             };
 
-            NameFieldWriter.SetValueAsync(artist, albumsPostedObj, new TestTransaction());
+            await NameFieldWriter.SetValueAsync(artist, albumsPostedObj, new TestTransaction());
 
             Assert.Equal(2, artist.Albums.Count);
             Assert.Equal("First album", artist.Albums.First().Name);

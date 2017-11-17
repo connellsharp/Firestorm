@@ -5,7 +5,7 @@ using Firestorm.Stems.Fuel.Fields;
 
 namespace Firestorm.Stems.Fuel.Substems.Handlers
 {
-    internal class SubItemResourceGetter<TItem, TNav> : SubItemFieldHandler<TItem, TNav>, IFieldResourceGetter<TItem>
+    internal class SubItemResourceGetter<TItem, TNav> : SubItemFieldHandlerBase<TItem, TNav>, IFieldResourceGetter<TItem>
         where TItem : class
         where TNav : class, new()
     {

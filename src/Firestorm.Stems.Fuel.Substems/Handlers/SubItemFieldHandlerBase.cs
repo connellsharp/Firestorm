@@ -8,13 +8,13 @@ using Firestorm.Stems.Fuel.Substems.Repositories;
 
 namespace Firestorm.Stems.Fuel.Substems.Handlers
 {
-    internal abstract class SubItemFieldHandler<TItem, TNav> : IFieldHandler<TItem>
+    internal abstract class SubItemFieldHandlerBase<TItem, TNav> : IFieldHandler<TItem>
         where TNav : class
     {
         protected readonly Expression<Func<TItem, TNav>> NavigationExpression;
         protected readonly StemEngineSubContext<TNav> EngineSubContext;
 
-        protected SubItemFieldHandler(Expression<Func<TItem, TNav>> navigationExpression, StemEngineSubContext<TNav> engineSubContext)
+        protected SubItemFieldHandlerBase(Expression<Func<TItem, TNav>> navigationExpression, StemEngineSubContext<TNav> engineSubContext)
         {
             NavigationExpression = navigationExpression;
             EngineSubContext = engineSubContext;
