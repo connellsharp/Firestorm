@@ -12,7 +12,7 @@ namespace Firestorm.Engine.Queryable
     /// </summary>
     internal static class LinqRuntimeTypeBuilder
     {
-        private static readonly AssemblyName AssemblyName = new AssemblyName { Name = "DynamicLinqTypes" };
+        private static readonly AssemblyName AssemblyName = new AssemblyName { Name = "Firestorm.RuntimeTypes" };
         private static readonly ModuleBuilder ModuleBuilder;
         private static readonly Dictionary<string, Type> BuiltTypes = new Dictionary<string, Type>();
 
@@ -52,11 +52,11 @@ namespace Firestorm.Engine.Queryable
         private static string GetTypeKey(IEnumerable<KeyValuePair<string, Type>> fields)
         {
             //TODO: optimize the type caching -- if fields are simply reordered, that doesn't mean that they're actually different types, so this needs to be smarter
-            var builder = new StringBuilder("LinqRuntimeType");
+            var builder = new StringBuilder("Firestorm.RuntimeTypes.Type");
 
             foreach (var field in fields)
             {
-                builder.AppendFormat(";{0} {1}", field.Value.Name, field.Key);
+                builder.AppendFormat("__{0}_{1}", field.Value.Name, field.Key);
             }
 
             return builder.ToString();
