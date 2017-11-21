@@ -1,6 +1,6 @@
 ﻿using Firestorm.Engine.Fields;
 
-namespace Firestorm.Fluent.Fuel.Definitions
+namespace Firestorm.Fluent.Fuel.Models
 {
     internal class ApiFieldModel<TItem>
         where TItem : class

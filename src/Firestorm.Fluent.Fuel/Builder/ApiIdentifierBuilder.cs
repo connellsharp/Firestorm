@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Firestorm.Engine.Additives.Identifiers;
-using Firestorm.Fluent.Fuel.Definitions;
+using Firestorm.Fluent.Fuel.Models;
 
 namespace Firestorm.Fluent.Fuel.Builder
 {

@@ -1,5 +1,6 @@
-﻿using Firestorm.Fluent.Fuel.Definitions;
+﻿using Firestorm.Fluent.Fuel.Models;
 using Firestorm.Fluent.Fuel.Sources;
+using Firestorm.Fluent.Sources;
 
 namespace Firestorm.Fluent.Fuel.Builder
 {

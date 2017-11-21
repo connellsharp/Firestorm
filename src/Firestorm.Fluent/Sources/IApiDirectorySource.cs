@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Firestorm.Fluent
+﻿namespace Firestorm.Fluent.Sources
 {
     public interface IApiDirectorySource
     {

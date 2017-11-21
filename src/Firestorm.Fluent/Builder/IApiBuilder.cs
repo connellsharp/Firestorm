@@ -1,3 +1,5 @@
+using Firestorm.Fluent.Sources;
+
 namespace Firestorm.Fluent
 {
     public interface IApiBuilder

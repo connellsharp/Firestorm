@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using Firestorm.Engine;
 using Firestorm.Engine.Fields;
-using Firestorm.Fluent.Fuel.Definitions;
+using Firestorm.Fluent.Fuel.Models;
 
-namespace Firestorm.Fluent.Fuel.Sources
+namespace Firestorm.Fluent.Fuel.Engine
 {
     internal class FluentFieldProvider<TItem> : IFieldProvider<TItem>
         where TItem : class

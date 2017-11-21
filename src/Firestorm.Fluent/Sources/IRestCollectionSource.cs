@@ -1,4 +1,4 @@
-﻿namespace Firestorm.Fluent
+﻿namespace Firestorm.Fluent.Sources
 {
     public interface IRestCollectionSource
     {

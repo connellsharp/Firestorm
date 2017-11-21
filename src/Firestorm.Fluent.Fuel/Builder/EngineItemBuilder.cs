@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Firestorm.Fluent.Fuel.Definitions;
+using Firestorm.Fluent.Fuel.Models;
 
 namespace Firestorm.Fluent.Fuel.Builder
 {
-    public class EngineItemBuilder<TItem> : IApiItemBuilder<TItem>
+    internal class EngineItemBuilder<TItem> : IApiItemBuilder<TItem>
         where TItem : class
     {
         private readonly ApiItemModel<TItem> _model;
 
-        public EngineItemBuilder(ApiItemModel<TItem> model)
+        internal EngineItemBuilder(ApiItemModel<TItem> model)
         {
             _model = model;
         }

@@ -2,9 +2,9 @@
 using Firestorm.Engine;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Identifiers;
-using Firestorm.Fluent.Fuel.Definitions;
+using Firestorm.Fluent.Fuel.Models;
 
-namespace Firestorm.Fluent.Fuel.Sources
+namespace Firestorm.Fluent.Fuel.Engine
 {
     internal class FluentEngineContext<TItem> : IEngineContext<TItem>
         where TItem : class
