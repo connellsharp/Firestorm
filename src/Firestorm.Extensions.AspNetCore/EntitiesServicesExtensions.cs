@@ -1,4 +1,5 @@
 ﻿using Firestorm.Endpoints.AspNetCore;
+using Firestorm.Engine.Data;
 using Firestorm.Engine.EFCore2;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.DataSource;
@@ -15,11 +16,13 @@ namespace Firestorm.Extensions.AspNetCore
         public static IFirestormServicesBuilder AddEntityFramework<TDbContext>(this IFirestormServicesBuilder builder)
             where TDbContext : DbContext
         {
+            builder.Services.AddSingleton<IDataSource>(sp => new EFCoreDataSource<TDbContext>(new RequestServiceProvider(sp)));
+
             builder.Services.AddSingleton<IRootResourceFactory>(sp => new DataSourceRootResourceFactory
-            {
-                DataSource = new EFCoreDataSource<TDbContext>(new RequestServiceProvider(sp)),
-                StemTypeGetter = sp.GetService<StemTypesLocation>().GetTypeGetter()
-            });
+                {
+                    DataSource = sp.GetService<IDataSource>(),
+                    StemTypeGetter = sp.GetService<StemTypesLocation>().GetTypeGetter()
+                });
 
             return builder;
         }

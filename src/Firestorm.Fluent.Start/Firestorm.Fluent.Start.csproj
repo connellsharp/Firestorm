@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Firestorm.Endpoints.Start\Firestorm.Endpoints.Start.csproj" />
+    <ProjectReference Include="..\Firestorm.Fluent.Fuel\Firestorm.Fluent.Fuel.csproj" />
     <ProjectReference Include="..\Firestorm.Fluent\Firestorm.Fluent.csproj" />
   </ItemGroup>
 
