@@ -23,24 +23,4 @@ namespace Firestorm.Fluent.Fuel
             return new EngineRestCollection<TItem>(context);
         }
     }
-
-    public class FluentCollectionCreatorCreator : IFluentCollectionCreatorCreator
-    {
-        private readonly IDataSource _dataSource;
-
-        public FluentCollectionCreatorCreator(IDataSource dataSource)
-        {
-            _dataSource = dataSource;
-        }
-
-        public IFluentCollectionCreator GetCollectionCreator<TItem>(ApiItemBuilder<TItem> apiItemBuilder)
-            where TItem : class
-        {
-            var implementations = new FieldImplementationsDictionary<TItem>();
-
-            // TODO builder implementations from builder
-
-            return new FluentCollectionCreator<TItem>(_dataSource, implementations);
-        }
-    }
 }

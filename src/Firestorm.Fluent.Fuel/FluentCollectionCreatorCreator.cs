@@ -16,7 +16,13 @@ namespace Firestorm.Fluent.Fuel
         {
             var implementations = new FieldImplementationsDictionary<TItem>();
 
-            // TODO builder implementations from builder
+            //foreach (var field in apiItemBuilder.Fields) {
+            //    implementations.Add(field.Name, new FieldImplementations<TItem> {
+            //        Reader = new ExpressionFieldReader<TItem>(field.Expression),
+            //        Writer = new ExpressionFieldWriter<TItem>(field.Expression),
+            //        FullResource = new ExpressionFullResource(field.Expression, )
+            //    });
+            //}
 
             return new FluentCollectionCreator<TItem>(_dataSource, implementations);
         }
