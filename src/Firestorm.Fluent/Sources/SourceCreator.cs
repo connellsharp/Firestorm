@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
-
-namespace Firestorm.Fluent
+﻿namespace Firestorm.Fluent
 {
     public class SourceCreator
     {
-        public ApiDirectorySource CreateSource(ApiContext apiContext, IFluentCollectionCreatorCreator creatorCreator)
+        public IApiDirectorySource CreateSource(ApiContext apiContext, IApiBuilder builder)
         {
-            var builder = new ApiBuilder();
             apiContext.OnModelCreating(builder);
-            return new ApiDirectorySource(builder, creatorCreator);
+            return builder.BuildSource();
         }
     }
 }

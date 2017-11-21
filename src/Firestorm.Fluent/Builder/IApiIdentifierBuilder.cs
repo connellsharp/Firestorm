@@ -4,4 +4,8 @@
     {
 
     }
+    public interface IApiIdentifierBuilder<TItem, TIdentifier> : IApiIdentifierBuilder<TItem>
+    {
+
+    }
 }

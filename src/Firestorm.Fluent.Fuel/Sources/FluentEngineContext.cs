@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Firestorm.Engine;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Identifiers;
+using Firestorm.Fluent.Fuel.Definitions;
 
-namespace Firestorm.Fluent.Fuel
+namespace Firestorm.Fluent.Fuel.Sources
 {
     internal class FluentEngineContext<TItem> : IEngineContext<TItem>
         where TItem : class
     {
-        public FluentEngineContext(FieldImplementationsDictionary<TItem> implementations)
+        public FluentEngineContext(IDictionary<string, ApiFieldModel<TItem>> fieldModels)
         {
-            Fields = new FluentFieldProvider<TItem>(implementations);
+            Fields = new FluentFieldProvider<TItem>(fieldModels);
         }
 
         public IDataTransaction Transaction { get; }

@@ -6,7 +6,7 @@ namespace Firestorm.Fluent
 {
     public abstract class ApiContext
     {
-        protected internal virtual void OnModelCreating(ApiBuilder apiBuilder)
+        protected internal virtual void OnModelCreating(IApiBuilder apiBuilder)
         {
         }
     }

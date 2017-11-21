@@ -3,32 +3,30 @@ using Firestorm.Endpoints;
 using Firestorm.Endpoints.Start;
 using Firestorm.Engine.Data;
 using Firestorm.Fluent.Fuel;
+using Firestorm.Fluent.Fuel.Builder;
+using Firestorm.Fluent.Fuel.Definitions;
 
 namespace Firestorm.Fluent.Start
 {
     public class FluentStartResourceFactory : IStartResourceFactory
     {
-        private readonly ConcurrentDictionary<string, IFluentCollectionCreator> _creators = new ConcurrentDictionary<string, IFluentCollectionCreator>();
-
+        private IApiDirectorySource _apiDirectorySource;
         public ApiContext ApiContext { get; set; }
 
         public IDataSource DataSource { get; set; }
 
         public void Initialize()
         {
-            var sourceCreator = new SourceCreator();
-            var creatorCreator = new FluentCollectionCreatorCreator(DataSource);
-            var apiSource = sourceCreator.CreateSource(ApiContext, creatorCreator);
+            EngineApiModel engineModel = new EngineApiModel();
+            var builder = new EngineApiBuilder(engineModel);
 
-            foreach (var rootSource in apiSource.GetRootSources())
-            {
-                _creators.TryAdd(rootSource.Name, rootSource.CollectionCreator);
-            }
+            var sourceCreator = new SourceCreator();
+            _apiDirectorySource = sourceCreator.CreateSource(ApiContext, builder);
         }
 
         public IRestResource GetStartResource(IRestEndpointContext endpointContext)
         {
-            return new ApiContextDirectory(endpointContext, _creators);
+            return new ApiContextDirectory(endpointContext, _apiDirectorySource);
         }
     }
 }

@@ -1,19 +1,20 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Firestorm.Engine;
 using Firestorm.Engine.Fields;
+using Firestorm.Fluent.Fuel.Definitions;
 
-namespace Firestorm.Fluent.Fuel
+namespace Firestorm.Fluent.Fuel.Sources
 {
     internal class FluentFieldProvider<TItem> : IFieldProvider<TItem>
         where TItem : class
     {
-        private readonly FieldImplementationsDictionary<TItem> _implementations;
+        private readonly IDictionary<string, ApiFieldModel<TItem>> _fieldModels;
 
-        public FluentFieldProvider(FieldImplementationsDictionary<TItem> implementations)
+        public FluentFieldProvider(IDictionary<string, ApiFieldModel<TItem>> fieldModels)
         {
-            _implementations = implementations;
+            _fieldModels = fieldModels;
         }
 
         public IEnumerable<string> GetDefaultNames(int nestedBy)
@@ -23,7 +24,7 @@ namespace Firestorm.Fluent.Fuel
 
         public bool FieldExists(string fieldName)
         {
-            return _implementations.ContainsKey(fieldName);
+            return _fieldModels.ContainsKey(fieldName);
         }
 
         public IRestResource GetFullResource(string fieldName, IDeferredItem<TItem> item, IDataTransaction dataTransaction)
@@ -33,17 +34,17 @@ namespace Firestorm.Fluent.Fuel
 
         public IFieldReader<TItem> GetReader(string fieldName)
         {
-            return _implementations[fieldName].Reader;
+            return _fieldModels[fieldName].Reader;
         }
 
         public IFieldWriter<TItem> GetWriter(string fieldName)
         {
-            return _implementations[fieldName].Writer;
+            return _fieldModels[fieldName].Writer;
         }
 
         public IFieldDescription GetDescription(string fieldName, CultureInfo cultureInfo)
         {
-            return _implementations[fieldName].Description;
+            return _fieldModels[fieldName].Description;
         }
     }
 }

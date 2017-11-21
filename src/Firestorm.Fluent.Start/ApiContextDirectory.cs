@@ -7,21 +7,18 @@ namespace Firestorm.Fluent.Start
 {
     public class ApiContextDirectory : IRestDirectory
     {
-        private readonly IDictionary<string, IFluentCollectionCreator> _creatorCache;
+        private readonly IApiDirectorySource _directorySource;
 
-        internal ApiContextDirectory(IRestEndpointContext apiContext, IDictionary<string, IFluentCollectionCreator> creatorCache)
+        internal ApiContextDirectory(IRestEndpointContext apiContext, IApiDirectorySource directorySource)
         {
-            _creatorCache = creatorCache;
+            _directorySource = directorySource;
         }
 
         public IRestResource GetChild(string startResourceName)
         {
-            if (!_creatorCache.ContainsKey(startResourceName))
-                return null;
+            IRestCollectionSource source = _directorySource.GetCollectionSource(startResourceName);
 
-            IFluentCollectionCreator creator = _creatorCache[startResourceName];
-
-            return creator.GetRestCollection();
+            return source?.GetRestCollection();
         }
 
         public Task<RestDirectoryInfo> GetInfoAsync()

@@ -1,6 +1,6 @@
 ﻿namespace Firestorm.Fluent
 {
-    public interface IFluentCollectionCreator
+    public interface IRestCollectionSource
     {
         IRestCollection GetRestCollection();
     }
