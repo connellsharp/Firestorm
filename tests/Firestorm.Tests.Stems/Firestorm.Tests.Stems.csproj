@@ -86,6 +86,10 @@
       <Project>{8A8BFE0E-1545-4152-96FC-23E72F1D0DF2}</Project>
       <Name>Firestorm.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Engine.Subs\Firestorm.Engine.Subs.csproj">
+      <Project>{33ee0031-b1aa-4c02-912e-86a29413d039}</Project>
+      <Name>Firestorm.Engine.Subs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Firestorm.Engine\Firestorm.Engine.csproj">
       <Project>{AAE9E7FF-8EE5-4CA0-87CF-7E0026E62CC7}</Project>
       <Name>Firestorm.Engine</Name>

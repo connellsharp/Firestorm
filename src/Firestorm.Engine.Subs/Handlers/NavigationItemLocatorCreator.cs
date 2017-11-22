@@ -11,12 +11,12 @@ using Firestorm.Stems.Fuel.Substems.Repositories;
 
 namespace Firestorm.Stems.Fuel.Substems.Handlers
 {
-    internal class StemNavigationItemLocatorCreator<TNav>
+    internal class NavigationItemLocatorCreator<TNav>
         where TNav : class, new()
     {
-        private readonly StemEngineSubContext<TNav> _substemSubContext;
+        private readonly IEngineSubContext<TNav> _substemSubContext;
 
-        internal StemNavigationItemLocatorCreator(StemEngineSubContext<TNav> substemSubContext)
+        internal NavigationItemLocatorCreator(IEngineSubContext<TNav> substemSubContext)
         {
             _substemSubContext = substemSubContext;
         }
@@ -24,7 +24,7 @@ namespace Firestorm.Stems.Fuel.Substems.Handlers
         /// <summary>
         /// Attempts to locate the item to modify using the modification request data.
         /// </summary>
-        internal async Task<DeferredItemBase<TNav>> LocateOrCreateItemAsync(StemEngineContext<TNav> navContext, RestItemData itemData, Func<Task> loadParentAsync)
+        internal async Task<DeferredItemBase<TNav>> LocateOrCreateItemAsync(AdditiveEngineContext<TNav> navContext, RestItemData itemData, Func<Task> loadParentAsync)
         {
             var locatedItem = LocateItem(navContext, itemData);
             if (locatedItem != null)
@@ -37,7 +37,7 @@ namespace Firestorm.Stems.Fuel.Substems.Handlers
         /// <summary>
         /// Attempts to locate the item to modify using the modification request data.
         /// </summary>
-        internal DeferredItemBase<TNav> LocateItem(StemEngineContext<TNav> navContext, RestItemData itemData)
+        internal DeferredItemBase<TNav> LocateItem(AdditiveEngineContext<TNav> navContext, RestItemData itemData)
         {
             foreach (string fieldName in itemData.Keys)
             {

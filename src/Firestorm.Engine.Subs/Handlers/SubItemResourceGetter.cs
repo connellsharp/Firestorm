@@ -5,11 +5,11 @@ using Firestorm.Stems.Fuel.Fields;
 
 namespace Firestorm.Stems.Fuel.Substems.Handlers
 {
-    internal class SubItemResourceGetter<TItem, TNav> : SubItemFieldHandlerBase<TItem, TNav>, IFieldResourceGetter<TItem>
+    public class SubItemResourceGetter<TItem, TNav> : SubItemFieldHandlerBase<TItem, TNav>, IFieldResourceGetter<TItem>
         where TItem : class
         where TNav : class, new()
     {
-        public SubItemResourceGetter(Expression<Func<TItem, TNav>> navigationExpression, StemEngineSubContext<TNav> engineSubContext)
+        public SubItemResourceGetter(Expression<Func<TItem, TNav>> navigationExpression, IEngineSubContext<TNav> engineSubContext)
             : base(navigationExpression, engineSubContext)
         { }
 

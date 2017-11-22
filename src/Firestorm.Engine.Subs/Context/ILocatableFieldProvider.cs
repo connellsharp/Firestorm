@@ -6,7 +6,7 @@ namespace Firestorm.Stems.Fuel.Fields
     /// <summary>
     /// A mapping of given API fields used for Stems.
     /// </summary>
-    public interface IStemFieldProvider<TItem> : IFieldProvider<TItem>
+    public interface ILocatableFieldProvider<TItem> : IFieldProvider<TItem>
         where TItem : class
     {
         [CanBeNull]

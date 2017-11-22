@@ -135,11 +135,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Extensions.AspNet
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fluent", "Fluent", "{3B09F420-8C13-4A60-ACC0-41E9F0AF48F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Fluent", "src\Firestorm.Fluent\Firestorm.Fluent.csproj", "{C2141E8C-7060-446F-BF9F-1F37B64F72D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Fluent", "src\Firestorm.Fluent\Firestorm.Fluent.csproj", "{C2141E8C-7060-446F-BF9F-1F37B64F72D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Fluent.Start", "src\Firestorm.Fluent.Start\Firestorm.Fluent.Start.csproj", "{1C46E45C-3DF8-429A-8A2D-62D0F68238BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Fluent.Start", "src\Firestorm.Fluent.Start\Firestorm.Fluent.Start.csproj", "{1C46E45C-3DF8-429A-8A2D-62D0F68238BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Fluent.Fuel", "src\Firestorm.Fluent.Fuel\Firestorm.Fluent.Fuel.csproj", "{0710A765-E0DF-4E04-A088-0AAF154FE40A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Fluent.Fuel", "src\Firestorm.Fluent.Fuel\Firestorm.Fluent.Fuel.csproj", "{0710A765-E0DF-4E04-A088-0AAF154FE40A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Engine.Subs", "src\Firestorm.Engine.Subs\Firestorm.Engine.Subs.csproj", "{33EE0031-B1AA-4C02-912E-86A29413D039}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -319,6 +321,10 @@ Global
 		{0710A765-E0DF-4E04-A088-0AAF154FE40A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0710A765-E0DF-4E04-A088-0AAF154FE40A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0710A765-E0DF-4E04-A088-0AAF154FE40A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33EE0031-B1AA-4C02-912E-86A29413D039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33EE0031-B1AA-4C02-912E-86A29413D039}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33EE0031-B1AA-4C02-912E-86A29413D039}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33EE0031-B1AA-4C02-912E-86A29413D039}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -382,6 +388,7 @@ Global
 		{C2141E8C-7060-446F-BF9F-1F37B64F72D2} = {3B09F420-8C13-4A60-ACC0-41E9F0AF48F8}
 		{1C46E45C-3DF8-429A-8A2D-62D0F68238BA} = {3B09F420-8C13-4A60-ACC0-41E9F0AF48F8}
 		{0710A765-E0DF-4E04-A088-0AAF154FE40A} = {3B09F420-8C13-4A60-ACC0-41E9F0AF48F8}
+		{33EE0031-B1AA-4C02-912E-86A29413D039} = {FA828466-0901-42FA-8BE9-FE3DA18E589D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E07ED662-9390-431F-B4D6-BDA65FE4169A}

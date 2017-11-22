@@ -5,11 +5,11 @@ using Firestorm.Engine.Fields;
 
 namespace Firestorm.Stems.Fuel.Substems.Handlers
 {
-    internal class SubItemFieldReader<TItem, TNav> : SubItemFieldHandlerBase<TItem, TNav>, IFieldReader<TItem>
+    public class SubItemFieldReader<TItem, TNav> : SubItemFieldHandlerBase<TItem, TNav>, IFieldReader<TItem>
         where TItem : class
         where TNav : class
     {
-        public SubItemFieldReader(Expression<Func<TItem, TNav>> navigationExpression, StemEngineSubContext<TNav> engineSubContext)
+        public SubItemFieldReader(Expression<Func<TItem, TNav>> navigationExpression, IEngineSubContext<TNav> engineSubContext)
             : base(navigationExpression, engineSubContext)
         { }
 
@@ -19,7 +19,7 @@ namespace Firestorm.Stems.Fuel.Substems.Handlers
         {
             var visitedNavigationExpr = (LambdaExpression) new ParameterReplacerVisitor(NavigationExpression.Parameters[0], itemPram).Visit(NavigationExpression);
 
-            LambdaExpression memberInitLambda = SubstemUtilities.GetMemberInitLambda(EngineSubContext.FieldProvider);
+            LambdaExpression memberInitLambda = SubUtilities.GetMemberInitLambda(EngineSubContext.FieldProvider);
 
             return visitedNavigationExpr.Chain(memberInitLambda).Body;
         }

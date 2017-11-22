@@ -10,15 +10,15 @@ using Firestorm.Stems.Fuel.Substems.Repositories;
 
 namespace Firestorm.Stems.Fuel.Substems.Handlers
 {
-    internal class SubCollectionFieldWriter<TItem, TProperty, TNav> : IFieldWriter<TItem>
+    public class SubCollectionFieldWriter<TItem, TProperty, TNav> : IFieldWriter<TItem>
         where TItem : class
         where TNav : class, new()
         where TProperty : IEnumerable<TNav>
     {
         private readonly Expression<Func<TItem, TProperty>> _navigationExpression;
-        private readonly StemEngineSubContext<TNav> _substemSubContext;
+        private readonly IEngineSubContext<TNav> _substemSubContext;
 
-        public SubCollectionFieldWriter(Expression<Func<TItem, TProperty>> navigationExpression, StemEngineSubContext<TNav> substemSubContext)
+        public SubCollectionFieldWriter(Expression<Func<TItem, TProperty>> navigationExpression, IEngineSubContext<TNav> substemSubContext)
         {
             _navigationExpression = navigationExpression;
             _substemSubContext = substemSubContext;
@@ -28,8 +28,8 @@ namespace Firestorm.Stems.Fuel.Substems.Handlers
         {
             var navRepository = new NavigationCollectionRepository<TItem, TProperty, TNav>(item, _navigationExpression);
 
-            var navLocatorCreator = new StemNavigationItemLocatorCreator<TNav>(_substemSubContext);
-            var navContext = new StemEngineContext<TNav>(dataTransaction, navRepository, _substemSubContext);
+            var navLocatorCreator = new NavigationItemLocatorCreator<TNav>(_substemSubContext);
+            var navContext = new AdditiveEngineContext<TNav>(dataTransaction, navRepository, _substemSubContext);
 
             IEnumerable deserializedCollection = (IEnumerable) deserializedValue; // todo null ?
 

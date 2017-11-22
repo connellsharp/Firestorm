@@ -8,15 +8,15 @@ using Firestorm.Engine.Fields;
 
 namespace Firestorm.Stems.Fuel.Substems.Handlers
 {
-    internal class SubCollectionFieldReader<TItem, TProperty, TNav> : IFieldReader<TItem>
+    public class SubCollectionFieldReader<TItem, TProperty, TNav> : IFieldReader<TItem>
         where TItem : class
         where TNav : class, new()
         where TProperty : IEnumerable<TNav>
     {
         private readonly Expression<Func<TItem, TProperty>> _navigationExpression;
-        private readonly StemEngineSubContext<TNav> _substemSubContext;
+        private readonly IEngineSubContext<TNav> _substemSubContext;
 
-        public SubCollectionFieldReader(Expression<Func<TItem, TProperty>> navigationExpression, StemEngineSubContext<TNav> substemSubContext)
+        public SubCollectionFieldReader(Expression<Func<TItem, TProperty>> navigationExpression, IEngineSubContext<TNav> substemSubContext)
         {
             _navigationExpression = navigationExpression;
             _substemSubContext = substemSubContext;
@@ -28,7 +28,7 @@ namespace Firestorm.Stems.Fuel.Substems.Handlers
         {
             var visitedNavigationExpr = (LambdaExpression) new ParameterReplacerVisitor(_navigationExpression.Parameters[0], itemPram).Visit(_navigationExpression);
 
-            LambdaExpression memberInitLambda = SubstemUtilities.GetMemberInitLambda(_substemSubContext.FieldProvider);
+            LambdaExpression memberInitLambda = SubUtilities.GetMemberInitLambda(_substemSubContext.FieldProvider);
 
             Type dynamicType = memberInitLambda.ReturnType;
             MethodCallExpression selectMethodExpr = Expression.Call(typeof(Enumerable), "Select", new[] { typeof(TNav), dynamicType }, visitedNavigationExpr.Body, memberInitLambda);

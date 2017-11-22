@@ -26,8 +26,8 @@ namespace Firestorm.Stems.Roots.DataSource
 
             IEngineRepository<TItem> repository = _dataSource.GetRepository<TItem>(transaction);
 
-            var stemEngineInfo = new StemEngineSubContext<TItem>(stem);
-            var context = new StemEngineContext<TItem>(transaction, repository, stemEngineInfo);
+            var stemEngineInfo = new StemsEngineSubContext<TItem>(stem);
+            var context = new AdditiveEngineContext<TItem>(transaction, repository, stemEngineInfo);
 
             return new EngineRestCollection<TItem>(context);
         }

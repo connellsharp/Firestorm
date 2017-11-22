@@ -22,7 +22,7 @@ namespace Firestorm.Tests.Stems.Substems
             var artistsStem = new ArtistsStem();
             artistsStem.SetParent(new TestStartAxis());
 
-            _writer = new SubItemFieldWriter<Album, Artist>(a => a.Artist, new StemEngineSubContext<Artist>(artistsStem));
+            _writer = new SubItemFieldWriter<Album, Artist>(a => a.Artist, new StemsEngineSubContext<Artist>(artistsStem));
         }
 
         public class ArtistsStem : Stem<Artist>

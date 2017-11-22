@@ -4,7 +4,7 @@ using Firestorm.Tests.Engine.Models;
 
 namespace Firestorm.Tests.Stems
 {
-    public class StemFieldDictionary<TItem> : FieldDictionary<TItem>, IStemFieldProvider<TItem>
+    public class StemFieldDictionary<TItem> : FieldDictionary<TItem>, ILocatableFieldProvider<TItem>
         where TItem : class
     {
         public IItemLocator<TItem> GetLocator(string apiFieldName)

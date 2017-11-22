@@ -10,14 +10,14 @@ namespace Firestorm.Stems.Fuel
 {
     /// <summary>
     /// Wraps a <see cref="Stem{TItem}"/> and provides API field information for the Firestorm Engine.
-    /// Basically a <see cref="StemEngineContext{TItem}"/> without repository info.
+    /// Basically a <see cref="AdditiveEngineContext{TItem}"/> without repository info.
     /// </summary>
-    public class StemEngineSubContext<TItem>
+    public class StemsEngineSubContext<TItem> : IEngineSubContext<TItem>
         where TItem : class
     {
         private readonly Stem<TItem> _stem;
 
-        public StemEngineSubContext([NotNull] Stem<TItem> stem)
+        public StemsEngineSubContext([NotNull] Stem<TItem> stem)
         {
             _stem = stem;
 
@@ -35,7 +35,7 @@ namespace Firestorm.Stems.Fuel
 
         public IIdentifierProvider<TItem> IdentifierProvider { get; }
 
-        public IStemFieldProvider<TItem> FieldProvider { get; }
+        public ILocatableFieldProvider<TItem> FieldProvider { get; }
 
         public IAuthorizationChecker<TItem> AuthorizationChecker { get; }
     }

@@ -7,15 +7,15 @@ using Firestorm.Stems.Fuel.Substems.Repositories;
 
 namespace Firestorm.Stems.Fuel.Substems.Handlers
 {
-    internal class SubCollectionResourceGetter<TItem, TCollection, TNav> : IFieldResourceGetter<TItem>
+    public class SubCollectionResourceGetter<TItem, TCollection, TNav> : IFieldResourceGetter<TItem>
         where TItem : class
         where TNav : class, new()
         where TCollection : IEnumerable<TNav>
     {
         private readonly Expression<Func<TItem, TCollection>> _navigationExpression;
-        private readonly StemEngineSubContext<TNav> _engineSubContext;
+        private readonly IEngineSubContext<TNav> _engineSubContext;
 
-        public SubCollectionResourceGetter(Expression<Func<TItem, TCollection>> navigationExpression, StemEngineSubContext<TNav> engineSubContext)
+        public SubCollectionResourceGetter(Expression<Func<TItem, TCollection>> navigationExpression, IEngineSubContext<TNav> engineSubContext)
         {
             _navigationExpression = navigationExpression;
             _engineSubContext = engineSubContext;
@@ -24,7 +24,7 @@ namespace Firestorm.Stems.Fuel.Substems.Handlers
         public IRestResource GetFullResource(IDeferredItem<TItem> item, IDataTransaction dataTransaction)
         {
             var navRepository = new NavigationCollectionRepository<TItem, TCollection, TNav>(item, _navigationExpression);
-            var context = new StemEngineContext<TNav>(dataTransaction, navRepository, _engineSubContext);
+            var context = new AdditiveEngineContext<TNav>(dataTransaction, navRepository, _engineSubContext);
             return new EngineRestCollection<TNav>(context);
         }
     }

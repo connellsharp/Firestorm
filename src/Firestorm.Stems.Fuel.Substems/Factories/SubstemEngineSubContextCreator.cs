@@ -7,13 +7,13 @@ namespace Firestorm.Stems.Fuel.Substems.Factories
         where TNav : class
         where TSubstem : Stem<TNav>
     {
-        internal static StemEngineSubContext<TNav> StemEngineContextFields(Stem<TItem> stem)
+        internal static StemsEngineSubContext<TNav> StemEngineContextFields(Stem<TItem> stem)
         {
             var autoActivator = new AutoActivator(stem.Configuration.DependencyResolver);
             var substem = autoActivator.CreateInstance<TSubstem>();
             substem.SetParent(stem);
 
-            return new StemEngineSubContext<TNav>(substem);
+            return new StemsEngineSubContext<TNav>(substem);
         }
     }
 }

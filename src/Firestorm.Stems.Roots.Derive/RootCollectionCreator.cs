@@ -14,11 +14,10 @@ namespace Firestorm.Stems.Roots.Derive
         public IRestCollection GetRestCollection(Root<TItem> root, Stem<TItem> stem)
         {
             var transaction = new RootDataTransaction(root);
-
             var repository = new RootEngineRepository<TItem>(root, stem);
+            var stemEngineInfo = new StemsEngineSubContext<TItem>(stem);
 
-            var stemEngineInfo = new StemEngineSubContext<TItem>(stem);
-            var context = new StemEngineContext<TItem>(transaction, repository, stemEngineInfo);
+            var context = new AdditiveEngineContext<TItem>(transaction, repository, stemEngineInfo);
 
             return new EngineRestCollection<TItem>(context);
         }

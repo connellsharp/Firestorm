@@ -12,7 +12,7 @@ namespace Firestorm.Stems.Fuel.Fields
     /// <summary>
     /// Fields provider built using reflection to look at <see cref="FieldAttribute"/>s on a class.
     /// </summary>
-    internal class AttributeFieldProvider<TItem> : IStemFieldProvider<TItem>
+    internal class AttributeFieldProvider<TItem> : ILocatableFieldProvider<TItem>
         where TItem : class
     {
         private readonly Stem<TItem> _stem;
