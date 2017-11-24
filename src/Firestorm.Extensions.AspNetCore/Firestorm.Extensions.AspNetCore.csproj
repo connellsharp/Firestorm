@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Firestorm.Endpoints.AspNetCore\Firestorm.Endpoints.AspNetCore.csproj" />
-    <ProjectReference Include="..\..\src\Firestorm.Engine.EFCore2\Firestorm.Engine.EFCore2.csproj" />
+    <ProjectReference Include="..\..\src\Firestorm.Data.EFCore2\Firestorm.Data.EFCore2.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.DataSource\Firestorm.Stems.Roots.DataSource.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.Start\Firestorm.Stems.Roots.Start.csproj" />
     <ProjectReference Include="..\Firestorm.Fluent.Start\Firestorm.Fluent.Start.csproj" />

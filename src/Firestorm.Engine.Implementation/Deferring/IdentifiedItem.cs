@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Firestorm.Data;
 using Firestorm.Engine.Identifiers;
 
 namespace Firestorm.Engine.Deferring

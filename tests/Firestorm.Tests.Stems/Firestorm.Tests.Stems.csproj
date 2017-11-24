@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -77,6 +77,10 @@
     <ProjectReference Include="..\..\src\Firestorm.Endpoints\Firestorm.Endpoints.csproj">
       <Project>{B629974F-C31F-4E05-8AD7-CD137DC84505}</Project>
       <Name>Firestorm.Endpoints</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Data\Firestorm.Data.csproj">
+      <Project>{16b05383-6f76-470c-bab4-6fe8de61ebaa}</Project>
+      <Name>Firestorm.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Firestorm.Engine.Implementation\Firestorm.Engine.Implementation.csproj">
       <Project>{908d22e4-1cc9-4b96-a470-9c79ee529d78}</Project>

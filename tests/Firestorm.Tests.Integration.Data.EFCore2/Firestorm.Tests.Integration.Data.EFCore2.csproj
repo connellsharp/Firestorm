@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Firestorm.Engine.EFCore2\Firestorm.Engine.EFCore2.csproj" />
+    <ProjectReference Include="..\..\src\Firestorm.Data.EFCore2\Firestorm.Data.EFCore2.csproj" />
     <ProjectReference Include="..\Firestorm.Tests.Integration.Data.Base\Firestorm.Tests.Integration.Data.Base.csproj" />
   </ItemGroup>
 

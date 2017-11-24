@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Firestorm.Engine
+namespace Firestorm.Data
 {
     /// <summary>
     /// The method used to loop over an <see cref="IQueryable{T}"/>, performing an <see cref="Action{T}"/> asynchronously.

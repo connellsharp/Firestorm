@@ -1,19 +1,18 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
-namespace Firestorm.Engine.EFCore2
+namespace Firestorm.Data.EntityFramework
 {
     /// <summary>
-    /// EF Core transaction using a given database context.
-    /// Context is not disposed with this object.
+    /// Entity Framework transaction object that creates and disposes of the database context.
     /// </summary>
-    public class EFCoreDataTransaction<TDatabase> : IDataTransaction
-        where TDatabase : DbContext
+    public class EntitiesDataTransaction<TDatabase> : IDataTransaction
+        where TDatabase : DbContext, new()
     {
-        public EFCoreDataTransaction(TDatabase database)
+        public EntitiesDataTransaction()
         {
-            DbContext = database;
+            DbContext = new TDatabase();
         }
 
         public TDatabase DbContext { get; }
@@ -41,14 +40,12 @@ namespace Firestorm.Engine.EFCore2
 
         public Task RollbackAsync()
         {
-            throw new NotImplementedException("Not implemented rollback for EF Core.");
+            throw new NotImplementedException("Not implemented rollback for Entity Framework.");
         }
 
         public void Dispose()
         {
-            // passed in to constructor.
-            // EF Core service provider takes care of disposing the context
-            //DbContext.Dispose();
+            DbContext.Dispose();
         }
     }
 }

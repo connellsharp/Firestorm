@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Firestorm.Engine
+namespace Firestorm.Data
 {
     /// <summary>
     /// Contains a method to perform asyncronous queries on an <see cref="IQueryable{T}"/> implementation.

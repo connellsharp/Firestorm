@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
+using Firestorm.Data;
 using JetBrains.Annotations;
 
 namespace Firestorm.Engine.Fields

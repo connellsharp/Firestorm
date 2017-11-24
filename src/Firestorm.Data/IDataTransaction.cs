@@ -1,8 +1,7 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace Firestorm.Engine
+namespace Firestorm.Data
 {
     /// <summary>
     /// Interface to manage data transaction lifetime for an <see cref="IEngineRepository{TItem}"/>.

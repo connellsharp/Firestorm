@@ -87,6 +87,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Firestorm.Data\Firestorm.Data.csproj">
+      <Project>{16b05383-6f76-470c-bab4-6fe8de61ebaa}</Project>
+      <Name>Firestorm.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Firestorm.Engine.Implementation\Firestorm.Engine.Implementation.csproj">
       <Project>{908d22e4-1cc9-4b96-a470-9c79ee529d78}</Project>
       <Name>Firestorm.Engine.Implementation</Name>

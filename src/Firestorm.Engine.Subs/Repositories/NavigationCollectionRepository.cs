@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Firestorm.Data;
 using Firestorm.Engine;
 
 namespace Firestorm.Stems.Fuel.Substems.Repositories

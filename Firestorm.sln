@@ -4,7 +4,7 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Core", "src\Firestorm.Core\Firestorm.Core.csproj", "{8A8BFE0E-1545-4152-96FC-23E72F1D0DF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Engine.EntityFramework", "src\Firestorm.Engine.EntityFramework\Firestorm.Engine.EntityFramework.csproj", "{CD4E5183-CB9C-433D-86DF-FC0F5A16B94B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Data.EntityFramework", "src\Firestorm.Data.EntityFramework\Firestorm.Data.EntityFramework.csproj", "{CD4E5183-CB9C-433D-86DF-FC0F5A16B94B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Endpoints.WebApi2", "src\Firestorm.Endpoints.WebApi2\Firestorm.Endpoints.WebApi2.csproj", "{44FBE17A-1E96-4E43-A20F-B1806DB6AF98}"
 EndProject
@@ -64,9 +64,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints.Start",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web Technologies", "Web Technologies", "{17B2F597-9A74-4B24-83E1-07CD8FF9B9B5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Engine.Data", "src\Firestorm.Engine.Data\Firestorm.Engine.Data.csproj", "{16B05383-6F76-470C-BAB4-6FE8DE61EBAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Data", "src\Firestorm.Data\Firestorm.Data.csproj", "{16B05383-6F76-470C-BAB4-6FE8DE61EBAA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data Technologies", "Data Technologies", "{70DAB166-3BB2-4585-A8E7-C255E898D777}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{70DAB166-3BB2-4585-A8E7-C255E898D777}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Stems.Attributes", "src\Firestorm.Stems.Attributes\Firestorm.Stems.Attributes.csproj", "{DD9A1F60-DC62-40F8-9D2C-13053E5F6072}"
 EndProject
@@ -117,7 +117,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{BF8FB258
 		nuget\base\Firestorm.Stems.Roots.Start.nuspec = nuget\base\Firestorm.Stems.Roots.Start.nuspec
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Engine.EFCore2", "src\Firestorm.Engine.EFCore2\Firestorm.Engine.EFCore2.csproj", "{619EA714-F180-4D6E-81DE-8611275B2FDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Data.EFCore2", "src\Firestorm.Data.EFCore2\Firestorm.Data.EFCore2.csproj", "{619EA714-F180-4D6E-81DE-8611275B2FDB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Stems.Fuel.Essential", "src\Firestorm.Stems.Fuel.Essential\Firestorm.Stems.Fuel.Essential.csproj", "{C3B73A29-DC9A-43A0-B18E-47F2115FA18A}"
 EndProject
@@ -141,7 +141,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Fluent.Start", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Fluent.Fuel", "src\Firestorm.Fluent.Fuel\Firestorm.Fluent.Fuel.csproj", "{0710A765-E0DF-4E04-A088-0AAF154FE40A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Engine.Subs", "src\Firestorm.Engine.Subs\Firestorm.Engine.Subs.csproj", "{33EE0031-B1AA-4C02-912E-86A29413D039}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Engine.Subs", "src\Firestorm.Engine.Subs\Firestorm.Engine.Subs.csproj", "{33EE0031-B1AA-4C02-912E-86A29413D039}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -358,9 +358,9 @@ Global
 		{5203A93D-8BB7-4852-B38C-1B867D00C005} = {C7F0DB78-F8D7-4074-A2D7-A14490AAA398}
 		{493EE624-7E8F-47DC-B3BD-F5A83C3E4068} = {17B2F597-9A74-4B24-83E1-07CD8FF9B9B5}
 		{FFFE6B9A-5753-460F-81B2-823C23BC4A3C} = {34A7625D-A639-4855-B49F-FA1EF91377A4}
-		{17B2F597-9A74-4B24-83E1-07CD8FF9B9B5} = {34A7625D-A639-4855-B49F-FA1EF91377A4}
-		{16B05383-6F76-470C-BAB4-6FE8DE61EBAA} = {FA828466-0901-42FA-8BE9-FE3DA18E589D}
-		{70DAB166-3BB2-4585-A8E7-C255E898D777} = {FA828466-0901-42FA-8BE9-FE3DA18E589D}
+		{17B2F597-9A74-4B24-83E1-07CD8FF9B9B5} = {C2F6430A-4C2E-495B-9556-7EF1A3A1C2B8}
+		{16B05383-6F76-470C-BAB4-6FE8DE61EBAA} = {08517E60-A9EA-4803-AB2D-5A15C6608C3E}
+		{70DAB166-3BB2-4585-A8E7-C255E898D777} = {C2F6430A-4C2E-495B-9556-7EF1A3A1C2B8}
 		{DD9A1F60-DC62-40F8-9D2C-13053E5F6072} = {C7F0DB78-F8D7-4074-A2D7-A14490AAA398}
 		{93A1D90B-E5E8-4DB1-ABCA-F6DBBC162B0C} = {1A6FE096-2D99-4CB7-B6ED-C0E71E3FE9E6}
 		{FC008C16-D570-450B-8A62-6064E80595EB} = {1A6FE096-2D99-4CB7-B6ED-C0E71E3FE9E6}

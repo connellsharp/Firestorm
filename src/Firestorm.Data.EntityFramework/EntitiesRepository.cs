@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Firestorm.Engine.EntityFramework
+namespace Firestorm.Data.EntityFramework
 {
     public class EntitiesRepository<TEntity> : IEngineRepository<TEntity>
         where TEntity : class, new()

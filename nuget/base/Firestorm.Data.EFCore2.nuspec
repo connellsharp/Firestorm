@@ -14,18 +14,17 @@
     <iconUrl>https://github.com/connellw/Firestorm/raw/master/nuget/icon.png</iconUrl>
 
     <dependencies>
-      <dependency id="Firestorm.Core" version="$(FsVersion)" />
+      <dependency id="Firestorm.Data" version="$(FsVersion)" />
       <dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="2.0.0" />
     </dependencies>
     
     <references>
-      <reference file="Firestorm.Engine.dll" />
-      <reference file="Firestorm.Engine.Data.dll" />
-      <reference file="Firestorm.Engine.EFCore2.dll" />
+      <reference file="Firestorm.Data.dll" />
+      <reference file="Firestorm.Data.EFCore2.dll" />
     </references>
   </metadata>
   <files>
-    <file src="..\..\src\Firestorm.Engine.EFCore2\bin\$(FsConfiguration)\netstandard2.0\*.dll" target="lib\netstandard2.0\"  />
-    <!--file src="..\..\src\Firestorm.Engine.EntityFramework\bin\$(FsConfiguration)\netstandard2.0\*.dll" target="lib\netstandard2.0\"  /-->
+    <file src="..\..\src\Firestorm.Data.EFCore2\bin\$(FsConfiguration)\netstandard2.0\*.dll" target="lib\netstandard2.0\"  />
+    <!--file src="..\..\src\Firestorm.Data.EntityFramework\bin\$(FsConfiguration)\netstandard2.0\*.dll" target="lib\netstandard2.0\"  /-->
   </files>
 </package>

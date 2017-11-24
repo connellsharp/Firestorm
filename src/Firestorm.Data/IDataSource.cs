@@ -1,4 +1,4 @@
-﻿namespace Firestorm.Engine.Data
+﻿namespace Firestorm.Data
 {
     /// <summary>
     /// Provides a simple source interface to create data transactions and get repositories used in the Engine.

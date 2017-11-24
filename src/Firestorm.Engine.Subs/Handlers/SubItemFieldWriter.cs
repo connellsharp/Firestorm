@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Firestorm.Data;
 using Firestorm.Engine;
 using Firestorm.Engine.Deferring;
 using Firestorm.Engine.Fields;

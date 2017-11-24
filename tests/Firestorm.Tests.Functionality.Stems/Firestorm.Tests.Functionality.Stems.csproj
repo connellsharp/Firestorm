@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\..\packages\MSTest.TestAdapter.1.1.18\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\..\..\packages\MSTest.TestAdapter.1.1.18\build\net45\MSTest.TestAdapter.props')" />
   <PropertyGroup>
@@ -71,6 +71,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Firestorm.Data\Firestorm.Data.csproj">
+      <Project>{16B05383-6F76-470C-BAB4-6FE8DE61EBAA}</Project>
+      <Name>Firestorm.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Firestorm.Engine.Implementation\Firestorm.Engine.Implementation.csproj">
       <Project>{908d22e4-1cc9-4b96-a470-9c79ee529d78}</Project>
       <Name>Firestorm.Engine.Implementation</Name>

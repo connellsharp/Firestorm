@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
   </PropertyGroup>
@@ -8,5 +8,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Firestorm.Core\Firestorm.Core.csproj" />
+    <ProjectReference Include="..\Firestorm.Data\Firestorm.Data.csproj" />
   </ItemGroup>
 </Project>

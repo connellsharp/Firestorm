@@ -1,4 +1,4 @@
-﻿using Firestorm.Engine.EFCore2;
+﻿using Firestorm.Data.EFCore2;
 using Firestorm.Tests.Integration.Data.Base;
 using Firestorm.Tests.Integration.Data.Base.Models;
 using JetBrains.Annotations;

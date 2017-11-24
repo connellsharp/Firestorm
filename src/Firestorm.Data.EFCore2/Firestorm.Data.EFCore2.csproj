@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Firestorm.Engine.Data\Firestorm.Engine.Data.csproj" />
+    <ProjectReference Include="..\Firestorm.Data\Firestorm.Data.csproj" />
   </ItemGroup>
 
 </Project>

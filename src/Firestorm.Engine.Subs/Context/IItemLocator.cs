@@ -1,4 +1,5 @@
-﻿using Firestorm.Engine;
+﻿using Firestorm.Data;
+using Firestorm.Engine;
 using Firestorm.Engine.Fields;
 
 namespace Firestorm.Stems.Fuel.Fields

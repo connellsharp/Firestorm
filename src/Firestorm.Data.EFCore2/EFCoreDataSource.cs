@@ -1,8 +1,7 @@
 ﻿using System;
-using Firestorm.Engine.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Firestorm.Engine.EFCore2
+namespace Firestorm.Data.EFCore2
 {
     public class EFCoreDataSource<TDatabase> : IDataSource
         where TDatabase : DbContext

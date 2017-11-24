@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
+using Firestorm.Data;
 using Firestorm.Engine;
 using Firestorm.Engine.Additives.Readers;
 using Firestorm.Engine.Additives.Writers;

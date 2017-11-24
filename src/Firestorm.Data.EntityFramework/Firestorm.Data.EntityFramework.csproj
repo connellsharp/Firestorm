@@ -7,8 +7,8 @@
     <ProjectGuid>{CD4E5183-CB9C-433D-86DF-FC0F5A16B94B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Firestorm.Engine.EntityFramework</RootNamespace>
-    <AssemblyName>Firestorm.Engine.EntityFramework</AssemblyName>
+    <RootNamespace>Firestorm.Data.EntityFramework</RootNamespace>
+    <AssemblyName>Firestorm.Data.EntityFramework</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -57,9 +57,9 @@
       <Project>{8a8bfe0e-1545-4152-96fc-23e72f1d0df2}</Project>
       <Name>Firestorm.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Firestorm.Engine.Data\Firestorm.Engine.Data.csproj">
+    <ProjectReference Include="..\Firestorm.Data\Firestorm.Data.csproj">
       <Project>{16b05383-6f76-470c-bab4-6fe8de61ebaa}</Project>
-      <Name>Firestorm.Engine.Data</Name>
+      <Name>Firestorm.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Firestorm.Engine.Additives\Firestorm.Engine.Additives.csproj">
       <Project>{f482d521-0ddf-4703-b9ea-568652db669a}</Project>

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
-using Firestorm.Engine.Data;
 
-namespace Firestorm.Engine.EntityFramework
+namespace Firestorm.Data.EntityFramework
 {
     public class EntitiesDataSource<TDatabase> : IDataSource
         where TDatabase : DbContext, new()

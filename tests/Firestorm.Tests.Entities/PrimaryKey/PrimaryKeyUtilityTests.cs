@@ -1,5 +1,5 @@
 ﻿using System.Data.Linq.Mapping;
-using Firestorm.Engine.EntityFramework.PrimaryKey;
+using Firestorm.Data.EntityFramework.PrimaryKey;
 using Xunit;
 
 namespace Firestorm.Tests.Entities.PrimaryKey

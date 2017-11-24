@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq.Expressions;
+using Firestorm.Data;
 using Firestorm.Engine;
 using Firestorm.Engine.Additives;
 using Firestorm.Engine.Additives.Authorization;

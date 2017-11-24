@@ -7,7 +7,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Firestorm.Core\Firestorm.Core.csproj" />
-    <ProjectReference Include="..\Firestorm.Engine.Data\Firestorm.Engine.Data.csproj" />
+    <ProjectReference Include="..\Firestorm.Data\Firestorm.Data.csproj" />
     <ProjectReference Include="..\Firestorm.Stems.Fuel\Firestorm.Stems.Fuel.csproj" />
     <ProjectReference Include="..\Firestorm.Stems.Roots\Firestorm.Stems.Roots.csproj" />
     <ProjectReference Include="..\Firestorm.Stems\Firestorm.Stems.csproj" />

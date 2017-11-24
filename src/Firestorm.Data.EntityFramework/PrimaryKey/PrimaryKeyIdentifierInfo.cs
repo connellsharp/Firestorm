@@ -1,7 +1,7 @@
 using System.Reflection;
 using Firestorm.Engine.Additives.Identifiers;
 
-namespace Firestorm.Engine.EntityFramework.PrimaryKey
+namespace Firestorm.Data.EntityFramework.PrimaryKey
 {
     /// <summary>
     /// An identifier found automatically using Entity Framework's primary key.

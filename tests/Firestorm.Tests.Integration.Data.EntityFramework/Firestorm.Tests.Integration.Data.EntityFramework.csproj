@@ -74,9 +74,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Firestorm.Engine.EntityFramework\Firestorm.Engine.EntityFramework.csproj">
+    <ProjectReference Include="..\..\src\Firestorm.Data\Firestorm.Data.csproj">
+      <Project>{16b05383-6f76-470c-bab4-6fe8de61ebaa}</Project>
+      <Name>Firestorm.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Data.EntityFramework\Firestorm.Data.EntityFramework.csproj">
       <Project>{CD4E5183-CB9C-433D-86DF-FC0F5A16B94B}</Project>
-      <Name>Firestorm.Engine.EntityFramework</Name>
+      <Name>Firestorm.Data.EntityFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Firestorm.Engine\Firestorm.Engine.csproj">
       <Project>{AAE9E7FF-8EE5-4CA0-87CF-7E0026E62CC7}</Project>

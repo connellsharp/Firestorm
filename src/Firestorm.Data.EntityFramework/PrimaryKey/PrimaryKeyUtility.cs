@@ -6,7 +6,7 @@ using System.Data.Linq.Mapping;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Firestorm.Engine.EntityFramework.PrimaryKey
+namespace Firestorm.Data.EntityFramework.PrimaryKey
 {
     /// <remarks>
     /// Taken from http://stackoverflow.com/a/3046102
