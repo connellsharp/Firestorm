@@ -1,21 +1,21 @@
 using System.Reflection;
-using Firestorm.Engine.Additives.Identifiers;
+using Firestorm.Data;
 
-namespace Firestorm.Data.EntityFramework.PrimaryKey
+namespace Firestorm.Engine.Additives.Identifiers
 {
     /// <summary>
     /// An identifier found automatically using Entity Framework's primary key.
     /// </summary>
     public class PrimaryKeyIdentifierInfo<TItem> : PropertyInfoIdentifierInfo<TItem>
     {
-        public PrimaryKeyIdentifierInfo()
-            : base(GetPropertyInfo())
+        public PrimaryKeyIdentifierInfo(IPrimaryKeyFinder keyfinder)
+            : base(GetPropertyInfo(keyfinder))
         {
         }
 
-        private static PropertyInfo GetPropertyInfo()
+        private static PropertyInfo GetPropertyInfo(IPrimaryKeyFinder keyfinder)
         {
-            return PrimaryKeyUtility.GetPrimaryKeyInfo<TItem>()
+            return keyfinder.GetPrimaryKeyInfo(typeof(TItem))
                    ?? IDConventionIdentifierInfo<TItem>.GetKeyPropertyByName();
         }
     }

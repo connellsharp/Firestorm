@@ -6,25 +6,25 @@ using System.Data.Linq.Mapping;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Firestorm.Data.EntityFramework.PrimaryKey
+namespace Firestorm.Data.EntityFramework
 {
     /// <remarks>
     /// Taken from http://stackoverflow.com/a/3046102
     /// </remarks>
-    internal static class PrimaryKeyUtility
+    internal class EntityPrimaryKeyFinder : IPrimaryKeyFinder
     {
-        public static T GetByPrimaryKey<T>(ObjectContext database, int id)
+        public T GetByPrimaryKey<T>(ObjectContext database, int id)
             where T : class
         {
             return (T)database.GetObjectByKey(new EntityKey(database.DefaultContainerName + "." + GetTableName<T>(), GetPrimaryKeyInfo<T>().Name, id));
         }
 
-        public static string GetTableName<T>()
+        public string GetTableName<T>()
         {
             return GetTableName(typeof(T));
         }
 
-        public static string GetTableName(Type entityType)
+        public string GetTableName(Type entityType)
         {
             return Pluralize(entityType.Name);
         }
@@ -54,9 +54,14 @@ namespace Firestorm.Data.EntityFramework.PrimaryKey
             return singular + "s";
         }
 
-        public static PropertyInfo GetPrimaryKeyInfo<T>()
+        public PropertyInfo GetPrimaryKeyInfo<T>()
         {
-            PropertyInfo[] properties = typeof(T).GetProperties();
+            return GetPrimaryKeyInfo(typeof(T));
+        }
+
+        public PropertyInfo GetPrimaryKeyInfo(Type type)
+        {
+            PropertyInfo[] properties = type.GetProperties();
             foreach (PropertyInfo pI in properties)
             {
                 object[] attributes = pI.GetCustomAttributes(true);
@@ -80,7 +85,7 @@ namespace Firestorm.Data.EntityFramework.PrimaryKey
             return null;
         }
 
-        public static Expression<Func<TEntity, TProperty>> GetPrimaryKeyExpression<TEntity, TProperty>()
+        public Expression<Func<TEntity, TProperty>> GetPrimaryKeyExpression<TEntity, TProperty>()
         {
             ParameterExpression param = Expression.Parameter(typeof(TEntity));
             PropertyInfo propertyInfo = GetPrimaryKeyInfo<TEntity>();

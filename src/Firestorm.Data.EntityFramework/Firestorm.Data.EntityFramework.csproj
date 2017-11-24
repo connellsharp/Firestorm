@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -48,26 +48,13 @@
     <Compile Include="EntitiesRepository.cs" />
     <Compile Include="EntitiesDataTransaction.cs" />
     <Compile Include="InternalsVisibleTo.cs" />
-    <Compile Include="PrimaryKey\PrimaryKeyUtility.cs" />
-    <Compile Include="PrimaryKey\PrimaryKeyIdentifierInfo.cs" />
+    <Compile Include="EntityPrimaryKeyFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Firestorm.Core\Firestorm.Core.csproj">
-      <Project>{8a8bfe0e-1545-4152-96fc-23e72f1d0df2}</Project>
-      <Name>Firestorm.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Firestorm.Data\Firestorm.Data.csproj">
       <Project>{16b05383-6f76-470c-bab4-6fe8de61ebaa}</Project>
       <Name>Firestorm.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Firestorm.Engine.Additives\Firestorm.Engine.Additives.csproj">
-      <Project>{f482d521-0ddf-4703-b9ea-568652db669a}</Project>
-      <Name>Firestorm.Engine.Additives</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Firestorm.Engine\Firestorm.Engine.csproj">
-      <Project>{AAE9E7FF-8EE5-4CA0-87CF-7E0026E62CC7}</Project>
-      <Name>Firestorm.Engine</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
