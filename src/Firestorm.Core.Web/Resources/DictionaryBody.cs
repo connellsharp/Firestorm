@@ -5,10 +5,10 @@ namespace Firestorm.Core.Web
     /// </remarks>
     public class DictionaryBody : ResourceBody, IPagedResourceBody
     {
-        public DictionaryBody(RestDictionaryData dictionary)
+        public DictionaryBody(RestItemData items, PageLinks pageLinks)
         {
-            Items = dictionary.Items;
-            //PageLinks = dictionary.PageDetails; TODO
+            Items = items;
+            PageLinks = pageLinks;
         }
 
         public RestItemData Items { get; }

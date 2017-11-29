@@ -7,9 +7,10 @@ namespace Firestorm
     /// </summary>
     public class RestDictionaryData
     {
-        public RestDictionaryData(IEnumerable<KeyValuePair<string, object>> items)
+        public RestDictionaryData(IEnumerable<KeyValuePair<string, object>> items, PageDetails pageDetails)
         {
             Items = new RestItemData(items);
+            PageDetails = pageDetails;
         }
 
         public RestItemData Items { get; }

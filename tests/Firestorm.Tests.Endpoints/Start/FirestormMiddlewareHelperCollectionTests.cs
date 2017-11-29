@@ -169,11 +169,13 @@ namespace Firestorm.Tests.Endpoints.Start
                 if (query.SelectFields != null && query.SelectFields.Any())
                     throw new NotImplementedException("Not implemented selecting in mock collection.");
 
-                return new RestCollectionData(List.Select((s, i) => new RestItemData(new
+                IEnumerable<RestItemData> items = List.Select((s, i) => new RestItemData(new
                 {
                     index = i,
                     value = s
-                })));
+                }));
+
+                return new RestCollectionData(items, null);
             }
 
             public IRestItem GetItem(string identifier, string identifierName = null)

@@ -21,7 +21,7 @@ namespace Firestorm.Client
                 HttpResponseMessage response = await client.GetAsync(fullUrl);
                 var queriedData = await DeserializeAsync<IEnumerable<RestItemData>>(response);
 
-                return new RestCollectionData(queriedData);
+                return new RestCollectionData(queriedData, null);
             }
         }
 

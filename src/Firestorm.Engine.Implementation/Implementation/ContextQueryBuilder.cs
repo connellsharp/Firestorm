@@ -1,7 +1,6 @@
 using System.Linq;
-using Firestorm.Data;
-using Firestorm.Engine.Fields;
 using Firestorm.Engine.Queryable;
+using JetBrains.Annotations;
 
 namespace Firestorm.Engine
 {
@@ -13,31 +12,53 @@ namespace Firestorm.Engine
         where TItem : class
     {
         private readonly IRestCollectionQuery _query;
+        private readonly IEngineContext<TItem> _context;
+        private readonly QueryablePager<TItem> _pager;
 
-        public ContextQueryBuilder(IRestCollectionQuery query)
+        public ContextQueryBuilder(IEngineContext<TItem> context, IRestCollectionQuery query)
         {
             _query = query;
+            _context = context;
+
+            _pager = new QueryablePager<TItem>(_query.PageInstruction);
         }
 
-        public IQueryable<TItem> BuildQueryable(IEngineRepository<TItem> repository, IAuthorizationChecker<TItem> authorizationChecker, IFieldProvider<TItem> fieldProvider)
+        public IQueryable<TItem> BuildQueryable()
         {
-            IQueryable<TItem> items = repository.GetAllItems();
+            IQueryable<TItem> items = _context.Repository.GetAllItems();
 
-            items = authorizationChecker.ApplyFilter(items);
+            items = _context.AuthorizationChecker.ApplyFilter(items);
 
             if (_query == null)
                 return items;
 
-            var filter = new QueryableFieldFilter<TItem>(fieldProvider, _query.FilterInstructions);
+            var filter = new QueryableFieldFilter<TItem>(_context.Fields, _query.FilterInstructions);
             items = filter.ApplyFilter(items);
 
-            var sorter = new QueryableFieldSorter<TItem>(fieldProvider, _query.SortIntructions);
+            var sorter = new QueryableFieldSorter<TItem>(_context.Fields, _query.SortIntructions);
             items = sorter.ApplySortOrder(items);
 
-            var pager = new QueryablePager<TItem>(_query.PageInstruction);
-            items = pager.ApplyPagination(items);
+            items = _pager.ApplyPagination(items);
 
             return items;
+        }
+
+        public PageDetails GetPageDetails([NoEnumeration] QueriedDataIterator queriedData)
+        {
+            if (queriedData.Length <= _pager.PageSize)
+            {
+                return new PageDetails
+                {
+                    HasNextPage = false
+                };
+            }
+
+            queriedData.RemoveLastItem();
+
+            return new PageDetails
+            {
+                HasNextPage = true
+            };
         }
     }
 }

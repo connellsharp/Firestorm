@@ -27,9 +27,9 @@ namespace Firestorm.Engine
         {
             await _context.Repository.InitializeAsync();
 
-            var queryBuilder = new ContextQueryBuilder<TItem>(query);
-            IQueryable<TItem> items = queryBuilder.BuildQueryable(_context.Repository, _context.AuthorizationChecker, _context.Fields);
-            
+            var queryBuilder = new ContextQueryBuilder<TItem>(_context, query);
+            IQueryable<TItem> items = queryBuilder.BuildQueryable();
+
             var fieldAuth = new FieldAuthChecker<TItem>(_context.Fields, _context.AuthorizationChecker, null);
             IEnumerable<string> fields = fieldAuth.GetOrEnsureFields(query?.SelectFields, 1);
 
@@ -37,10 +37,12 @@ namespace Firestorm.Engine
             readers.Add(IDENTIFIER_FIELD_NAME, new IdentifierFieldReader<TItem>(_namedReferenceInfo));
             var selector = new QueryableFieldSelector<TItem>(readers);
 
-            IEnumerable<RestItemData> queriedData = await selector.SelectFieldsOnlyAsync(items, _context.Repository.ForEachAsync);
+            QueriedDataIterator queriedData = await selector.SelectFieldsOnlyAsync(items, _context.Repository.ForEachAsync);
+            PageDetails pageDetails = queryBuilder.GetPageDetails(queriedData);
+
             var dictionaryData = GetKeys(queriedData).ToDictionary(k => k.Key, v => (object)v.Value);
 
-            return new RestDictionaryData(dictionaryData);
+            return new RestDictionaryData(dictionaryData, pageDetails);
         }
 
         private static IEnumerable<KeyValuePair<string, RestItemData>> GetKeys(IEnumerable<RestItemData> queriedData)

@@ -33,8 +33,13 @@ namespace Firestorm.Endpoints
         {
             IRestCollectionQuery query = Context.GetQuery();
             QueryValidationUtility.EnsureValidQuery(query);
-            RestDictionaryData items = await Dictionary.QueryDataAsync(query);
-            return new DictionaryBody(items);
+
+            RestDictionaryData dictionaryData = await Dictionary.QueryDataAsync(query);
+            
+            var linkCalculator = new PageLinkCalculator(Context.Configuration.PageConfiguration, query.PageInstruction, dictionaryData.PageDetails);
+            PageLinks pageLinks = linkCalculator.Calculate();
+
+            return new DictionaryBody(dictionaryData.Items, pageLinks);
         }
 
         public Task<Options> OptionsAsync()

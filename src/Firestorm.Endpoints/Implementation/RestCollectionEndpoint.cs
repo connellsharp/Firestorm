@@ -46,12 +46,12 @@ namespace Firestorm.Endpoints
             IRestCollectionQuery query = Context.GetQuery();
             QueryValidationUtility.EnsureValidQuery(query);
 
-            RestCollectionData items = await Collection.QueryDataAsync(query);
+            RestCollectionData collectionData = await Collection.QueryDataAsync(query);
 
-            var linkCalculator = new PageLinkCalculator(Context.Configuration.PageConfiguration, query.PageInstruction, items.PageDetails);
-            var pageLinks = linkCalculator.Calculate();
+            var linkCalculator = new PageLinkCalculator(Context.Configuration.PageConfiguration, query.PageInstruction, collectionData.PageDetails);
+            PageLinks pageLinks = linkCalculator.Calculate();
 
-            return new CollectionBody(items, pageLinks);
+            return new CollectionBody(collectionData.Items, pageLinks);
         }
 
         public Task<Options> OptionsAsync()

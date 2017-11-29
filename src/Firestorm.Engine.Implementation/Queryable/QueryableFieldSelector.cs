@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -42,15 +41,15 @@ namespace Firestorm.Engine.Queryable
         /// <summary>
         /// Executes a query that selects only the desired fields from an <see cref="IQueryable{TItem}"/>.
         /// </summary>
-        public async Task<IEnumerable<RestItemData>> SelectFieldsOnlyAsync(IQueryable<TItem> items, ForEachAsyncDelegate<object> forEachAsync)
+        public async Task<QueriedDataIterator> SelectFieldsOnlyAsync(IQueryable<TItem> items, ForEachAsyncDelegate<object> forEachAsync)
         {
             Type dynamicType = GetDynamicRuntimeType();
             IQueryable dynamicQueryable = GetDynamicQueryable(items, dynamicType);
 
             var replacerDictionary = await LoadAllReplacersAsync(items);
-            IEnumerable dynamicEnumerable = await ExecuteWithReplacementsAsync(replacerDictionary, dynamicQueryable, forEachAsync);
+            List<object> dynamicObjects = await ExecuteWithReplacementsAsync(replacerDictionary, dynamicQueryable, forEachAsync);
 
-            return GetRestItemDataIterator(dynamicEnumerable);
+            return new QueriedDataIterator(dynamicObjects);
         }
 
         private Type GetDynamicRuntimeType()
@@ -115,7 +114,7 @@ namespace Firestorm.Engine.Queryable
             return replacerDictionary;
         }
 
-        private async Task<IEnumerable> ExecuteWithReplacementsAsync(IDictionary<string, IFieldValueReplacer<TItem>> replacerDictionary, IQueryable dynamicQueryable, ForEachAsyncDelegate<object> forEachAsync)
+        private async Task<List<object>> ExecuteWithReplacementsAsync(IDictionary<string, IFieldValueReplacer<TItem>> replacerDictionary, IQueryable dynamicQueryable, ForEachAsyncDelegate<object> forEachAsync)
         {
             var dynamicType = dynamicQueryable.ElementType;
             var returnObjects = new List<object>();
@@ -146,14 +145,6 @@ namespace Firestorm.Engine.Queryable
                 object replacementValue = replacer.Value.GetReplacement(dbValue);
 
                 fieldInfo.SetValue(dynamicObj, replacementValue);
-            }
-        }
-
-        private static IEnumerable<RestItemData> GetRestItemDataIterator(IEnumerable dynamicEnumerable)
-        {
-            foreach (object obj in dynamicEnumerable)
-            {
-                yield return new RestItemData(obj);
             }
         }
     }

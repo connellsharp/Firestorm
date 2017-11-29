@@ -14,7 +14,7 @@ namespace Firestorm.Tests.Endpoints.Models
 
         public async Task<RestCollectionData> QueryDataAsync(IRestCollectionQuery query)
         {
-            return new RestCollectionData(QueryData(query));
+            return new RestCollectionData(QueryData(query), null);
         }
 
         private IEnumerable<RestItemData> QueryData(IRestCollectionQuery query)

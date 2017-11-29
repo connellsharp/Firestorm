@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Firestorm.Core;
 using Firestorm.Core.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -42,9 +41,8 @@ namespace Firestorm.Endpoints.Formatting.Json
                 case JTokenType.Array:
                     var items = from JObject jObject in jBody
                         select Converter.ConvertObject(jObject);
-
-                    var collectionData = new RestCollectionData(items);
-                    return new CollectionBody(collectionData, null);
+                    
+                    return new CollectionBody(items, null);
 
                 case JTokenType.Object:
                     Debug.Assert(jBody is JObject, "jBody is JObject");
