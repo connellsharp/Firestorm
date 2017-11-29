@@ -12,7 +12,7 @@ namespace Firestorm.Endpoints.Responses
                 return new
                 {
                     items = resource.GetObject(),
-                    page = pagedResource.PageDetails
+                    page = pagedResource.PageLinks
                 };
             }
 

@@ -78,7 +78,7 @@ namespace Firestorm.Endpoints.Query
         /// <summary>
         /// The querystring keys used to specify the number of items to return per page.
         /// </summary>
-        public string[] PageSizeQueryKeys { get; set; } = new[] { "limit", "take", "size" };
+        public string[] PageSizeQueryKeys { get; set; } = new[] { "limit", "take", "size", "per_page" };
 
         /// <summary>
         /// The querystring keys used to specify how many items to skip to get to the start of this page.

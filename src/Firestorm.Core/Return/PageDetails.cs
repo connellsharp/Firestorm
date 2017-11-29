@@ -5,8 +5,6 @@ namespace Firestorm
     /// </summary>
     public class PageDetails
     {
-        public string NextPath { get; }
-
-        public string PreviousPath { get; }
+        public bool HasNextPage { get; set; }
     }
 }

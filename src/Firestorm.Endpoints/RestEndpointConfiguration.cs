@@ -1,3 +1,4 @@
+using Firestorm.Endpoints.Pagination;
 using Firestorm.Endpoints.Query;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Strategies;
@@ -30,5 +31,10 @@ namespace Firestorm.Endpoints
         /// Contains 3 sets of strategies (for collection, items and scalars) defining how endpoints behave to unsafe requests.
         /// </summary>
         public UnsafeRequestStrategySets RequestStrategies { get; set; } = new UnsafeRequestStrategySets();
+
+        /// <summary>
+        /// The system-wide configuration defining how pagination can work.
+        /// </summary>
+        public PageConfiguration PageConfiguration { get; set; } = new PageConfiguration();
     }
 }

@@ -4,15 +4,15 @@ namespace Firestorm.Core.Web
 {
     public class CollectionBody : ResourceBody, IPagedResourceBody
     {
-        public CollectionBody(RestCollectionData collection)
+        public CollectionBody(RestCollectionData collection, PageLinks pageLinks)
         {
             Items = collection.Items;
-            PageDetails = collection.PageDetails;
+            PageLinks = pageLinks;
         }
 
         public IEnumerable<RestItemData> Items { get; }
 
-        public PageDetails PageDetails { get; }
+        public PageLinks PageLinks { get; }
 
         public override ResourceType ResourceType { get; } = ResourceType.Collection;
 

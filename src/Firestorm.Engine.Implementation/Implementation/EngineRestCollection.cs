@@ -35,6 +35,8 @@ namespace Firestorm.Engine
 
             IEnumerable<RestItemData> queriedData = await selector.SelectFieldsOnlyAsync(items, _context.Repository.ForEachAsync);
 
+            // TODO fill page details
+
             return new RestCollectionData(queriedData);
         }
 

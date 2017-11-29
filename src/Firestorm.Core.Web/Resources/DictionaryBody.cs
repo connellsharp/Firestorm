@@ -8,12 +8,12 @@ namespace Firestorm.Core.Web
         public DictionaryBody(RestDictionaryData dictionary)
         {
             Items = dictionary.Items;
-            PageDetails = dictionary.PageDetails;
+            //PageLinks = dictionary.PageDetails; TODO
         }
 
         public RestItemData Items { get; }
 
-        public PageDetails PageDetails { get; }
+        public PageLinks PageLinks { get; }
 
         public override ResourceType ResourceType { get; } = ResourceType.Dictionary;
 

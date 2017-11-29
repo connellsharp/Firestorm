@@ -73,6 +73,14 @@ namespace Firestorm.Endpoints.Start
             }
 
             ResourceBody resourceBody = await endpoint.GetAsync();
+
+            if (resourceBody is IPagedResourceBody pagedResourceBody)
+            {
+                var setter = new LinkHeaderBuilder();
+                setter.AddDetails(pagedResourceBody.PageLinks);
+                setter.SetHeaders(_requestHandler);
+            }
+
             object resBody = _configuration.EndpointConfiguration.ResponseContentGenerator.GetFromResource(resourceBody);
             await _requestHandler.SetResponseBody(resBody);
         }

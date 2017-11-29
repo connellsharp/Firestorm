@@ -37,8 +37,17 @@ namespace Firestorm.Endpoints.WebApi2
             if (!endpoint.EvaluatePreconditions(GetPreconditions()))
                 return StatusCode(HttpStatusCode.NotModified);
 
-            ResourceBody resource = await endpoint.GetAsync();
-            return Config.EndpointConfiguration.ResponseContentGenerator.GetFromResource(resource);
+            ResourceBody resourceBody = await endpoint.GetAsync();
+
+            // TODO support pagination via LinkHeaderBuilder ?
+            //if (resourceBody is IPagedResourceBody pagedResourceBody)
+            //{
+            //    var builder = new LinkHeaderBuilder();
+            //    builder.AddDetails(pagedResourceBody.PageDetails);
+            //    builder.GetHeaderValue();
+            //}
+
+            return Config.EndpointConfiguration.ResponseContentGenerator.GetFromResource(resourceBody);
         }
 
         [HttpOptions]
