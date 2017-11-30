@@ -20,7 +20,7 @@ namespace Firestorm.Engine
             _query = query;
             _context = context;
 
-            _pager = new QueryablePager<TItem>(_query.PageInstruction);
+            _pager = new QueryablePager<TItem>(_query?.PageInstruction);
         }
 
         public IQueryable<TItem> BuildQueryable()

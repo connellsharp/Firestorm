@@ -41,9 +41,8 @@ namespace Firestorm.Tests.Endpoints.Start
             var helper = new FirestormMiddlewareHelper(_firestormConfiguration, handler);
             
             await helper.InvokeAsync(new TestEndpointContext());
-
-            var enumerable = handler.ResponseBody as IEnumerable;
-            Assert.NotNull(enumerable);
+            
+            var enumerable = Assert.IsAssignableFrom<IEnumerable>(handler.ResponseBody);
             Assert.Equal(_startResource.List.Count, enumerable.OfType<object>().Count());
         }
 

@@ -10,14 +10,22 @@ namespace Firestorm.Endpoints.Start
 
         public void AddDetails(PageLinks pageLinks)
         {
-            _links.Add("next", pageLinks.NextPath);
-            _links.Add("prev", pageLinks.PreviousPath);
+            if (pageLinks == null)
+                return;
+
+            if (pageLinks.NextPath != null)
+                _links.Add("next", pageLinks.NextPath);
+
+            if (pageLinks.PreviousPath != null)
+                _links.Add("prev", pageLinks.PreviousPath);
         }
 
         public void SetHeaders(IHttpRequestHandler requestHandler)
         {
             string headerValue = GetHeaderValue(requestHandler.ResourcePath);
-            requestHandler.SetResponseHeader("Link", headerValue);
+
+            if (headerValue != null)
+                requestHandler.SetResponseHeader("Link", headerValue);
         }
 
         public string GetHeaderValue(string resourcePath)
@@ -28,6 +36,9 @@ namespace Firestorm.Endpoints.Start
             {
                 builder.AppendFormat("<{0}?{1}>;rel=\"{2}\", ", resourcePath, link.Value, link.Key);
             }
+
+            if (builder.Length == 0)
+                return null;
 
             string headerValue = builder.ToString(0, builder.Length - 2);
             return headerValue;

@@ -22,14 +22,15 @@ namespace Firestorm.Endpoints
 
         public PageLinks Calculate()
         {
-            if (!_details.HasNextPage)
-                return new PageLinks();
+            if (_details == null || !_details.HasNextPage)
+                return null;
 
             // TODO query keys
 
             switch (_configuration.SuggestedNavigationType)
             {
                 case PageNavigationType.SortAndFilter:
+                    throw new NotImplementedException("Not implemented next page URL for sort and filter strategy.");
                     return new PageLinks
                     {
                         NextPath = "?where=" + _instruction.PageNumber
@@ -38,7 +39,7 @@ namespace Firestorm.Endpoints
                 case PageNavigationType.PageNumber:
                     return new PageLinks
                     {
-                        NextPath = "?page=" + _instruction.PageNumber
+                        NextPath = "?page=" + (_instruction.PageNumber + 1)
                     };
 
                 case PageNavigationType.Offset:
