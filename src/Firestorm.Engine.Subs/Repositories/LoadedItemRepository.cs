@@ -3,9 +3,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Data;
-using Firestorm.Engine;
 
-namespace Firestorm.Stems.Fuel.Substems.Repositories
+namespace Firestorm.Engine.Subs.Repositories
 {
     /// <summary>
     /// An engine repository containing a single entity that has already been loaded into memory.

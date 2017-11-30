@@ -3,12 +3,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Firestorm.Data;
-using Firestorm.Engine;
 using Firestorm.Engine.Deferring;
 using Firestorm.Engine.Fields;
-using Firestorm.Stems.Fuel.Substems.Repositories;
+using Firestorm.Engine.Subs.Context;
+using Firestorm.Engine.Subs.Repositories;
 
-namespace Firestorm.Stems.Fuel.Substems.Handlers
+namespace Firestorm.Engine.Subs.Handlers
 {
     public class SubItemFieldWriter<TItem, TNav> : IFieldWriter<TItem>
         where TItem : class

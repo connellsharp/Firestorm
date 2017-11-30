@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Firestorm.Data;
-using Firestorm.Engine;
-using Firestorm.Stems.Fuel.Fields;
-using Firestorm.Stems.Fuel.Substems.Repositories;
+using Firestorm.Engine.Subs.Context;
+using Firestorm.Engine.Subs.Repositories;
 
-namespace Firestorm.Stems.Fuel.Substems.Handlers
+namespace Firestorm.Engine.Subs.Handlers
 {
     public class SubCollectionResourceGetter<TItem, TCollection, TNav> : IFieldResourceGetter<TItem>
         where TItem : class

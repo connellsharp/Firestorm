@@ -1,4 +1,4 @@
-namespace Firestorm.Stems.Fuel.Substems.Repositories
+namespace Firestorm.Engine.Subs.Repositories
 {
     /// <summary>
     /// An item that has already been loaded into memory.

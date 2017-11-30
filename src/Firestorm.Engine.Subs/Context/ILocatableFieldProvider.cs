@@ -1,7 +1,7 @@
 ﻿using Firestorm.Engine.Fields;
 using JetBrains.Annotations;
 
-namespace Firestorm.Stems.Fuel.Fields
+namespace Firestorm.Engine.Subs.Context
 {
     /// <summary>
     /// A mapping of given API fields used for Stems.

@@ -1,9 +1,9 @@
 using System;
 using System.Linq.Expressions;
-using Firestorm.Engine;
 using Firestorm.Engine.Fields;
+using Firestorm.Engine.Subs.Context;
 
-namespace Firestorm.Stems.Fuel.Substems.Handlers
+namespace Firestorm.Engine.Subs.Handlers
 {
     public class SubItemFieldReader<TItem, TNav> : SubItemFieldHandlerBase<TItem, TNav>, IFieldReader<TItem>
         where TItem : class

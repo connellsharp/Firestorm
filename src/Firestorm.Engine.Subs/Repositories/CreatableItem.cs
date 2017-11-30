@@ -1,9 +1,8 @@
 using System.Linq;
 using Firestorm.Data;
-using Firestorm.Engine;
 using Firestorm.Engine.Deferring;
 
-namespace Firestorm.Stems.Fuel.Substems.Repositories
+namespace Firestorm.Engine.Subs.Repositories
 {
     /// <summary>
     /// An item that can be created. 

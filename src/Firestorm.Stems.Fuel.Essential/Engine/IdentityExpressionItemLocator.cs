@@ -3,6 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Firestorm.Data;
 using Firestorm.Engine;
+using Firestorm.Engine.Subs.Context;
 using Firestorm.Stems.Fuel.Fields;
 
 namespace Firestorm.Stems.Fuel.Essential

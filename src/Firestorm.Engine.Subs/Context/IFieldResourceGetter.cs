@@ -1,8 +1,7 @@
 using Firestorm.Data;
-using Firestorm.Engine;
 using Firestorm.Engine.Fields;
 
-namespace Firestorm.Stems.Fuel.Fields
+namespace Firestorm.Engine.Subs.Context
 {
     /// <summary>
     /// Handler just for stems that can get the full resource.

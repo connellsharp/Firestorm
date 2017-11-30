@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Firestorm.Data;
-using Firestorm.Engine;
 using Firestorm.Engine.Fields;
 
-namespace Firestorm.Stems.Fuel.Fields
+namespace Firestorm.Engine.Subs.Context
 {
     /// <summary>
     /// A combination of multiple <see cref="IFieldProvider{TItem}"/> used as one.

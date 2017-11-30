@@ -1,10 +1,9 @@
 using System;
 using System.Linq.Expressions;
 using Firestorm.Data;
-using Firestorm.Engine;
-using Firestorm.Stems.Fuel.Fields;
+using Firestorm.Engine.Subs.Context;
 
-namespace Firestorm.Stems.Fuel.Substems.Handlers
+namespace Firestorm.Engine.Subs.Handlers
 {
     public class SubItemResourceGetter<TItem, TNav> : SubItemFieldHandlerBase<TItem, TNav>, IFieldResourceGetter<TItem>
         where TItem : class

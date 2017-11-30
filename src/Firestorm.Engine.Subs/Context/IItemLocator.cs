@@ -1,8 +1,7 @@
 ﻿using Firestorm.Data;
-using Firestorm.Engine;
 using Firestorm.Engine.Fields;
 
-namespace Firestorm.Stems.Fuel.Fields
+namespace Firestorm.Engine.Subs.Context
 {
     /// <summary>
     /// Locates an item by a field's value when used within a parent.

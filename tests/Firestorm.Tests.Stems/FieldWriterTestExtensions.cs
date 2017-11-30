@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Firestorm.Data;
 using Firestorm.Engine.Fields;
-using Firestorm.Stems.Fuel.Substems.Repositories;
+using Firestorm.Engine.Subs.Repositories;
 
 namespace Firestorm.Tests.Stems
 {

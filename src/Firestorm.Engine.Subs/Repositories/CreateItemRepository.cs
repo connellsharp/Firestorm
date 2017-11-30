@@ -2,9 +2,8 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Data;
-using Firestorm.Engine;
 
-namespace Firestorm.Stems.Fuel.Substems.Repositories
+namespace Firestorm.Engine.Subs.Repositories
 {
     /// <summary>
     /// An engine repository containing no items, but with the ability to create a new one.

@@ -2,10 +2,9 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Data;
-using Firestorm.Engine;
 using JetBrains.Annotations;
 
-namespace Firestorm.Stems.Fuel.Substems.Repositories
+namespace Firestorm.Engine.Subs.Repositories
 {
     /// <summary>
     /// An engine repository for query containing a single item.

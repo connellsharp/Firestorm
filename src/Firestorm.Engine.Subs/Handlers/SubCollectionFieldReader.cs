@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Firestorm.Engine;
 using Firestorm.Engine.Fields;
+using Firestorm.Engine.Subs.Context;
 
-namespace Firestorm.Stems.Fuel.Substems.Handlers
+namespace Firestorm.Engine.Subs.Handlers
 {
     public class SubCollectionFieldReader<TItem, TProperty, TNav> : IFieldReader<TItem>
         where TItem : class

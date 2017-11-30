@@ -1,8 +1,7 @@
 using Firestorm.Data;
-using Firestorm.Engine;
 using Firestorm.Engine.Deferring;
 
-namespace Firestorm.Stems.Fuel.Substems.Repositories
+namespace Firestorm.Engine.Subs.Repositories
 {
     /// <summary>
     /// Can be used as a <see cref="IDeferredItem{TItem}"/> instance when a repositoryWithSingleItem only contains a single item.

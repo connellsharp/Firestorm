@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Queryable;
 
-namespace Firestorm.Stems.Fuel.Substems
+namespace Firestorm.Engine.Subs
 {
     internal static class SubUtilities
     {

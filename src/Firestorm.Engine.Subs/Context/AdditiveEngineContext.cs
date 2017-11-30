@@ -1,10 +1,9 @@
 using Firestorm.Data;
-using Firestorm.Engine;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Identifiers;
 using JetBrains.Annotations;
 
-namespace Firestorm.Stems.Fuel
+namespace Firestorm.Engine.Subs.Context
 {
     public class AdditiveEngineContext<TItem> : IEngineContext<TItem>
         where TItem : class

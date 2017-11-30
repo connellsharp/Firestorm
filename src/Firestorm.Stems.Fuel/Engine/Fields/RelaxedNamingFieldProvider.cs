@@ -4,6 +4,7 @@ using System.Linq;
 using Firestorm.Data;
 using Firestorm.Engine;
 using Firestorm.Engine.Fields;
+using Firestorm.Engine.Subs.Context;
 using Firestorm.Stems.Naming;
 
 namespace Firestorm.Stems.Fuel.Fields
