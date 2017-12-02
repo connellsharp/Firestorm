@@ -4,15 +4,15 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Core", "src\Firestorm.Core\Firestorm.Core.csproj", "{8A8BFE0E-1545-4152-96FC-23E72F1D0DF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Data.EntityFramework", "src\Firestorm.Data.EntityFramework\Firestorm.Data.EntityFramework.csproj", "{CD4E5183-CB9C-433D-86DF-FC0F5A16B94B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Data.EntityFramework", "src\Firestorm.Data.EntityFramework\Firestorm.Data.EntityFramework.csproj", "{CD4E5183-CB9C-433D-86DF-FC0F5A16B94B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Endpoints.WebApi2", "src\Firestorm.Endpoints.WebApi2\Firestorm.Endpoints.WebApi2.csproj", "{44FBE17A-1E96-4E43-A20F-B1806DB6AF98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints.WebApi2", "src\Firestorm.Endpoints.WebApi2\Firestorm.Endpoints.WebApi2.csproj", "{44FBE17A-1E96-4E43-A20F-B1806DB6AF98}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints", "src\Firestorm.Endpoints\Firestorm.Endpoints.csproj", "{B629974F-C31F-4E05-8AD7-CD137DC84505}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Engine", "src\Firestorm.Engine\Firestorm.Engine.csproj", "{AAE9E7FF-8EE5-4CA0-87CF-7E0026E62CC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Endpoints.Owin", "src\Firestorm.Endpoints.Owin\Firestorm.Endpoints.Owin.csproj", "{BE5C7EC3-7379-4D87-89EB-F3705182B873}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints.Owin", "src\Firestorm.Endpoints.Owin\Firestorm.Endpoints.Owin.csproj", "{BE5C7EC3-7379-4D87-89EB-F3705182B873}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{C2F6430A-4C2E-495B-9556-7EF1A3A1C2B8}"
 EndProject
@@ -64,7 +64,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Integration
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Integration.Http.Base", "tests\Firestorm.Tests.Integration.Http.Base\Firestorm.Tests.Integration.Http.Base.csproj", "{FC008C16-D570-450B-8A62-6064E80595EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Tests.Integration.Http.NetFramework", "tests\Firestorm.Tests.Integration.Http.NetFramework\Firestorm.Tests.Integration.Http.NetFramework.csproj", "{F1A283CC-86E6-4194-98F7-C987CA5693C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Integration.Http.NetFramework", "tests\Firestorm.Tests.Integration.Http.NetFramework\Firestorm.Tests.Integration.Http.NetFramework.csproj", "{F1A283CC-86E6-4194-98F7-C987CA5693C9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "End-to-end", "End-to-end", "{12657C50-EDB1-4ED5-85C2-B08FFF18C114}"
 EndProject
@@ -80,7 +80,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Tests.Integration
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{96A6A15D-4B88-4732-A83D-BDBB235B8589}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Tests.Functionality.Stems", "tests\Firestorm.Tests.Functionality.Stems\Firestorm.Tests.Functionality.Stems.csproj", "{3312904B-E11E-4934-8752-DBC0250D61E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Functionality.Stems", "tests\Firestorm.Tests.Functionality.Stems\Firestorm.Tests.Functionality.Stems.csproj", "{3312904B-E11E-4934-8752-DBC0250D61E5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Functionality", "Functionality", "{B1A13EB5-D01D-4D4F-BBFB-803A6464D831}"
 EndProject
@@ -137,13 +137,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Unit.Stems"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Unit", "tests\Firestorm.Tests.Unit\Firestorm.Tests.Unit.csproj", "{2261A0EA-B171-428C-AC42-85DE04E805B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Tests.Unit.Endpoints", "tests\Firestorm.Tests.Unit.Endpoints\Firestorm.Tests.Unit.Endpoints.csproj", "{5030B352-3E0B-4A30-88E1-3B5E3DC43C73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Unit.Endpoints", "tests\Firestorm.Tests.Unit.Endpoints\Firestorm.Tests.Unit.Endpoints.csproj", "{5030B352-3E0B-4A30-88E1-3B5E3DC43C73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Tests.Unit.Engine", "tests\Firestorm.Tests.Unit.Engine\Firestorm.Tests.Unit.Engine.csproj", "{525E4EE6-7484-4FF8-8BCB-1827251530C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Unit.Engine", "tests\Firestorm.Tests.Unit.Engine\Firestorm.Tests.Unit.Engine.csproj", "{525E4EE6-7484-4FF8-8BCB-1827251530C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Tests.Unit.Client", "tests\Firestorm.Tests.Unit.Client\Firestorm.Tests.Unit.Client.csproj", "{07F026AA-4347-4D42-B96A-09698BC3A26E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Unit.Client", "tests\Firestorm.Tests.Unit.Client\Firestorm.Tests.Unit.Client.csproj", "{07F026AA-4347-4D42-B96A-09698BC3A26E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Tests.Unit.Data", "tests\Firestorm.Tests.Unit.Data\Firestorm.Tests.Unit.Data.csproj", "{909BB172-AF8C-4202-A48A-5F255A2F5878}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Unit.Data", "tests\Firestorm.Tests.Unit.Data\Firestorm.Tests.Unit.Data.csproj", "{909BB172-AF8C-4202-A48A-5F255A2F5878}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
