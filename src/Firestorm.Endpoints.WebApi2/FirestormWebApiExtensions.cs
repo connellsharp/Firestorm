@@ -49,14 +49,10 @@ namespace Firestorm.Endpoints.WebApi2
 
             firestormConfig.StartResourceFactory.Initialize();
 
-            return routes.MapHttpRoute(
-                name: "Firestorm" + (directory != null ? "_" + directory : "Root"),
-                routeTemplate: (directory != null ? directory + "/" : string.Empty) + "{*path}",
-                defaults: new
-                {
-                    controller = "Firestorm",
-                }
-            );
+            return routes.MapHttpRoute(name: "Firestorm" + (directory != null ? "_" + directory : "Root"), routeTemplate: (directory != null ? directory + "/" : string.Empty) + "{*path}", defaults: new
+            {
+                controller = "Firestorm",
+            });
         }
     }
 }
