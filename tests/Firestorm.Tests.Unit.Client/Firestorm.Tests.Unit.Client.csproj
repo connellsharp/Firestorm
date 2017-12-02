@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
@@ -7,16 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoFixture.AutoMoq" Version="4.0.0-rc1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0-preview-20170628-02" />
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Firestorm.Tests.Unit.Endpoints\Firestorm.Tests.Unit.Endpoints.csproj" />
-    <ProjectReference Include="..\Firestorm.Tests.Unit.Engine\Firestorm.Tests.Unit.Engine.csproj" />
-    <ProjectReference Include="..\Firestorm.Tests.Unit.Stems\Firestorm.Tests.Unit.Stems.csproj" />
+    <ProjectReference Include="..\..\src\Firestorm.Client\Firestorm.Client.csproj" />
+    <ProjectReference Include="..\Firestorm.Tests.Unit\Firestorm.Tests.Unit.csproj" />
   </ItemGroup>
 
 </Project>

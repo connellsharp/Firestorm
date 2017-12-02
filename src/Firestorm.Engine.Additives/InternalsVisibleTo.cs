@@ -1,3 +1,3 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Firestorm.Tests.Engine")]
+[assembly: InternalsVisibleTo("Firestorm.Tests.Unit.Engine")]
