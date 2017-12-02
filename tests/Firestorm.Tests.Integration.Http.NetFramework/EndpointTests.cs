@@ -6,7 +6,7 @@ using Firestorm.Tests.Integration.Http.Base;
 using Firestorm.Tests.Models;
 using Xunit;
 
-namespace Firestorm.Tests.HttpWebStacks
+namespace Firestorm.Tests.Integration.Http.NetFramework
 {
     /// <summary>
     /// Some basic tests for the Endpoint chains using the <see cref="IntegratedRestDirectory"/>.

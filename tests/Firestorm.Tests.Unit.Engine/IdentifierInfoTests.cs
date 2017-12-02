@@ -1,10 +1,8 @@
-﻿using Firestorm.Engine;
-using Firestorm.Engine.Additives.Identifiers;
-using Firestorm.Tests.Engine.Models;
-using Firestorm.Tests.Models;
+﻿using Firestorm.Engine.Additives.Identifiers;
+using Firestorm.Tests.Unit.Engine.Models;
 using Xunit;
 
-namespace Firestorm.Tests.Engine
+namespace Firestorm.Tests.Unit.Engine
 {
     public class IdentifierInfoTests
     {

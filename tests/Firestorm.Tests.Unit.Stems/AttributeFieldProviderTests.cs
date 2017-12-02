@@ -2,17 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Firestorm.Engine;
 using Firestorm.Engine.Defaults;
 using Firestorm.Engine.Fields;
 using Firestorm.Stems;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.Fuel.Fields;
-using Firestorm.Tests.Models;
 using Xunit;
 
-namespace Firestorm.Tests.Stems
+namespace Firestorm.Tests.Unit.Stems
 {
     public class AttributeFieldProviderTests
     {

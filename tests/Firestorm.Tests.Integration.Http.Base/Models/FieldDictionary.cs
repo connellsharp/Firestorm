@@ -10,7 +10,7 @@ using Firestorm.Engine.Additives.Writers;
 using Firestorm.Engine.Fields;
 using JetBrains.Annotations;
 
-namespace Firestorm.Tests.Engine.Models
+namespace Firestorm.Tests.Integration.Http.Base.Models
 {
     // TODO all these were taking from the Engine Unit tests. Probably should stay here and be removed from the unit tests?
 

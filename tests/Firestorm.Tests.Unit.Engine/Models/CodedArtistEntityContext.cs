@@ -7,9 +7,8 @@ using Firestorm.Engine.Additives.Identifiers;
 using Firestorm.Engine.Defaults;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Identifiers;
-using Firestorm.Tests.Models;
 
-namespace Firestorm.Tests.Engine.Models
+namespace Firestorm.Tests.Unit.Engine.Models
 {
     public class CodedArtistEntityContext : IEngineContext<Artist>
     {

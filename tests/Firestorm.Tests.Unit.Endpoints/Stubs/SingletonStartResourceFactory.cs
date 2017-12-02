@@ -1,8 +1,7 @@
-using Firestorm.Core;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Start;
 
-namespace Firestorm.Tests.Endpoints.Models
+namespace Firestorm.Tests.Unit.Endpoints.Stubs
 {
     internal class SingletonStartResourceFactory : IStartResourceFactory
     {

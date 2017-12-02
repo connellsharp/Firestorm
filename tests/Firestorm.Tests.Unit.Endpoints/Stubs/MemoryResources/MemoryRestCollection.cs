@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Firestorm.Core;
 
-namespace Firestorm.Tests.Endpoints.Models
+namespace Firestorm.Tests.Unit.Endpoints.Stubs.MemoryResources
 {
     public abstract class MemoryRestCollection<TEntity> : IRestCollection
     {

@@ -3,11 +3,10 @@ using System.Threading.Tasks;
 using Firestorm.Engine;
 using Firestorm.Engine.Additives.Identifiers;
 using Firestorm.Engine.Deferring;
-using Firestorm.Tests.Engine.Models;
-using Firestorm.Tests.Models;
+using Firestorm.Tests.Unit.Engine.Models;
 using Xunit;
 
-namespace Firestorm.Tests.Engine.Implementation
+namespace Firestorm.Tests.Unit.Engine.Implementation
 {
     public class EngineRestItemTests
     {

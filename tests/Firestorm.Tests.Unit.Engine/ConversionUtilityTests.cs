@@ -1,9 +1,8 @@
 ﻿using System;
 using Firestorm.Engine;
-using Firestorm.Engine.Fields;
 using Xunit;
 
-namespace Firestorm.Tests.Engine
+namespace Firestorm.Tests.Unit.Engine
 {
     public class ConversionUtilityTests
     {

@@ -1,11 +1,7 @@
-﻿using Firestorm.Endpoints;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Firestorm.Endpoints;
 
-namespace Firestorm.Tests.Stems.Roots
+namespace Firestorm.Tests.Unit.Stems.Roots
 {
     public class TestEndpointContext : IRestEndpointContext
     {

@@ -2,7 +2,7 @@
 using Firestorm.Endpoints.Start;
 using Xunit;
 
-namespace Firestorm.Tests.Endpoints.Start
+namespace Firestorm.Tests.Unit.Endpoints.Start
 {
     public class DictionaryStartResourceFactoryTests
     {

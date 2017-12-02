@@ -4,15 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Firestorm.Core;
 using Firestorm.Core.Web;
-using Firestorm.Endpoints;
 using Firestorm.Endpoints.Preconditions;
 using Firestorm.Endpoints.Start;
-using Firestorm.Tests.Endpoints.Models;
+using Firestorm.Tests.Unit.Endpoints.Stubs;
 using Xunit;
 
-namespace Firestorm.Tests.Endpoints.Start
+namespace Firestorm.Tests.Unit.Endpoints.Start
 {
     public class FirestormMiddlewareHelperCollectionTests
     {

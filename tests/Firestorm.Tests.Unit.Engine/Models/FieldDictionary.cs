@@ -10,7 +10,7 @@ using Firestorm.Engine.Additives.Writers;
 using Firestorm.Engine.Fields;
 using JetBrains.Annotations;
 
-namespace Firestorm.Tests.Engine.Models
+namespace Firestorm.Tests.Unit.Engine.Models
 {
     /// <summary>
     /// Maps API field names to the relevent properties.

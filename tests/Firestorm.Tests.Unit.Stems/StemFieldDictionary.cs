@@ -1,8 +1,7 @@
 ﻿using System;
 using Firestorm.Engine.Subs.Context;
-using Firestorm.Tests.Unit.Stems;
 
-namespace Firestorm.Tests.Stems
+namespace Firestorm.Tests.Unit.Stems
 {
     public class StemFieldDictionary<TItem> : FieldDictionary<TItem>, ILocatableFieldProvider<TItem>
         where TItem : class

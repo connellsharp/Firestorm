@@ -4,10 +4,9 @@ using System.Threading.Tasks;
 using Firestorm.Stems;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.Derive;
-using Firestorm.Tests.Models;
 using Xunit;
 
-namespace Firestorm.Tests.Stems.Roots
+namespace Firestorm.Tests.Unit.Stems.Roots
 {
     public class RootsDirectoryTests
     {

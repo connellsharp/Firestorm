@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Firestorm.Tests.Models;
+using Firestorm.Tests.Unit.Endpoints.Stubs.MemoryResources;
 
-namespace Firestorm.Tests.Endpoints.Models
+namespace Firestorm.Tests.Unit.Endpoints.Stubs
 {
     //[StartRestEndpoint("artists")]
     internal class ArtistMemoryCollection : MemoryRestCollection<Artist>

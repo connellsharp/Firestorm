@@ -1,7 +1,7 @@
 ﻿using Firestorm.Endpoints.Preconditions;
 using Microsoft.AspNetCore.Http;
 
-namespace Firestorm.Endpoints.AspNetCore
+namespace Firestorm.Endpoints.AspNetCore.HttpContext
 {
     internal class HttpPreconditions : IPreconditions
     {

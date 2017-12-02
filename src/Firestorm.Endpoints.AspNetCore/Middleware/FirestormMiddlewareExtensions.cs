@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Linq;
 using Firestorm.Endpoints.Start;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Firestorm.Endpoints.AspNetCore
+namespace Firestorm.Endpoints.AspNetCore.Middleware
 {
     public static class FirestormMiddlewareExtensions
     {

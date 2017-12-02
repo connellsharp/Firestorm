@@ -5,10 +5,9 @@ using Firestorm.Engine;
 using Firestorm.Engine.Additives.Readers;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Queryable;
-using Firestorm.Tests.Models;
 using Xunit;
 
-namespace Firestorm.Tests.Engine.Fields
+namespace Firestorm.Tests.Unit.Engine.Fields
 {
     public class QueryableFieldSelectorTests
     {

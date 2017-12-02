@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Firestorm.Engine.Queryable;
-using Firestorm.Tests.Engine.Models;
-using Firestorm.Tests.Models;
+using Firestorm.Tests.Unit.Engine.Models;
 using Xunit;
 
-namespace Firestorm.Tests.Engine.Fields
+namespace Firestorm.Tests.Unit.Engine.Fields
 {
     public class QueryableFieldSorterTests
     {

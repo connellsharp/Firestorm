@@ -5,15 +5,14 @@ using Firestorm.Endpoints.Formatting;
 using Firestorm.Endpoints.Formatting.Json;
 using Firestorm.Endpoints.Preconditions;
 using Firestorm.Endpoints.Start;
-using Microsoft.AspNetCore.Http;
 
-namespace Firestorm.Endpoints.AspNetCore
+namespace Firestorm.Endpoints.AspNetCore.HttpContext
 {
     internal class HttpContextHander : IHttpRequestHandler
     {
-        private readonly HttpContext _httpContext;
+        private readonly Microsoft.AspNetCore.Http.HttpContext _httpContext;
 
-        public HttpContextHander(HttpContext httpContext)
+        public HttpContextHander(Microsoft.AspNetCore.Http.HttpContext httpContext)
         {
             _httpContext = httpContext;
         }

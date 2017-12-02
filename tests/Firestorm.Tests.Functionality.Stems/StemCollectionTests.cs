@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Tests.Functionality.Stems.Models;
-using Firestorm.Tests.Models;
+using Firestorm.Tests.Unit;
 using Xunit;
 
 namespace Firestorm.Tests.Functionality.Stems

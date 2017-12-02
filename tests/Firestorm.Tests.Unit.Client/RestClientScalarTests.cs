@@ -2,7 +2,7 @@
 using Firestorm.Client;
 using Xunit;
 
-namespace Firestorm.Tests.Client
+namespace Firestorm.Tests.Unit.Client
 {
     public class RestClientScalarTests
     {

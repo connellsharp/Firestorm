@@ -1,4 +1,4 @@
-﻿namespace Firestorm.Tests.Stems.Attributes
+﻿namespace Firestorm.Tests.Unit.Stems.Attributes
 {
     public class TestRestUser : IRestUser
     {

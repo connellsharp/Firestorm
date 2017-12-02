@@ -3,7 +3,7 @@ using System.Net.Http;
 using Firestorm.Tests.Integration.Http.Base;
 using Microsoft.Owin.Hosting;
 
-namespace Firestorm.Tests.HttpWebStacks.Web
+namespace Firestorm.Tests.Integration.Http.NetFramework.Web
 {
     internal class NetFrameworkItegrationSuite<TStartup> : IHttpIntegrationSuite
     {

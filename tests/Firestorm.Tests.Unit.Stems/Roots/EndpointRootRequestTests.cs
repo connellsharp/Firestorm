@@ -1,8 +1,8 @@
 ﻿using Firestorm.Stems.Roots;
-using Firestorm.Tests.Stems.Attributes;
+using Firestorm.Tests.Unit.Stems.Attributes;
 using Xunit;
 
-namespace Firestorm.Tests.Stems.Roots
+namespace Firestorm.Tests.Unit.Stems.Roots
 {
     public class EndpointRootRequestTests
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Firestorm.Endpoints;
 
-namespace Firestorm.Tests.Endpoints.Models
+namespace Firestorm.Tests.Unit.Endpoints.Stubs
 {
     public class TestEndpointContext : IRestEndpointContext, IRestUser, IRestCollectionQuery
     {

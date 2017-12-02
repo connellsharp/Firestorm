@@ -6,10 +6,9 @@ using Firestorm.Engine.Subs.Handlers;
 using Firestorm.Stems;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Fuel;
-using Firestorm.Tests.Models;
 using Xunit;
 
-namespace Firestorm.Tests.Stems.Substems
+namespace Firestorm.Tests.Unit.Stems.Substems
 {
     public class SubItemFieldWriterTests
     {

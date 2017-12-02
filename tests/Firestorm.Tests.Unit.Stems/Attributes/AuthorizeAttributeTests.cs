@@ -1,8 +1,7 @@
-﻿using Firestorm.Stems;
-using Firestorm.Stems.Attributes.Basic.Attributes;
+﻿using Firestorm.Stems.Attributes.Basic.Attributes;
 using Xunit;
 
-namespace Firestorm.Tests.Stems.Attributes
+namespace Firestorm.Tests.Unit.Stems.Attributes
 {
     public class AuthorizeAttributeTests
     {

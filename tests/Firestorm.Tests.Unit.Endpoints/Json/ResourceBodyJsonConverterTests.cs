@@ -1,11 +1,9 @@
 ﻿using System.IO;
-using Firestorm.Core;
-using Firestorm.Core.Web;
 using Firestorm.Endpoints.Formatting.Json;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace Firestorm.Tests.Endpoints.Json
+namespace Firestorm.Tests.Unit.Endpoints.Json
 {
     public class ResourceBodyJsonConverterTests
     {

@@ -1,8 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using Firestorm.Core;
 
-namespace Firestorm.Tests.Endpoints.Models
+namespace Firestorm.Tests.Unit.Endpoints.Stubs.MemoryResources
 {
     public class MemoryRestScalar : IRestScalar
     {

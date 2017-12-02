@@ -1,10 +1,9 @@
 ﻿using System.Collections.Specialized;
 using System.Linq;
-using Firestorm.Core;
 using Firestorm.Endpoints.Query;
 using Xunit;
 
-namespace Firestorm.Tests.Endpoints
+namespace Firestorm.Tests.Unit.Endpoints
 {
     public class QueryStringCollectionQueryTests
     {

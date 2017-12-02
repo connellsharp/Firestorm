@@ -3,8 +3,8 @@ using Firestorm.Data;
 using Firestorm.Stems;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.Derive;
-using Firestorm.Tests.Endpoints.Models;
-using Firestorm.Tests.Models;
+using Firestorm.Tests.Unit;
+using Firestorm.Tests.Unit.Endpoints.Stubs;
 using Xunit;
 
 namespace Firestorm.Tests.Functionality.Stems

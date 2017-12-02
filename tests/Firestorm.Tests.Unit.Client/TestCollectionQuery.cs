@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Firestorm.Tests.Client
+namespace Firestorm.Tests.Unit.Client
 {
     public class TestCollectionQuery : IRestCollectionQuery
     {

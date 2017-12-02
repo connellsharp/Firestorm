@@ -9,11 +9,11 @@ using Firestorm.Stems;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.Roots.Derive;
-using Firestorm.Tests.Endpoints.Models;
-using Firestorm.Tests.Engine.Implementation;
-using Firestorm.Tests.Engine.Models;
 using Firestorm.Tests.Functionality.Stems.Models;
-using Firestorm.Tests.Models;
+using Firestorm.Tests.Unit;
+using Firestorm.Tests.Unit.Endpoints.Stubs;
+using Firestorm.Tests.Unit.Engine.Implementation;
+using Firestorm.Tests.Unit.Engine.Models;
 using Xunit;
 
 namespace Firestorm.Tests.Functionality.Stems

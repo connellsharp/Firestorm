@@ -1,6 +1,6 @@
 using Firestorm.Engine.Fields;
 
-namespace Firestorm.Tests.Engine.Models
+namespace Firestorm.Tests.Unit.Engine.Models
 {
     public class Field<T>
         where T : class

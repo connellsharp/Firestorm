@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Firestorm.Tests.Entities.PrimaryKey
+﻿namespace Firestorm.Tests.Unit.Data.PrimaryKey
 {
     // TODO Entity framework test proj
     //public class EntityPrimaryKeyFinderTests

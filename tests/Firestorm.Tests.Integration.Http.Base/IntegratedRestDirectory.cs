@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Firestorm.Core;
 using Firestorm.Endpoints;
 using Firestorm.Engine;
-using Firestorm.Tests.Engine.Models;
+using Firestorm.Tests.Integration.Http.Base.Models;
 using Firestorm.Tests.Models;
 
 namespace Firestorm.Tests.Integration.Http.Base

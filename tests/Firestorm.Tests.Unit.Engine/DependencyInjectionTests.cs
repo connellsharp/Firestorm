@@ -6,12 +6,11 @@ using Firestorm.Engine.Additives.Identifiers;
 using Firestorm.Engine.Defaults;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Identifiers;
-using Firestorm.Tests.Engine.Models;
-using Firestorm.Tests.Models;
-using Xunit;
+using Firestorm.Tests.Unit.Engine.Models;
 using Ninject;
+using Xunit;
 
-namespace Firestorm.Tests.Engine
+namespace Firestorm.Tests.Unit.Engine
 {
     public class DependencyInjectionTests
     {

@@ -6,7 +6,7 @@ using Firestorm.Stems.Fuel.Essential;
 using Firestorm.Stems.Fuel.Substems;
 using Firestorm.Stems.Naming;
 
-namespace Firestorm.Tests.Stems
+namespace Firestorm.Tests.Unit.Stems
 {
     internal class TestStartAxis : IAxis
     {

@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Firestorm.Endpoints.WebApi.ErrorHandling
+namespace Firestorm.Endpoints.WebApi2.ErrorHandling
 {
     // TODO: should these be shared with the client code?
 

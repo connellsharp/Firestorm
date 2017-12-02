@@ -4,7 +4,7 @@ using Firestorm.Endpoints.Formatting.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
 
-namespace Firestorm.Tests.Endpoints
+namespace Firestorm.Tests.Unit.Endpoints.Json
 {
     public class JObjectConverterTests
     {

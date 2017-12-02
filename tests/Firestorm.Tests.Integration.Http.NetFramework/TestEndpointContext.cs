@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Firestorm.Endpoints;
 
-namespace Firestorm.Tests.HttpWebStacks
+namespace Firestorm.Tests.Integration.Http.NetFramework
 {
     public class TestEndpointContext : IRestEndpointContext, IRestCollectionQuery
     {

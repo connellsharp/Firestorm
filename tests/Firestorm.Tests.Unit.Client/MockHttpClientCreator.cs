@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Firestorm.Client;
 
-namespace Firestorm.Tests.Client
+namespace Firestorm.Tests.Unit.Client
 {
     internal class MockHttpClientCreator : IHttpClientCreator
     {

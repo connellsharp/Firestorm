@@ -3,7 +3,7 @@ using Firestorm.Data;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Subs.Repositories;
 
-namespace Firestorm.Tests.Stems
+namespace Firestorm.Tests.Unit.Stems
 {
     public static class FieldWriterTestExtensions
     {

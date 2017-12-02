@@ -1,14 +1,12 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Firestorm.Core;
 using Firestorm.Core.Web;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Start;
-using Firestorm.Tests.Endpoints.Models;
-using Firestorm.Tests.Models;
+using Firestorm.Tests.Unit.Endpoints.Stubs;
 using Xunit;
 
-namespace Firestorm.Tests.Endpoints
+namespace Firestorm.Tests.Unit.Endpoints
 {
     /// <summary>
     /// Some basic tests for the Endpoint chains using the <see cref="TestRestDirectory"/>.

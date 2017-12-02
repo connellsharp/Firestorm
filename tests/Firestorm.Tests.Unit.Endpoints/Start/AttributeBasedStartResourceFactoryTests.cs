@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Firestorm.Endpoints;
 using Firestorm.Endpoints.Start;
 using Xunit;
 
-namespace Firestorm.Tests.Endpoints.Start
+namespace Firestorm.Tests.Unit.Endpoints.Start
 {
     public class AttributeBasedStartResourceFactoryTests
     {

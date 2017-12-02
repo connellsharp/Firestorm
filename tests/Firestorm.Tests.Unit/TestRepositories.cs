@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Firestorm.Tests.Models
+namespace Firestorm.Tests.Unit
 {
     public static class TestRepositories
     {

@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
+using Firestorm.Endpoints.AspNetCore.HttpContext;
 using Firestorm.Endpoints.Start;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;
 
-namespace Firestorm.Endpoints.AspNetCore
+namespace Firestorm.Endpoints.AspNetCore.Middleware
 {
     [UsedImplicitly]
     public class FirestormMiddleware
@@ -20,7 +21,7 @@ namespace Firestorm.Endpoints.AspNetCore
         }
 
         [UsedImplicitly]
-        public async Task Invoke(HttpContext httpContext)
+        public async Task Invoke(Microsoft.AspNetCore.Http.HttpContext httpContext)
         {
             IHttpRequestHandler requestHandler = new HttpContextHander(httpContext);
             var middlewareHelper = new FirestormMiddlewareHelper(_configuration, requestHandler);

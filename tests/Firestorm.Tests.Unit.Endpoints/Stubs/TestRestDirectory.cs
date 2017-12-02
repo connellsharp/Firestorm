@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
-using Firestorm.Core;
 
-namespace Firestorm.Tests.Endpoints.Models
+namespace Firestorm.Tests.Unit.Endpoints.Stubs
 {
     internal class TestRestDirectory : IRestDirectory
     {

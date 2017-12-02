@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using Firestorm.Stems.Fuel.Fields;
 using Firestorm.Stems.Naming;
-using Firestorm.Tests.Models;
 using Xunit;
 
-namespace Firestorm.Tests.Stems
+namespace Firestorm.Tests.Unit.Stems
 {
     public class NamingConventionSwitcherTests
     {

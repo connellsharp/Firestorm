@@ -1,9 +1,8 @@
-﻿using Firestorm.Tests.HttpWebStacks.Web;
-using Firestorm.Tests.Integration.Http.Base.Tests;
+﻿using Firestorm.Tests.Integration.Http.Base.Tests;
+using Firestorm.Tests.Integration.Http.NetFramework.Web;
 using JetBrains.Annotations;
-using Xunit;
 
-namespace Firestorm.Tests.HttpWebStacks
+namespace Firestorm.Tests.Integration.Http.NetFramework
 {
     [UsedImplicitly]
     public class PureOwinBasicIntegrationTests : BasicIntegrationTestsBase

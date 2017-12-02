@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Firestorm.Stems;
 using Firestorm.Stems.Attributes.Basic.Attributes;
-using Firestorm.Tests.Engine.Implementation;
 using Firestorm.Tests.Functionality.Stems.Models;
-using Firestorm.Tests.Models;
+using Firestorm.Tests.Unit;
+using Firestorm.Tests.Unit.Engine.Implementation;
 using Xunit;
 
 namespace Firestorm.Tests.Functionality.Stems

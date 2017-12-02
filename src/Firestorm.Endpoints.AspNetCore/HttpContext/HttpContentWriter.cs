@@ -1,14 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Firestorm.Endpoints.Formatting;
-using Microsoft.AspNetCore.Http;
 
-namespace Firestorm.Endpoints.AspNetCore
+namespace Firestorm.Endpoints.AspNetCore.HttpContext
 {
     internal class HttpContentWriter : IContentWriter
     {
-        private readonly HttpContext _httpContext;
+        private readonly Microsoft.AspNetCore.Http.HttpContext _httpContext;
 
-        public HttpContentWriter(HttpContext httpContext)
+        public HttpContentWriter(Microsoft.AspNetCore.Http.HttpContext httpContext)
         {
             _httpContext = httpContext;
         }

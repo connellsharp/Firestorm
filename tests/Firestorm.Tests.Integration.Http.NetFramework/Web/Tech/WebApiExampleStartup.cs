@@ -1,16 +1,15 @@
 ﻿using System.Web.Http;
-using Firestorm.Endpoints;
 using Firestorm.Endpoints.Start;
 using Firestorm.Endpoints.WebApi2;
-using Firestorm.Tests.HttpWebStacks.Web;
 using Firestorm.Tests.Integration.Http.Base;
+using Firestorm.Tests.Integration.Http.NetFramework.Web;
 using JetBrains.Annotations;
 using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartup(typeof(WebApiExampleStartup))]
 
-namespace Firestorm.Tests.HttpWebStacks.Web
+namespace Firestorm.Tests.Integration.Http.NetFramework.Web
 {
     public class WebApiExampleStartup
     {
