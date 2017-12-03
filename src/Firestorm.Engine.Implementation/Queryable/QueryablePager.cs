@@ -16,47 +16,77 @@ namespace Firestorm.Engine.Queryable
             _pageInstruction = pageInstruction;
         }
 
+        /// <summary>
+        /// Returns the actual page size based on the given instructions and configuration.
+        /// </summary>
         public int PageSize
         {
             get { return _pageInstruction?.Size ?? DEFAULT_PAGE_SIZE; }
         }
 
+        /// <summary>
+        /// Applies the offset and limit to the given queryable.
+        /// The number of items is limited to <see cref="PageSize"/>+1.
+        /// </summary>
         public IQueryable<TItem> ApplyPagination(IQueryable<TItem> items)
         {
+            AbsolutePageValues absolutePageValues = GetAbsolutePageValues();
+
+            if (absolutePageValues.EndOfPage)
+                items = items.Reverse();
+
+            if (absolutePageValues.AbsoluteOffset != 0)
+                items = items.Skip(absolutePageValues.AbsoluteOffset);
+
+            items = items.Take(absolutePageValues.PageSize + 1);
+
+            if (absolutePageValues.EndOfPage)
+                items = items.Reverse();
+
+            return items;
+        }
+
+        private AbsolutePageValues GetAbsolutePageValues()
+        {
+            var values = new AbsolutePageValues();
+
             if (_pageInstruction == null)
-                return items.Take(DEFAULT_PAGE_SIZE);
+            {
+                values.PageSize = DEFAULT_PAGE_SIZE;
+                return values;
+            }
 
-            int pageSize = _pageInstruction.Size ?? DEFAULT_PAGE_SIZE;
+            values.PageSize = _pageInstruction.Size ?? DEFAULT_PAGE_SIZE;
+            values.AbsoluteOffset = 0;
+            values.EndOfPage = false;
 
-            if (_pageInstruction.PageNumber.HasValue) // overwrites offset if both are set
-                _pageInstruction.Offset = (_pageInstruction.PageNumber.Value - 1) * pageSize;
+            if (_pageInstruction.PageNumber.HasValue)
+            {
+                if (_pageInstruction.PageNumber == 0)
+                    throw new InvalidOperationException("There is no such thing as the 0th page.");
+
+                if (_pageInstruction.PageNumber < 0)
+                    values.EndOfPage = true;
+
+                values.AbsoluteOffset += (Math.Abs(_pageInstruction.PageNumber.Value) - 1) * values.PageSize;
+            }
 
             if (_pageInstruction.Offset.HasValue)
             {
                 if (_pageInstruction.Offset < 0)
-                {
-                    items = items.Reverse();
+                    values.EndOfPage = true;
 
-                    if (_pageInstruction.Offset != 0)
-                        items = items.Skip(Math.Abs(_pageInstruction.Offset.Value));
-
-                    items = items.Take(pageSize + 1);
-                    items = items.Reverse();
-                }
-                else
-                {
-                    if (_pageInstruction.Offset != 0)
-                        items = items.Skip(_pageInstruction.Offset.Value);
-
-                    items = items.Take(pageSize + 1);
-                }
-            }
-            else
-            {
-                items = items.Take(pageSize + 1);
+                values.AbsoluteOffset += Math.Abs(_pageInstruction.Offset.Value);
             }
 
-            return items;
+            return values;
+        }
+
+        private class AbsolutePageValues
+        {
+            public int PageSize { get; set; }
+            public int AbsoluteOffset { get; set; }
+            public bool EndOfPage { get; set; }
         }
     }
 }

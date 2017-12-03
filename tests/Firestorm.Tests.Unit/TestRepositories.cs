@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 
 namespace Firestorm.Tests.Unit
 {
+    [Obsolete("Tests that use this should probably be refactored to be more data-driven tests.")]
     public static class TestRepositories
     {
         public static IEnumerable<Artist> GetArtists()
