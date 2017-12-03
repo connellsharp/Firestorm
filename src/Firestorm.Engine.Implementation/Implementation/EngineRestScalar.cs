@@ -12,7 +12,7 @@ namespace Firestorm.Engine
         private readonly IDeferredItem<TItem> _item;
         private readonly INamedField<TItem> _field;
 
-        internal EngineRestScalar([NotNull] IEngineContext<TItem> context, [NotNull] IDeferredItem<TItem> item, [NotNull] INamedField<TItem> field)
+        public EngineRestScalar([NotNull] IEngineContext<TItem> context, [NotNull] IDeferredItem<TItem> item, [NotNull] INamedField<TItem> field)
         {
             if (context == null) throw new ArgumentNullException(nameof(context));
             if (item == null) throw new ArgumentNullException(nameof(item));
@@ -28,9 +28,7 @@ namespace Firestorm.Engine
             if (!_context.AuthorizationChecker.CanGetField(_item, _field))
                 throw new NotAuthorizedForFieldException(AuthorizableVerb.Get, _field.Name);
 
-            IFieldReader<TItem> value = _field.Reader;
-
-            return await ScalarFieldHelper.LoadScalarValueAsync(value, _item.Query, _context.Repository.ForEachAsync);
+            return await ScalarFieldHelper.LoadScalarValueAsync(_field.Reader, _item.Query, _context.Repository.ForEachAsync);
         }
 
         public async Task<Acknowledgment> EditAsync(object value)
