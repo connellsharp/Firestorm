@@ -46,6 +46,22 @@ namespace Firestorm.Tests.Unit.Endpoints
         }
 
         [Fact]
+        public async Task DictionaryEndpoint()
+        {
+            IRestEndpoint endpoint = StartUtilities.GetEndpointFromPath(StartResourceFactory, EndpointContext, "artists/by_ID");
+            DictionaryBody dictionaryBody = (DictionaryBody)(await endpoint.GetAsync());
+
+            foreach (var pair in dictionaryBody.Items)
+            {
+                var itemData = pair.Value as RestItemData;
+                int id = (int)itemData["ID"];
+
+                Assert.True(id > 0);
+                Assert.Equal(pair.Key, id.ToString());
+            }
+        }
+
+        [Fact]
         public async Task FieldEndpoint()
         {
             IRestEndpoint endpoint = StartUtilities.GetEndpointFromPath(StartResourceFactory, EndpointContext, "artists/123/Name");

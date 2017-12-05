@@ -32,7 +32,7 @@ namespace Firestorm.Endpoints.Responses
                 return new
                 {
                     success = true,
-                    reference = createdItemAcknowledgment.NewIdentifier
+                    identifier = createdItemAcknowledgment.NewIdentifier
                 };
             }
             else

@@ -35,7 +35,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Stubs.MemoryResources
 
         public IRestDictionary ToDictionary(string identifierName)
         {
-            throw new NotImplementedException("Test collection not implemented getting dictionaries");
+            return new MemoryRestDictionary<TEntity>(this, identifierName);
         }
 
         public Task<CreatedItemAcknowledgment> AddAsync(RestItemData itemData)
