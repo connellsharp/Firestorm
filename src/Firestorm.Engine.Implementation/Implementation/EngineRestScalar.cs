@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using Firestorm.Engine.Fields;
 using JetBrains.Annotations;
 
 namespace Firestorm.Engine

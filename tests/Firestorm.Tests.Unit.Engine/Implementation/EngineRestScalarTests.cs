@@ -6,6 +6,7 @@ using AutoFixture.Kernel;
 using Firestorm.Data;
 using Firestorm.Engine;
 using Firestorm.Engine.Additives.Readers;
+using Firestorm.Engine.Additives.Writers;
 using Firestorm.Engine.Deferring;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Subs.Repositories;
@@ -60,6 +61,43 @@ namespace Firestorm.Tests.Unit.Engine.Implementation
             var obj = await scalar.GetAsync();
             string str = Assert.IsType<string>(obj);
             Assert.Equal(person.Name, str);
+        }
+
+        [Fact]
+        public async Task Edit_CantGetField_ThrowsNotAuthorized()
+        {
+            _fixture.FreezeMock<IAuthorizationChecker<Person>>(m =>
+            {
+                m.SetupIgnoreArgs(a => a.CanEditField(null, null)).Returns(false);
+            });
+
+            var scalar = _fixture.Create<EngineRestScalar<Person>>();
+
+            await Assert.ThrowsAsync<NotAuthorizedForFieldException>(async delegate
+            {
+                await scalar.EditAsync("test");
+            });
+        }
+
+        [Fact]
+        public async Task Edit_HappyPath_EditsValue()
+        {
+            _fixture.FreezeMock<IAuthorizationChecker<Person>>(m =>
+            {
+                m.SetupIgnoreArgs(a => a.CanEditField(null, null)).Returns(true);
+            });
+
+            _fixture.Inject<IFieldWriter<Person>>(new PropertyExpressionFieldWriter<Person, string>(p => p.Name));
+
+            var person = _fixture.Create<Person>();
+            _fixture.Inject(person);
+
+            var scalar = _fixture.Create<EngineRestScalar<Person>>();
+
+            var newValue = _fixture.Create<string>();
+            await scalar.EditAsync(newValue);
+
+            Assert.Equal(newValue, person.Name);
         }
 
         public class Person

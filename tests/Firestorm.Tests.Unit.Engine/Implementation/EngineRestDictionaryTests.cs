@@ -44,15 +44,4 @@ namespace Firestorm.Tests.Unit.Engine.Implementation
             Assert.Equal(TestRepositories.ArtistName, itemData["name"]);
         }
     }
-
-    public class TestCollectionQuery : IRestCollectionQuery
-    {
-        public IEnumerable<string> SelectFields { get; set; }
-
-        public IEnumerable<FilterInstruction> FilterInstructions { get; set; }
-
-        public IEnumerable<SortIntruction> SortIntructions { get; set; }
-
-        public PageInstruction PageInstruction { get; set; }
-    }
 }

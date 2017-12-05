@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Firestorm.Engine;
@@ -39,6 +40,11 @@ namespace Firestorm.Stems.Fuel.Identifiers
 
             var combinedLambda = Expression.Lambda<Func<TItem, bool>>(combinedPredicate, paramExpr);
             return combinedLambda;
+        }
+
+        internal static Expression<Func<TItem, bool>> CombinePredicates<TItem>(params Expression<Func<TItem, bool>>[] predicates)
+        {
+            return CombinePredicates((IEnumerable<Expression<Func<TItem, bool>>>) predicates);
         }
     }
 }
