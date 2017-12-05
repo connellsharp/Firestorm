@@ -2,29 +2,41 @@ using System;
 using System.Collections.Generic;
 using Firestorm.Stems.Attributes;
 using Firestorm.Stems.Attributes.Analysis;
-using Firestorm.Stems.Fuel;
 
 namespace Firestorm.Stems.Roots
 {
-    public static class AnalyzerCacheBuilder
+    public class AnalyzerCacheBuilder
     {
-        public static void AnalyzeAllStems(IEnumerable<Type> stemTypes, IStemConfiguration stemConfiguration)
+        private readonly AnalyzerCache _analyzerCache;
+        private readonly IStemConfiguration _stemConfiguration;
+
+        public AnalyzerCacheBuilder(IStemConfiguration stemConfiguration)
+        {
+            _stemConfiguration = stemConfiguration;
+            _analyzerCache = stemConfiguration.AnalyzerCache as AnalyzerCache;
+
+            // TODO refactor here - maybe put LoadType in the interface?
+            if(_analyzerCache == null)
+                throw new StemStartSetupException("Configuration must contain an AnalyzerCache property of type AnalyzerCache.");
+        }
+
+        public void AnalyzeAllStems(IEnumerable<Type> stemTypes)
         {
             foreach (Type stemType in stemTypes)
             {
-                AnalyzerStemType(stemType, stemConfiguration);
+                AnalyzerStemType(stemType);
             }
         }
 
-        private static void AnalyzerStemType(Type type, IStemConfiguration stemConfiguration)
+        private void AnalyzerStemType(Type type)
         {
-            AnalyzerCache.LoadAnalyzer<AttributeAnalyzer>(type, stemConfiguration);
+            _analyzerCache.LoadAnalyzer<AttributeAnalyzer>(type, _stemConfiguration);
 
             Type itemType = GetStemItemType(type);
             //AnalyzerCache.LoadAnalyzer(typeof(FieldDefinitionAnalyzer<>).MakeGenericType(itemType), type, stemConfiguration);
         }
 
-        private static Type GetStemItemType(Type type)
+        private Type GetStemItemType(Type type)
         {
             var stemType = type.GetGenericSubclass(typeof(Stem<>));
 

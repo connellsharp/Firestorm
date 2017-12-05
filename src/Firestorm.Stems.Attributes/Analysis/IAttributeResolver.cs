@@ -9,12 +9,11 @@ namespace Firestorm.Stems.Attributes.Analysis
     /// Adds to a <see cref="StemDefinition"/> with information about a Stem member with a <see cref="StemAttribute"/>.
     /// </summary>
     public interface IAttributeResolver
+        : IAnalysisResolver // doesn't actually need to inherit this, but it fits nicely and might be refactored in future.
     {
         Type ItemType { set; }
 
         StemDefinition Definition { set; }
-
-        IStemConfiguration Configuration { set; }
 
         StemAttribute Attribute { set; }
 

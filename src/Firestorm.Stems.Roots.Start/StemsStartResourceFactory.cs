@@ -26,7 +26,8 @@ namespace Firestorm.Stems.Roots
         {
             IEnumerable<Type> stemTypes = RootResourceFactory.GetStemTypes();
 
-            AnalyzerCacheBuilder.AnalyzeAllStems(stemTypes, StemConfiguration);
+            var cacheBuilder = new AnalyzerCacheBuilder(StemConfiguration);
+            cacheBuilder.AnalyzeAllStems(stemTypes);
 
             _initialized = true;
         }

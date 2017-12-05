@@ -33,5 +33,11 @@ namespace Firestorm.Stems
         /// </summary>
         [NotNull]
         IEnumerable<IStemsFeatureSet> FeatureSets { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [NotNull]
+        IAnalyzerFactory AnalyzerCache { get; }
     }
 }

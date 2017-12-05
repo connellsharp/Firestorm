@@ -15,11 +15,12 @@ namespace Firestorm.Stems.Fuel.Authorization
 
         private static readonly IAuthorizationChecker<TItem> AllowAllChecker = new AllowAllAuthorizationChecker<TItem>();
 
-        public StemAuthorizationChecker(Stem<TItem> stem, bool useCache = true)
+        public StemAuthorizationChecker(Stem<TItem> stem)
         {
             _stem = stem;
 
-            var analyzer = AnalyzerCache.GetAnalyzer<FieldDefinitionAnalyzer<TItem>>(stem.GetType(), stem.Configuration, useCache);
+            var analyzerFactory = stem.Configuration.AnalyzerCache;
+            var analyzer = analyzerFactory.GetAnalyzer<FieldDefinitionAnalyzer<TItem>>(stem.GetType(), stem.Configuration);
             _implementations = analyzer.Implementations;
         }
 

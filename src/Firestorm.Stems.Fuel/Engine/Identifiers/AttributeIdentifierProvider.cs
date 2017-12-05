@@ -16,11 +16,12 @@ namespace Firestorm.Stems.Fuel.Identifiers
         private readonly Stem<TItem> _stem;
         private readonly StemDefinition _stemDefinition;
 
-        public AttributeIdentifierProvider(Stem<TItem> stem, bool useCache = true)
+        public AttributeIdentifierProvider(Stem<TItem> stem)
         {
             _stem = stem;
 
-            var analyzer = AnalyzerCache.GetAnalyzer<AttributeAnalyzer>(stem.GetType(), stem.Configuration, useCache);
+            var analyzerFactory = stem.Configuration.AnalyzerCache;
+            var analyzer = analyzerFactory.GetAnalyzer<AttributeAnalyzer>(stem.GetType(), stem.Configuration);
             _stemDefinition = analyzer.Definition;
         }
 

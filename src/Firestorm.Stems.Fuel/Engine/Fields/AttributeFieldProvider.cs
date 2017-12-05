@@ -20,11 +20,13 @@ namespace Firestorm.Stems.Fuel.Fields
         private readonly Stem<TItem> _stem;
         private readonly EngineImplementations<TItem> _implementations;
 
-        public AttributeFieldProvider(Stem<TItem> stem, bool useCache = true)
+        public AttributeFieldProvider(Stem<TItem> stem)
         {
-            var definitionAnalyzer = AnalyzerCache.GetAnalyzer<FieldDefinitionAnalyzer<TItem>>(stem.GetType(), stem.Configuration, useCache);
-            _implementations = definitionAnalyzer.Implementations;
             _stem = stem;
+
+            var analyzerFactory = stem.Configuration.AnalyzerCache;
+            var definitionAnalyzer = analyzerFactory.GetAnalyzer<FieldDefinitionAnalyzer<TItem>>(stem.GetType(), stem.Configuration);
+            _implementations = definitionAnalyzer.Implementations;
         }
 
         public IEnumerable<string> GetDefaultNames(int nestedBy)
