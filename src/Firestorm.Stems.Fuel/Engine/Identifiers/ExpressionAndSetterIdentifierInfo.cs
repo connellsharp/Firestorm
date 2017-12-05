@@ -25,7 +25,7 @@ namespace Firestorm.Stems.Fuel.Identifiers
             _getterIdentifierInfo = GetGetterIdentifierInfo(getterExpr, multiReferenceCollection);
         }
 
-        private IIdentifierInfo<TItem> GetGetterIdentifierInfo(LambdaExpression getterExpr, bool multiReferenceCollection)
+        private static IIdentifierInfo<TItem> GetGetterIdentifierInfo(LambdaExpression getterExpr, bool multiReferenceCollection)
         {
             Type returnType = ResolverTypeUtility.GetPropertyLambdaReturnType<TItem>(getterExpr.GetType());
 
