@@ -2,7 +2,7 @@
 
 namespace Firestorm.Tests.Unit.Engine.Implementation
 {
-    internal class TestCollectionQuery : IRestCollectionQuery
+    public class TestCollectionQuery : IRestCollectionQuery
     {
         public IEnumerable<string> SelectFields { get; set; }
 

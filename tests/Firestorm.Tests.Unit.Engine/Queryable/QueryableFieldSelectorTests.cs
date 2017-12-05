@@ -7,7 +7,7 @@ using Firestorm.Engine.Fields;
 using Firestorm.Engine.Queryable;
 using Xunit;
 
-namespace Firestorm.Tests.Unit.Engine.Fields
+namespace Firestorm.Tests.Unit.Engine.Queryable
 {
     public class QueryableFieldSelectorTests
     {

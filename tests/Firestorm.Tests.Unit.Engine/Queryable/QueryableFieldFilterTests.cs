@@ -4,7 +4,7 @@ using Firestorm.Engine.Queryable;
 using Firestorm.Tests.Unit.Engine.Models;
 using Xunit;
 
-namespace Firestorm.Tests.Unit.Engine.Fields
+namespace Firestorm.Tests.Unit.Engine.Queryable
 {
     public class QueryableFieldFilterTests
     {
