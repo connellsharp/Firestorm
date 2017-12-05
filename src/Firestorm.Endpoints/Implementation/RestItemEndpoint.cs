@@ -29,7 +29,7 @@ namespace Firestorm.Endpoints
         public async Task<ResourceBody> GetAsync()
         {
             IRestCollectionQuery query = Context.GetQuery();
-            RestItemData item = await Item.GetDataAsync(query.SelectFields);
+            RestItemData item = await Item.GetDataAsync(query?.SelectFields);
             return new ItemBody(item);
         }
 

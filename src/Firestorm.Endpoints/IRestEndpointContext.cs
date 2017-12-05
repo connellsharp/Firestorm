@@ -1,5 +1,5 @@
 using System;
-using Firestorm.Core;
+using JetBrains.Annotations;
 
 namespace Firestorm.Endpoints
 {
@@ -11,6 +11,7 @@ namespace Firestorm.Endpoints
         /// <summary>
         /// The global configuration for all endpoints in this API.
         /// </summary>
+        [NotNull]
         RestEndpointConfiguration Configuration { get; }
 
         /// <summary>
@@ -21,6 +22,7 @@ namespace Firestorm.Endpoints
         /// <summary>
         /// The collection query from the querystring.
         /// </summary>
+        [CanBeNull]
         IRestCollectionQuery GetQuery();
 
         /// <summary>

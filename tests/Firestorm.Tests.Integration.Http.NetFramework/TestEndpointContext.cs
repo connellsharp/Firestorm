@@ -10,7 +10,7 @@ namespace Firestorm.Tests.Integration.Http.NetFramework
         {
         }
 
-        public RestEndpointConfiguration Configuration { get; }
+        public RestEndpointConfiguration Configuration { get; } = new RestEndpointConfiguration();
         public IRestUser User { get; }
 
         public IRestCollectionQuery GetQuery()
