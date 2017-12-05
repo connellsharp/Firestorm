@@ -22,6 +22,8 @@ namespace Firestorm
             ErrorStatus = errorStatus;
         }
 
-        public ErrorStatus ErrorStatus { get; set; }
+        public ErrorStatus ErrorStatus { get; }
+
+        public virtual string ErrorType { get; } = null;
     }
 }

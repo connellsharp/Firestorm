@@ -24,7 +24,11 @@ namespace Firestorm.Client
         {
             using (Stream stream = await response.Content.ReadAsStreamAsync())
             {
-                return DeserializeFromStream<T>(stream);
+                if (response.IsSuccessStatusCode)
+                    return DeserializeFromStream<T>(stream);
+
+                var errorData = DeserializeFromStream<RestItemData>(stream);
+                throw new ClientRestApiException(response.StatusCode, errorData);
             }
         }
 

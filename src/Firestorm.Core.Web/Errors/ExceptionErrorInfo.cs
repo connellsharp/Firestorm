@@ -6,7 +6,7 @@ namespace Firestorm.Core.Web
     public class ExceptionErrorInfo : ErrorInfo
     {
         public ExceptionErrorInfo(Exception exception)
-            : base(GetErrorStatus(exception), GetExceptionTypeText(exception.GetType()), exception.Message)
+            : base(GetErrorStatus(exception), GetExceptionTypeText(exception), exception.Message)
         {
             StackTrace = exception.StackTrace;
             InnerDescriptions = exception.InnerException != null ? IterateInnerExceptionMessages(exception) : null;
@@ -14,8 +14,7 @@ namespace Firestorm.Core.Web
 
         private static ErrorStatus GetErrorStatus(Exception exception)
         {
-            var restApiException = exception as RestApiException;
-            if (restApiException != null)
+            if (exception is RestApiException restApiException)
                 return restApiException.ErrorStatus;
 
             return exception is NotImplementedException ? ErrorStatus.NotImplemented : ErrorStatus.InternalServerError;
@@ -25,9 +24,13 @@ namespace Firestorm.Core.Web
 
         public string StackTrace { get; private set; }
 
-        private static string GetExceptionTypeText(Type exceptionType)
+        private static string GetExceptionTypeText(Exception exception)
         {
-            string exceptionTypeName = exceptionType.Name.TrimEnd("Exception");
+            if (exception is RestApiException restApiException && !string.IsNullOrEmpty(restApiException.ErrorType))
+                return restApiException.ErrorType;
+
+            // TODO: move lower and not rely on the null check?
+            string exceptionTypeName = exception.GetType().Name.TrimEnd("Exception");
             return exceptionTypeName.SeparateCamelCase("_", true);
         }
 
