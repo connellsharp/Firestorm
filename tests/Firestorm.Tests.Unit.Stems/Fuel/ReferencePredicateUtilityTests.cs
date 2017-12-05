@@ -28,7 +28,7 @@ namespace Firestorm.Tests.Unit.Stems.Fuel
             Expression<Func<Thing, bool>> idPredicate = t => t.ID == -123;
             Expression<Func<Thing, bool>> namePredicate = t => t.Name == firstItemsName;
 
-            var combinedPredicate = ReferencePredicateUtility.CombinePredicates(falsePredicate, idPredicate, namePredicate);
+            var combinedPredicate = PredicateUtility.CombinePredicates(falsePredicate, idPredicate, namePredicate);
 
             var foundItem = list.AsQueryable().Where(combinedPredicate).SingleOrDefault();
 

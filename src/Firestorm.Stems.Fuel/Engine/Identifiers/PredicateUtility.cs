@@ -1,14 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Firestorm.Engine;
 
 namespace Firestorm.Stems.Fuel.Identifiers
 {
-    internal static class ReferencePredicateUtility
+    internal static class PredicateUtility
     {
         // TODO possibly move to ExpressionTreeHelpers
+
         internal static Expression<Func<TItem, bool>> CombinePredicates<TItem>(IEnumerable<Expression<Func<TItem, bool>>> predicates)
         {
             ParameterExpression paramExpr = null;

@@ -40,7 +40,7 @@ namespace Firestorm.Stems.Fuel.Identifiers
 
         public Expression<Func<TItem, bool>> GetPredicate(string identifier)
         {
-            return ReferencePredicateUtility.CombinePredicates(_infos.Select(i => i.GetPredicate(identifier)));
+            return PredicateUtility.CombinePredicates(_infos.Select(i => i.GetPredicate(identifier)));
         }
 
         public void SetValue(TItem item, string identifier)
