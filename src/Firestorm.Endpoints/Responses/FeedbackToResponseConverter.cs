@@ -6,6 +6,7 @@ using Firestorm.Core.Web;
 
 namespace Firestorm.Endpoints.Responses
 {
+    [Obsolete("This has all been copied to different Firestorm.Endpoints.Start.Responses classes and planned to move to their own library.")]
     public class FeedbackToResponseConverter
     {
         private readonly Feedback _feedback;

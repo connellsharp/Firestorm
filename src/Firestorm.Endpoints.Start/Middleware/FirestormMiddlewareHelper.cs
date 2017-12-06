@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Firestorm.Core.Web;
+using Firestorm.Endpoints.Start.Responses;
 
 namespace Firestorm.Endpoints.Start
 {
@@ -9,11 +11,19 @@ namespace Firestorm.Endpoints.Start
     {
         private readonly FirestormConfiguration _configuration;
         private readonly IHttpRequestHandler _requestHandler;
+        private readonly List<IResponseBuilder> _builders;
 
         public FirestormMiddlewareHelper(FirestormConfiguration configuration, IHttpRequestHandler requestHandler)
         {
             _configuration = configuration;
             _requestHandler = requestHandler;
+
+            _builders = new List<IResponseBuilder>
+            {
+                new PageHeadersResponseBuilder(),
+                new FeedbackResponseBuilder(),
+                new ResponseBodyBuilder(_configuration.EndpointConfiguration.ResponseContentGenerator, _configuration.EndpointConfiguration.ShowDeveloperErrors)
+            };
         }
         
         /// <summary>
@@ -25,7 +35,7 @@ namespace Firestorm.Endpoints.Start
             try
             {
                 IRestEndpoint endpoint = GetEndpoint(endpointContext);
-                var invoker = new EndpointInvoker(_configuration.EndpointConfiguration, _requestHandler, endpoint);
+                var invoker = new EndpointInvoker(_builders, _requestHandler, endpoint);
                 await invoker.InvokeAsync();
             }
             catch (Exception ex)
@@ -49,9 +59,10 @@ namespace Firestorm.Endpoints.Start
 
             _requestHandler.SetStatusCode((HttpStatusCode) errorInfo.ErrorStatus);
 
+            // TODO: to responseBuilder?
             RestEndpointConfiguration endpointConfig = _configuration.EndpointConfiguration;
             object responseBody = endpointConfig.ResponseContentGenerator.GetFromError(errorInfo, endpointConfig.ShowDeveloperErrors);
-            await _requestHandler.SetResponseBody(responseBody);
+            await _requestHandler.SetResponseBodyAsync(responseBody);
         }
     }
 }

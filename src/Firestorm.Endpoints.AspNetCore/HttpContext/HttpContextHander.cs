@@ -31,7 +31,7 @@ namespace Firestorm.Endpoints.AspNetCore.HttpContext
             return new HttpPreconditions(_httpContext.Request.Headers);
         }
 
-        public async Task SetResponseBody(object obj)
+        public async Task SetResponseBodyAsync(object obj)
         {
             var negotator = new ContentNegotiator(new HttpContentWriter(_httpContext));
             await negotator.SetResponseBody(obj);

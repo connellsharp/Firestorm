@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Firestorm.Endpoints.Pagination;
 using Firestorm.Endpoints.Query;
 using Firestorm.Endpoints.Responses;

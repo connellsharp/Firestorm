@@ -15,7 +15,7 @@ namespace Firestorm.Endpoints.Start
 
         IPreconditions GetPreconditions();
 
-        Task SetResponseBody(object obj);
+        Task SetResponseBodyAsync(object obj);
 
         ResourceBody GetRequestBodyObject();
 

@@ -32,7 +32,7 @@ namespace Firestorm.Endpoints.Owin
             return new OwinPreconditions(_owinContext);
         }
 
-        public async Task SetResponseBody(object obj)
+        public async Task SetResponseBodyAsync(object obj)
         {
             var negotator = new ContentNegotiator(new OwinContentWriter(_owinContext));
             await negotator.SetResponseBody(obj);

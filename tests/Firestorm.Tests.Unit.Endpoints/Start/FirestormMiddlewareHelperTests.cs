@@ -137,7 +137,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
                 return null;
             }
 
-            public async Task SetResponseBody(object obj)
+            public async Task SetResponseBodyAsync(object obj)
             {
                 ResponseBody = obj;
             }

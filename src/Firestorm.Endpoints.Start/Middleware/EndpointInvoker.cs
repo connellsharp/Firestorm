@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Firestorm.Core.Web;
 using Firestorm.Core.Web.Options;
-using Firestorm.Endpoints.Responses;
+using Firestorm.Endpoints.Start.Responses;
 
 namespace Firestorm.Endpoints.Start
 {
@@ -13,13 +13,13 @@ namespace Firestorm.Endpoints.Start
     /// </summary>
     internal class EndpointInvoker
     {
-        private readonly RestEndpointConfiguration _configuration;
+        private readonly IEnumerable<IResponseBuilder> _builders;
         private readonly IHttpRequestHandler _requestHandler;
         private readonly IRestEndpoint _endpoint;
 
-        public EndpointInvoker(RestEndpointConfiguration configuration, IHttpRequestHandler requestHandler, IRestEndpoint endpoint)
+        public EndpointInvoker(IEnumerable<IResponseBuilder> builders, IHttpRequestHandler requestHandler, IRestEndpoint endpoint)
         {
-            _configuration = configuration;
+            _builders = builders;
             _requestHandler = requestHandler;
             _endpoint = endpoint;
         }
@@ -58,23 +58,21 @@ namespace Firestorm.Endpoints.Start
             }
 
             ResourceBody resourceBody = await _endpoint.GetAsync();
-
-            if (resourceBody is IPagedResourceBody pagedResourceBody)
+            
+            foreach (IResponseBuilder builder in _builders)
             {
-                var setter = new LinkHeaderBuilder(new UrlCalculator(_requestHandler));
-                setter.AddDetails(pagedResourceBody.PageLinks);
-                setter.SetHeaders(_requestHandler);
+                await builder.AddResourceAsync(_requestHandler, resourceBody);
             }
-
-            object resBody = _configuration.ResponseContentGenerator.GetFromResource(resourceBody);
-            await _requestHandler.SetResponseBody(resBody);
         }
 
         private async Task InvokeOptionsAsync()
         {
             Options options = await _endpoint.OptionsAsync();
-            object optionsBody = _configuration.ResponseContentGenerator.GetFromOptions(options);
-            await _requestHandler.SetResponseBody(optionsBody);
+
+            foreach (IResponseBuilder builder in _builders)
+            {
+                await builder.AddOptionsAsync(_requestHandler, options);
+            }
         }
 
         private async Task InvokeUnsafeAsync()
@@ -90,27 +88,10 @@ namespace Firestorm.Endpoints.Start
 
             Feedback feedback = await _endpoint.UnsafeAsync(method, postBody);
 
-            await WriteFeedbackToResponse(feedback);
-        }
-
-        private async Task WriteFeedbackToResponse(Feedback feedback)
-        {
-            var converter = new FeedbackToResponseConverter(feedback, _configuration);
-
-            HttpStatusCode status = converter.GetStatusCode();
-            _requestHandler.SetStatusCode(status);
-
-            if (status == HttpStatusCode.Created)
+            foreach (IResponseBuilder builder in _builders)
             {
-                object newIdentifier = converter.GetNewIdentifier();
-                Debug.Assert(newIdentifier != null, "Status code 201 should mean there is a new identifier.");
-                var urlCalculator = new UrlCalculator(_requestHandler);
-                string newUrl = urlCalculator.GetCreatedUrl(newIdentifier);
-                _requestHandler.SetResponseHeader("Location", newUrl);
+                await builder.AddFeedbackAsync(_requestHandler, feedback);
             }
-
-            object feedbackBody = converter.GetBody();
-            await _requestHandler.SetResponseBody(feedbackBody);
         }
     }
 }

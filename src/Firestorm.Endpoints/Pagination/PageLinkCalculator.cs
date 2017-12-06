@@ -25,18 +25,15 @@ namespace Firestorm.Endpoints
             if (_details == null || !_details.HasNextPage)
                 return null;
 
-            // TODO query keys
-
             switch (_configuration.SuggestedNavigationType)
             {
                 case PageNavigationType.SortAndFilter:
                     throw new NotImplementedException("Not implemented next page URL for sort and filter strategy.");
-                    return new PageLinks();
 
                 case PageNavigationType.PageNumber:
                     return new PageLinks
                     {
-                        NextPath = new PageInstruction
+                        Next = new PageInstruction
                         {
                             PageNumber = _instruction.PageNumber + 1,
                             Size = _instruction.Size
@@ -46,7 +43,7 @@ namespace Firestorm.Endpoints
                 case PageNavigationType.Offset:
                     return new PageLinks
                     {
-                        NextPath = new PageInstruction
+                        Next = new PageInstruction
                         {
                             Offset = _instruction.Offset + _instruction.Size,
                             Size = _instruction.Size

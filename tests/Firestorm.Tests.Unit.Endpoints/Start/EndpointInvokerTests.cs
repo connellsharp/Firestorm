@@ -56,8 +56,8 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
 
                 var pageLinks = new PageLinks
                 {
-                    NextPath = hasNextPath ? new PageInstruction { PageNumber = 3 } : null,
-                    PreviousPath = hasPrevPath ? new PageInstruction { PageNumber = 1 } : null,
+                    Next = hasNextPath ? new PageInstruction { PageNumber = 3 } : null,
+                    Previous = hasPrevPath ? new PageInstruction { PageNumber = 1 } : null,
                 };
 
                 m.Setup(a => a.GetAsync()).ReturnsAsync(new CollectionBody(null, pageLinks));

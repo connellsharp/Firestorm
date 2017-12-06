@@ -20,11 +20,11 @@ namespace Firestorm.Endpoints.Start
             if (pageLinks == null)
                 return;
 
-            if (pageLinks.NextPath != null)
-                _links.Add("next", _urlCalculator.GetPageUrl(pageLinks.NextPath));
+            if (pageLinks.Next != null)
+                _links.Add("next", _urlCalculator.GetPageUrl(pageLinks.Next));
 
-            if (pageLinks.PreviousPath != null)
-                _links.Add("prev", _urlCalculator.GetPageUrl(pageLinks.PreviousPath));
+            if (pageLinks.Previous != null)
+                _links.Add("prev", _urlCalculator.GetPageUrl(pageLinks.Previous));
         }
 
         public void SetHeaders(IHttpRequestHandler requestHandler)
