@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using Firestorm.Core.Web;
 
@@ -7,6 +8,12 @@ namespace Firestorm.Endpoints.Start
     public class LinkHeaderBuilder
     {
         private readonly Dictionary<string, string> _links = new Dictionary<string, string>();
+        private readonly IUrlCalculator _urlCalculator;
+
+        internal LinkHeaderBuilder(IUrlCalculator urlCalculator)
+        {
+            _urlCalculator = urlCalculator;
+        }
 
         public void AddDetails(PageLinks pageLinks)
         {
@@ -14,10 +21,10 @@ namespace Firestorm.Endpoints.Start
                 return;
 
             if (pageLinks.NextPath != null)
-                _links.Add("next", pageLinks.NextPath);
+                _links.Add("next", _urlCalculator.GetPageUrl(pageLinks.NextPath));
 
             if (pageLinks.PreviousPath != null)
-                _links.Add("prev", pageLinks.PreviousPath);
+                _links.Add("prev", _urlCalculator.GetPageUrl(pageLinks.PreviousPath));
         }
 
         public void SetHeaders(IHttpRequestHandler requestHandler)

@@ -5,8 +5,8 @@ namespace Firestorm.Core.Web
     /// </summary>
     public class PageLinks
     {
-        public string NextPath { get; set; }
+        public PageInstruction NextPath { get; set; }
 
-        public string PreviousPath { get; set; }
+        public PageInstruction PreviousPath { get; set; }
     }
 }

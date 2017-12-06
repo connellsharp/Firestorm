@@ -44,17 +44,22 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
         }
 
         [Theory]
-        [InlineData("next/path", null, true)]
-        [InlineData(null, "prev/path", true)]
-        [InlineData("next/path", "prev/path", true)]
-        [InlineData(null, null, false)]
-        public async Task InvokeGet_BodyWithNextPath_AddsLinkHeader(string nextPath, string prevPath, bool shouldHaveLinkHeader)
+        [InlineData(true, false, true)]
+        [InlineData(false, true, true)]
+        [InlineData(true, true, true)]
+        [InlineData(false, false, false)]
+        public async Task InvokeGet_BodyWithNextPath_AddsLinkHeader(bool hasNextPath, bool hasPrevPath, bool shouldHaveLinkHeader)
         {
             _fixture.FreezeMock<IRestEndpoint>(m =>
             {
                 m.SetupIgnoreArgs(a => a.EvaluatePreconditions(null)).Returns(true);
 
-                var pageLinks = new PageLinks { NextPath = nextPath, PreviousPath = prevPath };
+                var pageLinks = new PageLinks
+                {
+                    NextPath = hasNextPath ? new PageInstruction { PageNumber = 3 } : null,
+                    PreviousPath = hasPrevPath ? new PageInstruction { PageNumber = 1 } : null,
+                };
+
                 m.Setup(a => a.GetAsync()).ReturnsAsync(new CollectionBody(null, pageLinks));
             });
 

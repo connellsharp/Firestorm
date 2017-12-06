@@ -31,21 +31,26 @@ namespace Firestorm.Endpoints
             {
                 case PageNavigationType.SortAndFilter:
                     throw new NotImplementedException("Not implemented next page URL for sort and filter strategy.");
-                    return new PageLinks
-                    {
-                        NextPath = "?where=" + _instruction.PageNumber
-                    };
+                    return new PageLinks();
 
                 case PageNavigationType.PageNumber:
                     return new PageLinks
                     {
-                        NextPath = "?page=" + (_instruction.PageNumber + 1)
+                        NextPath = new PageInstruction
+                        {
+                            PageNumber = _instruction.PageNumber + 1,
+                            Size = _instruction.Size
+                        }
                     };
 
                 case PageNavigationType.Offset:
                     return new PageLinks
                     {
-                        NextPath = "?offset=" + (_instruction.Offset + _instruction.Size)
+                        NextPath = new PageInstruction
+                        {
+                            Offset = _instruction.Offset + _instruction.Size,
+                            Size = _instruction.Size
+                        }
                     };
 
                 default:

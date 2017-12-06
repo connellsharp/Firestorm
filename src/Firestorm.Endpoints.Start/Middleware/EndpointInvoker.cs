@@ -61,7 +61,7 @@ namespace Firestorm.Endpoints.Start
 
             if (resourceBody is IPagedResourceBody pagedResourceBody)
             {
-                var setter = new LinkHeaderBuilder();
+                var setter = new LinkHeaderBuilder(new UrlCalculator(_requestHandler));
                 setter.AddDetails(pagedResourceBody.PageLinks);
                 setter.SetHeaders(_requestHandler);
             }
@@ -104,7 +104,8 @@ namespace Firestorm.Endpoints.Start
             {
                 object newIdentifier = converter.GetNewIdentifier();
                 Debug.Assert(newIdentifier != null, "Status code 201 should mean there is a new identifier.");
-                string newUrl = string.Format("{0}/{1}", _requestHandler.ResourcePath.TrimEnd('/'), newIdentifier);
+                var urlCalculator = new UrlCalculator(_requestHandler);
+                string newUrl = urlCalculator.GetCreatedUrl(newIdentifier);
                 _requestHandler.SetResponseHeader("Location", newUrl);
             }
 
