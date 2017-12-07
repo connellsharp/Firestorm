@@ -99,27 +99,25 @@ namespace Firestorm.Endpoints.WebApi2
 
         private IHttpActionResult GetResultFromFeedback(Feedback feedback)
         {
-            var converter = new FeedbackToResponseConverter(feedback, Config.EndpointConfiguration);
+            var response = new Response(ResourcePath);
+            var responseBuilder = new AggregateResponseBuilder(new DefaultResponseBuilders(Config.EndpointConfiguration));
+            responseBuilder.AddFeedback(response, feedback);
 
-            object responseBody = converter.GetBody();
-            var statusCode = converter.GetStatusCode();
+            object responseBody = response.GetFullBody();
 
-            if (statusCode == HttpStatusCode.Created)
+            if (response.StatusCode == HttpStatusCode.Created)
             {
-                object newReference = converter.GetNewIdentifier();
-                Debug.Assert(newReference != null, "Status code 201 should mean there is a new identifier.");
-                string newUrl = string.Format("{0}/{1}", ResourcePath.TrimEnd('/'), newReference);
-                return Created(newUrl, responseBody); // because it adds the Location: header
+                return Created(response.Headers["Location"], responseBody);
             }
 
             if (feedback.Type == FeedbackType.MultiResponse)
             {
-                Debug.Assert(statusCode == (HttpStatusCode) 207);
+                Debug.Assert(response.StatusCode == (HttpStatusCode) 207);
                 Debug.Assert(responseBody is object[]);
-                return Content(statusCode, responseBody as object[]); // for content negotiation. does this even make a difference?
+                return Content(response.StatusCode, responseBody as object[]); // for content negotiation. does this even make a difference?
             }
 
-            return Content(statusCode, responseBody);
+            return Content(response.StatusCode, responseBody);
         }
 
         private IRestEndpoint GetEndpoint()

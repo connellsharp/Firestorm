@@ -1,3 +1,4 @@
+using System;
 using Firestorm.Core;
 using Firestorm.Core.Web;
 using Firestorm.Core.Web.Options;
@@ -7,6 +8,7 @@ namespace Firestorm.Endpoints.Responses
     /// <summary>
     /// Gets the objects to return in the response body from the return values from <see cref="IRestEndpoint"/> implementations.
     /// </summary>
+    [Obsolete("Not used anymore. Using builders to combine several features.")]
     public interface IResponseContentGenerator
     {
         object GetFromResource(ResourceBody resource);

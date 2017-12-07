@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Firestorm.Core.Web;
-using Firestorm.Endpoints.Start.Responses;
+using Firestorm.Endpoints.Responses;
 
 namespace Firestorm.Endpoints.Start
 {
@@ -11,19 +10,14 @@ namespace Firestorm.Endpoints.Start
     {
         private readonly FirestormConfiguration _configuration;
         private readonly IHttpRequestHandler _requestHandler;
-        private readonly List<IResponseBuilder> _builders;
+        private readonly IResponseBuilder _builder;
 
         public FirestormMiddlewareHelper(FirestormConfiguration configuration, IHttpRequestHandler requestHandler)
         {
             _configuration = configuration;
             _requestHandler = requestHandler;
 
-            _builders = new List<IResponseBuilder>
-            {
-                new PageHeadersResponseBuilder(),
-                new FeedbackResponseBuilder(),
-                new ResponseBodyBuilder(_configuration.EndpointConfiguration.ResponseContentGenerator, _configuration.EndpointConfiguration.ShowDeveloperErrors)
-            };
+            _builder = new AggregateResponseBuilder(new DefaultResponseBuilders(configuration.EndpointConfiguration));
         }
         
         /// <summary>
@@ -35,7 +29,7 @@ namespace Firestorm.Endpoints.Start
             try
             {
                 IRestEndpoint endpoint = GetEndpoint(endpointContext);
-                var invoker = new EndpointInvoker(_builders, _requestHandler, endpoint);
+                var invoker = new EndpointInvoker(_builder, _requestHandler, endpoint);
                 await invoker.InvokeAsync();
             }
             catch (Exception ex)

@@ -4,6 +4,7 @@ using AutoFixture;
 using AutoFixture.AutoMoq;
 using Firestorm.Core.Web;
 using Firestorm.Endpoints;
+using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Start;
 using Moq;
 using Xunit;
@@ -65,6 +66,8 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
 
             var handlerMock = _fixture.FreezeMock<IHttpRequestHandler>();
             handlerMock.SetupGet(a => a.RequestMethod).Returns("GET");
+
+            _fixture.Relay<IResponseBuilder, PaginationHeadersResponseBuilder>();
 
             var invoker = _fixture.Create<EndpointInvoker>();
             await invoker.InvokeAsync();

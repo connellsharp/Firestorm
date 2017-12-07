@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Start;
 using JetBrains.Annotations;
 using Microsoft.Owin;

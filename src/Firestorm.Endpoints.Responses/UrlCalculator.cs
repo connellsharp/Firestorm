@@ -1,21 +1,20 @@
-using System;
 using System.Text;
 
-namespace Firestorm.Endpoints.Start
+namespace Firestorm.Endpoints.Responses
 {
     internal class UrlCalculator : IUrlCalculator
     {
-        private readonly IHttpRequestHandler _requestHandler;
+        private readonly string _resourcePath;
 
-        public UrlCalculator(IHttpRequestHandler requestHandler)
+        public UrlCalculator(string resourcePath)
         {
-            _requestHandler = requestHandler;
+            _resourcePath = resourcePath;
         }
 
         public string GetPageUrl(PageInstruction pageInstruction)
         {
             var builder = new StringBuilder();
-            builder.Append(_requestHandler.ResourcePath);
+            builder.Append(_resourcePath);
             builder.Append('?');
 
             if (pageInstruction.PageNumber.HasValue)
@@ -32,7 +31,7 @@ namespace Firestorm.Endpoints.Start
 
         public string GetCreatedUrl(object newIdentifier)
         {
-            return string.Format("{0}/{1}", _requestHandler.ResourcePath.TrimEnd('/'), newIdentifier);
+            return string.Format("{0}/{1}", _resourcePath.TrimEnd('/'), newIdentifier);
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Firestorm.Core.Web;
 using Firestorm.Core.Web.Options;
-using Firestorm.Endpoints.Start.Responses;
+using Firestorm.Endpoints.Responses;
 
 namespace Firestorm.Endpoints.Start
 {
@@ -13,13 +12,13 @@ namespace Firestorm.Endpoints.Start
     /// </summary>
     internal class EndpointInvoker
     {
-        private readonly IEnumerable<IResponseBuilder> _builders;
+        private readonly IResponseBuilder _responseBuilder;
         private readonly IHttpRequestHandler _requestHandler;
         private readonly IRestEndpoint _endpoint;
 
-        public EndpointInvoker(IEnumerable<IResponseBuilder> builders, IHttpRequestHandler requestHandler, IRestEndpoint endpoint)
+        public EndpointInvoker(IResponseBuilder responseBuilder, IHttpRequestHandler requestHandler, IRestEndpoint endpoint)
         {
-            _builders = builders;
+            _responseBuilder = responseBuilder;
             _requestHandler = requestHandler;
             _endpoint = endpoint;
         }
@@ -58,21 +57,21 @@ namespace Firestorm.Endpoints.Start
             }
 
             ResourceBody resourceBody = await _endpoint.GetAsync();
-            
-            foreach (IResponseBuilder builder in _builders)
-            {
-                await builder.AddResourceAsync(_requestHandler, resourceBody);
-            }
+
+            var response = new Response(_requestHandler.ResourcePath);
+            _responseBuilder.AddResource(response, resourceBody);
+
+            await ResponseUtility.WriteResponseAsync(_requestHandler, response);
         }
 
         private async Task InvokeOptionsAsync()
         {
             Options options = await _endpoint.OptionsAsync();
 
-            foreach (IResponseBuilder builder in _builders)
-            {
-                await builder.AddOptionsAsync(_requestHandler, options);
-            }
+            var response = new Response(_requestHandler.ResourcePath);
+            _responseBuilder.AddOptions(response, options);
+
+            await ResponseUtility.WriteResponseAsync(_requestHandler, response);
         }
 
         private async Task InvokeUnsafeAsync()
@@ -88,10 +87,10 @@ namespace Firestorm.Endpoints.Start
 
             Feedback feedback = await _endpoint.UnsafeAsync(method, postBody);
 
-            foreach (IResponseBuilder builder in _builders)
-            {
-                await builder.AddFeedbackAsync(_requestHandler, feedback);
-            }
+            var response = new Response(_requestHandler.ResourcePath);
+            _responseBuilder.AddFeedback(response, feedback);
+
+            await ResponseUtility.WriteResponseAsync(_requestHandler, response);
         }
     }
 }

@@ -4,6 +4,7 @@ using Firestorm.Core.Web;
 using Firestorm.Endpoints.Formatting;
 using Firestorm.Endpoints.Formatting.Json;
 using Firestorm.Endpoints.Preconditions;
+using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Start;
 using Microsoft.Owin;
 

@@ -20,7 +20,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         [Fact]
         public void SuccessBoolean_ResourceResponse_HasWrappedInput()
         {
-            var generator = new SuccessBooleanResponseContentGenerator();
+            var generator = new SuccessBooleanResponseBuilder();
             generator.WrapResourceObject = true;
             TestGeneratorForResource(generator, true);
         }
@@ -28,7 +28,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         [Fact]
         public void StatusCode_ResourceResponse_HasWrappedInput()
         {
-            var generator = new StatusCodeResponseContentGenerator();
+            var generator = new StatusCodeResponseBuilder();
             generator.WrapResourceObject = true;
             TestGeneratorForResource(generator, true);
         }
@@ -36,19 +36,20 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         [Fact]
         public void StatusCode_ResourceResponse_HasSameAsInput()
         {
-            var generator = new StatusCodeResponseContentGenerator();
+            var generator = new StatusCodeResponseBuilder();
             generator.WrapResourceObject = false;
             TestGeneratorForResource(generator, false);
         }
 
-        private void TestGeneratorForResource(IResponseContentGenerator generator, bool wrapsObject)
+        private void TestGeneratorForResource(IResponseBuilder builder, bool wrapsObject)
         {
             var itemData = new RestItemData();
             _fixture.AddManyTo(itemData, 10);
 
-            var result = generator.GetFromResource(new ItemBody(itemData));
+            var response = new Response(null);
+            builder.AddResource(response, new ItemBody(itemData));
 
-            var generatedItemData = new RestItemData(result);
+            var generatedItemData = new RestItemData(response.Body);
 
             if (wrapsObject)
                 generatedItemData = new RestItemData(generatedItemData["resource"]);

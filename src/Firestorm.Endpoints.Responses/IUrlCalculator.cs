@@ -1,4 +1,4 @@
-namespace Firestorm.Endpoints.Start
+namespace Firestorm.Endpoints.Responses
 {
     internal interface IUrlCalculator
     {

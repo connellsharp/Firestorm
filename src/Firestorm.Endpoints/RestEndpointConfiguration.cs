@@ -22,7 +22,7 @@ namespace Firestorm.Endpoints
         /// <summary>
         /// Gets the objects to return in the response body from the return values from <see cref="IRestEndpoint"/> implementations.
         /// </summary>
-        public IResponseContentGenerator ResponseContentGenerator { get; set; } = new DirectResponseContentGenerator();
+        public IResponseContentGenerator ResponseContentGenerator { get; set; }
 
         /// <summary>
         /// The configuration used to build the <see cref="QueryStringCollectionQuery"/> from a requested query string.

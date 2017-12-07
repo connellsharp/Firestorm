@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using Firestorm.Core.Web;
 
-namespace Firestorm.Endpoints.Start
+namespace Firestorm.Endpoints.Responses
 {
-    public class LinkHeaderBuilder
+    internal class LinkHeaderBuilder
     {
         private readonly Dictionary<string, string> _links = new Dictionary<string, string>();
         private readonly IUrlCalculator _urlCalculator;
@@ -27,12 +26,12 @@ namespace Firestorm.Endpoints.Start
                 _links.Add("prev", _urlCalculator.GetPageUrl(pageLinks.Previous));
         }
 
-        public void SetHeaders(IHttpRequestHandler requestHandler)
+        public void SetHeaders(Response response)
         {
-            string headerValue = GetHeaderValue(requestHandler.ResourcePath);
+            string headerValue = GetHeaderValue(response.ResourcePath);
 
             if (headerValue != null)
-                requestHandler.SetResponseHeader("Link", headerValue);
+                response.Headers["Link"] = headerValue;
         }
 
         public string GetHeaderValue(string resourcePath)
