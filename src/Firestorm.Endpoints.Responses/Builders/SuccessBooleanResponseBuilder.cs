@@ -33,7 +33,7 @@ namespace Firestorm.Endpoints.Responses
         public void AddMultiFeedback(Response response, IEnumerable<Feedback> feedbackItems)
         {
             var looper = new MultiFeedbackLooper(this);
-            response.Body = feedbackItems.Select(looper.GetBodyFromFeedback);
+            response.ResourceBody = feedbackItems.Select(looper.GetBodyFromFeedback);
         }
 
         public void AddOptions(Response response, Options options)

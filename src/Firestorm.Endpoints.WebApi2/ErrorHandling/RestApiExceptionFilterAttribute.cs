@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Web.Http.Filters;
 using Firestorm.Core.Web;
 using Firestorm.Endpoints.Responses;
+using Firestorm.Endpoints.Start;
 
 namespace Firestorm.Endpoints.WebApi2.ErrorHandling
 {
@@ -19,7 +20,7 @@ namespace Firestorm.Endpoints.WebApi2.ErrorHandling
             var response = new Response(controller.ResourcePath);
             controller.ResponseBuilder.AddError(response, exceptionInfo);
 
-            context.Response = context.Request.CreateResponse(response.StatusCode, response.Body);
+            context.Response = context.Request.CreateResponse(response.StatusCode, response.GetFullBody());
         }
     }
 }

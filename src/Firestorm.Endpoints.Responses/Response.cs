@@ -16,8 +16,8 @@ namespace Firestorm.Endpoints.Responses
 
         public Dictionary<string, string> Headers { get; } = new Dictionary<string, string>();
 
-        public RestItemData ExtraBody { get; } = new RestItemData();
+        public object ResourceBody { get; set; }
 
-        public object Body { get; set; }
+        public RestItemData ExtraBody { get; } = new RestItemData();
     }
 }

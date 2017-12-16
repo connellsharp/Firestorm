@@ -8,10 +8,10 @@ namespace Firestorm.Endpoints.Start
         public static object GetFullBody(this Response response)
         {
             if (response.ExtraBody.Count == 0)
-                return response.Body;
+                return response.ResourceBody;
 
-            if (response.Body != null)
-                response.ExtraBody.Add("resource", response.Body);
+            if (response.ResourceBody != null)
+                response.ExtraBody.Add("resource", response.ResourceBody);
 
             return response.ExtraBody;
         }

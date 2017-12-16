@@ -8,7 +8,7 @@ namespace Firestorm.Endpoints.Responses
     {
         public void AddResource(Response response, ResourceBody resourceBody)
         {
-            response.Body = resourceBody.GetObject();
+            response.ResourceBody = resourceBody.GetObject();
         }
 
         public void AddOptions(Response response, Options options)

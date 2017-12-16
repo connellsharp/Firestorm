@@ -57,6 +57,7 @@ namespace Firestorm.Tests.Integration.Http.Base.Tests
             string json = await response.Content.ReadAsStringAsync();
             dynamic obj = JsonConvert.DeserializeObject(json);
 
+            Assert.NotNull(obj);
             Assert.Equal("item_with_identifier_not_found", (string)obj.error);
         }
 
@@ -69,6 +70,7 @@ namespace Firestorm.Tests.Integration.Http.Base.Tests
             string json = await response.Content.ReadAsStringAsync();
             dynamic obj = JsonConvert.DeserializeObject(json);
 
+            Assert.NotNull(obj);
             Assert.Equal("field_not_found", (string)obj.error);
         }
 

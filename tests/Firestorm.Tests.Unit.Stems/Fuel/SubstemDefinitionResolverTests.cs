@@ -49,7 +49,7 @@ namespace Firestorm.Tests.Unit.Stems.Fuel
             //var reader = implementations.ReaderFactories.First().Value.Get(null);
 
             //var body = reader.GetSelectExpression(nameExpr.Parameters[0]);
-            //Assert.Equal(nameExpr.Body, body);
+            //Assert.Equal(nameExpr.ResourceBody, body);
         }
 
         [Fact]

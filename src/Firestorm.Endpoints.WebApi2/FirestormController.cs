@@ -51,7 +51,7 @@ namespace Firestorm.Endpoints.WebApi2
 
             var response = new Response(ResourcePath);
             ResponseBuilder.AddResource(response, resourceBody);
-            return response.Body; // TODO headers?
+            return response.ResourceBody; // TODO headers?
         }
 
         [HttpOptions]
@@ -61,7 +61,7 @@ namespace Firestorm.Endpoints.WebApi2
 
             var response = new Response(ResourcePath);
             ResponseBuilder.AddOptions(response, options);
-            return response.Body; // TODO headers?
+            return response.ResourceBody; // TODO headers?
         }
 
         [HttpPost]
