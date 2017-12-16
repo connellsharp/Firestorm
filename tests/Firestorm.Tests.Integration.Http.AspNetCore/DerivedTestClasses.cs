@@ -5,9 +5,9 @@ using Xunit;
 namespace Firestorm.Tests.Integration.Http.AspNetCore
 {
     [UsedImplicitly]
-    public class BasicIntegrationTests : BasicIntegrationTestsBase, IClassFixture<NetCoreIntegrationSuite>
+    public class AspNetCoreBasicIntegrationTests : BasicIntegrationTestsBase, IClassFixture<NetCoreIntegrationSuite>
     {
-        public BasicIntegrationTests(NetCoreIntegrationSuite integrationSuite)
+        public AspNetCoreBasicIntegrationTests(NetCoreIntegrationSuite integrationSuite)
             : base(integrationSuite)
         { }
     }

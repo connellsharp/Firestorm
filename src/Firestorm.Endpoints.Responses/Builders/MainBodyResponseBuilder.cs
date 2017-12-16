@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Net;
 using Firestorm.Core.Web;
 using Firestorm.Core.Web.Options;
 
@@ -8,7 +9,12 @@ namespace Firestorm.Endpoints.Responses
     {
         public void AddResource(Response response, ResourceBody resourceBody)
         {
-            response.ResourceBody = resourceBody.GetObject();
+            object obj = resourceBody.GetObject();
+
+            response.ResourceBody = obj;
+            response.StatusCode = obj != null ? HttpStatusCode.OK : HttpStatusCode.NoContent;
+
+            // TODO: take move NoContent because there may be content added later in ExtraBody
         }
 
         public void AddOptions(Response response, Options options)

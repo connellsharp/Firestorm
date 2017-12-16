@@ -11,7 +11,6 @@ namespace Firestorm.Endpoints.Responses
     {
         public void AddResource(Response response, ResourceBody resourceBody)
         {
-            // TODO HttpStatusCode.NoContent ?
         }
 
         public void AddOptions(Response response, Options options)
