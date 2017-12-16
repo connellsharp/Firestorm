@@ -13,7 +13,6 @@ namespace Firestorm.Endpoints.Responses
             _list = new List<IResponseBuilder>
             {
                 new MainBodyResponseBuilder(),
-                new PaginationHeadersResponseBuilder(),
                 new FeedbackResponseHeadersBuilder(),
                 new ErrorResponseBuilder()
             };
@@ -43,6 +42,12 @@ namespace Firestorm.Endpoints.Responses
 
             if(responseConfiguruation.ShowDeveloperErrors)
                 _list.Add(new DeveloperExceptionInfoResponseBuilder());
+
+            if(responseConfiguruation.PageConfiguration.UseLinkHeaders)
+                _list.Add(new PaginationHeadersResponseBuilder());
+
+            if(responseConfiguruation.PageConfiguration.WrapCollectionResponseBody)
+                _list.Add(new PagedBodyResponseBuilder());
         }
 
         public IEnumerator<IResponseBuilder> GetEnumerator()
