@@ -21,8 +21,11 @@ namespace Firestorm.Endpoints.Start
             if (configuration.EndpointConfiguration.RequestStrategies == null)
                 throw new FirestormConfigurationException("EndpointConfiguration.RequestStrategies cannot be null.");
 
-            if (configuration.EndpointConfiguration.ResponseContentGenerator == null)
-                throw new FirestormConfigurationException("EndpointConfiguration.ResponseContentGenerator cannot be null.");
+            if (configuration.EndpointConfiguration.ResponseConfiguration == null)
+                throw new FirestormConfigurationException("EndpointConfiguration.ResponseConfiguration cannot be null.");
+
+            if (configuration.EndpointConfiguration.ResponseConfiguration.PageConfiguration == null)
+                throw new FirestormConfigurationException("EndpointConfiguration.PageConfiguration cannot be null.");
         }
     }
 }

@@ -67,14 +67,14 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
         }
 
         [Fact]
-        public void EnsureValid_NullResponseContentGenerator_Throws()
+        public void EnsureValid_NullResponseConfiguration_Throws()
         {
             var config = new FirestormConfiguration
             {
                 StartResourceFactory = new SingletonStartResourceFactory(null),
                 EndpointConfiguration = new RestEndpointConfiguration
                 {
-                    ResponseContentGenerator = null
+                    ResponseConfiguration = null
                 }
             };
 

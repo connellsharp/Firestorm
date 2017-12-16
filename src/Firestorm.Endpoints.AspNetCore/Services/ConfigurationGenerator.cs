@@ -56,7 +56,7 @@ namespace Firestorm.Endpoints.AspNetCore
                 EndpointConfiguration = new RestEndpointConfiguration
                 {
                     QueryStringConfiguration = _services.GetService<CollectionQueryStringConfiguration>(),
-                    ResponseContentGenerator = _services.GetService<IResponseContentGenerator>(),
+                    ResponseConfiguration = _services.GetService<ResponseConfiguruation>(),
                     RequestStrategies = _services.GetService<UnsafeRequestStrategySets>(),
                 }
             };

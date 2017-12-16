@@ -3,6 +3,7 @@ using AutoFixture;
 using AutoFixture.AutoMoq;
 using Firestorm.Core.Web;
 using Firestorm.Endpoints.Responses;
+using Firestorm.Endpoints.Start;
 using Xunit;
 
 namespace Firestorm.Tests.Unit.Endpoints.Responses
@@ -46,10 +47,13 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
             var itemData = new RestItemData();
             _fixture.AddManyTo(itemData, 10);
 
-            var response = new Response(null);
-            builder.AddResource(response, new ItemBody(itemData));
+            var aggBuilder = new AggregateResponseBuilder(new MainBodyResponseBuilder(), builder);
 
-            var generatedItemData = new RestItemData(response.Body);
+            var response = new Response(null);
+            var resourceBody = new ItemBody(itemData);
+            aggBuilder.AddResource(response, resourceBody);
+
+            var generatedItemData = new RestItemData(response.GetFullBody());
 
             if (wrapsObject)
                 generatedItemData = new RestItemData(generatedItemData["resource"]);

@@ -1,23 +1,10 @@
-﻿using System.Threading.Tasks;
-using Firestorm.Core.Web;
+﻿using Firestorm.Core.Web;
 using Firestorm.Endpoints.Responses;
 
 namespace Firestorm.Endpoints.Start
 {
     public static class ResponseUtility
     {
-        internal static Task WriteResponseAsync(IHttpRequestHandler requestHandler, Response response)
-        {
-            requestHandler.SetStatusCode(response.StatusCode);
-
-            foreach (var header in response.Headers)
-            {
-                requestHandler.SetResponseHeader(header.Key, header.Value);
-            }
-
-            return requestHandler.SetResponseBodyAsync(response.GetFullBody());
-        }
-
         public static object GetFullBody(this Response response)
         {
             if (response.ExtraBody.Count == 0)

@@ -12,14 +12,14 @@ namespace Firestorm.Endpoints.Start
     /// </summary>
     internal class EndpointInvoker
     {
-        private readonly IResponseBuilder _responseBuilder;
         private readonly IHttpRequestHandler _requestHandler;
         private readonly IRestEndpoint _endpoint;
+        private readonly ResponseWriter _responseWriter;
 
         public EndpointInvoker(IResponseBuilder responseBuilder, IHttpRequestHandler requestHandler, IRestEndpoint endpoint)
         {
-            _responseBuilder = responseBuilder;
             _requestHandler = requestHandler;
+            _responseWriter = new ResponseWriter(_requestHandler, responseBuilder);
             _endpoint = endpoint;
         }
 
@@ -58,20 +58,16 @@ namespace Firestorm.Endpoints.Start
 
             ResourceBody resourceBody = await _endpoint.GetAsync();
 
-            var response = new Response(_requestHandler.ResourcePath);
-            _responseBuilder.AddResource(response, resourceBody);
-
-            await ResponseUtility.WriteResponseAsync(_requestHandler, response);
+            _responseWriter.AddResource(resourceBody);
+            await _responseWriter.WriteAsync();
         }
 
         private async Task InvokeOptionsAsync()
         {
             Options options = await _endpoint.OptionsAsync();
 
-            var response = new Response(_requestHandler.ResourcePath);
-            _responseBuilder.AddOptions(response, options);
-
-            await ResponseUtility.WriteResponseAsync(_requestHandler, response);
+            _responseWriter.AddOptions(options);
+            await _responseWriter.WriteAsync();
         }
 
         private async Task InvokeUnsafeAsync()
@@ -87,10 +83,8 @@ namespace Firestorm.Endpoints.Start
 
             Feedback feedback = await _endpoint.UnsafeAsync(method, postBody);
 
-            var response = new Response(_requestHandler.ResourcePath);
-            _responseBuilder.AddFeedback(response, feedback);
-
-            await ResponseUtility.WriteResponseAsync(_requestHandler, response);
+            _responseWriter.AddFeedback(feedback);
+            await _responseWriter.WriteAsync();
         }
     }
 }

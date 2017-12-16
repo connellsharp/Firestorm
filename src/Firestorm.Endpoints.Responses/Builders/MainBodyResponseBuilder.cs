@@ -4,7 +4,7 @@ using Firestorm.Core.Web.Options;
 
 namespace Firestorm.Endpoints.Responses
 {
-    public class DirectResponseBuilder : IResponseBuilder
+    public class MainBodyResponseBuilder : IResponseBuilder
     {
         public void AddResource(Response response, ResourceBody resourceBody)
         {
@@ -13,7 +13,7 @@ namespace Firestorm.Endpoints.Responses
 
         public void AddOptions(Response response, Options options)
         {
-            throw new System.NotImplementedException();
+            throw new System.NotImplementedException("Options response not implemented");
         }
 
         public void AddAcknowledgment(Response response, Acknowledgment acknowledgment)

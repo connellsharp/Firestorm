@@ -48,7 +48,7 @@ namespace Firestorm.Endpoints
 
             RestCollectionData collectionData = await Collection.QueryDataAsync(query);
 
-            var linkCalculator = new PageLinkCalculator(Context.Configuration.PageConfiguration, query.PageInstruction, collectionData.PageDetails);
+            var linkCalculator = new PageLinkCalculator(Context.Configuration.ResponseConfiguration.PageConfiguration, query.PageInstruction, collectionData.PageDetails);
             PageLinks pageLinks = linkCalculator.Calculate();
 
             return new CollectionBody(collectionData.Items, pageLinks);

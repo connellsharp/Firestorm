@@ -17,7 +17,7 @@ namespace Firestorm.Endpoints.Start
             _configuration = configuration;
             _requestHandler = requestHandler;
 
-            _builder = new AggregateResponseBuilder(new DefaultResponseBuilders(configuration.EndpointConfiguration));
+            _builder = new AggregateResponseBuilder(new DefaultResponseBuilders(configuration.EndpointConfiguration.ResponseConfiguration));
         }
         
         /// <summary>
@@ -51,12 +51,9 @@ namespace Firestorm.Endpoints.Start
         {
             var errorInfo = new ExceptionErrorInfo(ex);
 
-            _requestHandler.SetStatusCode((HttpStatusCode) errorInfo.ErrorStatus);
-
-            // TODO: to responseBuilder?
-            RestEndpointConfiguration endpointConfig = _configuration.EndpointConfiguration;
-            object responseBody = endpointConfig.ResponseContentGenerator.GetFromError(errorInfo, endpointConfig.ShowDeveloperErrors);
-            await _requestHandler.SetResponseBodyAsync(responseBody);
+            var writer = new ResponseWriter(_requestHandler, _builder);
+            writer.AddError(errorInfo);
+            await writer.WriteAsync();
         }
     }
 }

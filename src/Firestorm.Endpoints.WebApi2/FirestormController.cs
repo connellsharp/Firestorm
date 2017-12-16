@@ -12,6 +12,13 @@ using Firestorm.Endpoints.WebApi2.ErrorHandling;
 
 namespace Firestorm.Endpoints.WebApi2
 {
+    /// <summary>
+    /// The Firestorm Web API Controller for ASP.NET Web API 2.0.
+    /// </summary>
+    /// <remarks>
+    /// This has evolved and uses some middlewarey-type stuff that's designed more around OWIN and ASP.NET Core.
+    /// Likely, this will be obsolete soon.
+    /// </remarks>
     [RestApiExceptionFilter]
     public class FirestormController : ApiController
     {
@@ -25,9 +32,12 @@ namespace Firestorm.Endpoints.WebApi2
         private FirestormController(FirestormConfiguration configuration)
         {
             Config = configuration;
+            ResponseBuilder = new AggregateResponseBuilder(new DefaultResponseBuilders(Config.EndpointConfiguration.ResponseConfiguration));
         }
 
         internal FirestormConfiguration Config { get; }
+
+        internal IResponseBuilder ResponseBuilder { get; }
 
         [HttpGet]
         public async Task<object> GetAsync()
@@ -39,22 +49,19 @@ namespace Firestorm.Endpoints.WebApi2
 
             ResourceBody resourceBody = await endpoint.GetAsync();
 
-            // TODO support pagination via LinkHeaderBuilder ?
-            //if (resourceBody is IPagedResourceBody pagedResourceBody)
-            //{
-            //    var builder = new LinkHeaderBuilder();
-            //    builder.AddDetails(pagedResourceBody.PageDetails);
-            //    builder.GetHeaderValue();
-            //}
-
-            return Config.EndpointConfiguration.ResponseContentGenerator.GetFromResource(resourceBody);
+            var response = new Response(ResourcePath);
+            ResponseBuilder.AddResource(response, resourceBody);
+            return response.Body; // TODO headers?
         }
 
         [HttpOptions]
         public async Task<object> OptionsAsync()
         {
             Options options = await GetEndpoint().OptionsAsync();
-            return Config.EndpointConfiguration.ResponseContentGenerator.GetFromOptions(options);
+
+            var response = new Response(ResourcePath);
+            ResponseBuilder.AddOptions(response, options);
+            return response.Body; // TODO headers?
         }
 
         [HttpPost]
@@ -100,8 +107,7 @@ namespace Firestorm.Endpoints.WebApi2
         private IHttpActionResult GetResultFromFeedback(Feedback feedback)
         {
             var response = new Response(ResourcePath);
-            var responseBuilder = new AggregateResponseBuilder(new DefaultResponseBuilders(Config.EndpointConfiguration));
-            responseBuilder.AddFeedback(response, feedback);
+            ResponseBuilder.AddFeedback(response, feedback);
 
             object responseBody = response.GetFullBody();
 
@@ -128,7 +134,7 @@ namespace Firestorm.Endpoints.WebApi2
 
         protected IRestEndpointContext Context { get; private set; }
 
-        protected string ResourcePath
+        protected internal string ResourcePath
         {
             get { return (string) ControllerContext.RouteData.Values["path"]; }
         }

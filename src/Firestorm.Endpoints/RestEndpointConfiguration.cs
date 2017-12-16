@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Firestorm.Endpoints.Pagination;
 using Firestorm.Endpoints.Query;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Strategies;
@@ -14,17 +11,6 @@ namespace Firestorm.Endpoints
     public class RestEndpointConfiguration
     {
         /// <summary>
-        /// Set to true to enable details exception messages in the error responses.
-        /// This should not be used in production.
-        /// </summary>
-        public bool ShowDeveloperErrors { get; set; } = false;
-
-        /// <summary>
-        /// Gets the objects to return in the response body from the return values from <see cref="IRestEndpoint"/> implementations.
-        /// </summary>
-        public IResponseContentGenerator ResponseContentGenerator { get; set; }
-
-        /// <summary>
         /// The configuration used to build the <see cref="QueryStringCollectionQuery"/> from a requested query string.
         /// </summary>
         public CollectionQueryStringConfiguration QueryStringConfiguration { get; set; } = new CollectionQueryStringConfiguration();
@@ -35,8 +21,9 @@ namespace Firestorm.Endpoints
         public UnsafeRequestStrategySets RequestStrategies { get; set; } = new UnsafeRequestStrategySets();
 
         /// <summary>
-        /// The system-wide configuration defining how pagination can work.
+        /// The options used to build the responses to return to the client.
         /// </summary>
-        public PageConfiguration PageConfiguration { get; set; } = new PageConfiguration();
+        public ResponseConfiguruation ResponseConfiguration { get; set; } = new ResponseConfiguruation();
+
     }
 }

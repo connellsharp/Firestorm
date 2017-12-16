@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,17 +8,40 @@ namespace Firestorm.Endpoints.Responses
     {
         private readonly List<IResponseBuilder> _list;
 
-        public DefaultResponseBuilders(RestEndpointConfiguration endpointConfiguration)
+        public DefaultResponseBuilders(ResponseConfiguruation responseConfiguruation)
         {
             _list = new List<IResponseBuilder>
             {
-                new DirectResponseBuilder(),
+                new MainBodyResponseBuilder(),
                 new PaginationHeadersResponseBuilder(),
                 new FeedbackResponseHeadersBuilder(),
                 new ErrorResponseBuilder()
             };
 
-            if(endpointConfiguration.ShowDeveloperErrors)
+            switch (responseConfiguruation.StatusField)
+            {
+                case ResponseStatusField.None:
+                    break;
+
+                case ResponseStatusField.StatusCode:
+                    _list.Add(new StatusCodeResponseBuilder
+                    {
+                        WrapResourceObject = responseConfiguruation.WrapResourceObject
+                    });
+                    break;
+
+                case ResponseStatusField.SuccessBoolean:
+                    _list.Add(new SuccessBooleanResponseBuilder
+                    {
+                        WrapResourceObject = responseConfiguruation.WrapResourceObject
+                    });
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(responseConfiguruation.StatusField), "Given StatusField in the response config is invalid.");
+            }
+
+            if(responseConfiguruation.ShowDeveloperErrors)
                 _list.Add(new DeveloperExceptionInfoResponseBuilder());
         }
 
