@@ -17,7 +17,7 @@ namespace Firestorm.Endpoints.WebApi2.ErrorHandling
             
             var exceptionInfo = new ExceptionErrorInfo(context.Exception);
 
-            var response = new Response(controller.ResourcePath);
+            Response response = controller.CreateResponse();
             controller.ResponseBuilder.AddError(response, exceptionInfo);
 
             context.Response = context.Request.CreateResponse(response.StatusCode, response.GetFullBody());

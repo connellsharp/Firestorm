@@ -49,7 +49,7 @@ namespace Firestorm.Endpoints.WebApi2
 
             ResourceBody resourceBody = await endpoint.GetAsync();
 
-            var response = new Response(ResourcePath);
+            Response response = CreateResponse();
             ResponseBuilder.AddResource(response, resourceBody);
             return response.ResourceBody; // TODO headers?
         }
@@ -59,7 +59,7 @@ namespace Firestorm.Endpoints.WebApi2
         {
             Options options = await GetEndpoint().OptionsAsync();
 
-            var response = new Response(ResourcePath);
+            Response response = CreateResponse();
             ResponseBuilder.AddOptions(response, options);
             return response.ResourceBody; // TODO headers?
         }
@@ -106,7 +106,7 @@ namespace Firestorm.Endpoints.WebApi2
 
         private IHttpActionResult GetResultFromFeedback(Feedback feedback)
         {
-            var response = new Response(ResourcePath);
+            Response response = CreateResponse();
             ResponseBuilder.AddFeedback(response, feedback);
 
             object responseBody = response.GetFullBody();
@@ -126,22 +126,27 @@ namespace Firestorm.Endpoints.WebApi2
             return Content(response.StatusCode, responseBody);
         }
 
-        private IRestEndpoint GetEndpoint()
+        private string ResourcePath
         {
-            Context = new HttpRequestRestEndpointContext(RequestContext, Request, Config.EndpointConfiguration);
-            return StartUtilities.GetEndpointFromPath(Config.StartResourceFactory, Context, ResourcePath);
+            get { return (string)ControllerContext.RouteData.Values["path"]; }
         }
 
-        protected IRestEndpointContext Context { get; private set; }
-
-        protected internal string ResourcePath
+        public Response CreateResponse()
         {
-            get { return (string) ControllerContext.RouteData.Values["path"]; }
+            return new Response(ResourcePath);
+        }
+
+        private IRestEndpointContext _context;
+
+        private IRestEndpoint GetEndpoint()
+        {
+            _context = new HttpRequestRestEndpointContext(RequestContext, Request, Config.EndpointConfiguration);
+            return StartUtilities.GetEndpointFromPath(Config.StartResourceFactory, _context, ResourcePath);
         }
 
         protected override void Dispose(bool disposing)
         {
-            Context?.Dispose();
+            _context?.Dispose();
             base.Dispose(disposing);
         }
     }
