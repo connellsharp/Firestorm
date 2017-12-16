@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Firestorm.Core.Web;
 
@@ -11,6 +12,11 @@ namespace Firestorm.Endpoints.Responses
         public MultiFeedbackLooper(IResponseBuilder builder)
         {
             _builder = builder;
+        }
+
+        public object GetBodyFromMultiFeedback(IEnumerable<Feedback> feedbackItems)
+        {
+            return feedbackItems.Select(GetBodyFromFeedback);
         }
 
         public object GetBodyFromFeedback(Feedback feedback)

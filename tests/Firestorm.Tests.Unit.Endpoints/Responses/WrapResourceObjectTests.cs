@@ -8,11 +8,11 @@ using Xunit;
 
 namespace Firestorm.Tests.Unit.Endpoints.Responses
 {
-    public class ResponseContentGeneratorTests
+    public class WrapResourceObjectTests
     {
         private readonly Fixture _fixture;
 
-        public ResponseContentGeneratorTests()
+        public WrapResourceObjectTests()
         {
             _fixture = new Fixture();
             _fixture.Customize(new AutoConfiguredMoqCustomization());
@@ -24,6 +24,14 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
             var generator = new SuccessBooleanResponseBuilder();
             generator.WrapResourceObject = true;
             TestGeneratorForResource(generator, true);
+        }
+
+        [Fact]
+        public void SuccessBoolean_ResourceResponse_HasSameAsInput()
+        {
+            var generator = new SuccessBooleanResponseBuilder();
+            generator.WrapResourceObject = false;
+            TestGeneratorForResource(generator, false);
         }
 
         [Fact]
@@ -44,14 +52,11 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
 
         private void TestGeneratorForResource(IResponseBuilder builder, bool wrapsObject)
         {
-            var itemData = new RestItemData();
-            _fixture.AddManyTo(itemData, 10);
-
             var aggBuilder = new AggregateResponseBuilder(new MainBodyResponseBuilder(), builder);
 
             var response = new Response(null);
-            var resourceBody = new ItemBody(itemData);
-            aggBuilder.AddResource(response, resourceBody);
+
+            RestItemData itemData = CreateAndAddResponseContent(aggBuilder, response);
 
             var generatedItemData = new RestItemData(response.GetFullBody());
 
@@ -59,6 +64,15 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
                 generatedItemData = new RestItemData(generatedItemData["resource"]);
 
             Assert.Equal(itemData, generatedItemData, new ItemDataComparer());
+        }
+
+        private RestItemData CreateAndAddResponseContent(IResponseBuilder builder, Response response)
+        {
+            var itemData = new RestItemData();
+            _fixture.AddManyTo(itemData, 10);
+            var resourceBody = new ItemBody(itemData);
+            builder.AddResource(response, resourceBody);
+            return itemData;
         }
 
         private class ItemDataComparer : IEqualityComparer<RestItemData>
