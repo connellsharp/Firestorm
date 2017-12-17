@@ -25,6 +25,9 @@ namespace Firestorm.Tests.Functionality.Fluent
             {
                 i.RootName = "teams";
 
+                i.Field(t => t.Name)
+                    .HasName("name");
+
                 i.Field(t => t.Division)
                     .HasName("division");
 

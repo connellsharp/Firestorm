@@ -7,7 +7,7 @@ namespace Firestorm.Fluent
     public static class ApiBuilderExtensions
     {
         public static IApiBuilder Item<TItem>(this IApiBuilder builder, [NotNull] Action<IApiItemBuilder<TItem>> buildAction)
-            where TItem : class
+            where TItem : class, new()
         {
             buildAction(builder.Item<TItem>());
             return builder;

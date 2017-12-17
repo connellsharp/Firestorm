@@ -5,7 +5,7 @@ using Firestorm.Fluent.Fuel.Models;
 namespace Firestorm.Fluent.Fuel.Builder
 {
     internal class EngineItemBuilder<TItem> : IApiItemBuilder<TItem>
-        where TItem : class
+        where TItem : class, new()
     {
         private readonly ApiItemModel<TItem> _model;
 

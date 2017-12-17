@@ -18,7 +18,7 @@ namespace Firestorm.Fluent.Start
 
         public void Initialize()
         {
-            var engineModel = new EngineApiModel();
+            var engineModel = new EngineApiModel(DataSource);
             var builder = new EngineApiBuilder(engineModel);
 
             var sourceCreator = new SourceCreator();

@@ -14,9 +14,9 @@ namespace Firestorm.Fluent.Fuel.Builder
         public EngineApiModel Model { get; set; }
 
         public virtual IApiItemBuilder<TItem> Item<TItem>()
-            where TItem : class
+            where TItem : class, new()
         {
-            var itemModel = new ApiItemModel<TItem>();
+            var itemModel = new ApiItemModel<TItem>(Model.DataSource);
             var itemBuilder = new EngineItemBuilder<TItem>(itemModel);
             Model.Items.Add(itemModel);
             return itemBuilder;

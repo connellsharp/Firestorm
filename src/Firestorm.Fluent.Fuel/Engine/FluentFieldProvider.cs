@@ -20,7 +20,9 @@ namespace Firestorm.Fluent.Fuel.Engine
 
         public IEnumerable<string> GetDefaultNames(int nestedBy)
         {
-            throw new NotImplementedException();
+            // TODO share Display enum functionality from Stems? And show nestedBy > x ?
+
+            return _fieldModels.Keys;
         }
 
         public bool FieldExists(string fieldName)
