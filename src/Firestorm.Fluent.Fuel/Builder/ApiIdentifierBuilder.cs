@@ -15,9 +15,15 @@ namespace Firestorm.Fluent.Fuel.Builder
             _identifierModel = identifierModel;
         }
 
-        public void AddExpresion(Expression<Func<TItem, TIdentifier>> expression)
+        public void AddExpression(Expression<Func<TItem, TIdentifier>> expression)
         {
             _identifierModel.IdentifierInfo = new ExpressionIdentifierInfo<TItem, TIdentifier>(expression);
+        }
+
+        public IApiIdentifierBuilder<TItem, TIdentifier> HasName(string identifierName)
+        {
+            _identifierModel.Name = identifierName;
+            return this;
         }
     }
 }

@@ -6,6 +6,6 @@
     }
     public interface IApiIdentifierBuilder<TItem, TIdentifier> : IApiIdentifierBuilder<TItem>
     {
-
+        IApiIdentifierBuilder<TItem, TIdentifier> HasName(string identifierName);
     }
 }

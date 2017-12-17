@@ -25,7 +25,7 @@ namespace Firestorm.Fluent.Fuel.Builder
             var identifierModel = new ApiIdentifierModel<TItem>();
 
             var identifierBuilder = new ApiIdentifierBuilder<TItem, TIdentifier>(identifierModel);
-            identifierBuilder.AddExpresion(expression);
+            identifierBuilder.AddExpression(expression);
 
             _model.Identifiers.Add(identifierModel);
             return identifierBuilder;

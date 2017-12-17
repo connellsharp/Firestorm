@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Firestorm.Engine.Additives.Identifiers;
 using Firestorm.Engine.Identifiers;
-using Firestorm.Stems.Fuel.Identifiers;
 using Moq;
 using Xunit;
 
-namespace Firestorm.Tests.Unit.Stems.Fuel
+namespace Firestorm.Tests.Unit.Engine.Additives
 {
     public class CombinedIdentifierInfoTests
     {

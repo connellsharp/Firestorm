@@ -5,13 +5,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using Firestorm.Engine.Identifiers;
 
-namespace Firestorm.Stems.Fuel.Identifiers
+namespace Firestorm.Engine.Additives.Identifiers
 {
     /// <summary>
     /// Combines several <see cref="IIdentifierInfo{TItem}"/> into one.
     /// Used when no identifier name is given.
     /// </summary>
-    internal class CombinedIdentifierInfo<TItem> : IIdentifierInfo<TItem>
+    public class CombinedIdentifierInfo<TItem> : IIdentifierInfo<TItem>
         where TItem : class
     {
         private readonly IEnumerable<IIdentifierInfo<TItem>> _infos;

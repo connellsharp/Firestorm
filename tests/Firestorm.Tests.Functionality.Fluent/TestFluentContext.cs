@@ -25,6 +25,9 @@ namespace Firestorm.Tests.Functionality.Fluent
             {
                 i.RootName = "teams";
 
+                i.Identifier(t => t.Name.Replace(" ", "").ToLower())
+                    .HasName("key");
+
                 i.Field(t => t.Name)
                     .HasName("name");
 

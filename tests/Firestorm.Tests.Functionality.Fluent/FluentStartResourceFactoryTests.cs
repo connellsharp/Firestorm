@@ -28,10 +28,7 @@ namespace Firestorm.Tests.Functionality.Fluent
                             new Player { SquadNumber = 21, Name = "David Silva", Age = 31 },
                             new Player { SquadNumber = 7, Name = "Raheem Sterling", Age = 23 }
                         }
-                    }
-                },
-                new List<Team>
-                {
+                    },
                     new Team
                     {
                         Name = "Spurs",
@@ -48,7 +45,7 @@ namespace Firestorm.Tests.Functionality.Fluent
         }
 
         [Fact]
-        public async Task GetStartResource_TestData_ReturnsTeamsData()
+        public async Task Collection_TestData_ReturnsTeamsData()
         {
             var resourceFactory = new FluentStartResourceFactory
             {
@@ -58,11 +55,33 @@ namespace Firestorm.Tests.Functionality.Fluent
 
             var startResource = resourceFactory.GetStartResource(null); // TODO we don't actually use the context yet?
             var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
+
             var teamsCollection = startDirectory.GetCollection("teams");
             var data = await teamsCollection.QueryDataAsync(null);
             string firstTeamName = (string) data.Items.First()["name"];
 
             Assert.Equal("Man City", firstTeamName);
+        }
+
+        [Fact]
+        public async Task Item_TestData_ReturnsTeamsData()
+        {
+            var resourceFactory = new FluentStartResourceFactory
+            {
+                ApiContext = new TestFluentContext(),
+                DataSource = _memoryDataSource
+            };
+
+            var startResource = resourceFactory.GetStartResource(null); // TODO we don't actually use the context yet?
+            var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
+
+            var teamsCollection = startDirectory.GetCollection("teams");
+            var item = teamsCollection.GetItem("mancity");
+            var teamData = await item.GetDataAsync(null);
+
+            string teamName = (string)teamData["name"];
+
+            Assert.Equal("Man City", teamName);
         }
     }
 }

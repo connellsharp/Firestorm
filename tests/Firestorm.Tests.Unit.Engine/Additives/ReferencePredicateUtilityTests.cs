@@ -3,10 +3,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using AutoFixture;
 using AutoFixture.AutoMoq;
-using Firestorm.Stems.Fuel.Identifiers;
+using Firestorm.Engine.Additives.Identifiers;
 using Xunit;
 
-namespace Firestorm.Tests.Unit.Stems.Fuel
+namespace Firestorm.Tests.Unit.Engine.Additives
 {
     public class ReferencePredicateUtilityTests
     {
