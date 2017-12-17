@@ -20,6 +20,9 @@ namespace Firestorm.Stems.Fuel.Identifiers
 
         private static Func<string, Expression<Func<TItem, bool>>> GetPredicateFunc(MethodInfo method)
         {
+            if(!method.IsStatic)
+                throw new StemAttributeSetupException("Identifier attribute predicate methods can only be used on static methods.");
+
             ParameterInfo[] parameters = method.GetParameters();
             if (parameters.Length != 1 || parameters[0].ParameterType != typeof(string))
                 throw new StemAttributeSetupException("Identifier attribute must be placed on methods with a single string parameter.");

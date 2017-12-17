@@ -21,6 +21,16 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         }
 
         [Fact]
+        public void AggregateResponseBuilder_EmptyMultiFeedback_Status207()
+        {
+            var response = new Response(null);
+            var builder = new AggregateResponseBuilder(new FeedbackResponseHeadersBuilder());
+            builder.AddMultiFeedback(response, new List<Feedback>());
+
+            Assert.Equal((HttpStatusCode)207, response.StatusCode);
+        }
+
+        [Fact]
         public void StatusCodeResponseBuilder_EmptyMultiFeedback_EnumerableBody()
         {
             var response = new Response(null);
