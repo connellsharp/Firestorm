@@ -11,7 +11,7 @@ namespace Firestorm.Stems.Fuel
 {
     /// <summary>
     /// Wraps a <see cref="Stem{TItem}"/> and provides API field information for the Firestorm Engine.
-    /// Basically a <see cref="AdditiveEngineContext{TItem}"/> without repository info.
+    /// Basically a <see cref="FullEngineContext{TItem}"/> without repository info.
     /// </summary>
     public class StemsEngineSubContext<TItem> : IEngineSubContext<TItem>
         where TItem : class

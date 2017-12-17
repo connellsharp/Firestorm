@@ -17,7 +17,7 @@ namespace Firestorm.Endpoints.Formatting.Json
             return ReadResourceBody(reader);
         }
 
-        public static ResourceBody ReadResourceStream(Stream stream)
+        internal static ResourceBody ReadResourceStream(Stream stream)
         {
             if (stream.CanSeek && stream.Length == 0)
                 return null;

@@ -28,7 +28,7 @@ namespace Firestorm.Engine.Subs.Handlers
             IQueryableSingle<TNav> navigationQuery = item.Query.Select(_navigationExpression).SingleDefferred();
             var navSingleRepository = new QueryableSingleRepository<TNav>(navigationQuery);
 
-            var navContext = new AdditiveEngineContext<TNav>(dataTransaction, navSingleRepository, _engineSubContext);
+            var navContext = new FullEngineContext<TNav>(dataTransaction, navSingleRepository, _engineSubContext);
 
             var itemData = new RestItemData(deserializedValue);
 

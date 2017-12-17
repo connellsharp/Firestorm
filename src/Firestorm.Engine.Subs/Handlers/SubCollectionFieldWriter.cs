@@ -30,7 +30,7 @@ namespace Firestorm.Engine.Subs.Handlers
             var navRepository = new NavigationCollectionRepository<TItem, TProperty, TNav>(item, _navigationExpression);
 
             var navLocatorCreator = new NavigationItemLocatorCreator<TNav>(_substemSubContext);
-            var navContext = new AdditiveEngineContext<TNav>(dataTransaction, navRepository, _substemSubContext);
+            var navContext = new FullEngineContext<TNav>(dataTransaction, navRepository, _substemSubContext);
 
             IEnumerable deserializedCollection = (IEnumerable) deserializedValue; // todo null ?
 

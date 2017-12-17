@@ -22,7 +22,7 @@ namespace Firestorm.Engine.Subs.Handlers
         /// <summary>
         /// Attempts to locate the item to modify using the modification request data.
         /// </summary>
-        internal async Task<DeferredItemBase<TNav>> LocateOrCreateItemAsync(AdditiveEngineContext<TNav> navContext, RestItemData itemData, Func<Task> loadParentAsync)
+        internal async Task<DeferredItemBase<TNav>> LocateOrCreateItemAsync(FullEngineContext<TNav> navContext, RestItemData itemData, Func<Task> loadParentAsync)
         {
             var locatedItem = LocateItem(navContext, itemData);
             if (locatedItem != null)
@@ -35,7 +35,7 @@ namespace Firestorm.Engine.Subs.Handlers
         /// <summary>
         /// Attempts to locate the item to modify using the modification request data.
         /// </summary>
-        internal DeferredItemBase<TNav> LocateItem(AdditiveEngineContext<TNav> navContext, RestItemData itemData)
+        internal DeferredItemBase<TNav> LocateItem(FullEngineContext<TNav> navContext, RestItemData itemData)
         {
             foreach (string fieldName in itemData.Keys)
             {

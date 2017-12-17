@@ -16,9 +16,9 @@ namespace Firestorm.Stems.Roots.Derive
         {
             var transaction = new RootDataTransaction(root);
             var repository = new RootEngineRepository<TItem>(root, stem);
-            var stemEngineInfo = new StemsEngineSubContext<TItem>(stem);
+            var subContext = new StemsEngineSubContext<TItem>(stem);
 
-            var context = new AdditiveEngineContext<TItem>(transaction, repository, stemEngineInfo);
+            var context = new FullEngineContext<TItem>(transaction, repository, subContext);
 
             return new EngineRestCollection<TItem>(context);
         }

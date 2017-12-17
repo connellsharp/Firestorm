@@ -23,7 +23,7 @@ namespace Firestorm.Endpoints.AspNetCore.Middleware
         [UsedImplicitly]
         public async Task Invoke(Microsoft.AspNetCore.Http.HttpContext httpContext)
         {
-            IHttpRequestHandler requestHandler = new HttpContextHander(httpContext);
+            IHttpRequestHandler requestHandler = new HttpContextHandler(httpContext);
             var middlewareHelper = new FirestormMiddlewareHelper(_configuration, requestHandler);
 
             var restContext = new HttpContextRestEndpointContext(httpContext, _configuration.EndpointConfiguration);

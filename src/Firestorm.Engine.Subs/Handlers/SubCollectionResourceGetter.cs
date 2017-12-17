@@ -24,7 +24,7 @@ namespace Firestorm.Engine.Subs.Handlers
         public IRestResource GetFullResource(IDeferredItem<TItem> item, IDataTransaction dataTransaction)
         {
             var navRepository = new NavigationCollectionRepository<TItem, TCollection, TNav>(item, _navigationExpression);
-            var context = new AdditiveEngineContext<TNav>(dataTransaction, navRepository, _engineSubContext);
+            var context = new FullEngineContext<TNav>(dataTransaction, navRepository, _engineSubContext);
             return new EngineRestCollection<TNav>(context);
         }
     }

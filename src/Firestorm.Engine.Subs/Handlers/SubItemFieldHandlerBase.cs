@@ -25,7 +25,7 @@ namespace Firestorm.Engine.Subs.Handlers
         {
             IQueryableSingle<TNav> navigationQuery = item.Query.Select(NavigationExpression).SingleDefferred();
             var itemRepository = new QueryableSingleRepository<TNav>(navigationQuery);
-            var context = new AdditiveEngineContext<TNav>(dataTransaction, itemRepository, EngineSubContext);
+            var context = new FullEngineContext<TNav>(dataTransaction, itemRepository, EngineSubContext);
             var deferredNavItem = new RepositoryDeferredItem<TNav>(itemRepository);
             return new EngineRestItem<TNav>(context, deferredNavItem);
         }
@@ -35,7 +35,7 @@ namespace Firestorm.Engine.Subs.Handlers
         {
             TNav navItem = NavigationExpression.Compile().Invoke(item.LoadedItem);
             var repository = new LoadedItemRepository<TNav>(navItem);
-            var context = new AdditiveEngineContext<TNav>(dataTransaction, repository, EngineSubContext);
+            var context = new FullEngineContext<TNav>(dataTransaction, repository, EngineSubContext);
             var deferredNavItem = new RepositoryDeferredItem<TNav>(context.Repository);
             return new EngineRestItem<TNav>(context, deferredNavItem);
         }

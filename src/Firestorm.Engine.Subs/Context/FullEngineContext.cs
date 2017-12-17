@@ -5,12 +5,12 @@ using JetBrains.Annotations;
 
 namespace Firestorm.Engine.Subs.Context
 {
-    public class AdditiveEngineContext<TItem> : IEngineContext<TItem>
+    public class FullEngineContext<TItem> : IEngineContext<TItem>
         where TItem : class
     {
         private readonly IEngineSubContext<TItem> _subContext;
 
-        public AdditiveEngineContext(IDataTransaction transaction, IEngineRepository<TItem> repository, [NotNull] IEngineSubContext<TItem> subContext)
+        public FullEngineContext(IDataTransaction transaction, IEngineRepository<TItem> repository, [NotNull] IEngineSubContext<TItem> subContext)
         {
             Transaction = transaction;
             Repository = repository;

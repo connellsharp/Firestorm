@@ -2,17 +2,16 @@
 using System.Threading.Tasks;
 using Firestorm.Core.Web;
 using Firestorm.Endpoints.Formatting;
-using Firestorm.Endpoints.Formatting.Json;
 using Firestorm.Endpoints.Preconditions;
 using Firestorm.Endpoints.Start;
 
 namespace Firestorm.Endpoints.AspNetCore.HttpContext
 {
-    internal class HttpContextHander : IHttpRequestHandler
+    internal class HttpContextHandler : IHttpRequestHandler
     {
         private readonly Microsoft.AspNetCore.Http.HttpContext _httpContext;
 
-        public HttpContextHander(Microsoft.AspNetCore.Http.HttpContext httpContext)
+        public HttpContextHandler(Microsoft.AspNetCore.Http.HttpContext httpContext)
         {
             _httpContext = httpContext;
         }
@@ -31,15 +30,16 @@ namespace Firestorm.Endpoints.AspNetCore.HttpContext
             return new HttpPreconditions(_httpContext.Request.Headers);
         }
 
-        public async Task SetResponseBodyAsync(object obj)
+        public Task SetResponseBodyAsync(object obj)
         {
-            var negotator = new ContentNegotiator(new HttpContentWriter(_httpContext));
-            await negotator.SetResponseBody(obj);
+            var negotiator = new ContentNegotiator(new HttpContentAccepts(), new HttpContentWriter(_httpContext));
+            return negotiator.SetResponseBodyAsync(obj);
         }
 
         public ResourceBody GetRequestBodyObject()
         {
-            return ResourceBodyJsonConverter.ReadResourceStream(_httpContext.Request.Body);
+            var reader = new ContentReader();
+            return reader.ReadResourceStream(_httpContext.Request.Body);
         }
 
         public void SetResponseHeader(string key, string value)
@@ -47,4 +47,7 @@ namespace Firestorm.Endpoints.AspNetCore.HttpContext
             _httpContext.Response.Headers[key] = value;
         }
     }
+
+    internal class HttpContentAccepts : IContentAccepts
+    { }
 }
