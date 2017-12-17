@@ -6,23 +6,15 @@ using Firestorm.Data;
 
 namespace Firestorm.Engine.Defaults
 {
-    public abstract class MemoryRepository<TItem> : IEngineRepository<TItem>
+    public class MemoryRepository<TItem> : IEngineRepository<TItem>
         where TItem : class, new()
     {
-        private List<TItem> _list;
+        private readonly List<TItem> _list;
 
-        public MemoryRepository()
+        public MemoryRepository(IEnumerable<TItem> items)
         {
-            Initialize();
+            _list = items.ToList();
         }
-
-        public void Initialize() // TODO: repo vs transaction
-        {
-            if (_list == null)
-                _list = new List<TItem>(LoadInitialRepository());
-        }
-
-        protected abstract IEnumerable<TItem> LoadInitialRepository();
 
         public Task InitializeAsync()
         {

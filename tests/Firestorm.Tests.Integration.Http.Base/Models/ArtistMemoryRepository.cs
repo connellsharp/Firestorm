@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Firestorm.Engine.Defaults;
 using Firestorm.Tests.Models;
 
@@ -8,9 +7,10 @@ namespace Firestorm.Tests.Integration.Http.Base.Models
 
     public class ArtistMemoryRepository : MemoryRepository<Artist>
     {
-        protected override IEnumerable<Artist> LoadInitialRepository()
+        public ArtistMemoryRepository()
+            :base(TestRepositories.GetArtists())
         {
-            return TestRepositories.GetArtists();
+            
         }
     }
 }

@@ -4,6 +4,8 @@ namespace Firestorm.Fluent.Fuel.Models
 {
     public interface IApiItemModel
     {
+        string RootName { get; }
+
         IRestCollectionSource GetCollectionSource();
     }
 }

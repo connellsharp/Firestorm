@@ -16,9 +16,13 @@ namespace Firestorm.Fluent.Fuel.Engine
         }
 
         public IDataTransaction Transaction { get; }
+
         public IEngineRepository<TItem> Repository { get; }
+
         public IIdentifierProvider<TItem> Identifiers { get; }
+
         public IFieldProvider<TItem> Fields { get; }
+
         public IAuthorizationChecker<TItem> AuthorizationChecker { get; }
     }
 }

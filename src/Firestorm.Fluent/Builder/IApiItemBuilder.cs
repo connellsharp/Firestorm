@@ -5,7 +5,7 @@ namespace Firestorm.Fluent
 {
     public interface IApiItemBuilder
     {
-
+        string RootName { set; }
     }
 
     public interface IApiItemBuilder<TItem> : IApiItemBuilder

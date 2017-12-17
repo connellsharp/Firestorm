@@ -14,6 +14,12 @@ namespace Firestorm.Fluent.Fuel.Builder
             _model = model;
         }
 
+        public string RootName
+        {
+            get { return _model.RootName; }
+            set { _model.RootName = value; }
+        }
+
         public IApiIdentifierBuilder<TItem, TIdentifier> Identifier<TIdentifier>(Expression<Func<TItem, TIdentifier>> expression)
         {
             var identifierModel = new ApiIdentifierModel<TItem>();
@@ -21,7 +27,7 @@ namespace Firestorm.Fluent.Fuel.Builder
             var identifierBuilder = new ApiIdentifierBuilder<TItem, TIdentifier>(identifierModel);
             identifierBuilder.AddExpresion(expression);
 
-            _model.Identifiers.Add(identifierModel.Name, identifierModel);
+            _model.Identifiers.Add(identifierModel);
             return identifierBuilder;
         }
 
@@ -32,7 +38,7 @@ namespace Firestorm.Fluent.Fuel.Builder
             var fieldBuilder = new EngineFieldBuilder<TItem, TField>(fieldModel);
             fieldBuilder.AddExpression(expression);
 
-            _model.Fields.Add(fieldModel.Name, fieldModel);
+            _model.Fields.Add(fieldModel);
             return fieldBuilder;
         }
     }
