@@ -5,25 +5,32 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Firestorm.Tests.Integration.Http.AspNetCore
 {
-    public class NetCoreIntegrationSuite : IHttpIntegrationSuite
+    public class NetCoreIntegrationSuite<TStartup> : IHttpIntegrationSuite
+        where TStartup : class
     {
+        private readonly int _portNumber;
         private IWebHost _host;
+
+        public NetCoreIntegrationSuite(int portNumber)
+        {
+            _portNumber = portNumber;
+        }
 
         public void Start()
         {
-            const string URL = "http://localhost:5000";
+            string url = "http://localhost:" + _portNumber;
 
             _host = new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls(URL)
-                .UseStartup<NetCoreIntegrationStartup>()
+                .UseUrls(url)
+                .UseStartup<TStartup>()
                 .Build();
 
             _host.Start();
 
             HttpClient = new HttpClient
             {
-                BaseAddress = new Uri(URL)
+                BaseAddress = new Uri(url)
             };
         }
 

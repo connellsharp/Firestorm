@@ -2,6 +2,7 @@
 using Firestorm.Endpoints.Start;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Firestorm.Endpoints.AspNetCore.Middleware
 {
@@ -12,7 +13,7 @@ namespace Firestorm.Endpoints.AspNetCore.Middleware
         /// </summary>
         public static IApplicationBuilder UseFirestorm(this IApplicationBuilder app)
         {
-            var config = app.GetScopedService<FirestormConfiguration>();
+            FirestormConfiguration config = LoadConfigurationAsService(app);
 
             //app.UseMiddleware<FirestormMiddleware>(); // this should mean the IoC creates a new config object.
             app.UseFirestorm(config);
@@ -29,8 +30,7 @@ namespace Firestorm.Endpoints.AspNetCore.Middleware
                 EndpointConfiguration = endpointConfiguration,
                 StartResourceFactory = app.GetScopedService<IStartResourceFactory>()
             };
-
-            //app.UseMiddleware<FirestormMiddleware>(); // this should mean the IoC creates a new config object.
+            
             app.UseFirestorm(config);
             return app;
         }
@@ -40,9 +40,9 @@ namespace Firestorm.Endpoints.AspNetCore.Middleware
         /// </summary>
         public static IApplicationBuilder UseFirestorm(this IApplicationBuilder app, Action<FirestormConfiguration> configureAction)
         {
-            var config = app.GetScopedService<FirestormConfiguration>() ?? new FirestormConfiguration();
+            FirestormConfiguration config = LoadConfigurationAsService(app);
             configureAction(config);
-            
+
             app.UseFirestorm(config);
             return app;
         }
@@ -56,6 +56,18 @@ namespace Firestorm.Endpoints.AspNetCore.Middleware
 
             app.UseMiddleware<FirestormMiddleware>(configuration);
             return app;
+        }
+
+        private static FirestormConfiguration LoadConfigurationAsService(IApplicationBuilder app)
+        {
+            var config = app.GetScopedService<FirestormConfiguration>() ??
+                         app.GetScopedService<IOptions<FirestormConfiguration>>()?.Value ??
+                         new FirestormConfiguration();
+
+            if (config.StartResourceFactory == null)
+                config.StartResourceFactory = app.GetScopedService<IStartResourceFactory>();
+
+            return config;
         }
 
         private static TService GetScopedService<TService>(this IApplicationBuilder app)

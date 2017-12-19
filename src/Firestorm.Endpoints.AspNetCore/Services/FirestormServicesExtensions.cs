@@ -11,6 +11,8 @@ namespace Firestorm.Endpoints.AspNetCore
         /// </summary>
         public static IFirestormServicesBuilder AddFirestorm(this IServiceCollection services)
         {
+            services.AddOptions();
+
             IFirestormServicesBuilder builder = new FirestormServicesBuilder(services);
             return builder;
         }

@@ -1,15 +1,18 @@
-﻿using Firestorm.Endpoints;
-using Firestorm.Endpoints.AspNetCore;
+﻿using Firestorm.Endpoints.AspNetCore;
 using Firestorm.Endpoints.AspNetCore.Middleware;
 using Firestorm.Endpoints.Start;
 using Firestorm.Tests.Integration.Http.Base;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Firestorm.Tests.Integration.Http.AspNetCore
 {
-    public class NetCoreIntegrationStartup
+    /// <summary>
+    /// A startup class with no services, all defined in the main config object.
+    /// </summary>
+    public class NetCoreOriginalConfigStartup
     {
         [UsedImplicitly]
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -18,19 +21,45 @@ namespace Firestorm.Tests.Integration.Http.AspNetCore
             {
                 StartResourceFactory = new IntegratedStartResourceFactory()
             });
+        }
+    }
 
-            if (env.IsDevelopment())
+    /// <summary>
+    /// A startup class that uses the AddFirestorm method with the configureAction to configure the options.
+    /// </summary>
+    public class NetCoreServicesOptionsStartup
+    {
+        [UsedImplicitly]
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddFirestorm(config =>
             {
-                // In Development, use the developer exception page
-                //app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                // In Staging/Production, route exceptions to /error
-                //app.UseExceptionHandler("/error");
-            }
+                config.StartResourceFactory = new IntegratedStartResourceFactory();
+            });
+        }
 
-            var contentRootPath = env.ContentRootPath;
+        [UsedImplicitly]
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            app.UseFirestorm();
+        }
+    }
+
+    /// <summary>
+    /// A startup class that configures the <see cref="IStartResourceFactory"/> independently, then simply calls UseFirestorm with no params.
+    /// </summary>
+    public class NetCoreServicesSingletonsStartup
+    {
+        [UsedImplicitly]
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddSingleton<IStartResourceFactory>(new IntegratedStartResourceFactory());
+        }
+
+        [UsedImplicitly]
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            app.UseFirestorm();
         }
     }
 }
