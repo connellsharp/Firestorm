@@ -41,7 +41,7 @@ namespace Firestorm.Endpoints.AspNetCore
         private static IFirestormServicesBuilder AddRequiredFirestormServices(this IFirestormServicesBuilder builder)
         {
             builder.Services.AddOptions();
-            //builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             return builder;
         }
     }

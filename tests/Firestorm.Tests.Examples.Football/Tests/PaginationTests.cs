@@ -33,7 +33,7 @@ namespace Firestorm.Tests.Examples.Football.Tests
 
             Assert.Contains(successObjs, sm =>
             {
-                return sm.Status == "ok";
+                return sm.Status == "created";
             });
         }
 
@@ -47,6 +47,8 @@ namespace Firestorm.Tests.Examples.Football.Tests
         public async Task PlayersCollection_PageSize1_NextInLinkHeader()
         {
             HttpResponseMessage response = await _fixture.HttpClient.GetAsync("/players?size=1");
+
+            Assert.Equal(200, (int)response.StatusCode);
 
             IEnumerable<string> linkHeaders = response.Headers.GetValues("Link");
             Assert.Equal(1, linkHeaders.Count());

@@ -27,9 +27,6 @@ namespace Firestorm.Endpoints
 
             switch (_configuration.SuggestedNavigationType)
             {
-                case PageNavigationType.SortAndFilter:
-                    throw new NotImplementedException("Not implemented next page URL for sort and filter strategy.");
-
                 case PageNavigationType.PageNumber:
                     return new PageLinks
                     {
@@ -49,6 +46,9 @@ namespace Firestorm.Endpoints
                             Size = _instruction.Size
                         }
                     };
+
+                case PageNavigationType.SortAndFilter:
+                    throw new NotImplementedException("Not implemented next page URL for sort and filter strategy.");
 
                 default:
                     throw new ArgumentOutOfRangeException();
