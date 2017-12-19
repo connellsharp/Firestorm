@@ -64,12 +64,12 @@ namespace Firestorm.Client
             }
         }
 
-        private void AppendSortOrder(QueryStringBuilder builder, IEnumerable<SortIntruction> sortIntructions)
+        private void AppendSortOrder(QueryStringBuilder builder, IEnumerable<SortIntruction> sortInstructions)
         {
-            string sortString = string.Join(_configuration.SortInstructionDelimiter.ToString(), sortIntructions.Select(delegate (SortIntruction instruction)
+            string sortString = string.Join(_configuration.SortInstructionDelimiter.ToString(), sortInstructions.Select(delegate (SortIntruction instruction)
             {
                 if (instruction.FieldName.Contains(_configuration.SelectFieldDelimiter) || instruction.FieldName.Contains(_configuration.SortModifierDelimiter))
-                    throw new ArgumentException("Cannot build sort order query value that contain a delimiter character.", nameof(sortIntructions));
+                    throw new ArgumentException("Cannot build sort order query value that contain a delimiter character.", nameof(sortInstructions));
                 
                 string sortModifierStr = _configuration.SortDirectionModifiers[instruction.Direction];
 
