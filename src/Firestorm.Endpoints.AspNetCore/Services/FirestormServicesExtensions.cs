@@ -1,5 +1,6 @@
 ﻿using System;
 using Firestorm.Endpoints.Start;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Firestorm.Endpoints.AspNetCore
@@ -11,9 +12,8 @@ namespace Firestorm.Endpoints.AspNetCore
         /// </summary>
         public static IFirestormServicesBuilder AddFirestorm(this IServiceCollection services)
         {
-            services.AddOptions();
-
             IFirestormServicesBuilder builder = new FirestormServicesBuilder(services);
+            builder.AddRequiredFirestormServices();
             return builder;
         }
 
@@ -32,6 +32,16 @@ namespace Firestorm.Endpoints.AspNetCore
         public static IFirestormServicesBuilder Configure(this IFirestormServicesBuilder builder, Action<FirestormConfiguration> configureAction)
         {
             builder.Services.Configure(configureAction);
+            return builder;
+        }
+
+        /// <summary>
+        /// Adds Firestorm services.
+        /// </summary>
+        private static IFirestormServicesBuilder AddRequiredFirestormServices(this IFirestormServicesBuilder builder)
+        {
+            builder.Services.AddOptions();
+            //builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             return builder;
         }
     }

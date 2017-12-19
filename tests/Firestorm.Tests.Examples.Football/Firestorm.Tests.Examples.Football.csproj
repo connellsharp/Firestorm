@@ -21,9 +21,5 @@
     <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.Start\Firestorm.Stems.Roots.Start.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Extensions.AspNetCore\Firestorm.Extensions.AspNetCore.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Tests\" />
-  </ItemGroup>
 
 </Project>

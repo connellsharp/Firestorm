@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using Firestorm.Data;
 using Firestorm.Endpoints;
 using Firestorm.Fluent.Sources;
 
@@ -25,7 +24,9 @@ namespace Firestorm.Fluent.Start
 
         public Task<RestDirectoryInfo> GetInfoAsync()
         {
-            throw new NotImplementedException();
+            IEnumerable<RestResourceInfo> restResourceInfos = _directorySource.GetCollectionNames().Select(name => new RestResourceInfo(name, ResourceType.Collection));
+            RestDirectoryInfo directoryInfo = new RestDirectoryInfo(restResourceInfos);
+            return Task.FromResult(directoryInfo);
         }
     }
 }
