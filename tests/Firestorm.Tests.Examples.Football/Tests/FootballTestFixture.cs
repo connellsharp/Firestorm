@@ -8,13 +8,15 @@ namespace Firestorm.Tests.Examples.Football.Tests
 {
     public class FootballTestFixture : IDisposable
     {
+        private static int _startPort = 3000;
+
         private readonly IWebHost _host;
 
         public HttpClient HttpClient { get; }
 
         public FootballTestFixture()
         {
-            var url = "http://localhost:1337";
+            var url = "http://localhost:" + _startPort++;
 
             _host = new WebHostBuilder()
                 .UseKestrel()
