@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Firestorm.Client;
 using Firestorm.Endpoints;
@@ -33,7 +34,10 @@ namespace Firestorm.Tests.Integration.Http.NetFramework.Web
 
         public Task<RestDirectoryInfo> GetInfoAsync()
         {
-            throw new System.NotImplementedException();
+            return Task.FromResult(new RestDirectoryInfo(new List<RestResourceInfo>
+            {
+                new RestResourceInfo("artists", ResourceType.Collection)
+            }));
         }
     }
 }
