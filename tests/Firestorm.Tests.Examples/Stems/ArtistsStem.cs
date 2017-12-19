@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Firestorm.Stems;
-using Firestorm.Stems.Roots.Entities;
-using Firestorm.Tests.Examples.Data;
+using Firestorm.Stems.Attributes.Basic.Attributes;
+using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Tests.Examples.Data.Models;
 
 namespace Firestorm.Tests.Examples.Stems
 {
-    [EntityRoot]
+    [DataSourceRoot]
     public class ArtistsStem : Stem<Artist>
     {
         [Identifier]
-        [Get(DisplayFor.NestedOnce)]
+        [Get(Display.Nested)]
         public static Expression<Func<Artist, int>> ID
         {
             get { return a => a.ArtistID; }

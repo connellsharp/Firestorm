@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Firestorm.Data.EntityFramework;
+﻿using Firestorm.Data.EntityFramework;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Start;
@@ -22,7 +21,10 @@ namespace Firestorm.Tests.Examples.Web
             {
                 EndpointConfiguration = new RestEndpointConfiguration
                 {
-                    ResponseContentGenerator = new StatusCodeResponseContentGenerator() // PagedBodyResponseContentGenerator
+                    ResponseConfiguration = new ResponseConfiguruation
+                    {
+                        StatusField = ResponseStatusField.StatusCode
+                    }
                 },
                 StartResourceFactory = new StemsStartResourceFactory
                 {
