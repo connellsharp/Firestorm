@@ -7,16 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0-preview-20170628-02" />
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <ProjectReference Include="..\..\src\Firestorm.Endpoints.AspNetCore\Firestorm.Endpoints.AspNetCore.csproj" />
-    <ProjectReference Include="..\Firestorm.Tests.Integration.Http.Base\Firestorm.Tests.Integration.Http.Base.csproj" />
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Attributes.Basic\Firestorm.Stems.Attributes.Basic.csproj" />
+    <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.Start\Firestorm.Stems.Roots.Start.csproj" />
+    <ProjectReference Include="..\..\src\Firestorm.Extensions.AspNetCore\Firestorm.Extensions.AspNetCore.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Tests\" />
   </ItemGroup>
 
 </Project>
