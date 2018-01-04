@@ -13,5 +13,11 @@ namespace Firestorm.Tests.Examples.Football.Models
         public int FoundedYear { get; set; }
 
         public ICollection<Player> Players { get; set; }
+
+        public League League { get; set; }
+
+        public ICollection<Fixture> HomeFixtures { get; set; }
+
+        public ICollection<Fixture> AwayFixtures { get; set; }
     }
 }

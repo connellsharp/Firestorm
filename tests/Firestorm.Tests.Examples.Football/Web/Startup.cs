@@ -1,9 +1,11 @@
+using System;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.AspNetCore;
 using Firestorm.Endpoints.AspNetCore.Middleware;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Extensions.AspNetCore;
 using Firestorm.Tests.Examples.Football.Models;
+using Firestorm.Tests.Examples.Football.Tests;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,6 +16,13 @@ namespace Firestorm.Tests.Examples.Football.Web
 {
     public class Startup
     {
+        private readonly FirestormApiTech _tech;
+
+        public Startup(StartupTechSettings tech)
+        {
+            _tech = tech.Tech;
+        }
+
         [UsedImplicitly]
         public void ConfigureServices(IServiceCollection services)
         {
@@ -24,11 +33,22 @@ namespace Firestorm.Tests.Examples.Football.Web
                     builder.UseSqlServer(connection);
                 });
 
-            services.AddFirestorm()
-                .AddEntityFramework<FootballDbContext>()
-                .AddFluent<FootballApiContext>()
-                //.AddStems()
-                ;
+            var fsBuilder = services.AddFirestorm()
+                .AddEntityFramework<FootballDbContext>();
+
+            switch (_tech)
+            {
+                case FirestormApiTech.Stems:
+                    fsBuilder.AddStems();
+                    break;
+
+                case FirestormApiTech.Fluent:
+                    fsBuilder.AddFluent<FootballApiContext>();
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         [UsedImplicitly]

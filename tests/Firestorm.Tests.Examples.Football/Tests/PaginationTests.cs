@@ -15,11 +15,13 @@ namespace Firestorm.Tests.Examples.Football.Tests
         {
             _fixture = fixture;
         }
-
-        [Fact]
-        public async Task PlayersCollection_PostMulti_MultiResponseAllSuccess()
+        
+        [Theory, ClassData(typeof(FootballHttpClientIndexes))]
+        public async Task PlayersCollection_PostMulti_MultiResponseAllSuccess(FirestormApiTech tech)
         {
-            HttpResponseMessage response = await _fixture.HttpClient.PostAsync("/players", new StringContent(@"[
+            HttpClient client = _fixture.GetClient(tech);
+
+            HttpResponseMessage response = await client.PostAsync("/players", new StringContent(@"[
                 { name: ""Romelu Lukaku"" },
                 { name: ""Anthony Martial"" },
                 { name: ""Marcus Rashford"" },
@@ -43,10 +45,12 @@ namespace Firestorm.Tests.Examples.Football.Tests
             public string Status { get; set; }
         }
 
-        [Fact]
-        public async Task PlayersCollection_PageSize1_NextInLinkHeader()
+        [Theory, ClassData(typeof(FootballHttpClientIndexes))]
+        public async Task PlayersCollection_PageSize1_NextInLinkHeader(FirestormApiTech tech)
         {
-            HttpResponseMessage response = await _fixture.HttpClient.GetAsync("/players?size=1");
+            HttpClient client = _fixture.GetClient(tech);
+
+            HttpResponseMessage response = await client.GetAsync("/players?size=1");
 
             Assert.Equal(200, (int)response.StatusCode);
 

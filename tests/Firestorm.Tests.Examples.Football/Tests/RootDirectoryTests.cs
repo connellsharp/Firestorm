@@ -12,11 +12,13 @@ namespace Firestorm.Tests.Examples.Football.Tests
         {
             _fixture = fixture;
         }
-
-        [Fact]
-        public async Task Root_DoesntError()
+        
+        [Theory, ClassData(typeof(FootballHttpClientIndexes))]
+        public async Task Root_DoesntError(FirestormApiTech tech)
         {
-            HttpResponseMessage response = await _fixture.HttpClient.GetAsync("/");
+            HttpClient client = _fixture.GetClient(tech);
+
+            HttpResponseMessage response = await client.GetAsync("/");
             response.EnsureSuccessStatusCode();
         }
     }

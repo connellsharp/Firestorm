@@ -3,25 +3,23 @@ using System.IO;
 using System.Net.Http;
 using Firestorm.Tests.Examples.Football.Web;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Firestorm.Tests.Examples.Football.Tests
 {
-    public class FootballTestFixture : IDisposable
+    public class HostClientPair : IDisposable
     {
-        private static int _startPort = 3000;
-
         private readonly IWebHost _host;
 
-        public HttpClient HttpClient { get; }
-
-        public FootballTestFixture()
+        public HostClientPair(int port, FirestormApiTech tech)
         {
-            var url = "http://localhost:" + _startPort++;
+            var url = "http://localhost:" + port;
 
             _host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 //.UseIISIntegration()
+                .ConfigureServices(s => s.AddSingleton(new StartupTechSettings(tech)))
                 .UseStartup<Startup>()
                 .UseUrls(url)
                 .Build();
@@ -34,10 +32,22 @@ namespace Firestorm.Tests.Examples.Football.Tests
             _host.Start();
         }
 
+        public HttpClient HttpClient { get; }
+
         public void Dispose()
         {
             _host.Dispose();
             HttpClient.Dispose();
+        }
+    }
+
+    public class StartupTechSettings
+    {
+        public FirestormApiTech Tech { get; }
+
+        public StartupTechSettings(FirestormApiTech tech)
+        {
+            Tech = tech;
         }
     }
 }

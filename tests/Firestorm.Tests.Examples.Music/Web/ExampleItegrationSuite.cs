@@ -12,6 +12,7 @@ namespace Firestorm.Tests.Examples.Web
     public class ExampleItegrationSuite : IHttpIntegrationSuite
     {
         private static readonly Random Random = new Random();
+
         private readonly string _url = "http://localhost:" + Random.Next(1200, 1500);
         private readonly FirestormConfiguration _firestormConfig;
 
