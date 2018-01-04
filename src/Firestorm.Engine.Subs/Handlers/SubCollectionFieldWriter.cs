@@ -17,20 +17,20 @@ namespace Firestorm.Engine.Subs.Handlers
         where TProperty : IEnumerable<TNav>
     {
         private readonly Expression<Func<TItem, TProperty>> _navigationExpression;
-        private readonly IEngineSubContext<TNav> _substemSubContext;
+        private readonly IEngineSubContext<TNav> _subContext;
 
-        public SubCollectionFieldWriter(Expression<Func<TItem, TProperty>> navigationExpression, IEngineSubContext<TNav> substemSubContext)
+        public SubCollectionFieldWriter(Expression<Func<TItem, TProperty>> navigationExpression, IEngineSubContext<TNav> subContext)
         {
             _navigationExpression = navigationExpression;
-            _substemSubContext = substemSubContext;
+            _subContext = subContext;
         }
 
         public async Task SetValueAsync(IDeferredItem<TItem> item, object deserializedValue, IDataTransaction dataTransaction)
         {
             var navRepository = new NavigationCollectionRepository<TItem, TProperty, TNav>(item, _navigationExpression);
 
-            var navLocatorCreator = new NavigationItemLocatorCreator<TNav>(_substemSubContext);
-            var navContext = new FullEngineContext<TNav>(dataTransaction, navRepository, _substemSubContext);
+            var navLocatorCreator = new NavigationItemLocatorCreator<TNav>(_subContext);
+            var navContext = new FullEngineContext<TNav>(dataTransaction, navRepository, _subContext);
 
             IEnumerable deserializedCollection = (IEnumerable) deserializedValue; // todo null ?
 

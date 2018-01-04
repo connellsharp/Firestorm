@@ -12,11 +12,11 @@ namespace Firestorm.Engine.Subs.Handlers
     internal class NavigationItemLocatorCreator<TNav>
         where TNav : class, new()
     {
-        private readonly IEngineSubContext<TNav> _substemSubContext;
+        private readonly IEngineSubContext<TNav> _subContext;
 
-        internal NavigationItemLocatorCreator(IEngineSubContext<TNav> substemSubContext)
+        internal NavigationItemLocatorCreator(IEngineSubContext<TNav> subContext)
         {
-            _substemSubContext = substemSubContext;
+            _subContext = subContext;
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Firestorm.Engine.Subs.Handlers
             {
                 // TODO implicit & explicit location option e.g. { "*id": 123 }
 
-                IItemLocator<TNav> locator = _substemSubContext.FieldProvider.GetLocator(fieldName);
+                IItemLocator<TNav> locator = _subContext.FieldProvider.GetLocator(fieldName);
                 if (locator != null)
                 {
                     object findValue = itemData[fieldName];
@@ -61,7 +61,7 @@ namespace Firestorm.Engine.Subs.Handlers
         private QueryableSingleRepository<TNav> LocateItemByFilters(IQueryable<TNav> query, RestItemData itemData)
         {
             IEnumerable<FilterInstruction> filterInstructions = GetFilterInstructions(itemData);
-            var filter = new QueryableFieldFilter<TNav>(_substemSubContext.FieldProvider, filterInstructions);
+            var filter = new QueryableFieldFilter<TNav>(_subContext.FieldProvider, filterInstructions);
             var itemQuery = filter.ApplyFilter(query).SingleDefferred();
             return new QueryableSingleRepository<TNav>(itemQuery);
         }
@@ -70,7 +70,7 @@ namespace Firestorm.Engine.Subs.Handlers
         {
             foreach (string fieldName in itemData.Keys)
             {
-                IItemLocator<TNav> locator = _substemSubContext.FieldProvider.GetLocator(fieldName);
+                IItemLocator<TNav> locator = _subContext.FieldProvider.GetLocator(fieldName);
                 if (locator == null)
                     continue;
 
