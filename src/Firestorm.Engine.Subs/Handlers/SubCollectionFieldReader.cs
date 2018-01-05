@@ -28,7 +28,7 @@ namespace Firestorm.Engine.Subs.Handlers
         {
             var visitedNavigationExpr = (LambdaExpression) new ParameterReplacerVisitor(_navigationExpression.Parameters[0], itemPram).Visit(_navigationExpression);
 
-            LambdaExpression memberInitLambda = SubUtilities.GetMemberInitLambda(_substemSubContext.FieldProvider);
+            LambdaExpression memberInitLambda = SubUtilities.GetMemberInitLambda(_substemSubContext.Fields);
 
             Type dynamicType = memberInitLambda.ReturnType;
             MethodCallExpression selectMethodExpr = Expression.Call(typeof(Enumerable), "Select", new[] { typeof(TNav), dynamicType }, visitedNavigationExpr.Body, memberInitLambda);

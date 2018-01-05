@@ -6,6 +6,6 @@ namespace Firestorm.Fluent.Fuel.Models
     {
         string RootName { get; }
         
-        IRestCollectionSource GetCollectionSource();
+        IRestCollectionSource GetRootCollectionSource();
     }
 }

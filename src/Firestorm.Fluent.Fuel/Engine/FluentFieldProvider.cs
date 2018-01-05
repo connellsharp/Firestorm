@@ -4,11 +4,12 @@ using System.Globalization;
 using Firestorm.Data;
 using Firestorm.Engine;
 using Firestorm.Engine.Fields;
+using Firestorm.Engine.Subs.Context;
 using Firestorm.Fluent.Fuel.Models;
 
 namespace Firestorm.Fluent.Fuel.Engine
 {
-    internal class FluentFieldProvider<TItem> : IFieldProvider<TItem>
+    internal class FluentFieldProvider<TItem> : ILocatableFieldProvider<TItem>
         where TItem : class
     {
         private readonly IDictionary<string, ApiFieldModel<TItem>> _fieldModels;
@@ -32,7 +33,7 @@ namespace Firestorm.Fluent.Fuel.Engine
 
         public IRestResource GetFullResource(string fieldName, IDeferredItem<TItem> item, IDataTransaction dataTransaction)
         {
-            throw new NotImplementedException();
+            return _fieldModels[fieldName].FieldResourceGetter.GetFullResource(item, dataTransaction);
         }
 
         public IFieldReader<TItem> GetReader(string fieldName)
@@ -48,6 +49,11 @@ namespace Firestorm.Fluent.Fuel.Engine
         public IFieldDescription GetDescription(string fieldName, CultureInfo cultureInfo)
         {
             return _fieldModels[fieldName].Description;
+        }
+
+        public IItemLocator<TItem> GetLocator(string fieldName)
+        {
+            throw new NotImplementedException();
         }
     }
 }

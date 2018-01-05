@@ -19,7 +19,7 @@ namespace Firestorm.Engine.Subs.Handlers
         {
             var visitedNavigationExpr = (LambdaExpression) new ParameterReplacerVisitor(NavigationExpression.Parameters[0], itemPram).Visit(NavigationExpression);
 
-            LambdaExpression memberInitLambda = SubUtilities.GetMemberInitLambda(EngineSubContext.FieldProvider);
+            LambdaExpression memberInitLambda = SubUtilities.GetMemberInitLambda(EngineSubContext.Fields);
 
             return visitedNavigationExpr.Chain(memberInitLambda).Body;
         }

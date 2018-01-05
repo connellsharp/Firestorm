@@ -8,6 +8,7 @@
     <ProjectReference Include="..\Firestorm.Engine.Additives\Firestorm.Engine.Additives.csproj" />
     <ProjectReference Include="..\Firestorm.Data\Firestorm.Data.csproj" />
     <ProjectReference Include="..\Firestorm.Engine.Implementation\Firestorm.Engine.Implementation.csproj" />
+    <ProjectReference Include="..\Firestorm.Engine.Subs\Firestorm.Engine.Subs.csproj" />
     <ProjectReference Include="..\Firestorm.Fluent\Firestorm.Fluent.csproj" />
   </ItemGroup>
 

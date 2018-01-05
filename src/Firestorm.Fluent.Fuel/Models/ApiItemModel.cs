@@ -13,6 +13,7 @@ namespace Firestorm.Fluent.Fuel.Models
 
         public ApiItemModel(IDataSource dataSource)
         {
+
             _dataSource = dataSource;
         }
 
@@ -22,7 +23,7 @@ namespace Firestorm.Fluent.Fuel.Models
 
         public string RootName { get; set; }
 
-        public IRestCollectionSource GetCollectionSource()
+        public IRestCollectionSource GetRootCollectionSource()
         {
             return new RestCollectionSource<TItem>(_dataSource, Fields.ToDictionary(f => f.Name), Identifiers.ToDictionary(i => i.Name));
         }

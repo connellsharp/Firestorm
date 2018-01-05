@@ -22,9 +22,9 @@ namespace Firestorm.Engine.Subs.Context
 
         public IEngineRepository<TItem> Repository { get; }
 
-        public IIdentifierProvider<TItem> Identifiers => _subContext.IdentifierProvider;
+        public IIdentifierProvider<TItem> Identifiers => _subContext.Identifiers;
 
-        public IFieldProvider<TItem> Fields => _subContext.FieldProvider;
+        public IFieldProvider<TItem> Fields => _subContext.Fields;
 
         public IAuthorizationChecker<TItem> AuthorizationChecker => _subContext.AuthorizationChecker;
     }

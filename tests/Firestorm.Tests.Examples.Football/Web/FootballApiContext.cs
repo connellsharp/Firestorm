@@ -29,7 +29,12 @@ namespace Firestorm.Tests.Examples.Football.Web
                             Points = (t.Wins * 3) + (t.Draws * 1),
                             Team = t.Team.Name
                         }))
-                    .HasName("teams");
+                    .HasName("teams")
+                    .IsCollection(tp =>
+                    {
+                        tp.Field(l => l.Points).HasName("points");
+                        tp.Field(l => l.Team).HasName("team");
+                    });
             });
 
             apiBuilder.Item<Team>(e =>
@@ -43,10 +48,12 @@ namespace Firestorm.Tests.Examples.Football.Web
                     .HasName("founded");
 
                 e.Field(t => t.Players)
-                    .HasName("players");
+                    .HasName("players")
+                    .IsCollection();
 
                 e.Field(t => t.AwayFixtures.Concat(t.HomeFixtures))
-                    .HasName("fixtures");
+                    .HasName("fixtures")
+                    .IsCollection();
             });
 
             apiBuilder.Item<Player>(e =>
@@ -61,10 +68,15 @@ namespace Firestorm.Tests.Examples.Football.Web
                     .HasName("number");
 
                 e.Field(p => p.Goals)
-                    .HasName("goals");
+                    .HasName("goals")
+                    .IsCollection(g =>
+                    {
+                        g.Field(h => h.Id).HasName("id");
+                    });
 
                 e.Field(p => p.Team)
-                    .HasName("team");
+                    .HasName("team")
+                    .IsItem();
             });
         }
     }

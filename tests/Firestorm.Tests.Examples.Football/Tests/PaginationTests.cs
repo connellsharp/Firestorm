@@ -50,7 +50,7 @@ namespace Firestorm.Tests.Examples.Football.Tests
         {
             HttpClient client = _fixture.GetClient(tech);
 
-            HttpResponseMessage response = await client.GetAsync("/players?size=1");
+            HttpResponseMessage response = await client.GetAsync("/players?size=1&fields=name");
 
             Assert.Equal(200, (int)response.StatusCode);
 

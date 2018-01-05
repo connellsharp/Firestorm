@@ -22,21 +22,21 @@ namespace Firestorm.Stems.Fuel
         {
             _stem = stem;
 
-            IdentifierProvider = new AttributeIdentifierProvider<TItem>(stem); //new IDConventionIdentifierInfo<TItem>();
-            FieldProvider = new AttributeFieldProvider<TItem>(stem);
+            Identifiers = new AttributeIdentifierProvider<TItem>(stem); //new IDConventionIdentifierInfo<TItem>();
+            Fields = new AttributeFieldProvider<TItem>(stem);
             AuthorizationChecker = new StemAuthorizationChecker<TItem>(stem);
 
             NamingConventionSwitcher conventionSwitcher = stem.Configuration.NamingConventionSwitcher;
             if (conventionSwitcher != null)
             {
-                FieldProvider = new RelaxedNamingFieldProvider<TItem>(FieldProvider, conventionSwitcher);
+                Fields = new RelaxedNamingFieldProvider<TItem>(Fields, conventionSwitcher);
                 AuthorizationChecker = new RelaxedNamingAuthorizationChecker<TItem>(AuthorizationChecker, conventionSwitcher);
             }
         }
 
-        public IIdentifierProvider<TItem> IdentifierProvider { get; }
+        public IIdentifierProvider<TItem> Identifiers { get; }
 
-        public ILocatableFieldProvider<TItem> FieldProvider { get; }
+        public ILocatableFieldProvider<TItem> Fields { get; }
 
         public IAuthorizationChecker<TItem> AuthorizationChecker { get; }
     }

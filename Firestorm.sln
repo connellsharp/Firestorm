@@ -42,7 +42,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{D8DE754F-9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{1A353687-93AC-4112-87CF-42CFE6E2F84C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Tests.Examples.Music", "tests\Firestorm.Tests.Examples.Music\Firestorm.Tests.Examples.Music.csproj", "{306B8FC0-EF02-423E-8D6B-6BCE8141FF52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Examples.Music", "tests\Firestorm.Tests.Examples.Music\Firestorm.Tests.Examples.Music.csproj", "{306B8FC0-EF02-423E-8D6B-6BCE8141FF52}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints.Formatting", "src\Firestorm.Endpoints.Formatting\Firestorm.Endpoints.Formatting.csproj", "{E172D3FF-C931-495E-A5DB-3AF5C45B26AF}"
 EndProject
@@ -76,7 +76,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Integration
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Integration.Data.EFCore2", "tests\Firestorm.Tests.Integration.Data.EFCore2\Firestorm.Tests.Integration.Data.EFCore2.csproj", "{7F0D2B4F-2BD3-4F17-867B-94EF4CB3E2DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Tests.Integration.Data.EntityFramework", "tests\Firestorm.Tests.Integration.Data.EntityFramework\Firestorm.Tests.Integration.Data.EntityFramework.csproj", "{0EE1D7CB-6107-419E-9884-1D50A0DF7306}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Integration.Data.EntityFramework", "tests\Firestorm.Tests.Integration.Data.EntityFramework\Firestorm.Tests.Integration.Data.EntityFramework.csproj", "{0EE1D7CB-6107-419E-9884-1D50A0DF7306}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{96A6A15D-4B88-4732-A83D-BDBB235B8589}"
 EndProject
@@ -149,7 +149,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints.Respons
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Functionality.Fluent", "tests\Firestorm.Tests.Functionality.Fluent\Firestorm.Tests.Functionality.Fluent.csproj", "{61421B86-680A-451E-AC0D-3E5837515809}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Tests.Examples.Football", "tests\Firestorm.Tests.Examples.Football\Firestorm.Tests.Examples.Football.csproj", "{30DD9A72-A393-41D1-BF98-CBA1BF82F6DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Examples.Football", "tests\Firestorm.Tests.Examples.Football\Firestorm.Tests.Examples.Football.csproj", "{30DD9A72-A393-41D1-BF98-CBA1BF82F6DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

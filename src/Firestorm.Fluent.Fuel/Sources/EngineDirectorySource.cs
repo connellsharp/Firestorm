@@ -17,7 +17,7 @@ namespace Firestorm.Fluent.Fuel.Sources
         public IRestCollectionSource GetCollectionSource(string collectionName)
         {
             IApiItemModel itemModel = _rootItems[collectionName];
-            return itemModel.GetCollectionSource();
+            return itemModel.GetRootCollectionSource();
         }
 
         public IEnumerable<string> GetCollectionNames()
