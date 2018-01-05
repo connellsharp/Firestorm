@@ -53,12 +53,21 @@ namespace Firestorm.Engine.Subs.Repositories
 
         private ICollection<TNav> GetNavCollection()
         {
-            TParent parentItem = _parentItem.LoadedItem;
-            IEnumerable<TNav> navEnumerable = _navigationExpression.Compile().Invoke(parentItem);
+            IEnumerable<TNav> navEnumerable;
 
+            try
+            {
+                TParent parentItem = _parentItem.LoadedItem;
+                navEnumerable = _navigationExpression.Compile().Invoke(parentItem);
+            }
+            catch (Exception ex)
+            {
+                throw new NotSupportedException("Error getting navigation collection from parent item.", ex);
+            }
+        
             var navCollection = navEnumerable as ICollection<TNav>;
             if (navCollection == null)
-                throw new NotSupportedException("Cannot add items to this navigation property.");
+                throw new NotSupportedException("Cannot add items to this navigation property because it does not implement ICollection.");
 
             return navCollection;
         }

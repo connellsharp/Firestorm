@@ -49,14 +49,12 @@ namespace Firestorm.Fluent.Fuel.Builder
             where TNavItem : class, TField, new()
         {
             var itemModel = new ApiItemModel<TNavItem>(null); // can be null because GetRootCollection never called for navigation properties
-
-            var castedExpression = _expression as Expression<Func<TItem, TNavItem>>;
+            var castedExpression = _expression as Expression<Func<TItem, TNavItem>>; // should cast fine due to generic constraint
             IEngineSubContext<TNavItem> subContext = GetSubContext(itemModel);
 
             _fieldModel.Reader = new SubItemFieldReader<TItem, TNavItem>(castedExpression, subContext);
             _fieldModel.FieldResourceGetter = new SubItemResourceGetter<TItem, TNavItem>(castedExpression, subContext);
             _fieldModel.Writer = new SubItemFieldWriter<TItem, TNavItem>(castedExpression, subContext);
-
 
             var itemBuilder = new EngineItemBuilder<TNavItem>(itemModel);
             return itemBuilder;
@@ -66,9 +64,8 @@ namespace Firestorm.Fluent.Fuel.Builder
             where TCollection : TField, IEnumerable<TNavItem>
             where TNavItem : class, new()
         {
-            var itemModel = new ApiItemModel<TNavItem>(null);
-
-            var castedExpression = _expression as Expression<Func<TItem, TCollection>>;
+            var itemModel = new ApiItemModel<TNavItem>(null); // can be null because GetRootCollection never called for navigation properties
+            var castedExpression = _expression as Expression<Func<TItem, TCollection>>; // should cast fine due to generic constraint
             IEngineSubContext<TNavItem> subContext = GetSubContext(itemModel);
 
             _fieldModel.Reader = new SubCollectionFieldReader<TItem, TCollection, TNavItem>(castedExpression, subContext);
