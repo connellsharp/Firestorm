@@ -16,18 +16,20 @@ namespace Firestorm.Stems.Attributes
             }
         }
 
+        public static bool InheritsGenericInterface(this Type type, Type genericInterfaceDefinition)
+        {
+            return GetGenericInterface(type, genericInterfaceDefinition) != null;
+        }
+        
         [CanBeNull]
         public static Type GetGenericInterface(this Type type, Type genericInterfaceDefinition)
         {
+            // TODO Exact duplicate of this in Firestorm.Data.EnumerableTypeUtility
+
             if (type.IsOfGenericTypeDefinition(genericInterfaceDefinition))
                 return type;
 
             return type.GetInterfaces().FirstOrDefault(t => t.IsOfGenericTypeDefinition(genericInterfaceDefinition));
-        }
-
-        public static bool InheritsGenericInterface(this Type type, Type genericInterfaceDefinition)
-        {
-            return GetGenericInterface(type, genericInterfaceDefinition) != null;
         }
 
         public static bool IsOfGenericTypeDefinition(this Type type, Type genericInterfaceDefinition)
@@ -61,7 +63,8 @@ namespace Firestorm.Stems.Attributes
             return type.GetInterface(interfaceType.Name) != null;
         }
 
-        public static bool IsScalarType(this Type fieldType) // TODO exact same method appears in Engine.ScalarFieldHelper
+        // TODO exact same method appears in Engine.ScalarFieldHelper
+        public static bool IsScalarType(this Type fieldType)
         {
             Type type = Nullable.GetUnderlyingType(fieldType) ?? fieldType;
             TypeCode typeCode = Type.GetTypeCode(type);

@@ -25,6 +25,10 @@ namespace Firestorm.Tests.Examples.Football.Models
                 e.Property(t => t.FoundedYear);
 
                 e.HasMany(t => t.Players).WithOne(p => p.Team);
+
+                e.HasMany(p => p.AwayFixtures).WithOne(t => t.AwayTeam);
+
+                e.HasMany(p => p.HomeFixtures).WithOne(t => t.HomeTeam);
             });
 
             modelBuilder.Entity<Player>(e =>

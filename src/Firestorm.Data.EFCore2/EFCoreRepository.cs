@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,7 +42,29 @@ namespace Firestorm.Data.EFCore2
 
         protected virtual TEntity CreateUnattachedEntity()
         {
-            return new TEntity();
+            var entity = new TEntity();
+            AddEmptyCollections(entity);
+            return entity;
+        }
+
+        private static void AddEmptyCollections(TEntity entity)
+        {
+            // EF Core doesn't create empty ICollection objects for the navigation properties, which causes errors in NavigationCollectionRepository.GetNavCollection.
+            // This method adds all the empty collections. I'm not sure if Lazy-loading them is better, or if EF can add these itself when the entity is attached?
+
+            foreach (PropertyInfo property in typeof(TEntity).GetProperties())
+            {
+                if (!EnumerableTypeUtility.IsEnumerable(property.PropertyType))
+                    continue;
+
+                if (property.GetValue(entity) != null)
+                    continue;
+
+                var itemType = EnumerableTypeUtility.GetItemType(property.PropertyType);
+                var newList = EnumerableTypeUtility.CreateList(itemType);
+
+                property.SetValue(entity, newList);
+            }
         }
 
         protected virtual Expression<Func<TEntity, bool>> AvailableToApiPredicate

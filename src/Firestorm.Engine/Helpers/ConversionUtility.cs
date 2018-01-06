@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
+using Firestorm.Data;
 
 namespace Firestorm.Engine
 {
@@ -82,12 +82,10 @@ namespace Firestorm.Engine
             if (type.IsInstanceOfType(sourceValue))
                 return sourceValue;
 
-            if (type != typeof(string) && typeof(IEnumerable).IsAssignableFrom(type))
+            if (EnumerableTypeUtility.IsEnumerable(type))
             {
-                Type itemType = GetEnumerableGenericType(type);
-
-                Type listType = typeof(List<>).MakeGenericType(itemType);
-                var newList = (IList) Activator.CreateInstance(listType);
+                Type itemType = EnumerableTypeUtility.GetItemType(type);
+                IList newList = EnumerableTypeUtility.CreateList(itemType);
 
                 CopyArrayItems((IEnumerable) sourceValue, itemType, newList);
 
@@ -106,16 +104,6 @@ namespace Firestorm.Engine
                 CopyProperties(sourceValue, newValue);
                 return newValue;
             }
-        }
-
-        private static Type GetEnumerableGenericType(Type type)
-        {
-            // shared with Firestorm.Stems.TypeExtensions
-
-            var genericInterfaceDefinition = typeof(IEnumerable<>);
-            var enumerableType = type.GetInterfaces().FirstOrDefault(t => t.IsGenericType && t.GetGenericTypeDefinition() == genericInterfaceDefinition);
-            var itemType = enumerableType.GetGenericArguments()[0];
-            return itemType;
         }
 
         private static void CopyArrayItems(IEnumerable sourceValue, Type itemType, IList newList)
