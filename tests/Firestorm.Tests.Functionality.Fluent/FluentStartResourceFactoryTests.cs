@@ -49,7 +49,7 @@ namespace Firestorm.Tests.Functionality.Fluent
         {
             var resourceFactory = new FluentStartResourceFactory
             {
-                ApiContext = new TestFluentContext(),
+                RestContext = new TestFluentContext(),
                 DataSource = _memoryDataSource
             };
 
@@ -68,7 +68,7 @@ namespace Firestorm.Tests.Functionality.Fluent
         {
             var resourceFactory = new FluentStartResourceFactory
             {
-                ApiContext = new TestFluentContext(),
+                RestContext = new TestFluentContext(),
                 DataSource = _memoryDataSource
             };
 

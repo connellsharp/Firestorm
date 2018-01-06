@@ -2,9 +2,9 @@ using Firestorm.Fluent;
 
 namespace Firestorm.Tests.Functionality.Fluent
 {
-    public class TestFluentContext : ApiContext
+    public class TestFluentContext : RestContext
     {
-        protected override void OnModelCreating(IApiBuilder apiBuilder)
+        protected override void OnApiCreating(IApiBuilder apiBuilder)
         {
             apiBuilder.Item<Player>(i =>
             {

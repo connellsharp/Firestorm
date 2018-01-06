@@ -2,9 +2,9 @@
 {
     public class SourceCreator
     {
-        public IApiDirectorySource CreateSource(ApiContext apiContext, IApiBuilder builder)
+        public IApiDirectorySource CreateSource(RestContext restContext, IApiBuilder builder)
         {
-            apiContext.OnModelCreating(builder);
+            restContext.OnApiCreating(builder);
             return builder.BuildSource();
         }
     }
