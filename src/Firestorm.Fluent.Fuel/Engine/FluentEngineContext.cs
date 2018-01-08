@@ -12,7 +12,7 @@ namespace Firestorm.Fluent.Fuel.Engine
     {
         private readonly FluentEngineSubContext<TItem> _subContext;
 
-        public FluentEngineContext(IDataSource dataSource, IDictionary<string, ApiFieldModel<TItem>> fieldModels, IDictionary<string, ApiIdentifierModel<TItem>> identifierModels)
+        public FluentEngineContext(IDataSource dataSource, IEnumerable<ApiFieldModel<TItem>> fieldModels, IEnumerable<ApiIdentifierModel<TItem>> identifierModels)
         {
             // TODO refactor this ctor ? Just use the FullEngineContext and pass in the FluentEngineSubContext ?
 

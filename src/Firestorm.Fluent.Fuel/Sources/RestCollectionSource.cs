@@ -11,10 +11,10 @@ namespace Firestorm.Fluent.Fuel.Sources
         where TItem : class, new()
     {
         private readonly IDataSource _dataSource;
-        private readonly IDictionary<string, ApiFieldModel<TItem>> _fieldModels;
-        private readonly IDictionary<string, ApiIdentifierModel<TItem>> _identifierModels;
+        private readonly IEnumerable<ApiFieldModel<TItem>> _fieldModels;
+        private readonly IEnumerable<ApiIdentifierModel<TItem>> _identifierModels;
 
-        internal RestCollectionSource(IDataSource dataSource, IDictionary<string, ApiFieldModel<TItem>> fieldModels, IDictionary<string, ApiIdentifierModel<TItem>> identifierModels)
+        internal RestCollectionSource(IDataSource dataSource, IEnumerable<ApiFieldModel<TItem>> fieldModels, IEnumerable<ApiIdentifierModel<TItem>> identifierModels)
         {
             _dataSource = dataSource;
             _fieldModels = fieldModels;

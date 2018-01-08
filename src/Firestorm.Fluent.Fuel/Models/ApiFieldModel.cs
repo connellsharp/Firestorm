@@ -15,6 +15,6 @@ namespace Firestorm.Fluent.Fuel.Models
 
         public IFieldDescription Description { get; set; }
 
-        public IFieldResourceGetter<TItem> FieldResourceGetter { get; set; }
+        public IFieldResourceGetter<TItem> ResourceGetter { get; set; }
     }
 }

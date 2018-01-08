@@ -25,7 +25,7 @@ namespace Firestorm.Fluent.Fuel.Models
 
         public IRestCollectionSource GetRootCollectionSource()
         {
-            return new RestCollectionSource<TItem>(_dataSource, Fields.ToDictionary(f => f.Name), Identifiers.ToDictionary(i => i.Name));
+            return new RestCollectionSource<TItem>(_dataSource, Fields, Identifiers);
         }
     }
 }

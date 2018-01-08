@@ -53,7 +53,7 @@ namespace Firestorm.Fluent.Fuel.Builder
             IEngineSubContext<TNavItem> subContext = GetSubContext(itemModel);
 
             _fieldModel.Reader = new SubItemFieldReader<TItem, TNavItem>(castedExpression, subContext);
-            _fieldModel.FieldResourceGetter = new SubItemResourceGetter<TItem, TNavItem>(castedExpression, subContext);
+            _fieldModel.ResourceGetter = new SubItemResourceGetter<TItem, TNavItem>(castedExpression, subContext);
             _fieldModel.Writer = new SubItemFieldWriter<TItem, TNavItem>(castedExpression, subContext);
 
             var itemBuilder = new EngineItemBuilder<TNavItem>(itemModel);
@@ -69,7 +69,7 @@ namespace Firestorm.Fluent.Fuel.Builder
             IEngineSubContext<TNavItem> subContext = GetSubContext(itemModel);
 
             _fieldModel.Reader = new SubCollectionFieldReader<TItem, TCollection, TNavItem>(castedExpression, subContext);
-            _fieldModel.FieldResourceGetter = new SubCollectionResourceGetter<TItem, TCollection, TNavItem>(castedExpression, subContext);
+            _fieldModel.ResourceGetter = new SubCollectionResourceGetter<TItem, TCollection, TNavItem>(castedExpression, subContext);
             _fieldModel.Writer = new SubCollectionFieldWriter<TItem, TCollection, TNavItem>(castedExpression, subContext);
 
             var itemBuilder = new EngineItemBuilder<TNavItem>(itemModel);
@@ -79,7 +79,7 @@ namespace Firestorm.Fluent.Fuel.Builder
         private static FluentEngineSubContext<TNavItem> GetSubContext<TNavItem>(ApiItemModel<TNavItem> itemModel)
             where TNavItem : class, new()
         {
-            return new FluentEngineSubContext<TNavItem>(itemModel.Fields.ToDictionary(f => f.Name), itemModel.Identifiers.ToDictionary(i => i.Name));
+            return new FluentEngineSubContext<TNavItem>(itemModel.Fields, itemModel.Identifiers);
         }
     }
 }

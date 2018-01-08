@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Firestorm.Data;
 using Firestorm.Engine;
 using Firestorm.Engine.Fields;
@@ -12,11 +13,11 @@ namespace Firestorm.Fluent.Fuel.Engine
     internal class FluentFieldProvider<TItem> : ILocatableFieldProvider<TItem>
         where TItem : class
     {
-        private readonly IDictionary<string, ApiFieldModel<TItem>> _fieldModels;
+        private readonly IReadOnlyDictionary<string, ApiFieldModel<TItem>> _fieldModels;
 
-        public FluentFieldProvider(IDictionary<string, ApiFieldModel<TItem>> fieldModels)
+        public FluentFieldProvider(IEnumerable<ApiFieldModel<TItem>> fieldModels)
         {
-            _fieldModels = fieldModels;
+            _fieldModels = new LazyDictionary<ApiFieldModel<TItem>>(fieldModels, f => f.Name);
         }
 
         public IEnumerable<string> GetDefaultNames(int nestedBy)
@@ -33,7 +34,7 @@ namespace Firestorm.Fluent.Fuel.Engine
 
         public IRestResource GetFullResource(string fieldName, IDeferredItem<TItem> item, IDataTransaction dataTransaction)
         {
-            return _fieldModels[fieldName].FieldResourceGetter.GetFullResource(item, dataTransaction);
+            return _fieldModels[fieldName].ResourceGetter.GetFullResource(item, dataTransaction);
         }
 
         public IFieldReader<TItem> GetReader(string fieldName)

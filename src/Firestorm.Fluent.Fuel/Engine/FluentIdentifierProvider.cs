@@ -14,11 +14,11 @@ namespace Firestorm.Fluent.Fuel.Engine
     internal class FluentIdentifierProvider<TItem> : IIdentifierProvider<TItem>
         where TItem : class
     {
-        private readonly IDictionary<string, ApiIdentifierModel<TItem>> _identifierModels;
+        private readonly IReadOnlyDictionary<string, ApiIdentifierModel<TItem>> _identifierModels;
 
-        public FluentIdentifierProvider(IDictionary<string, ApiIdentifierModel<TItem>> identifierModels)
+        public FluentIdentifierProvider(IEnumerable<ApiIdentifierModel<TItem>> identifierModels)
         {
-            _identifierModels = identifierModels;
+            _identifierModels = new LazyDictionary<ApiIdentifierModel<TItem>>(identifierModels, i => i.Name);
         }
 
         public IIdentifierInfo<TItem> GetInfo(string identifierName)
