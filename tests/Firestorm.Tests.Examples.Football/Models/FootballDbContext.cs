@@ -26,9 +26,7 @@ namespace Firestorm.Tests.Examples.Football.Models
 
                 e.HasMany(t => t.Players).WithOne(p => p.Team);
 
-                e.HasMany(p => p.AwayFixtures).WithOne(t => t.AwayTeam);
-
-                e.HasMany(p => p.HomeFixtures).WithOne(t => t.HomeTeam);
+                e.HasMany(p => p.Fixtures).WithOne(t => t.Team);
             });
 
             modelBuilder.Entity<Player>(e =>
@@ -49,15 +47,20 @@ namespace Firestorm.Tests.Examples.Football.Models
                 e.HasMany(p => p.Teams).WithOne(t => t.League);
             });
 
+            modelBuilder.Entity<FixtureTeam>(e =>
+            {
+                e.HasKey(p => new { p.FixtureId, p.IsHome });
+
+                e.Property(p => p.IsHome);
+            });
+
             modelBuilder.Entity<Fixture>(e =>
             {
                 e.HasKey(p => p.Id);
 
-                e.HasOne(p => p.AwayTeam).WithMany(t => t.AwayFixtures);
-
-                e.HasOne(p => p.HomeTeam).WithMany(t => t.HomeFixtures);
-
                 e.HasMany(f => f.Goals).WithOne(g => g.Fixture);
+
+                e.HasMany(p => p.Teams).WithOne(t => t.Fixture).HasForeignKey(ft => ft.FixtureId);
             });
 
             modelBuilder.Entity<Goal>(e =>

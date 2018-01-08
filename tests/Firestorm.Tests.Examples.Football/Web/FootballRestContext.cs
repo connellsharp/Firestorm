@@ -20,9 +20,9 @@ namespace Firestorm.Tests.Examples.Football.Web
                         .Select(t => new
                         {
                             Team = t,
-                            Wins = t.HomeFixtures.Concat(t.AwayFixtures).Count(f => f.Goals.Count(g => g.Player.Team == t) > f.Goals.Count(g => g.Player.Team == t)),
-                            Draws = t.HomeFixtures.Concat(t.AwayFixtures).Count(f => f.Goals.Count(g => g.Player.Team == t) == f.Goals.Count(g => g.Player.Team == t)),
-                            Losses = t.HomeFixtures.Concat(t.AwayFixtures).Count(f => f.Goals.Count(g => g.Player.Team == t) < f.Goals.Count(g => g.Player.Team == t)),
+                            Wins = t.Fixtures.Count(f => f.Fixture.Goals.Count(g => g.Player.Team == t) > f.Fixture.Goals.Count(g => g.Player.Team == t)),
+                            Draws = t.Fixtures.Count(f => f.Fixture.Goals.Count(g => g.Player.Team == t) == f.Fixture.Goals.Count(g => g.Player.Team == t)),
+                            Losses = t.Fixtures.Count(f => f.Fixture.Goals.Count(g => g.Player.Team == t) < f.Fixture.Goals.Count(g => g.Player.Team == t)),
                         })
                         .Select(t => new TeamPosition
                         {
@@ -51,9 +51,20 @@ namespace Firestorm.Tests.Examples.Football.Web
                     .HasName("players")
                     .IsCollection();
 
-                e.Field(t => t.AwayFixtures.Concat(t.HomeFixtures))
+                e.Field(t => t.Fixtures)
                     .HasName("fixtures")
-                    .IsCollection();
+                    .IsCollection(c =>
+                    {
+                        c.Identifier(f => f.FixtureId);
+
+                        c.Field(f => f.IsHome).HasName("home");
+
+                        c.Field(f => f.Fixture.Teams).HasName("teams").IsCollection(t =>
+                        {
+                            t.Identifier(tt => tt.Team.Id);
+                            t.Field(tt => tt.IsHome).HasName("home");
+                        });
+                    });
             });
 
             apiBuilder.Item<Player>(e =>

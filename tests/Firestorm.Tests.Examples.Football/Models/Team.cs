@@ -16,8 +16,6 @@ namespace Firestorm.Tests.Examples.Football.Models
 
         public League League { get; set; }
 
-        public ICollection<Fixture> HomeFixtures { get; set; }
-
-        public ICollection<Fixture> AwayFixtures { get; set; }
+        public ICollection<FixtureTeam> Fixtures { get; set; }
     }
 }
