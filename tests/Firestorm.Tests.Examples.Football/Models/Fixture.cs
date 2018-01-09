@@ -18,10 +18,10 @@ namespace Firestorm.Tests.Examples.Football.Models
 
     public class FixtureTeam
     {
+        public int TeamId { get; set; }
         public Team Team { get; set; }
 
         public int FixtureId { get; set; }
-
         public Fixture Fixture { get; set; }
 
         public bool IsHome { get; set; }

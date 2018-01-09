@@ -11,6 +11,8 @@ namespace Firestorm.Fluent
 
         IApiFieldBuilder<TItem, TField> AllowWrite();
 
+        IApiFieldBuilder<TItem, TField> AllowLocate();
+
         IApiItemBuilder<TNavItem> IsItem<TNavItem>()
             where TNavItem : class, TField, new();
 

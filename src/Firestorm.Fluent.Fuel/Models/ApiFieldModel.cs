@@ -1,5 +1,4 @@
-﻿using Firestorm.Data;
-using Firestorm.Engine.Fields;
+﻿using Firestorm.Engine.Fields;
 using Firestorm.Engine.Subs.Context;
 
 namespace Firestorm.Fluent.Fuel.Models
@@ -16,5 +15,7 @@ namespace Firestorm.Fluent.Fuel.Models
         public IFieldDescription Description { get; set; }
 
         public IFieldResourceGetter<TItem> ResourceGetter { get; set; }
+
+        public IItemLocator<TItem> Locator { get; set; }
     }
 }

@@ -39,7 +39,8 @@ namespace Firestorm.Engine.Additives.Identifiers
         {
             try
             {
-                return IdentifierExpressionHelpers.GetIdentifierPredicate(_getterExpr, identifier);
+                TReturn convertedIdentifier = ConversionUtility.ConvertValue<TReturn>(identifier);
+                return IdentifierExpressionHelpers.GetIdentifierPredicate(_getterExpr, convertedIdentifier);
             }
             catch (Exception ex) when (ex is FormatException || ex is InvalidCastException)
             {

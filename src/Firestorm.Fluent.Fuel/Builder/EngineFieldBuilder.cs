@@ -6,7 +6,6 @@ using System.Linq.Expressions;
 using Firestorm.Engine;
 using Firestorm.Engine.Additives.Readers;
 using Firestorm.Engine.Additives.Writers;
-using Firestorm.Engine.Identifiers;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Engine.Subs.Handlers;
 using Firestorm.Fluent.Fuel.Engine;
@@ -42,6 +41,12 @@ namespace Firestorm.Fluent.Fuel.Builder
         public IApiFieldBuilder<TItem, TField> AllowWrite()
         {
             _fieldModel.Writer = new PropertyExpressionFieldWriter<TItem, TField>(_expression);
+            return this;
+        }
+
+        public IApiFieldBuilder<TItem, TField> AllowLocate()
+        {
+            _fieldModel.Locator = new IdentifierExpressionItemLocator<TItem, TField>(_expression);
             return this;
         }
 

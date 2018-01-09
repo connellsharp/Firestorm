@@ -54,7 +54,7 @@ namespace Firestorm.Fluent.Fuel.Engine
 
         public IItemLocator<TItem> GetLocator(string fieldName)
         {
-            throw new NotImplementedException();
+            return _fieldModels[fieldName].Locator;
         }
     }
 }

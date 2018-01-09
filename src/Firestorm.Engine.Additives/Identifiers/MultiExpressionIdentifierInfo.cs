@@ -13,7 +13,7 @@ namespace Firestorm.Engine.Additives.Identifiers
         where TItem : class
     {
         private readonly Expression<Func<TItem, IEnumerable<TReturn>>> _getterExpr;
-        private readonly Func<string, Expression<Func<TItem, bool>>> _predicateGetter;
+        private readonly Func<TReturn, Expression<Func<TItem, bool>>> _predicateGetter;
 
         public MultiExpressionIdentifierInfo([NotNull] Expression<Func<TItem, IEnumerable<TReturn>>> getterExpr)
         {
@@ -42,7 +42,8 @@ namespace Firestorm.Engine.Additives.Identifiers
         {
             try
             {
-                return _predicateGetter(identifier);
+                TReturn convertedIdentifier = ConversionUtility.ConvertString<TReturn>(identifier);
+                return _predicateGetter(convertedIdentifier);
             }
             catch (Exception ex) when (ex is FormatException || ex is InvalidCastException)
             {

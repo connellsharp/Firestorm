@@ -53,17 +53,20 @@ namespace Firestorm.Tests.Examples.Football.Web
 
                 e.Field(t => t.Fixtures)
                     .HasName("fixtures")
-                    .IsCollection(c =>
+                    .IsCollection(ft =>
                     {
-                        c.Identifier(f => f.FixtureId);
+                        ft.Identifier(f => f.FixtureId);
 
-                        c.Field(f => f.IsHome).HasName("home");
+                        ft.Field(f => f.IsHome)
+                            .HasName("home");
 
-                        c.Field(f => f.Fixture.Teams).HasName("teams").IsCollection(t =>
-                        {
-                            t.Identifier(tt => tt.Team.Id);
-                            t.Field(tt => tt.IsHome).HasName("home");
-                        });
+                        ft.Field(f => f.Fixture.Teams)
+                            .HasName("teams")
+                            .IsCollection(t =>
+                            {
+                                t.Field(tt => tt.TeamId).HasName("id").AllowLocate();
+                                t.Field(tt => tt.IsHome).HasName("home");
+                            });
                     });
             });
 

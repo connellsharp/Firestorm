@@ -46,7 +46,8 @@ namespace Firestorm.Engine
 
         public static object ConvertString(string strValue, Type type)
         {
-            // TODO if type IS string?
+            if (type == typeof(string))
+                return strValue;
 
             if (string.IsNullOrEmpty(strValue))
                 return null;

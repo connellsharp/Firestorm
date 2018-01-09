@@ -1,5 +1,7 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace Firestorm.Tests.Examples.Football.Tests
@@ -23,7 +25,17 @@ namespace Firestorm.Tests.Examples.Football.Tests
                 { teams: [ { id: 3, home: true } ], goals: [ ] },
             ]"));
 
-            response.EnsureSuccessStatusCode();
+            AssertSuccess(response);
+        }
+
+        private static void AssertSuccess(HttpResponseMessage response)
+        {
+            if (!response.IsSuccessStatusCode)
+            {
+                string errorJson = response.Content.ReadAsStringAsync().Result;
+                var errorObj = JsonConvert.DeserializeObject<ErrorModel>(errorJson);
+                throw new RestApiException((ErrorStatus) response.StatusCode, errorObj.Error + ": " + errorObj.ErrorDescription);
+            }
         }
 
         [Theory, ClassData(typeof(FootballHttpClientIndexes))]
@@ -34,5 +46,14 @@ namespace Firestorm.Tests.Examples.Football.Tests
             HttpResponseMessage response = await client.GetAsync("/leagues/premierleague/teams/by_position/1/name");
             response.EnsureSuccessStatusCode();
         }
+    }
+
+    internal class ErrorModel
+    {
+        [JsonProperty("error")]
+        public string Error { get; set; }
+
+        [JsonProperty("error_description")]
+        public string ErrorDescription { get; set; }
     }
 }

@@ -26,7 +26,7 @@ namespace Firestorm.Tests.Examples.Football.Models
 
                 e.HasMany(t => t.Players).WithOne(p => p.Team);
 
-                e.HasMany(p => p.Fixtures).WithOne(t => t.Team);
+                e.HasMany(p => p.Fixtures).WithOne(t => t.Team).HasForeignKey(ft => ft.TeamId);
             });
 
             modelBuilder.Entity<Player>(e =>

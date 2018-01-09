@@ -13,12 +13,11 @@ namespace Firestorm.Engine
     public static class IdentifierExpressionHelpers
     {
         /// <summary>
-        /// Returns a predicate that returns true if the item in the <see cref="identifierExpr"/> matches the <see cref="identifier"/>.
+        /// Returns a predicate that returns true if the item in the <see cref="identifierExpr"/> matches the <see cref="identifierObj"/>.
         /// </summary>
         [Pure]
-        public static Expression<Func<TItem, bool>> GetIdentifierPredicate<TItem, TIdentifier>(Expression<Func<TItem, TIdentifier>> identifierExpr, string identifier)
+        public static Expression<Func<TItem, bool>> GetIdentifierPredicate<TItem, TIdentifier>(Expression<Func<TItem, TIdentifier>> identifierExpr, TIdentifier identifierObj)
         {
-            TIdentifier identifierObj = ConversionUtility.ConvertString<TIdentifier>(identifier);
             BinaryExpression predicateExpr = Expression.Equal(identifierExpr.Body, Expression.Constant(identifierObj, typeof(TIdentifier)));
             return Expression.Lambda<Func<TItem, bool>>(predicateExpr, identifierExpr.Parameters);
         }
@@ -30,9 +29,8 @@ namespace Firestorm.Engine
         /// Based on http://stackoverflow.com/a/326496/369247
         /// </remarks>
         [Pure]
-        public static Expression<Func<TItem, bool>> GetAnyIdentifierPredicate<TItem, TIdentifier>(Expression<Func<TItem, IEnumerable<TIdentifier>>> identifierExpr, string identifier)
+        public static Expression<Func<TItem, bool>> GetAnyIdentifierPredicate<TItem, TIdentifier>(Expression<Func<TItem, IEnumerable<TIdentifier>>> identifierExpr, TIdentifier identifierObj)
         {
-            TIdentifier identifierObj = ConversionUtility.ConvertString<TIdentifier>(identifier);
             var paramExpr = Expression.Parameter(typeof(TIdentifier), "r");
             BinaryExpression predicateExpr = Expression.Equal(paramExpr, Expression.Constant(identifierObj, typeof(TIdentifier)));
             var singleItemPredicate = Expression.Lambda<Func<TIdentifier, bool>>(predicateExpr, paramExpr);
@@ -56,13 +54,12 @@ namespace Firestorm.Engine
             return methods.First();
         }
 
-        public static void SetIdentifier<TItem, TIdentifier>(TItem item, Expression<Func<TItem, TIdentifier>> identifierExpr, string identifier)
+        public static void SetIdentifier<TItem, TIdentifier>(TItem item, Expression<Func<TItem, TIdentifier>> identifierExpr, TIdentifier newIdentifier)
         {
             MemberExpression expr = GetMemberExpression(identifierExpr);
             var propertyInfo = (PropertyInfo)expr.Member;
-
-            TIdentifier newReference = ConversionUtility.ConvertString<TIdentifier>(identifier);
-            propertyInfo.SetValue(item, newReference);
+            
+            propertyInfo.SetValue(item, newIdentifier);
         }
 
         /// <remarks>Taken from http://stackoverflow.com/a/17116267/369247 </remarks>

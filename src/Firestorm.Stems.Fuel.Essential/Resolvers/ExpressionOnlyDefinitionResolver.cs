@@ -4,9 +4,9 @@ using Firestorm.Engine.Additives.Readers;
 using Firestorm.Engine.Additives.Writers;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Subs.Context;
+using Firestorm.Engine.Subs.Handlers;
 using Firestorm.Stems.Attributes.Analysis;
 using Firestorm.Stems.Attributes.Definitions;
-using Firestorm.Stems.Fuel.Fields;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 
@@ -53,7 +53,7 @@ namespace Firestorm.Stems.Fuel.Essential.Resolvers
             {
                 Type locatorPropertyValueType = ResolverTypeUtility.GetPropertyLambdaReturnType<TItem>(FieldDefinition.Locator.Expression.GetType());
                 Debug.Assert(locatorPropertyValueType == FieldDefinition.FieldType, "FieldType is incorrect");
-                Type locatorFieldValueType = typeof(IdentityExpressionItemLocator<,>).MakeGenericType(typeof(TItem), locatorPropertyValueType);
+                Type locatorFieldValueType = typeof(IdentifierExpressionItemLocator<,>).MakeGenericType(typeof(TItem), locatorPropertyValueType);
                 var locator = (IItemLocator<TItem>) Activator.CreateInstance(locatorFieldValueType, FieldDefinition.Locator.Expression);
                 var locatorFactory = new SingletonFactory<IItemLocator<TItem>, TItem>(locator);
                 implementations.LocatorFactories.Add(FieldDefinition.FieldName, locatorFactory);

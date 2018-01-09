@@ -4,6 +4,7 @@ using Firestorm.Endpoints.AspNetCore;
 using Firestorm.Endpoints.AspNetCore.Middleware;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Extensions.AspNetCore;
+using Firestorm.Tests.Examples.Football.Data;
 using Firestorm.Tests.Examples.Football.Models;
 using Firestorm.Tests.Examples.Football.Tests;
 using JetBrains.Annotations;
@@ -57,6 +58,7 @@ namespace Firestorm.Tests.Examples.Football.Web
             using (var dbContext = app.ApplicationServices.GetService<FootballDbContext>())
             {
                 dbContext.Database.EnsureCreated();
+                DbInitializer.Initialize(dbContext);
             }
 
             app.UseFirestorm(new RestEndpointConfiguration
