@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
-using Firestorm.Engine;
 using Firestorm.Engine.Additives.Readers;
 using Firestorm.Engine.Additives.Writers;
 using Firestorm.Engine.Subs.Context;
@@ -29,7 +28,13 @@ namespace Firestorm.Fluent.Fuel.Builder
             Debug.Assert(_expression == null);
 
             _expression = expression;
+            _fieldModel.Expression = expression;
+
             _fieldModel.Reader = new ExpressionFieldReader<TItem, TField>(_expression);
+
+            string name = ExpressionNameHelper.GetFullPropertyName(_expression);
+            if (!string.IsNullOrEmpty(name))
+                _fieldModel.Name = name;
         }
 
         public IApiFieldBuilder<TItem, TField> HasName(string fieldName)

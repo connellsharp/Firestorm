@@ -24,6 +24,8 @@ namespace Firestorm.Fluent.Fuel.Models
 
         public string RootName { get; set; }
 
+        public Type ItemType => typeof(TItem);
+
         public Action<TItem> OnCreating { get; set; }
 
         public IRestCollectionSource GetRootCollectionSource()

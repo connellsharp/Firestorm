@@ -1,4 +1,6 @@
-﻿using Firestorm.Fluent.Fuel.Models;
+﻿using System.Linq;
+using Firestorm.Data;
+using Firestorm.Fluent.Fuel.Models;
 using Firestorm.Fluent.Fuel.Sources;
 using Firestorm.Fluent.Sources;
 
@@ -11,18 +13,29 @@ namespace Firestorm.Fluent.Fuel.Builder
             Model = model;
         }
 
-        public EngineApiModel Model { get; set; }
+        public EngineApiModel Model { get; }
 
         public virtual IApiItemBuilder<TItem> Item<TItem>()
             where TItem : class, new()
         {
-            var itemModel = new ApiItemModel<TItem>(Model.DataSource);
+            var itemModel = Model.Roots.FirstOrDefault(i => i.ItemType == typeof(TItem)) as ApiItemModel<TItem>
+                            ?? CreateNewItemModel<TItem>();
+
             var itemBuilder = new EngineItemBuilder<TItem>(itemModel);
+            return itemBuilder;
+        }
+
+        private ApiItemModel<TItem> CreateNewItemModel<TItem>()
+            where TItem : class, new()
+        {
+            var itemModel = new ApiItemModel<TItem>(Model.DataSource);
 
             Model.Items.Add(itemModel);
             Model.Roots.Add(itemModel);
 
-            return itemBuilder;
+            itemModel.RootName = PluralConventionUtility.Pluralize(typeof(TItem).Name);
+
+            return itemModel;
         }
 
         public IApiDirectorySource BuildSource()

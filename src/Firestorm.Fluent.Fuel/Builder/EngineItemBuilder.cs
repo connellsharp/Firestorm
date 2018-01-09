@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using Firestorm.Fluent.Fuel.Models;
 
@@ -35,14 +35,22 @@ namespace Firestorm.Fluent.Fuel.Builder
 
         public IApiFieldBuilder<TItem, TField> Field<TField>(Expression<Func<TItem, TField>> expression)
         {
-            var fieldModel = new ApiFieldModel<TItem>();
+            var fieldModel = _model.Fields.FirstOrDefault(f => f.Expression == expression) // TODO does not actually compare properly
+                             ?? CreateNewFieldModel();
 
             var fieldBuilder = new EngineFieldBuilder<TItem, TField>(fieldModel);
-            fieldBuilder.AddExpression(expression);
 
-            _model.Fields.Add(fieldModel);
+            if (fieldModel.Expression == null) // only models created above
+                fieldBuilder.AddExpression(expression);
 
             return fieldBuilder;
+        }
+
+        private ApiFieldModel<TItem> CreateNewFieldModel()
+        {
+            var fieldModel =  new ApiFieldModel<TItem>();
+            _model.Fields.Add(fieldModel);
+            return fieldModel;
         }
 
         public IApiItemBuilder<TItem> OnCreating(Action<TItem> action)

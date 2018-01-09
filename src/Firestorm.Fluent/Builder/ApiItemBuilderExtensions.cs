@@ -15,8 +15,9 @@ namespace Firestorm.Fluent
                 ParameterExpression paramExpression = Expression.Parameter(itemType);
                 LambdaExpression expression = Expression.Lambda(Expression.Property(paramExpression, property), paramExpression);
 
-                MethodInfo method = typeof(IApiBuilder).GetMethod(nameof(IApiItemBuilder<TItem>.Field))?.MakeGenericMethod(itemType);
-                method.Invoke(builder, new object[] { expression });
+                MethodInfo method = typeof(IApiItemBuilder<TItem>).GetMethod(nameof(IApiItemBuilder<TItem>.Field), BindingFlags.Public | BindingFlags.Instance);
+                MethodInfo genericMethod = method.MakeGenericMethod(property.PropertyType);
+                genericMethod.Invoke(builder, new object[] { expression });
             }
 
             return builder;
