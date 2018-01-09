@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Firestorm.Data;
@@ -6,7 +7,7 @@ using Firestorm.Fluent.Sources;
 
 namespace Firestorm.Fluent.Fuel.Models
 {
-    internal class ApiItemModel<TItem> : IApiItemModel
+    internal class ApiItemModel<TItem> : IApiItemModel, IApiRoot
         where TItem : class, new()
     {
         private readonly IDataSource _dataSource;
@@ -23,9 +24,11 @@ namespace Firestorm.Fluent.Fuel.Models
 
         public string RootName { get; set; }
 
+        public Action<TItem> OnCreating { get; set; }
+
         public IRestCollectionSource GetRootCollectionSource()
         {
-            return new RestCollectionSource<TItem>(_dataSource, Fields, Identifiers);
+            return new RestCollectionSource<TItem>(_dataSource, this);
         }
     }
 }
