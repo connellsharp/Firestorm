@@ -6,10 +6,12 @@ namespace Firestorm.Fluent
 {
     public static class ApiBuilderExtensions
     {
-        public static IApiBuilder Item<TItem>(this IApiBuilder builder, [NotNull] Action<IApiItemBuilder<TItem>> buildAction)
+        public static IApiBuilder Item<TItem>(this IApiBuilder builder, [NotNull] Action<IApiItemBuilder<TItem>> configureAction)
             where TItem : class, new()
         {
-            buildAction(builder.Item<TItem>());
+            builder.Item<TItem>()
+                .Configure(configureAction);
+
             return builder;
         }
     }

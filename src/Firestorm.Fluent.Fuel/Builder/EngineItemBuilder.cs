@@ -29,6 +29,7 @@ namespace Firestorm.Fluent.Fuel.Builder
             identifierBuilder.AddExpression(expression);
 
             _model.Identifiers.Add(identifierModel);
+
             return identifierBuilder;
         }
 
@@ -40,6 +41,7 @@ namespace Firestorm.Fluent.Fuel.Builder
             fieldBuilder.AddExpression(expression);
 
             _model.Fields.Add(fieldModel);
+
             return fieldBuilder;
         }
 

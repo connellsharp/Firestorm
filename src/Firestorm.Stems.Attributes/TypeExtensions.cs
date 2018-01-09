@@ -40,6 +40,8 @@ namespace Firestorm.Stems.Attributes
         [CanBeNull]
         public static Type GetGenericSubclass(this Type type, Type genericSubclass)
         {
+            // TODO Exact duplicate of this in Fluent.TypeExceptions. Starting to sense a pattern here...
+
             while (type != null && type != typeof(object))
             {
                 Type genericDefinition = type.IsGenericType ? type.GetGenericTypeDefinition() : type;

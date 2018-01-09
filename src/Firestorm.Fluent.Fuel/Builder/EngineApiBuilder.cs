@@ -18,8 +18,10 @@ namespace Firestorm.Fluent.Fuel.Builder
         {
             var itemModel = new ApiItemModel<TItem>(Model.DataSource);
             var itemBuilder = new EngineItemBuilder<TItem>(itemModel);
+
             Model.Items.Add(itemModel);
             Model.Roots.Add(itemModel);
+
             return itemBuilder;
         }
 

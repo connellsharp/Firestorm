@@ -1,61 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using JetBrains.Annotations;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Firestorm.Fluent
 {
     public static class ApiItemBuilderExtensions
     {
-        public static IApiItemBuilder<TNavItem> IsItem<TItem, TNavItem>(this IApiFieldBuilder<TItem, TNavItem> builder)
-            where TNavItem : class, new()
+        public static IApiItemBuilder<TItem> AutoConfigure<TItem>(this IApiItemBuilder<TItem> builder)
         {
-            return builder.IsItem<TNavItem>();
+            Type itemType = typeof(TItem);
+
+            foreach (PropertyInfo property in itemType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                ParameterExpression paramExpression = Expression.Parameter(itemType);
+                LambdaExpression expression = Expression.Lambda(Expression.Property(paramExpression, property), paramExpression);
+
+                MethodInfo method = typeof(IApiBuilder).GetMethod(nameof(IApiItemBuilder<TItem>.Field))?.MakeGenericMethod(itemType);
+                method.Invoke(builder, new object[] { expression });
+            }
+
+            return builder;
         }
 
-        public static IApiItemBuilder<TNavItem> IsCollection<TItem, TNavItem>(this IApiFieldBuilder<TItem, IQueryable<TNavItem>> builder)
-            where TNavItem : class, new()
+        public static IApiItemBuilder<TItem> Configure<TItem>(this IApiItemBuilder<TItem> builder, Action<IApiItemBuilder<TItem>> configureAction)
         {
-            return builder.IsCollection<IQueryable<TNavItem>, TNavItem>();
-        }
-
-        public static IApiItemBuilder<TNavItem> IsCollection<TItem, TNavItem>(this IApiFieldBuilder<TItem, ICollection<TNavItem>> builder)
-            where TNavItem : class, new()
-        {
-            return builder.IsCollection<ICollection<TNavItem>, TNavItem>();
-        }
-
-        public static IApiItemBuilder<TNavItem> IsCollection<TItem, TNavItem>(this IApiFieldBuilder<TItem, IEnumerable<TNavItem>> builder)
-            where TNavItem : class, new()
-        {
-            return builder.IsCollection<IEnumerable<TNavItem>, TNavItem>();
-        }
-
-        public static IApiFieldBuilder<TItem, IQueryable<TNavItem>> IsCollection<TItem, TNavItem>(this IApiFieldBuilder<TItem, IQueryable<TNavItem>> builder, [NotNull] Action<IApiItemBuilder<TNavItem>> buildAction)
-            where TNavItem : class, new()
-        {
-            return builder.IsCollection<TItem, IQueryable<TNavItem>, TNavItem>(buildAction);
-        }
-
-        public static IApiFieldBuilder<TItem, ICollection<TNavItem>> IsCollection<TItem, TNavItem>(this IApiFieldBuilder<TItem, ICollection<TNavItem>> builder, [NotNull] Action<IApiItemBuilder<TNavItem>> buildAction)
-            where TNavItem : class, new()
-        {
-            return builder.IsCollection<TItem, ICollection<TNavItem>, TNavItem>(buildAction);
-        }
-
-        public static IApiFieldBuilder<TItem, IEnumerable<TNavItem>> IsCollection<TItem, TNavItem>(this IApiFieldBuilder<TItem, IEnumerable<TNavItem>> builder, [NotNull] Action<IApiItemBuilder<TNavItem>> buildAction)
-            where TNavItem : class, new()
-        {
-            return builder.IsCollection<TItem, IEnumerable<TNavItem>, TNavItem>(buildAction);
-        }
-
-        public static IApiFieldBuilder<TItem, TCollection> IsCollection<TItem, TCollection, TNavItem>(this IApiFieldBuilder<TItem, TCollection> builder, [NotNull] Action<IApiItemBuilder<TNavItem>> buildAction)
-            where TCollection : IEnumerable<TNavItem>
-            where TNavItem : class, new()
-        {
-            IApiItemBuilder<TNavItem> apiItemBuilder = builder.IsCollection<TCollection, TNavItem>();
-            buildAction(apiItemBuilder);
-
+            configureAction(builder);
             return builder;
         }
     }

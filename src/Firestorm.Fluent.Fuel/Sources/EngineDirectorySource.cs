@@ -11,7 +11,7 @@ namespace Firestorm.Fluent.Fuel.Sources
 
         public EngineDirectorySource(EngineApiModel model)
         {
-            _rootItems = model.Roots.Where(im => im.RootName != null).ToDictionary(im => im.RootName);
+            _rootItems = model.Roots.ToDictionary(r => r.RootName);
         }
 
         public IRestCollectionSource GetCollectionSource(string collectionName)
