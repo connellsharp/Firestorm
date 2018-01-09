@@ -1,11 +1,18 @@
 ﻿using System.Linq;
 using Firestorm.Fluent;
+using Firestorm.Fluent.Sources;
 using Firestorm.Tests.Examples.Football.Models;
 
 namespace Firestorm.Tests.Examples.Football.Web
 {
     public class FootballRestContext : RestContext
     {
+        public ApiRoot<Team> Teams { get; set; }
+        public ApiRoot<Player> Players { get; set; }
+        public ApiRoot<Goal> Goals { get; set; }
+        public ApiRoot<Fixture> Fixtures { get; set; }
+        public ApiRoot<League> Leagues { get; set; }
+
         protected override void OnApiCreating(IApiBuilder apiBuilder)
         {
             apiBuilder.Item<League>(e =>
@@ -67,6 +74,11 @@ namespace Firestorm.Tests.Examples.Football.Web
                                 t.Field(tt => tt.TeamId).HasName("id").AllowLocate();
                                 t.Field(tt => tt.IsHome).HasName("home");
                             });
+
+                        ft.OnCreating(f =>
+                        {
+                            f.Fixture = new Fixture();
+                        });
                     });
             });
 

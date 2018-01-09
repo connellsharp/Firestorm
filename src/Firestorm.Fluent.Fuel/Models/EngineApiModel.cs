@@ -12,6 +12,8 @@ namespace Firestorm.Fluent.Fuel.Models
 
         internal IDataSource DataSource { get; }
 
-        public IList<IApiItemModel> Items { get; } = new List<IApiItemModel>();
+        public IList<IApiRoot> Roots { get; } = new List<IApiRoot>();
+
+        internal IList<IApiItemModel> Items { get; } = new List<IApiItemModel>();
     }
 }

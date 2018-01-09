@@ -42,5 +42,11 @@ namespace Firestorm.Fluent.Fuel.Builder
             _model.Fields.Add(fieldModel);
             return fieldBuilder;
         }
+
+        public IApiItemBuilder<TItem> OnCreating(Action<TItem> action)
+        {
+            _model.OnCreating = action;
+            return this;
+        }
     }
 }

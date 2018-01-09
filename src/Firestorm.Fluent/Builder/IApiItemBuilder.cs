@@ -13,5 +13,7 @@ namespace Firestorm.Fluent
         IApiIdentifierBuilder<TItem, TIdentifier> Identifier<TIdentifier>(Expression<Func<TItem, TIdentifier>> expression);
 
         IApiFieldBuilder<TItem, TField> Field<TField>(Expression<Func<TItem, TField>> expression);
+
+        IApiItemBuilder<TItem> OnCreating(Action<TItem> expression);
     }
 }

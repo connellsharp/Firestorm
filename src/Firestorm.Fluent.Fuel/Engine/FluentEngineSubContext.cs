@@ -11,10 +11,10 @@ namespace Firestorm.Fluent.Fuel.Engine
     internal class FluentEngineSubContext<TItem> : IEngineSubContext<TItem>
         where TItem : class, new()
     {
-        public FluentEngineSubContext(IEnumerable<ApiFieldModel<TItem>> fieldModels, IEnumerable<ApiIdentifierModel<TItem>> identifierModels)
+        internal FluentEngineSubContext(ApiItemModel<TItem> itemModel)
         {
-            Identifiers = new FluentIdentifierProvider<TItem>(identifierModels);
-            Fields = new FluentFieldProvider<TItem>(fieldModels);
+            Identifiers = new FluentIdentifierProvider<TItem>(itemModel.Identifiers);
+            Fields = new FluentFieldProvider<TItem>(itemModel.Fields);
             
             AuthorizationChecker = new AllowAllAuthorizationChecker<TItem>(); // TODO
         }
