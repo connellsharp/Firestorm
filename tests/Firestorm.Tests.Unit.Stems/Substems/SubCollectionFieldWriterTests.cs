@@ -21,7 +21,7 @@ namespace Firestorm.Tests.Unit.Stems.Substems
             subStem.SetParent(new TestStartAxis());
 
             StemsEngineSubContext<Album> stemsEngineSubContext = new StemsEngineSubContext<Album>(subStem);
-            NameFieldWriter = new SubCollectionFieldWriter<Artist, IEnumerable<Album>, Album>(a => a.Albums, stemsEngineSubContext);
+            NameFieldWriter = new SubCollectionFieldWriter<Artist, IEnumerable<Album>, Album>(a => a.Albums, stemsEngineSubContext, null);
         }
 
         public class ArtistAlbumsStem : Stem<Album>
