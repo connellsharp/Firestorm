@@ -9,13 +9,13 @@ namespace Firestorm.Engine.Subs.Repositories
     /// <summary>
     /// Wraps and implements <see cref="IEngineRepository{TItem}"/> and calls methods on the given events object when repository methods are called.
     /// </summary>
-    public class RepositoryEventWrapper<TItem>: IEngineRepository<TItem>
+    internal class RepositoryEventWrapper<TItem>: IEngineRepository<TItem>
         where TItem : class
     {
         private readonly IEngineRepository<TItem> _repository;
         private readonly IRepositoryEvents<TItem> _events;
 
-        public RepositoryEventWrapper(IEngineRepository<TItem> repository, IRepositoryEvents<TItem> events)
+        internal RepositoryEventWrapper(IEngineRepository<TItem> repository, IRepositoryEvents<TItem> events)
         {
             _repository = repository;
             _events = events;
@@ -46,18 +46,6 @@ namespace Firestorm.Engine.Subs.Repositories
         public void MarkDeleted(TItem item)
         {
             _repository.MarkDeleted(item);
-        }
-    }
-
-    public static class RepositoryWrapperUtility
-    {
-        public static IEngineRepository<TItem> TryWrapEvents<TItem>(IEngineRepository<TItem> repository, IRepositoryEvents<TItem> events)
-            where TItem : class
-        {
-            if (events != null && events.HasAnyEvent)
-                return new RepositoryEventWrapper<TItem>(repository, events);
-
-            return repository;
         }
     }
 }
