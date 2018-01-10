@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Linq.Expressions;
 using Firestorm.Engine.Additives.Readers;
 using Firestorm.Engine.Additives.Writers;
@@ -16,30 +14,23 @@ namespace Firestorm.Fluent.Fuel.Builder
         where TItem : class
     {
         private readonly ApiFieldModel<TItem> _fieldModel;
-        private Expression<Func<TItem, TField>> _expression;
+        private readonly Expression<Func<TItem, TField>> _expression;
 
-        internal EngineFieldBuilder(ApiFieldModel<TItem> fieldModel)
+        internal EngineFieldBuilder(ApiFieldModel<TItem> fieldModel, Expression<Func<TItem, TField>> expression)
         {
             _fieldModel = fieldModel;
-        }
-
-        public void AddExpression(Expression<Func<TItem, TField>> expression)
-        {
-            Debug.Assert(_expression == null);
-
             _expression = expression;
-            _fieldModel.Expression = expression;
-
-            _fieldModel.Reader = new ExpressionFieldReader<TItem, TField>(_expression);
-
-            string name = ExpressionNameHelper.GetFullPropertyName(_expression);
-            if (!string.IsNullOrEmpty(name))
-                _fieldModel.Name = name;
         }
 
         public IApiFieldBuilder<TItem, TField> HasName(string fieldName)
         {
             _fieldModel.Name = fieldName;
+            return this;
+        }
+
+        public IApiFieldBuilder<TItem, TField> AllowRead()
+        {
+            _fieldModel.Reader = new ExpressionFieldReader<TItem, TField>(_expression);
             return this;
         }
 

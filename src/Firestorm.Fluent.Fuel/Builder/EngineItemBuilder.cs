@@ -35,21 +35,29 @@ namespace Firestorm.Fluent.Fuel.Builder
 
         public IApiFieldBuilder<TItem, TField> Field<TField>(Expression<Func<TItem, TField>> expression)
         {
-            var fieldModel = _model.Fields.FirstOrDefault(f => f.Expression == expression) // TODO does not actually compare properly
-                             ?? CreateNewFieldModel();
+            string originalName = ExpressionNameHelper.GetFullPropertyName(expression);
 
-            var fieldBuilder = new EngineFieldBuilder<TItem, TField>(fieldModel);
+            var fieldModel = _model.Fields.FirstOrDefault(f => f.OriginalName == originalName)
+                             ?? CreateNewFieldModel(originalName);
 
-            if (fieldModel.Expression == null) // only models created above
-                fieldBuilder.AddExpression(expression);
+            var fieldBuilder = new EngineFieldBuilder<TItem, TField>(fieldModel, expression);
+
+            if (fieldModel.Reader == null) // only models created above
+                fieldBuilder.AllowRead();
 
             return fieldBuilder;
         }
 
-        private ApiFieldModel<TItem> CreateNewFieldModel()
+        private ApiFieldModel<TItem> CreateNewFieldModel(string originalName)
         {
-            var fieldModel =  new ApiFieldModel<TItem>();
+            var fieldModel = new ApiFieldModel<TItem>
+            {
+                OriginalName = originalName,
+                Name = originalName
+            };
+
             _model.Fields.Add(fieldModel);
+
             return fieldModel;
         }
 
