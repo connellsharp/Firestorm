@@ -26,7 +26,7 @@ namespace Firestorm.Fluent.Fuel.Models
 
         public Type ItemType => typeof(TItem);
 
-        public Action<TItem> OnCreating { get; set; }
+        public ActionRepositoryEvents<TItem> Events { get; } = new ActionRepositoryEvents<TItem>();
 
         public IRestCollectionSource GetRootCollectionSource()
         {

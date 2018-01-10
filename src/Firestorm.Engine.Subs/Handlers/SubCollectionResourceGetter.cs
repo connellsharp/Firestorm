@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using Firestorm.Data;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Engine.Subs.Repositories;
+using JetBrains.Annotations;
 
 namespace Firestorm.Engine.Subs.Handlers
 {
@@ -14,17 +15,22 @@ namespace Firestorm.Engine.Subs.Handlers
     {
         private readonly Expression<Func<TItem, TCollection>> _navigationExpression;
         private readonly IEngineSubContext<TNav> _engineSubContext;
+        private readonly IRepositoryEvents<TNav> _repoEvents;
 
-        public SubCollectionResourceGetter(Expression<Func<TItem, TCollection>> navigationExpression, IEngineSubContext<TNav> engineSubContext)
+        public SubCollectionResourceGetter(Expression<Func<TItem, TCollection>> navigationExpression, IEngineSubContext<TNav> engineSubContext, [CanBeNull] IRepositoryEvents<TNav> repoEvents)
         {
             _navigationExpression = navigationExpression;
             _engineSubContext = engineSubContext;
+            _repoEvents = repoEvents;
         }
 
         public IRestResource GetFullResource(IDeferredItem<TItem> item, IDataTransaction dataTransaction)
         {
-            var navRepository = new NavigationCollectionRepository<TItem, TCollection, TNav>(item, _navigationExpression);
+            IEngineRepository<TNav> navRepository = new NavigationCollectionRepository<TItem, TCollection, TNav>(item, _navigationExpression);
+            navRepository = RepositoryWrapperUtility.TryWrapEvents(navRepository, _repoEvents);
+
             var context = new FullEngineContext<TNav>(dataTransaction, navRepository, _engineSubContext);
+
             return new EngineRestCollection<TNav>(context);
         }
     }

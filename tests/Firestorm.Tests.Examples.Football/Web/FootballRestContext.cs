@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Firestorm.Fluent;
 using Firestorm.Fluent.Sources;
 using Firestorm.Tests.Examples.Football.Models;
@@ -71,13 +72,16 @@ namespace Firestorm.Tests.Examples.Football.Web
                             .HasName("teams")
                             .IsCollection(t =>
                             {
-                                t.Field(tt => tt.TeamId).HasName("id").AllowLocate();
+                                t.Field(tt => tt.TeamId).HasName("id").AllowLocate().AllowWrite();
                                 t.Field(tt => tt.IsHome).HasName("home");
                             });
 
                         ft.OnCreating(f =>
                         {
-                            f.Fixture = new Fixture();
+                            f.Fixture = new Fixture
+                            {
+                                Teams = new List<FixtureTeam>(2)
+                            };
                         });
                     });
             });

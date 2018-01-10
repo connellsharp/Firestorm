@@ -8,6 +8,7 @@ using Firestorm.Engine.Deferring;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Engine.Subs.Repositories;
+using JetBrains.Annotations;
 
 namespace Firestorm.Engine.Subs.Handlers
 {
@@ -18,18 +19,22 @@ namespace Firestorm.Engine.Subs.Handlers
     {
         private readonly Expression<Func<TItem, TProperty>> _navigationExpression;
         private readonly IEngineSubContext<TNav> _subContext;
+        private readonly IRepositoryEvents<TNav> _repoEvents;
 
-        public SubCollectionFieldWriter(Expression<Func<TItem, TProperty>> navigationExpression, IEngineSubContext<TNav> subContext)
+        public SubCollectionFieldWriter(Expression<Func<TItem, TProperty>> navigationExpression, IEngineSubContext<TNav> subContext, IRepositoryEvents<TNav> repoEvents)
         {
             _navigationExpression = navigationExpression;
             _subContext = subContext;
+            _repoEvents = repoEvents;
         }
 
         public async Task SetValueAsync(IDeferredItem<TItem> item, object deserializedValue, IDataTransaction dataTransaction)
         {
-            var navRepository = new NavigationCollectionRepository<TItem, TProperty, TNav>(item, _navigationExpression);
-
             var navLocatorCreator = new NavigationItemLocatorCreator<TNav>(_subContext);
+
+            IEngineRepository<TNav> navRepository = new NavigationCollectionRepository<TItem, TProperty, TNav>(item, _navigationExpression);
+            navRepository = RepositoryWrapperUtility.TryWrapEvents(navRepository, _repoEvents);
+
             var navContext = new FullEngineContext<TNav>(dataTransaction, navRepository, _subContext);
 
             IEnumerable deserializedCollection = (IEnumerable) deserializedValue; // todo null ?

@@ -10,7 +10,7 @@ namespace Firestorm.Engine.Subs.Repositories
     /// <summary>
     /// An engine repository for a navigation collection property.
     /// </summary>
-    public class NavigationCollectionRepository<TParent, TCollection, TNav> : IEngineRepository<TNav>
+    internal class NavigationCollectionRepository<TParent, TCollection, TNav> : IEngineRepository<TNav>
         where TNav : class, new()
         where TCollection : IEnumerable<TNav>
     {

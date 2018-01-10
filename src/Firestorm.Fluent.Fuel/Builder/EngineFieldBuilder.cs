@@ -70,8 +70,8 @@ namespace Firestorm.Fluent.Fuel.Builder
             IEngineSubContext<TNavItem> subContext = new FluentEngineSubContext<TNavItem>(itemModel);
 
             _fieldModel.Reader = new SubCollectionFieldReader<TItem, TCollection, TNavItem>(castedExpression, subContext);
-            _fieldModel.ResourceGetter = new SubCollectionResourceGetter<TItem, TCollection, TNavItem>(castedExpression, subContext);
-            _fieldModel.Writer = new SubCollectionFieldWriter<TItem, TCollection, TNavItem>(castedExpression, subContext);
+            _fieldModel.ResourceGetter = new SubCollectionResourceGetter<TItem, TCollection, TNavItem>(castedExpression, subContext, itemModel.Events);
+            _fieldModel.Writer = new SubCollectionFieldWriter<TItem, TCollection, TNavItem>(castedExpression, subContext, itemModel.Events);
 
             var itemBuilder = new EngineItemBuilder<TNavItem>(itemModel);
             return itemBuilder;

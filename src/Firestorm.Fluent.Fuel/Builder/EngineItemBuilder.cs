@@ -63,7 +63,7 @@ namespace Firestorm.Fluent.Fuel.Builder
 
         public IApiItemBuilder<TItem> OnCreating(Action<TItem> action)
         {
-            _model.OnCreating = action;
+            _model.Events.OnCreatingAction = action;
             return this;
         }
     }
