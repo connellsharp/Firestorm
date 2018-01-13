@@ -30,11 +30,10 @@ namespace Firestorm.Engine.Subs.Handlers
 
         public async Task SetValueAsync(IDeferredItem<TItem> item, object deserializedValue, IDataTransaction dataTransaction)
         {
-            var navLocatorCreator = new NavigationItemLocatorCreator<TNav>(_subContext);
-
             IEngineRepository<TNav> navRepository = new NavigationCollectionRepository<TItem, TProperty, TNav>(item, _navigationExpression);
             navRepository = RepositoryWrapperUtility.TryWrapEvents(navRepository, _repoEvents);
 
+            var navLocatorCreator = new NavigationItemLocatorCreator<TNav>(_subContext);
             var navContext = new FullEngineContext<TNav>(dataTransaction, navRepository, _subContext);
 
             IEnumerable deserializedCollection = (IEnumerable) deserializedValue; // todo null ?
@@ -43,7 +42,7 @@ namespace Firestorm.Engine.Subs.Handlers
             {
                 var itemData = new RestItemData(deserializedItem);
                 
-                DeferredItemBase<TNav> deferredItem = await navLocatorCreator.LocateOrCreateItemAsync(navContext, itemData, item.LoadAsync);
+                DeferredItemBase<TNav> deferredItem = await navLocatorCreator.LocateOrCreateItemAsync(navRepository, itemData, item.LoadAsync);
 
                 var navEngineItem = new EngineRestItem<TNav>(navContext, deferredItem);
                 Acknowledgment acknowledgment = await navEngineItem.EditAsync(itemData);

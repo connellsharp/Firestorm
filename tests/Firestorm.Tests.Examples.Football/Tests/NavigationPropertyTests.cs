@@ -21,8 +21,8 @@ namespace Firestorm.Tests.Examples.Football.Tests
             HttpClient client = _fixture.GetClient(tech);
 
             HttpResponseMessage response = await client.PostAsync("/teams/1/fixtures", new StringContent(@"[
-                { teams: [ { id: 2 } ], home: true, goals: [ ] },
-                { teams: [ { id: 3, home: true } ], goals: [ ] },
+                { vs_team: { id: 2 }, home: false, goals: [ ] },
+                { vs_team: { id: 3 }, home: true , goals: [ ] },
             ]"));
 
             AssertSuccess(response);

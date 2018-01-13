@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Firestorm.Data;
 using Firestorm.Engine.Deferring;
 using Firestorm.Engine.Queryable;
 using Firestorm.Engine.Subs.Context;
@@ -22,20 +23,20 @@ namespace Firestorm.Engine.Subs.Handlers
         /// <summary>
         /// Attempts to locate the item to modify using the modification request data.
         /// </summary>
-        internal async Task<DeferredItemBase<TNav>> LocateOrCreateItemAsync(FullEngineContext<TNav> navContext, RestItemData itemData, Func<Task> loadParentAsync)
+        internal async Task<DeferredItemBase<TNav>> LocateOrCreateItemAsync(IEngineRepository<TNav> navRepository, RestItemData itemData, Func<Task> loadParentAsync)
         {
-            var locatedItem = LocateItem(navContext, itemData);
+            var locatedItem = LocateItem(navRepository, itemData);
             if (locatedItem != null)
                 return locatedItem;
 
             await loadParentAsync();
-            return new CreatableItem<TNav>(navContext.Repository);
+            return new CreatableItem<TNav>(navRepository);
         }
 
         /// <summary>
         /// Attempts to locate the item to modify using the modification request data.
         /// </summary>
-        internal DeferredItemBase<TNav> LocateItem(FullEngineContext<TNav> navContext, RestItemData itemData)
+        internal DeferredItemBase<TNav> LocateItem(IEngineRepository<TNav> navRepository, RestItemData itemData)
         {
             foreach (string fieldName in itemData.Keys)
             {
@@ -46,7 +47,7 @@ namespace Firestorm.Engine.Subs.Handlers
                 {
                     object findValue = itemData[fieldName];
 
-                    TNav locatedItem = locator.TryLocateItem(navContext.Repository, findValue);
+                    TNav locatedItem = locator.TryLocateItem(navRepository, findValue);
                     if (locatedItem != null)
                     {
                         itemData.Remove(fieldName); // remove so we don't write to this value later.

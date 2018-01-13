@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using Firestorm.Data;
 using Firestorm.Engine;
+using Firestorm.Engine.Additives.Writers;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Fluent.Fuel.Models;
@@ -44,7 +45,8 @@ namespace Firestorm.Fluent.Fuel.Engine
 
         public IFieldWriter<TItem> GetWriter(string fieldName)
         {
-            return _fieldModels[fieldName].Writer;
+            ApiFieldModel<TItem> model = _fieldModels[fieldName];
+            return model.Writer ?? new ConfirmOnlyFieldWriter<TItem>(fieldName, model.Reader);
         }
 
         public IFieldDescription GetDescription(string fieldName, CultureInfo cultureInfo)

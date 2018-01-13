@@ -12,7 +12,7 @@ namespace Firestorm.Stems.Fuel.Substems.Factories
     /// </summary>
     internal class SubItemFieldWriterFactory<TItem, TNav, TSubstem> : IFactory<IFieldWriter<TItem>,TItem>
         where TItem : class
-        where TNav : class
+        where TNav : class, new()
         where TSubstem : Stem<TNav>
     {
         private readonly Expression<Func<TItem, TNav>> _navigationExpression;
@@ -26,7 +26,7 @@ namespace Firestorm.Stems.Fuel.Substems.Factories
         public IFieldWriter<TItem> Get(Stem<TItem> stem)
         {
             StemsEngineSubContext<TNav> subContext = SubstemEngineSubContextCreator<TItem, TNav, TSubstem>.StemEngineContextFields(stem);
-            return new SubItemFieldWriter<TItem, TNav>(_navigationExpression, subContext);
+            return new SubItemFieldWriter<TItem, TNav>(_navigationExpression, subContext, null);
         }
     }
 }

@@ -1,12 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Debug;
 
 namespace Firestorm.Tests.Examples.Football.Models
 {
     public class FootballDbContext : DbContext
     {
+        public static readonly LoggerFactory MyLoggerFactory
+            = new LoggerFactory(new[] { new DebugLoggerProvider((_, __) => true) });
+
         public FootballDbContext(DbContextOptions<FootballDbContext> options)
             : base(options)
-        { }
+        {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLoggerFactory(MyLoggerFactory);
+        }
 
         public DbSet<Team> Teams { get; set; }
         public DbSet<Player> Players { get; set; }
