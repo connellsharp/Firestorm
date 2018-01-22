@@ -17,7 +17,7 @@ namespace Firestorm.Extensions.AspNetCore
         {
             var context = new TApiContext();
 
-            builder.Services.AddSingleton<IStartResourceFactory>(sp => new FluentStartResourceFactory
+            builder.AddStartResourceFactory(sp => new FluentStartResourceFactory
             {
                 RestContext = context,
                 DataSource = sp.GetService<IDataSource>()

@@ -30,7 +30,7 @@ namespace Firestorm.Extensions.AspNetCore
         /// </summary>
         public static IFirestormServicesBuilder AddStems(this IFirestormServicesBuilder builder, Assembly assembly, string baseNamespace)
         {
-            builder.Services.AddSingleton<IStartResourceFactory>(sp => new StemsStartResourceFactory
+            builder.AddStartResourceFactory(sp => new StemsStartResourceFactory
             {
                 StemConfiguration = new DefaultStemConfiguration
                 {

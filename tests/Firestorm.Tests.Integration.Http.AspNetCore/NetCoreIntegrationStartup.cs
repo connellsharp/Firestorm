@@ -32,10 +32,8 @@ namespace Firestorm.Tests.Integration.Http.AspNetCore
         [UsedImplicitly]
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddFirestorm(config =>
-            {
-                config.StartResourceFactory = new IntegratedStartResourceFactory();
-            });
+            services.AddFirestorm()
+                .AddStartResourceFactory(new IntegratedStartResourceFactory());
         }
 
         [UsedImplicitly]
