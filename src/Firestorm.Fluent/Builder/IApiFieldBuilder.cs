@@ -19,7 +19,7 @@ namespace Firestorm.Fluent
             where TNavItem : class, TField, new();
 
         IApiItemBuilder<TNavItem> IsCollection<TCollection, TNavItem>()
-            where TCollection : TField, IEnumerable<TNavItem>
+            where TCollection : class, TField, IEnumerable<TNavItem>
             where TNavItem : class, new();
     }
 }

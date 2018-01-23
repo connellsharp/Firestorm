@@ -18,7 +18,10 @@ namespace Firestorm.Engine.Additives
                 throw new ArgumentException(String.Format("Property '{0}' was reflected from a type that is not assignable from {1}.", propertyInfo.Name, expectedType));
         }
 
-        /// <remarks>Taken from http://stackoverflow.com/a/672212/369247 </remarks>
+        /// <remarks>
+        /// Taken from http://stackoverflow.com/a/672212/369247
+        /// Very similar utility in <see cref="IdentifierExpressionHelpers"/>
+        /// </remarks>
         internal static PropertyInfo GetPropertyInfoFromLambda<TItem, TProperty>([NotNull] Expression<Func<TItem, TProperty>> propertyExpression) 
             where TItem : class
         {

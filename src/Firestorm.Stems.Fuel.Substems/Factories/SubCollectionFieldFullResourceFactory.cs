@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Engine.Subs.Handlers;
-using Firestorm.Stems.Fuel.Fields;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 using JetBrains.Annotations;
 
@@ -14,9 +13,9 @@ namespace Firestorm.Stems.Fuel.Substems.Factories
     /// </summary>
     internal class SubCollectionFieldFullResourceFactory<TItem, TCollection, TNav, TSubstem> : IFactory<IFieldResourceGetter<TItem>, TItem>
         where TItem : class
+        where TCollection : class, IEnumerable<TNav>
         where TNav : class, new()
         where TSubstem : Stem<TNav>
-        where TCollection : IEnumerable<TNav>
     {
         private readonly Expression<Func<TItem, TCollection>> _navigationExpression;
 
@@ -29,7 +28,8 @@ namespace Firestorm.Stems.Fuel.Substems.Factories
         public IFieldResourceGetter<TItem> Get(Stem<TItem> stem)
         {
             StemsEngineSubContext<TNav> subContext = SubstemEngineSubContextCreator<TItem, TNav, TSubstem>.StemEngineContextFields(stem);
-            return new SubCollectionResourceGetter<TItem, TCollection,TNav>(_navigationExpression, subContext, null);
+            var tools = new SubWriterTools<TItem, TCollection, TNav>(_navigationExpression, null, null);
+            return new SubCollectionResourceGetter<TItem, TCollection,TNav>(tools, subContext);
         }
     }
 }

@@ -13,28 +13,23 @@ using JetBrains.Annotations;
 
 namespace Firestorm.Engine.Subs.Handlers
 {
-    public class SubCollectionFieldWriter<TItem, TProperty, TNav> : IFieldWriter<TItem>
+    public class SubCollectionFieldWriter<TItem, TCollection, TNav> : IFieldWriter<TItem>
         where TItem : class
         where TNav : class, new()
-        where TProperty : IEnumerable<TNav>
+        where TCollection : class, IEnumerable<TNav>
     {
-        private readonly Expression<Func<TItem, TProperty>> _navigationExpression;
+        private readonly SubWriterTools<TItem, TCollection, TNav> _navTools;
         private readonly IEngineSubContext<TNav> _subContext;
-        private readonly IRepositoryEvents<TNav> _repoEvents;
-        private readonly INavigationSetter<TItem, TProperty> _setter;
 
-        public SubCollectionFieldWriter(Expression<Func<TItem, TProperty>> navigationExpression, IEngineSubContext<TNav> subContext, IRepositoryEvents<TNav> repoEvents, [CanBeNull] INavigationSetter<TItem, TProperty> setter)
+        public SubCollectionFieldWriter(SubWriterTools<TItem, TCollection, TNav> navTools, IEngineSubContext<TNav> subContext)
         {
-            _navigationExpression = navigationExpression;
+            _navTools = navTools;
             _subContext = subContext;
-            _repoEvents = repoEvents;
-            _setter = setter ?? new DefaultNavigationSetter<TItem, TProperty>(_navigationExpression);
         }
 
         public async Task SetValueAsync(IDeferredItem<TItem> item, object deserializedValue, IDataTransaction dataTransaction)
         {
-            IEngineRepository<TNav> navRepository = new NavigationCollectionRepository<TItem, TProperty, TNav>(item, _navigationExpression, _setter);
-            navRepository = RepositoryWrapperUtility.TryWrapEvents(navRepository, _repoEvents);
+            IEngineRepository<TNav> navRepository = new NavigationCollectionRepository<TItem, TCollection, TNav>(item, _navTools);
 
             IDataTransaction transaction = new VoidTransaction(); // we commit the transaction in the parent. TODO optional save-as-you-go ?
             var navContext = new FullEngineContext<TNav>(transaction, navRepository, _subContext);

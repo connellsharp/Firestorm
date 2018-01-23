@@ -16,7 +16,7 @@ namespace Firestorm.Fluent.Fuel.Builder
     {
         private readonly ApiFieldModel<TItem> _fieldModel;
         private readonly Expression<Func<TItem, TField>> _expression;
-        private INavigationItemSetter<TItem, TField> _setter;
+        private INavigationSetter<TItem, TField> _setter;
 
         internal EngineFieldBuilder(ApiFieldModel<TItem> fieldModel, Expression<Func<TItem, TField>> expression)
         {
@@ -39,13 +39,13 @@ namespace Firestorm.Fluent.Fuel.Builder
         public IApiFieldBuilder<TItem, TField> AllowWrite()
         {
             _fieldModel.Writer = new PropertyExpressionFieldWriter<TItem, TField>(_expression);
-            _setter = new DefaultNavigationItemSetter<TItem, TField>(_expression);
+            _setter = new DefaultNavigationSetter<TItem, TField>(_expression);
             return this;
         }
 
         public IApiFieldBuilder<TItem, TField> AllowWrite(Action<TItem, TField> action)
         {
-            _setter = new ActionNavigationItemSetter<TItem, TField>(action);
+            _setter = new ActionNavigationSetter<TItem, TField>(action);
             return this;
         }
 
@@ -59,28 +59,35 @@ namespace Firestorm.Fluent.Fuel.Builder
             where TNavItem : class, TField, new()
         {
             var itemModel = new ApiItemModel<TNavItem>(null); // can be null because GetRootCollection never called for navigation properties
-            var castedExpression = _expression as Expression<Func<TItem, TNavItem>>; // should cast fine due to generic constraint
             IEngineSubContext<TNavItem> subContext = new FluentEngineSubContext<TNavItem>(itemModel);
 
+            var castedExpression = _expression as Expression<Func<TItem, TNavItem>>; // should cast fine due to generic constraint
+
+            var navTools = new SubWriterTools<TItem, TNavItem, TNavItem>(castedExpression, itemModel.Events, _setter);
+
             _fieldModel.Reader = new SubItemFieldReader<TItem, TNavItem>(castedExpression, subContext);
-            _fieldModel.ResourceGetter = new SubItemResourceGetter<TItem, TNavItem>(castedExpression, subContext); // TODO events
-            _fieldModel.Writer = new SubItemFieldWriter<TItem, TNavItem>(castedExpression, subContext, itemModel.Events, _setter);
+            _fieldModel.ResourceGetter = new SubItemResourceGetter<TItem, TNavItem>(castedExpression, subContext);
+            _fieldModel.Writer = new SubItemFieldWriter<TItem, TNavItem>(navTools, subContext);
 
             var itemBuilder = new EngineItemBuilder<TNavItem>(itemModel);
             return itemBuilder;
         }
 
         public IApiItemBuilder<TNavItem> IsCollection<TCollection, TNavItem>()
-            where TCollection : TField, IEnumerable<TNavItem>
+            where TCollection : class, TField, IEnumerable<TNavItem>
             where TNavItem : class, new()
         {
             var itemModel = new ApiItemModel<TNavItem>(null); // can be null because GetRootCollection never called for navigation properties
-            var castedExpression = _expression as Expression<Func<TItem, TCollection>>; // should cast fine due to generic constraint
             IEngineSubContext<TNavItem> subContext = new FluentEngineSubContext<TNavItem>(itemModel);
 
+            var castedExpression = _expression as Expression<Func<TItem, TCollection>>; // should cast fine due to generic constraint
+            var castedSetter = _setter as INavigationSetter<TItem, TCollection>;
+
+            var navTools = new SubWriterTools<TItem, TCollection, TNavItem>(castedExpression, itemModel.Events, castedSetter);
+
             _fieldModel.Reader = new SubCollectionFieldReader<TItem, TCollection, TNavItem>(castedExpression, subContext);
-            _fieldModel.ResourceGetter = new SubCollectionResourceGetter<TItem, TCollection, TNavItem>(castedExpression, subContext, itemModel.Events);
-            _fieldModel.Writer = new SubCollectionFieldWriter<TItem, TCollection, TNavItem>(castedExpression, subContext, itemModel.Events);
+            _fieldModel.ResourceGetter = new SubCollectionResourceGetter<TItem, TCollection, TNavItem>(navTools, subContext);
+            _fieldModel.Writer = new SubCollectionFieldWriter<TItem, TCollection, TNavItem>(navTools, subContext);
 
             var itemBuilder = new EngineItemBuilder<TNavItem>(itemModel);
             return itemBuilder;

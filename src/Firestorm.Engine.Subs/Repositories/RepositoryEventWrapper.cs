@@ -8,6 +8,7 @@ namespace Firestorm.Engine.Subs.Repositories
 {
     /// <summary>
     /// Wraps and implements <see cref="IEngineRepository{TItem}"/> and calls methods on the given events object when repository methods are called.
+    /// Note: You do not need to wrap <see cref="NavigationItemRepository{TParent,TNav}"/> or <see cref="NavigationCollectionRepository{TParent,TCollection,TNav}"/>.
     /// </summary>
     internal class RepositoryEventWrapper<TItem>: IEngineRepository<TItem>
         where TItem : class

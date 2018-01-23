@@ -3,6 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Firestorm.Data;
+using Firestorm.Engine.Subs.Handlers;
 
 namespace Firestorm.Engine.Subs.Repositories
 {
@@ -10,17 +11,16 @@ namespace Firestorm.Engine.Subs.Repositories
     /// An engine repository for a navigation collection property.
     /// </summary>
     internal class NavigationItemRepository<TParent, TNav> : IEngineRepository<TNav>
+        where TParent : class
         where TNav : class, new()
     {
         private readonly IDeferredItem<TParent> _parentItem;
-        private readonly Expression<Func<TParent, TNav>> _navigationExpression;
-        private readonly INavigationItemSetter<TParent, TNav> _navSetter;
+        private readonly SubWriterTools<TParent, TNav, TNav> _tools;
 
-        public NavigationItemRepository(IDeferredItem<TParent> parentItem, Expression<Func<TParent, TNav>> navigationExpression, INavigationItemSetter<TParent, TNav> navSetter)
+        public NavigationItemRepository(IDeferredItem<TParent> parentItem, SubWriterTools<TParent, TNav, TNav> tools)
         {
             _parentItem = parentItem;
-            _navigationExpression = navigationExpression;
-            _navSetter = navSetter;
+            _tools = tools;
         }
 
         public async Task InitializeAsync()
@@ -33,12 +33,13 @@ namespace Firestorm.Engine.Subs.Repositories
         {
             // assumes that parent item query always 1 item
             // returns empty enumerable if no navigation item is set so CreateAndAttachItem can be called later.
-            return _parentItem.Query.Select(_navigationExpression).Where(i => i != null);
+            return _parentItem.Query.Select(_tools.NavExpression).Where(i => i != null);
         }
 
         public TNav CreateAndAttachItem()
         {
             var item = new TNav();
+            _tools.RepoEvents.OnCreating(item);
             SetParentNavItem(item);
             return item;
         }
@@ -51,7 +52,7 @@ namespace Firestorm.Engine.Subs.Repositories
         private void SetParentNavItem(TNav item)
         {
             var parent = _parentItem.Query.First();
-            _navSetter.SetNavItem(parent, item);
+            _tools.Setter.SetNavItem(parent, item);
         }
 
         public Task ForEachAsync<T>(IQueryable<T> query, Action<T> action)

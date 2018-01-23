@@ -9,6 +9,10 @@ namespace Firestorm.Engine.Subs.Handlers
         where TItem : class
         where TNav : class, new()
     {
+        //public SubItemResourceGetter(SubWriterTools<TItem, TNav, TNav> navTools, IEngineSubContext<TNav> subContext)
+        //{
+        //}
+
         public SubItemResourceGetter(Expression<Func<TItem, TNav>> navigationExpression, IEngineSubContext<TNav> engineSubContext)
             : base(navigationExpression, engineSubContext)
         { }

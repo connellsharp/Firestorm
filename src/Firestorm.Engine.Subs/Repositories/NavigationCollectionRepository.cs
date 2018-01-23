@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Firestorm.Data;
+using Firestorm.Engine.Subs.Handlers;
 
 namespace Firestorm.Engine.Subs.Repositories
 {
@@ -11,18 +13,21 @@ namespace Firestorm.Engine.Subs.Repositories
     /// An engine repository for a navigation collection property.
     /// </summary>
     internal class NavigationCollectionRepository<TParent, TCollection, TNav> : IEngineRepository<TNav>
+        where TParent : class
         where TNav : class, new()
-        where TCollection : IEnumerable<TNav>
+        where TCollection : class, IEnumerable<TNav>
     {
         private readonly IDeferredItem<TParent> _parentItem;
-        private readonly Expression<Func<TParent, TCollection>> _navigationExpression;
+        private readonly SubWriterTools<TParent, TCollection, TNav> _tools;
         private readonly Expression<Func<TParent, IEnumerable<TNav>>> _castedExpression;
+        private readonly INavigationSetter<TParent, TCollection> _navSetter;
 
-        public NavigationCollectionRepository(IDeferredItem<TParent> parentItem, Expression<Func<TParent, TCollection>> navigationExpression)
+        public NavigationCollectionRepository(IDeferredItem<TParent> parentItem, SubWriterTools<TParent, TCollection, TNav> tools)
         {
             _parentItem = parentItem;
-            _navigationExpression = navigationExpression;
-            _castedExpression = Expression.Lambda<Func<TParent, IEnumerable<TNav>>>(_navigationExpression.Body, _navigationExpression.Parameters);
+            _tools = tools;
+            
+            _castedExpression = Expression.Lambda<Func<TParent, IEnumerable<TNav>>>(_tools.NavExpression.Body, _tools.NavExpression.Parameters);
         }
 
         public async Task InitializeAsync()
@@ -41,6 +46,7 @@ namespace Firestorm.Engine.Subs.Repositories
             ICollection<TNav> navCollection = GetNavCollection();
 
             var item = new TNav();
+            _tools.RepoEvents.OnCreating(item);
             navCollection.Add(item);
             return item;
         }
@@ -53,18 +59,29 @@ namespace Firestorm.Engine.Subs.Repositories
 
         private ICollection<TNav> GetNavCollection()
         {
+            TParent parentItem;
             IEnumerable<TNav> navEnumerable;
 
             try
             {
-                TParent parentItem = _parentItem.LoadedItem;
-                navEnumerable = _navigationExpression.Compile().Invoke(parentItem);
+                parentItem = _parentItem.LoadedItem;
+                navEnumerable = _tools.NavExpression.Compile().Invoke(parentItem);
             }
             catch (Exception ex)
             {
                 throw new NotSupportedException("Error getting navigation collection from parent item.", ex);
             }
-        
+
+            if (navEnumerable == null)
+            {
+                var newList = new List<TNav>();
+                var castedList = newList as TCollection;
+                Debug.Assert(castedList != null, "This should always cast. Is it not covariant?");
+
+                _tools.Setter.SetNavItem(parentItem, castedList);
+                return newList;
+            }
+
             var navCollection = navEnumerable as ICollection<TNav>;
             if (navCollection == null)
                 throw new NotSupportedException("Cannot add items to this navigation property because it does not implement ICollection.");

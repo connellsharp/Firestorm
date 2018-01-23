@@ -1,6 +1,6 @@
 namespace Firestorm.Engine.Subs.Handlers
 {
-    public interface IRepositoryEvents<TItem>
+    public interface IRepositoryEvents<in TItem>
     {
         bool HasAnyEvent { get; }
 

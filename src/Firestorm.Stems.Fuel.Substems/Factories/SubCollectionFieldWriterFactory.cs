@@ -11,16 +11,16 @@ namespace Firestorm.Stems.Fuel.Substems.Factories
     /// <summary>
     /// Field value factory to create <see cref="SubCollectionFieldWriter{TItem,TProperty,TNav}"/>.
     /// </summary>
-    internal class SubCollectionFieldWriterFactory<TItem, TProperty, TNav, TSubstem> : IFactory<IFieldWriter<TItem>,TItem>
+    internal class SubCollectionFieldWriterFactory<TItem, TCollection, TNav, TSubstem> : IFactory<IFieldWriter<TItem>,TItem>
         where TItem : class
+        where TCollection : class, IEnumerable<TNav>
         where TNav : class, new()
         where TSubstem : Stem<TNav>
-        where TProperty : IEnumerable<TNav>
     {
-        private readonly Expression<Func<TItem, TProperty>> _navigationExpression;
+        private readonly Expression<Func<TItem, TCollection>> _navigationExpression;
 
         [UsedImplicitly]
-        public SubCollectionFieldWriterFactory(Expression<Func<TItem, TProperty>> navigationExpression)
+        public SubCollectionFieldWriterFactory(Expression<Func<TItem, TCollection>> navigationExpression)
         {
             _navigationExpression = navigationExpression;
         }
@@ -28,7 +28,8 @@ namespace Firestorm.Stems.Fuel.Substems.Factories
         public IFieldWriter<TItem> Get(Stem<TItem> stem)
         {
             StemsEngineSubContext<TNav> subContext = SubstemEngineSubContextCreator<TItem, TNav, TSubstem>.StemEngineContextFields(stem);
-            return new SubCollectionFieldWriter<TItem, TProperty, TNav>(_navigationExpression, subContext, null);
+            var tools = new SubWriterTools<TItem, TCollection, TNav>(_navigationExpression, null, null);
+            return new SubCollectionFieldWriter<TItem, TCollection, TNav>(tools, subContext);
         }
     }
 }

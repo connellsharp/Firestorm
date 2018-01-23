@@ -59,7 +59,7 @@ namespace Firestorm.Fluent
         }
 
         public static IApiFieldBuilder<TItem, TCollection> IsCollection<TItem, TCollection, TNavItem>(this IApiFieldBuilder<TItem, TCollection> builder, [NotNull] Action<IApiItemBuilder<TNavItem>> configureAction)
-            where TCollection : IEnumerable<TNavItem>
+            where TCollection : class, IEnumerable<TNavItem>
             where TNavItem : class, new()
         {
             builder.IsCollection<TCollection, TNavItem>()

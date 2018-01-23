@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using AutoFixture;
 using Firestorm.Engine.Deferring;
+using Firestorm.Engine.Subs.Handlers;
 using Firestorm.Engine.Subs.Repositories;
 using Xunit;
 
@@ -16,6 +17,14 @@ namespace Firestorm.Tests.Unit.Engine.Subs
         public NavigationCollectionRepositoryTests()
         {
             _fixture = new Fixture();
+        }
+
+        private static NavigationCollectionRepository<Author, ICollection<Book>, Book> GetBooksNavRepo(Author author)
+        {
+            var item = new AlreadyLoadedItem<Author>(author, null);
+            var tools = new SubWriterTools<Author, ICollection<Book>, Book>(a => a.Books, null, null);
+            var repo = new NavigationCollectionRepository<Author, ICollection<Book>, Book>(item, tools);
+            return repo;
         }
 
         [Fact]
@@ -31,7 +40,7 @@ namespace Firestorm.Tests.Unit.Engine.Subs
                 }
             };
 
-            var repo = new NavigationCollectionRepository<Author, ICollection<Book>, Book>(new AlreadyLoadedItem<Author>(author, null), a => a.Books);
+            NavigationCollectionRepository<Author, ICollection<Book>, Book> repo = GetBooksNavRepo(author);
 
             var bookQuery = repo.GetAllItems().ToList();
             
@@ -51,7 +60,7 @@ namespace Firestorm.Tests.Unit.Engine.Subs
                 }
             };
 
-            var repo = new NavigationCollectionRepository<Author, ICollection<Book>, Book>(new AlreadyLoadedItem<Author>(author, null), a => a.Books);
+            NavigationCollectionRepository<Author, ICollection<Book>, Book> repo = GetBooksNavRepo(author);
 
             repo.MarkDeleted(testBook);
             
@@ -67,7 +76,7 @@ namespace Firestorm.Tests.Unit.Engine.Subs
                 Books = books
             };
 
-            var repo = new NavigationCollectionRepository<Author, ICollection<Book>, Book>(new AlreadyLoadedItem<Author>(author, null), a => a.Books);
+            NavigationCollectionRepository<Author, ICollection<Book>, Book> repo = GetBooksNavRepo(author);
 
             var book = repo.CreateAndAttachItem();
             
@@ -82,7 +91,7 @@ namespace Firestorm.Tests.Unit.Engine.Subs
                 Books = null
             };
 
-            var repo = new NavigationCollectionRepository<Author, ICollection<Book>, Book>(new AlreadyLoadedItem<Author>(author, null), a => a.Books);
+            NavigationCollectionRepository<Author, ICollection<Book>, Book> repo = GetBooksNavRepo(author);
 
             Assert.Throws<NotSupportedException>(delegate
             {
