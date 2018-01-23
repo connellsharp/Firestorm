@@ -2,7 +2,6 @@ using System;
 using System.Net.Http;
 using System.Web.Http.Filters;
 using Firestorm.Core.Web;
-using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Start;
 
 namespace Firestorm.Endpoints.WebApi2.ErrorHandling

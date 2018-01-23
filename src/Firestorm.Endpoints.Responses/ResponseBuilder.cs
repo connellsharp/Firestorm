@@ -2,9 +2,8 @@
 using System.Net;
 using Firestorm.Core.Web;
 using Firestorm.Core.Web.Options;
-using Firestorm.Endpoints.Responses;
 
-namespace Firestorm.Endpoints.Start
+namespace Firestorm.Endpoints.Responses
 {
     public class ResponseBuilder
     {
@@ -40,7 +39,20 @@ namespace Firestorm.Endpoints.Start
 
         public void AddFeedback(Feedback feedback)
         {
-            _modifier.AddFeedback(_response, feedback);
+            switch (feedback)
+            {
+                case AcknowledgmentFeedback acknowledgmentFeedback:
+                    _modifier.AddAcknowledgment(_response, acknowledgmentFeedback.Acknowledgment);
+                    break;
+
+                case ErrorFeedback errorFeedback:
+                    _modifier.AddError(_response, errorFeedback.Error);
+                    break;
+
+                case MultiFeedback multiFeedback:
+                    _modifier.AddMultiFeedback(_response, multiFeedback.FeedbackItems);
+                    break;
+            }
         }
 
         public void SetStatusCode(HttpStatusCode statusCode)

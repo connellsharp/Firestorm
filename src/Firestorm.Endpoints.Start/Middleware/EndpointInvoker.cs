@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Firestorm.Core.Web;
 using Firestorm.Core.Web.Options;
+using Firestorm.Endpoints.Responses;
 
 namespace Firestorm.Endpoints.Start
 {

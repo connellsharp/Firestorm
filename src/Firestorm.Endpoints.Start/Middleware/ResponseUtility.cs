@@ -1,5 +1,4 @@
-﻿using Firestorm.Core.Web;
-using Firestorm.Endpoints.Responses;
+﻿using Firestorm.Endpoints.Responses;
 
 namespace Firestorm.Endpoints.Start
 {
@@ -14,24 +13,6 @@ namespace Firestorm.Endpoints.Start
                 response.ExtraBody.Add("resource", response.ResourceBody);
 
             return response.ExtraBody;
-        }
-
-        public static void AddFeedback(this IResponseModifier responseModifier, Response response, Feedback feedback)
-        {
-            switch (feedback)
-            {
-                case AcknowledgmentFeedback acknowledgmentFeedback:
-                    responseModifier.AddAcknowledgment(response, acknowledgmentFeedback.Acknowledgment);
-                    break;
-
-                case ErrorFeedback errorFeedback:
-                    responseModifier.AddError(response, errorFeedback.Error);
-                    break;
-
-                case MultiFeedback multiFeedback:
-                    responseModifier.AddMultiFeedback(response, multiFeedback.FeedbackItems);
-                    break;
-            }
         }
     }
 }
