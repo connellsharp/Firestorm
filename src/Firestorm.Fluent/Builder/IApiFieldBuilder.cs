@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Firestorm.Fluent
 {
@@ -10,6 +11,7 @@ namespace Firestorm.Fluent
         IApiFieldBuilder<TItem, TField> HasName(string fieldName);
 
         IApiFieldBuilder<TItem, TField> AllowWrite();
+        IApiFieldBuilder<TItem, TField> AllowWrite(Action<TItem, TField> action);
 
         IApiFieldBuilder<TItem, TField> AllowLocate();
 

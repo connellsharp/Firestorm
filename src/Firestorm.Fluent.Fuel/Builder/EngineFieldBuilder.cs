@@ -5,6 +5,7 @@ using Firestorm.Engine.Additives.Readers;
 using Firestorm.Engine.Additives.Writers;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Engine.Subs.Handlers;
+using Firestorm.Engine.Subs.Repositories;
 using Firestorm.Fluent.Fuel.Engine;
 using Firestorm.Fluent.Fuel.Models;
 
@@ -15,6 +16,7 @@ namespace Firestorm.Fluent.Fuel.Builder
     {
         private readonly ApiFieldModel<TItem> _fieldModel;
         private readonly Expression<Func<TItem, TField>> _expression;
+        private INavigationItemSetter<TItem, TField> _setter;
 
         internal EngineFieldBuilder(ApiFieldModel<TItem> fieldModel, Expression<Func<TItem, TField>> expression)
         {
@@ -37,6 +39,13 @@ namespace Firestorm.Fluent.Fuel.Builder
         public IApiFieldBuilder<TItem, TField> AllowWrite()
         {
             _fieldModel.Writer = new PropertyExpressionFieldWriter<TItem, TField>(_expression);
+            _setter = new DefaultNavigationItemSetter<TItem, TField>(_expression);
+            return this;
+        }
+
+        public IApiFieldBuilder<TItem, TField> AllowWrite(Action<TItem, TField> action)
+        {
+            _setter = new ActionNavigationItemSetter<TItem, TField>(action);
             return this;
         }
 
@@ -55,7 +64,7 @@ namespace Firestorm.Fluent.Fuel.Builder
 
             _fieldModel.Reader = new SubItemFieldReader<TItem, TNavItem>(castedExpression, subContext);
             _fieldModel.ResourceGetter = new SubItemResourceGetter<TItem, TNavItem>(castedExpression, subContext); // TODO events
-            _fieldModel.Writer = new SubItemFieldWriter<TItem, TNavItem>(castedExpression, subContext, itemModel.Events);
+            _fieldModel.Writer = new SubItemFieldWriter<TItem, TNavItem>(castedExpression, subContext, itemModel.Events, _setter);
 
             var itemBuilder = new EngineItemBuilder<TNavItem>(itemModel);
             return itemBuilder;

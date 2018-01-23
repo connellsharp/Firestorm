@@ -66,16 +66,16 @@ namespace Firestorm.Tests.Examples.Football.Web
                         ft.Identifier(f => f.FixtureId);
 
                         ft.Field(f => f.IsHome)
+                            .AllowWrite((f, v) => f.IsHome = v)
                             .HasName("home");
 
-                        ft.Field(f => f.Fixture.Teams.FirstOrDefault(tt => tt.TeamId != f.TeamId) ?? new FixtureTeam())
-                            //.AllowWrite((f, wt) => { f.Fixture.Teams.Add(wt); })
+                        ft.Field(f => f.Fixture.Teams.FirstOrDefault(tt => tt.TeamId != f.TeamId))
+                            //.AllowWrite()
+                            .AllowWrite((f, tt) => f.Fixture.Teams.Add(tt))
                             .HasName("vs_team")
                             .IsItem(t =>
                             {
                                 t.Field(tt => tt.TeamId).HasName("id").AllowLocate().AllowWrite();
-
-                               // t.OnCreating(f => f.)
                             });
 
                         ft.OnCreating(f =>
@@ -101,10 +101,7 @@ namespace Firestorm.Tests.Examples.Football.Web
 
                 e.Field(p => p.Goals)
                     .HasName("goals")
-                    .IsCollection(g =>
-                    {
-                        g.Field(h => h.Id).HasName("id");
-                    });
+                    .IsCollection(g => { g.Field(h => h.Id).HasName("id"); });
 
                 e.Field(p => p.Team)
                     .HasName("team")

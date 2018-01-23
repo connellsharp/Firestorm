@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 using System.Threading.Tasks;
 using Firestorm.Data;
 
@@ -16,11 +14,13 @@ namespace Firestorm.Engine.Subs.Repositories
     {
         private readonly IDeferredItem<TParent> _parentItem;
         private readonly Expression<Func<TParent, TNav>> _navigationExpression;
+        private readonly INavigationItemSetter<TParent, TNav> _navSetter;
 
-        public NavigationItemRepository(IDeferredItem<TParent> parentItem, Expression<Func<TParent, TNav>> navigationExpression)
+        public NavigationItemRepository(IDeferredItem<TParent> parentItem, Expression<Func<TParent, TNav>> navigationExpression, INavigationItemSetter<TParent, TNav> navSetter)
         {
             _parentItem = parentItem;
             _navigationExpression = navigationExpression;
+            _navSetter = navSetter;
         }
 
         public async Task InitializeAsync()
@@ -31,7 +31,9 @@ namespace Firestorm.Engine.Subs.Repositories
 
         public IQueryable<TNav> GetAllItems()
         {
-            return _parentItem.Query.Select(_navigationExpression);
+            // assumes that parent item query always 1 item
+            // returns empty enumerable if no navigation item is set so CreateAndAttachItem can be called later.
+            return _parentItem.Query.Select(_navigationExpression).Where(i => i != null);
         }
 
         public TNav CreateAndAttachItem()
@@ -49,11 +51,7 @@ namespace Firestorm.Engine.Subs.Repositories
         private void SetParentNavItem(TNav item)
         {
             var parent = _parentItem.Query.First();
-            throw new NotImplementedException("Not implemented creating new items in the NavigationItemRepository yet.");
-
-            // TODO not just properties here. Use the writers somehow?
-            //PropertyInfo property = PropertyInfoUtilities.GetPropertyInfoFromLambda(_navigationExpression);
-            //property.SetValue(parent, item);
+            _navSetter.SetNavItem(parent, item);
         }
 
         public Task ForEachAsync<T>(IQueryable<T> query, Action<T> action)
