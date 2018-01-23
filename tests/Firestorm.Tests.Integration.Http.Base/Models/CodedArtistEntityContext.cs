@@ -17,7 +17,7 @@ namespace Firestorm.Tests.Integration.Http.Base.Models
     {
         public CodedArtistEntityContext(IRestUser user)
         {
-            Transaction = new TestTransaction();
+            Transaction = new VoidTransaction();
             Repository = new ArtistMemoryRepository();
             AuthorizationChecker = new AllowAllAuthorizationChecker<Artist>();
         }

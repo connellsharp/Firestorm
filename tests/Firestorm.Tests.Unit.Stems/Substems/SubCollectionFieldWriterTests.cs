@@ -47,7 +47,7 @@ namespace Firestorm.Tests.Unit.Stems.Substems
                 new { name = "Last album" },
             };
 
-            await NameFieldWriter.SetValueAsync(artist, albumsPostedObj, new TestTransaction());
+            await NameFieldWriter.SetValueAsync(artist, albumsPostedObj, new VoidTransaction());
 
             Assert.Equal(2, artist.Albums.Count);
             Assert.Equal("First album", artist.Albums.First().Name);
@@ -74,7 +74,7 @@ namespace Firestorm.Tests.Unit.Stems.Substems
                 new { id = 2, name = "Last album" },
             };
 
-            await NameFieldWriter.SetValueAsync(artist, albumsPostedObj, new TestTransaction());
+            await NameFieldWriter.SetValueAsync(artist, albumsPostedObj, new VoidTransaction());
 
             Assert.Equal(2, artist.Albums.Count);
             Assert.Equal("First album", artist.Albums.First().Name);

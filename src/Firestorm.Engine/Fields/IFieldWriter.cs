@@ -9,6 +9,6 @@ namespace Firestorm.Engine.Fields
     public interface IFieldWriter<in TItem> : IFieldHandler<TItem>
         where TItem : class
     {
-        Task SetValueAsync(IDeferredItem<TItem> item, object deserializedValue, IDataTransaction dataTransaction);
+        Task SetValueAsync(IDeferredItem<TItem> item, object deserializedValue, IDataTransaction dataTransaction); // TODO remove dataTransaction
     }
 }

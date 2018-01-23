@@ -7,7 +7,7 @@ namespace Firestorm.Engine.Defaults
     /// <summary>
     /// A dummy <see cref="IDataTransaction"/> implementation that does nothing.
     /// </summary>
-    public class TestTransaction : IDataTransaction
+    public class VoidTransaction : IDataTransaction
     {
         public void StartTransaction()
         {

@@ -12,7 +12,7 @@ namespace Firestorm.Engine.Defaults
 
         public IDataTransaction CreateTransaction()
         {
-            return new TestTransaction();
+            return new VoidTransaction();
         }
 
         public IEngineRepository<TItem> GetRepository<TItem>(IDataTransaction transaction)

@@ -41,7 +41,7 @@ namespace Firestorm.Tests.Functionality.Stems.Models
         {
             public override Type StartStemType { get; } = typeof(TStem);
 
-            protected override IDataTransaction DataTransaction { get; } = new TestTransaction();
+            protected override IDataTransaction DataTransaction { get; } = new VoidTransaction();
 
             protected override IEngineRepository<Artist> Repository { get; } = new ArtistMemoryRepository();
         }

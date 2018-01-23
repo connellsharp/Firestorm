@@ -16,6 +16,7 @@ namespace Firestorm.Tests.Examples.Football.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.EnableSensitiveDataLogging();
             optionsBuilder.UseLoggerFactory(MyLoggerFactory);
         }
 

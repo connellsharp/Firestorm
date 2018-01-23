@@ -31,7 +31,7 @@ namespace Firestorm.Tests.Unit.Stems
         [Fact]
         public async Task SetWithExpressionField()
         {
-            await Provider.GetWriter("Name").SetValueAsync(Item, TestRepositories.ArtistName, new TestTransaction());
+            await Provider.GetWriter("Name").SetValueAsync(Item, TestRepositories.ArtistName, new VoidTransaction());
             Assert.Equal(Item.Name, TestRepositories.ArtistName);
         }
 
@@ -43,7 +43,7 @@ namespace Firestorm.Tests.Unit.Stems
 
             await Assert.ThrowsAsync<InvalidOperationException>(async delegate
             {
-                await writer.SetValueAsync(Item, 111, new TestTransaction());
+                await writer.SetValueAsync(Item, 111, new VoidTransaction());
             });
         }
 
@@ -55,10 +55,10 @@ namespace Firestorm.Tests.Unit.Stems
 
             var artist = new Artist();
 
-            provider1.GetWriter("Label").SetValueAsync(artist, "Awesome", new TestTransaction());
+            provider1.GetWriter("Label").SetValueAsync(artist, "Awesome", new VoidTransaction());
             Assert.Equal(artist.Label, "first_Awesome");
 
-            provider2.GetWriter("Label").SetValueAsync(artist, "Awesome", new TestTransaction());
+            provider2.GetWriter("Label").SetValueAsync(artist, "Awesome", new VoidTransaction());
             Assert.Equal(artist.Label, "second_Awesome");
         }
 

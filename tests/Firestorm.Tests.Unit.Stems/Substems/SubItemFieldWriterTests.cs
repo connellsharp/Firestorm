@@ -43,7 +43,7 @@ namespace Firestorm.Tests.Unit.Stems.Substems
         public async Task AlbumWithArtist_SetArtistName_EditsExistingName()
         {
             var album = new Album { Artist = new Artist(654, "Old guy") };
-            await _writer.SetValueAsync(album, new { name = "New guy" }, new TestTransaction());
+            await _writer.SetValueAsync(album, new { name = "New guy" }, new VoidTransaction());
             Assert.Equal("New guy", album.Artist.Name);
         }
 
@@ -51,7 +51,7 @@ namespace Firestorm.Tests.Unit.Stems.Substems
         public async Task AlbumWithNoArtist_SetArtistID_AddsRelationship()
         {
             var album = new Album();
-            await _writer.SetValueAsync(album, new { id = 123 }, new TestTransaction());
+            await _writer.SetValueAsync(album, new { id = 123 }, new VoidTransaction());
             // TODO not implemented yet, but this could find the artist with that ID using the Locator
             Assert.Equal(123, album.Artist.ID);
         }
@@ -62,7 +62,7 @@ namespace Firestorm.Tests.Unit.Stems.Substems
             var album = new Album();
             await Assert.ThrowsAsync<ArgumentNullException>(async delegate
             {
-                await _writer.SetValueAsync(album, new { name = "New guy" }, new TestTransaction());
+                await _writer.SetValueAsync(album, new { name = "New guy" }, new VoidTransaction());
             });
         }
     }

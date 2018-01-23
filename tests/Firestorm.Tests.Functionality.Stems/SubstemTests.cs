@@ -29,7 +29,7 @@ namespace Firestorm.Tests.Functionality.Stems
 
         private class TestRoot : EngineRoot<Artist>
         {
-            protected override IDataTransaction DataTransaction { get; } = new TestTransaction();
+            protected override IDataTransaction DataTransaction { get; } = new VoidTransaction();
 
             protected override IEngineRepository<Artist> Repository { get; } = new ArtistMemoryRepository();
 
