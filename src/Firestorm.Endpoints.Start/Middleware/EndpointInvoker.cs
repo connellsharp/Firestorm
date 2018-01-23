@@ -13,9 +13,9 @@ namespace Firestorm.Endpoints.Start
     {
         private readonly IHttpRequestReader _requestReader;
         private readonly IRestEndpoint _endpoint;
-        private readonly IResponseBuilder _responseBuilder;
+        private readonly ResponseBuilder _responseBuilder;
 
-        public EndpointInvoker(IHttpRequestReader requestReader, IRestEndpoint endpoint, IResponseBuilder responseBuilder)
+        public EndpointInvoker(IHttpRequestReader requestReader, IRestEndpoint endpoint, ResponseBuilder responseBuilder)
         {
             _requestReader = requestReader;
             _responseBuilder = responseBuilder;

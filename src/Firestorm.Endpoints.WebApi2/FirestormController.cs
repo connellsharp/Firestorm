@@ -32,12 +32,18 @@ namespace Firestorm.Endpoints.WebApi2
         private FirestormController(FirestormConfiguration configuration)
         {
             Config = configuration;
-            ResponseModifier = new AggregateResponseModifier(new DefaultResponseModifiers(Config.EndpointConfiguration.ResponseConfiguration));
+            Response = new Response(ResourcePath);
+
+            var modifiers = new DefaultResponseModifiers(Config.EndpointConfiguration.ResponseConfiguration);
+
+            ResponseBuilder = new ResponseBuilder(Response, modifiers);
         }
 
         internal FirestormConfiguration Config { get; }
 
-        internal IResponseModifier ResponseModifier { get; }
+        internal Response Response { get; }
+
+        internal ResponseBuilder ResponseBuilder { get; }
 
         [HttpGet]
         public async Task<object> GetAsync()
@@ -48,20 +54,18 @@ namespace Firestorm.Endpoints.WebApi2
                 return StatusCode(HttpStatusCode.NotModified);
 
             ResourceBody resourceBody = await endpoint.GetAsync();
-
-            Response response = CreateResponse();
-            ResponseModifier.AddResource(response, resourceBody);
-            return response.ResourceBody; // TODO headers?
+            
+            ResponseBuilder.AddResource(resourceBody);
+            return Response.ResourceBody; // TODO headers?
         }
 
         [HttpOptions]
         public async Task<object> OptionsAsync()
         {
             Options options = await GetEndpoint().OptionsAsync();
-
-            Response response = CreateResponse();
-            ResponseModifier.AddOptions(response, options);
-            return response.ResourceBody; // TODO headers?
+            
+            ResponseBuilder.AddOptions(options);
+            return Response.ResourceBody; // TODO headers?
         }
 
         [HttpPost]
@@ -106,34 +110,28 @@ namespace Firestorm.Endpoints.WebApi2
 
         private IHttpActionResult GetResultFromFeedback(Feedback feedback)
         {
-            Response response = CreateResponse();
-            ResponseModifier.AddFeedback(response, feedback);
+            ResponseBuilder.AddFeedback(feedback);
 
-            object responseBody = response.GetFullBody();
+            object responseBody = Response.GetFullBody();
 
-            if (response.StatusCode == HttpStatusCode.Created)
+            if (Response.StatusCode == HttpStatusCode.Created)
             {
-                return Created(response.Headers["Location"], responseBody);
+                return Created(Response.Headers["Location"], responseBody);
             }
 
             if (feedback.Type == FeedbackType.MultiResponse)
             {
-                Debug.Assert(response.StatusCode == (HttpStatusCode) 207);
+                Debug.Assert(Response.StatusCode == (HttpStatusCode) 207);
                 Debug.Assert(responseBody is object[]);
-                return Content(response.StatusCode, responseBody as object[]); // for content negotiation. does this even make a difference?
+                return Content(Response.StatusCode, responseBody as object[]); // for content negotiation. does this even make a difference?
             }
 
-            return Content(response.StatusCode, responseBody);
+            return Content(Response.StatusCode, responseBody);
         }
 
         private string ResourcePath
         {
             get { return (string)ControllerContext.RouteData.Values["path"]; }
-        }
-
-        public Response CreateResponse()
-        {
-            return new Response(ResourcePath);
         }
 
         private IRestEndpointContext _context;

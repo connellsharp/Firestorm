@@ -16,11 +16,10 @@ namespace Firestorm.Endpoints.WebApi2.ErrorHandling
                 throw new ArgumentException("RestApiExceptionFilterAttribute should only be applied to FirestormController.");
             
             var exceptionInfo = new ExceptionErrorInfo(context.Exception);
+            
+            controller.ResponseBuilder.AddError(exceptionInfo);
 
-            Response response = controller.CreateResponse();
-            controller.ResponseModifier.AddError(response, exceptionInfo);
-
-            context.Response = context.Request.CreateResponse(response.StatusCode, response.GetFullBody());
+            context.Response = context.Request.CreateResponse(controller.Response.StatusCode, controller.Response.GetFullBody());
         }
     }
 }

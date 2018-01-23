@@ -6,7 +6,7 @@ using Firestorm.Endpoints.Responses;
 
 namespace Firestorm.Endpoints.Start
 {
-    internal class ResponseBuilder : IResponseBuilder
+    public class ResponseBuilder
     {
         private readonly IResponseModifier _modifier;
         private readonly Response _response;
