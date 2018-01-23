@@ -5,35 +5,39 @@ using Firestorm.Core.Web.Options;
 
 namespace Firestorm.Endpoints.Responses
 {
-    public class SuccessBooleanResponseBuilder : IResponseBuilder
+    public class StatusCodeResponseModifier : IResponseModifier
     {
         public bool WrapResourceObject { get; set; }
 
         public void AddResource(Response response, ResourceBody resourceBody)
         {
             if (WrapResourceObject)
-                response.ExtraBody["success"] = true;
+                response.ExtraBody["status"] = "ok";
         }
 
         public void AddAcknowledgment(Response response, Acknowledgment acknowledgment)
         {
-            response.ExtraBody["success"] = true;
-
-            if (acknowledgment is CreatedItemAcknowledgment createdItemAcknowledgment)
+            if(acknowledgment is CreatedItemAcknowledgment createdItemAcknowledgment)
             {
+                response.ExtraBody["status"] = "created";
                 response.ExtraBody["identifier"] = createdItemAcknowledgment.NewIdentifier;
+            }
+            else
+            {
+                response.ExtraBody["status"] = "ok";
             }
         }
 
         public void AddError(Response response, ErrorInfo error)
         {
-            response.ExtraBody["success"] = false;
+            string status = error.ErrorStatus.ToString().SeparateCamelCase("_", true);
+            response.ExtraBody.Add("status", status);
         }
 
         public void AddMultiFeedback(Response response, IEnumerable<Feedback> feedbackItems)
         {
             var looper = new MultiFeedbackLooper(this);
-            response.ResourceBody = feedbackItems.Select(looper.GetBodyFromFeedback);
+            response.ResourceBody = looper.GetBodyFromMultiFeedback(feedbackItems);
         }
 
         public void AddOptions(Response response, Options options)

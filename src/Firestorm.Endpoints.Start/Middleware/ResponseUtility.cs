@@ -16,20 +16,20 @@ namespace Firestorm.Endpoints.Start
             return response.ExtraBody;
         }
 
-        public static void AddFeedback(this IResponseBuilder responseBuilder, Response response, Feedback feedback)
+        public static void AddFeedback(this IResponseModifier responseModifier, Response response, Feedback feedback)
         {
             switch (feedback)
             {
                 case AcknowledgmentFeedback acknowledgmentFeedback:
-                    responseBuilder.AddAcknowledgment(response, acknowledgmentFeedback.Acknowledgment);
+                    responseModifier.AddAcknowledgment(response, acknowledgmentFeedback.Acknowledgment);
                     break;
 
                 case ErrorFeedback errorFeedback:
-                    responseBuilder.AddError(response, errorFeedback.Error);
+                    responseModifier.AddError(response, errorFeedback.Error);
                     break;
 
                 case MultiFeedback multiFeedback:
-                    responseBuilder.AddMultiFeedback(response, multiFeedback.FeedbackItems);
+                    responseModifier.AddMultiFeedback(response, multiFeedback.FeedbackItems);
                     break;
             }
         }

@@ -10,14 +10,20 @@ namespace Firestorm.Endpoints.Start
     {
         private readonly FirestormConfiguration _configuration;
         private readonly IHttpRequestHandler _requestHandler;
-        private readonly IResponseBuilder _builder;
+        private readonly ResponseBuilder _builder;
+        private readonly ResponseWriter _writer;
 
         public FirestormMiddlewareHelper(FirestormConfiguration configuration, IHttpRequestHandler requestHandler)
         {
             _configuration = configuration;
             _requestHandler = requestHandler;
+            
+            var response = new Response(requestHandler.ResourcePath);
 
-            _builder = new AggregateResponseBuilder(new DefaultResponseBuilders(configuration.EndpointConfiguration.ResponseConfiguration));
+            var modifiers = new DefaultResponseModifiers(configuration.EndpointConfiguration.ResponseConfiguration);
+            _builder = new ResponseBuilder(response, modifiers);
+
+            _writer = new ResponseWriter(_requestHandler, response);
         }
         
         /// <summary>
@@ -29,12 +35,18 @@ namespace Firestorm.Endpoints.Start
             try
             {
                 IRestEndpoint endpoint = GetEndpoint(endpointContext);
-                var invoker = new EndpointInvoker(_builder, _requestHandler, endpoint);
+
+                var invoker = new EndpointInvoker(_requestHandler, endpoint, _builder);
                 await invoker.InvokeAsync();
+
+                await _writer.WriteAsync();
             }
             catch (Exception ex)
             {
-                await InvokeError(ex);
+                var errorInfo = new ExceptionErrorInfo(ex);
+                _builder.AddError(errorInfo);
+
+                await _writer.WriteAsync();
             }
             finally
             {
@@ -45,15 +57,6 @@ namespace Firestorm.Endpoints.Start
         private IRestEndpoint GetEndpoint(IRestEndpointContext endpointContext)
         {
             return StartUtilities.GetEndpointFromPath(_configuration.StartResourceFactory, endpointContext, _requestHandler.ResourcePath);
-        }
-
-        private async Task InvokeError(Exception ex)
-        {
-            var errorInfo = new ExceptionErrorInfo(ex);
-
-            var writer = new ResponseWriter(_requestHandler, _builder);
-            writer.AddError(errorInfo);
-            await writer.WriteAsync();
         }
     }
 }

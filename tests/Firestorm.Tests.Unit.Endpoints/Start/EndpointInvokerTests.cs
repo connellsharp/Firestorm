@@ -67,7 +67,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
             var handlerMock = _fixture.FreezeMock<IHttpRequestHandler>();
             handlerMock.SetupGet(a => a.RequestMethod).Returns("GET");
 
-            _fixture.Relay<IResponseBuilder, PaginationHeadersResponseBuilder>();
+            _fixture.Relay<IResponseModifier, PaginationHeadersResponseModifier>();
 
             var invoker = _fixture.Create<EndpointInvoker>();
             await invoker.InvokeAsync();

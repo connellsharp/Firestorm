@@ -7,11 +7,11 @@ namespace Firestorm.Endpoints.Responses
 {
     internal class MultiFeedbackLooper
     {
-        private readonly IResponseBuilder _builder;
+        private readonly IResponseModifier _modifier;
 
-        public MultiFeedbackLooper(IResponseBuilder builder)
+        public MultiFeedbackLooper(IResponseModifier modifier)
         {
-            _builder = builder;
+            _modifier = modifier;
         }
 
         public object GetBodyFromMultiFeedback(IEnumerable<Feedback> feedbackItems)
@@ -29,11 +29,11 @@ namespace Firestorm.Endpoints.Responses
             switch (feedback)
             {
                 case AcknowledgmentFeedback acknowledgmentFeedback:
-                    _builder.AddAcknowledgment(response, acknowledgmentFeedback.Acknowledgment);
+                    _modifier.AddAcknowledgment(response, acknowledgmentFeedback.Acknowledgment);
                     return response.ExtraBody;
 
                 case ErrorFeedback errorFeedback:
-                    _builder.AddError(response, errorFeedback.Error); // TODO showDeveloperErrors ?
+                    _modifier.AddError(response, errorFeedback.Error); // TODO showDeveloperErrors ?
                     return response.ExtraBody;
 
                 case MultiFeedback multiFeedback:

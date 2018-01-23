@@ -13,31 +13,31 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         [Fact]
         public void StatusField_SuccessBoolean_AddsBuilder()
         {
-            var builder = new DefaultResponseBuilders(new ResponseConfiguruation
+            var builder = new DefaultResponseModifiers(new ResponseConfiguruation
             {
                 StatusField = ResponseStatusField.SuccessBoolean
             });
             
-            bool hasBuilder = builder.Any(b => b is SuccessBooleanResponseBuilder);
+            bool hasBuilder = builder.Any(b => b is SuccessBooleanResponseModifier);
             Assert.True(hasBuilder);
         }
 
         [Fact]
         public void StatusField_StatusCode_AddsBuilder()
         {
-            var builder = new DefaultResponseBuilders(new ResponseConfiguruation
+            var builder = new DefaultResponseModifiers(new ResponseConfiguruation
             {
                 StatusField = ResponseStatusField.StatusCode
             });
 
-            bool hasBuilder = builder.Any(b => b is StatusCodeResponseBuilder);
+            bool hasBuilder = builder.Any(b => b is StatusCodeResponseModifier);
             Assert.True(hasBuilder);
         }
 
         [Fact]
         public void WrapCollectionResponseBody_AddsPagedBodyBuilder()
         {
-            var builder = new DefaultResponseBuilders(new ResponseConfiguruation
+            var builder = new DefaultResponseModifiers(new ResponseConfiguruation
             {
                 PageConfiguration =
                 {
@@ -45,19 +45,19 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
                 }
             });
 
-            bool hasBuilder = builder.Any(b => b is PagedBodyResponseBuilder);
+            bool hasBuilder = builder.Any(b => b is PagedBodyResponseModifier);
             Assert.True(hasBuilder);
         }
 
         [Fact]
         public void ShowDeveloperErrors_AddsDeveloperExceptionBuilder()
         {
-            var builder = new DefaultResponseBuilders(new ResponseConfiguruation
+            var builder = new DefaultResponseModifiers(new ResponseConfiguruation
             {
                 ShowDeveloperErrors = true
             });
 
-            bool hasBuilder = builder.Any(b => b is DeveloperExceptionInfoResponseBuilder);
+            bool hasBuilder = builder.Any(b => b is DeveloperExceptionInfoResponseModifier);
             Assert.True(hasBuilder);
         }
     }

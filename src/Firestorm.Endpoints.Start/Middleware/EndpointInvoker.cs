@@ -3,88 +3,81 @@ using System.Net;
 using System.Threading.Tasks;
 using Firestorm.Core.Web;
 using Firestorm.Core.Web.Options;
-using Firestorm.Endpoints.Responses;
 
 namespace Firestorm.Endpoints.Start
 {
     /// <summary>
-    /// Invokes the request from the given <see cref="IHttpRequestHandler"/> onto the given <see cref="IRestEndpoint"/>
+    /// Invokes the request from the given <see cref="IHttpRequestHandler"/> onto the given <see cref="IRestEndpoint"/> and builds the response using the <see cref="IResponseBuilder"/>.
     /// </summary>
     internal class EndpointInvoker
     {
-        private readonly IHttpRequestHandler _requestHandler;
+        private readonly IHttpRequestReader _requestReader;
         private readonly IRestEndpoint _endpoint;
-        private readonly ResponseWriter _responseWriter;
+        private readonly IResponseBuilder _responseBuilder;
 
-        public EndpointInvoker(IResponseBuilder responseBuilder, IHttpRequestHandler requestHandler, IRestEndpoint endpoint)
+        public EndpointInvoker(IHttpRequestReader requestReader, IRestEndpoint endpoint, IResponseBuilder responseBuilder)
         {
-            _requestHandler = requestHandler;
-            _responseWriter = new ResponseWriter(_requestHandler, responseBuilder);
+            _requestReader = requestReader;
+            _responseBuilder = responseBuilder;
             _endpoint = endpoint;
         }
 
-        public async Task InvokeAsync()
+        public Task InvokeAsync()
         {
-            switch (_requestHandler.RequestMethod)
+            switch (_requestReader.RequestMethod)
             {
                 case "GET":
-                    await InvokeGetAsync();
-                    return;
+                    return InvokeGetAsync();
 
                 case "OPTIONS":
-                    await InvokeOptionsAsync();
-                    return;
+                    return InvokeOptionsAsync();
 
                 case "POST":
                 case "PUT":
                 case "PATCH":
                 case "DELETE":
-                    await InvokeUnsafeAsync();
-                    return;
+                    return InvokeUnsafeAsync();
 
                 default:
-                    _requestHandler.SetStatusCode(HttpStatusCode.MethodNotAllowed);
-                    return;
+                    _responseBuilder.SetStatusCode(HttpStatusCode.MethodNotAllowed);
+                    return Task.FromResult(false);
             }
         }
 
         private async Task InvokeGetAsync()
         {
-            if (!_endpoint.EvaluatePreconditions(_requestHandler.GetPreconditions()))
+            if (!_endpoint.EvaluatePreconditions(_requestReader.GetPreconditions()))
             {
-                _requestHandler.SetStatusCode(HttpStatusCode.NotModified);
+                _responseBuilder.SetStatusCode(HttpStatusCode.NotModified);
                 return;
             }
 
             ResourceBody resourceBody = await _endpoint.GetAsync();
 
-            _responseWriter.AddResource(resourceBody);
-            await _responseWriter.WriteAsync();
+            _responseBuilder.AddResource(resourceBody);
         }
 
         private async Task InvokeOptionsAsync()
         {
             Options options = await _endpoint.OptionsAsync();
 
-            _responseWriter.AddOptions(options);
-            await _responseWriter.WriteAsync();
+            _responseBuilder.AddOptions(options);
         }
 
         private async Task InvokeUnsafeAsync()
         {
-            if (!_endpoint.EvaluatePreconditions(_requestHandler.GetPreconditions()))
+            if (!_endpoint.EvaluatePreconditions(_requestReader.GetPreconditions()))
             {
-                _requestHandler.SetStatusCode(HttpStatusCode.PreconditionFailed);
+                _responseBuilder.SetStatusCode(HttpStatusCode.PreconditionFailed);
                 return;
             }
 
-            var method = (UnsafeMethod)Enum.Parse(typeof(UnsafeMethod), _requestHandler.RequestMethod, true);
-            ResourceBody postBody = _requestHandler.GetRequestBodyObject();
+            var method = (UnsafeMethod)Enum.Parse(typeof(UnsafeMethod), _requestReader.RequestMethod, true);
+            ResourceBody postBody = _requestReader.GetRequestBodyObject();
 
             Feedback feedback = await _endpoint.UnsafeAsync(method, postBody);
 
-            _responseWriter.AddFeedback(feedback);
-            await _responseWriter.WriteAsync();
+            _responseBuilder.AddFeedback(feedback);
         }
     }
 }

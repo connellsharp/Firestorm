@@ -21,7 +21,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         [Fact]
         public void SuccessBoolean_ResourceResponse_HasWrappedInput()
         {
-            var generator = new SuccessBooleanResponseBuilder();
+            var generator = new SuccessBooleanResponseModifier();
             generator.WrapResourceObject = true;
             TestGeneratorForResource(generator, true);
         }
@@ -29,7 +29,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         [Fact]
         public void SuccessBoolean_ResourceResponse_HasSameAsInput()
         {
-            var generator = new SuccessBooleanResponseBuilder();
+            var generator = new SuccessBooleanResponseModifier();
             generator.WrapResourceObject = false;
             TestGeneratorForResource(generator, false);
         }
@@ -37,7 +37,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         [Fact]
         public void StatusCode_ResourceResponse_HasWrappedInput()
         {
-            var generator = new StatusCodeResponseBuilder();
+            var generator = new StatusCodeResponseModifier();
             generator.WrapResourceObject = true;
             TestGeneratorForResource(generator, true);
         }
@@ -45,14 +45,14 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         [Fact]
         public void StatusCode_ResourceResponse_HasSameAsInput()
         {
-            var generator = new StatusCodeResponseBuilder();
+            var generator = new StatusCodeResponseModifier();
             generator.WrapResourceObject = false;
             TestGeneratorForResource(generator, false);
         }
 
-        private void TestGeneratorForResource(IResponseBuilder builder, bool wrapsObject)
+        private void TestGeneratorForResource(IResponseModifier modifier, bool wrapsObject)
         {
-            var aggBuilder = new AggregateResponseBuilder(new MainBodyResponseBuilder(), builder);
+            var aggBuilder = new AggregateResponseModifier(new MainBodyResponseModifier(), modifier);
 
             var response = new Response(null);
 
@@ -66,12 +66,12 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
             Assert.Equal(itemData, generatedItemData, new ItemDataComparer());
         }
 
-        private RestItemData CreateAndAddResponseContent(IResponseBuilder builder, Response response)
+        private RestItemData CreateAndAddResponseContent(IResponseModifier modifier, Response response)
         {
             var itemData = new RestItemData();
             _fixture.AddManyTo(itemData, 10);
             var resourceBody = new ItemBody(itemData);
-            builder.AddResource(response, resourceBody);
+            modifier.AddResource(response, resourceBody);
             return itemData;
         }
 

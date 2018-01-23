@@ -32,12 +32,12 @@ namespace Firestorm.Endpoints.WebApi2
         private FirestormController(FirestormConfiguration configuration)
         {
             Config = configuration;
-            ResponseBuilder = new AggregateResponseBuilder(new DefaultResponseBuilders(Config.EndpointConfiguration.ResponseConfiguration));
+            ResponseModifier = new AggregateResponseModifier(new DefaultResponseModifiers(Config.EndpointConfiguration.ResponseConfiguration));
         }
 
         internal FirestormConfiguration Config { get; }
 
-        internal IResponseBuilder ResponseBuilder { get; }
+        internal IResponseModifier ResponseModifier { get; }
 
         [HttpGet]
         public async Task<object> GetAsync()
@@ -50,7 +50,7 @@ namespace Firestorm.Endpoints.WebApi2
             ResourceBody resourceBody = await endpoint.GetAsync();
 
             Response response = CreateResponse();
-            ResponseBuilder.AddResource(response, resourceBody);
+            ResponseModifier.AddResource(response, resourceBody);
             return response.ResourceBody; // TODO headers?
         }
 
@@ -60,7 +60,7 @@ namespace Firestorm.Endpoints.WebApi2
             Options options = await GetEndpoint().OptionsAsync();
 
             Response response = CreateResponse();
-            ResponseBuilder.AddOptions(response, options);
+            ResponseModifier.AddOptions(response, options);
             return response.ResourceBody; // TODO headers?
         }
 
@@ -107,7 +107,7 @@ namespace Firestorm.Endpoints.WebApi2
         private IHttpActionResult GetResultFromFeedback(Feedback feedback)
         {
             Response response = CreateResponse();
-            ResponseBuilder.AddFeedback(response, feedback);
+            ResponseModifier.AddFeedback(response, feedback);
 
             object responseBody = response.GetFullBody();
 

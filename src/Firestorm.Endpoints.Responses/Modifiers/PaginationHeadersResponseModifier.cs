@@ -4,7 +4,7 @@ using Firestorm.Core.Web.Options;
 
 namespace Firestorm.Endpoints.Responses
 {
-    internal class PaginationHeadersResponseBuilder : IResponseBuilder
+    internal class PaginationHeadersResponseModifier : IResponseModifier
     {
         public void AddResource(Response response, ResourceBody resourceBody)
         {

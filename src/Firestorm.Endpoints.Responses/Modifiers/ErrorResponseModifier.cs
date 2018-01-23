@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 using Firestorm.Core.Web;
 using Firestorm.Core.Web.Options;
 
 namespace Firestorm.Endpoints.Responses
 {
-    internal class DeveloperExceptionInfoResponseBuilder : IResponseBuilder
+    internal class ErrorResponseModifier : IResponseModifier
     {
         public void AddResource(Response response, ResourceBody resourceBody)
         {
@@ -17,11 +16,8 @@ namespace Firestorm.Endpoints.Responses
 
         public void AddError(Response response, ErrorInfo error)
         {
-            if (error is ExceptionErrorInfo exceptionInfo)
-            {
-                response.ExtraBody.Add("inner_descriptions", exceptionInfo.InnerDescriptions);
-                response.ExtraBody.Add("stack_trace", exceptionInfo.StackTrace.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
-            }
+            response.ExtraBody.Add("error", error.ErrorType);
+            response.ExtraBody.Add("error_description", error.ErrorDescription);
         }
 
         public void AddMultiFeedback(Response response, IEnumerable<Feedback> feedbackItems)

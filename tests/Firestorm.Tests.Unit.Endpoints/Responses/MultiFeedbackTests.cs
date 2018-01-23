@@ -14,7 +14,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         public void FeedbackResponseHeadersBuilder_EmptyMultiFeedback_Status207()
         {
             var response = new Response(null);
-            var builder = new FeedbackResponseHeadersBuilder();
+            var builder = new FeedbackResponseHeadersModifier();
             builder.AddMultiFeedback(response, new List<Feedback>());
 
             Assert.Equal((HttpStatusCode) 207, response.StatusCode);
@@ -24,7 +24,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         public void AggregateResponseBuilder_EmptyMultiFeedback_Status207()
         {
             var response = new Response(null);
-            var builder = new AggregateResponseBuilder(new FeedbackResponseHeadersBuilder());
+            var builder = new AggregateResponseModifier(new FeedbackResponseHeadersModifier());
             builder.AddMultiFeedback(response, new List<Feedback>());
 
             Assert.Equal((HttpStatusCode)207, response.StatusCode);
@@ -34,7 +34,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         public void StatusCodeResponseBuilder_EmptyMultiFeedback_EnumerableBody()
         {
             var response = new Response(null);
-            var builder = new StatusCodeResponseBuilder();
+            var builder = new StatusCodeResponseModifier();
 
             builder.AddMultiFeedback(response, new List<Feedback>());
             
@@ -45,7 +45,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         public void SuccessBooleanResponseBuilder_EmptyMultiFeedback_EnumerableBody()
         {
             var response = new Response(null);
-            var builder = new SuccessBooleanResponseBuilder();
+            var builder = new SuccessBooleanResponseModifier();
 
             builder.AddMultiFeedback(response, new List<Feedback>());
             
@@ -56,7 +56,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         public void StatusCodeResponseBuilder_MultiFeedback_StatusOk()
         {
             var response = new Response(null);
-            var builder = new StatusCodeResponseBuilder();
+            var builder = new StatusCodeResponseModifier();
 
             builder.AddMultiFeedback(response, new List<Feedback>
             {
@@ -72,7 +72,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         public void SuccessBooleanResponseBuilder_MultiFeedback_SuccessTrue()
         {
             var response = new Response(null);
-            var builder = new SuccessBooleanResponseBuilder();
+            var builder = new SuccessBooleanResponseModifier();
 
             builder.AddMultiFeedback(response, new List<Feedback>
             {
@@ -88,7 +88,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         public void StatusCodeResponseBuilder_SingleErrorFeedback_IsCorrectStatus()
         {
             var response = new Response(null);
-            var builder = new StatusCodeResponseBuilder();
+            var builder = new StatusCodeResponseModifier();
 
             builder.AddMultiFeedback(response, new List<Feedback>
             {
@@ -104,7 +104,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         public void SuccessBooleanResponseBuilder_SingleErrorFeedback_SuccessFalse()
         {
             var response = new Response(null);
-            var builder = new SuccessBooleanResponseBuilder();
+            var builder = new SuccessBooleanResponseModifier();
 
             builder.AddMultiFeedback(response, new List<Feedback>
             {
@@ -120,7 +120,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         public void StatusCodeResponseBuilder_MultiFeedback_CorrectCount()
         {
             var response = new Response(null);
-            var builder = new StatusCodeResponseBuilder();
+            var builder = new StatusCodeResponseModifier();
 
             builder.AddMultiFeedback(response, new List<Feedback>
             {

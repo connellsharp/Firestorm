@@ -1,64 +1,29 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Firestorm.Core.Web;
-using Firestorm.Core.Web.Options;
+﻿using System.Threading.Tasks;
 using Firestorm.Endpoints.Responses;
 
 namespace Firestorm.Endpoints.Start
 {
     internal class ResponseWriter
     {
-        private readonly IHttpRequestHandler _requestHandler;
-        private readonly IResponseBuilder _builder;
+        private readonly IHttpRequestResponder _responder;
         private readonly Response _response;
 
-        public ResponseWriter(IHttpRequestHandler requestHandler, IResponseBuilder builder)
+        public ResponseWriter(IHttpRequestResponder responder, Response response)
         {
-            _requestHandler = requestHandler;
-            _builder = builder;
-            _response = new Response(requestHandler.ResourcePath);
-        }
-
-        public void AddResource(ResourceBody resourceBody)
-        {
-            _builder.AddResource(_response, resourceBody);
-        }
-
-        public void AddOptions(Options options)
-        {
-            _builder.AddOptions(_response, options);
-        }
-
-        public void AddAcknowledgment(Acknowledgment acknowledgment)
-        {
-            _builder.AddAcknowledgment(_response, acknowledgment);
-        }
-
-        public void AddError(ErrorInfo error)
-        {
-            _builder.AddError(_response, error);
-        }
-
-        public void AddMultiFeedback(IEnumerable<Feedback> feedbackItems)
-        {
-            _builder.AddMultiFeedback(_response, feedbackItems);
-        }
-
-        public void AddFeedback(Feedback feedback)
-        {
-            _builder.AddFeedback(_response, feedback);
+            _responder = responder;
+            _response = response;
         }
 
         public Task WriteAsync()
         {
-            _requestHandler.SetStatusCode(_response.StatusCode);
+            _responder.SetStatusCode(_response.StatusCode);
 
             foreach (var header in _response.Headers)
             {
-                _requestHandler.SetResponseHeader(header.Key, header.Value);
+                _responder.SetResponseHeader(header.Key, header.Value);
             }
 
-            return _requestHandler.SetResponseBodyAsync(_response.GetFullBody());
+            return _responder.SetResponseBodyAsync(_response.GetFullBody());
         }
     }
 }

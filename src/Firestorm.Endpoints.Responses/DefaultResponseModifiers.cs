@@ -4,17 +4,17 @@ using System.Collections.Generic;
 
 namespace Firestorm.Endpoints.Responses
 {
-    public class DefaultResponseBuilders : IEnumerable<IResponseBuilder>
+    public class DefaultResponseModifiers : IEnumerable<IResponseModifier>
     {
-        private readonly List<IResponseBuilder> _list;
+        private readonly List<IResponseModifier> _list;
 
-        public DefaultResponseBuilders(ResponseConfiguruation responseConfiguruation)
+        public DefaultResponseModifiers(ResponseConfiguruation responseConfiguruation)
         {
-            _list = new List<IResponseBuilder>
+            _list = new List<IResponseModifier>
             {
-                new MainBodyResponseBuilder(),
-                new FeedbackResponseHeadersBuilder(),
-                new ErrorResponseBuilder()
+                new MainBodyResponseModifier(),
+                new FeedbackResponseHeadersModifier(),
+                new ErrorResponseModifier()
             };
 
             switch (responseConfiguruation.StatusField)
@@ -23,14 +23,14 @@ namespace Firestorm.Endpoints.Responses
                     break;
 
                 case ResponseStatusField.StatusCode:
-                    _list.Add(new StatusCodeResponseBuilder
+                    _list.Add(new StatusCodeResponseModifier
                     {
                         WrapResourceObject = responseConfiguruation.WrapResourceObject
                     });
                     break;
 
                 case ResponseStatusField.SuccessBoolean:
-                    _list.Add(new SuccessBooleanResponseBuilder
+                    _list.Add(new SuccessBooleanResponseModifier
                     {
                         WrapResourceObject = responseConfiguruation.WrapResourceObject
                     });
@@ -41,16 +41,16 @@ namespace Firestorm.Endpoints.Responses
             }
 
             if(responseConfiguruation.ShowDeveloperErrors)
-                _list.Add(new DeveloperExceptionInfoResponseBuilder());
+                _list.Add(new DeveloperExceptionInfoResponseModifier());
 
             if(responseConfiguruation.PageConfiguration.UseLinkHeaders)
-                _list.Add(new PaginationHeadersResponseBuilder());
+                _list.Add(new PaginationHeadersResponseModifier());
 
             if(responseConfiguruation.PageConfiguration.WrapCollectionResponseBody)
-                _list.Add(new PagedBodyResponseBuilder());
+                _list.Add(new PagedBodyResponseModifier());
         }
 
-        public IEnumerator<IResponseBuilder> GetEnumerator()
+        public IEnumerator<IResponseModifier> GetEnumerator()
         {
             return _list.GetEnumerator();
         }

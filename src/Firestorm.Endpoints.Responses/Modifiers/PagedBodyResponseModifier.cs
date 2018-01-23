@@ -4,7 +4,7 @@ using Firestorm.Core.Web.Options;
 
 namespace Firestorm.Endpoints.Responses
 {
-    public class PagedBodyResponseBuilder : IResponseBuilder
+    public class PagedBodyResponseModifier : IResponseModifier
     {
         public void AddResource(Response response, ResourceBody resourceBody)
         {

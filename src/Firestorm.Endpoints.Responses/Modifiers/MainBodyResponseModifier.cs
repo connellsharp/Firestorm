@@ -5,7 +5,7 @@ using Firestorm.Core.Web.Options;
 
 namespace Firestorm.Endpoints.Responses
 {
-    public class MainBodyResponseBuilder : IResponseBuilder
+    public class MainBodyResponseModifier : IResponseModifier
     {
         public void AddResource(Response response, ResourceBody resourceBody)
         {
