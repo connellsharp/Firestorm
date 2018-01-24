@@ -46,7 +46,7 @@ namespace Firestorm.Engine.Subs.Repositories
             ICollection<TNav> navCollection = GetNavCollection();
 
             var item = new TNav();
-            _tools.RepoEvents.OnCreating(item);
+            _tools.RepoEvents?.OnCreating(item);
             navCollection.Add(item);
             return item;
         }

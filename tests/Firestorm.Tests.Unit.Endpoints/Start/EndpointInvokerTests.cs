@@ -34,14 +34,18 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
             {
                 m.SetupIgnoreArgs(a => a.EvaluatePreconditions(null)).Returns(false);
             });
+
+            var readerMock = _fixture.FreezeMock<IHttpRequestReader>();
+            readerMock.SetupGet(a => a.RequestMethod).Returns(method);
             
-            var handlerMock = _fixture.FreezeMock<IHttpRequestHandler>();
-            handlerMock.SetupGet(a => a.RequestMethod).Returns(method);
+            var response = new Response("test");
+            _fixture.Inject(new ResponseBuilder(response, new PaginationHeadersResponseModifier()));
 
             var invoker = _fixture.Create<EndpointInvoker>();
             await invoker.InvokeAsync();
             
-            handlerMock.Verify(a => a.SetStatusCode(expectedStatusCode));
+            Assert.Equal(expectedStatusCode, response.StatusCode);
+            //handlerMock.Verify(a => a.SetStatusCode(expectedStatusCode));
         }
 
         [Theory]
@@ -64,15 +68,17 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
                 m.Setup(a => a.GetAsync()).ReturnsAsync(new CollectionBody(null, pageLinks));
             });
 
-            var handlerMock = _fixture.FreezeMock<IHttpRequestHandler>();
-            handlerMock.SetupGet(a => a.RequestMethod).Returns("GET");
+            var readerMock = _fixture.FreezeMock<IHttpRequestReader>();
+            readerMock.SetupGet(a => a.RequestMethod).Returns("GET");
 
-            _fixture.Relay<IResponseModifier, PaginationHeadersResponseModifier>();
+            var response = new Response("test");
+            _fixture.Inject(new ResponseBuilder(response, new PaginationHeadersResponseModifier()));
 
             var invoker = _fixture.Create<EndpointInvoker>();
             await invoker.InvokeAsync();
 
-            handlerMock.Verify(a => a.SetResponseHeader("Link", It.IsAny<string>()), Times.Exactly(shouldHaveLinkHeader ? 1 : 0));
+            Assert.True(response.Headers.ContainsKey("Link"));
+            //handlerMock.Verify(a => a.SetResponseHeader("Link", It.IsAny<string>()), Times.Exactly(shouldHaveLinkHeader ? 1 : 0));
         }
     }
 }

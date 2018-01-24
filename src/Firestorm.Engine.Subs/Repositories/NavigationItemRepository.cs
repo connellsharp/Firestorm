@@ -39,7 +39,7 @@ namespace Firestorm.Engine.Subs.Repositories
         public TNav CreateAndAttachItem()
         {
             var item = new TNav();
-            _tools.RepoEvents.OnCreating(item);
+            _tools.RepoEvents?.OnCreating(item);
             SetParentNavItem(item);
             return item;
         }
