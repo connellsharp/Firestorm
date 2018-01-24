@@ -1,8 +1,7 @@
 using System;
 using System.Linq.Expressions;
-using Firestorm.Engine.Subs.Repositories;
 
-namespace Firestorm.Engine.Subs.Handlers
+namespace Firestorm.Engine.Subs
 {
     public class DefaultNavigationSetter<TParent, TNav> : INavigationSetter<TParent,TNav>
     {

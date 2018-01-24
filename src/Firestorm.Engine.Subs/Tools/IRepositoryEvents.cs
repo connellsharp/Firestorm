@@ -1,4 +1,4 @@
-namespace Firestorm.Engine.Subs.Handlers
+namespace Firestorm.Engine.Subs
 {
     public interface IRepositoryEvents<in TItem>
     {

@@ -1,4 +1,4 @@
-namespace Firestorm.Engine.Subs.Repositories
+namespace Firestorm.Engine.Subs
 {
     /// <summary>
     /// Sets the object value of a navigation property of a parent item.

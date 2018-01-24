@@ -23,7 +23,13 @@ namespace Firestorm.Fluent.Fuel.Builder
 
         public IApiIdentifierBuilder<TItem, TIdentifier> Identifier<TIdentifier>(Expression<Func<TItem, TIdentifier>> expression)
         {
-            var identifierModel = new ApiIdentifierModel<TItem>();
+            string originalName = ExpressionNameHelper.GetFullPropertyName(expression);
+            var identifierModel = new ApiIdentifierModel<TItem>
+            {
+                Name = originalName
+            };
+
+            // TODO selecting same expression again, like with fields
 
             var identifierBuilder = new ApiIdentifierBuilder<TItem, TIdentifier>(identifierModel);
             identifierBuilder.AddExpression(expression);

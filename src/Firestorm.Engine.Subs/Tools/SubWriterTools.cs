@@ -1,9 +1,8 @@
 using System;
 using System.Linq.Expressions;
-using Firestorm.Engine.Subs.Repositories;
 using JetBrains.Annotations;
 
-namespace Firestorm.Engine.Subs.Handlers
+namespace Firestorm.Engine.Subs
 {
     /// <summary>
     /// Contains dependencies used by Sub writers and resources.
