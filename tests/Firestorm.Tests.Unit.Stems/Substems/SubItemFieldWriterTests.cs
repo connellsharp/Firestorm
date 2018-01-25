@@ -49,7 +49,7 @@ namespace Firestorm.Tests.Unit.Stems.Substems
             Assert.Equal("New guy", album.Artist.Name);
         }
 
-        [Fact(Skip = "Not implemented setting related stems using locators yet.")]
+        [Fact(Skip = "Not implemented yet.")]
         public async Task AlbumWithNoArtist_SetArtistID_AddsRelationship()
         {
             var album = new Album();
@@ -59,13 +59,13 @@ namespace Firestorm.Tests.Unit.Stems.Substems
         }
 
         [Fact]
-        public async Task AlbumWithNoArtist_SetArtistName_ThrowsNullReference()
+        public async Task AlbumWithNoArtist_SetArtistName_AddsNewArtist()
         {
             var album = new Album();
-            await Assert.ThrowsAsync<ArgumentNullException>(async delegate
-            {
-                await _writer.SetValueAsync(album, new { name = "New guy" }, new VoidTransaction());
-            });
+            await _writer.SetValueAsync(album, new { name = "New guy" }, new VoidTransaction());
+
+            Assert.NotNull(album.Artist);
+            Assert.Equal("New guy", album.Artist.Name);
         }
     }
 }

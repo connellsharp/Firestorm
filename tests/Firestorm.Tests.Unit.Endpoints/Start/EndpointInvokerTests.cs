@@ -77,7 +77,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
             var invoker = _fixture.Create<EndpointInvoker>();
             await invoker.InvokeAsync();
 
-            Assert.True(response.Headers.ContainsKey("Link"));
+            Assert.Equal(shouldHaveLinkHeader, response.Headers.ContainsKey("Link"));
             //handlerMock.Verify(a => a.SetResponseHeader("Link", It.IsAny<string>()), Times.Exactly(shouldHaveLinkHeader ? 1 : 0));
         }
     }

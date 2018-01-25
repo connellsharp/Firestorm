@@ -19,7 +19,6 @@ namespace Firestorm.Engine.Subs.Handlers
         private readonly SubWriterTools<TItem, TNav, TNav> _navTools;
         private readonly IEngineSubContext<TNav> _subContext;
 
-
         public SubItemFieldWriter(SubWriterTools<TItem, TNav, TNav> navTools, IEngineSubContext<TNav> subContext)
         {
             _navTools = navTools;
@@ -31,17 +30,40 @@ namespace Firestorm.Engine.Subs.Handlers
             //IQueryableSingle<TNav> navigationQuery = item.Query.Select(_navigationExpression).SingleDefferred();
             //IEngineRepository<TNav> navRepository = new QueryableSingleRepository<TNav>(navigationQuery);
             IEngineRepository<TNav> navRepository = new NavigationItemRepository<TItem, TNav>(item, _navTools);
-            
+
             var itemData = new RestItemData(deserializedValue);
 
             var navLocatorCreator = new NavigationItemLocatorCreator<TNav>(_subContext);
             DeferredItemBase<TNav> deferredItem = await navLocatorCreator.LocateOrCreateItemAsync(navRepository, itemData, item.LoadAsync);
             //DeferredItemBase<TNav> deferredItem = new RepositoryDeferredItem<TNav>(navSingleRepository);
 
-            IDataTransaction transaction = new VoidTransaction(); // we commit the transaction in the parent. TODO optional save-as-you-go ?
-            var navContext = new FullEngineContext<TNav>(transaction, navRepository, _subContext);
-            var navEngineItem = new EngineRestItem<TNav>(navContext, deferredItem);
-            Acknowledgment acknowledgment = await navEngineItem.EditAsync(itemData);
+            try
+            {
+                IDataTransaction transaction = new VoidTransaction(); // we commit the transaction in the parent. TODO optional save-as-you-go ?
+                var navContext = new FullEngineContext<TNav>(transaction, navRepository, _subContext);
+                var navEngineItem = new EngineRestItem<TNav>(navContext, deferredItem);
+                Acknowledgment acknowledgment = await navEngineItem.EditAsync(itemData);
+            }
+            catch (RestApiException ex)
+            {
+                throw new SubWriterException(ex, item); 
+            }
+        }
+
+        private class SubWriterException : RestApiException
+        {
+            public SubWriterException(RestApiException innerException, IDeferredItemInfo itemInfo)
+                : base(innerException.ErrorStatus, GetMessage(itemInfo), innerException)
+            { }
+
+            private static string GetMessage(IDeferredItemInfo itemInfo)
+            {
+                string identifier = itemInfo.WasCreated ? "newly created "
+                    : itemInfo.Identifier != null ? "'" + itemInfo.Identifier + "' "
+                    : "";
+
+                return "An error occured when editing the " + identifier + "sub item.";
+            }
         }
     }
 }

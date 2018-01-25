@@ -45,15 +45,15 @@ namespace Firestorm.Engine
             return returnObj;
         }
 
-        public static Task<object> SingleOrThrowAsync(IQueryable source, ForEachAsyncDelegate<object> forEachAsync)
+        public static Task<object> SingleOrCreateAsync(IQueryable source, ForEachAsyncDelegate<object> forEachAsync, Func<object> createItemFunc)
         {
             if (source.IsInMemory()) // nasty fix for non-entity queries.
-                return SingleOrThrowAsync(source.OfType<object>(), forEachAsync);
+                return SingleOrCreateAsync(source.OfType<object>(), forEachAsync, createItemFunc);
 
             if (source.ElementType.IsValueType) // executes the query here. works around that EF can't box value types.
-                return Task.FromResult(SingleOrThrow(IterateObjects(source)));
+                return Task.FromResult(SingleOrCreate(IterateObjects(source), createItemFunc));
 
-            return SingleOrThrowAsync(source.AsObjects(), forEachAsync);
+            return SingleOrCreateAsync(source.AsObjects(), forEachAsync, createItemFunc);
         }
 
         public static Task<T> SingleOrThrowAsync<T>(IQueryable<T> source, ForEachAsyncDelegate<T> forEachAsync)
@@ -62,7 +62,7 @@ namespace Firestorm.Engine
             return SingleOrCreateAsync(source, forEachAsync, ThrowNotFound<T>);
         }
 
-        public static async Task<T> SingleOrCreateAsync<T>(IQueryable<T> source, ForEachAsyncDelegate<T> forEachAsync, Func<T> createAndAttachItem)
+        public static async Task<T> SingleOrCreateAsync<T>(IQueryable<T> source, ForEachAsyncDelegate<T> forEachAsync, Func<T> createItemFunc)
             where T : class
         {
             IQueryable<T> takeQuery = source.Take(2);
@@ -79,7 +79,7 @@ namespace Firestorm.Engine
             });
 
             if (i == 0)
-                return createAndAttachItem();
+                return createItemFunc();
 
             return returnObj;
         }

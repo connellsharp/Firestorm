@@ -81,10 +81,17 @@ namespace Firestorm.Engine.Deferring
             TItem item = CreateAttachAndSetItem();
 
             if (item == null)
-                return ItemQueryHelper.ThrowNotFound<TItem>();
+                throw new DeferredItemNotFoundException();
 
             LazyState = LazyState.Created;
             return item;
+        }
+
+        private class DeferredItemNotFoundException : RestApiException
+        {
+            public DeferredItemNotFoundException()
+                : base(ErrorStatus.NotFound, "The deferred item was not found.")
+            { }
         }
 
         [CanBeNull]
@@ -96,7 +103,7 @@ namespace Firestorm.Engine.Deferring
         private class ItemNotLoadedException : InvalidOperationException
         {
             internal ItemNotLoadedException()
-                : base("Referenced item was not loaded. Try calling LoadAsync first.")
+                : base("Deferred item was not loaded. Try calling LoadAsync first.")
             { }
         }
     }

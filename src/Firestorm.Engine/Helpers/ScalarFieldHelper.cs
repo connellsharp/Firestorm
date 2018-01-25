@@ -25,7 +25,7 @@ namespace Firestorm.Engine
             Expression selectExpression = value.GetSelectExpression(itemPram);
 
             IQueryable selectScalarOnlyQuery = ExpressionTreeHelpers.GetSelectByExpressionQuery(itemQuery, itemPram, selectExpression);
-            object loadedValue = await ItemQueryHelper.SingleOrThrowAsync(selectScalarOnlyQuery, forEachAsync);
+            object loadedValue = await ItemQueryHelper.SingleOrCreateAsync(selectScalarOnlyQuery, forEachAsync, () => throw new ParentItemNotFoundException());
 
             if (value.Replacer != null)
             {
@@ -34,6 +34,13 @@ namespace Firestorm.Engine
             }
 
             return loadedValue;
+        }
+
+        private class ParentItemNotFoundException : RestApiException
+        {
+            public ParentItemNotFoundException()
+                : base(ErrorStatus.NotFound, "The item was not found.")
+            { }
         }
     }
 }

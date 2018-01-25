@@ -23,8 +23,17 @@ namespace Firestorm.Engine.Additives.Writers
 
         public async Task SetValueAsync(IDeferredItem<TItem> item, object deserializedValue, IDataTransaction dataTransaction)
         {
-            ForEachAsyncDelegate<object> forEachAsync = ItemQueryHelper.DefaultForEachAsync; // TODO get from item?
-            object loadedValue = await ScalarFieldHelper.LoadScalarValueAsync(_fieldReader, item.Query, forEachAsync);
+            object loadedValue;
+
+            try
+            {
+                ForEachAsyncDelegate<object> forEachAsync = ItemQueryHelper.DefaultForEachAsync; // TODO get from item?
+                loadedValue = await ScalarFieldHelper.LoadScalarValueAsync(_fieldReader, item.Query, forEachAsync);
+            }
+            catch (Exception ex)
+            {
+                throw new ConfirmOnlyValueLoadException(ex, deserializedValue);
+            }
 
             // TODO find a more efficient way. Possibly generic values too?
 
@@ -39,6 +48,13 @@ namespace Firestorm.Engine.Additives.Writers
 
             throw new InvalidOperationException("Cannot set the '" + _fieldName + "' field. Given value must be equal to the current value.");
 
+        }
+
+        private class ConfirmOnlyValueLoadException : RestApiException
+        {
+            public ConfirmOnlyValueLoadException(Exception exception, object deserializedValue)
+                : base(ErrorStatus.InternalServerError, "Error loading value to confirm whether it is correct. Value: " + deserializedValue, exception)
+            { }
         }
     }
 }

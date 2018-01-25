@@ -67,7 +67,7 @@ namespace Firestorm.Tests.Unit.Engine.Subs
         }
 
         [Fact]
-        public void AttachItem_EmptyCollection_AddsItem()
+        public void AttachNewItem_EmptyCollection_AddsItem()
         {
             var books = new List<Book>();
             var author = new Author
@@ -83,7 +83,7 @@ namespace Firestorm.Tests.Unit.Engine.Subs
         }
 
         [Fact]
-        public void AttachItem_NullCollection_ThrowsNotSupported()
+        public void AttachNewItem_NullCollection_CreatesCollection()
         {
             var author = new Author
             {
@@ -92,10 +92,10 @@ namespace Firestorm.Tests.Unit.Engine.Subs
 
             NavigationCollectionRepository<Author, ICollection<Book>, Book> repo = GetBooksNavRepo(author);
 
-            Assert.Throws<NotSupportedException>(delegate
-            {
-                var book = repo.CreateAndAttachItem();
-            });
+            var book = repo.CreateAndAttachItem();
+
+            Assert.NotNull(author.Books);
+            Assert.Contains(book, author.Books);
         }
 
         public class Author
