@@ -53,7 +53,7 @@ namespace Firestorm.Tests.Examples.Basics
         [Fact]
         public async Task Tracks_GetIDsWhereLiked_AllOdd()
         {
-            HttpResponseMessage response = await HttpClient.GetAsync("/tracks?fields=id&liked=true");
+            HttpResponseMessage response = await HttpClient.GetAsync("/tracks?fields=id&liked=true&id<=10");
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
@@ -72,7 +72,7 @@ namespace Firestorm.Tests.Examples.Basics
         [Fact]
         public async Task Tracks_GetIDsWhereNotLiked_AllEven()
         {
-            HttpResponseMessage response = await HttpClient.GetAsync("/tracks?fields=id&liked=false");
+            HttpResponseMessage response = await HttpClient.GetAsync("/tracks?fields=id&liked=false&where=id<=10");
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
@@ -84,6 +84,7 @@ namespace Firestorm.Tests.Examples.Basics
             foreach (dynamic obj in objs)
             {
                 int id = obj.id;
+
                 Assert.Equal(0, id % 2); // weird bodge, in db all my likes are odd numbers
             }
         }
