@@ -77,7 +77,6 @@ namespace Firestorm.Tests.Examples.Football.Web
                             .HasName("home");
 
                         ft.Field(f => f.Fixture.Teams.FirstOrDefault(tt => tt.TeamId != f.TeamId))
-                            //.AllowWrite()
                             .AllowWrite((f, tt) => { f.Fixture.Teams.Add(tt); })
                             .HasName("vs_team")
                             .IsItem(t =>
