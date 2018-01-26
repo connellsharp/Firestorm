@@ -16,7 +16,7 @@ namespace Firestorm.Extensions.AspNetCore
         public static IFirestormServicesBuilder AddEntityFramework<TDbContext>(this IFirestormServicesBuilder builder)
             where TDbContext : DbContext
         {
-            builder.Services.AddSingleton<IDataSource>(sp => new EFCoreDataSource<TDbContext>(new RequestServiceProvider(sp)));
+            builder.AddDataSource(sp => new EFCoreDataSource<TDbContext>(new RequestServiceProvider(sp)));
 
             builder.Services.AddSingleton<IRootResourceFactory>(sp => new DataSourceRootResourceFactory
                 {

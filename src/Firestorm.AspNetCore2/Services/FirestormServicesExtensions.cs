@@ -38,7 +38,7 @@ namespace Firestorm.AspNetCore2
         }
 
         /// <summary>
-        /// Configures Firestorm using the given action.
+        /// Configures the start resource for this Firestorm API.
         /// </summary>
         public static IFirestormServicesBuilder AddStartResourceFactory(this IFirestormServicesBuilder builder, IStartResourceFactory startResourceFactory)
         {
@@ -47,7 +47,7 @@ namespace Firestorm.AspNetCore2
         }
 
         /// <summary>
-        /// Configures Firestorm using the given action.
+        /// Configures the start resource for this Firestorm API.
         /// </summary>
         public static IFirestormServicesBuilder AddStartResourceFactory(this IFirestormServicesBuilder builder, Func<IServiceProvider,IStartResourceFactory> startResourceFactoryFunc)
         {
