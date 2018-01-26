@@ -32,19 +32,37 @@ namespace Firestorm.AspNetWebApi2
 
         private FirestormController(FirestormConfiguration configuration)
         {
-            Config = configuration;
-            Response = new Response(ResourcePath);
-
-            var modifiers = new DefaultResponseModifiers(Config.EndpointConfiguration.ResponseConfiguration);
-
-            ResponseBuilder = new ResponseBuilder(Response, modifiers);
+            _config = configuration;
         }
 
-        internal FirestormConfiguration Config { get; }
+        private readonly FirestormConfiguration _config;
+        private Response _response;
+        private ResponseBuilder _responseBuilder;
 
-        internal Response Response { get; }
+        internal Response Response
+        {
+            get
+            {
+                if (_response == null) Load();
+                return _response;
+            }
+        }
 
-        internal ResponseBuilder ResponseBuilder { get; }
+        internal ResponseBuilder ResponseBuilder
+        {
+            get
+            {
+                if (_responseBuilder == null) Load();
+                return _responseBuilder;
+            }
+        }
+
+        private void Load()
+        {
+            var modifiers = new DefaultResponseModifiers(_config.EndpointConfiguration.ResponseConfiguration);
+            _response = new Response(ResourcePath);
+            _responseBuilder = new ResponseBuilder(Response, modifiers);
+        }
 
         [HttpGet]
         public async Task<object> GetAsync()
@@ -55,7 +73,7 @@ namespace Firestorm.AspNetWebApi2
                 return StatusCode(HttpStatusCode.NotModified);
 
             ResourceBody resourceBody = await endpoint.GetAsync();
-            
+
             ResponseBuilder.AddResource(resourceBody);
             return Response.ResourceBody; // TODO headers?
         }
@@ -64,7 +82,7 @@ namespace Firestorm.AspNetWebApi2
         public async Task<object> OptionsAsync()
         {
             Options options = await GetEndpoint().OptionsAsync();
-            
+
             ResponseBuilder.AddOptions(options);
             return Response.ResourceBody; // TODO headers?
         }
@@ -96,7 +114,7 @@ namespace Firestorm.AspNetWebApi2
         private async Task<IHttpActionResult> GetResultFromMethodFeedbackAsync(UnsafeMethod method, ResourceBody body)
         {
             IRestEndpoint endpoint = GetEndpoint();
-            
+
             if (!endpoint.EvaluatePreconditions(GetPreconditions()))
                 return StatusCode(HttpStatusCode.PreconditionFailed);
 
@@ -132,15 +150,15 @@ namespace Firestorm.AspNetWebApi2
 
         private string ResourcePath
         {
-            get { return (string)ControllerContext.RouteData.Values["path"]; }
+            get { return (string) ControllerContext.RouteData.Values["path"]; }
         }
 
         private IRestEndpointContext _context;
 
         private IRestEndpoint GetEndpoint()
         {
-            _context = new HttpRequestRestEndpointContext(RequestContext, Request, Config.EndpointConfiguration);
-            return StartUtilities.GetEndpointFromPath(Config.StartResourceFactory, _context, ResourcePath);
+            _context = new HttpRequestRestEndpointContext(RequestContext, Request, _config.EndpointConfiguration);
+            return StartUtilities.GetEndpointFromPath(_config.StartResourceFactory, _context, ResourcePath);
         }
 
         protected override void Dispose(bool disposing)
