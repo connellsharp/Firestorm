@@ -52,7 +52,7 @@ namespace Firestorm.Tests.Examples.Music.Basics
         [Fact]
         public async Task Tracks_GetIDsWhereLiked_AllOdd()
         {
-            HttpResponseMessage response = await HttpClient.GetAsync("/tracks?fields=id&liked=true&id<=10");
+            HttpResponseMessage response = await HttpClient.GetAsync("/tracks?fields=id&liked=true&where=id<=10");
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 

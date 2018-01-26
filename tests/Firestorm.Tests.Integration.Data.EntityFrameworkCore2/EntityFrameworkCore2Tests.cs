@@ -7,9 +7,9 @@ using Xunit;
 namespace Firestorm.Tests.Integration.Data.EntityFrameworkCore2
 {
     [UsedImplicitly]
-    public class EntityFrameworkTests : BasicDataTests, IClassFixture<ExampleDataContext>
+    public class EntityFrameworkCore2Tests : BasicDataTests, IClassFixture<ExampleDataContext>
     {
-        public EntityFrameworkTests(ExampleDataContext context) 
+        public EntityFrameworkCore2Tests(ExampleDataContext context) 
             : base(new EFCoreDataTransaction<ExampleDataContext>(context), new EFCoreRepository<Artist>(context.Artists))
         {
         }
