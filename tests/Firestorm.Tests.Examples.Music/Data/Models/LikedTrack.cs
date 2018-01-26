@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Firestorm.Tests.Examples.Data.Models
+namespace Firestorm.Tests.Examples.Music.Data.Models
 {
     public class LikedTrack
     {

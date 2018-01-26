@@ -1,8 +1,7 @@
 using System;
 using Firestorm.Core.Web;
-using Firestorm.Endpoints.Pagination;
 
-namespace Firestorm.Endpoints
+namespace Firestorm.Endpoints.Pagination
 {
     /// <summary>
     /// Calculates the next and previous page links based on application config, request querystring and collection details.

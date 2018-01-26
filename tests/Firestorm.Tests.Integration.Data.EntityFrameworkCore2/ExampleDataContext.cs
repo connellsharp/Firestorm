@@ -2,7 +2,7 @@ using Firestorm.Tests.Integration.Data.Base.Models;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Firestorm.Tests.Integration.EntityFrameworkCore2
+namespace Firestorm.Tests.Integration.Data.EntityFrameworkCore2
 {
     [UsedImplicitly]
     public class ExampleDataContext : DbContext

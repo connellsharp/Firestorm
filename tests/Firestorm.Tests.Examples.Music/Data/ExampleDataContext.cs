@@ -1,9 +1,9 @@
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using Firestorm.Tests.Examples.Data.Models;
+using Firestorm.Tests.Examples.Music.Data.Models;
 using JetBrains.Annotations;
 
-namespace Firestorm.Tests.Examples.Data
+namespace Firestorm.Tests.Examples.Music.Data
 {
     [UsedImplicitly]
     public class ExampleDataContext : DbContext

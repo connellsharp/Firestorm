@@ -4,7 +4,7 @@ using Firestorm.Tests.Integration.Data.Base;
 using Firestorm.Tests.Integration.Data.Base.Models;
 using JetBrains.Annotations;
 
-namespace Firestorm.Tests.Integration.EntityFramework6
+namespace Firestorm.Tests.Integration.Data.EntityFramework6
 {
     [UsedImplicitly]
     public class ExampleModelInitializer : DropCreateDatabaseAlways<ExampleDataContext>

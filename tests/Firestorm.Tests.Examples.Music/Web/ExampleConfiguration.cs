@@ -1,14 +1,14 @@
-﻿using Firestorm.EntityFramework6;
-using Firestorm.Endpoints;
+﻿using Firestorm.Endpoints;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Start;
+using Firestorm.EntityFramework6;
 using Firestorm.Stems.AutoMap;
 using Firestorm.Stems.Naming;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.DataSource;
-using Firestorm.Tests.Examples.Data;
+using Firestorm.Tests.Examples.Music.Data;
 
-namespace Firestorm.Tests.Examples.Web
+namespace Firestorm.Tests.Examples.Music.Web
 {
     internal static class ExampleConfiguration
     {

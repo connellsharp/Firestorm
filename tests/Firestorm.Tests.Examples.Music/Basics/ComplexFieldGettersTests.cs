@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Firestorm.Stems;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Roots.DataSource;
-using Firestorm.Tests.Examples.Data.Models;
-using Firestorm.Tests.Examples.Web;
-using Newtonsoft.Json;
+using Firestorm.Tests.Examples.Music.Data.Models;
+using Firestorm.Tests.Examples.Music.Web;
 using Xunit;
 
-namespace Firestorm.Tests.Examples.Basics
+namespace Firestorm.Tests.Examples.Music.Basics
 {
     public class ComplexFieldGettersTests : IClassFixture<ExampleFixture<ComplexFieldGettersTests>>
     {

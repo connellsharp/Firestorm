@@ -4,7 +4,7 @@ using Firestorm.Tests.Integration.Data.Base.Models;
 using JetBrains.Annotations;
 using Xunit;
 
-namespace Firestorm.Tests.Integration.EntityFrameworkCore2
+namespace Firestorm.Tests.Integration.Data.EntityFrameworkCore2
 {
     [UsedImplicitly]
     public class EntityFrameworkTests : BasicDataTests, IClassFixture<ExampleDataContext>

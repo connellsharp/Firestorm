@@ -7,12 +7,12 @@ using Firestorm.Stems;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.Roots.DataSource;
-using Firestorm.Tests.Examples.Data.Models;
-using Firestorm.Tests.Examples.Web;
-using Xunit;
+using Firestorm.Tests.Examples.Music.Data.Models;
+using Firestorm.Tests.Examples.Music.Web;
 using Newtonsoft.Json;
+using Xunit;
 
-namespace Firestorm.Tests.Examples.Basics
+namespace Firestorm.Tests.Examples.Music.Basics
 {
     public class SubstemTests : IClassFixture<ExampleFixture<SubstemTests>>
     {

@@ -3,7 +3,7 @@ using System.Linq;
 using Firestorm.Endpoints.Query;
 using Xunit;
 
-namespace Firestorm.Tests.Unit.Endpoints
+namespace Firestorm.Tests.Unit.Endpoints.Query
 {
     public class QueryStringCollectionQueryTests
     {

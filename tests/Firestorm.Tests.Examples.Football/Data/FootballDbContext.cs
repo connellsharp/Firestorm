@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Firestorm.Tests.Examples.Football.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Debug;
 
-namespace Firestorm.Tests.Examples.Football.Models
+namespace Firestorm.Tests.Examples.Football.Data
 {
     public class FootballDbContext : DbContext
     {

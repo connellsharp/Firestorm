@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using Firestorm.Tests.Examples.Data.Models;
+using Firestorm.Tests.Examples.Music.Data.Models;
 using JetBrains.Annotations;
 
-namespace Firestorm.Tests.Examples.Data
+namespace Firestorm.Tests.Examples.Music.Data
 {
     [UsedImplicitly]
     public class ExampleModelInitializer : DropCreateDatabaseAlways<ExampleDataContext>

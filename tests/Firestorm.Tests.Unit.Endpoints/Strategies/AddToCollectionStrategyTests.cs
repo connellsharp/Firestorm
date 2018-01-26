@@ -5,7 +5,7 @@ using Firestorm.Endpoints.Strategies;
 using Firestorm.Tests.Unit.Endpoints.Stubs;
 using Xunit;
 
-namespace Firestorm.Tests.Unit.Endpoints
+namespace Firestorm.Tests.Unit.Endpoints.Strategies
 {
     public class AddToCollectionStrategyTests
     {

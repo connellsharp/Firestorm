@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Owin;
 
-namespace Firestorm.Tests.Examples.Web
+namespace Firestorm.Tests.Examples.Music.Web
 {
     public class SpoofUserMiddleware : OwinMiddleware
     {

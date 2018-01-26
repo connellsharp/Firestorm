@@ -3,7 +3,7 @@ using System.Net.Http;
 using Firestorm.Endpoints.Start;
 using Firestorm.Tests.Integration.Http.Base;
 
-namespace Firestorm.Tests.Examples.Web
+namespace Firestorm.Tests.Examples.Music.Web
 {
     public class ExampleFixture<TTest> : IDisposable
     {

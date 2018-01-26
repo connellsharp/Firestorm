@@ -6,7 +6,7 @@ using Firestorm.Endpoints.Start;
 using Firestorm.Tests.Unit.Endpoints.Stubs;
 using Xunit;
 
-namespace Firestorm.Tests.Unit.Endpoints
+namespace Firestorm.Tests.Unit.Endpoints.Functionality
 {
     /// <summary>
     /// Some basic tests for the Endpoint chains using the <see cref="TestRestDirectory"/>.

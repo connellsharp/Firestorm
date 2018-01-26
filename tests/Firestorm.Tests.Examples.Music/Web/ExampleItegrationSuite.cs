@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Net.Http;
-using Firestorm.Endpoints;
-using Firestorm.Owin;
 using Firestorm.Endpoints.Start;
+using Firestorm.Owin;
 using Firestorm.Tests.Integration.Http.Base;
-using Microsoft.Owin.Hosting;
 using Owin;
 
-namespace Firestorm.Tests.Examples.Web
+namespace Firestorm.Tests.Examples.Music.Web
 {
     public class ExampleItegrationSuite : IHttpIntegrationSuite
     {
