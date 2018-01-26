@@ -14,7 +14,7 @@ namespace Firestorm.Tests.Integration.Data.EntityFrameworkCore2
         private static DbContextOptions GetOptions()
         {
             return new DbContextOptionsBuilder<ExampleDataContext>()
-                .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Firestorm.Tests.Integration.EntityFramework6.ExampleDataContext;integrated security=True;Trusted_Connection=True;MultipleActiveResultSets=true")
+                .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Firestorm.Tests.Integration.Data.EntityFramework6.ExampleDataContext;integrated security=True;Trusted_Connection=True;MultipleActiveResultSets=true")
                 .Options;
         }
 
