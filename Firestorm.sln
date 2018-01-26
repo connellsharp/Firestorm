@@ -1,18 +1,18 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Core", "src\Firestorm.Core\Firestorm.Core.csproj", "{8A8BFE0E-1545-4152-96FC-23E72F1D0DF2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Data.EntityFramework", "src\Firestorm.Data.EntityFramework\Firestorm.Data.EntityFramework.csproj", "{CD4E5183-CB9C-433D-86DF-FC0F5A16B94B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.EntityFramework6", "src\Firestorm.Data.EntityFramework\Firestorm.EntityFramework6.csproj", "{CD4E5183-CB9C-433D-86DF-FC0F5A16B94B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints.WebApi2", "src\Firestorm.Endpoints.WebApi2\Firestorm.Endpoints.WebApi2.csproj", "{44FBE17A-1E96-4E43-A20F-B1806DB6AF98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.AspNetWebApi2", "src\Firestorm.Endpoints.WebApi2\Firestorm.AspNetWebApi2.csproj", "{44FBE17A-1E96-4E43-A20F-B1806DB6AF98}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints", "src\Firestorm.Endpoints\Firestorm.Endpoints.csproj", "{B629974F-C31F-4E05-8AD7-CD137DC84505}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Engine", "src\Firestorm.Engine\Firestorm.Engine.csproj", "{AAE9E7FF-8EE5-4CA0-87CF-7E0026E62CC7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints.Owin", "src\Firestorm.Endpoints.Owin\Firestorm.Endpoints.Owin.csproj", "{BE5C7EC3-7379-4D87-89EB-F3705182B873}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Owin", "src\Firestorm.Endpoints.Owin\Firestorm.Owin.csproj", "{BE5C7EC3-7379-4D87-89EB-F3705182B873}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{C2F6430A-4C2E-495B-9556-7EF1A3A1C2B8}"
 EndProject
@@ -48,7 +48,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints.Formatt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Stems.Fuel", "src\Firestorm.Stems.Fuel\Firestorm.Stems.Fuel.csproj", "{5203A93D-8BB7-4852-B38C-1B867D00C005}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints.AspNetCore", "src\Firestorm.Endpoints.AspNetCore\Firestorm.Endpoints.AspNetCore.csproj", "{493EE624-7E8F-47DC-B3BD-F5A83C3E4068}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.AspNetCore", "src\Firestorm.Endpoints.AspNetCore\Firestorm.AspNetCore.csproj", "{493EE624-7E8F-47DC-B3BD-F5A83C3E4068}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints.Start", "src\Firestorm.Endpoints.Start\Firestorm.Endpoints.Start.csproj", "{FFFE6B9A-5753-460F-81B2-823C23BC4A3C}"
 EndProject
@@ -107,7 +107,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{BF8FB258
 		nuget\base\Firestorm.Stems.Roots.Start.nuspec = nuget\base\Firestorm.Stems.Roots.Start.nuspec
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Data.EFCore2", "src\Firestorm.Data.EFCore2\Firestorm.Data.EFCore2.csproj", "{619EA714-F180-4D6E-81DE-8611275B2FDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.EntityFrameworkCore2", "src\Firestorm.Data.EFCore2\Firestorm.EntityFrameworkCore2.csproj", "{619EA714-F180-4D6E-81DE-8611275B2FDB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Stems.Fuel.Essential", "src\Firestorm.Stems.Fuel.Essential\Firestorm.Stems.Fuel.Essential.csproj", "{C3B73A29-DC9A-43A0-B18E-47F2115FA18A}"
 EndProject

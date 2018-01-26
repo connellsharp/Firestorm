@@ -78,7 +78,7 @@ namespace Firestorm.Tests.Examples.Football.Web
     }
 
     [DataSourceRoot]
-    public class TeamsStem : Stem<Player>
+    public class TeamsStem : Stem<Team>
     {
         [Get]
         public static string Name { get; }
