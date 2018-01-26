@@ -3,6 +3,7 @@ using System.Net.Http;
 using Firestorm.Endpoints.Start;
 using Firestorm.Owin;
 using Firestorm.Tests.Integration.Http.Base;
+using Microsoft.Owin.Hosting;
 using Owin;
 
 namespace Firestorm.Tests.Examples.Music.Web
