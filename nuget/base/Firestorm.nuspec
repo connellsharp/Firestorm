@@ -15,10 +15,8 @@
 
     <dependencies>
       <dependency id="Firestorm.Core" version="$(FsVersion)" />
-      <dependency id="Firestorm.Endpoints.AspNetCore" version="$(FsVersion)" />
-      <dependency id="Firestorm.Engine.EFCore2" version="$(FsVersion)" />
-      <dependency id="Firestorm.Stems" version="$(FsVersion)" />
-      <dependency id="Firestorm.Stems.Roots" version="$(FsVersion)" />
+      <dependency id="Firestorm.AspNetCore2" version="$(FsVersion)" />
+      <dependency id="Firestorm.EntityFrameworkCore2" version="$(FsVersion)" />
       <dependency id="Firestorm.Stems.Roots.DataSource" version="$(FsVersion)" />
     </dependencies>
   </metadata>

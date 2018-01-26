@@ -1,4 +1,4 @@
-﻿using Firestorm.Endpoints.Owin;
+﻿using Firestorm.Owin;
 using Firestorm.Endpoints.Start;
 using Firestorm.Tests.Integration.Http.NetFramework.Web;
 using JetBrains.Annotations;

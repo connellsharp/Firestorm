@@ -1,6 +1,6 @@
 ﻿using Firestorm.Data;
 using Firestorm.Endpoints.Start;
-using Firestorm.Endpoints.AspNetCore;
+using Firestorm.AspNetCore2;
 using Firestorm.Fluent;
 using Firestorm.Fluent.Start;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,6 +1,6 @@
 ﻿using Firestorm.Data;
-using Firestorm.Data.EFCore2;
-using Firestorm.Endpoints.AspNetCore;
+using Firestorm.EntityFrameworkCore2;
+using Firestorm.AspNetCore2;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.DataSource;
 using Microsoft.EntityFrameworkCore;

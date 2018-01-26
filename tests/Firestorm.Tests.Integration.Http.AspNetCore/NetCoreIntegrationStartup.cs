@@ -1,5 +1,5 @@
-﻿using Firestorm.Endpoints.AspNetCore;
-using Firestorm.Endpoints.AspNetCore.Middleware;
+﻿using Firestorm.AspNetCore2;
+using Firestorm.AspNetCore2.Middleware;
 using Firestorm.Endpoints.Start;
 using Firestorm.Tests.Integration.Http.Base;
 using JetBrains.Annotations;

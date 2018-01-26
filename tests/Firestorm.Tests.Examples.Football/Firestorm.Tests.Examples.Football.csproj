@@ -24,7 +24,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Firestorm.Endpoints.AspNetCore\Firestorm.Endpoints.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\src\Firestorm.AspNetCore2\Firestorm.AspNetCore2.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Stems.Attributes.Basic\Firestorm.Stems.Attributes.Basic.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.Start\Firestorm.Stems.Roots.Start.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Extensions.AspNetCore\Firestorm.Extensions.AspNetCore.csproj" />

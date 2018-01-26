@@ -1,4 +1,4 @@
-﻿using Firestorm.Data.EntityFramework;
+﻿using Firestorm.EntityFramework6;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Start;
