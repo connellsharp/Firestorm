@@ -23,11 +23,34 @@ namespace Firestorm.Endpoints.Start
 
             foreach (string dir in dirs)
             {
-                endpoint = endpoint.Next(dir);
-                // TODO null 404?
+                try
+                {
+                    endpoint = endpoint.Next(dir);
+                }
+                catch (Exception ex)
+                {
+                    throw new NextEndpointErrorException(dir, ex);
+                }
+
+                if (endpoint == null)
+                    throw new NextEndpointNotFoundException(dir);
             }
 
             return endpoint;
+        }
+
+        private class NextEndpointNotFoundException : RestApiException
+        {
+            public NextEndpointNotFoundException(string dir)
+                : base(ErrorStatus.NotFound, "The '" + dir + "' endpoint was not found.")
+            { }
+        }
+
+        private class NextEndpointErrorException : RestApiException
+        {
+            public NextEndpointErrorException(string dir, Exception innerException)
+                : base("There was an error loading the '" + dir + "' endpoint.", innerException)
+            { }
         }
     }
 }
