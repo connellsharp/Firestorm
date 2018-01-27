@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Firestorm.Engine.EntityFrameworkCore2</id>
+    <id>Firestorm.EntityFrameworkCore2</id>
     <version>$(FsVersion)</version>
     <title>Firestorm with Entity Framework Core 2.0</title>
     <description>Use Entity Framework Core as a data source for Firestorm APIs</description>
