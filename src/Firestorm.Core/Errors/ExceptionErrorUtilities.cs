@@ -15,15 +15,15 @@ namespace Firestorm
             return ErrorStatus.InternalServerError;
         }
 
-        internal static string GetExceptionTypeText(Exception exception)
+        internal static string GetExceptionType(Exception exception)
         {
             if (exception is RestApiException restApiException)
                 return restApiException.ErrorType;
             
-            return GetExceptionTypeString(exception.GetType());
+            return GetTypeString(exception.GetType());
         }
 
-        internal static string GetExceptionTypeString(Type type)
+        internal static string GetTypeString(Type type)
         {
             string exceptionTypeName = type.Name.TrimEnd("Exception");
             return exceptionTypeName.SeparateCamelCase("_", true);

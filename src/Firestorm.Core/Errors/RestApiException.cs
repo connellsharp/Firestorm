@@ -30,7 +30,13 @@ namespace Firestorm
 
         public virtual string ErrorType
         {
-            get { return ExceptionErrorUtilities.GetExceptionTypeString(GetType()); }
+            get
+            {
+                if (InnerException is RestApiException restApiException)
+                    return restApiException.ErrorType;
+
+                return ExceptionErrorUtilities.GetTypeString(GetType());
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Firestorm
         public ExceptionErrorInfo(Exception exception)
         {
             ErrorStatus = ExceptionErrorUtilities.GetExceptionStatus(exception);
-            ErrorType = ExceptionErrorUtilities.GetExceptionTypeText(exception);
+            ErrorType = ExceptionErrorUtilities.GetExceptionType(exception);
             ErrorDescription = exception.Message;
 
             StackTrace = exception.StackTrace;
