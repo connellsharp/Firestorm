@@ -12,7 +12,20 @@ namespace Firestorm.Tests.Examples.Football.Tests
 
             string errorJson = response.Content.ReadAsStringAsync().Result;
             var errorObj = JsonConvert.DeserializeObject<ErrorModel>(errorJson);
-            throw new RestApiException((ErrorStatus)response.StatusCode, errorObj.Error + ": " + errorObj.ErrorDescription);
+
+            var status = (ErrorStatus) response.StatusCode;
+
+            throw new RestApiException(status, GetMessage(status, errorObj));
+        }
+
+        private static string GetMessage(ErrorStatus status, ErrorModel errorObj)
+        {
+            string message = ((int)status) + " " + status + " - " + errorObj.Error + " - " + errorObj.ErrorDescription;
+
+            if (errorObj.InnerDescriptions == null)
+                return message;
+
+            return message + "\r\n\r\n" + string.Join("\r\n", errorObj.InnerDescriptions);
         }
 
         internal class ErrorModel
@@ -22,6 +35,9 @@ namespace Firestorm.Tests.Examples.Football.Tests
 
             [JsonProperty("error_description")]
             public string ErrorDescription { get; set; }
+
+            [JsonProperty("inner_descriptions")]
+            public string[] InnerDescriptions { get; set; }
         }
     }
 }

@@ -49,7 +49,7 @@ namespace Firestorm.Endpoints.Start
         private class NextEndpointErrorException : RestApiException
         {
             public NextEndpointErrorException(string dir, Exception innerException)
-                : base("There was an error loading the '" + dir + "' endpoint.", innerException)
+                : base("Error loading the '" + dir + "' endpoint: " + innerException.Message, innerException)
             { }
         }
     }
