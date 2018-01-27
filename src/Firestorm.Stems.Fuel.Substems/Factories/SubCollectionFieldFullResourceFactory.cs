@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using Firestorm.Engine.Subs;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Engine.Subs.Handlers;
+using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 using JetBrains.Annotations;
 
@@ -19,17 +20,20 @@ namespace Firestorm.Stems.Fuel.Substems.Factories
         where TSubstem : Stem<TNav>
     {
         private readonly Expression<Func<TItem, TCollection>> _navigationExpression;
+        private readonly FieldDefinition _definition;
 
         [UsedImplicitly]
-        public SubCollectionFieldFullResourceFactory(Expression<Func<TItem, TCollection>> navigationExpression)
+        public SubCollectionFieldFullResourceFactory(Expression<Func<TItem, TCollection>> navigationExpression, FieldDefinition definition)
         {
             _navigationExpression = navigationExpression;
+            _definition = definition;
         }
 
         public IFieldResourceGetter<TItem> Get(Stem<TItem> stem)
         {
             StemsEngineSubContext<TNav> subContext = SubstemEngineSubContextCreator<TItem, TNav, TSubstem>.StemEngineContextFields(stem);
-            var tools = new SubWriterTools<TItem, TCollection, TNav>(_navigationExpression, null, null);
+            MethodSetter<TItem, TCollection> setter = MethodSetter<TItem, TCollection>.FromDefinition(_definition, stem);
+            var tools = new SubWriterTools<TItem, TCollection, TNav>(_navigationExpression, null, setter);
             return new SubCollectionResourceGetter<TItem, TCollection,TNav>(tools, subContext);
         }
     }

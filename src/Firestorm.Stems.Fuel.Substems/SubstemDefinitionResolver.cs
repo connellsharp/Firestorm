@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using Firestorm.Engine.Fields;
 using Firestorm.Stems.Attributes.Analysis;
 using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Fuel.Resolving;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 using Firestorm.Stems.Fuel.Substems.Factories;
@@ -52,7 +54,9 @@ namespace Firestorm.Stems.Fuel.Substems
                 Type typeDefinition = GetFactoryTypeDefinition(handlerType, typeArgs.IsCollection);
                 Type factoryType = typeDefinition.MakeGenericType(GetFactoryTypeArgs<TItem>(typeArgs).ToArray());
 
-                var factory = (IFactory<THandler, TItem>) Activator.CreateInstance(factoryType, typeArgs.GetterExpression);
+                var autoActivator = new AutoActivator(new SubstemHandlerDependencyResolver(typeArgs.GetterExpression, FieldDefinition));
+                
+                var factory = (IFactory<THandler, TItem>)autoActivator.CreateInstance(factoryType);
 
                 dictionary.Add(FieldDefinition.FieldName, factory);
             }
@@ -63,11 +67,11 @@ namespace Firestorm.Stems.Fuel.Substems
             }
         }
 
-        private Type GetFactoryTypeDefinition(HandlerTypes fullResource, bool isCollection)
+        private Type GetFactoryTypeDefinition(HandlerTypes handlerType, bool isCollection)
         {
             // There's some weird stuff going on here with generics. I'm not sure it's all necessary..
 
-            switch (fullResource)
+            switch (handlerType)
             {
                 case HandlerTypes.FullResource:
                     return isCollection ? typeof(SubCollectionFieldFullResourceFactory<,,,>) : typeof(SubItemFieldFullResourceFactory<,,>);
@@ -79,7 +83,7 @@ namespace Firestorm.Stems.Fuel.Substems
                     return isCollection ? typeof(SubCollectionFieldWriterFactory<,,,>) : typeof(SubItemFieldWriterFactory<,,>);
 
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(fullResource), fullResource, null);
+                    throw new ArgumentOutOfRangeException(nameof(handlerType), handlerType, null);
             }
         }
 
@@ -95,6 +99,30 @@ namespace Firestorm.Stems.Fuel.Substems
                 yield return typeArgs.EnumerableTypeArgument;
 
             yield return FieldDefinition.SubstemType;
+        }
+
+        private class SubstemHandlerDependencyResolver : IDependencyResolver
+        {
+            private readonly LambdaExpression _getterExpression;
+            private readonly FieldDefinition _fieldDefinition;
+
+            public SubstemHandlerDependencyResolver(LambdaExpression getterExpression, FieldDefinition fieldDefinition)
+            {
+                _getterExpression = getterExpression;
+                _fieldDefinition = fieldDefinition;
+            }
+
+            public object Resolve(Type type)
+            {
+                if (typeof(Expression).IsAssignableFrom(type))
+                    return _getterExpression;
+
+                if (type == typeof(FieldDefinition))
+                    return _fieldDefinition;
+
+                Debug.Fail("One of the handler types listed below is requesting a dependency that is not supported here.");
+                return null;
+            }
         }
 
         private enum HandlerTypes

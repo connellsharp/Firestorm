@@ -29,10 +29,10 @@ namespace Firestorm.Tests.Examples.Football.Web
     public class FixturesStem : Stem<FixtureTeam>
     {
         [Get, Identifier]
-        public static string FixtureId { get; }
+        public static Expression<Func<FixtureTeam, int>> ID { get; } = ft => ft.FixtureId;
 
         [Get]
-        public static bool Home { get; }
+        public static Expression<Func<FixtureTeam, bool>> Home { get; } = ft => ft.IsHome;
 
         [Set]
         public static void SetHome(FixtureTeam ft, bool isHome)
@@ -51,13 +51,16 @@ namespace Firestorm.Tests.Examples.Football.Web
         }
 
         [Set]
-        public static void SetHome(FixtureTeam ft, FixtureTeam vsTeam)
+        public static void SetVsTeam(FixtureTeam ft, FixtureTeam vsTeam)
         {
+            if (ft.Fixture == null)
+                ft.Fixture = new Fixture { Teams = new List<FixtureTeam>() };
+
             ft.Fixture.Teams.Add(vsTeam);
         }
 
         [Get, Substem(typeof(GoalsStem))]
-        public static ICollection<Goal> Goals { get; }
+        public static Expression<Func<FixtureTeam, ICollection<Goal>>> Goals { get; } = ft => ft.Fixture.Goals;
 
         public override bool CanAddItem()
         {
@@ -68,8 +71,8 @@ namespace Firestorm.Tests.Examples.Football.Web
     [DataSourceRoot] // TODO not
     public class VsTeamStem : Stem<FixtureTeam>
     {
-        [Get(Name = "id")]
-        public static string TeamId { get; }
+        [Get, Set]
+        public static Expression<Func<FixtureTeam, int>> ID { get; } = ft => ft.TeamId;
     }
 
     [DataSourceRoot]
@@ -90,7 +93,7 @@ namespace Firestorm.Tests.Examples.Football.Web
         public static ICollection<Player> Players { get; }
 
         [Get, Substem(typeof(FixturesStem))]
-        public static ICollection<Fixture> Fixtures { get; }
+        public static ICollection<FixtureTeam> Fixtures { get; }
     }
 
     [DataSourceRoot]
@@ -101,8 +104,5 @@ namespace Firestorm.Tests.Examples.Football.Web
 
         [Get]
         public static string Name { get; }
-
-        [Get]
-        public static int SquadNumber { get; }
     }
 }

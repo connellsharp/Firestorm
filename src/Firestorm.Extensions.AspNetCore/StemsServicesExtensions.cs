@@ -14,7 +14,7 @@ namespace Firestorm.Extensions.AspNetCore
         /// </summary>
         public static IFirestormServicesBuilder AddStems(this IFirestormServicesBuilder builder)
         {
-            return builder.AddStems(Assembly.GetEntryAssembly());
+            return builder.AddStems(Assembly.GetCallingAssembly());
         }
 
         /// <summary>
