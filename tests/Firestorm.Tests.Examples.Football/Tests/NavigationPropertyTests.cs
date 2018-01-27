@@ -26,6 +26,16 @@ namespace Firestorm.Tests.Examples.Football.Tests
         }
 
         [Theory, ClassData(typeof(FootballHttpClientIndexes))]
+        public async Task CalculateLeaguePoints_Success(FirestormApiTech tech)
+        {
+            HttpClient client = _fixture.GetClient(tech);
+            
+            HttpResponseMessage response = await client.GetAsync("/leagues/premierleague/teams?sort=points+desc&limit=1");
+
+            ResponseAssert.Success(response);
+        }
+
+        [Theory(Skip = "Pretty complex field would want ROW_NUMBER. Perhaps a special 'index' field with order by could be included in future."), ClassData(typeof(FootballHttpClientIndexes))]
         public async Task CalculateLeaguePosition_Success(FirestormApiTech tech)
         {
             HttpClient client = _fixture.GetClient(tech);

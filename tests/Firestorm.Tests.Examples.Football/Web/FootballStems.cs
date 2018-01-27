@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using Firestorm.Stems;
 using Firestorm.Tests.Examples.Football.Models;
 using Firestorm.Stems.Attributes.Basic.Attributes;
@@ -94,6 +93,9 @@ namespace Firestorm.Tests.Examples.Football.Web
 
         [Get, Substem(typeof(FixturesStem))]
         public static ICollection<FixtureTeam> Fixtures { get; }
+
+        [Get]
+        public static League League { get; }
     }
 
     [DataSourceRoot]
@@ -104,5 +106,36 @@ namespace Firestorm.Tests.Examples.Football.Web
 
         [Get]
         public static string Name { get; }
+
+        [Get, Substem(typeof(TeamPositionsStem))]
+        public static Expression<Func<League, IEnumerable<TeamPosition>>> Teams
+        {
+            get
+            {
+                return l => l.Teams
+                    .Select(t => new
+                    {
+                        Team = t,
+                        Wins = t.Fixtures.Count(f => f.Fixture.Goals.Count(g => g.Player.Team == t) > f.Fixture.Goals.Count(g => g.Player.Team == t)),
+                        Draws = t.Fixtures.Count(f => f.Fixture.Goals.Count(g => g.Player.Team == t) == f.Fixture.Goals.Count(g => g.Player.Team == t)),
+                        Losses = t.Fixtures.Count(f => f.Fixture.Goals.Count(g => g.Player.Team == t) < f.Fixture.Goals.Count(g => g.Player.Team == t)),
+                    })
+                    .Select(t => new TeamPosition
+                    {
+                        Points = (t.Wins * 3) + (t.Draws * 1),
+                        Team = t.Team.Name
+                    });
+            }
+        }
+    }
+
+    [DataSourceRoot]
+    public class TeamPositionsStem : Stem<TeamPosition>
+    {
+        [Get]
+        public static int Points { get; }
+
+        [Get]
+        public static string Team { get; }
     }
 }
