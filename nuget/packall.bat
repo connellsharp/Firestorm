@@ -24,4 +24,4 @@ cd v%Version%
 forfiles /s /m *.nuspec /c "cmd /c ..\nuget pack @path"
 
 cd ..
-:pause
+pause
