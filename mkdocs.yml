@@ -1,0 +1,37 @@
+site_name: Firestorm Documentation
+pages:
+- Introduction:
+    - Home: 'readme.md'
+    - What is Firestorm?: 'intro/what-is-firestorm.md'
+    - Aims: 'intro/aims.md'
+
+- Endpoints:
+    - Basic Requests: 'endpoints/basic-requests.md'
+    
+- Installation and Setup:
+    - Installation: 'setup/installation.md'
+    - Configuration Object: 'setup/configuration-object.md'
+    - ASP.NET Core Startup: 'setup/aspnetcore-startup.md'
+    - Chosing a Methodology: 'setup/chosing-a-methodology.md'
+    
+- Stems: 
+    - Stems Intro: 'stems/stems-intro.md'
+    - Basics: 'stems/stems-basics.md'
+    - Auto Mapping: 'stems/auto-mapping.md'
+    - Identifiers: 'stems/identifiers.md'
+    - Authorisation: 'stems/authorisation.md'
+    - Substems: 'stems/substems.md'
+    - Dependency Injection: 'stems/dependency-injection.md'
+    - Best Practices: 'stems/best-practices.md'
+    - Roots: 'stems/roots.md'
+    
+- Fluent: 
+    - Fluent Intro: 'fluent/fluent-intro.md'
+    - Builder API: 'fluent/builder-api.md'
+
+- Contributors:
+    - Solution Architecture: 'contrib/solution-architecture.md'
+    - Packages: 'contrib/packages.md'
+    - Future Development: 'contrib/future-developments/versioning.md'
+    
+theme: readthedocs
