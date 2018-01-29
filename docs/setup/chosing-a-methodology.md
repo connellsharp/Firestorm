@@ -1,6 +1,6 @@
 # Chosing a Methodology
 
-This section is for .NET Developers who wish to create standardised REST APIs using Firestorm.
+Once your endpoints are configured, you need to chose a methodology to provide Firestorm with the description of your API.
 
 ## Stems
 

@@ -108,7 +108,7 @@ Add an album.
 ``` request
 POST /artists/123/albums
 {
-    "title": "Dividing by Zero"
+    "title": "Outer Edges Remixes"
 }
 ```
 ``` json

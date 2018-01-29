@@ -8,7 +8,7 @@ The aim is to provides neat and easy ways to write standardised APIs.
 
 Writing a standard REST API using a `Controller` can often be tedious. Writing the same CRUD operations in each controller, adding the same null checks, the same permissions. That's before you even get into adding `where` filters or pagination.
 
-Firestorm simplifies all that by using definitions of fields used in your API. You tell Firestorm how to write a field, and that logic is used in `POST`, `PUT` and `PATCH` requests on the collection, a single item or more complex navigation queries.
+Firestorm simplifies all that by using definitions of fields used in your API. You tell Firestorm how to write a field once, and that logic is used throughout your API.
 
 ## Human-readable REST API
 
@@ -25,6 +25,8 @@ GET /characters/harry-potter/friends
     { name: "Hermione Granger" }
 ]
 ```
+
+You can read more about the requests and responses [here](endpoints/basic-requests.md).
 
 ## Efficient database querying
 

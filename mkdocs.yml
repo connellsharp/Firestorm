@@ -1,7 +1,7 @@
-site_name: Firestorm Documentation
+site_name: Firestorm
 pages:
 - Introduction:
-    - Home: 'readme.md'
+    - Home: 'index.md'
     - What is Firestorm?: 'intro/what-is-firestorm.md'
     - Aims: 'intro/aims.md'
 
@@ -15,7 +15,8 @@ pages:
     - Chosing a Methodology: 'setup/chosing-a-methodology.md'
     
 - Stems: 
-    - Stems Intro: 'stems/stems-intro.md'
+    - Introduction: 'stems/stems-intro.md'
+    - Setup: 'stems/stems-setup.md'
     - Basics: 'stems/stems-basics.md'
     - Auto Mapping: 'stems/auto-mapping.md'
     - Identifiers: 'stems/identifiers.md'
@@ -26,7 +27,8 @@ pages:
     - Roots: 'stems/roots.md'
     
 - Fluent: 
-    - Fluent Intro: 'fluent/fluent-intro.md'
+    - Introduction: 'fluent/fluent-intro.md'
+    - Setup: 'fluent/fluent-setup.md'
     - Builder API: 'fluent/builder-api.md'
 
 - Contributors:
