@@ -1,6 +1,6 @@
 # Web Startup
 
-For all supported web API technologies, a NuGet package is provided that depends on `Firestorm.Endpoints.Start`. Here in lies the main [configuration object](configuration-object.md), the `FirestormConfiguration` class, containing all your API settings.
+For all supported web API technologies, a NuGet package is provided that depends on `Firestorm.Endpoints`. Here in lies the main [configuration object](configuration-object.md), the `FirestormConfiguration` class, containing all your API settings.
 
 ## ASP<span>.</span>NET Core
 

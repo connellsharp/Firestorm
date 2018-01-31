@@ -34,6 +34,6 @@ pages:
 - Contributors:
     - Solution Architecture: 'contrib/solution-architecture.md'
     - Packages: 'contrib/packages.md'
-    - Future Development: 'contrib/future-developments/versioning.md'
+    - Future Development: 'contrib/future-developments.md'
     
 theme: readthedocs

@@ -14,7 +14,7 @@ Just outside that, another set of classes set-out a common way to describe resou
 
 - Resource Body
 - Feedback
-    - Acknowledgement says the request has been fulfilled.
+    - Acknowledgment says the request has been fulfilled.
     - Error states someone went wrong when processing the request.
     - Multi Response is an array of Feedback responses
 
@@ -58,6 +58,8 @@ There are several implementations for different web frameworks:
 
 The Engine is an **implementation** of Firestorm Core that uses Expression Trees to build queries for an `IQueryable`. It makes use of deferred execution.
 
+It's also a **consumer** of Firestorm Data.
+
 ![image.png](.attachments/image-e5348081-860c-4e58-8417-9d99a355aaf1.png)
 
 Defines an `IEngineContext` to be used in Engine resources. The context contains interfaces that describe how to:
@@ -81,7 +83,9 @@ Extending the implementation to include navigation properties. Several `IEngineC
 
 ## Entities
 
-A few entity libraries are available to integrate with your ORM. These simply wrap the framework and implement interfaces defined in `Firestorm.Data`.
+A few entity libraries are available to integrate with your ORM.
+
+These are all **implementations** of interfaces defined in `Firestorm.Data` that encapsulate the ORM framework.
 
 ## Stems
 Stems provides ways to decorate classes to describe your REST API.

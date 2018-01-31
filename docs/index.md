@@ -2,13 +2,7 @@
 
 Firestorm is a REST API framework for .NET.
 
-The aim is to provides neat and easy ways to write standardised APIs.
-
-## Clean and concise code
-
-Writing a standard REST API using a `Controller` can often be tedious. Writing the same CRUD operations in each controller, adding the same null checks, the same permissions. That's before you even get into adding `where` filters or pagination.
-
-Firestorm simplifies all that by using definitions of fields used in your API. You tell Firestorm how to write a field once, and that logic is used throughout your API.
+The [aim](intro/aims.md) is to provide neat and easy ways to write standardised APIs.
 
 ## Human-readable REST API
 
@@ -28,15 +22,31 @@ GET /characters/harry-potter/friends
 
 You can read more about the requests and responses [here](endpoints/basic-requests.md).
 
-## Efficient database querying
-
-Firestorm builds an `IQueryable` using your definitions and the client's request. The query is executed by your LINQ Provider.
-
-It takes advantage of deferred execution and asyncronous features within C# and .NET to execute queries efficiently.
-
 ## Configurable
 
-You can customise your naming conventions, response structure, verb strategies and much more to suit your API needs.
+You can customise many aspects of Firestorm to suit your API needs.
+
+- Response structure. You could add `"status": "ok"` to successful responses.
+- Naming conventions. `snake_case`, `camelCase` or `PascalCase`
+- Verb strategies. Use `PUT` or `PATCH` for partial updates
+
+These and much more are all enabled by the main [configuration object](setup/configuration-object.md).
+
+## Clean and concise code
+
+Writing this kind of REST API using a `Controller` can be tedious. Writing the same CRUD operations in each controller, the same null checks, permissions. That's before you even get into adding `where` filters or pagination.
+
+Firestorm simplifies all that by using definitions of fields used in your API. You tell Firestorm how to write a field, and that logic is used throughout your API.
+
+There are currently two ways to write your APIs: [Stems](stems/stems-intro.md) and [Fluent](fluent/fluent-intro.md).
+
+## Efficient database querying
+
+Firestorm runs on top of your ORM. Using your code and the client's request, it builds an `IQueryable` that is executed by your LINQ Provider.
+
+It takes advantage of deferred execution and asynchronous features within C# and .NET to execute queries efficiently.
+
+See the [solution architecture](contrib/solution-architecture.md) for information on how the project is built.
 
 
 ## Open Source
