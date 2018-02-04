@@ -11,12 +11,12 @@ Your API will be used by humans too. Designing, debugging and maintaining your A
 Firestorm keeps the HTTP request and response concise and understandable.
 
 ```http
-GET /characters/harry-potter/friends
+GET /characters/harry-potter/friends HTTP/1.1
 
 200 OK
 [
-    { name: "Ronald Weasley" },
-    { name: "Hermione Granger" }
+    { "name": "Ronald Weasley" },
+    { "name": "Hermione Granger" }
 ]
 ```
 
