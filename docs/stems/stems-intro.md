@@ -37,10 +37,6 @@ public class AlbumsStem : Stem<Album>
     [Get, Set]
     public static DateTime ReleaseDate { get; }
 
-    [Get(Display.Hidden)]
-    [Substem(typeof(TracksSubstem))]
-    public static ICollection<Track> Tracks { get; }
-
     [Get]
     public static Expression<Func<Album, bool>> IsStreamable
     {
@@ -121,3 +117,4 @@ HTTP/1.1 201 Created
 }
 ```
 
+And more. You can read more about the requests and responses [here](../endpoints/basic-requests.md).

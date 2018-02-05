@@ -9,13 +9,13 @@ Static properties that return `Expression<Func<Artist, int>>` are the most eff
 
 Getters can be given a Display.Nested argument to display the field even when nested in a collection.
 
-``` csharp
+```csharp
 public class ArtistsStem : Stem<Artist>
 {
     [Get(Display.Nested)]
-    public static Expression<Func<Artist, int>> ID
+    public static Expression<Func<Artist, int>> Id
     {
-        get { return a => a.ID; }
+        get { return a => a.Id; }
     }
     
     [Get]
@@ -32,9 +32,10 @@ public class ArtistsStem : Stem<Artist>
 }
 ```
 
-``` json
-GET /artists
-200 OK
+```http
+GET /artists HTTP/1.1
+
+HTTP/1.1 200 OK
 [        
     { "id": 122 },
     { "id": 123 },
@@ -42,9 +43,10 @@ GET /artists
 ]
 ```
 
-``` json
-GET /artists/123
-200 OK
+```http
+GET /artists/123 HTTP/1.1
+
+HTTP/1.1 200 OK
 {
     "id": 123,
     "name": "Periphery",
@@ -52,9 +54,10 @@ GET /artists/123
 }
 ```
 
-``` json
-GET /artists/123/name
-200 OK
+```http
+GET /artists/123/name HTTP/1.1
+
+HTTP/1.1 200 OK
 "Periphery"
 ```
 
@@ -63,9 +66,10 @@ GET /artists/123/name
 
 The Firestorm Engine provides querying functionality.
 
-``` json
-GET /artists?fields=id,name
-200 OK
+```http
+GET /artists?fields=id,name HTTP/1.1
+
+HTTP/1.1 200 OK
 [                        
     {
         "id": 122,
@@ -82,9 +86,10 @@ GET /artists?fields=id,name
 ]
 ```
 
-``` json
-GET /artists?fields=id,name&sort=start_date
-200 OK
+```http
+GET /artists?fields=id,name&sort=start_date HTTP/1.1
+
+HTTP/1.1 200 OK
 [
     {
         "id": 124,
@@ -101,9 +106,10 @@ GET /artists?fields=id,name&sort=start_date
 ]
 ```
 
-``` json
-GET /artists?fields=name&where=id>122
-200 OK                
+```http
+GET /artists?fields=name&where=id>122 HTTP/1.1
+
+HTTP/1.1 200 OK                
 [       
     {
         "name": "Periphery"
@@ -123,7 +129,7 @@ The `Set` attribute marks a member as a field that an API client can write to.
 
 Simple static properties that return `Expression<Func<Artist, int>>` for a single property can also be used as setters.
 
-``` csharp
+```csharp
 public class ArtistsStem : Stem<Artist>
 {
     [Get(Display.Nested)]
@@ -147,26 +153,29 @@ public class ArtistsStem : Stem<Artist>
 }
 ```
 
-``` json
-POST /artists
+```http
+POST /artists HTTP/1.1
 {
     "name": "Fred"
 }
-201 Created
+
+HTTP/1.1 201 Created
 ```
 
-``` json
-PUT /artists/123                
+```http
+PUT /artists/123 HTTP/1.1
 {
     "name": "Fred"
 }
-200 OK
+
+HTTP/1.1 200 OK
 ```
 
-``` json
-PUT /artists/123/name             
+```http
+PUT /artists/123/name HTTP/1.1
 "Fred"
-200 OK
+
+HTTP/1.1 200 OK
 ```
 
 #### Static Setter Methods
@@ -196,27 +205,29 @@ public class ArtistsStem : Stem<Artist>
 }
 ```
 
-``` json
-POST /artists
+```http
+POST /artists HTTP/1.1
 {
     "name": "Fred"
 }
-201 Created
+
+HTTP/1.1 201 Created
 ```
 
-``` json
-PUT /artists/123                
+```http
+PUT /artists/123 HTTP/1.1
 {
     "name": "Fred"
 }
-200 OK
+
+HTTP/1.1 200 OK
 ```
 
 #### Instance Setter Methods
 
 Non-static methods of the same signature can be used too. These will use a single Stem instance per API request. This is very handy when combined with [Constructor Inection](http://localhost:63119/Stems/NOWHERE).
 
-``` csharp
+```csharp
 public class ArtistsStem : Stem<Artist>
 {
     private readonly IArtistsService _service;
@@ -244,12 +255,13 @@ public class ArtistsStem : Stem<Artist>
 }
 ```
 
-``` json
-POST /artists
+```http
+POST /artists HTTP/1.1
 {
     "name": "The Beatles"
 }
-400 Bad Request
+
+HTTP/1.1 400 Bad Request
 {
     "error": "argument",
     "message": "An artist already exists with this name."

@@ -4,7 +4,7 @@ Substems are used to define the relationships between objects.
 
 You add the `Substem` attribute to navigation properties, supplying the `Stem<>` type that defines the fields for the navigation object(s).
 
-``` csharp
+```csharp
 public class ArtistsStem : Stem<Artist>
 {
     [Identifier]
@@ -46,9 +46,10 @@ public class TracksStem : Stem<Track>
 
 These define the paths used to navigate the API.
 
-``` json
-GET /artists/123/tracks
-200 OK
+```http
+GET /artists/123/tracks HTTP/1.1
+
+HTTP/1.1 200 OK
 [        
     { "id": 12345},
     { "id": 12346},
@@ -56,9 +57,10 @@ GET /artists/123/tracks
 ]
 ```
 
-``` json
-GET /artists/123/tracks/by_index/1
-200 OK
+```http
+GET /artists/123/tracks/by_index/1 HTTP/1.1
+
+HTTP/1.1 200 OK
 {
     "id": 12345,
     "title": "Awesome Song"

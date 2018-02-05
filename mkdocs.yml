@@ -1,4 +1,5 @@
 site_name: Firestorm
+
 pages:
 - Introduction:
     - Home: 'index.md'
@@ -7,6 +8,7 @@ pages:
 
 - Endpoints:
     - Basic Requests: 'endpoints/basic-requests.md'
+    - Pagination: 'endpoints/pagination.md'
     
 - Installation and Setup:
     - Installation: 'setup/installation.md'
@@ -37,3 +39,6 @@ pages:
     - Future Development: 'contrib/future-developments.md'
     
 theme: readthedocs
+
+markdown_extensions:
+  - admonition

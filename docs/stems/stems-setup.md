@@ -6,15 +6,59 @@ PM> Install-Package Firestorm.Stems
 
 That's all you need to start writing Stems! For good separation, you can keep your Stem classes in their own assembly.
 
-But those stems only describe what users can do with the data. They need something to feed them the information. They need **[Roots](roots.md)**, and there are a few ways of doing this.
+# StemsStartResourceFactory
+
+To run Stems in your application, you must reference the `Firestorm.Stems.All`.
+
+```
+PM> Install-Package Firestorm.Stems.All
+```
+
+In your startup configuration, set the `StartResourceFactory` in your [configuration object](../setup/configuration-object.md) property to `StemsStartResourceFactory`.
+
+A typical resource factory may look like this.
+
+```csharp
+StartResourceFactory = new StemsStartResourceFactory
+{
+	StemConfiguration = new DefaultStemConfiguration
+	{
+		NamingConventionSwitcher = new DefaultNamingConventionSwitcher(),
+		AutoPropertyMapper = new DefaultPropertyAutoMapper()
+	},
+	RootResourceFactory = new DataSourceRootResourceFactory
+	{
+		StemTypeGetter = new NestedTypeGetter(typeof(TTest)),
+		DataSource = new EntitiesDataSource<ExampleDataContext>(),
+	}
+}
+```
+
+### StemConfiguration
+
+The factory requires a `StemConfiguration` object, which contains your stem configuration. This contains further settings related to Stems.
+
+- The **NamingConventionSwitcher** switches the request/response naming conventions with your Stem members'.
+- The **AutoPropertyMapper** automatically gets `Expression`s from a [simpler property signature](auto-mapping.md).
+- The **DependencyResolver** provides the services used for [dependency injection](dependency-injection.md).
+
+### RootResourceFactory 
+
+The `StartResourceFactory` requires a `RootResourceFactory ` to feed the Stems with the data they need. There are a couple of different ways to define **[Roots](roots.md)**.
 
 In these examples, we will use the `DataSourceRootFactory` to use Entity Framework Core for the Root data.
 
-To use Stems, you must set the `EndpointConfiguration.StartResourceFactory` property to `StemsStartResourceFactory`.
+!!!note
+    There are plans to redesign Roots as a separate `IDataSource` implementation, meaning there would be no need for this extra `RootResourceFactory`.
 
-## ASP<span>.</span>NET Core 2.0
+## Web Startup
 
-_Note: This example uses ASP<span>.</span>NET Core but you can use the same config [with other web technologies](../setup/installation.md)._
+Now you can use your configuration object in your web startup.
+
+### ASP<span>.</span>NET Core 2.0
+
+!!!note
+	This example uses ASP<span>.</span>NET Core but you can use the same config [with other web technologies](../setup/installation.md).
 
 ```
 PM> Install-Package Firestorm.AspNetCore2
@@ -40,12 +84,12 @@ public class Startup
 }
 ```
 
-## ASP<span>.</span>NET Core Extensions
+### ASP<span>.</span>NET Core Extensions
 
 Alternatively you can use the extensions.
 
 ```
-PM> Install-Package Firestorm.AspNetCore2
+PM> Install-Package Firestorm.Extensions.AspNetCore2
 ```
 
 ```csharp

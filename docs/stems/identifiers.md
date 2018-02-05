@@ -9,12 +9,12 @@ Static properties that return `Expression<Func<Artist, int>>` can be used to m
 
 This is particularly handy when the identifier is also a field.
 
-``` csharp
+```csharp
 public class ArtistsStem : Stem<Artist>
 {
     [Identifier]
     [Get(Display.Nested)]
-    public static int ID { get; }
+    public static int Id { get; }
     
     [Get]
     public static string Name { get; }
@@ -24,9 +24,10 @@ public class ArtistsStem : Stem<Artist>
 }
 ```
 
-``` json
-GET /artists
-200 OK
+```http
+GET /artists HTTP/1.1
+
+HTTP/1.1 200 OK
 [        
     { "id": 122 },
     { "id": 123 },
@@ -34,18 +35,20 @@ GET /artists
 ]
 ```
 
-``` json
-GET /artists/123
-200 OK
+```http
+GET /artists/123 HTTP/1.1
+
+HTTP/1.1 200 OK
 {
     "id": 123,
     "name": "Wattitude"
 }
 ```
 
-``` json
-GET /artists/by_id/123
-200 OK
+```http
+GET /artists/by_id/123 HTTP/1.1
+
+HTTP/1.1 200 OK
 {
     "id": 123,
     "name": "Wattitude"
@@ -56,7 +59,7 @@ GET /artists/by_id/123
 
 Methods that take a single argument and return an item can also be used directly. Firestorm will attempt to convert the given value into the parameter type. The method can return null if no item with the given identifier was found.
 
-``` csharp
+```csharp
 public class ArtistsStem : Stem<Artist>
 {
     [Identifier]
@@ -78,27 +81,30 @@ public class ArtistsStem : Stem<Artist>
 }
 ```
 
-``` json
-GET /artists/noisia
-200 OK
+```http
+GET /artists/noisia HTTP/1.1
+
+HTTP/1.1 200 OK
 {
     "id": 124,
     "name": "Noisia"
 }
 ```
 
-``` json
-GET /artists/by_name/noisia
-200 OK
+```http
+GET /artists/by_name/noisia HTTP/1.1
+
+HTTP/1.1 200 OK
 {                
     "id": 124,
     "name": "Noisia"
 }
 ```
 
-``` json
-GET /artists/by_id/124
-200 OK
+```http
+GET /artists/by_id/124 HTTP/1.1
+
+HTTP/1.1 200 OK
 {                
     "id": 124,
     "name": "Noisia"
@@ -111,7 +117,7 @@ When multiple identifiers are defined but not specified in the URL, both identif
 
 Properties or parameterless methods that return an item can be used for special identifier strings.
 
-``` csharp
+```csharp
 public class ArtistsStem : Stem<Artist>
 {
     [Identifier]
@@ -144,22 +150,14 @@ public class ArtistsStem : Stem<Artist>
 }
 ```
 
-``` json
-GET /artists/noisia
-200 OK
+```http
+GET /artists/me HTTP/1.1
+
+HTTP/1.1 200 OK
 {
-    "id": 124,
-    "name": "Noisia"
+    "id": 7654,
+    "name": "My Awesome Band"
 }
 ```
 
-```
-GET /artists/by_name/noisia
-200 OK
-{                
-    "id": 124,
-    "name": "Noisia"
-}
-```
-
-When multiple identifiers are used, these are matched first and therefore override any identifiers that match the same string. In the above example, this means any artist with the name "me" cannot be identified by name.
+When multiple identifiers are used, these are matched first and therefore override any identifiers that match the same string. In the above example, this means any artist with the name "me" cannot be identified by name unless the `by_name` path is used.

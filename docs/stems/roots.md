@@ -1,6 +1,9 @@
 There are currently two ways to provide data for Stems.
 
-Whichever way you choose, you will be given an implementation of `IStartResourceFactory`, which is given to the `FirestormConfiguration` (see [Installation](Installation)).
+Whichever way you choose, you will be given an implementation of `IRootResourceFactory`, which is given to the `StemsStartResourceFactory` (see [Setup](stems-setup.md)).
+
+!!!note
+    There are plans to redesign Roots as a separate `IDataSource` implementation, meaning there would be no need for the extra `RootResourceFactory`.
 
 # Derive
 
@@ -56,11 +59,11 @@ You feed a single `IDataSource` into a `DataSourceStartResourceFactory`.
 
 ```csharp
 StartResourceFactory = new DataSourceStartResourceFactory
-    {
-        DataSource = YourDataSourceImplementation(),
-        StemTypes = new { typeof(AuthorsStem), typeof(BooksStem) },
-        StemsNamespace = "YourApplication.Stems"
-    }
+{
+	DataSource = YourDataSourceImplementation(),
+	StemTypes = new { typeof(AuthorsStem), typeof(BooksStem) },
+	StemsNamespace = "YourApplication.Stems"
+}
 ```
 
 With this methodology, your Stems don't have a parent `Root` to pass down the `User` and `Configuration` properties. Instead, the package creates a fake object for your Stems to start from called a `Vase`.
@@ -81,9 +84,12 @@ public class AuthorsStem : Stem<Author>
 You can use off-the-shelf `IDataSource` implementations. If your Stems describe usage of Entity Framework models directly, you can use the `EntityFrameworkDataSource<>` with your `DbContext` type.
 
 ```
-PM> Install-Package Firestorm.Engine.Entities
+PM> Install-Package Firestorm.EntityFramework
 ```
 
 ```csharp
-        DataSource = EntityFrameworkDataSource<YourEntityContext>(),
+StartResourceFactory = new DataSourceStartResourceFactory
+{
+	DataSource = EntityFrameworkDataSource<YourEntityContext>(),
+}
 ```

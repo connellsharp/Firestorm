@@ -1,6 +1,9 @@
 # Authorization
 
-Firestorm v1.0 provides basic authorization at a field, item and collection levels.
+Firestorm provides basic authorization at a field, item and collection levels.
+
+!!!note
+	v1.0 provides basic authorization. A more comprehensive set of authorisation features is planned for a future version.
 
 ## AuthorizeAttribute for fields
 
@@ -46,15 +49,15 @@ The `Stem<>` class declares the virtual property `Expression<Func<TItem, ItemPer
 The `ItemPermission` enum returned by this expression determines what actions the user can do for the given item.
 
 ```csharp
-  public enum ItemPermission
-  {
-    None = 0,
-    Read = 1,
-    Write = 2,
-    ReadWrite = Write | Read,
-    Delete = 4,
-    ReadWriteDelete = Delete | ReadWrite,
-  }
+public enum ItemPermission
+{
+	None = 0,
+	Read = 1,
+	Write = 2,
+	ReadWrite = Write | Read,
+	Delete = 4,
+	ReadWriteDelete = Delete | ReadWrite,
+}
 ```
 
 For example, you can make an expression that allows the user to view all artists, but only edit their own.
