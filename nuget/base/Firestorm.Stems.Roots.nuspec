@@ -21,6 +21,7 @@
     <references>
       <reference file="Firestorm.Engine.Implementation.dll" />
       <reference file="Firestorm.Engine.Additives.dll" />
+      <reference file="Firestorm.Engine.Subs.dll" />
       <reference file="Firestorm.Stems.Fuel.dll" />
       <reference file="Firestorm.Stems.Roots.dll" />
     </references>

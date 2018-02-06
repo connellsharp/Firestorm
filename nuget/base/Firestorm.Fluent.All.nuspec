@@ -17,5 +17,16 @@
       <dependency id="Firestorm.Fluent" version="$(FsVersion)" />
       <dependency id="Firestorm.Fluent.Start" version="$(FsVersion)" />
     </dependencies>
+    
+    <references>
+      <reference file="Firestorm.Engine.dll" />
+      <reference file="Firestorm.Engine.Implementation.dll" />
+      <reference file="Firestorm.Engine.Additives.dll" />
+      <reference file="Firestorm.Engine.Subs.dll" />
+    </references>
   </metadata>
+  <files>
+    <file src="..\..\src\Firestorm.Stems.Roots\bin\$(FsConfiguration)\net45\*.dll" target="lib\net45\"  />
+    <file src="..\..\src\Firestorm.Stems.Roots\bin\$(FsConfiguration)\netstandard2.0\*.dll" target="lib\netstandard2.0\"  />
+  </files>
 </package>

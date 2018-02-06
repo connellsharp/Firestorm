@@ -23,6 +23,7 @@
       <reference file="Firestorm.Endpoints.dll" />
       <reference file="Firestorm.Endpoints.Start.dll" />
       <reference file="Firestorm.Endpoints.Formatting.dll" />
+      <reference file="Firestorm.Endpoints.Responses.dll" />
     </references>
   </metadata>
   <files>
@@ -30,5 +31,7 @@
     <file src="..\..\src\Firestorm.Endpoints.Start\bin\$(FsConfiguration)\netstandard2.0\*.dll" target="lib\netstandard2.0\"  />
     <file src="..\..\src\Firestorm.Endpoints.Formatting\bin\$(FsConfiguration)\net45\*.dll" target="lib\net45\"  />
     <file src="..\..\src\Firestorm.Endpoints.Formatting\bin\$(FsConfiguration)\netstandard2.0\*.dll" target="lib\netstandard2.0\"  />
+    <file src="..\..\src\Firestorm.Endpoints.Responses\bin\$(FsConfiguration)\net45\*.dll" target="lib\net45\"  />
+    <file src="..\..\src\Firestorm.Endpoints.Responses\bin\$(FsConfiguration)\netstandard2.0\*.dll" target="lib\netstandard2.0\"  />
   </files>
 </package>
