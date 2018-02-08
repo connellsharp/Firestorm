@@ -25,14 +25,14 @@ namespace Firestorm.Fluent.Sources
                 Type itemType = rootType.GetGenericArguments()[0];
 
                 MethodInfo addRootMethod = typeof(SourceCreator).GetMethod(nameof(AddRootItem), BindingFlags.NonPublic | BindingFlags.Static).MakeGenericMethod(itemType);
-                addRootMethod.Invoke(null, new object[] { builder, property.Name, apiContext.Options.AutoConfigureMode });
+                addRootMethod.Invoke(null, new object[] { builder, property.Name, apiContext.Options.RootConfiguration });
             }
         }
 
-        private static void AddRootItem<TItem>(IApiBuilder builder, string rootName, AutoConfigureMode mode)
+        private static void AddRootItem<TItem>(IApiBuilder builder, string rootName, AutoConfiguration configuration)
             where TItem : class, new()
         {
-            var itemBuilder = builder.Item<TItem>().AutoConfigure(mode);
+            var itemBuilder = builder.Item<TItem>().AutoConfigure(configuration);
             itemBuilder.RootName = rootName;
         }
     }

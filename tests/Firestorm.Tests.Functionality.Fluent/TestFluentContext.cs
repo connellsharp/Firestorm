@@ -4,6 +4,10 @@ namespace Firestorm.Tests.Functionality.Fluent
 {
     public class TestFluentContext : ApiContext
     {
+        public TestFluentContext()
+        {
+        }
+
         protected override void OnApiCreating(IApiBuilder apiBuilder)
         {
             apiBuilder.Item<Player>(i =>

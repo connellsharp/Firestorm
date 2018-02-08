@@ -5,12 +5,9 @@
     /// </summary>
     public class ApiContextOptions
     {
-        public AutoConfigureMode AutoConfigureMode { get; set; }
-    }
-
-    public enum AutoConfigureMode
-    {
-        ReadOnly,
-        ReadWrite
+        /// <summary>
+        /// The configuration used to configure the <see cref="ApiRoot{TItem}"/> properties.
+        /// </summary>
+        public AutoConfiguration RootConfiguration { get; set; }
     }
 }

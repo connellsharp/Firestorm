@@ -15,6 +15,6 @@
         {
         }
 
-        internal ApiContextOptions Options { get; }
+        protected internal ApiContextOptions Options { get; }
     }
 }
