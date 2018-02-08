@@ -8,6 +8,6 @@
         /// <summary>
         /// The configuration used to configure the <see cref="ApiRoot{TItem}"/> properties.
         /// </summary>
-        public AutoConfiguration RootConfiguration { get; set; }
+        public AutoConfiguration RootConfiguration { get; set; } = new AutoConfiguration();
     }
 }
