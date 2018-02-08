@@ -4,34 +4,29 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Firestorm.EntityFrameworkCore2
 {
-    public class EFCoreDataSource<TDatabase> : IDataSource
-        where TDatabase : DbContext
+    public class EFCoreDataSource<TDbContext> : IDataSource
+        where TDbContext : DbContext
     {
-        private readonly Func<TDatabase> _getServiceFunc;
+        private readonly IDbContextFactory<TDbContext> _dbContextFactory;
 
-        public EFCoreDataSource(Func<TDatabase> getServiceFunc)
+        public EFCoreDataSource(IDbContextFactory<TDbContext> dbContextFactory)
         {
-            _getServiceFunc = getServiceFunc;
-        }
-
-        public EFCoreDataSource(IServiceProvider serviceProvider)
-        {
-            _getServiceFunc = () => (TDatabase)serviceProvider.GetService(typeof(TDatabase));
+            _dbContextFactory = dbContextFactory;
         }
 
         public IDataTransaction CreateTransaction()
         {
-            TDatabase database = _getServiceFunc();
-            return new EFCoreDataTransaction<TDatabase>(database);
+            TDbContext database = _dbContextFactory.Create();
+            return new EFCoreDataTransaction<TDbContext>(database);
         }
 
         public IEngineRepository<TEntity> GetRepository<TEntity>(IDataTransaction transaction)
             where TEntity : class, new()
         {
-            if (!(transaction is EFCoreDataTransaction<TDatabase> entitiesTransaction))
+            if (!(transaction is EFCoreDataTransaction<TDbContext> entitiesTransaction))
                 throw new ArgumentException("Entity Framework Core data source was given a transaction for the wrong data source type or context.");
 
-            TDatabase database = entitiesTransaction.DbContext;
+            TDbContext database = entitiesTransaction.DbContext;
             DbSet<TEntity> repo = database.Set<TEntity>();
             return new EFCoreRepository<TEntity>(repo);
         }

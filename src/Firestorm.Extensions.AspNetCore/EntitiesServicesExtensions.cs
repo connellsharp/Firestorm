@@ -16,13 +16,27 @@ namespace Firestorm.Extensions.AspNetCore
         public static IFirestormServicesBuilder AddEntityFramework<TDbContext>(this IFirestormServicesBuilder builder)
             where TDbContext : DbContext
         {
-            builder.AddDataSource(sp => new EFCoreDataSource<TDbContext>(new RequestServiceProvider(sp)));
+            return builder.AddEntityFramework<TDbContext>(new FirestormEntityOptions());
+        }
+
+        /// <summary>
+        /// Configures a Firestorm Data source for Entity Framework Core.
+        /// </summary>
+        public static IFirestormServicesBuilder AddEntityFramework<TDbContext>(this IFirestormServicesBuilder builder, FirestormEntityOptions options)
+            where TDbContext : DbContext
+        {
+            builder.AddDataSource(sp =>
+            {
+                var requestProvider = new RequestServiceProvider(sp);
+                var dbContextFactory = new EntitiesContextFactory<TDbContext>(requestProvider, options);
+                return new EFCoreDataSource<TDbContext>(dbContextFactory);
+            });
 
             builder.Services.AddSingleton<IRootResourceFactory>(sp => new DataSourceRootResourceFactory
-                {
-                    DataSource = sp.GetService<IDataSource>(),
-                    StemTypeGetter = sp.GetService<StemTypesLocation>().GetTypeGetter()
-                });
+            {
+                DataSource = sp.GetService<IDataSource>(),
+                StemTypeGetter = sp.GetService<StemTypesLocation>().GetTypeGetter()
+            });
 
             return builder;
         }
