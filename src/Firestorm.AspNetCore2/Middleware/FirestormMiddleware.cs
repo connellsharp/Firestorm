@@ -4,7 +4,7 @@ using Firestorm.Endpoints.Start;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;
 
-namespace Firestorm.AspNetCore2.Middleware
+namespace Firestorm.AspNetCore2
 {
     [UsedImplicitly]
     public class FirestormMiddleware

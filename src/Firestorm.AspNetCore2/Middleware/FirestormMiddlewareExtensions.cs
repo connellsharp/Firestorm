@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace Firestorm.AspNetCore2.Middleware
+namespace Firestorm.AspNetCore2
 {
     public static class FirestormMiddlewareExtensions
     {
