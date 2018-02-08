@@ -1,4 +1,5 @@
-﻿using Firestorm.Data;
+﻿using System;
+using Firestorm.Data;
 using Firestorm.EntityFrameworkCore2;
 using Firestorm.AspNetCore2;
 using Firestorm.Stems.Roots;
@@ -17,6 +18,17 @@ namespace Firestorm.Extensions.AspNetCore
             where TDbContext : DbContext
         {
             return builder.AddEntityFramework<TDbContext>(new FirestormEntityOptions());
+        }
+
+        /// <summary>
+        /// Configures a Firestorm Data source for Entity Framework Core.
+        /// </summary>
+        public static IFirestormServicesBuilder AddEntityFramework<TDbContext>(this IFirestormServicesBuilder builder, Action<FirestormEntityOptions> configureAction)
+            where TDbContext : DbContext
+        {
+            var options = new FirestormEntityOptions();
+            configureAction(options);
+            return builder.AddEntityFramework<TDbContext>(options);
         }
 
         /// <summary>
