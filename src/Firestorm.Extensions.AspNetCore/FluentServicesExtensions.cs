@@ -13,7 +13,7 @@ namespace Firestorm.Extensions.AspNetCore
         /// Configures Firestorm Stems using Stem tpes from the application's entry assembly.
         /// </summary>
         public static IFirestormServicesBuilder AddFluent<TApiContext>(this IFirestormServicesBuilder builder)
-            where TApiContext : RestContext, new()
+            where TApiContext : ApiContext, new()
         {
             var context = new TApiContext();
 

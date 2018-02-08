@@ -5,18 +5,18 @@ namespace Firestorm.Fluent.Sources
 {
     public class SourceCreator
     {
-        public IApiDirectorySource CreateSource(RestContext restContext, IApiBuilder builder)
+        public IApiDirectorySource CreateSource(ApiContext apiContext, IApiBuilder builder)
         {
-            AddApiRootProperties(restContext, builder);
+            AddApiRootProperties(apiContext, builder);
 
-            restContext.OnApiCreating(builder);
+            apiContext.OnApiCreating(builder);
 
             return builder.BuildSource();
         }
 
-        private static void AddApiRootProperties(RestContext restContext, IApiBuilder builder)
+        private static void AddApiRootProperties(ApiContext apiContext, IApiBuilder builder)
         {
-            foreach (PropertyInfo property in restContext.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            foreach (PropertyInfo property in apiContext.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 Type rootType = property.PropertyType.GetGenericSubclass(typeof(ApiRoot<>));
                 if (rootType == null)
@@ -24,15 +24,15 @@ namespace Firestorm.Fluent.Sources
 
                 Type itemType = rootType.GetGenericArguments()[0];
 
-                MethodInfo addRootMethod = typeof(SourceCreator).GetMethod(nameof(AddRootItem), BindingFlags.NonPublic | BindingFlags.Static)?.MakeGenericMethod(itemType);
-                addRootMethod.Invoke(null, new object[] { builder, property.Name });
+                MethodInfo addRootMethod = typeof(SourceCreator).GetMethod(nameof(AddRootItem), BindingFlags.NonPublic | BindingFlags.Static).MakeGenericMethod(itemType);
+                addRootMethod.Invoke(null, new object[] { builder, property.Name, apiContext.Options.AutoConfigureMode });
             }
         }
 
-        private static void AddRootItem<TItem>(IApiBuilder builder, string rootName)
+        private static void AddRootItem<TItem>(IApiBuilder builder, string rootName, AutoConfigureMode mode)
             where TItem : class, new()
         {
-            var itemBuilder = builder.Item<TItem>().AutoConfigure();
+            var itemBuilder = builder.Item<TItem>().AutoConfigure(mode);
             itemBuilder.RootName = rootName;
         }
     }
