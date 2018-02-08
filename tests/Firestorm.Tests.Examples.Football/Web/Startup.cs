@@ -44,7 +44,7 @@ namespace Firestorm.Tests.Examples.Football.Web
                     break;
 
                 case FirestormApiTech.Fluent:
-                    fsBuilder.AddFluent<FootballRestContext>();
+                    fsBuilder.AddFluent<FootballApiContext>();
                     break;
 
                 default:

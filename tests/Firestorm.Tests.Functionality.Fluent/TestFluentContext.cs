@@ -2,7 +2,7 @@ using Firestorm.Fluent;
 
 namespace Firestorm.Tests.Functionality.Fluent
 {
-    public class TestFluentContext : RestContext
+    public class TestFluentContext : ApiContext
     {
         protected override void OnApiCreating(IApiBuilder apiBuilder)
         {

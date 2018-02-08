@@ -6,7 +6,7 @@ using Firestorm.Tests.Examples.Football.Models;
 
 namespace Firestorm.Tests.Examples.Football.Web
 {
-    public class FootballRestContext : RestContext
+    public class FootballApiContext : ApiContext
     {
         public ApiRoot<Team> Teams { get; set; }
         public ApiRoot<Player> Players { get; set; }

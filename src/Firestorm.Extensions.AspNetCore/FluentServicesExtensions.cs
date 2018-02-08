@@ -19,7 +19,7 @@ namespace Firestorm.Extensions.AspNetCore
 
             builder.AddStartResourceFactory(sp => new FluentStartResourceFactory
             {
-                RestContext = context,
+                ApiContext = context,
                 DataSource = sp.GetService<IDataSource>()
             });
 
