@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Firestorm.Stems.Naming
+namespace Firestorm.Endpoints.Naming
 {
     internal class SnakeCaseConvention : ICaseConvention
     {

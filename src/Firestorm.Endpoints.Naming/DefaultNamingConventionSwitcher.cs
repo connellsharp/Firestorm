@@ -1,4 +1,4 @@
-﻿namespace Firestorm.Stems.Naming
+﻿namespace Firestorm.Endpoints.Naming
 {
     public class DefaultNamingConventionSwitcher : NamingConventionSwitcher
     {
