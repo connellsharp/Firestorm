@@ -36,7 +36,7 @@ namespace Firestorm.Tests.Unit.Stems.Roots
             var info = await startDirectory.GetInfoAsync();
 
             Assert.Equal(1, info.Resources.Count());
-            Assert.Equal("test", info.Resources.Single().Name);
+            Assert.Equal("Test", info.Resources.Single().Name);
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace Firestorm.Tests.Unit.Stems.Roots
             var startResource = _factory.GetStartResource(new TestRootRequest(), new DefaultStemConfiguration());
 
             var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
-            var resource = startDirectory.GetChild("test");
+            var resource = startDirectory.GetChild("Test");
             var collection = Assert.IsAssignableFrom<IRestCollection>(resource);
 
         }

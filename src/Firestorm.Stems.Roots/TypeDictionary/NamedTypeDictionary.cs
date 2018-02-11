@@ -37,13 +37,13 @@ namespace Firestorm.Stems.Roots
 
         private void AddTypeInternal(Type type)
         {
-            string name = GetName(type).ToUpperInvariant();
-            _loadedTypes.Add(name, type);
+            string key = GetKey(GetName(type));
+            _loadedTypes.Add(key, type);
         }
 
         public Type GetType(string name)
         {
-            string upperName = name.ToUpperInvariant();
+            string upperName = GetKey(name);
 
             if (!_loadedTypes.ContainsKey(upperName))
                 throw new KeyNotFoundException("A named type with the name '" + name + "' cannot be found in this dictionary.");
@@ -59,6 +59,11 @@ namespace Firestorm.Stems.Roots
         public IEnumerable<Type> GetAllTypes()
         {
             return _loadedTypes.Values;
+        }
+
+        protected virtual string GetKey(string name)
+        {
+            return name; //.ToUpperInvariant();
         }
 
         protected virtual string GetName(Type type)

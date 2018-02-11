@@ -45,7 +45,7 @@ namespace Firestorm.Tests.Unit.Stems.Substems
         public async Task AlbumWithArtist_SetArtistName_EditsExistingName()
         {
             var album = new Album { Artist = new Artist(654, "Old guy") };
-            await _writer.SetValueAsync(album, new { name = "New guy" }, new VoidTransaction());
+            await _writer.SetValueAsync(album, new { Name = "New guy" }, new VoidTransaction());
             Assert.Equal("New guy", album.Artist.Name);
         }
 
@@ -62,7 +62,7 @@ namespace Firestorm.Tests.Unit.Stems.Substems
         public async Task AlbumWithNoArtist_SetArtistName_AddsNewArtist()
         {
             var album = new Album();
-            await _writer.SetValueAsync(album, new { name = "New guy" }, new VoidTransaction());
+            await _writer.SetValueAsync(album, new { Name = "New guy" }, new VoidTransaction());
 
             Assert.NotNull(album.Artist);
             Assert.Equal("New guy", album.Artist.Name);
