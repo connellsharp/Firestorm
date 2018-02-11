@@ -4,12 +4,12 @@ using Firestorm.Endpoints.Preconditions;
 
 namespace Firestorm.Endpoints.Start
 {
-    internal class RequestReader
+    internal class RequestReader : IRequestReader
     {
         private readonly IHttpRequestReader _requestReader;
         private readonly INamingConventionSwitcher _nameSwitcher;
 
-        internal RequestReader(IHttpRequestReader requestReader, INamingConventionSwitcher nameSwitcher)
+        public RequestReader(IHttpRequestReader requestReader, INamingConventionSwitcher nameSwitcher)
         {
             _requestReader = requestReader;
             _nameSwitcher = nameSwitcher;

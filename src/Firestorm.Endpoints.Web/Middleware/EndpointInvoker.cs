@@ -13,10 +13,10 @@ namespace Firestorm.Endpoints.Start
     internal class EndpointInvoker
     {
         private readonly IRestEndpoint _endpoint;
-        private readonly RequestReader _requestReader;
+        private readonly IRequestReader _requestReader;
         private readonly ResponseBuilder _responseBuilder;
 
-        public EndpointInvoker(IRestEndpoint endpoint, RequestReader requestReader, ResponseBuilder responseBuilder)
+        public EndpointInvoker(IRestEndpoint endpoint, IRequestReader requestReader, ResponseBuilder responseBuilder)
         {
             _endpoint = endpoint;
             _requestReader = requestReader;
@@ -74,9 +74,7 @@ namespace Firestorm.Endpoints.Start
             }
 
             var method =  (UnsafeMethod)Enum.Parse(typeof(UnsafeMethod), _requestReader.RequestMethod, true);
-            
             ResourceBody requestBody = _requestReader.GetRequestBody();
-
             Feedback feedback = await _endpoint.UnsafeAsync(method, requestBody);
 
             _responseBuilder.AddFeedback(feedback);

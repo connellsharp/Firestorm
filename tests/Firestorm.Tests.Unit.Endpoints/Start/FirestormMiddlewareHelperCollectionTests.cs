@@ -75,7 +75,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
             var handler = new MockHttpRequestHandler
             {
                 RequestMethod = "PUT",
-                RequestContentReader = new MockJsonReader(@"New value"),
+                RequestContentReader = new MockJsonReader(@"""New value"""),
                 ResourcePath = ""
             };
 
@@ -108,7 +108,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
             var handler = new MockHttpRequestHandler
             {
                 RequestMethod = "POST",
-                RequestContentReader = new MockJsonReader(@"New value"),
+                RequestContentReader = new MockJsonReader(@"""New value"""),
                 ResourcePath = ""
             };
 
@@ -173,8 +173,8 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
 
                 IEnumerable<RestItemData> items = List.Select((s, i) => new RestItemData(new
                 {
-                    index = i,
-                    value = s
+                    Index = i,
+                    Value = s
                 }));
 
                 return new RestCollectionData(items, null);
@@ -193,7 +193,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
 
             public async Task<CreatedItemAcknowledgment> AddAsync(RestItemData itemData)
             {
-                List.Add((string) itemData["value"]);
+                List.Add((string) itemData["Value"]);
                 return new CreatedItemAcknowledgment(123);
             }
         }
@@ -252,6 +252,19 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
         public string GetMimeType()
         {
             return "application/json";
+        }
+    }
+
+    internal class EmptyReader : IContentReader
+    {
+        public Stream GetContentStream()
+        {
+            return null;
+        }
+
+        public string GetMimeType()
+        {
+            return null;
         }
     }
 }

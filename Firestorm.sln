@@ -88,26 +88,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Stems.Roots.Deriv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Engine.Implementation", "src\Firestorm.Engine.Implementation\Firestorm.Engine.Implementation.csproj", "{908D22E4-1CC9-4B96-A470-9C79EE529D78}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{BF8FB258-91C4-42EF-96F6-E4F5E4D097D5}"
-	ProjectSection(SolutionItems) = preProject
-		nuget\base\Firestorm.AspNetCore.nuspec = nuget\base\Firestorm.AspNetCore.nuspec
-		nuget\base\Firestorm.AspNetWebApi2.nuspec = nuget\base\Firestorm.AspNetWebApi2.nuspec
-		nuget\base\Firestorm.Client.nuspec = nuget\base\Firestorm.Client.nuspec
-		nuget\base\Firestorm.Core.nuspec = nuget\base\Firestorm.Core.nuspec
-		nuget\base\Firestorm.Data.nuspec = nuget\base\Firestorm.Data.nuspec
-		nuget\base\Firestorm.Endpoints.nuspec = nuget\base\Firestorm.Endpoints.nuspec
-		nuget\base\Firestorm.EntityFramework6.nuspec = nuget\base\Firestorm.EntityFramework6.nuspec
-		nuget\base\Firestorm.EntityFrameworkCore2.nuspec = nuget\base\Firestorm.EntityFrameworkCore2.nuspec
-		nuget\base\Firestorm.nuspec = nuget\base\Firestorm.nuspec
-		nuget\base\Firestorm.Owin.nuspec = nuget\base\Firestorm.Owin.nuspec
-		nuget\base\Firestorm.Stems.All.nuspec = nuget\base\Firestorm.Stems.All.nuspec
-		nuget\base\Firestorm.Stems.nuspec = nuget\base\Firestorm.Stems.nuspec
-		nuget\base\Firestorm.Stems.Roots.DataSource.nuspec = nuget\base\Firestorm.Stems.Roots.DataSource.nuspec
-		nuget\base\Firestorm.Stems.Roots.Derive.nuspec = nuget\base\Firestorm.Stems.Roots.Derive.nuspec
-		nuget\base\Firestorm.Stems.Roots.nuspec = nuget\base\Firestorm.Stems.Roots.nuspec
-		nuget\base\Firestorm.Stems.Roots.Start.nuspec = nuget\base\Firestorm.Stems.Roots.Start.nuspec
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.EntityFrameworkCore2", "src\Firestorm.EntityFrameworkCore2\Firestorm.EntityFrameworkCore2.csproj", "{619EA714-F180-4D6E-81DE-8611275B2FDB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Stems.Fuel.Essential", "src\Firestorm.Stems.Fuel.Essential\Firestorm.Stems.Fuel.Essential.csproj", "{C3B73A29-DC9A-43A0-B18E-47F2115FA18A}"

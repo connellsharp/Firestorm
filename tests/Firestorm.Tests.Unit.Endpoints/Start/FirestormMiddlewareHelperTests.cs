@@ -48,7 +48,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
             var handler = new MockHttpRequestHandler
             {
                 RequestMethod = "PUT",
-                RequestContentReader = new MockJsonReader("New value"),
+                RequestContentReader = new MockJsonReader(@"""New value"""),
                 ResourcePath = ""
             };
 

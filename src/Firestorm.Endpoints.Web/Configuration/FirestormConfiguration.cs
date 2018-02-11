@@ -1,3 +1,5 @@
+using Firestorm.Endpoints.Web;
+
 namespace Firestorm.Endpoints.Start
 {
     /// <summary>
@@ -12,8 +14,8 @@ namespace Firestorm.Endpoints.Start
         public IStartResourceFactory StartResourceFactory { get; set; }
 
         /// <summary>
-        /// The configuration discribing how to interact with the resources in this API.
+        /// The configuration describing how to interact with the resources in this API.
         /// </summary>
-        public RestEndpointConfiguration EndpointConfiguration { get; set; } = new RestEndpointConfiguration();
+        public RestEndpointConfiguration EndpointConfiguration { get; set; } = new DefaultRestEndpointConfiguration();
     }
 }

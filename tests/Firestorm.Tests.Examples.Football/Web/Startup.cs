@@ -2,6 +2,7 @@ using System;
 using Firestorm.Endpoints;
 using Firestorm.AspNetCore2;
 using Firestorm.Endpoints.Responses;
+using Firestorm.Endpoints.Web;
 using Firestorm.Extensions.AspNetCore;
 using Firestorm.Tests.Examples.Football.Data;
 using Firestorm.Tests.Examples.Football.Models;

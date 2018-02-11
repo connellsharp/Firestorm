@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Firestorm.Core.Web;
+using JetBrains.Annotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -13,14 +14,14 @@ namespace Firestorm.Endpoints.Formatting.Json
     /// </summary>
     internal class ResourceBodyReader
     {
-        private readonly JObjectDictionaryCreator<RestItemData> _restItemDataCreator;
+        private readonly JObjectToDictionaryConverter<RestItemData> _restItemDataConverter;
 
         public ResourceBodyReader(INamingConventionSwitcher switcher)
         {
-            _restItemDataCreator = new JObjectDictionaryCreator<RestItemData>(switcher);
+            _restItemDataConverter = new JObjectToDictionaryConverter<RestItemData>(switcher);
         }
 
-        internal ResourceBody ReadResourceStream(Stream stream)
+        internal ResourceBody ReadResourceStream([NotNull] Stream stream)
         {
             if (stream.CanSeek && stream.Length == 0)
                 return null;
@@ -43,13 +44,13 @@ namespace Firestorm.Endpoints.Formatting.Json
             {
                 case JTokenType.Array:
                     var items = from JObject jObject in jBody
-                                select _restItemDataCreator.ConvertObject(jObject);
+                                select _restItemDataConverter.ConvertObject(jObject);
 
                     return new CollectionBody(items, null);
 
                 case JTokenType.Object:
                     Debug.Assert(jBody is JObject, "jBody is JObject");
-                    RestItemData itemData = _restItemDataCreator.ConvertObject((JObject)jBody);
+                    RestItemData itemData = _restItemDataConverter.ConvertObject((JObject)jBody);
                     return new ItemBody(itemData);
 
                 case JTokenType.Float:

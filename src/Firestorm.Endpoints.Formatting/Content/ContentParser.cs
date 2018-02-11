@@ -19,10 +19,13 @@ namespace Firestorm.Endpoints.Formatting
         {
             string mime = _reader.GetMimeType();
 
-            if (mime != null && !mime.Contains("json"))
-                throw new ContentTypeNotSupportedException();
+            //if (mime != null && !mime.Contains("json"))
+            //    throw new ContentTypeNotSupportedException();
 
             Stream stream = _reader.GetContentStream();
+
+            if (stream == null)
+                return null;
 
             var bodyReader = new ResourceBodyReader(_switcher);
             return bodyReader.ReadResourceStream(stream);

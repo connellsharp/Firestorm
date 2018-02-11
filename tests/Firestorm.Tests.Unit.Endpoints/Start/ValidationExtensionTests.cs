@@ -1,6 +1,7 @@
 ﻿using System;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Start;
+using Firestorm.Endpoints.Web;
 using Firestorm.Tests.Unit.Endpoints.Stubs;
 using Xunit;
 

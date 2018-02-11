@@ -7,11 +7,11 @@ namespace Firestorm.Endpoints.Formatting.Json
 {
     public class JObjectDataImporter : IRestItemDataImporter
     {
-        private readonly JObjectDictionaryCreator<ExpandoObject> _dictionaryCreator;
+        private readonly JObjectToDictionaryConverter<ExpandoObject> _dictionaryConverter;
 
         public JObjectDataImporter()
         {
-            _dictionaryCreator = new JObjectDictionaryCreator<ExpandoObject>(null);
+            _dictionaryConverter = new JObjectToDictionaryConverter<ExpandoObject>(null);
         }
 
         public bool CanImport(object obj)
@@ -30,7 +30,7 @@ namespace Firestorm.Endpoints.Formatting.Json
             var jObj = (JObject) obj;
             foreach (KeyValuePair<string, JToken> pair in jObj)
             {
-                yield return new KeyValuePair<string, object>(pair.Key, _dictionaryCreator.Convert(pair.Value));
+                yield return new KeyValuePair<string, object>(pair.Key, _dictionaryConverter.Convert(pair.Value));
             }
         }
     }

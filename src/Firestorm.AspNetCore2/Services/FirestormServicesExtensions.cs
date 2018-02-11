@@ -1,6 +1,7 @@
 ﻿using System;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Start;
+using Firestorm.Endpoints.Web;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;

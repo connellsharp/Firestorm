@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Firestorm.Endpoints;
+using Firestorm.Endpoints.Web;
 
 namespace Firestorm.Tests.Integration.Http.NetFramework
 {
@@ -10,7 +11,7 @@ namespace Firestorm.Tests.Integration.Http.NetFramework
         {
         }
 
-        public RestEndpointConfiguration Configuration { get; } = new RestEndpointConfiguration();
+        public RestEndpointConfiguration Configuration { get; } = new DefaultRestEndpointConfiguration();
         public IRestUser User { get; }
 
         public IRestCollectionQuery GetQuery()

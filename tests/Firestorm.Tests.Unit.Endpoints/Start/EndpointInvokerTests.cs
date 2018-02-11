@@ -35,7 +35,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
                 m.SetupIgnoreArgs(a => a.EvaluatePreconditions(null)).Returns(false);
             });
 
-            var readerMock = _fixture.FreezeMock<IHttpRequestReader>();
+            var readerMock = _fixture.FreezeMock<IRequestReader>();
             readerMock.SetupGet(a => a.RequestMethod).Returns(method);
             
             var response = new Response("test");

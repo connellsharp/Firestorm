@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Firestorm.Endpoints;
+using Firestorm.Endpoints.Web;
 
 namespace Firestorm.Tests.Unit.Endpoints.Stubs
 {
@@ -9,7 +10,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Stubs
         public const string TestUsername = "TestUsername";
         public const string TestRole = "TestRole";
 
-        public RestEndpointConfiguration Configuration { get; } = new RestEndpointConfiguration();
+        public RestEndpointConfiguration Configuration { get; } = new DefaultRestEndpointConfiguration();
 
         public IRestUser User => this;
 

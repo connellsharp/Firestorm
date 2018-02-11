@@ -1,4 +1,3 @@
-using Firestorm.Core.Web;
 using Firestorm.Endpoints.Formatting;
 using Firestorm.Endpoints.Preconditions;
 
