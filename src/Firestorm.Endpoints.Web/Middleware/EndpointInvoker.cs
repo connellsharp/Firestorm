@@ -74,9 +74,9 @@ namespace Firestorm.Endpoints.Start
             }
 
             var method = (UnsafeMethod)Enum.Parse(typeof(UnsafeMethod), _requestReader.RequestMethod, true);
-            ResourceBody postBody = _requestReader.GetRequestBodyObject();
+            ResourceBody requestBody = _requestReader.GetRequestBodyObject();
 
-            Feedback feedback = await _endpoint.UnsafeAsync(method, postBody);
+            Feedback feedback = await _endpoint.UnsafeAsync(method, requestBody);
 
             _responseBuilder.AddFeedback(feedback);
         }

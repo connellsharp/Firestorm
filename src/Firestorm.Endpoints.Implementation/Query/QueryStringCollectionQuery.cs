@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using Firestorm.Core;
 using JetBrains.Annotations;
 
 namespace Firestorm.Endpoints.Query
@@ -12,20 +11,20 @@ namespace Firestorm.Endpoints.Query
     /// </summary>
     public class QueryStringCollectionQuery : IRestCollectionQuery
     {
-        private readonly CollectionQueryStringConfiguration _configuration;
+        private readonly QueryStringConfiguration _configuration;
 
         private List<string> _selectFields;
         private List<FilterInstruction> _filterInstructions;
         private List<SortIntruction> _sortInstructions;
         private PageInstruction _pageInstruction;
 
-        public QueryStringCollectionQuery([NotNull] CollectionQueryStringConfiguration configuration, [CanBeNull] string query)
+        public QueryStringCollectionQuery([NotNull] QueryStringConfiguration configuration, [CanBeNull] string query)
         {
             _configuration = configuration;
             AddQueryString(query);
         }
 
-        public QueryStringCollectionQuery([NotNull] CollectionQueryStringConfiguration configuration, [NotNull] NameValueCollection query)
+        public QueryStringCollectionQuery([NotNull] QueryStringConfiguration configuration, [NotNull] NameValueCollection query)
         {
             _configuration = configuration;
             AddQueryCollection(query);

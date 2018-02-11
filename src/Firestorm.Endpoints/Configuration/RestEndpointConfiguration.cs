@@ -14,7 +14,7 @@ namespace Firestorm.Endpoints
         /// <summary>
         /// The configuration used to build the <see cref="QueryStringCollectionQuery"/> from a requested query string.
         /// </summary>
-        public CollectionQueryStringConfiguration QueryStringConfiguration { get; set; } = new CollectionQueryStringConfiguration();
+        public QueryStringConfiguration QueryStringConfiguration { get; set; } = new QueryStringConfiguration();
 
         /// <summary>
         /// Contains 3 sets of strategies (for collection, items and scalars) defining how endpoints behave to unsafe requests.

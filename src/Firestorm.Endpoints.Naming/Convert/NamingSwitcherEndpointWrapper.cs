@@ -36,7 +36,7 @@ namespace Firestorm.Endpoints.Naming
             return body;
         }
 
-        public Task<Options> OptionsAsync()
+        public async Task<Options> OptionsAsync()
         {
             Options options = await _underlyingEndpoint.OptionsAsync();
             new BodyKeyConverter(_namingConventionSwitcher.ConvertCodedToDefault).ChangeKeys(options);

@@ -5,7 +5,7 @@ namespace Firestorm.Endpoints.Query
     /// <summary>
     /// The configuration used to build the <see cref="QueryStringCollectionQuery"/> from a requested query string.
     /// </summary>
-    public class CollectionQueryStringConfiguration
+    public class QueryStringConfiguration
     {
         /// <summary>
         /// The querystring keys used to specify which fields to select.

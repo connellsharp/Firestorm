@@ -1,15 +1,14 @@
 using System;
 using System.Linq;
-using Firestorm.Core;
 
 namespace Firestorm.Endpoints.Query
 {
     internal class QueryFilterInstruction : FilterInstruction
     {
         private static readonly char[] OPERATOR_CHARS = new[] { '=', '<', '>', '!', '*', '^', '$' }; // TODO: move to configuration?
-        private readonly CollectionQueryStringConfiguration _configuration;
+        private readonly QueryStringConfiguration _configuration;
 
-        internal QueryFilterInstruction(CollectionQueryStringConfiguration configuration, string instructionString)
+        internal QueryFilterInstruction(QueryStringConfiguration configuration, string instructionString)
         {
             _configuration = configuration;
             if (string.IsNullOrEmpty(instructionString))

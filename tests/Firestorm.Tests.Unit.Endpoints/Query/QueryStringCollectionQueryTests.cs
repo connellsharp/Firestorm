@@ -10,7 +10,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         [Fact]
         public void GivenFieldsString_ContainsFields()
         {
-            var query = new QueryStringCollectionQuery(new CollectionQueryStringConfiguration(), "fields=id,test,foo");
+            var query = new QueryStringCollectionQuery(new QueryStringConfiguration(), "fields=id,test,foo");
 
             Assert.True(query.SelectFields.Contains("id"));
             Assert.True(query.SelectFields.Contains("test"));
@@ -20,7 +20,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         [Fact]
         public void GivenFieldsStringWithQuertionMark_ContainsFields()
         {
-            var query = new QueryStringCollectionQuery(new CollectionQueryStringConfiguration(), "?fields=id,test,foo");
+            var query = new QueryStringCollectionQuery(new QueryStringConfiguration(), "?fields=id,test,foo");
 
             Assert.True(query.SelectFields.Contains("id"));
             Assert.True(query.SelectFields.Contains("test"));
@@ -30,7 +30,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         [Fact]
         public void GivenFieldsCollection_ContainsFields()
         {
-            var query = new QueryStringCollectionQuery(new CollectionQueryStringConfiguration(), new NameValueCollection {
+            var query = new QueryStringCollectionQuery(new QueryStringConfiguration(), new NameValueCollection {
                 { "fields", "test" },
                 { "where", "age>25" },
                 });
@@ -42,7 +42,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         [Fact]
         public void GivenFilters_ContainsFilters()
         {
-            var query = new QueryStringCollectionQuery(new CollectionQueryStringConfiguration(), "where=age>=25&where=age<45");
+            var query = new QueryStringCollectionQuery(new QueryStringConfiguration(), "where=age>=25&where=age<45");
 
             Assert.True(query.FilterInstructions.Any(fi => fi.FieldName == "age" && fi.Operator == FilterComparisonOperator.GreaterThanOrEquals && fi.ValueString == "25"));
             Assert.True(query.FilterInstructions.Any(fi => fi.FieldName == "age" && fi.Operator == FilterComparisonOperator.LessThan && fi.ValueString == "45"));
@@ -51,7 +51,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         [Fact]
         public void SpecialKeysEnabled_GivenSpecialFilterKeys_ContainsFilters()
         {
-            var query = new QueryStringCollectionQuery(new CollectionQueryStringConfiguration
+            var query = new QueryStringCollectionQuery(new QueryStringConfiguration
             {
                 SpecialFilterKeysEnabled = true
             }, "age>=25&age<45");
@@ -63,7 +63,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         [Fact]
         public void SpecialKeysDisabled_GivenSpecialFilterKeys_DoesntContainFilters()
         {
-            var query = new QueryStringCollectionQuery(new CollectionQueryStringConfiguration
+            var query = new QueryStringCollectionQuery(new QueryStringConfiguration
             {
                 SpecialFilterKeysEnabled = false
             }, "age>=25&age<45");
@@ -74,7 +74,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         [Fact]
         public void GivenSortStringWithComma_ContainsSortInstructions()
         {
-            var query = new QueryStringCollectionQuery(new CollectionQueryStringConfiguration(), "sort=someDate+asc,another+desc");
+            var query = new QueryStringCollectionQuery(new QueryStringConfiguration(), "sort=someDate+asc,another+desc");
 
             Assert.True(query.SortIntructions.Any(si => si.FieldName == "someDate" && si.Direction == SortDirection.Ascending));
             Assert.True(query.SortIntructions.Any(si => si.FieldName == "another" && si.Direction == SortDirection.Descending));
@@ -83,7 +83,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         [Fact]
         public void GivenSortStrings_ContainsSortInstructions()
         {
-            var query = new QueryStringCollectionQuery(new CollectionQueryStringConfiguration(), "sort=someDate+asc&sort=another+desc");
+            var query = new QueryStringCollectionQuery(new QueryStringConfiguration(), "sort=someDate+asc&sort=another+desc");
 
             Assert.True(query.SortIntructions.Any(si => si.FieldName == "someDate" && si.Direction == SortDirection.Ascending));
             Assert.True(query.SortIntructions.Any(si => si.FieldName == "another" && si.Direction == SortDirection.Descending));
@@ -92,7 +92,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         [Fact]
         public void GivenNoSpecificSortDirection_ContainsUnspecified()
         {
-            var query = new QueryStringCollectionQuery(new CollectionQueryStringConfiguration(), "sort=column");
+            var query = new QueryStringCollectionQuery(new QueryStringConfiguration(), "sort=column");
 
             Assert.True(query.SortIntructions.Any(si => si.FieldName == "column" && si.Direction == SortDirection.Unspecified));
         }

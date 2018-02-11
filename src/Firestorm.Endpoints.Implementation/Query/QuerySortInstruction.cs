@@ -5,11 +5,11 @@ namespace Firestorm.Endpoints.Query
 {
     internal class QuerySortInstruction : SortIntruction
     {
-        private readonly CollectionQueryStringConfiguration _configuration;
+        private readonly QueryStringConfiguration _configuration;
 
         /// <param name="configuration"></param>
         /// <param name="instructionString">The sort instruction string e.g. "name+asc".</param>
-        public QuerySortInstruction(CollectionQueryStringConfiguration configuration, string instructionString)
+        public QuerySortInstruction(QueryStringConfiguration configuration, string instructionString)
         {
             _configuration = configuration;
 
@@ -22,7 +22,7 @@ namespace Firestorm.Endpoints.Query
             Direction = split.Length == 1 ? SortDirection.Unspecified : ParseSortDirection(split[1]);
         }
 
-        public QuerySortInstruction(CollectionQueryStringConfiguration configuration, string fieldName, string sortDirection)
+        public QuerySortInstruction(QueryStringConfiguration configuration, string fieldName, string sortDirection)
         {
             _configuration = configuration;
             FieldName = fieldName;
