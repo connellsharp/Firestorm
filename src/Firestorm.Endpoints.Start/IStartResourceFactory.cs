@@ -1,5 +1,3 @@
-using Firestorm.Core;
-
 namespace Firestorm.Endpoints.Start
 {
     /// <summary>

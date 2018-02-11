@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Net;
 using System.Threading.Tasks;
-using Firestorm.Core.Web;
 using Firestorm.Endpoints.Responses;
 
 namespace Firestorm.Endpoints.Start
@@ -17,7 +15,7 @@ namespace Firestorm.Endpoints.Start
         {
             _configuration = configuration;
             _requestHandler = requestHandler;
-            
+
             var response = new Response(requestHandler.ResourcePath);
 
             var modifiers = new DefaultResponseModifiers(configuration.EndpointConfiguration.ResponseConfiguration);
@@ -25,7 +23,7 @@ namespace Firestorm.Endpoints.Start
 
             _writer = new ResponseWriter(_requestHandler, response);
         }
-        
+
         /// <summary>
         /// Finds the endpoint and invokes the request onto it.
         /// Handles errors and disposes of the endpoint when completed.
@@ -56,7 +54,14 @@ namespace Firestorm.Endpoints.Start
 
         private IRestEndpoint GetEndpoint(IRestEndpointContext endpointContext)
         {
-            return StartUtilities.GetEndpointFromPath(_configuration.StartResourceFactory, endpointContext, _requestHandler.ResourcePath);
+            IRestResource startResource = _configuration.StartResourceFactory.GetStartResource(endpointContext);
+            IRestEndpoint endpoint = Endpoint.GetFromResource(endpointContext, startResource);
+
+            endpoint = StartUtilities.GetEndpointFromPath(endpoint, _requestHandler.ResourcePath);
+
+            // TODO naming convention switching here?
+
+            return endpoint;
         }
     }
 }

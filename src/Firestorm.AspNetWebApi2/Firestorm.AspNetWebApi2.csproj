@@ -14,8 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Firestorm.Endpoints.Formatting\Firestorm.Endpoints.Formatting.csproj" />
-    <ProjectReference Include="..\Firestorm.Endpoints.Start\Firestorm.Endpoints.Start.csproj" />
+    <ProjectReference Include="..\Firestorm.Endpoints.Web\Firestorm.Endpoints.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 namespace Firestorm.Endpoints
 {
     /// <summary>
-    /// The configuration required to setup a Firestorm REST API server.
+    /// The options and services required to setup a Firestorm REST API server.
     /// Describes how to interact with the resources in this API.
     /// </summary>
     public class RestEndpointConfiguration

@@ -4,14 +4,9 @@ namespace Firestorm.Endpoints.Start
 {
     public static class StartUtilities
     {
-        public static IRestEndpoint GetEndpointFromPath(IStartResourceFactory starter, IRestEndpointContext endpointContext, string fullResourcePath)
+        public static IRestEndpoint GetEndpointFromPath(IRestEndpoint startEndpoint, string fullResourcePath)
         {
-            IRestResource startResource = starter.GetStartResource(endpointContext);
-            IRestEndpoint endpoint = Endpoint.GetFromResource(endpointContext, startResource);
-
-            endpoint = AggregateNextCalls(endpoint, fullResourcePath);
-
-            return endpoint;
+            return AggregateNextCalls(startEndpoint, fullResourcePath);
         }
 
         private static IRestEndpoint AggregateNextCalls(IRestEndpoint endpoint, string fullResourcePath)
