@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.Linq;
-using Firestorm.Stems.Naming;
 
 namespace Firestorm.Stems.Roots
 {
@@ -12,13 +10,11 @@ namespace Firestorm.Stems.Roots
         /// </summary>
         /// <param name="namedTypeDictionary"></param>
         /// <returns></returns>
-        public static RestDirectoryInfo CreateDirectoryInfo(this NamedTypeDictionary namedTypeDictionary, NamingConventionSwitcher conventionSwitcher)
+        public static RestDirectoryInfo CreateDirectoryInfo(this NamedTypeDictionary namedTypeDictionary)
         {
-            var convention = new CapsUnderscoreConvention(); // TODO. not quite. no underscores.
-
             var resourceInfos = from name in namedTypeDictionary.GetAllNames()
-                                let convertedName = conventionSwitcher.ConvertSpecifiedToDefault(name, convention)
-                                select new RestResourceInfo(convertedName, ResourceType.Collection);
+                                //let convertedName = name // TODO caps?
+                                select new RestResourceInfo(name, ResourceType.Collection);
 
             return new RestDirectoryInfo(resourceInfos);
         }

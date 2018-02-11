@@ -158,7 +158,7 @@ namespace Firestorm.AspNetWebApi2
         private IRestEndpoint GetEndpoint()
         {
             _context = new HttpRequestRestEndpointContext(RequestContext, Request, _config.EndpointConfiguration);
-            return StartUtilities.GetEndpointFromPath(_config.StartResourceFactory, _context, ResourcePath);
+            return StartEndpointUtility.GetEndpointFromPath(_config, _context, ResourcePath);
         }
 
         protected override void Dispose(bool disposing)

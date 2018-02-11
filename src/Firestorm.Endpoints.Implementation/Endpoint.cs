@@ -32,7 +32,7 @@ namespace Firestorm.Endpoints
                     return new RestDirectoryEndpoint(endpointContext, directory);
 
                 default:
-                        throw new IncorrectEndpointException("The returned IRestResource is not a valid resource type.");
+                        throw new IncorrectEndpointException(resource.GetType());
             }
         }
     }

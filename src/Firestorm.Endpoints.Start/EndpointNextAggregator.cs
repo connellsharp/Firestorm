@@ -2,19 +2,25 @@ using System;
 
 namespace Firestorm.Endpoints.Start
 {
-    public static class StartUtilities
+    /// <summary>
+    /// Aggregates calls to <see cref="IRestEndpoint.Next"/> based on the full resource path.
+    /// </summary>
+    public class EndpointNextAggregator
     {
-        public static IRestEndpoint GetEndpointFromPath(IRestEndpoint startEndpoint, string fullResourcePath)
+        private readonly IRestEndpoint _startEndpoint;
+
+        public EndpointNextAggregator(IRestEndpoint startEndpoint)
         {
-            return AggregateNextCalls(startEndpoint, fullResourcePath);
+            _startEndpoint = startEndpoint;
         }
 
-        private static IRestEndpoint AggregateNextCalls(IRestEndpoint endpoint, string fullResourcePath)
+        public IRestEndpoint AggregateNext(string fullResourcePath)
         {
             if (string.IsNullOrEmpty(fullResourcePath))
-                return endpoint;
+                return _startEndpoint;
 
             string[] dirs = fullResourcePath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+            IRestEndpoint endpoint = _startEndpoint;
 
             foreach (string dir in dirs)
             {

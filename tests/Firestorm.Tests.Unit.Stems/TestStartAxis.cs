@@ -5,7 +5,6 @@ using Firestorm.Stems.Attributes.Analysis;
 using Firestorm.Stems.AutoMap;
 using Firestorm.Stems.Fuel.Essential;
 using Firestorm.Stems.Fuel.Substems;
-using Firestorm.Stems.Naming;
 
 namespace Firestorm.Tests.Unit.Stems
 {
@@ -24,8 +23,6 @@ namespace Firestorm.Tests.Unit.Stems
 
         private class TestStemConfiguration : IStemConfiguration
         {
-            public NamingConventionSwitcher NamingConventionSwitcher { get; } = new DefaultNamingConventionSwitcher();
-
             public IDependencyResolver DependencyResolver { get; }
 
             public IPropertyAutoMapper AutoPropertyMapper { get; } = new DefaultPropertyAutoMapper();

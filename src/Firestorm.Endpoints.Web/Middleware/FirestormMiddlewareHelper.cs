@@ -54,14 +54,7 @@ namespace Firestorm.Endpoints.Start
 
         private IRestEndpoint GetEndpoint(IRestEndpointContext endpointContext)
         {
-            IRestResource startResource = _configuration.StartResourceFactory.GetStartResource(endpointContext);
-            IRestEndpoint endpoint = Endpoint.GetFromResource(endpointContext, startResource);
-
-            endpoint = StartUtilities.GetEndpointFromPath(endpoint, _requestHandler.ResourcePath);
-
-            // TODO naming convention switching here?
-
-            return endpoint;
+            return StartEndpointUtility.GetEndpointFromPath(_configuration, endpointContext, _requestHandler.ResourcePath);
         }
     }
 }

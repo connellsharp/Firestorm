@@ -27,7 +27,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Functionality
         public async Task ListArtists()
         {
 
-            IRestEndpoint endpoint = StartUtilities.GetEndpointFromPath(StartResourceFactory, EndpointContext, "artists");
+            IRestEndpoint endpoint = StartEndpointUtility.GetEndpointFromPath(StartResourceFactory, EndpointContext, "artists");
             var response = (CollectionBody)(await endpoint.GetAsync());
             RestItemData[] arr = response.Items.ToArray();
             int firstId = (int)arr[0]["ID"];
@@ -37,7 +37,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Functionality
         [Fact]
         public async Task ItemEndpoint()
         {
-            IRestEndpoint endpoint = StartUtilities.GetEndpointFromPath(StartResourceFactory, EndpointContext, "artists/123");
+            IRestEndpoint endpoint = StartEndpointUtility.GetEndpointFromPath(StartResourceFactory, EndpointContext, "artists/123");
             ItemBody itemBody = (ItemBody)(await endpoint.GetAsync());
 
             RestItemData itemData = itemBody.Item;
@@ -48,7 +48,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Functionality
         [Fact]
         public async Task DictionaryEndpoint()
         {
-            IRestEndpoint endpoint = StartUtilities.GetEndpointFromPath(StartResourceFactory, EndpointContext, "artists/by_ID");
+            IRestEndpoint endpoint = StartEndpointUtility.GetEndpointFromPath(StartResourceFactory, EndpointContext, "artists/by_ID");
             DictionaryBody dictionaryBody = (DictionaryBody)(await endpoint.GetAsync());
 
             foreach (var pair in dictionaryBody.Items)
@@ -64,7 +64,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Functionality
         [Fact]
         public async Task FieldEndpoint()
         {
-            IRestEndpoint endpoint = StartUtilities.GetEndpointFromPath(StartResourceFactory, EndpointContext, "artists/123/Name");
+            IRestEndpoint endpoint = StartEndpointUtility.GetEndpointFromPath(StartResourceFactory, EndpointContext, "artists/123/Name");
             ResourceBody response = await endpoint.GetAsync();
             Assert.Equal(response.GetObject(), TestRepositories.ArtistName);
         }

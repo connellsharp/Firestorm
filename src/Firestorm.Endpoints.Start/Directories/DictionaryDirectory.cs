@@ -12,7 +12,7 @@ namespace Firestorm.Endpoints.Start
         public IRestResource GetChild(string startResourceName)
         {
             if (!_startEndpointTypes.ContainsKey(startResourceName))
-                throw new IncorrectEndpointException("The starting startResourceName '" + startResourceName + "' does not exist.");
+                throw new ChildNotFoundException("The starting startResourceName '" + startResourceName + "' does not exist.");
 
             Type startType = _startEndpointTypes[startResourceName];
 
@@ -47,6 +47,13 @@ namespace Firestorm.Endpoints.Start
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        private class ChildNotFoundException : RestApiException
+        {
+            public ChildNotFoundException(string message)
+                : base(ErrorStatus.NotFound, message)
+            { }
         }
     }
 }

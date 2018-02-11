@@ -8,7 +8,7 @@ using Firestorm.Endpoints.Responses;
 namespace Firestorm.Endpoints.Start
 {
     /// <summary>
-    /// Invokes the request from the given <see cref="IHttpRequestHandler"/> onto the given <see cref="IRestEndpoint"/> and builds the response using the <see cref="IResponseBuilder"/>.
+    /// Invokes the request from the given <see cref="IHttpRequestHandler"/> onto the given <see cref="IRestEndpoint"/> and builds the response using the <see cref="ResponseBuilder"/>.
     /// </summary>
     internal class EndpointInvoker
     {

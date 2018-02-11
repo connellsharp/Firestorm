@@ -59,7 +59,7 @@ namespace Firestorm.Stems.Roots.Derive
 
         public Task<RestDirectoryInfo> GetInfoAsync()
         {
-            return Task.FromResult(_rootTypeDictionary.CreateDirectoryInfo(_configuration.NamingConventionSwitcher));
+            return Task.FromResult(_rootTypeDictionary.CreateDirectoryInfo());
         }
     }
 }
