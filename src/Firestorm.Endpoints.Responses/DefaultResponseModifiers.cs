@@ -8,7 +8,7 @@ namespace Firestorm.Endpoints.Responses
     {
         private readonly List<IResponseModifier> _list;
 
-        public DefaultResponseModifiers(ResponseConfiguruation responseConfiguruation)
+        public DefaultResponseModifiers(ResponseConfiguration responseConfiguration)
         {
             _list = new List<IResponseModifier>
             {
@@ -17,7 +17,7 @@ namespace Firestorm.Endpoints.Responses
                 new ErrorResponseModifier()
             };
 
-            switch (responseConfiguruation.StatusField)
+            switch (responseConfiguration.StatusField)
             {
                 case ResponseStatusField.None:
                     break;
@@ -25,28 +25,28 @@ namespace Firestorm.Endpoints.Responses
                 case ResponseStatusField.StatusCode:
                     _list.Add(new StatusCodeResponseModifier
                     {
-                        WrapResourceObject = responseConfiguruation.WrapResourceObject
+                        WrapResourceObject = responseConfiguration.WrapResourceObject
                     });
                     break;
 
                 case ResponseStatusField.SuccessBoolean:
                     _list.Add(new SuccessBooleanResponseModifier
                     {
-                        WrapResourceObject = responseConfiguruation.WrapResourceObject
+                        WrapResourceObject = responseConfiguration.WrapResourceObject
                     });
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(responseConfiguruation.StatusField), "Given StatusField in the response config is invalid.");
+                    throw new ArgumentOutOfRangeException(nameof(responseConfiguration.StatusField), "Given StatusField in the response config is invalid.");
             }
 
-            if(responseConfiguruation.ShowDeveloperErrors)
+            if(responseConfiguration.ShowDeveloperErrors)
                 _list.Add(new DeveloperExceptionInfoResponseModifier());
 
-            if(responseConfiguruation.PageConfiguration.UseLinkHeaders)
+            if(responseConfiguration.PageConfiguration.UseLinkHeaders)
                 _list.Add(new PaginationHeadersResponseModifier());
 
-            if(responseConfiguruation.PageConfiguration.WrapCollectionResponseBody)
+            if(responseConfiguration.PageConfiguration.WrapCollectionResponseBody)
                 _list.Add(new PagedBodyResponseModifier());
         }
 

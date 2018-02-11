@@ -7,7 +7,7 @@ namespace Firestorm.Endpoints
 {
     /// <summary>
     /// The configuration required to setup a Firestorm REST API server.
-    /// Desribes how to interact with the resources in this API.
+    /// Describes how to interact with the resources in this API.
     /// </summary>
     public class RestEndpointConfiguration
     {
@@ -19,17 +19,17 @@ namespace Firestorm.Endpoints
         /// <summary>
         /// Contains 3 sets of strategies (for collection, items and scalars) defining how endpoints behave to unsafe requests.
         /// </summary>
-        public UnsafeRequestStrategySets RequestStrategies { get; set; } = new UnsafeRequestStrategySets();
+        public IUnsafeRequestStrategySets RequestStrategies { get; set; }
 
         /// <summary>
         /// The options used to build the responses to return to the client.
         /// </summary>
-        public ResponseConfiguruation ResponseConfiguration { get; set; } = new ResponseConfiguruation();
+        public ResponseConfiguration ResponseConfiguration { get; set; } = new ResponseConfiguration();
         
         /// <summary>
-        /// The object used to convert from .NET Stem member naming conventions to client-side API conventions.
+        /// The object used to convert from .NET member naming conventions to client-side API conventions.
         /// </summary>
         [CanBeNull]
-        NamingConventionSwitcher NamingConventionSwitcher { get; }
+        public INamingConventionSwitcher NamingConventionSwitcher { get; set; }
     }
 }

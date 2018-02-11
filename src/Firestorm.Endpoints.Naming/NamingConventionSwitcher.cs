@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using Firestorm.Endpoints;
 
 namespace Firestorm.Stems.Naming
 {
     /// <summary>
     /// The object used to convert from .NET Stem member naming conventions to client-side API conventions.
     /// </summary>
-    public class NamingConventionSwitcher
+    public class NamingConventionSwitcher : INamingConventionSwitcher
     {
         public ICaseConvention CodedCase { get; set; }
 

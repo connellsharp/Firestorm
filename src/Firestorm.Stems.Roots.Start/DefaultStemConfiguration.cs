@@ -3,14 +3,11 @@ using Firestorm.Stems.Attributes.Analysis;
 using Firestorm.Stems.AutoMap;
 using Firestorm.Stems.Fuel.Essential;
 using Firestorm.Stems.Fuel.Substems;
-using Firestorm.Stems.Naming;
 
 namespace Firestorm.Stems.Roots
 {
     public class DefaultStemConfiguration : IStemConfiguration
     {
-        public NamingConventionSwitcher NamingConventionSwitcher { get; set; } = new DefaultNamingConventionSwitcher();
-
         public IDependencyResolver DependencyResolver { get; set; } = null;
 
         public IPropertyAutoMapper AutoPropertyMapper { get; set; } = new DefaultPropertyAutoMapper();

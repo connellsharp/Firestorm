@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Firestorm.Stems.AutoMap;
-using Firestorm.Stems.Naming;
 using JetBrains.Annotations;
 
 namespace Firestorm.Stems

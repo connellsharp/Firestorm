@@ -13,7 +13,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         [Fact]
         public void StatusField_SuccessBoolean_AddsBuilder()
         {
-            var builder = new DefaultResponseModifiers(new ResponseConfiguruation
+            var builder = new DefaultResponseModifiers(new ResponseConfiguration
             {
                 StatusField = ResponseStatusField.SuccessBoolean
             });
@@ -25,7 +25,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         [Fact]
         public void StatusField_StatusCode_AddsBuilder()
         {
-            var builder = new DefaultResponseModifiers(new ResponseConfiguruation
+            var builder = new DefaultResponseModifiers(new ResponseConfiguration
             {
                 StatusField = ResponseStatusField.StatusCode
             });
@@ -37,7 +37,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         [Fact]
         public void WrapCollectionResponseBody_AddsPagedBodyBuilder()
         {
-            var builder = new DefaultResponseModifiers(new ResponseConfiguruation
+            var builder = new DefaultResponseModifiers(new ResponseConfiguration
             {
                 PageConfiguration =
                 {
@@ -52,7 +52,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         [Fact]
         public void ShowDeveloperErrors_AddsDeveloperExceptionBuilder()
         {
-            var builder = new DefaultResponseModifiers(new ResponseConfiguruation
+            var builder = new DefaultResponseModifiers(new ResponseConfiguration
             {
                 ShowDeveloperErrors = true
             });

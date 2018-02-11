@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Firestorm.Core;
 
 namespace Firestorm.Endpoints.Strategies
 {
@@ -9,10 +8,7 @@ namespace Firestorm.Endpoints.Strategies
         public IUnsafeRequestStrategy<TResource> GetOrThrow(UnsafeMethod method)
         {
             if (!ContainsKey(method))
-            {
-                string resourceType = typeof(TResource).Name.Replace("IRest", string.Empty).ToLower();
-                throw new MethodNotAllowedException("The " + method.ToString().ToUpper() + " method is not allowed on a " + resourceType);
-            }
+                throw new MethodNotAllowedException(method, typeof(TResource));
 
             return this[method];
         }

@@ -1,11 +1,8 @@
-using System;
-using Firestorm.Core;
-
 namespace Firestorm.Endpoints
 {
-    public class MethodNotAllowedException : RestApiException
+    internal class MethodNotAllowedException : RestApiException
     {
-        public MethodNotAllowedException(string message)
+        internal MethodNotAllowedException(string message)
             : base(ErrorStatus.MethodNotAllowed, message)
         {
         }

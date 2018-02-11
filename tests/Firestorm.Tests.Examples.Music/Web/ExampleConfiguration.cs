@@ -21,7 +21,7 @@ namespace Firestorm.Tests.Examples.Music.Web
             {
                 EndpointConfiguration = new RestEndpointConfiguration
                 {
-                    ResponseConfiguration = new ResponseConfiguruation
+                    ResponseConfiguration = new ResponseConfiguration
                     {
                         StatusField = ResponseStatusField.StatusCode
                     }
