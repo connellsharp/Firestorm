@@ -27,8 +27,8 @@ namespace Firestorm.Client
             if (query.FilterInstructions != null)
                 AppendFilters(builder, query.FilterInstructions);
 
-            if (query.SortIntructions != null)
-                AppendSortOrder(builder, query.SortIntructions);
+            if (query.SortInstructions != null)
+                AppendSortOrder(builder, query.SortInstructions);
 
             // TODO page size
 

@@ -3,7 +3,7 @@ namespace Firestorm.Endpoints.Strategies
     /// <summary>
     /// Contains 3 sets of strategies (for collection, items and scalars) defining how endpoints behave to unsafe requests.
     /// </summary>
-    public class UnsafeRequestStrategySets
+    public class UnsafeRequestStrategySets : IUnsafeRequestStrategySets
     {
         public UnsafeRequestStrategies<IRestCollection> ForCollections { get; set; } = new UnsafeRequestStrategies<IRestCollection>
         {

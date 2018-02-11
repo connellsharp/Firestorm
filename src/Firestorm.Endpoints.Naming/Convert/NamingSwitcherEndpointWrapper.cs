@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Firestorm.Core.Web;
 using Firestorm.Core.Web.Options;
 using Firestorm.Endpoints.Preconditions;
@@ -28,14 +29,18 @@ namespace Firestorm.Endpoints.Naming
             return _underlyingEndpoint.Next(convertedPath);
         }
 
-        public Task<ResourceBody> GetAsync()
+        public async Task<ResourceBody> GetAsync()
         {
-            return _underlyingEndpoint.GetAsync();
+            ResourceBody body = await _underlyingEndpoint.GetAsync();
+            new BodyKeyConverter(_namingConventionSwitcher.ConvertCodedToDefault).ChangeKeys(body);
+            return body;
         }
 
         public Task<Options> OptionsAsync()
         {
-            return _underlyingEndpoint.OptionsAsync();
+            Options options = await _underlyingEndpoint.OptionsAsync();
+            new BodyKeyConverter(_namingConventionSwitcher.ConvertCodedToDefault).ChangeKeys(options);
+            return options;
         }
 
         public Task<Feedback> UnsafeAsync(UnsafeMethod method, ResourceBody body)
@@ -46,6 +51,30 @@ namespace Firestorm.Endpoints.Naming
         public bool EvaluatePreconditions(IPreconditions preconditions)
         {
             return _underlyingEndpoint.EvaluatePreconditions(preconditions);
+        }
+    }
+
+    internal class BodyKeyConverter
+    {
+        private readonly Func<string, string> _transformFunc;
+
+        public BodyKeyConverter(Func<string, string> transformFunc)
+        {
+            _transformFunc = transformFunc;
+        }
+
+        internal void ChangeKeys(ResourceBody body)
+        {
+            switch (body)
+            {
+                case CollectionBody collectionBody:
+                    foreach (var item in collectionBody.Items)
+                        ChangeItemKeys(item);
+            }
+        }
+
+        private void ChangeItemKeys(RestItemData item)
+        {
         }
     }
 }

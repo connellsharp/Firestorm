@@ -35,7 +35,7 @@ namespace Firestorm.Engine
             var filter = new QueryableFieldFilter<TItem>(_context.Fields, _query.FilterInstructions);
             items = filter.ApplyFilter(items);
 
-            var sorter = new QueryableFieldSorter<TItem>(_context.Fields, _query.SortIntructions);
+            var sorter = new QueryableFieldSorter<TItem>(_context.Fields, _query.SortInstructions);
             items = sorter.ApplySortOrder(items);
 
             items = _pager.ApplyPagination(items);
