@@ -62,7 +62,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
 
         public Task WriteBytesAsync(byte[] bytes)
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }
