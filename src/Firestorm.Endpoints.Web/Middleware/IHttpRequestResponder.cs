@@ -1,5 +1,5 @@
 using System.Net;
-using System.Threading.Tasks;
+using Firestorm.Endpoints.Formatting;
 
 namespace Firestorm.Endpoints.Start
 {
@@ -7,8 +7,10 @@ namespace Firestorm.Endpoints.Start
     {
         void SetStatusCode(HttpStatusCode statusCode);
 
-        Task SetResponseBodyAsync(object obj);
-
         void SetResponseHeader(string key, string value);
+
+        IContentAccepts GetAcceptHeaders();
+
+        IContentWriter GetContentWriter();
     }
 }

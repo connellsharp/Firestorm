@@ -10,16 +10,16 @@ namespace Firestorm.Tests.Unit.Endpoints.Json
     {
         public JObjectConverterTests()
         {
-            Converter = new JObjectConverter<ExpandoObject>();
+            DictionaryCreator = new JObjectDictionaryCreator<ExpandoObject>(null);
         }
 
-        private JObjectConverter<ExpandoObject> Converter { get; set; }
+        private JObjectDictionaryCreator<ExpandoObject> DictionaryCreator { get; set; }
 
         [Fact]
         public void Null_Convert_IsNull()
         {
             var jValue = JValue.CreateNull();
-            dynamic dyn = Converter.Convert(jValue);
+            dynamic dyn = DictionaryCreator.Convert(jValue);
             Assert.Null(dyn);
         }
 
@@ -34,7 +34,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Json
             };
 
             var jObject = JObject.FromObject(obj);
-            dynamic dyn = Converter.ConvertObject(jObject);
+            dynamic dyn = DictionaryCreator.ConvertObject(jObject);
 
             Assert.Equal(obj.thing, dyn.thing);
             Assert.Equal(obj.test, dyn.test);
@@ -51,7 +51,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Json
             };
 
             var jObject = JObject.FromObject(obj);
-            dynamic dyn = Converter.ConvertObject(jObject);
+            dynamic dyn = DictionaryCreator.ConvertObject(jObject);
 
             Assert.Equal(obj.thing, dyn.thing);
             Assert.Equal(obj.again, dyn.again);
@@ -72,7 +72,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Json
             };
 
             var jObject = JObject.FromObject(obj);
-            dynamic dyn = Converter.ConvertObject(jObject);
+            dynamic dyn = DictionaryCreator.ConvertObject(jObject);
 
             Assert.Equal(obj.thing, dyn.thing);
             Assert.Equal(obj.test.nested, dyn.test.nested);
@@ -90,7 +90,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Json
             };
 
             var jToken = JToken.FromObject(arr);
-            dynamic dyn = Converter.Convert(jToken);
+            dynamic dyn = DictionaryCreator.Convert(jToken);
 
             Assert.Equal(arr[0].test, arr[0].test);
             Assert.Equal(arr[1].test, arr[1].test);
@@ -103,7 +103,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Json
             var jValue = JValue.CreateComment("This is a comment");
             Assert.Throws<NotSupportedException>(delegate
             {
-                Converter.Convert(jValue);
+                DictionaryCreator.Convert(jValue);
             });
         }
     }

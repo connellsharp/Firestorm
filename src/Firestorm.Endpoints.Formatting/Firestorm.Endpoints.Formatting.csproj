@@ -9,5 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Firestorm.Core.Web\Firestorm.Core.Web.csproj" />
     <ProjectReference Include="..\Firestorm.Core\Firestorm.Core.csproj" />
+    <ProjectReference Include="..\Firestorm.Endpoints\Firestorm.Endpoints.csproj" />
   </ItemGroup>
 </Project>

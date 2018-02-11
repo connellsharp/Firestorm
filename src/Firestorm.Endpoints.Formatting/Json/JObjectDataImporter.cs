@@ -1,18 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using Firestorm.Core;
 using Newtonsoft.Json.Linq;
 
 namespace Firestorm.Endpoints.Formatting.Json
 {
     public class JObjectDataImporter : IRestItemDataImporter
     {
-        private readonly JObjectConverter<ExpandoObject> _converter;
+        private readonly JObjectDictionaryCreator<ExpandoObject> _dictionaryCreator;
 
         public JObjectDataImporter()
         {
-            _converter = new JObjectConverter<ExpandoObject>();
+            _dictionaryCreator = new JObjectDictionaryCreator<ExpandoObject>(null);
         }
 
         public bool CanImport(object obj)
@@ -31,7 +30,7 @@ namespace Firestorm.Endpoints.Formatting.Json
             var jObj = (JObject) obj;
             foreach (KeyValuePair<string, JToken> pair in jObj)
             {
-                yield return new KeyValuePair<string, object>(pair.Key, _converter.Convert(pair.Value));
+                yield return new KeyValuePair<string, object>(pair.Key, _dictionaryCreator.Convert(pair.Value));
             }
         }
     }

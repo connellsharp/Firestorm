@@ -14,4 +14,7 @@
     <ProjectReference Include="..\Firestorm.Core.Web\Firestorm.Core.Web.csproj" />
     <ProjectReference Include="..\Firestorm.Core\Firestorm.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Endpoint\" />
+  </ItemGroup>
 </Project>

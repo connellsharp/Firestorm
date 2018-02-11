@@ -31,7 +31,7 @@ namespace Firestorm.AspNetWebApi2
             //httpConfig.Filters.Add(new RestApiExceptionFilterAttribute()); // global filter
             //config.Services.Replace(typeof(IExceptionHandler), new OopsExceptionHandler()); // global handler
 
-            httpConfig.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new ResourceBodyJsonConverter());
+            httpConfig.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new ResourceBodyJsonConverter(firestormConfig.EndpointConfiguration.NamingConventionSwitcher));
 
             // TODO: xml serialization doesn't work..
             //httpConfig.Formatters.XmlFormatter.SetSerializer<RestItemData>(new RestItemDataXmlSerializer());

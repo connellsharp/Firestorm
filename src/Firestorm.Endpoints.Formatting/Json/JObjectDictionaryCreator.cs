@@ -1,18 +1,27 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Firestorm.Endpoints.Naming;
+using JetBrains.Annotations;
 using Newtonsoft.Json.Linq;
 
 namespace Firestorm.Endpoints.Formatting.Json
 {
     /// <summary>
-    /// Converts the JToken to either a type of <see cref="TObject"/>, <see cref="IEnumerable{TObject}"/> or a scalar type.
+    /// Converts the JToken to either a type of <see cref="TDictionary"/>, <see cref="IEnumerable{TDictionary}"/> or a scalar type.
     /// </summary>
-    internal class JObjectConverter<TObject>
-        where TObject : IDictionary<string, object>, new()
+    internal class JObjectDictionaryCreator<TDictionary>
+        where TDictionary : IDictionary<string, object>, new()
     {
+        private readonly INamingConventionSwitcher _switcher;
+
+        public JObjectDictionaryCreator([CanBeNull] INamingConventionSwitcher switcher)
+        {
+            _switcher = switcher ?? new VoidNamingConventionSwitcher();
+        }
+
         /// <summary>
-        /// Converts the JToken to either a type of <see cref="TObject"/>, <see cref="IEnumerable{TObject}"/> or a scalar type.
+        /// Converts the JToken to either a type of <see cref="TDictionary"/>, <see cref="IEnumerable{TDictionary}"/> or a scalar type.
         /// </summary>
         internal object Convert(JToken token)
         {
@@ -52,16 +61,17 @@ namespace Firestorm.Endpoints.Formatting.Json
         }
 
         /// <summary>
-        /// Adds the properties of the given <see cref="jObject" /> to a new instance of the <see cref="TObject"/> dictionary type.
+        /// Adds the properties of the given <see cref="jObject" /> to a new instance of the <see cref="TDictionary"/> dictionary type.
         /// </summary>
-        internal TObject ConvertObject(JObject jObject)
+        internal TDictionary ConvertObject(JObject jObject)
         {
-            var obj = new TObject();
+            var obj = new TDictionary();
             IDictionary<string, object> dictionary = obj;
 
             foreach (JProperty property in jObject.Properties())
             {
-                dictionary.Add(property.Name, Convert(property.Value));
+                string key = _switcher.ConvertRequestedToCoded(property.Name);
+                dictionary.Add(key, Convert(property.Value));
             }
 
             return obj;

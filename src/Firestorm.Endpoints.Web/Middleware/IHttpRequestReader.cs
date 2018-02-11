@@ -1,4 +1,5 @@
 using Firestorm.Core.Web;
+using Firestorm.Endpoints.Formatting;
 using Firestorm.Endpoints.Preconditions;
 
 namespace Firestorm.Endpoints.Start
@@ -10,7 +11,7 @@ namespace Firestorm.Endpoints.Start
         string ResourcePath { get; }
 
         IPreconditions GetPreconditions();
-
-        ResourceBody GetRequestBodyObject();
+        
+        IContentReader GetContentReader();
     }
 }

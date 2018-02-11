@@ -8,7 +8,7 @@ namespace Firestorm.Tests.Unit.Engine.Implementation
 
         public IEnumerable<FilterInstruction> FilterInstructions { get; set; }
 
-        public IEnumerable<SortIntruction> SortIntructions { get; set; }
+        public IEnumerable<SortIntruction> SortInstructions { get; set; }
 
         public PageInstruction PageInstruction { get; set; }
     }

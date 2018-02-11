@@ -1,11 +1,8 @@
-﻿using System.IO;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using Firestorm.Core.Web;
 using Firestorm.Endpoints.Formatting;
-using Firestorm.Endpoints.Formatting.Json;
 using Firestorm.Endpoints.Preconditions;
-using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Start;
 using Microsoft.Owin;
 
@@ -34,16 +31,19 @@ namespace Firestorm.Owin
             return new OwinPreconditions(_owinContext);
         }
 
-        public Task SetResponseBodyAsync(object obj)
+        public IContentReader GetContentReader()
         {
-            var negotator = new ContentNegotiator(new OwinContentAccepts(), new OwinContentWriter(_owinContext));
-            return negotator.SetResponseBodyAsync(obj);
+            return new OwinContentReader(_owinContext);
         }
 
-        public ResourceBody GetRequestBodyObject()
+        public IContentAccepts GetAcceptHeaders()
         {
-            var reader = new ContentReader();
-            return reader.ReadResourceStream(_owinContext.Request.Body);
+            return new OwinContentAccepts();
+        }
+
+        public IContentWriter GetContentWriter()
+        {
+            return new OwinContentWriter(_owinContext);
         }
 
         public void SetResponseHeader(string key, string value)

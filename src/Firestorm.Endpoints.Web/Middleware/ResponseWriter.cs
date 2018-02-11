@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Firestorm.Endpoints.Formatting;
 using Firestorm.Endpoints.Responses;
 
 namespace Firestorm.Endpoints.Start
@@ -23,7 +24,8 @@ namespace Firestorm.Endpoints.Start
                 _responder.SetResponseHeader(header.Key, header.Value);
             }
 
-            return _responder.SetResponseBodyAsync(_response.GetFullBody());
+            var negotiator = new ContentNegotiator(_responder.GetAcceptHeaders(), _responder.GetContentWriter());
+            return negotiator.SetResponseBodyAsync(_response.GetFullBody());
         }
     }
 }

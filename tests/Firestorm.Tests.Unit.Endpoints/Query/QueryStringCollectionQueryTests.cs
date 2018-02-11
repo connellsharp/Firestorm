@@ -76,8 +76,8 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         {
             var query = new QueryStringCollectionQuery(new QueryStringConfiguration(), "sort=someDate+asc,another+desc");
 
-            Assert.True(query.SortIntructions.Any(si => si.FieldName == "someDate" && si.Direction == SortDirection.Ascending));
-            Assert.True(query.SortIntructions.Any(si => si.FieldName == "another" && si.Direction == SortDirection.Descending));
+            Assert.True(query.SortInstructions.Any(si => si.FieldName == "someDate" && si.Direction == SortDirection.Ascending));
+            Assert.True(query.SortInstructions.Any(si => si.FieldName == "another" && si.Direction == SortDirection.Descending));
         }
 
         [Fact]
@@ -85,8 +85,8 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         {
             var query = new QueryStringCollectionQuery(new QueryStringConfiguration(), "sort=someDate+asc&sort=another+desc");
 
-            Assert.True(query.SortIntructions.Any(si => si.FieldName == "someDate" && si.Direction == SortDirection.Ascending));
-            Assert.True(query.SortIntructions.Any(si => si.FieldName == "another" && si.Direction == SortDirection.Descending));
+            Assert.True(query.SortInstructions.Any(si => si.FieldName == "someDate" && si.Direction == SortDirection.Ascending));
+            Assert.True(query.SortInstructions.Any(si => si.FieldName == "another" && si.Direction == SortDirection.Descending));
         }
 
         [Fact]
@@ -94,7 +94,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         {
             var query = new QueryStringCollectionQuery(new QueryStringConfiguration(), "sort=column");
 
-            Assert.True(query.SortIntructions.Any(si => si.FieldName == "column" && si.Direction == SortDirection.Unspecified));
+            Assert.True(query.SortInstructions.Any(si => si.FieldName == "column" && si.Direction == SortDirection.Unspecified));
         }
     }
 }

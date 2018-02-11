@@ -1,6 +1,4 @@
 ﻿using System.Net;
-using System.Threading.Tasks;
-using Firestorm.Core.Web;
 using Firestorm.Endpoints.Formatting;
 using Firestorm.Endpoints.Preconditions;
 using Firestorm.Endpoints.Start;
@@ -30,21 +28,24 @@ namespace Firestorm.AspNetCore2.HttpContext
             return new HttpPreconditions(_httpContext.Request.Headers);
         }
 
-        public Task SetResponseBodyAsync(object obj)
+        public IContentReader GetContentReader()
         {
-            var negotiator = new ContentNegotiator(new HttpContentAccepts(), new HttpContentWriter(_httpContext));
-            return negotiator.SetResponseBodyAsync(obj);
-        }
-
-        public ResourceBody GetRequestBodyObject()
-        {
-            var reader = new ContentReader();
-            return reader.ReadResourceStream(_httpContext.Request.Body);
+            return new HttpContentReader(_httpContext);
         }
 
         public void SetResponseHeader(string key, string value)
         {
             _httpContext.Response.Headers[key] = value;
+        }
+
+        public IContentAccepts GetAcceptHeaders()
+        {
+            return new HttpContentAccepts();
+        }
+
+        public IContentWriter GetContentWriter()
+        {
+            return new HttpContentWriter(_httpContext);
         }
     }
 

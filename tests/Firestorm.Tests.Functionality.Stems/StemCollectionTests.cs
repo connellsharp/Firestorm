@@ -80,7 +80,7 @@ namespace Firestorm.Tests.Functionality.Stems
 
             public IEnumerable<string> SelectFields { get; } = null;
             public IEnumerable<FilterInstruction> FilterInstructions { get; }
-            public IEnumerable<SortIntruction> SortIntructions { get; } = null;
+            public IEnumerable<SortIntruction> SortInstructions { get; } = null;
             public PageInstruction PageInstruction { get; } = null;
         }
     }

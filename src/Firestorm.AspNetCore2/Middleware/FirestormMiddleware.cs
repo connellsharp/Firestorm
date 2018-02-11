@@ -17,7 +17,7 @@ namespace Firestorm.AspNetCore2
             _next = next;
             _configuration = configuration;
 
-            _configuration.StartResourceFactory.Initialize();
+            _configuration.StartResourceFactory.Initialize(); // TODO does this initialize every time?
         }
 
         [UsedImplicitly]
@@ -25,7 +25,7 @@ namespace Firestorm.AspNetCore2
         {
             IHttpRequestHandler requestHandler = new HttpContextHandler(httpContext);
             var middlewareHelper = new FirestormMiddlewareHelper(_configuration, requestHandler);
-
+            
             var restContext = new HttpContextRestEndpointContext(httpContext, _configuration.EndpointConfiguration);
 
             await middlewareHelper.InvokeAsync(restContext);
