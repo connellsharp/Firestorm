@@ -1,6 +1,7 @@
 using Firestorm.Endpoints.Query;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Strategies;
+using JetBrains.Annotations;
 
 namespace Firestorm.Endpoints
 {
@@ -24,6 +25,11 @@ namespace Firestorm.Endpoints
         /// The options used to build the responses to return to the client.
         /// </summary>
         public ResponseConfiguruation ResponseConfiguration { get; set; } = new ResponseConfiguruation();
-
+        
+        /// <summary>
+        /// The object used to convert from .NET Stem member naming conventions to client-side API conventions.
+        /// </summary>
+        [CanBeNull]
+        NamingConventionSwitcher NamingConventionSwitcher { get; }
     }
 }
