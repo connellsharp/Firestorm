@@ -11,12 +11,6 @@ namespace Firestorm.Stems
     public interface IStemConfiguration
     {
         /// <summary>
-        /// The object used to convert from .NET Stem member naming conventions to client-side API conventions.
-        /// </summary>
-        [CanBeNull]
-        NamingConventionSwitcher NamingConventionSwitcher { get; }
-
-        /// <summary>
         /// Resolves dependencies for constructor parameters on Stem classes.
         /// </summary>
         [CanBeNull] // if no constructor parameters are used on Stem classes.
