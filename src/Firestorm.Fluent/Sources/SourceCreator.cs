@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace Firestorm.Fluent.Sources
@@ -25,6 +26,7 @@ namespace Firestorm.Fluent.Sources
                 Type itemType = rootType.GetGenericArguments()[0];
 
                 MethodInfo addRootMethod = typeof(SourceCreator).GetMethod(nameof(AddRootItem), BindingFlags.NonPublic | BindingFlags.Static).MakeGenericMethod(itemType);
+                Debug.Assert(addRootMethod != null, "Could not find generic method to add root item with reflection.");
                 addRootMethod.Invoke(null, new object[] { builder, property.Name, apiContext.Options.RootConfiguration });
             }
         }

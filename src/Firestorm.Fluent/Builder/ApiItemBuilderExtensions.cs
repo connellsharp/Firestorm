@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -23,8 +25,9 @@ namespace Firestorm.Fluent
                 ParameterExpression paramExpression = Expression.Parameter(itemType);
                 LambdaExpression expression = Expression.Lambda(Expression.Property(paramExpression, property), paramExpression);
 
-                MethodInfo method = typeof(IApiItemBuilder<TItem>).GetMethod(nameof(AddField), BindingFlags.NonPublic | BindingFlags.Static);
-                MethodInfo genericMethod = method.MakeGenericMethod(property.PropertyType);
+                MethodInfo method = typeof(ApiItemBuilderExtensions).GetMethod(nameof(AddField), BindingFlags.NonPublic | BindingFlags.Static);
+                MethodInfo genericMethod = method.MakeGenericMethod(typeof(TItem), property.PropertyType);
+                Debug.Assert(genericMethod != null, "Couldn't find generic method to add field with reflection.");
                 genericMethod.Invoke(null, new object[] { builder, expression, configuration });
             }
 
@@ -37,6 +40,10 @@ namespace Firestorm.Fluent
 
             if (configuration.AllowWrite)
                 fieldBuilder.AllowWrite();
+
+            // TODO auto configure sub items and collections
+            //fieldBuilder.IsItem<TField>().AutoConfigure(configuration);
+            //fieldBuilder.IsCollection<IEnumerable<TField>, TField>().AutoConfigure(configuration);
 
             return builder;
         }
