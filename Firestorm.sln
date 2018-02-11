@@ -152,9 +152,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Functionali
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Examples.Football", "tests\Firestorm.Tests.Examples.Football\Firestorm.Tests.Examples.Football.csproj", "{30DD9A72-A393-41D1-BF98-CBA1BF82F6DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Endpoints.Naming", "src\Firestorm.Endpoints.Naming\Firestorm.Endpoints.Naming.csproj", "{056EFC08-2FCD-4F8D-AD45-8D6814F5D500}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints.Naming", "src\Firestorm.Endpoints.Naming\Firestorm.Endpoints.Naming.csproj", "{056EFC08-2FCD-4F8D-AD45-8D6814F5D500}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Endpoints.Implementation", "src\Firestorm.Endpoints.Implementation\Firestorm.Endpoints.Implementation.csproj", "{F00AEB35-21EB-4AB6-B8CA-06071C11667F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints.Implementation", "src\Firestorm.Endpoints.Implementation\Firestorm.Endpoints.Implementation.csproj", "{F00AEB35-21EB-4AB6-B8CA-06071C11667F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Endpoints.Web", "src\Firestorm.Endpoints.Web\Firestorm.Endpoints.Web.csproj", "{C3B0C396-765D-4689-8233-DF2F17C1419B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Engine.Fuel", "src\Firestorm.Engine.Fuel\Firestorm.Engine.Fuel.csproj", "{F5CCEB00-FC4E-432D-A0C2-3167A4E07F17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -362,6 +366,14 @@ Global
 		{F00AEB35-21EB-4AB6-B8CA-06071C11667F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F00AEB35-21EB-4AB6-B8CA-06071C11667F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F00AEB35-21EB-4AB6-B8CA-06071C11667F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3B0C396-765D-4689-8233-DF2F17C1419B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3B0C396-765D-4689-8233-DF2F17C1419B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3B0C396-765D-4689-8233-DF2F17C1419B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3B0C396-765D-4689-8233-DF2F17C1419B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5CCEB00-FC4E-432D-A0C2-3167A4E07F17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5CCEB00-FC4E-432D-A0C2-3167A4E07F17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5CCEB00-FC4E-432D-A0C2-3167A4E07F17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5CCEB00-FC4E-432D-A0C2-3167A4E07F17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -432,6 +444,8 @@ Global
 		{30DD9A72-A393-41D1-BF98-CBA1BF82F6DF} = {12657C50-EDB1-4ED5-85C2-B08FFF18C114}
 		{056EFC08-2FCD-4F8D-AD45-8D6814F5D500} = {34A7625D-A639-4855-B49F-FA1EF91377A4}
 		{F00AEB35-21EB-4AB6-B8CA-06071C11667F} = {34A7625D-A639-4855-B49F-FA1EF91377A4}
+		{C3B0C396-765D-4689-8233-DF2F17C1419B} = {34A7625D-A639-4855-B49F-FA1EF91377A4}
+		{F5CCEB00-FC4E-432D-A0C2-3167A4E07F17} = {FA828466-0901-42FA-8BE9-FE3DA18E589D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E07ED662-9390-431F-B4D6-BDA65FE4169A}

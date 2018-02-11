@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Firestorm.Engine.Additives\Firestorm.Engine.Additives.csproj" />
+    <ProjectReference Include="..\Firestorm.Engine.Implementation\Firestorm.Engine.Implementation.csproj" />
+    <ProjectReference Include="..\Firestorm.Engine.Subs\Firestorm.Engine.Subs.csproj" />
+  </ItemGroup>
+
+</Project>
