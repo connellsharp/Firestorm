@@ -1,9 +1,9 @@
 ﻿using Firestorm.Endpoints;
+using Firestorm.Endpoints.Naming;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Start;
 using Firestorm.EntityFramework6;
 using Firestorm.Stems.AutoMap;
-using Firestorm.Stems.Naming;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Tests.Examples.Music.Data;
@@ -24,7 +24,8 @@ namespace Firestorm.Tests.Examples.Music.Web
                     ResponseConfiguration = new ResponseConfiguration
                     {
                         StatusField = ResponseStatusField.StatusCode
-                    }
+                    },
+                    NamingConventionSwitcher = new DefaultNamingConventionSwitcher(),
                 },
                 StartResourceFactory = new StemsStartResourceFactory
                 {
@@ -35,7 +36,6 @@ namespace Firestorm.Tests.Examples.Music.Web
                     },
                     StemConfiguration = new DefaultStemConfiguration
                     {
-                        NamingConventionSwitcher = new DefaultNamingConventionSwitcher(),
                         AutoPropertyMapper = new DefaultPropertyAutoMapper()
                     }
                 }

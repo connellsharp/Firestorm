@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 
 namespace Firestorm.Endpoints.Start
 {
@@ -8,10 +9,12 @@ namespace Firestorm.Endpoints.Start
     public class EndpointNextAggregator
     {
         private readonly IRestEndpoint _startEndpoint;
+        private readonly INamingConventionSwitcher _namingConventionSwitcher;
 
-        public EndpointNextAggregator(IRestEndpoint startEndpoint)
+        public EndpointNextAggregator([NotNull] IRestEndpoint startEndpoint, [NotNull] INamingConventionSwitcher namingConventionSwitcher)
         {
-            _startEndpoint = startEndpoint;
+            _startEndpoint = startEndpoint ?? throw new ArgumentNullException(nameof(startEndpoint));
+            _namingConventionSwitcher = namingConventionSwitcher ?? throw new ArgumentNullException(nameof(namingConventionSwitcher));
         }
 
         public IRestEndpoint AggregateNext(string fullResourcePath)
@@ -19,22 +22,26 @@ namespace Firestorm.Endpoints.Start
             if (string.IsNullOrEmpty(fullResourcePath))
                 return _startEndpoint;
 
-            string[] dirs = fullResourcePath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
             IRestEndpoint endpoint = _startEndpoint;
+            string[] dirs = fullResourcePath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string dir in dirs)
             {
+                string directory = _namingConventionSwitcher.ConvertRequestedToCoded(dir);
+
                 try
                 {
-                    endpoint = endpoint.Next(dir);
+                    endpoint = endpoint.Next(directory);
                 }
                 catch (Exception ex)
                 {
-                    throw new NextEndpointErrorException(dir, ex);
+                    throw new NextEndpointErrorException(directory, ex);
                 }
 
                 if (endpoint == null)
-                    throw new NextEndpointNotFoundException(dir);
+                {
+                    throw new NextEndpointNotFoundException(directory);
+                }
             }
 
             return endpoint;

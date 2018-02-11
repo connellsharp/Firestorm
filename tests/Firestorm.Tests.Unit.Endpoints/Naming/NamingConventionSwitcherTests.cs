@@ -77,19 +77,5 @@ namespace Firestorm.Tests.Unit.Endpoints.Naming
             string switched4 = switcher.ConvertRequestedToOutput("originally-kebab-case");
             Assert.Equal("originally_kebab_case", switched4);
         }
-
-        [Fact]
-        public void RelaxedFieldMappings()
-        {
-            var switcher = new NamingConventionSwitcher(new PascalCaseConvention(), new SnakeCaseConvention());
-            var baseFieldMappings = new StemFieldDictionary<Artist>()
-            {
-                { "ArtistName", a => a.Name }
-            };
-
-            var fieldProvider = new RelaxedNamingFieldProvider<Artist>(baseFieldMappings, switcher);
-
-            Assert.True(fieldProvider.FieldExists("artist_name"));
-        }
     }
 }

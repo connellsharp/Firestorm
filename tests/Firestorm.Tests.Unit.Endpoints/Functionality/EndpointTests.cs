@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Firestorm.Core.Web;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Start;
+using Firestorm.Endpoints.Web;
 using Firestorm.Tests.Unit.Endpoints.Stubs;
 using Xunit;
 
