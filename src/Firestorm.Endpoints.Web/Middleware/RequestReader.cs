@@ -8,12 +8,12 @@ namespace Firestorm.Endpoints.Start
     internal class RequestReader : IRequestReader
     {
         private readonly IHttpRequestReader _httpReader;
-        private readonly RestEndpointConfiguration _endpointConfiguration;
+        private readonly RestEndpointConfiguration _config;
 
-        public RequestReader(IHttpRequestReader httpReader, RestEndpointConfiguration endpointConfiguration)
+        public RequestReader(IHttpRequestReader httpReader, RestEndpointConfiguration config)
         {
             _httpReader = httpReader;
-            _endpointConfiguration = endpointConfiguration;
+            _config = config;
         }
 
         public string RequestMethod => _httpReader.RequestMethod;
@@ -22,13 +22,23 @@ namespace Firestorm.Endpoints.Start
 
         public ResourceBody GetRequestBody()
         {
-            var parser = new ContentParser(_httpReader.GetContentReader(), _endpointConfiguration.NamingConventionSwitcher);
+            var parser = new ContentParser(_httpReader.GetContentReader(), _config.NamingConventionSwitcher);
             return parser.GetRequestBody();
         }
 
         public IRestCollectionQuery GetQuery()
         {
-            return new QueryStringCollectionQuery(_endpointConfiguration.QueryStringConfiguration, _httpReader.GetQueryString());
+            string queryString = _httpReader.GetQueryString();
+
+            if (string.IsNullOrEmpty(queryString))
+                return null;
+
+            var query = new QueryStringCollectionQuery(_config.QueryStringConfiguration, queryString);
+
+            if (_config.NamingConventionSwitcher != null)
+                return new NameSwitcherQuery(query, _config.NamingConventionSwitcher);
+
+            return query;
         }
     }
 }

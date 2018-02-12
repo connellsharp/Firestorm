@@ -22,7 +22,7 @@ namespace Firestorm.Tests.Integration.Http.NetFramework
     {
         public IEnumerable<string> SelectFields { get; set; }
         public IEnumerable<FilterInstruction> FilterInstructions { get; }
-        public IEnumerable<SortIntruction> SortInstructions { get; }
+        public IEnumerable<SortInstruction> SortInstructions { get; }
         public PageInstruction PageInstruction { get; }
     }
 }

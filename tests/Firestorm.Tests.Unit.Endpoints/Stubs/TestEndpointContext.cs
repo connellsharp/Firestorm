@@ -29,7 +29,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Stubs
 
         public IEnumerable<FilterInstruction> FilterInstructions { get; }
 
-        public IEnumerable<SortIntruction> SortInstructions { get; set; }
+        public IEnumerable<SortInstruction> SortInstructions { get; set; }
 
         public PageInstruction PageInstruction { get; set; }
 

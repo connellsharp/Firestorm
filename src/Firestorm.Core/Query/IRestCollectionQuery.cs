@@ -15,7 +15,7 @@ namespace Firestorm
         IEnumerable<FilterInstruction> FilterInstructions { get; }
 
         [CanBeNull]
-        IEnumerable<SortIntruction> SortInstructions { get; }
+        IEnumerable<SortInstruction> SortInstructions { get; }
 
         [CanBeNull]
         PageInstruction PageInstruction { get; }

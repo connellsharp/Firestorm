@@ -16,7 +16,7 @@ namespace Firestorm.Tests.Unit.Engine.Queryable
                 { "id", a => a.ID }
             }, new[]
             {
-                new SortIntruction("id", SortDirection.Ascending)
+                new SortInstruction("id", SortDirection.Ascending)
             });
 
             var unordered = new List<Artist>

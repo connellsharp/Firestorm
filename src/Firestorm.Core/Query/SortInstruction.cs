@@ -1,12 +1,12 @@
 namespace Firestorm
 {
-    public class SortIntruction
+    public class SortInstruction
     {
-        protected SortIntruction()
+        protected SortInstruction()
         {
         }
 
-        public SortIntruction(string fieldName, SortDirection sortDirection)
+        public SortInstruction(string fieldName, SortDirection sortDirection)
         {
             FieldName = fieldName;
             Direction = sortDirection;

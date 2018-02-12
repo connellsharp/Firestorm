@@ -3,7 +3,7 @@ using Firestorm.Core;
 
 namespace Firestorm.Endpoints.Query
 {
-    internal class QuerySortInstruction : SortIntruction
+    internal class QuerySortInstruction : SortInstruction
     {
         private readonly QueryStringConfiguration _configuration;
 

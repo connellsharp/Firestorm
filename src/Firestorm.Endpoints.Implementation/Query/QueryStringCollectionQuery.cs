@@ -15,7 +15,7 @@ namespace Firestorm.Endpoints.Query
 
         private List<string> _selectFields;
         private List<FilterInstruction> _filterInstructions;
-        private List<SortIntruction> _sortInstructions;
+        private List<SortInstruction> _sortInstructions;
         private PageInstruction _pageInstruction;
 
         public QueryStringCollectionQuery([NotNull] QueryStringConfiguration configuration, [CanBeNull] string query)
@@ -163,7 +163,7 @@ namespace Firestorm.Endpoints.Query
             get { return _filterInstructions; }
         }
 
-        public IEnumerable<SortIntruction> SortInstructions
+        public IEnumerable<SortInstruction> SortInstructions
         {
             get { return _sortInstructions; }
         }

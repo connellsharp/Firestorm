@@ -12,9 +12,9 @@ namespace Firestorm.Engine.Queryable
         where TItem : class
     {
         private readonly IFieldProvider<TItem> _fieldProvider;
-        private readonly IEnumerable<SortIntruction> _instructions;
+        private readonly IEnumerable<SortInstruction> _instructions;
 
-        internal QueryableFieldSorter(IFieldProvider<TItem> fieldProvider, [CanBeNull] IEnumerable<SortIntruction> instructions)
+        internal QueryableFieldSorter(IFieldProvider<TItem> fieldProvider, [CanBeNull] IEnumerable<SortInstruction> instructions)
         {
             _fieldProvider = fieldProvider;
             _instructions = instructions;
@@ -27,7 +27,7 @@ namespace Firestorm.Engine.Queryable
 
             bool doneOnce = false;
 
-            foreach (SortIntruction sortIntruction in _instructions)
+            foreach (SortInstruction sortIntruction in _instructions)
             {
                 Debug.Assert(sortIntruction != null);
 
@@ -40,14 +40,14 @@ namespace Firestorm.Engine.Queryable
             return items;
         }
 
-        private LambdaExpression GetOrderSelectorExpression(SortIntruction sortIntruction)
+        private LambdaExpression GetOrderSelectorExpression(SortInstruction sortInstruction)
         {
-            if (!_fieldProvider.FieldExists(sortIntruction.FieldName))
-                throw new FieldNotFoundException(sortIntruction.FieldName, false);
+            if (!_fieldProvider.FieldExists(sortInstruction.FieldName))
+                throw new FieldNotFoundException(sortInstruction.FieldName, false);
 
-            IFieldReader<TItem> fieldReader = _fieldProvider.GetReader(sortIntruction.FieldName);
+            IFieldReader<TItem> fieldReader = _fieldProvider.GetReader(sortInstruction.FieldName);
             if (fieldReader == null)
-                throw new FieldOperationNotAllowedException(sortIntruction.FieldName, FieldOperationNotAllowedException.Operation.Read);
+                throw new FieldOperationNotAllowedException(sortInstruction.FieldName, FieldOperationNotAllowedException.Operation.Read);
 
             try
             {
@@ -61,7 +61,7 @@ namespace Firestorm.Engine.Queryable
             }
             catch (Exception ex)
             {
-                throw new FieldCannotFilterException(sortIntruction.FieldName, ex);
+                throw new FieldCannotFilterException(sortInstruction.FieldName, ex);
             }
         }
     }
