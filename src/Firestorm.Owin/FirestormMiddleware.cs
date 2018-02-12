@@ -24,7 +24,7 @@ namespace Firestorm.Owin
             IHttpRequestHandler requestHandler = new OwinContextHandler(owinContext);
             var middlewareHelper = new FirestormMiddlewareHelper(_configuration, requestHandler);
 
-            var restContext = new OwinRestEndpointContext(owinContext, _configuration);
+            var restContext = new OwinRestEndpointContext(owinContext, _configuration.EndpointConfiguration);
 
             await middlewareHelper.InvokeAsync(restContext);
 

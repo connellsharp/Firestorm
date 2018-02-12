@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Firestorm.Core;
 using Firestorm.Core.Web;
 using Firestorm.Core.Web.Options;
 using Firestorm.Endpoints.Preconditions;
@@ -14,9 +13,9 @@ namespace Firestorm.Endpoints
             Directory = directory;
         }
 
-        IRestEndpointContext Context { get; }
+        private IRestEndpointContext Context { get; }
 
-        IRestDirectory Directory { get; }
+        private IRestDirectory Directory { get; }
 
         public IRestEndpoint Next(string resourceName)
         {

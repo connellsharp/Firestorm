@@ -4,11 +4,13 @@ using Firestorm.Endpoints.Query;
 
 namespace Firestorm.AspNetCore2.HttpContext
 {
+    using HttpContext = Microsoft.AspNetCore.Http.HttpContext;
+
     internal class HttpContextRestEndpointContext : IRestEndpointContext
     {
-        private readonly Microsoft.AspNetCore.Http.HttpContext _httpContext;
+        private readonly HttpContext _httpContext;
 
-        public HttpContextRestEndpointContext(Microsoft.AspNetCore.Http.HttpContext httpContext, RestEndpointConfiguration configuration)
+        public HttpContextRestEndpointContext(HttpContext httpContext, RestEndpointConfiguration configuration)
         {
             _httpContext = httpContext;
             Configuration = configuration;
