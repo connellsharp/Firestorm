@@ -19,15 +19,15 @@ namespace Firestorm.Tests.Functionality.Stems
         [Fact]
         public async Task IdentifiedItem_GetIDOnly_Correct()
         {
-            var itemData = await _restCollection.GetItem("123").GetDataAsync(new[] { "ID" });
+            var itemData = await _restCollection.GetItem("123").GetDataAsync(new[] { "Id" });
 
-            Assert.Equal(itemData["ID"], 123);
+            Assert.Equal(itemData["Id"], 123);
         }
 
         [Fact]
         public async Task IdentifiedItem_GetIDField_Correct()
         {
-            object scalar = await _restCollection.GetItem("123").GetScalar("ID").GetAsync();
+            object scalar = await _restCollection.GetItem("123").GetScalar("Id").GetAsync();
 
             Assert.Equal(scalar, 123);
         }
@@ -45,7 +45,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             var itemData = await _restCollection.GetItem("123").GetDataAsync(null);
 
-            Assert.Equal(itemData["ID"], 123);
+            Assert.Equal(itemData["Id"], 123);
             Assert.Equal(itemData["Name"], TestRepositories.ArtistName);
             Assert.False(itemData.ContainsKey("Albums"));
         }
@@ -55,7 +55,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             var itemData = await _restCollection.GetItem("123").GetDataAsync(new[] { "Albums" });
             
-            Assert.False(itemData.ContainsKey("ID"));
+            Assert.False(itemData.ContainsKey("Id"));
             Assert.False(itemData.ContainsKey("Name"));
             Assert.True(itemData.ContainsKey("Albums"));
         }
@@ -63,11 +63,11 @@ namespace Firestorm.Tests.Functionality.Stems
         [Fact]
         public async Task GetCollectionOnlyDisplaysNestedFields()
         {
-            var idFilterQuery = new StemCollectionTests.SimpleFilterQuery(new FilterInstruction("ID", FilterComparisonOperator.Equals, "123"));
+            var idFilterQuery = new StemCollectionTests.SimpleFilterQuery(new FilterInstruction("Id", FilterComparisonOperator.Equals, "123"));
             var collectionData = await _restCollection.QueryDataAsync(idFilterQuery);
             var itemData = collectionData.Items.Single();
 
-            Assert.Equal(itemData["ID"], 123);
+            Assert.Equal(itemData["Id"], 123);
             Assert.False(itemData.ContainsKey("Name"));
         }
 

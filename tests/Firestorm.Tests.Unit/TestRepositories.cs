@@ -12,7 +12,7 @@ namespace Firestorm.Tests.Unit
             {
                 Albums = new List<Album>
                 {
-                    new Album { ID = 1, Name = AlbumName }
+                    new Album { Id = 1, Name = AlbumName }
                 }
             };
         }

@@ -20,10 +20,10 @@ namespace Firestorm.Tests.Unit.Endpoints.Stubs.MemoryResources
         {
             RestCollectionData items = await _memoryRestCollection.QueryDataAsync(query);
 
-            return new RestDictionaryData(items.Items.Select(GetIdentitiedPair), items.PageDetails);
+            return new RestDictionaryData(items.Items.Select(GetIdentifiedPair), items.PageDetails);
         }
 
-        private KeyValuePair<string, object> GetIdentitiedPair(RestItemData item)
+        private KeyValuePair<string, object> GetIdentifiedPair(RestItemData item)
         {
             return new KeyValuePair<string, object>(item[_identifierName].ToString(), item);
         }

@@ -30,7 +30,7 @@ namespace Firestorm.Tests.Unit.Stems.Substems
         {
             [Get(Display.Nested), Identifier]
             [Locator]
-            public static Expression<Func<Album, int>> ID { get; } = a => a.ID;
+            public static Expression<Func<Album, int>> Id { get; } = a => a.Id;
 
             [Get, Set]
             public static Expression<Func<Album, string>> Name { get; } = a => a.Name;
@@ -65,8 +65,8 @@ namespace Firestorm.Tests.Unit.Stems.Substems
             {
                 Albums = new List<Album>
                 {
-                    new Album { ID = 1, Name = "Old first album name" },
-                    new Album { ID = 2, Name = "Old second album name" },
+                    new Album { Id = 1, Name = "Old first album name" },
+                    new Album { Id = 2, Name = "Old second album name" },
                 }
             };
 

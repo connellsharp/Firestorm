@@ -52,7 +52,7 @@ namespace Firestorm.Tests.Functionality.Stems
         private class AlbumSubstem : Stem<Album>
         {
             [Get(Display.Nested), Identifier]
-            public static Expression<Func<Album, int>> ID { get; } = a => a.ID;
+            public static Expression<Func<Album, int>> ID { get; } = a => a.Id;
 
             [Get, Set]
             public static Expression<Func<Album, string>> Name { get; } = a => a.Name;
@@ -78,7 +78,7 @@ namespace Firestorm.Tests.Functionality.Stems
         public async Task GetAlbums_FirstOneCorrectID()
         {
             RestCollectionData albums = await _restCollection.GetItem("123").GetCollection("Albums").QueryDataAsync(null);
-            Assert.Equal(albums.Items.First()["ID"], 1);
+            Assert.Equal(albums.Items.First()["Id"], 1);
         }
 
         [Fact]

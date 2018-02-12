@@ -28,7 +28,7 @@ namespace Firestorm.Tests.Examples.Football.Web
     public class FixturesStem : Stem<FixtureTeam>
     {
         [Get, Identifier]
-        public static Expression<Func<FixtureTeam, int>> ID { get; } = ft => ft.FixtureId;
+        public static Expression<Func<FixtureTeam, int>> Id { get; } = ft => ft.FixtureId;
 
         [Get]
         public static Expression<Func<FixtureTeam, bool>> Home { get; } = ft => ft.IsHome;
@@ -71,7 +71,7 @@ namespace Firestorm.Tests.Examples.Football.Web
     public class VsTeamStem : Stem<FixtureTeam>
     {
         [Get, Set]
-        public static Expression<Func<FixtureTeam, int>> ID { get; } = ft => ft.TeamId;
+        public static Expression<Func<FixtureTeam, int>> Id { get; } = ft => ft.TeamId;
     }
 
     [DataSourceRoot]

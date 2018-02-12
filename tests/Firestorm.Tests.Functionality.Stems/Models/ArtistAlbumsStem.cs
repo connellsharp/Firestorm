@@ -11,7 +11,7 @@ namespace Firestorm.Tests.Functionality.Stems.Models
     {
         [Get(Display.Nested), Identifier]
         [Locator]
-        public static Expression<Func<Album, int>> ID { get; } = a => a.ID;
+        public static Expression<Func<Album, int>> Id { get; } = a => a.Id;
 
         [Get, Set]
         public static Expression<Func<Album, string>> Name { get; } = a => a.Name;

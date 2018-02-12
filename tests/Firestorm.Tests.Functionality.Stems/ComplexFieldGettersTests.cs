@@ -51,7 +51,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             RestCollectionData data = await _restCollection.QueryDataAsync(new TestCollectionQuery
             {
-                SelectFields = new[] { "ID", "Complex" }
+                SelectFields = new[] { "Id", "Complex" }
             });
 
             var firstComplex = (MyComplexObject)data.Items.First()["Complex"];
@@ -63,7 +63,7 @@ namespace Firestorm.Tests.Functionality.Stems
         [Fact]
         public async Task Item_GetWithComplexField_StatusOK()
         {
-            RestItemData data = await _restCollection.GetItem("123").GetDataAsync(new[] { "ID", "Complex" });
+            RestItemData data = await _restCollection.GetItem("123").GetDataAsync(new[] { "Id", "Complex" });
 
             var firstComplex = (MyComplexObject)data["Complex"];
 
