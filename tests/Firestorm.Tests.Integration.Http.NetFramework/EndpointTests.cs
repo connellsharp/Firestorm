@@ -16,7 +16,9 @@ namespace Firestorm.Tests.Integration.Http.NetFramework
         [Fact]
         public async Task FieldSelectorManualNext()
         {
-            IRestEndpointContext endpointContext = new TestEndpointContext
+            IRestEndpointContext endpointContext = new TestEndpointContext();
+
+            var testQuery = new TestCollectionQuery
             {
                 SelectFields = new[] { "name" }
             };
@@ -24,7 +26,7 @@ namespace Firestorm.Tests.Integration.Http.NetFramework
             EngineRestCollection<Artist> artistsCollection = IntegratedRestDirectory.GetArtistCollection(endpointContext);
             IRestEndpoint endpoint = Endpoint.GetFromResource(endpointContext, artistsCollection);
             endpoint = endpoint.Next("123");
-            var response = (ItemBody)(await endpoint.GetAsync());
+            var response = (ItemBody)(await endpoint.GetAsync(testQuery));
             Assert.Equal(response.Item["name"], TestRepositories.ArtistName);
         }
     }

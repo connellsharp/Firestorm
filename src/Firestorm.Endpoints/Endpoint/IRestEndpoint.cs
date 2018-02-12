@@ -19,7 +19,7 @@ namespace Firestorm.Endpoints
         /// <summary>
         /// Performs a GET request.
         /// </summary>
-        Task<ResourceBody> GetAsync();
+        Task<ResourceBody> GetAsync(IRestCollectionQuery query);
 
         /// <summary>
         /// Performs an OPTIONS request.

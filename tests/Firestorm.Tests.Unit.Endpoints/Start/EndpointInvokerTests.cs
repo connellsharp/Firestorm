@@ -65,7 +65,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
                     Previous = hasPrevPath ? new PageInstruction { PageNumber = 1 } : null,
                 };
 
-                m.Setup(a => a.GetAsync()).ReturnsAsync(new CollectionBody(null, pageLinks));
+                m.Setup(a => a.GetAsync(null)).ReturnsAsync(new CollectionBody(null, pageLinks));
             });
 
             var readerMock = _fixture.FreezeMock<IHttpRequestReader>();

@@ -53,7 +53,7 @@ namespace Firestorm.Endpoints.Start
                 return;
             }
 
-            ResourceBody resourceBody = await _endpoint.GetAsync();
+            ResourceBody resourceBody = await _endpoint.GetAsync(_requestReader.GetQuery());
 
             _responseBuilder.AddResource(resourceBody);
         }

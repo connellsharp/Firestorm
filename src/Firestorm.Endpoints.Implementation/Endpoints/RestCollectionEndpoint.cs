@@ -40,9 +40,8 @@ namespace Firestorm.Endpoints
             }
         }
 
-        public async Task<ResourceBody> GetAsync()
+        public async Task<ResourceBody> GetAsync(IRestCollectionQuery query)
         {
-            IRestCollectionQuery query = Context.GetQuery();
             QueryValidationUtility.EnsureValidQuery(query);
 
             RestCollectionData collectionData = await Collection.QueryDataAsync(query);

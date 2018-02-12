@@ -36,6 +36,11 @@ namespace Firestorm.Owin
             return new OwinContentReader(_owinContext);
         }
 
+        public string GetQueryString()
+        {
+            return _owinContext.Request.QueryString.Value;
+        }
+
         public IContentAccepts GetAcceptHeaders()
         {
             return new OwinContentAccepts();

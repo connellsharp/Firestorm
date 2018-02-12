@@ -19,7 +19,7 @@ namespace Firestorm.Endpoints.Start
 
             _resourcePath = requestHandler.ResourcePath;
 
-            _reader = new RequestReader(requestHandler, _configuration.EndpointConfiguration.NamingConventionSwitcher);
+            _reader = new RequestReader(requestHandler, _configuration.EndpointConfiguration);
 
             var response = new Response(requestHandler.ResourcePath);
 

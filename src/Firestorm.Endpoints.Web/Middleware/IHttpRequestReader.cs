@@ -12,5 +12,7 @@ namespace Firestorm.Endpoints.Start
         IPreconditions GetPreconditions();
         
         IContentReader GetContentReader();
+
+        string GetQueryString();
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using Firestorm.Core;
 using Firestorm.Core.Web;
 using Firestorm.Core.Web.Options;
 using Firestorm.Endpoints.Pagination;
@@ -30,9 +29,8 @@ namespace Firestorm.Endpoints
         }
 
         /// <remarks>Similar body to <see cref="RestCollectionEndpoint.GetAsync"/></remarks>
-        public async Task<ResourceBody> GetAsync()
+        public async Task<ResourceBody> GetAsync(IRestCollectionQuery query)
         {
-            IRestCollectionQuery query = Context.GetQuery();
             QueryValidationUtility.EnsureValidQuery(query);
 
             RestDictionaryData dictionaryData = await Dictionary.QueryDataAsync(query);

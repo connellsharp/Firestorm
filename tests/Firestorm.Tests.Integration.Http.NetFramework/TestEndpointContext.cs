@@ -5,22 +5,21 @@ using Firestorm.Endpoints.Web;
 
 namespace Firestorm.Tests.Integration.Http.NetFramework
 {
-    public class TestEndpointContext : IRestEndpointContext, IRestCollectionQuery
+    public class TestEndpointContext : IRestEndpointContext
     {
         public void Dispose()
         {
         }
 
         public RestEndpointConfiguration Configuration { get; } = new DefaultRestEndpointConfiguration();
+
         public IRestUser User { get; }
 
-        public IRestCollectionQuery GetQuery()
-        {
-            return this;
-        }
-
         public event EventHandler OnDispose;
+    }
 
+    public class TestCollectionQuery : IRestCollectionQuery
+    {
         public IEnumerable<string> SelectFields { get; set; }
         public IEnumerable<FilterInstruction> FilterInstructions { get; }
         public IEnumerable<SortIntruction> SortInstructions { get; }

@@ -31,6 +31,11 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
             return RequestContentReader;
         }
 
+        public string GetQueryString()
+        {
+            return null;
+        }
+
         public IContentReader RequestContentReader { get; set; } = new EmptyReader();
 
         public Dictionary<string, string> ResponseHeaders { get; } = new Dictionary<string, string>();

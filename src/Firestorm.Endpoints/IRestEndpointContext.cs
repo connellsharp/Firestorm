@@ -20,12 +20,6 @@ namespace Firestorm.Endpoints
         IRestUser User { get; }
 
         /// <summary>
-        /// The collection query from the querystring.
-        /// </summary>
-        [CanBeNull]
-        IRestCollectionQuery GetQuery();
-
-        /// <summary>
         /// Event that is called when the endpoint is disposed.
         /// Can/should be used to attach handlers that dispose of dependencies too e.g. Stems.
         /// </summary>

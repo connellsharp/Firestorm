@@ -24,7 +24,7 @@ namespace Firestorm.Endpoints
             return Endpoint.GetFromResource(Context, resource);
         }
 
-        public async Task<ResourceBody> GetAsync()
+        public async Task<ResourceBody> GetAsync(IRestCollectionQuery query)
         {
             RestDirectoryInfo directory = await Directory.GetInfoAsync();
             return new DirectoryBody(directory);

@@ -13,5 +13,7 @@ namespace Firestorm.Endpoints.Start
         IPreconditions GetPreconditions();
 
         ResourceBody GetRequestBody();
+
+        IRestCollectionQuery GetQuery();
     }
 }

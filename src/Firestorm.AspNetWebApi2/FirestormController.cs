@@ -10,6 +10,7 @@ using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Start;
 using Firestorm.AspNetWebApi2.ErrorHandling;
 using Firestorm.Endpoints;
+using Firestorm.Endpoints.Query;
 using Firestorm.Endpoints.Web;
 
 namespace Firestorm.AspNetWebApi2
@@ -73,10 +74,15 @@ namespace Firestorm.AspNetWebApi2
             if (!endpoint.EvaluatePreconditions(GetPreconditions()))
                 return StatusCode(HttpStatusCode.NotModified);
 
-            ResourceBody resourceBody = await endpoint.GetAsync();
+            ResourceBody resourceBody = await endpoint.GetAsync(GetQuery());
 
             ResponseBuilder.AddResource(resourceBody);
             return Response.ResourceBody; // TODO headers?
+        }
+
+        private IRestCollectionQuery GetQuery()
+        {
+            return new QueryStringCollectionQuery(_config.EndpointConfiguration.QueryStringConfiguration, Request.RequestUri.Query);
         }
 
         [HttpOptions]

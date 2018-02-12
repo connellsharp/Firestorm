@@ -25,7 +25,7 @@ namespace Firestorm.Endpoints
             throw new InvalidOperationException("No further paths are allowed after a scalar property.");
         }
 
-        public async Task<ResourceBody> GetAsync()
+        public async Task<ResourceBody> GetAsync(IRestCollectionQuery query)
         {
             object value = await Scalar.GetAsync();
             return new ScalarBody(value);

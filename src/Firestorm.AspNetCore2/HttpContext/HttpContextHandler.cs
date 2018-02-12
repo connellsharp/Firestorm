@@ -33,6 +33,11 @@ namespace Firestorm.AspNetCore2.HttpContext
             return new HttpContentReader(_httpContext);
         }
 
+        public string GetQueryString()
+        {
+            return _httpContext.Request.QueryString.Value;
+        }
+
         public void SetResponseHeader(string key, string value)
         {
             _httpContext.Response.Headers[key] = value;
