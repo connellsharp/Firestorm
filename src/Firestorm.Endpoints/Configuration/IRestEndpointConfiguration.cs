@@ -14,7 +14,7 @@ namespace Firestorm.Endpoints
         /// <summary>
         /// The configuration used to build the <see cref="QueryStringCollectionQuery"/> from a requested query string.
         /// </summary>
-        public QueryStringConfiguration QueryStringConfiguration { get; set; }
+        public QueryStringConfiguration QueryStringConfiguration { get; set; } = new QueryStringConfiguration();
 
         /// <summary>
         /// Contains 3 sets of strategies (for collection, items and scalars) defining how endpoints behave to unsafe requests.
@@ -24,7 +24,7 @@ namespace Firestorm.Endpoints
         /// <summary>
         /// The options used to build the responses to return to the client.
         /// </summary>
-        public ResponseConfiguration ResponseConfiguration { get; set; }
+        public ResponseConfiguration ResponseConfiguration { get; set; } = new ResponseConfiguration();
         
         /// <summary>
         /// The object used to convert from .NET member naming conventions to client-side API conventions.

@@ -1,6 +1,4 @@
 using Firestorm.Endpoints.Naming;
-using Firestorm.Endpoints.Query;
-using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Strategies;
 
 namespace Firestorm.Endpoints.Web
@@ -12,9 +10,7 @@ namespace Firestorm.Endpoints.Web
     {
         public DefaultRestEndpointConfiguration()
         {
-            QueryStringConfiguration = new QueryStringConfiguration();
             RequestStrategies = new UnsafeRequestStrategySets();
-            ResponseConfiguration = new ResponseConfiguration();
             NamingConventionSwitcher = new DefaultNamingConventionSwitcher();
         }
     }

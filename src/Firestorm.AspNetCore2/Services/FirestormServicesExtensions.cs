@@ -21,7 +21,16 @@ namespace Firestorm.AspNetCore2
         }
 
         /// <summary>
-        /// Adds Firestorm services and configures them using the given action.
+        /// Adds Firestorm services and configures them using <see cref="IOptions{RestEndpointConfiguration}"/> and the given action.
+        /// </summary>
+        public static IFirestormServicesBuilder AddFirestorm(this IServiceCollection services, RestEndpointConfiguration endpointConfiguration)
+        {
+            return services.AddFirestorm()
+                .ConfigureEndpoints(endpointConfiguration);
+        }
+
+        /// <summary>
+        /// Adds Firestorm services and configures them using <see cref="IOptions{RestEndpointConfiguration}"/> and the given action.
         /// </summary>
         public static IFirestormServicesBuilder AddFirestorm(this IServiceCollection services, Action<RestEndpointConfiguration> configureEndpointsAction)
         {
@@ -30,11 +39,21 @@ namespace Firestorm.AspNetCore2
         }
 
         /// <summary>
-        /// Configures Firestorm using the given action.
+        /// Configures Firestorm using <see cref="IOptions{RestEndpointConfiguration}"/> with the given action.
+        /// </summary>
+        public static IFirestormServicesBuilder ConfigureEndpoints(this IFirestormServicesBuilder builder, RestEndpointConfiguration endpointConfiguration)
+        {
+            builder.Services.AddSingleton(endpointConfiguration);
+            return builder;
+        }
+
+        /// <summary>
+        /// Configures Firestorm using <see cref="IOptions{RestEndpointConfiguration}"/> with the given action.
         /// </summary>
         public static IFirestormServicesBuilder ConfigureEndpoints(this IFirestormServicesBuilder builder, Action<RestEndpointConfiguration> configureEndpointsAction)
         {
-            builder.Services.Configure(configureEndpointsAction);
+            builder.Services.Configure<DefaultRestEndpointConfiguration>(configureEndpointsAction);
+            builder.Services.AddSingleton<RestEndpointConfiguration>(sp => sp.GetService<IOptions<DefaultRestEndpointConfiguration>>().Value);
             return builder;
         }
 
@@ -67,7 +86,7 @@ namespace Firestorm.AspNetCore2
 
             builder.Services.AddSingleton<FirestormConfiguration>(sp => new FirestormConfiguration
             {
-                EndpointConfiguration = sp.GetService<IOptions<RestEndpointConfiguration>>().Value,
+                EndpointConfiguration = sp.GetService<RestEndpointConfiguration>() ?? new DefaultRestEndpointConfiguration(),
                 StartResourceFactory = sp.GetService<IStartResourceFactory>()
             });
 
