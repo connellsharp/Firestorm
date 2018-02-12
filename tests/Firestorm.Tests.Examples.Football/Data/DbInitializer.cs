@@ -45,8 +45,8 @@ namespace Firestorm.Tests.Examples.Football.Data
             {
                 dbContext.Teams.Find(1).Fixtures = new List<FixtureTeam>
                 {
-                    new FixtureTeam { IsHome = true, Fixture = new Fixture { Teams = new List<FixtureTeam> { new FixtureTeam { TeamId = 2 } } } },
-                    new FixtureTeam { IsHome = false, Fixture = new Fixture { Teams = new List<FixtureTeam> { new FixtureTeam { TeamId = 3 } } } },
+                    new FixtureTeam { IsHome = true, Fixture = new Fixture { Teams = new List<FixtureTeam> { new FixtureTeam { TeamId = 2 } } } }
+                    //new FixtureTeam { IsHome = false, Fixture = new Fixture { Teams = new List<FixtureTeam> { new FixtureTeam { TeamId = 3 } } } },
                 };
 
                 dbContext.SaveChanges();

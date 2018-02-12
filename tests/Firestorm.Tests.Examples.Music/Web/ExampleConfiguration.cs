@@ -20,7 +20,7 @@ namespace Firestorm.Tests.Examples.Music.Web
         {
             return new FirestormConfiguration
             {
-                EndpointConfiguration = new RestEndpointConfiguration
+                EndpointConfiguration = new DefaultRestEndpointConfiguration
                 {
                     ResponseConfiguration = new ResponseConfiguration
                     {

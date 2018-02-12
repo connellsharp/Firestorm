@@ -17,7 +17,7 @@ namespace Firestorm.Endpoints.Naming
         {
             // regex from http://stackoverflow.com/a/155487/369247
 
-            foreach (Match match in Regex.Matches(casedString, "([A-Z]+(?=$|[A-Z][a-z])|[A-Z][a-z]+)"))
+            foreach (Match match in Regex.Matches(casedString, "([A-Z]+(?=$|[A-Z][a-z0-9])|[A-Z][a-z0-9]+)"))
             {
                 yield return match.Groups[0].Value;
             }
@@ -43,6 +43,6 @@ namespace Firestorm.Endpoints.Naming
             return builder.ToString();
         }
 
-        internal static readonly string[] KnownTwoLetterAcronyms = new[] { "ID", "IO", "DB", "UI" };
+        internal static readonly string[] KnownTwoLetterAcronyms = new[] { "IO", "UI" };
     }
 }

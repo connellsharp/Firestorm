@@ -18,8 +18,6 @@ namespace Firestorm.Tests.Examples.Football.Web
         {
             apiBuilder.Item<League>(e =>
             {
-                e.RootName = "leagues";
-
                 e.Field(l => l.Name);
 
                 e.Identifier(l => l.Name.Replace(" ", string.Empty).ToLower());
@@ -37,30 +35,24 @@ namespace Firestorm.Tests.Examples.Football.Web
                             Points = (t.Wins * 3) + (t.Draws * 1),
                             Team = t.Team.Name
                         }))
-                    .HasName("teams")
                     .IsCollection(tp =>
                     {
-                        tp.Field(l => l.Points).HasName("points");
-                        tp.Field(l => l.Team).HasName("team");
+                        tp.Field(l => l.Points);
+                        tp.Field(l => l.Team);
                     });
             });
 
             apiBuilder.Item<Team>(e =>
             {
-                e.RootName = "teams";
-
-                e.Field(t => t.Name)
-                    .HasName("name");
+                e.Field(t => t.Name);
 
                 e.Field(t => t.FoundedYear)
-                    .HasName("founded");
+                    .HasName("Founded");
 
                 e.Field(t => t.Players)
-                    .HasName("players")
                     .IsCollection();
 
                 e.Field(t => t.Fixtures)
-                    .HasName("fixtures")
                     .IsCollection(ft =>
                     {
                         ft.Identifier(f => f.FixtureId);
@@ -74,21 +66,21 @@ namespace Firestorm.Tests.Examples.Football.Web
                                 if(vsTeam != null)
                                     vsTeam.IsHome = !v;
                             })
-                            .HasName("home");
+                            .HasName("Home");
 
                         ft.Field(f => f.Fixture.Teams.FirstOrDefault(tt => tt.TeamId != f.TeamId))
                             .AllowWrite((f, tt) => { f.Fixture.Teams.Add(tt); })
-                            .HasName("vs_team")
+                            .HasName("VsTeam")
                             .IsItem(t =>
                             {
                                 t.Field(tt => tt.TeamId)
-                                    .HasName("id")
+                                    .HasName("Id")
                                     .AllowLocate()
                                     .AllowWrite();
                             });
 
                         ft.Field(f => f.Fixture.Goals)
-                            .HasName("goals")
+                            .HasName("Goals")
                             .IsCollection(g => { });
 
                         ft.OnCreating(f =>
@@ -103,21 +95,16 @@ namespace Firestorm.Tests.Examples.Football.Web
 
             apiBuilder.Item<Player>(e =>
             {
-                e.RootName = "players";
-
                 e.Field(p => p.Name)
-                    .AllowWrite()
-                    .HasName("name");
+                    .AllowWrite();
 
                 e.Field(p => p.SquadNumber)
-                    .HasName("number");
+                    .HasName("Number");
 
                 e.Field(p => p.Goals)
-                    .HasName("goals")
-                    .IsCollection(g => { g.Field(h => h.Id).HasName("id"); });
+                    .IsCollection(g => { g.Field(h => h.Id); });
 
                 e.Field(p => p.Team)
-                    .HasName("team")
                     .IsItem();
             });
         }

@@ -61,7 +61,7 @@ namespace Firestorm.Tests.Examples.Football.Web
                 DbInitializer.Initialize(dbContext);
             }
 
-            app.UseFirestorm(new RestEndpointConfiguration
+            app.UseFirestorm(new DefaultRestEndpointConfiguration
             {
                 ResponseConfiguration =
                 {

@@ -59,7 +59,7 @@ namespace Firestorm.Endpoints.Naming
                 }
             }
 
-            return null;
+            return requestedFieldName;
         }
     }
 }
