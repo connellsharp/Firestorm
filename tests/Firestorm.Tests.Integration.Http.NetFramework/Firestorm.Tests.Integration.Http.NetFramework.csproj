@@ -7,15 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0-preview-20170628-02" />
-    <PackageReference Include="xunit" Version="2.2.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.3" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.3" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Owin" Version="5.2.3" />
     <PackageReference Include="Microsoft.Owin" version="3.1.0" />
     <PackageReference Include="Microsoft.Owin.Host.HttpListener" version="3.1.0" />
-    <PackageReference Include="Microsoft.Owin.Hosting" version="2.0.2" />
+    <PackageReference Include="Microsoft.Owin.Hosting" version="3.1.0" />
     <PackageReference Include="Newtonsoft.Json" version="10.0.3" />
     <PackageReference Include="Owin" version="1.0" />
   </ItemGroup>
