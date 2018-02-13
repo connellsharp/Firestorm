@@ -54,7 +54,7 @@ namespace Firestorm.Tests.Unit.Stems.Substems
         {
             var album = new Album();
             await _writer.SetValueAsync(album, new { id = 123 }, new VoidTransaction());
-            // TODO not implemented yet, but this could find the artist with that Id using the Locator
+            // TODO not implemented yet, but this could find the artist with that ID using the Locator
             Assert.Equal(123, album.Artist.ID);
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -58,10 +59,14 @@ namespace Firestorm.Stems.Fuel.Fields
 
         public IFieldWriter<TItem> GetWriter(string fieldName)
         {
-            if (!_implementations.WriterFactories.ContainsKey(fieldName))
-                return new ConfirmOnlyFieldWriter<TItem>(fieldName, GetReader(fieldName));
+            if (_implementations.WriterFactories.ContainsKey(fieldName))
+                return _implementations.WriterFactories[fieldName].Get(_stem);
 
-            return _implementations.WriterFactories[fieldName].Get(_stem);
+            IFieldReader<TItem> reader = GetReader(fieldName);
+            if (reader != null)
+                return new ConfirmOnlyFieldWriter<TItem>(fieldName, reader);
+
+            return null;
         }
 
         public IItemLocator<TItem> GetLocator(string fieldName)

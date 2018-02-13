@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Firestorm.Core.Web;
 using Firestorm.Endpoints.Formatting;
-using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Start;
 using Firestorm.Tests.Unit.Endpoints.Stubs;
 using Xunit;
@@ -162,14 +159,17 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
 
             public async Task<RestCollectionData> QueryDataAsync(IRestCollectionQuery query)
             {
-                if (query.FilterInstructions != null && query.FilterInstructions.Any())
-                    throw new NotImplementedException("Not implemented filtering in mock collection.");
+                if (query != null)
+                {
+                    if (query.FilterInstructions != null && query.FilterInstructions.Any())
+                        throw new NotImplementedException("Not implemented filtering in mock collection.");
 
-                if (query.SortInstructions != null && query.SortInstructions.Any())
-                    throw new NotImplementedException("Not implemented sorting in mock collection.");
+                    if (query.SortInstructions != null && query.SortInstructions.Any())
+                        throw new NotImplementedException("Not implemented sorting in mock collection.");
 
-                if (query.SelectFields != null && query.SelectFields.Any())
-                    throw new NotImplementedException("Not implemented selecting in mock collection.");
+                    if (query.SelectFields != null && query.SelectFields.Any())
+                        throw new NotImplementedException("Not implemented selecting in mock collection.");
+                }
 
                 IEnumerable<RestItemData> items = List.Select((s, i) => new RestItemData(new
                 {

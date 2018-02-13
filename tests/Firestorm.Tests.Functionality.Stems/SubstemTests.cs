@@ -78,7 +78,7 @@ namespace Firestorm.Tests.Functionality.Stems
         public async Task GetAlbums_FirstOneCorrectID()
         {
             RestCollectionData albums = await _restCollection.GetItem("123").GetCollection("Albums").QueryDataAsync(null);
-            Assert.Equal(albums.Items.First()["Id"], 1);
+            Assert.Equal(albums.Items.First()["ID"], 1);
         }
 
         [Fact]

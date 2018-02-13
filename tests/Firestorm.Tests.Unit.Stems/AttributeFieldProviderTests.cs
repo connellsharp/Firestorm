@@ -38,7 +38,7 @@ namespace Firestorm.Tests.Unit.Stems
         [Fact]
         public async Task SetReadOnlyField_Throws()
         {
-            IFieldWriter<Artist> writer = Provider.GetWriter("Id");
+            IFieldWriter<Artist> writer = Provider.GetWriter("ID");
             //Assert.IsNull(writer);
 
             await Assert.ThrowsAsync<InvalidOperationException>(async delegate

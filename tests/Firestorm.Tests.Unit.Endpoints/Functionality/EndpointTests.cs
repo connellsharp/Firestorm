@@ -32,7 +32,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Functionality
             var response = (CollectionBody)(await endpoint.GetAsync(null));
 
             RestItemData[] arr = response.Items.ToArray();
-            int firstId = (int)arr[0]["Id"];
+            int firstId = (int)arr[0]["ID"];
             Assert.True(firstId > 0);
         }
 
@@ -43,22 +43,22 @@ namespace Firestorm.Tests.Unit.Endpoints.Functionality
             ItemBody itemBody = (ItemBody)(await endpoint.GetAsync(null));
 
             RestItemData itemData = itemBody.Item;
-            Assert.Equal("Id", itemData.Keys.First());
+            Assert.Equal("ID", itemData.Keys.First());
 
-            int firstId = (int)itemData["Id"];
+            int firstId = (int)itemData["ID"];
             Assert.True(firstId > 0);
         }
 
         [Fact]
         public async Task DictionaryEndpoint()
         {
-            IRestEndpoint endpoint = StartEndpointUtility.GetEndpointFromPath(StartResourceFactory, EndpointContext, "artists/by_Id");
+            IRestEndpoint endpoint = StartEndpointUtility.GetEndpointFromPath(StartResourceFactory, EndpointContext, "artists/by_ID");
             DictionaryBody dictionaryBody = (DictionaryBody)(await endpoint.GetAsync(null));
 
             foreach (var pair in dictionaryBody.Items)
             {
                 var itemData = pair.Value as RestItemData;
-                int id = (int)itemData["Id"];
+                int id = (int)itemData["ID"];
 
                 Assert.True(id > 0);
                 Assert.Equal(pair.Key, id.ToString());

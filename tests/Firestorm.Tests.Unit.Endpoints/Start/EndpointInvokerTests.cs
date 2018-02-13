@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AutoFixture;
 using AutoFixture.AutoMoq;
@@ -65,10 +66,10 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
                     Previous = hasPrevPath ? new PageInstruction { PageNumber = 1 } : null,
                 };
 
-                m.Setup(a => a.GetAsync(null)).ReturnsAsync(new CollectionBody(null, pageLinks));
+                m.Setup(a => a.GetAsync(It.IsAny<IRestCollectionQuery>())).ReturnsAsync(new CollectionBody(null, pageLinks));
             });
 
-            var readerMock = _fixture.FreezeMock<IHttpRequestReader>();
+            var readerMock = _fixture.FreezeMock<IRequestReader>();
             readerMock.SetupGet(a => a.RequestMethod).Returns("GET");
 
             var response = new Response("test");
@@ -76,7 +77,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
 
             var invoker = _fixture.Create<EndpointInvoker>();
             await invoker.InvokeAsync();
-
+            
             Assert.Equal(shouldHaveLinkHeader, response.Headers.ContainsKey("Link"));
             //handlerMock.Verify(a => a.SetResponseHeader("Link", It.IsAny<string>()), Times.Exactly(shouldHaveLinkHeader ? 1 : 0));
         }

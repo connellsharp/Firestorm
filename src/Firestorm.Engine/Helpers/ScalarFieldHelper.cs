@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Firestorm.Data;
 using Firestorm.Engine.Fields;
+using JetBrains.Annotations;
 
 namespace Firestorm.Engine
 {
@@ -17,20 +18,22 @@ namespace Firestorm.Engine
         }
 
         /// <summary>
-        /// Loads a single scalar field value from a single <see cref="itemQuery"/>.
+        /// Loads a single scalar field reader from a single <see cref="itemQuery"/>.
         /// </summary>
-        public static async Task<object> LoadScalarValueAsync<TItem>(IFieldReader<TItem> value, IQueryableSingle<TItem> itemQuery, ForEachAsyncDelegate<object> forEachAsync)
+        public static async Task<object> LoadScalarValueAsync<TItem>([NotNull] IFieldReader<TItem> reader, IQueryableSingle<TItem> itemQuery, ForEachAsyncDelegate<object> forEachAsync)
         {
-            ParameterExpression itemPram = Expression.Parameter(typeof(TItem), "itm");
-            Expression selectExpression = value.GetSelectExpression(itemPram);
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
 
+            ParameterExpression itemPram = Expression.Parameter(typeof(TItem), "itm");
+            Expression selectExpression = reader.GetSelectExpression(itemPram);
+            
             IQueryable selectScalarOnlyQuery = ExpressionTreeHelpers.GetSelectByExpressionQuery(itemQuery, itemPram, selectExpression);
             object loadedValue = await ItemQueryHelper.SingleOrCreateAsync(selectScalarOnlyQuery, forEachAsync, () => throw new ParentItemNotFoundException());
 
-            if (value.Replacer != null)
+            if (reader.Replacer != null)
             {
-                await value.Replacer.LoadAsync(itemQuery);
-                return value.Replacer.GetReplacement(loadedValue);
+                await reader.Replacer.LoadAsync(itemQuery);
+                return reader.Replacer.GetReplacement(loadedValue);
             }
 
             return loadedValue;

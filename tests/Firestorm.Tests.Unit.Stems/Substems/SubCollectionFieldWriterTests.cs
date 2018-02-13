@@ -72,8 +72,8 @@ namespace Firestorm.Tests.Unit.Stems.Substems
 
             var albumsPostedObj = new[]
             {
-                new { id = 1, name = "First album" },
-                new { id = 2, name = "Last album" },
+                new { Id = 1, Name = "First album" },
+                new { Id = 2, Name = "Last album" },
             };
 
             await NameFieldWriter.SetValueAsync(artist, albumsPostedObj, new VoidTransaction());

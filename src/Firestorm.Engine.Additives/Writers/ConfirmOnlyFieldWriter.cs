@@ -1,7 +1,9 @@
 using System;
+using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using Firestorm.Data;
 using Firestorm.Engine.Fields;
+using JetBrains.Annotations;
 
 namespace Firestorm.Engine.Additives.Writers
 {
@@ -15,10 +17,10 @@ namespace Firestorm.Engine.Additives.Writers
         private readonly string _fieldName;
         private readonly IFieldReader<TItem> _fieldReader;
 
-        public ConfirmOnlyFieldWriter(string fieldName, IFieldReader<TItem> fieldReader)
+        public ConfirmOnlyFieldWriter([NotNull] string fieldName, [NotNull] IFieldReader<TItem> fieldReader)
         {
-            _fieldName = fieldName;
-            _fieldReader = fieldReader;
+            _fieldName = fieldName ?? throw new ArgumentNullException(nameof(fieldName));
+            _fieldReader = fieldReader ?? throw new ArgumentNullException(nameof(fieldReader));
         }
 
         public async Task SetValueAsync(IDeferredItem<TItem> item, object deserializedValue, IDataTransaction dataTransaction)
