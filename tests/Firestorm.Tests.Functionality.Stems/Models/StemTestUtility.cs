@@ -30,7 +30,7 @@ namespace Firestorm.Tests.Functionality.Stems.Models
         public static IRestCollection GetArtistsCollection<TStem>()
         {
             IRestDirectory directory = GetDirectoryFromRoots(typeof(ArtistsRoot<TStem>));
-            var restCollection = (IRestCollection)directory.GetChild("artists");
+            var restCollection = (IRestCollection)directory.GetChild("Artists");
             return restCollection;
         }
 

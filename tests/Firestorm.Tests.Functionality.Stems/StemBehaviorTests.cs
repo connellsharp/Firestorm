@@ -24,7 +24,7 @@ namespace Firestorm.Tests.Functionality.Stems
             };
             
             var directory = (IRestDirectory)stemStartResources.GetStartResource(endpointContext);
-            var collection = directory.GetChild("disposable");
+            var collection = directory.GetChild("Disposable");
 
             DisposableRoot.DisposeCalled = false;
             endpointContext.Dispose();
