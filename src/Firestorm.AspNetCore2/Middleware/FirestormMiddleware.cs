@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Firestorm.AspNetCore2.HttpContext;
-using Firestorm.Endpoints.Start;
+using Firestorm.Endpoints.Web;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;
 
