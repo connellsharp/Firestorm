@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Firestorm.Data
 {
-    public class PluralConventionPrimaryKeyFinder : IPrimaryKeyFinder
+    public class IdConventionPrimaryKeyFinder : IPrimaryKeyFinder
     {
         public PropertyInfo GetPrimaryKeyInfo(Type type)
         {

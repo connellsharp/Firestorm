@@ -20,6 +20,8 @@ namespace Firestorm.Endpoints
         public IRestEndpoint Next(string resourceName)
         {
             IRestResource resource = Directory.GetChild(resourceName);
+            if (resource == null)
+                return null;
 
             return Endpoint.GetFromResource(Context, resource);
         }

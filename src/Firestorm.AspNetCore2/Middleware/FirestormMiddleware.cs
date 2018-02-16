@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Firestorm.AspNetCore2.HttpContext;
 using Firestorm.Endpoints.Start;
 using JetBrains.Annotations;
@@ -17,7 +18,8 @@ namespace Firestorm.AspNetCore2
             _next = next;
             _configuration = configuration;
 
-            _configuration.StartResourceFactory.Initialize(); // TODO does this initialize every time?
+            // middlewares are singletons constructed during WebHostBuilder.Build(), we can initialize here
+            _configuration.StartResourceFactory.Initialize();
         }
 
         [UsedImplicitly]

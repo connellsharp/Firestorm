@@ -17,34 +17,33 @@ namespace Firestorm.Tests.Integration.Http.Base.Tests
         public async Task RootDirectory_Get_StatusOK()
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/");
-
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            ResponseAssert.Success(response);
         }
 
         [Fact]
         public async Task ArtistsCollection_Get_StatusOK()
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/artists");
-
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            ResponseAssert.Success(response);
         }
 
         [Fact]
         public async Task ArtistItem_Get_Deserialises()
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/artists/123");
-
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            ResponseAssert.Success(response);
 
             string json = await response.Content.ReadAsStringAsync();
             object obj = JsonConvert.DeserializeObject(json);
-
         }
 
         [Fact]
         public async Task ArtistNameScalar_Get_Correct()
         {
-            string responseStr = await HttpClient.GetStringAsync("/artists/123/name");
+            HttpResponseMessage response = await HttpClient.GetAsync("/artists/123/name");
+            ResponseAssert.Success(response);
+
+            string responseStr = await response.Content.ReadAsStringAsync();
             Assert.Equal("\"" + TestRepositories.ArtistName + "\"", responseStr);
         }
 
@@ -78,8 +77,8 @@ namespace Firestorm.Tests.Integration.Http.Base.Tests
         public async Task ArtistsCollection_GetWithFields_DeserialisesAndCorrect()
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/artists?fields=id,name");
-
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            
+            ResponseAssert.Success(response);
 
             string json = await response.Content.ReadAsStringAsync();
             dynamic obj = JsonConvert.DeserializeObject(json);

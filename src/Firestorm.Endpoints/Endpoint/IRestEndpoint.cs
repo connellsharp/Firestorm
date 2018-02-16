@@ -13,7 +13,9 @@ namespace Firestorm.Endpoints
     {
         /// <summary>
         /// Drills down into the next layer of the URL path.
+        /// Returns null if the endpoint does not exist.
         /// </summary>
+        [CanBeNull]
         IRestEndpoint Next(string path);
 
         /// <summary>

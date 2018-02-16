@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Firestorm.Endpoints.Naming;
-using Firestorm.Endpoints.Query;
 using JetBrains.Annotations;
 
-namespace Firestorm.Endpoints.Start
+namespace Firestorm.Endpoints.Formatting.Naming
 {
     /// <summary>
     /// Exposes and implements <see cref="IRestCollectionQuery"/> to wrap one instance and switch the names of the fields.
@@ -13,12 +11,12 @@ namespace Firestorm.Endpoints.Start
     /// <remarks>
     /// This pattern again. Not sure if I like it. But it works for this naming convention stuff.
     /// </remarks>
-    internal class NameSwitcherQuery : IRestCollectionQuery
+    public class NameSwitcherQuery : IRestCollectionQuery
     {
-        private readonly QueryStringCollectionQuery _underlyingQuery;
+        private readonly IRestCollectionQuery _underlyingQuery;
         private readonly INamingConventionSwitcher _switcher;
 
-        public NameSwitcherQuery([NotNull] QueryStringCollectionQuery underlyingQuery, [NotNull] INamingConventionSwitcher switcher)
+        public NameSwitcherQuery([NotNull] IRestCollectionQuery underlyingQuery, [NotNull] INamingConventionSwitcher switcher)
         {
             Debug.Assert(underlyingQuery != null);
             Debug.Assert(switcher != null);

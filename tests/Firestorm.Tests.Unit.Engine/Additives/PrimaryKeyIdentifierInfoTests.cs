@@ -9,7 +9,7 @@ namespace Firestorm.Tests.Unit.Engine.Additives
         [Fact]
         public void PluralConventionPrimaryKey_GetValue_CorrectForIDProperty()
         {
-            var info = new PrimaryKeyIdentifierInfo<Person>(new PluralConventionPrimaryKeyFinder());
+            var info = new PrimaryKeyIdentifierInfo<Person>(new IdConventionPrimaryKeyFinder());
 
             var person = new Person { ID = 1 };
             var value = info.GetValue(person);

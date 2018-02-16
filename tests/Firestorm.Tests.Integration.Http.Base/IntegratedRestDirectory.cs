@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Firestorm.Core;
 using Firestorm.Endpoints;
 using Firestorm.Engine;
 using Firestorm.Tests.Integration.Http.Base.Models;
@@ -10,6 +9,8 @@ namespace Firestorm.Tests.Integration.Http.Base
 {
     public class IntegratedRestDirectory : IRestDirectory
     {
+        private const string ArtistRootName = nameof(Artist) + "s";
+
         private readonly IRestEndpointContext _endpointContext;
 
         public IntegratedRestDirectory(IRestEndpointContext endpointContext)
@@ -21,7 +22,7 @@ namespace Firestorm.Tests.Integration.Http.Base
         {
             switch (startResourceName)
             {
-                case "artists":
+                case ArtistRootName:
                     return GetArtistCollection(_endpointContext);
 
                 default:
@@ -38,7 +39,7 @@ namespace Firestorm.Tests.Integration.Http.Base
         {
             return Task.FromResult(new RestDirectoryInfo(new List<RestResourceInfo>
             {
-                new RestResourceInfo("artists", ResourceType.Collection)
+                new RestResourceInfo(ArtistRootName, ResourceType.Collection)
             }));
         }
     }

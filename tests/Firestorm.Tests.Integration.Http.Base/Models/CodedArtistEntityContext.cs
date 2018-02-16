@@ -32,8 +32,8 @@ namespace Firestorm.Tests.Integration.Http.Base.Models
 
         private static IFieldProvider<Artist> StaticFieldProvider { get; } = new FieldDictionary<Artist>
         {
-            {"id", a => a.ID},
-            {"name", a => a.Name}
+            {"Id", a => a.ID},
+            {"Name", a => a.Name}
         };
 
         public IAuthorizationChecker<Artist> AuthorizationChecker { get; }

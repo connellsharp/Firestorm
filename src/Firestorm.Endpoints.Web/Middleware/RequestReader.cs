@@ -1,5 +1,6 @@
 ﻿using Firestorm.Core.Web;
 using Firestorm.Endpoints.Formatting;
+using Firestorm.Endpoints.Formatting.Naming;
 using Firestorm.Endpoints.Preconditions;
 using Firestorm.Endpoints.Query;
 
