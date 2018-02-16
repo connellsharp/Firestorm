@@ -43,8 +43,8 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
             var response = new Response("test");
             _fixture.Inject(new ResponseBuilder(response, new PaginationHeadersResponseModifier()));
 
-            var invoker = _fixture.Create<EndpointInvoker>();
-            await invoker.InvokeAsync();
+            var invoker = _fixture.Create<EndpointExecutor>();
+            await invoker.ExecuteAsync();
             
             Assert.Equal(expectedStatusCode, response.StatusCode);
             //handlerMock.Verify(a => a.SetStatusCode(expectedStatusCode));
@@ -76,8 +76,8 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
             var response = new Response("test");
             _fixture.Inject(new ResponseBuilder(response, new PaginationHeadersResponseModifier()));
 
-            var invoker = _fixture.Create<EndpointInvoker>();
-            await invoker.InvokeAsync();
+            var invoker = _fixture.Create<EndpointExecutor>();
+            await invoker.ExecuteAsync();
             
             Assert.Equal(shouldHaveLinkHeader, response.Headers.ContainsKey("Link"));
             //handlerMock.Verify(a => a.SetResponseHeader("Link", It.IsAny<string>()), Times.Exactly(shouldHaveLinkHeader ? 1 : 0));

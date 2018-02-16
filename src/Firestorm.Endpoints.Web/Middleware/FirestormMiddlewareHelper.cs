@@ -29,7 +29,7 @@ namespace Firestorm.Endpoints.Web
         }
 
         /// <summary>
-        /// Finds the endpoint and invokes the request onto it.
+        /// Finds the endpoint and executes the request onto it.
         /// Handles errors and disposes of the endpoint when completed.
         /// </summary>
         public async Task InvokeAsync(IRestEndpointContext endpointContext)
@@ -38,8 +38,8 @@ namespace Firestorm.Endpoints.Web
             {
                 IRestEndpoint endpoint = GetEndpoint(endpointContext);
 
-                var invoker = new EndpointInvoker(endpoint, _reader, _builder);
-                await invoker.InvokeAsync();
+                var invoker = new EndpointExecutor(endpoint, _reader, _builder);
+                await invoker.ExecuteAsync();
 
                 await _writer.WriteAsync();
             }

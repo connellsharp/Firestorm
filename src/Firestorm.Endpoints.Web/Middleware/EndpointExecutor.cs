@@ -8,36 +8,37 @@ using Firestorm.Endpoints.Responses;
 namespace Firestorm.Endpoints.Web
 {
     /// <summary>
-    /// Invokes the request from the given <see cref="IHttpRequestHandler"/> onto the given <see cref="IRestEndpoint"/> and builds the response using the <see cref="ResponseBuilder"/>.
+    /// Executes the request from the given <see cref="IHttpRequestHandler"/> onto the given <see cref="IRestEndpoint"/>
+    /// and builds the response using the <see cref="ResponseBuilder"/>.
     /// </summary>
-    internal class EndpointInvoker
+    internal class EndpointExecutor
     {
         private readonly IRestEndpoint _endpoint;
         private readonly IRequestReader _requestReader;
         private readonly ResponseBuilder _responseBuilder;
 
-        public EndpointInvoker(IRestEndpoint endpoint, IRequestReader requestReader, ResponseBuilder responseBuilder)
+        public EndpointExecutor(IRestEndpoint endpoint, IRequestReader requestReader, ResponseBuilder responseBuilder)
         {
             _endpoint = endpoint;
             _requestReader = requestReader;
             _responseBuilder = responseBuilder;
         }
 
-        public Task InvokeAsync()
+        public Task ExecuteAsync()
         {
             switch (_requestReader.RequestMethod)
             {
                 case "GET":
-                    return InvokeGetAsync();
+                    return ExecuteGetAsync();
 
                 case "OPTIONS":
-                    return InvokeOptionsAsync();
+                    return ExecuteOptionsAsync();
 
                 case "POST":
                 case "PUT":
                 case "PATCH":
                 case "DELETE":
-                    return InvokeUnsafeAsync();
+                    return ExecuteUnsafeAsync();
 
                 default:
                     _responseBuilder.SetStatusCode(HttpStatusCode.MethodNotAllowed);
@@ -45,7 +46,7 @@ namespace Firestorm.Endpoints.Web
             }
         }
 
-        private async Task InvokeGetAsync()
+        private async Task ExecuteGetAsync()
         {
             if (!_endpoint.EvaluatePreconditions(_requestReader.GetPreconditions()))
             {
@@ -58,14 +59,14 @@ namespace Firestorm.Endpoints.Web
             _responseBuilder.AddResource(resourceBody);
         }
 
-        private async Task InvokeOptionsAsync()
+        private async Task ExecuteOptionsAsync()
         {
             Options options = await _endpoint.OptionsAsync();
 
             _responseBuilder.AddOptions(options);
         }
 
-        private async Task InvokeUnsafeAsync()
+        private async Task ExecuteUnsafeAsync()
         {
             if (!_endpoint.EvaluatePreconditions(_requestReader.GetPreconditions()))
             {
