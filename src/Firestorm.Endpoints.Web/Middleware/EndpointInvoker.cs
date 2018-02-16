@@ -5,7 +5,7 @@ using Firestorm.Core.Web;
 using Firestorm.Core.Web.Options;
 using Firestorm.Endpoints.Responses;
 
-namespace Firestorm.Endpoints.Start
+namespace Firestorm.Endpoints.Web
 {
     /// <summary>
     /// Invokes the request from the given <see cref="IHttpRequestHandler"/> onto the given <see cref="IRestEndpoint"/> and builds the response using the <see cref="ResponseBuilder"/>.

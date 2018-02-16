@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Start;
+using Firestorm.Endpoints.Web;
 using JetBrains.Annotations;
 using Microsoft.Owin;
 

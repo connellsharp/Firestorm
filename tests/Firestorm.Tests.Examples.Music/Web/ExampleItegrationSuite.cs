@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using Firestorm.Endpoints.Start;
+using Firestorm.Endpoints.Web;
 using Firestorm.Owin;
 using Firestorm.Tests.Integration.Http.Base;
 using Microsoft.Owin.Hosting;

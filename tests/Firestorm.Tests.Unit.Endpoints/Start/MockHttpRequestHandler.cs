@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Firestorm.Endpoints.Formatting;
 using Firestorm.Endpoints.Preconditions;
 using Firestorm.Endpoints.Start;
+using Firestorm.Endpoints.Web;
 
 namespace Firestorm.Tests.Unit.Endpoints.Start
 {

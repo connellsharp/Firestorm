@@ -5,6 +5,7 @@ using Firestorm.Endpoints.Formatting.Json;
 using Firestorm.Endpoints.Formatting.Xml;
 using Firestorm.Endpoints.Start;
 using Firestorm.AspNetWebApi2.ErrorHandling;
+using Firestorm.Endpoints.Web;
 
 namespace Firestorm.AspNetWebApi2
 {

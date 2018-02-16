@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Web.Http.Controllers;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Query;
+using Firestorm.Endpoints.Web.Defaults;
 
 namespace Firestorm.AspNetWebApi2
 {

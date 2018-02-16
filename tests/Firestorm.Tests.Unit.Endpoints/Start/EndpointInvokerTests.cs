@@ -7,6 +7,7 @@ using Firestorm.Core.Web;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Start;
+using Firestorm.Endpoints.Web;
 using Moq;
 using Xunit;
 

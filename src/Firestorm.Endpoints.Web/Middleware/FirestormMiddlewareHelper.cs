@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Firestorm.Endpoints.Responses;
-using Firestorm.Endpoints.Web;
 
-namespace Firestorm.Endpoints.Start
+namespace Firestorm.Endpoints.Web
 {
     public class FirestormMiddlewareHelper
     {

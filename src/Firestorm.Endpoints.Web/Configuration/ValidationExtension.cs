@@ -1,6 +1,6 @@
 using JetBrains.Annotations;
 
-namespace Firestorm.Endpoints.Start
+namespace Firestorm.Endpoints.Web
 {
     public static class ValidationExtension
     {

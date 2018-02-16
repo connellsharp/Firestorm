@@ -1,4 +1,4 @@
-namespace Firestorm.Endpoints.Start
+namespace Firestorm.Endpoints.Web
 {
     public interface IHttpRequestHandler : IHttpRequestResponder, IHttpRequestReader
     {

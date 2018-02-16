@@ -4,7 +4,7 @@ using Firestorm.Endpoints.Formatting.Naming;
 using Firestorm.Endpoints.Preconditions;
 using Firestorm.Endpoints.Query;
 
-namespace Firestorm.Endpoints.Start
+namespace Firestorm.Endpoints.Web
 {
     internal class RequestReader : IRequestReader
     {

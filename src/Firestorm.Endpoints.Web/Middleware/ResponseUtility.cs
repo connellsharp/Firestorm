@@ -1,6 +1,6 @@
 ﻿using Firestorm.Endpoints.Responses;
 
-namespace Firestorm.Endpoints.Start
+namespace Firestorm.Endpoints.Web
 {
     public static class ResponseUtility
     {

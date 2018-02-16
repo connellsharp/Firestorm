@@ -4,6 +4,7 @@ using Firestorm.Core.Web;
 using Firestorm.Endpoints.Formatting;
 using Firestorm.Endpoints.Preconditions;
 using Firestorm.Endpoints.Start;
+using Firestorm.Endpoints.Web;
 using Microsoft.Owin;
 
 namespace Firestorm.Owin

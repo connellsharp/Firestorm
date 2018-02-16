@@ -1,6 +1,6 @@
-using Firestorm.Endpoints.Web;
+using Firestorm.Endpoints.Start;
 
-namespace Firestorm.Endpoints.Start
+namespace Firestorm.Endpoints.Web
 {
     /// <summary>
     /// The services and options required to setup a Firestorm REST API server.
