@@ -25,21 +25,21 @@ namespace Firestorm.Tests.Examples.Music.Basics
         [DataSourceRoot]
         public class ArtistsStem : Stem<Artist>
         {
-            [Identifier(Name = "id")]
+            [Identifier]
             [Get(Display.Nested)]
             public static Expression<Func<Artist, int>> ID
             {
                 get { return a => a.ArtistID; }
             }
 
-            [Identifier(Name = "name")]
+            [Identifier]
             [Get]
             public static Expression<Func<Artist, string>> Name
             {
                 get { return a => a.Name; }
             }
 
-            [Identifier(Exactly = "me")]
+            [Identifier(Exactly = "Me")]
             public Artist GetExactArtist()
             {
                 return new Artist { Name = "My artist" };

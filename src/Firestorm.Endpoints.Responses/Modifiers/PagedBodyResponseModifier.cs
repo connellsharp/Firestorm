@@ -10,7 +10,7 @@ namespace Firestorm.Endpoints.Responses
         {
             if (resourceBody is IPagedResourceBody pagedResource)
             {
-                response.ExtraBody["page"] = pagedResource.PageLinks;
+                response.ExtraBody["Page"] = pagedResource.PageLinks;
             }
         }
 

@@ -7,27 +7,29 @@ namespace Firestorm.Endpoints.Responses
 {
     public class SuccessBooleanResponseModifier : IResponseModifier
     {
+        private const string SuccessKey = "Success";
+
         public bool WrapResourceObject { get; set; }
 
         public void AddResource(Response response, ResourceBody resourceBody)
         {
             if (WrapResourceObject)
-                response.ExtraBody["success"] = true;
+                response.ExtraBody[SuccessKey] = true;
         }
 
         public void AddAcknowledgment(Response response, Acknowledgment acknowledgment)
         {
-            response.ExtraBody["success"] = true;
+            response.ExtraBody[SuccessKey] = true;
 
             if (acknowledgment is CreatedItemAcknowledgment createdItemAcknowledgment)
             {
-                response.ExtraBody["identifier"] = createdItemAcknowledgment.NewIdentifier;
+                response.ExtraBody["Identifier"] = createdItemAcknowledgment.NewIdentifier; // TODO Identifier name?
             }
         }
 
         public void AddError(Response response, ErrorInfo error)
         {
-            response.ExtraBody["success"] = false;
+            response.ExtraBody[SuccessKey] = false;
         }
 
         public void AddMultiFeedback(Response response, IEnumerable<Feedback> feedbackItems)

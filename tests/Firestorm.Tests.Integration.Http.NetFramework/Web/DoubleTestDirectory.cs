@@ -21,11 +21,11 @@ namespace Firestorm.Tests.Integration.Http.NetFramework.Web
         {
             switch (startResourceName)
             {
-                case "artistcore":
+                case "ArtistCore":
                     return IntegratedRestDirectory.GetArtistCollection(_endpointContext);
 
-                case "artists":
-                    return _selfRestClient.RequestCollection("artistcore");
+                case "Artists":
+                    return _selfRestClient.RequestCollection("ArtistCore");
 
                 default:
                     return null;
@@ -36,7 +36,7 @@ namespace Firestorm.Tests.Integration.Http.NetFramework.Web
         {
             return Task.FromResult(new RestDirectoryInfo(new List<RestResourceInfo>
             {
-                new RestResourceInfo("artists", ResourceType.Collection)
+                new RestResourceInfo("Artists", ResourceType.Collection)
             }));
         }
     }
