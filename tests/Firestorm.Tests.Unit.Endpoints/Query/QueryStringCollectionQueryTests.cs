@@ -12,9 +12,9 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         {
             var query = new QueryStringCollectionQuery(new QueryStringConfiguration(), "fields=id,test,foo");
 
-            Assert.True(query.SelectFields.Contains("id"));
-            Assert.True(query.SelectFields.Contains("test"));
-            Assert.True(query.SelectFields.Contains("foo"));
+            Assert.Contains("id", query.SelectFields);
+            Assert.Contains("test", query.SelectFields);
+            Assert.Contains("foo", query.SelectFields);
         }
 
         [Fact]
@@ -22,9 +22,9 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         {
             var query = new QueryStringCollectionQuery(new QueryStringConfiguration(), "?fields=id,test,foo");
 
-            Assert.True(query.SelectFields.Contains("id"));
-            Assert.True(query.SelectFields.Contains("test"));
-            Assert.True(query.SelectFields.Contains("foo"));
+            Assert.Contains("id", query.SelectFields);
+            Assert.Contains("test", query.SelectFields);
+            Assert.Contains("foo", query.SelectFields);
         }
 
         [Fact]
@@ -35,8 +35,8 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
                 { "where", "age>25" },
                 });
             
-            Assert.True(query.SelectFields.Contains("test"));
-            Assert.True(query.FilterInstructions.Any(fi => fi.FieldName == "age" && fi.Operator == FilterComparisonOperator.GreaterThan && fi.ValueString == "25"));
+            Assert.Contains("test", query.SelectFields);
+            Assert.Contains(query.FilterInstructions, fi => fi.FieldName == "age" && fi.Operator == FilterComparisonOperator.GreaterThan && fi.ValueString == "25");
         }
 
         [Fact]
@@ -44,8 +44,8 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         {
             var query = new QueryStringCollectionQuery(new QueryStringConfiguration(), "where=age>=25&where=age<45");
 
-            Assert.True(query.FilterInstructions.Any(fi => fi.FieldName == "age" && fi.Operator == FilterComparisonOperator.GreaterThanOrEquals && fi.ValueString == "25"));
-            Assert.True(query.FilterInstructions.Any(fi => fi.FieldName == "age" && fi.Operator == FilterComparisonOperator.LessThan && fi.ValueString == "45"));
+            Assert.Contains(query.FilterInstructions, fi => fi.FieldName == "age" && fi.Operator == FilterComparisonOperator.GreaterThanOrEquals && fi.ValueString == "25");
+            Assert.Contains(query.FilterInstructions, fi => fi.FieldName == "age" && fi.Operator == FilterComparisonOperator.LessThan && fi.ValueString == "45");
         }
 
         [Fact]
@@ -56,8 +56,8 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
                 SpecialFilterKeysEnabled = true
             }, "age>=25&age<45");
 
-            Assert.True(query.FilterInstructions.Any(fi => fi.FieldName == "age" && fi.Operator == FilterComparisonOperator.GreaterThanOrEquals && fi.ValueString == "25"));
-            Assert.True(query.FilterInstructions.Any(fi => fi.FieldName == "age" && fi.Operator == FilterComparisonOperator.LessThan && fi.ValueString == "45"));
+            Assert.Contains(query.FilterInstructions, fi => fi.FieldName == "age" && fi.Operator == FilterComparisonOperator.GreaterThanOrEquals && fi.ValueString == "25");
+            Assert.Contains(query.FilterInstructions, fi => fi.FieldName == "age" && fi.Operator == FilterComparisonOperator.LessThan && fi.ValueString == "45");
         }
 
         [Fact]
@@ -76,8 +76,8 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         {
             var query = new QueryStringCollectionQuery(new QueryStringConfiguration(), "sort=someDate+asc,another+desc");
 
-            Assert.True(query.SortInstructions.Any(si => si.FieldName == "someDate" && si.Direction == SortDirection.Ascending));
-            Assert.True(query.SortInstructions.Any(si => si.FieldName == "another" && si.Direction == SortDirection.Descending));
+            Assert.Contains(query.SortInstructions, si => si.FieldName == "someDate" && si.Direction == SortDirection.Ascending);
+            Assert.Contains(query.SortInstructions, si => si.FieldName == "another" && si.Direction == SortDirection.Descending);
         }
 
         [Fact]
@@ -85,8 +85,8 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         {
             var query = new QueryStringCollectionQuery(new QueryStringConfiguration(), "sort=someDate+asc&sort=another+desc");
 
-            Assert.True(query.SortInstructions.Any(si => si.FieldName == "someDate" && si.Direction == SortDirection.Ascending));
-            Assert.True(query.SortInstructions.Any(si => si.FieldName == "another" && si.Direction == SortDirection.Descending));
+            Assert.Contains(query.SortInstructions, si => si.FieldName == "someDate" && si.Direction == SortDirection.Ascending);
+            Assert.Contains(query.SortInstructions, si => si.FieldName == "another" && si.Direction == SortDirection.Descending);
         }
 
         [Fact]
@@ -94,7 +94,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Query
         {
             var query = new QueryStringCollectionQuery(new QueryStringConfiguration(), "sort=column");
 
-            Assert.True(query.SortInstructions.Any(si => si.FieldName == "column" && si.Direction == SortDirection.Unspecified));
+            Assert.Contains(query.SortInstructions, si => si.FieldName == "column" && si.Direction == SortDirection.Unspecified);
         }
     }
 }
