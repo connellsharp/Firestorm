@@ -7,7 +7,7 @@ namespace Firestorm.Endpoints.Responses
 {
     public class SuccessBooleanResponseModifier : IResponseModifier
     {
-        private const string SuccessKey = "Success";
+        internal const string SuccessKey = "Success";
 
         public bool WrapResourceObject { get; set; }
 

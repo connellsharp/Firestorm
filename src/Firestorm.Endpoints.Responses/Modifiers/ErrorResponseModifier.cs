@@ -16,8 +16,8 @@ namespace Firestorm.Endpoints.Responses
 
         public void AddError(Response response, ErrorInfo error)
         {
-            response.ExtraBody.Add("error", error.ErrorType);
-            response.ExtraBody.Add("error_description", error.ErrorDescription);
+            response.ExtraBody.Add("Error", error.ErrorType);
+            response.ExtraBody.Add("ErrorDescription", error.ErrorDescription);
         }
 
         public void AddMultiFeedback(Response response, IEnumerable<Feedback> feedbackItems)

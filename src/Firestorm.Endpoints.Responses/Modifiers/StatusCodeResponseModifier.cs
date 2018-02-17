@@ -6,7 +6,7 @@ namespace Firestorm.Endpoints.Responses
 {
     public class StatusCodeResponseModifier : IResponseModifier
     {
-        private const string StatusKey = "Status";
+        internal const string StatusKey = "Status";
 
         public bool WrapResourceObject { get; set; }
 

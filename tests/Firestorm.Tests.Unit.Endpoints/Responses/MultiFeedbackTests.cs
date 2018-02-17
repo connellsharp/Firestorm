@@ -65,7 +65,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
 
             var enumerable = Assert.IsAssignableFrom<IEnumerable>(response.ResourceBody);
             var itemData = enumerable.Cast<RestItemData>().Single();
-            Assert.Equal("ok", itemData["status"]);
+            Assert.Equal("ok", itemData[StatusCodeResponseModifier.StatusKey]);
         }
 
         [Fact]
@@ -81,7 +81,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
 
             var enumerable = Assert.IsAssignableFrom<IEnumerable>(response.ResourceBody);
             var itemData = enumerable.Cast<RestItemData>().Single();
-            Assert.Equal(true, itemData["success"]);
+            Assert.Equal(true, itemData[SuccessBooleanResponseModifier.SuccessKey]);
         }
 
         [Fact]
@@ -97,7 +97,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
 
             var enumerable = Assert.IsAssignableFrom<IEnumerable>(response.ResourceBody);
             var itemData = enumerable.Cast<RestItemData>().Single();
-            Assert.Equal("internal_server_error", itemData["status"]);
+            Assert.Equal("internal_server_error", itemData[StatusCodeResponseModifier.StatusKey]);
         }
 
         [Fact]
@@ -113,7 +113,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
 
             var enumerable = Assert.IsAssignableFrom<IEnumerable>(response.ResourceBody);
             var itemData = enumerable.Cast<RestItemData>().Single();
-            Assert.Equal(false, itemData["success"]);
+            Assert.Equal(false, itemData[SuccessBooleanResponseModifier.SuccessKey]);
         }
 
         [Fact]

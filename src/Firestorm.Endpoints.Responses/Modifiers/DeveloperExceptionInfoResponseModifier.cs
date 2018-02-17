@@ -19,8 +19,8 @@ namespace Firestorm.Endpoints.Responses
         {
             if (error is ExceptionErrorInfo exceptionInfo)
             {
-                response.ExtraBody.Add("inner_descriptions", exceptionInfo.InnerDescriptions);
-                response.ExtraBody.Add("stack_trace", exceptionInfo.StackTrace.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
+                response.ExtraBody.Add("InnerDescriptions", exceptionInfo.InnerDescriptions);
+                response.ExtraBody.Add("StackTrace", exceptionInfo.StackTrace.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
             }
         }
 
