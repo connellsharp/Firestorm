@@ -1,15 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net45</TargetFramework>
+    <TargetFramework>net452</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" version="11.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi" version="5.2.3" />
-    <PackageReference Include="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
-    <PackageReference Include="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
-    <PackageReference Include="Microsoft.AspNet.WebApi.WebHost" version="5.2.3" />
     <PackageReference Include="Newtonsoft.Json" version="10.0.3" />
   </ItemGroup>
 
