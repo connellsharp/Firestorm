@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
@@ -32,7 +33,7 @@ namespace Firestorm.Tests.Integration.Http.Base
 
             if (errorObj.DeveloperInfo != null)
             {
-                foreach (var info in errorObj.DeveloperInfo)
+                foreach (var info in errorObj.DeveloperInfo.Reverse())
                 {
                     builder.AppendLine();
                     builder.AppendFormat("Message: {0}\r\n", info.Message);
