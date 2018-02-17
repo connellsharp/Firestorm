@@ -9,7 +9,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Naming
         [Fact]
         public void PascalToSnakeCase()
         {
-            var switcher = new NamingConventionSwitcher(new PascalCaseConvention(), new SnakeCaseConvention());
+            var switcher = new NamingConventionSwitcher(new PascalCaseConvention(null), new SnakeCaseConvention());
             string switched = switcher.ConvertCodedToDefault("ThisIsPascalCase");
             Assert.Equal("this_is_pascal_case", switched);
         }
@@ -17,7 +17,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Naming
         [Fact]
         public void PascalToSnakeCaseWithAcronym()
         {
-            var switcher = new NamingConventionSwitcher(new PascalCaseConvention(), new SnakeCaseConvention());
+            var switcher = new NamingConventionSwitcher(new PascalCaseConvention(null), new SnakeCaseConvention());
             string switched = switcher.ConvertCodedToDefault("WhatAboutHTTPListener");
             Assert.Equal("what_about_http_listener", switched);
         }
@@ -25,7 +25,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Naming
         [Fact]
         public void SnakeToPascalCase()
         {
-            var switcher = new NamingConventionSwitcher(new SnakeCaseConvention(), new PascalCaseConvention());
+            var switcher = new NamingConventionSwitcher(new SnakeCaseConvention(), new PascalCaseConvention(null));
             string switched = switcher.ConvertCodedToDefault("snake_case_start_yeah");
             Assert.Equal("SnakeCaseStartYeah", switched);
         }
@@ -33,7 +33,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Naming
         [Fact]
         public void CamelToKebabCase()
         {
-            var switcher = new NamingConventionSwitcher(new CamelCaseConvention(), new KebabCaseConvention());
+            var switcher = new NamingConventionSwitcher(new CamelCaseConvention(null), new KebabCaseConvention());
             string switched = switcher.ConvertCodedToDefault("camelCaseThingHere");
             Assert.Equal("camel-case-thing-here", switched);
         }
@@ -41,7 +41,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Naming
         [Fact]
         public void KebabToCamelCase()
         {
-            var switcher = new NamingConventionSwitcher(new KebabCaseConvention(), new CamelCaseConvention());
+            var switcher = new NamingConventionSwitcher(new KebabCaseConvention(), new CamelCaseConvention(null));
             string switched = switcher.ConvertCodedToDefault("kebab-case-makes-me-laugh");
             Assert.Equal("kebabCaseMakesMeLaugh", switched);
         }
@@ -49,7 +49,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Naming
         [Fact]
         public void KebabWithTwoLetterAcronymToCamelCase()
         {
-            var switcher = new NamingConventionSwitcher(new KebabCaseConvention(), new CamelCaseConvention());
+            var switcher = new NamingConventionSwitcher(new KebabCaseConvention(), new CamelCaseConvention(new []{ "UI" }));
             string switched = switcher.ConvertCodedToDefault("what-about-ui-acronym");
             Assert.Equal("whatAboutUIAcronym", switched);
         }
@@ -57,11 +57,11 @@ namespace Firestorm.Tests.Unit.Endpoints.Naming
         [Fact]
         public void AllAllowedCases()
         {
-            var switcher = new NamingConventionSwitcher(new PascalCaseConvention(), new SnakeCaseConvention(), new List<ICaseConvention>()
+            var switcher = new NamingConventionSwitcher(new PascalCaseConvention(null), new SnakeCaseConvention(), new List<ICaseConvention>()
             {
-                new PascalCaseConvention(),
+                new PascalCaseConvention(null),
                 new SnakeCaseConvention(),
-                new CamelCaseConvention(),
+                new CamelCaseConvention(null),
                 new KebabCaseConvention()
             });
 
