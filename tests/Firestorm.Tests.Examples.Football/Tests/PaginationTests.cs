@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Firestorm.Tests.Integration.Http.Base;
 using Newtonsoft.Json;
 using Xunit;
 
@@ -51,8 +52,8 @@ namespace Firestorm.Tests.Examples.Football.Tests
             HttpClient client = _fixture.GetClient(tech);
 
             HttpResponseMessage response = await client.GetAsync("/players?size=1&fields=name");
-
-            Assert.Equal(200, (int)response.StatusCode);
+            
+            ResponseAssert.Success(response);
 
             IEnumerable<string> linkHeaders = response.Headers.GetValues("Link");
             Assert.Equal(1, linkHeaders.Count());

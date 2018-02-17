@@ -6,6 +6,7 @@ using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Tests.Examples.Music.Data.Models;
 using Firestorm.Tests.Examples.Music.Web;
+using Firestorm.Tests.Integration.Http.Base;
 using Xunit;
 
 namespace Firestorm.Tests.Examples.Music.Basics
@@ -46,7 +47,7 @@ namespace Firestorm.Tests.Examples.Music.Basics
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/tracks?fields=id,title,complex");
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            ResponseAssert.Success(response);
         }
 
         [Fact]
@@ -54,7 +55,7 @@ namespace Firestorm.Tests.Examples.Music.Basics
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/tracks/1?fields=id,title,complex");
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            ResponseAssert.Success(response);
         }
 
         [Fact]
@@ -62,7 +63,7 @@ namespace Firestorm.Tests.Examples.Music.Basics
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/tracks/1/complex");
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            ResponseAssert.Success(response);
         }
     }
 }

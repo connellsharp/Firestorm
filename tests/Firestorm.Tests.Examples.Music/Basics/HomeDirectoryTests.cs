@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Firestorm.Tests.Examples.Music.Web;
+using Firestorm.Tests.Integration.Http.Base;
 using Newtonsoft.Json;
 using Xunit;
 
@@ -20,7 +21,7 @@ namespace Firestorm.Tests.Examples.Music.Basics
         public async Task HomeDirectory_Get_StatusOK()
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/");
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            ResponseAssert.Success(response);
         }
 
         [Fact]

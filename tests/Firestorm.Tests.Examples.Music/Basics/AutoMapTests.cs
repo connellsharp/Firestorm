@@ -7,6 +7,7 @@ using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Tests.Examples.Music.Data.Models;
 using Firestorm.Tests.Examples.Music.Web;
+using Firestorm.Tests.Integration.Http.Base;
 using Newtonsoft.Json;
 using Xunit;
 
@@ -39,7 +40,7 @@ namespace Firestorm.Tests.Examples.Music.Basics
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/artists");
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            ResponseAssert.Success(response);
         }
 
         [Fact]
@@ -47,7 +48,7 @@ namespace Firestorm.Tests.Examples.Music.Basics
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/artists/1");
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            ResponseAssert.Success(response);
 
             string json = await response.Content.ReadAsStringAsync();
             object obj = JsonConvert.DeserializeObject(json);
@@ -66,7 +67,7 @@ namespace Firestorm.Tests.Examples.Music.Basics
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/artists?fields=start_date,name");
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            ResponseAssert.Success(response);
 
             string json = await response.Content.ReadAsStringAsync();
             dynamic obj = JsonConvert.DeserializeObject(json);

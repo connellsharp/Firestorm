@@ -28,6 +28,7 @@
     <ProjectReference Include="..\..\src\Firestorm.Stems.Attributes.Basic\Firestorm.Stems.Attributes.Basic.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.Start\Firestorm.Stems.Roots.Start.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Extensions.AspNetCore\Firestorm.Extensions.AspNetCore.csproj" />
+    <ProjectReference Include="..\Firestorm.Tests.Integration.Http.Base\Firestorm.Tests.Integration.Http.Base.csproj" />
   </ItemGroup>
 
 </Project>

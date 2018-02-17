@@ -1,5 +1,6 @@
 using System.Net.Http;
 using System.Threading.Tasks;
+using Firestorm.Tests.Integration.Http.Base;
 using Xunit;
 
 namespace Firestorm.Tests.Examples.Football.Tests

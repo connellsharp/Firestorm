@@ -25,13 +25,14 @@ namespace Firestorm.Endpoints.Formatting.Naming
             _switcher = switcher;
         }
 
-        public IEnumerable<string> SelectFields => _underlyingQuery.SelectFields.Select(_switcher.ConvertRequestedToCoded);
+        public IEnumerable<string> SelectFields =>
+            _underlyingQuery.SelectFields?.Select(_switcher.ConvertRequestedToCoded);
 
         public IEnumerable<FilterInstruction> FilterInstructions =>
-            _underlyingQuery.FilterInstructions.Select(fi => new FilterInstruction(_switcher.ConvertRequestedToCoded(fi.FieldName), fi.Operator, fi.ValueString));
+            _underlyingQuery.FilterInstructions?.Select(fi => new FilterInstruction(_switcher.ConvertRequestedToCoded(fi.FieldName), fi.Operator, fi.ValueString));
 
         public IEnumerable<SortInstruction> SortInstructions =>
-            _underlyingQuery.SortInstructions.Select(fi => new SortInstruction(_switcher.ConvertRequestedToCoded(fi.FieldName), fi.Direction));
+            _underlyingQuery.SortInstructions?.Select(fi => new SortInstruction(_switcher.ConvertRequestedToCoded(fi.FieldName), fi.Direction));
 
         public PageInstruction PageInstruction => _underlyingQuery.PageInstruction;
     }

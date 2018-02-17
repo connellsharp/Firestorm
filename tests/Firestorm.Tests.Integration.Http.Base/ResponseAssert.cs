@@ -5,9 +5,9 @@ using Newtonsoft.Json;
 
 namespace Firestorm.Tests.Integration.Http.Base
 {
-    internal static class ResponseAssert
+    public static class ResponseAssert
     {
-        internal static void Success(HttpResponseMessage response)
+        public static void Success(HttpResponseMessage response)
         {
             if (response.IsSuccessStatusCode)
                 return;
@@ -56,7 +56,7 @@ namespace Firestorm.Tests.Integration.Http.Base
         /// <remarks>
         /// <see cref="ExceptionErrorInfo"/>
         /// </remarks>
-        internal class ErrorModel
+        private class ErrorModel
         {
             [JsonProperty("error")]
             public string Error { get; set; }
