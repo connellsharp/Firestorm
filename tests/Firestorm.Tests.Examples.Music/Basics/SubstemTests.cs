@@ -9,6 +9,7 @@ using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Tests.Examples.Music.Data.Models;
 using Firestorm.Tests.Examples.Music.Web;
+using Firestorm.Tests.Integration.Http.Base;
 using Newtonsoft.Json;
 using Xunit;
 
@@ -112,6 +113,8 @@ namespace Firestorm.Tests.Examples.Music.Basics
                 title = "My new track"
             });
 
+            ResponseAssert.Success(response1);
+
             string json1 = await response1.Content.ReadAsStringAsync();
             dynamic obj1 = JsonConvert.DeserializeObject(json1);
 
@@ -123,6 +126,8 @@ namespace Firestorm.Tests.Examples.Music.Basics
             {
                 title = "My edited track"
             });
+
+            ResponseAssert.Success(response2);
 
             var track = await GetDynamicObject(trackUrl);
 
