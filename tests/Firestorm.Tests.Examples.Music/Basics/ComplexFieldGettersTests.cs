@@ -35,9 +35,9 @@ namespace Firestorm.Tests.Examples.Music.Basics
             {
                 return new
                 {
-                    title = title,
-                    nice = "object",
-                    look = "at this"
+                    Title = title,
+                    Nice = "object",
+                    Look = "at this"
                 };
             }
         }

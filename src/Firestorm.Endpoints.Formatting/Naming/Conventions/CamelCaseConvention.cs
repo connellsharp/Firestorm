@@ -43,7 +43,7 @@ namespace Firestorm.Endpoints.Naming
                     builder.Append(word.ToLower());
                     first = false;
                 }
-                if (_twoLetterAcronyms != null && _twoLetterAcronyms.Any(ka => string.Equals(ka, word, StringComparison.OrdinalIgnoreCase)))
+                else if (_twoLetterAcronyms != null && _twoLetterAcronyms.Any(ka => string.Equals(ka, word, StringComparison.OrdinalIgnoreCase)))
                 {
                     builder.Append(word.ToUpper());
                 }

@@ -35,7 +35,7 @@ namespace Firestorm.Fluent.Fuel.Engine
 
         public IRestResource GetFullResource(string fieldName, IDeferredItem<TItem> item, IDataTransaction dataTransaction)
         {
-            return _fieldModels[fieldName].ResourceGetter.GetFullResource(item, dataTransaction);
+            return _fieldModels[fieldName].ResourceGetter?.GetFullResource(item, dataTransaction);
         }
 
         public IFieldReader<TItem> GetReader(string fieldName)
