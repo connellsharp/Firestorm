@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Firestorm.Core.Web;
 using Firestorm.Core.Web.Options;
 
@@ -19,8 +20,11 @@ namespace Firestorm.Endpoints.Responses
         {
             if (error is ExceptionErrorInfo exceptionInfo)
             {
-                response.ExtraBody.Add("InnerDescriptions", exceptionInfo.InnerDescriptions);
-                response.ExtraBody.Add("StackTrace", exceptionInfo.StackTrace.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
+                response.ExtraBody.Add("DeveloperInfo", exceptionInfo.GetDeveloperInfo().Select(info => new
+                {
+                    Message = info.Message,
+                    StackTrace = info.StackTrace.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries)
+                }));
             }
         }
 

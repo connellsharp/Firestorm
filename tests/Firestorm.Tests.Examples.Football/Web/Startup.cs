@@ -69,7 +69,8 @@ namespace Firestorm.Tests.Examples.Football.Web
                     PageConfiguration =
                     {
                         UseLinkHeaders = true
-                    }
+                    },
+                    ShowDeveloperErrors = true
                 }
             });
         }

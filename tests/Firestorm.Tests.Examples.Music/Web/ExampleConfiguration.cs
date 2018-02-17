@@ -24,7 +24,8 @@ namespace Firestorm.Tests.Examples.Music.Web
                 {
                     ResponseConfiguration = new ResponseConfiguration
                     {
-                        StatusField = ResponseStatusField.StatusCode
+                        StatusField = ResponseStatusField.StatusCode,
+                        ShowDeveloperErrors = true
                     },
                     NamingConventionSwitcher = new DefaultNamingConventionSwitcher(),
                 },

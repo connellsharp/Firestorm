@@ -25,29 +25,31 @@ namespace Firestorm.Tests.Integration.Http.Base
         {
             var builder = new StringBuilder();
 
-            builder.AppendLine((int)status + " " + status);
+            builder.AppendLine((int) status + " " + status);
 
             builder.AppendFormat("Error: {0}\r\n", errorObj.Error);
-            builder.AppendFormat("Message: {0}\r\n", errorObj.ErrorDescription);
+            builder.AppendFormat("Description: {0}\r\n", errorObj.ErrorDescription);
 
-            if (errorObj.InnerDescriptions != null)
+            if (errorObj.DeveloperInfo != null)
             {
-                builder.AppendLine();
-
-                foreach (var message in errorObj.InnerDescriptions)
+                foreach (var info in errorObj.DeveloperInfo)
                 {
-                    builder.AppendFormat("Inner Message: {0}\r\n", message);
+                    builder.AppendLine();
+                    builder.AppendFormat("Message: {0}\r\n", info.Message);
+
+                    if (info.StackTrace != null)
+                    {
+                        foreach (string line in info.StackTrace)
+                            builder.AppendLine(line);
+
+                        builder.AppendLine();
+                    }
                 }
             }
-
-            if (errorObj.StackTrace != null)
+            else
             {
                 builder.AppendLine();
-                
-                foreach (string line in errorObj.StackTrace)
-                    builder.AppendLine(line);
-
-                builder.AppendLine();
+                builder.AppendLine("No developer info was returned in the response.");
             }
 
             return builder.ToString();
@@ -64,8 +66,14 @@ namespace Firestorm.Tests.Integration.Http.Base
             [JsonProperty("error_description")]
             public string ErrorDescription { get; set; }
 
-            [JsonProperty("inner_descriptions")]
-            public string[] InnerDescriptions { get; set; }
+            [JsonProperty("developer_info")]
+            public DevInfo[] DeveloperInfo { get; set; }
+        }
+        
+        private class DevInfo
+        {
+            [JsonProperty("message")]
+            public string Message { get; set; }
 
             [JsonProperty("stack_trace")]
             public string[] StackTrace { get; set; }

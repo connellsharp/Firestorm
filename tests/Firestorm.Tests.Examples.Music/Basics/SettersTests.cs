@@ -10,6 +10,7 @@ using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Tests.Examples.Music.Data.Models;
 using Firestorm.Tests.Examples.Music.Web;
+using Firestorm.Tests.Integration.Http.Base;
 using Newtonsoft.Json;
 using Xunit;
 
@@ -60,6 +61,7 @@ namespace Firestorm.Tests.Examples.Music.Basics
         {
             HttpResponseMessage response = await HttpClient.PostAsync("/artists", JsonContent(@"{ ""name"": ""Fred"", start_date: ""1990-01-01"" }"));
 
+            ResponseAssert.Success(response);
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
         }
 
@@ -67,9 +69,10 @@ namespace Firestorm.Tests.Examples.Music.Basics
         public async Task ArtistItem_UpdateName_GetIsSame()
         {
             HttpResponseMessage response1 = await HttpClient.PutAsync("/artists/2", JsonContent(@"{ ""name"": ""Bill"" }"));
-            Assert.Equal(HttpStatusCode.OK, response1.StatusCode);
+            ResponseAssert.Success(response1);
 
             HttpResponseMessage response2 = await HttpClient.GetAsync("/artists/2");
+            ResponseAssert.Success(response2);
             string json = await response2.Content.ReadAsStringAsync();
             dynamic obj = JsonConvert.DeserializeObject(json);
             Assert.Equal("Bill", obj.name.ToString());
@@ -79,9 +82,10 @@ namespace Firestorm.Tests.Examples.Music.Basics
         public async Task ArtistName_Update_GetIsSame()
         {
             HttpResponseMessage response1 = await HttpClient.PutAsync("/artists/2/name", JsonContent(@"""Bob"""));
-            Assert.Equal(HttpStatusCode.OK, response1.StatusCode);
+            ResponseAssert.Success(response1);
 
             HttpResponseMessage response2 = await HttpClient.GetAsync("/artists/2/name");
+            ResponseAssert.Success(response2);
             string json = await response2.Content.ReadAsStringAsync();
             Assert.Equal("\"Bob\"", json);
         }

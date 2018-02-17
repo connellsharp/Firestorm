@@ -47,7 +47,6 @@ namespace Firestorm.Tests.Examples.Music.Basics
         public async Task ArtistItem_Get_Deserialises()
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/artists/1");
-
             ResponseAssert.Success(response);
 
             string json = await response.Content.ReadAsStringAsync();
@@ -58,7 +57,12 @@ namespace Firestorm.Tests.Examples.Music.Basics
         [Fact]
         public async Task ArtistNameScalar_Get_Correct()
         {
-            string responseStr = await HttpClient.GetStringAsync("/artists/1/name");
+            HttpResponseMessage response = await HttpClient.GetAsync("/artists/1/name");
+
+            ResponseAssert.Success(response);
+
+            string responseStr = await response.Content.ReadAsStringAsync();
+
             Assert.Equal("\"Eminem\"", responseStr);
         }
 
@@ -66,7 +70,6 @@ namespace Firestorm.Tests.Examples.Music.Basics
         public async Task ArtistsCollection_GetWithFields_DeserialisesAndCorrect()
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/artists?fields=start_date,name");
-
             ResponseAssert.Success(response);
 
             string json = await response.Content.ReadAsStringAsync();

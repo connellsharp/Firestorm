@@ -8,27 +8,39 @@ namespace Firestorm
     /// </summary>
     public class ExceptionErrorInfo : ErrorInfo
     {
+        private readonly Exception _exception;
+
         public ExceptionErrorInfo(Exception exception)
         {
+            _exception = exception;
             ErrorStatus = ExceptionErrorUtilities.GetExceptionStatus(exception);
             ErrorType = ExceptionErrorUtilities.GetExceptionType(exception);
             ErrorDescription = exception.Message;
-
-            StackTrace = exception.StackTrace;
-            InnerDescriptions = exception.InnerException != null ? IterateInnerExceptionMessages(exception) : null;
         }
 
-        public string StackTrace { get; private set; }
-
-        public IEnumerable<string> InnerDescriptions { get; private set; }
-
-        private static IEnumerable<string> IterateInnerExceptionMessages(Exception exception)
+        public IEnumerable<ErrorDeveloperInfo> GetDeveloperInfo()
         {
-            while (exception.InnerException != null)
+            Exception exception = _exception;
+
+            do
             {
+                yield return new ErrorDeveloperInfo(exception);
                 exception = exception.InnerException;
-                yield return exception.Message;
             }
+            while (exception != null);
         }
+    }
+
+    public class ErrorDeveloperInfo
+    {
+        internal ErrorDeveloperInfo(Exception exception)
+        {
+            Message = exception.Message;
+            StackTrace = exception.StackTrace;
+        }
+
+        public string Message { get; }
+
+        public string StackTrace { get; }
     }
 }
