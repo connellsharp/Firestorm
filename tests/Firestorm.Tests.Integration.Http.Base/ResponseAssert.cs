@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using JetBrains.Annotations;
 using Newtonsoft.Json;
 
 namespace Firestorm.Tests.Integration.Http.Base
@@ -13,11 +14,11 @@ namespace Firestorm.Tests.Integration.Http.Base
             if (response.IsSuccessStatusCode)
                 return;
 
+            var status = (ErrorStatus)response.StatusCode;
+
             string errorJson = response.Content.ReadAsStringAsync().Result;
 
             var errorObj = JsonConvert.DeserializeObject<ErrorModel>(errorJson);
-
-            var status = (ErrorStatus) response.StatusCode;
 
             throw new RestApiException(status, GetMessage(status, errorObj));
         }
@@ -28,29 +29,36 @@ namespace Firestorm.Tests.Integration.Http.Base
 
             builder.AppendLine((int) status + " " + status);
 
-            builder.AppendFormat("Error: {0}\r\n", errorObj.Error);
-            builder.AppendFormat("Description: {0}\r\n", errorObj.ErrorDescription);
-
-            if (errorObj.DeveloperInfo != null)
+            if(errorObj == null)
             {
-                foreach (var info in errorObj.DeveloperInfo.Reverse())
-                {
-                    builder.AppendLine();
-                    builder.AppendFormat("Message: {0}\r\n", info.Message);
-
-                    if (info.StackTrace != null)
-                    {
-                        foreach (string line in info.StackTrace)
-                            builder.AppendLine(line);
-
-                        builder.AppendLine();
-                    }
-                }
+                builder.AppendLine("Error response but no response body.");
             }
             else
             {
-                builder.AppendLine();
-                builder.AppendLine("No developer info was returned in the response.");
+                builder.AppendFormat("Error: {0}\r\n", errorObj.Error);
+                builder.AppendFormat("Description: {0}\r\n", errorObj.ErrorDescription);
+
+                if (errorObj.DeveloperInfo != null)
+                {
+                    foreach (var info in errorObj.DeveloperInfo.Reverse())
+                    {
+                        builder.AppendLine();
+                        builder.AppendFormat("Message: {0}\r\n", info.Message);
+
+                        if (info.StackTrace != null)
+                        {
+                            foreach (string line in info.StackTrace)
+                                builder.AppendLine(line);
+
+                            builder.AppendLine();
+                        }
+                    }
+                }
+                else
+                {
+                    builder.AppendLine();
+                    builder.AppendLine("No developer info was returned in the response.");
+                }
             }
 
             return builder.ToString();
