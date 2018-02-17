@@ -8,6 +8,13 @@ namespace Firestorm.Endpoints.Naming
 {
     internal class CamelCaseConvention : ICaseConvention
     {
+        private readonly string[] _twoLetterAcronyms;
+
+        public CamelCaseConvention(string[] twoLetterAcronyms)
+        {
+            _twoLetterAcronyms = twoLetterAcronyms;
+        }
+
         public bool IsCase(string casedString)
         {
             return casedString.IndexOfAny(new[] { '_', '-' }) == -1 && char.IsLower(casedString[0]);
@@ -36,7 +43,7 @@ namespace Firestorm.Endpoints.Naming
                     builder.Append(word.ToLower());
                     first = false;
                 }
-                else if (PascalCaseConvention.KnownTwoLetterAcronyms.Any(ka => string.Equals(ka, word, StringComparison.OrdinalIgnoreCase)))
+                if (_twoLetterAcronyms != null && _twoLetterAcronyms.Any(ka => string.Equals(ka, word, StringComparison.OrdinalIgnoreCase)))
                 {
                     builder.Append(word.ToUpper());
                 }

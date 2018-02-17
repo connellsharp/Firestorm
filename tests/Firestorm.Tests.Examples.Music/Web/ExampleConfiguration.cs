@@ -27,7 +27,10 @@ namespace Firestorm.Tests.Examples.Music.Web
                         StatusField = ResponseStatusField.StatusCode,
                         ShowDeveloperErrors = true
                     },
-                    NamingConventionSwitcher = new DefaultNamingConventionSwitcher(),
+                    NamingConventionSwitcher = new DefaultNamingConventionSwitcher(new NamingConventionOptions
+                    {
+                        TwoLetterAcronyms = new[] { "ID" }
+                    }),
                 },
                 StartResourceFactory = new StemsStartResourceFactory
                 {

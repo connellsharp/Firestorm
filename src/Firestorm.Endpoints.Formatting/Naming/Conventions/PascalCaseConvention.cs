@@ -8,6 +8,13 @@ namespace Firestorm.Endpoints.Naming
 {
     internal class PascalCaseConvention : ICaseConvention
     {
+        private readonly string[] _twoLetterAcronyms;
+
+        public PascalCaseConvention(string[] twoLetterAcronyms)
+        {
+            _twoLetterAcronyms = twoLetterAcronyms;
+        }
+
         public bool IsCase(string casedString)
         {
             return casedString.IndexOfAny(new[] { '_', '-' }) == -1 && char.IsUpper(casedString[0]);
@@ -29,7 +36,7 @@ namespace Firestorm.Endpoints.Naming
 
             foreach (string word in words)
             {
-                if (KnownTwoLetterAcronyms.Any(ka => string.Equals(ka, word, StringComparison.OrdinalIgnoreCase)))
+                if (_twoLetterAcronyms != null && _twoLetterAcronyms.Any(ka => string.Equals(ka, word, StringComparison.OrdinalIgnoreCase)))
                 {
                     builder.Append(word.ToUpper());
                 }
@@ -42,7 +49,5 @@ namespace Firestorm.Endpoints.Naming
 
             return builder.ToString();
         }
-
-        internal static readonly string[] KnownTwoLetterAcronyms = new[] { "IO", "UI" };
     }
 }
