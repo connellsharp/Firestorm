@@ -13,8 +13,7 @@ namespace Firestorm.Endpoints.Formatting.Json
         /// Create an instance of objectType, based properties in the JSON object 
         /// </summary> 
         /// <param name="objectType">type of object expected</param> 
-        /// <param name="jObject">contents of JSON object that will be 
-        /// deserialized</param> 
+        /// <param name="jObject">contents of JSON object that will be deserialized</param> 
         /// <returns></returns> 
         protected abstract T Create(Type objectType, JObject jObject);
 
