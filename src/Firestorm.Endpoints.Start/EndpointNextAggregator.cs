@@ -27,20 +27,20 @@ namespace Firestorm.Endpoints.Start
 
             foreach (string dir in dirs)
             {
-                string directory = _namingConventionSwitcher.ConvertRequestedToCoded(dir);
+                var path = new AggregatorNextPath(dir, _namingConventionSwitcher);
 
                 try
                 {
-                    endpoint = endpoint.Next(directory);
+                    endpoint = endpoint.Next(path);
                 }
                 catch (Exception ex)
                 {
-                    throw new NextEndpointErrorException(directory, ex);
+                    throw new NextEndpointErrorException(path, ex);
                 }
 
                 if (endpoint == null)
                 {
-                    throw new NextEndpointNotFoundException(directory);
+                    throw new NextEndpointNotFoundException(path);
                 }
             }
 
@@ -49,14 +49,14 @@ namespace Firestorm.Endpoints.Start
 
         private class NextEndpointNotFoundException : RestApiException
         {
-            public NextEndpointNotFoundException(string dir)
+            public NextEndpointNotFoundException(AggregatorNextPath dir)
                 : base(ErrorStatus.NotFound, "The '" + dir + "' endpoint was not found.")
             { }
         }
 
         private class NextEndpointErrorException : RestApiException
         {
-            public NextEndpointErrorException(string dir, Exception innerException)
+            public NextEndpointErrorException(AggregatorNextPath dir, Exception innerException)
                 : base("Error loading the '" + dir + "' endpoint: " + innerException.Message, innerException)
             { }
         }

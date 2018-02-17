@@ -23,19 +23,19 @@ namespace Firestorm.Endpoints
 
         public IRestCollection Collection { get; }
 
-        public IRestEndpoint Next(string identifier)
+        public IRestEndpoint Next(INextPath path)
         {
             string dictionaryPrefix = Context.Configuration.QueryStringConfiguration.DictionaryReferencePrefix;
-            if (identifier.StartsWith(dictionaryPrefix))
+            if (path.Raw.StartsWith(dictionaryPrefix))
             {
-                string identifierName = identifier.Substring(dictionaryPrefix.Length);
+                string identifierName = path.GetCoded(dictionaryPrefix.Length);
                 IRestDictionary dictionary = Collection.ToDictionary(identifierName);
                 return new RestDictionaryEndpoint(Context, dictionary);
             }
             else
             {
                 // TODO split by = char? see https://stackoverflow.com/a/20386425/369247
-                IRestItem item = Collection.GetItem(identifier);
+                IRestItem item = Collection.GetItem(path.Raw);
                 return new RestItemEndpoint(Context, item);
             }
         }

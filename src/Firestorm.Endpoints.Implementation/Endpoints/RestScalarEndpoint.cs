@@ -20,7 +20,7 @@ namespace Firestorm.Endpoints
 
         public IRestScalar Scalar { get; }
 
-        public IRestEndpoint Next(string nextPath)
+        public IRestEndpoint Next(INextPath nextPath)
         {
             throw new InvalidOperationException("No further paths are allowed after a scalar property.");
         }

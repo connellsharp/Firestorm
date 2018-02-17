@@ -18,9 +18,9 @@ namespace Firestorm.Endpoints
 
         IRestItem Item { get; }
 
-        public IRestEndpoint Next(string fieldName)
+        public IRestEndpoint Next(INextPath fieldName)
         {
-            IRestResource resource = Item.GetField(fieldName);
+            IRestResource resource = Item.GetField(fieldName.GetCoded());
             return Endpoint.GetFromResource(Context, resource);
         }
 

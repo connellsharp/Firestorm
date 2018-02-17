@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Firestorm.Core.Web;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Responses;
+using Firestorm.Endpoints.Start;
 using Firestorm.Engine;
 using Firestorm.Tests.Integration.Http.Base;
 using Firestorm.Tests.Models;
@@ -27,7 +28,7 @@ namespace Firestorm.Tests.Integration.Http.NetFramework
 
             EngineRestCollection<Artist> artistsCollection = IntegratedRestDirectory.GetArtistCollection(endpointContext);
             IRestEndpoint endpoint = Endpoint.GetFromResource(endpointContext, artistsCollection);
-            endpoint = endpoint.Next("123");
+            endpoint = endpoint.Next(new AggregatorNextPath("123", endpointContext.Configuration.NamingConventionSwitcher));
             var response = (ItemBody)(await endpoint.GetAsync(testQuery));
 
             Assert.Equal(response.Item["Name"], TestRepositories.ArtistName);

@@ -22,9 +22,9 @@ namespace Firestorm.Endpoints
 
         public IRestDictionary Dictionary { get; }
 
-        public IRestEndpoint Next(string identifier)
+        public IRestEndpoint Next(INextPath identifier)
         {
-            IRestItem item = Dictionary.GetItem(identifier);
+            IRestItem item = Dictionary.GetItem(identifier.GetCoded());
             return new RestItemEndpoint(Context, item);
         }
 

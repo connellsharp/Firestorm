@@ -16,7 +16,7 @@ namespace Firestorm.Endpoints
         /// Returns null if the endpoint does not exist.
         /// </summary>
         [CanBeNull]
-        IRestEndpoint Next(string path);
+        IRestEndpoint Next(INextPath path);
 
         /// <summary>
         /// Performs a GET request.

@@ -17,9 +17,9 @@ namespace Firestorm.Endpoints
 
         private IRestDirectory Directory { get; }
 
-        public IRestEndpoint Next(string resourceName)
+        public IRestEndpoint Next(INextPath resourceName)
         {
-            IRestResource resource = Directory.GetChild(resourceName);
+            IRestResource resource = Directory.GetChild(resourceName.GetCoded());
             if (resource == null)
                 return null;
 

@@ -8,6 +8,7 @@ using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Tests.Examples.Music.Data.Models;
 using Firestorm.Tests.Examples.Music.Web;
+using Firestorm.Tests.Integration.Http.Base;
 using Newtonsoft.Json;
 using Xunit;
 
@@ -85,6 +86,9 @@ namespace Firestorm.Tests.Examples.Music.Basics
         {
             HttpResponseMessage response = await HttpClient.GetAsync(requestUri);
             string json = await response.Content.ReadAsStringAsync();
+
+            ResponseAssert.Success(response);
+
             dynamic obj = JsonConvert.DeserializeObject(json);
             return obj;
         }
