@@ -1,4 +1,6 @@
+using System;
 using System.Net.Http;
+using System.Text;
 using Newtonsoft.Json;
 
 namespace Firestorm.Tests.Integration.Http.Base
@@ -11,6 +13,7 @@ namespace Firestorm.Tests.Integration.Http.Base
                 return;
 
             string errorJson = response.Content.ReadAsStringAsync().Result;
+
             var errorObj = JsonConvert.DeserializeObject<ErrorModel>(errorJson);
 
             var status = (ErrorStatus) response.StatusCode;
@@ -20,19 +23,39 @@ namespace Firestorm.Tests.Integration.Http.Base
 
         private static string GetMessage(ErrorStatus status, ErrorModel errorObj)
         {
-            string message = ((int)status) + " " + status + "\r\nError: " + errorObj.Error + "\r\nMessage: " + errorObj.ErrorDescription;
+            var builder = new StringBuilder();
 
-            if (errorObj.StackTrace != null)
-                foreach (string line in errorObj.StackTrace)
-                    message += "\r\n" + line;
+            builder.AppendLine((int)status + " " + status);
+
+            builder.AppendFormat("Error: {0}\r\n", errorObj.Error);
+            builder.AppendFormat("Message: {0}\r\n", errorObj.ErrorDescription);
 
             if (errorObj.InnerDescriptions != null)
-                return message + "\r\n\r\n" + string.Join("\r\n", errorObj.InnerDescriptions);
+            {
+                builder.AppendLine();
 
-            return message;
+                foreach (var message in errorObj.InnerDescriptions)
+                {
+                    builder.AppendFormat("Inner Message: {0}\r\n", message);
+                }
+            }
 
+            if (errorObj.StackTrace != null)
+            {
+                builder.AppendLine();
+                
+                foreach (string line in errorObj.StackTrace)
+                    builder.AppendLine(line);
+
+                builder.AppendLine();
+            }
+
+            return builder.ToString();
         }
 
+        /// <remarks>
+        /// <see cref="ExceptionErrorInfo"/>
+        /// </remarks>
         internal class ErrorModel
         {
             [JsonProperty("error")]

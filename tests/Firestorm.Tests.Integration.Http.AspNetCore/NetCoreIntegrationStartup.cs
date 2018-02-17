@@ -1,4 +1,5 @@
 ﻿using Firestorm.AspNetCore2;
+using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Start;
 using Firestorm.Endpoints.Web;
 using Firestorm.Tests.Integration.Http.Base;
@@ -19,7 +20,14 @@ namespace Firestorm.Tests.Integration.Http.AspNetCore
         {
             app.UseFirestorm(new FirestormConfiguration
             {
-                StartResourceFactory = new IntegratedStartResourceFactory()
+                StartResourceFactory = new IntegratedStartResourceFactory(),
+                EndpointConfiguration = new DefaultRestEndpointConfiguration
+                {
+                    ResponseConfiguration = new ResponseConfiguration
+                    {
+                        ShowDeveloperErrors = true
+                    }
+                }
             });
         }
     }
@@ -32,7 +40,11 @@ namespace Firestorm.Tests.Integration.Http.AspNetCore
         [UsedImplicitly]
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddFirestorm()
+            services.AddFirestorm(config =>
+                {
+                    config.ResponseConfiguration.ShowDeveloperErrors = true;
+                    //
+                })
                 .AddStartResourceFactory(new IntegratedStartResourceFactory());
         }
 
@@ -57,7 +69,11 @@ namespace Firestorm.Tests.Integration.Http.AspNetCore
         [UsedImplicitly]
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseFirestorm();
+            app.UseFirestorm(config =>
+            {
+                config.EndpointConfiguration.ResponseConfiguration.ShowDeveloperErrors = true;
+                //
+            });
         }
     }
 }
