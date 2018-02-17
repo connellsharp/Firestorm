@@ -10,12 +10,12 @@ namespace Firestorm.Endpoints.Formatting.Json
     /// <summary>
     /// Converts the JToken to either a type of <see cref="TDictionary"/>, <see cref="IEnumerable{TDictionary}"/> or a scalar type.
     /// </summary>
-    internal class JObjectToDictionaryConverter<TDictionary>
+    internal class JObjectToDictionaryTranslator<TDictionary>
         where TDictionary : IDictionary<string, object>, new()
     {
         private readonly INamingConventionSwitcher _switcher;
 
-        public JObjectToDictionaryConverter([CanBeNull] INamingConventionSwitcher switcher)
+        public JObjectToDictionaryTranslator([CanBeNull] INamingConventionSwitcher switcher)
         {
             _switcher = switcher ?? new VoidNamingConventionSwitcher();
         }

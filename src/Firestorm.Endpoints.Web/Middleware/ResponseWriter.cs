@@ -8,11 +8,13 @@ namespace Firestorm.Endpoints.Web
     {
         private readonly IHttpRequestResponder _responder;
         private readonly Response _response;
+        private readonly RestEndpointConfiguration _endpointConfig;
 
-        public ResponseWriter(IHttpRequestResponder responder, Response response)
+        public ResponseWriter(IHttpRequestResponder responder, Response response, RestEndpointConfiguration endpointConfig)
         {
             _responder = responder;
             _response = response;
+            _endpointConfig = endpointConfig;
         }
 
         public Task WriteAsync()
@@ -24,7 +26,7 @@ namespace Firestorm.Endpoints.Web
                 _responder.SetResponseHeader(header.Key, header.Value);
             }
 
-            var negotiator = new ContentNegotiator(_responder.GetAcceptHeaders(), _responder.GetContentWriter());
+            var negotiator = new ContentNegotiator(_responder.GetAcceptHeaders(), _responder.GetContentWriter(), _endpointConfig.NamingConventionSwitcher);
             return negotiator.SetResponseBodyAsync(_response.GetFullBody());
         }
     }

@@ -14,11 +14,11 @@ namespace Firestorm.Endpoints.Formatting.Json
     /// </summary>
     internal class ResourceBodyReader
     {
-        private readonly JObjectToDictionaryConverter<RestItemData> _restItemDataConverter;
+        private readonly JObjectToDictionaryTranslator<RestItemData> _restItemDataTranslator;
 
         public ResourceBodyReader(INamingConventionSwitcher switcher)
         {
-            _restItemDataConverter = new JObjectToDictionaryConverter<RestItemData>(switcher);
+            _restItemDataTranslator = new JObjectToDictionaryTranslator<RestItemData>(switcher);
         }
 
         internal ResourceBody ReadResourceStream([NotNull] Stream stream)
@@ -44,13 +44,13 @@ namespace Firestorm.Endpoints.Formatting.Json
             {
                 case JTokenType.Array:
                     var items = from JObject jObject in jBody
-                                select _restItemDataConverter.ConvertObject(jObject);
+                                select _restItemDataTranslator.ConvertObject(jObject);
 
                     return new CollectionBody(items, null);
 
                 case JTokenType.Object:
                     Debug.Assert(jBody is JObject, "jBody is JObject");
-                    RestItemData itemData = _restItemDataConverter.ConvertObject((JObject)jBody);
+                    RestItemData itemData = _restItemDataTranslator.ConvertObject((JObject)jBody);
                     return new ItemBody(itemData);
 
                 case JTokenType.Float:

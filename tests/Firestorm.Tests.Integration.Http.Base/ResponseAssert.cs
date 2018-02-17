@@ -20,12 +20,17 @@ namespace Firestorm.Tests.Integration.Http.Base
 
         private static string GetMessage(ErrorStatus status, ErrorModel errorObj)
         {
-            string message = ((int)status) + " " + status + " - " + errorObj.Error + " - " + errorObj.ErrorDescription;
+            string message = ((int)status) + " " + status + "\r\nError: " + errorObj.Error + "\r\nMessage: " + errorObj.ErrorDescription;
 
-            if (errorObj.InnerDescriptions == null)
-                return message;
+            if (errorObj.StackTrace != null)
+                foreach (string line in errorObj.StackTrace)
+                    message += "\r\n" + line;
 
-            return message + "\r\n\r\n" + string.Join("\r\n", errorObj.InnerDescriptions);
+            if (errorObj.InnerDescriptions != null)
+                return message + "\r\n\r\n" + string.Join("\r\n", errorObj.InnerDescriptions);
+
+            return message;
+
         }
 
         internal class ErrorModel
@@ -38,6 +43,9 @@ namespace Firestorm.Tests.Integration.Http.Base
 
             [JsonProperty("inner_descriptions")]
             public string[] InnerDescriptions { get; set; }
+
+            [JsonProperty("stack_trace")]
+            public string[] StackTrace { get; set; }
         }
     }
 }

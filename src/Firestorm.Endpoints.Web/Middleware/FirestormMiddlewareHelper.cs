@@ -25,7 +25,7 @@ namespace Firestorm.Endpoints.Web
             var modifiers = new DefaultResponseModifiers(configuration.EndpointConfiguration.ResponseConfiguration);
             _builder = new ResponseBuilder(response, modifiers);
 
-            _writer = new ResponseWriter(requestHandler, response);
+            _writer = new ResponseWriter(requestHandler, response, _configuration.EndpointConfiguration);
         }
 
         /// <summary>

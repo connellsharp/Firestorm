@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Threading.Tasks;
+using Firestorm.Endpoints.Formatting.Json;
 using Newtonsoft.Json;
 
 namespace Firestorm.Endpoints.Formatting
@@ -8,11 +9,18 @@ namespace Firestorm.Endpoints.Formatting
     {
         private readonly IContentAccepts _accepts;
         private readonly IContentWriter _writer;
+        private readonly JsonSerializerSettings _jsonSerializerSettings;
 
-        public ContentNegotiator(IContentAccepts accepts, IContentWriter writer)
+        public ContentNegotiator(IContentAccepts accepts, IContentWriter writer, INamingConventionSwitcher namingConventionSwitcher)
         {
             _accepts = accepts;
             _writer = writer;
+
+            _jsonSerializerSettings = new JsonSerializerSettings
+            {
+                ContractResolver = new NameSwitcherContractResolver(namingConventionSwitcher),
+                //Converters = { new RestItemDataJsonConverter(namingConventionSwitcher) }
+            };
         }
 
         public async Task SetResponseBodyAsync(object obj)
@@ -22,7 +30,8 @@ namespace Firestorm.Endpoints.Formatting
 
             _writer.SetMimeType("application/json; charset=utf-8");
 
-            string json = JsonConvert.SerializeObject(obj);
+            string json = JsonConvert.SerializeObject(obj, _jsonSerializerSettings);
+
             byte[] bytes = Encoding.UTF8.GetBytes(json);
 
             _writer.SetLength(bytes.Length);

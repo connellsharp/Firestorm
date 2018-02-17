@@ -21,7 +21,7 @@ namespace Firestorm.Endpoints.Responses
             if(acknowledgment is CreatedItemAcknowledgment createdItemAcknowledgment)
             {
                 response.ExtraBody[StatusKey] = "created";
-                response.ExtraBody["identifier"] = createdItemAcknowledgment.NewIdentifier;
+                response.ExtraBody["Identifier"] = createdItemAcknowledgment.NewIdentifier;
             }
             else
             {

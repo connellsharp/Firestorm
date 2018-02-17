@@ -3,7 +3,6 @@ using AutoFixture;
 using AutoFixture.AutoMoq;
 using Firestorm.Core.Web;
 using Firestorm.Endpoints.Responses;
-using Firestorm.Endpoints.Start;
 using Firestorm.Endpoints.Web;
 using Xunit;
 
@@ -62,7 +61,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
             var generatedItemData = new RestItemData(response.GetFullBody());
 
             if (wrapsObject)
-                generatedItemData = new RestItemData(generatedItemData["resource"]);
+                generatedItemData = new RestItemData(generatedItemData[ResponseUtility.ResourceKey]);
 
             Assert.Equal(itemData, generatedItemData, new ItemDataComparer());
         }
