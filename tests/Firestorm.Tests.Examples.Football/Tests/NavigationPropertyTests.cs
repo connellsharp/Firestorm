@@ -1,6 +1,8 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Firestorm.Tests.Integration.Http.Base;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace Firestorm.Tests.Examples.Football.Tests
@@ -34,6 +36,11 @@ namespace Firestorm.Tests.Examples.Football.Tests
             HttpResponseMessage response = await client.GetAsync("/leagues/premierleague/teams?sort=points+desc&limit=1");
 
             ResponseAssert.Success(response);
+
+            string str = await response.Content.ReadAsStringAsync();
+            var arr = JsonConvert.DeserializeObject<object[]>(str);
+
+            Assert.Single(arr);
         }
 
         [Theory(Skip = "Pretty complex field would want ROW_NUMBER. Perhaps a special 'index' field with order by could be included in future."), ClassData(typeof(FootballHttpClientIndexes))]

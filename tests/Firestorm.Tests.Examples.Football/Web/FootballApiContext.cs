@@ -12,7 +12,7 @@ namespace Firestorm.Tests.Examples.Football.Web
         public ApiRoot<Player> Players { get; set; }
         public ApiRoot<Goal> Goals { get; set; }
         public ApiRoot<Fixture> Fixtures { get; set; }
-        public ApiRoot<League> Leagues { get; set; }
+        //public ApiRoot<League> Leagues { get; set; }
 
         protected override void OnApiCreating(IApiBuilder apiBuilder)
         {
@@ -35,6 +35,7 @@ namespace Firestorm.Tests.Examples.Football.Web
                             Points = (t.Wins * 3) + (t.Draws * 1),
                             Team = t.Team.Name
                         }))
+                    .HasName("Teams")
                     .IsCollection(tp =>
                     {
                         tp.Field(l => l.Points);
