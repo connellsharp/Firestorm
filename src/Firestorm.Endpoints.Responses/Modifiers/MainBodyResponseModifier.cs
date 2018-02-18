@@ -28,6 +28,8 @@ namespace Firestorm.Endpoints.Responses
 
         public void AddError(Response response, ErrorInfo error)
         {
+            // if an error occurs after AddResource, we don't want the resource body in the response.
+            response.ResourceBody = null;
         }
 
         public void AddMultiFeedback(Response response, IEnumerable<Feedback> feedbackItems)

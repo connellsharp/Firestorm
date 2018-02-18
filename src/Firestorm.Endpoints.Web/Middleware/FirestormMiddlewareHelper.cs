@@ -40,18 +40,20 @@ namespace Firestorm.Endpoints.Web
 
                 var invoker = new EndpointExecutor(endpoint, _reader, _builder);
                 await invoker.ExecuteAsync();
+
+                await _writer.WriteAsync();
             }
             catch (Exception ex)
             {
                 var errorInfo = new ExceptionErrorInfo(ex);
                 _builder.AddError(errorInfo);
+
+                await _writer.WriteAsync();
             }
             finally
             {
                 endpointContext.Dispose();
             }
-
-            await _writer.WriteAsync();
         }
 
         private IRestEndpoint GetEndpoint(IRestEndpointContext endpointContext)

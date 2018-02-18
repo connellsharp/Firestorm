@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using Firestorm.Endpoints;
 using Firestorm.AspNetCore2;
 using Firestorm.Endpoints.Responses;
@@ -11,7 +10,6 @@ using Firestorm.Tests.Examples.Football.Tests;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -77,43 +75,6 @@ namespace Firestorm.Tests.Examples.Football.Web
                     ShowDeveloperErrors = true
                 }
             });
-        }
-    }
-
-    public class CriticalJsonErrorMiddleware
-    {
-        private readonly RequestDelegate _next;
-
-        public CriticalJsonErrorMiddleware(RequestDelegate next)
-        {
-            _next = next;
-        }
-
-        [UsedImplicitly]
-        public async Task Invoke(HttpContext context)
-        {
-            try
-            {
-                await _next.Invoke(context);
-            }
-            catch (Exception ex)
-            {
-                context.Response.StatusCode = 500;
-
-                string json = GetExceptionJson(ex);
-                await context.Response.WriteAsync(json);
-            }
-        }
-
-        private static string GetExceptionJson(Exception ex)
-        {
-            return "{" +
-                   "\"error\": \"critical_unhandled_error\"," +
-                   "\"error_description\": \"" + ex.Message + "\"," +
-                   "\"developer_info\": [" +
-                   "{ \"stack_trace\": [ \"" + ex.StackTrace.Replace("\"", "\\\"").Replace("\\", "\\\\").Replace(Environment.NewLine, "\", \"") + "\" ] }" +
-                   "] " +
-                   "}";
         }
     }
 }
