@@ -23,7 +23,7 @@ namespace Firestorm.Endpoints.Responses
                 response.ExtraBody.Add("DeveloperInfo", exceptionInfo.GetDeveloperInfo().Select(info => new
                 {
                     Message = info.Message,
-                    StackTrace = info.StackTrace.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries)
+                    StackTrace = info.StackTrace?.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
                 }));
             }
         }

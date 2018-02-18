@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace Firestorm
 {
@@ -18,6 +19,7 @@ namespace Firestorm
             ErrorDescription = exception.Message;
         }
 
+        [NotNull]
         public IEnumerable<ErrorDeveloperInfo> GetDeveloperInfo()
         {
             Exception exception = _exception;
