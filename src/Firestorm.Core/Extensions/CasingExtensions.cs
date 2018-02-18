@@ -3,6 +3,12 @@ using System.Text.RegularExpressions;
 
 namespace Firestorm
 {
+    /// <summary>
+    /// Extensions to do with casing conventions.
+    /// </summary>
+    /// <remarks>
+    /// Should this be in the core? it's related to field naming conventions. Perhaps Core.Web ?
+    /// </remarks>
     public static class CasingExtensions
     {
         /// <summary>
@@ -10,7 +16,6 @@ namespace Firestorm
         /// </summary>
         /// <remarks>
         /// Idea from http://stackoverflow.com/a/5796427/369247
-        /// Should this be in the core? it's related to field naming conventions
         /// </remarks>
         public static string SeparateCamelCase(this string str, string separator = " ", bool makeLowercase = false)
         {
@@ -26,10 +31,6 @@ namespace Firestorm
         /// <summary>
         /// Removes the <see cref="separator"/> characters and capitalises the letter that comes after.
         /// </summary>
-        /// <remarks>
-        /// Idea from http://stackoverflow.com/a/5796427/369247
-        /// Should this be in the core? it's related to field naming conventions
-        /// </remarks>
         public static string MakeCamelCase(this string str, char separator = ' ', bool firstCapital = false)
         {
             var builder = new StringBuilder();
