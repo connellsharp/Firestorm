@@ -20,7 +20,7 @@ namespace Firestorm.Endpoints.Formatting.Json
 
         public sealed override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException("Writing JSON from a JsonGenericReadOnlyConverterBase is not supported.");
         }
 
         public sealed override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

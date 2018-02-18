@@ -14,6 +14,8 @@ namespace Firestorm.Endpoints.Formatting.Json
             _restItemDataTranslator = new JObjectToDictionaryTranslator<RestItemData>(switcher);
         }
 
+        public override bool CanWrite => false;
+
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             throw new NotImplementedException("Not implemented writing RestItemData to JSON yet.");
