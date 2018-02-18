@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Firestorm.Client
+namespace Firestorm.Client.Content
 {
     internal interface IContentSerializer
     {

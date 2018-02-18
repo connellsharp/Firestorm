@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Firestorm.Client
+namespace Firestorm.Client.Content
 {
     internal class JsonContentSerializer : IContentSerializer
     {

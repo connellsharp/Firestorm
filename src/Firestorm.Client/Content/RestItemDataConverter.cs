@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Firestorm.Client
+namespace Firestorm.Client.Content
 {
     /// <remarks>
     /// This class is kind-of temporary until the Client is full.

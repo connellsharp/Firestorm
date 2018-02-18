@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using JetBrains.Annotations;
 
-namespace Firestorm.Client
+namespace Firestorm.Client.Query
 {
     internal class QueryStringBuilder
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace Firestorm.Client
+namespace Firestorm.Client.Query
 {
     /// <summary>
     /// Capable of serialising queries that are deserialised at the other end using a <see cref="Endpoints.QueryStringCollectionQuery"/>.

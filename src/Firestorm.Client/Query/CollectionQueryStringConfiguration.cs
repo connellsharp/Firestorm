@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Firestorm.Client
+namespace Firestorm.Client.Query
 {
     /// <summary>
     /// The configuration used to build a query string from a <see cref="IRestCollectionQuery"/>.
