@@ -10,6 +10,7 @@ using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Start;
 using Firestorm.AspNetWebApi2.ErrorHandling;
 using Firestorm.Endpoints;
+using Firestorm.Endpoints.Formatting.Naming;
 using Firestorm.Endpoints.Query;
 using Firestorm.Endpoints.Web;
 
@@ -82,7 +83,8 @@ namespace Firestorm.AspNetWebApi2
 
         private IRestCollectionQuery GetQuery()
         {
-            return new QueryStringCollectionQuery(_config.EndpointConfiguration.QueryStringConfiguration, Request.RequestUri.Query);
+            var query = new QueryStringCollectionQuery(_config.EndpointConfiguration.QueryStringConfiguration, Request.RequestUri.Query);
+            return NameSwitcherUtility.TryWrapQuery(query, _config.EndpointConfiguration.NamingConventionSwitcher);
         }
 
         [HttpOptions]

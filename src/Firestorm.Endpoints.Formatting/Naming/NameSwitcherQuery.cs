@@ -16,7 +16,7 @@ namespace Firestorm.Endpoints.Formatting.Naming
         private readonly IRestCollectionQuery _underlyingQuery;
         private readonly INamingConventionSwitcher _switcher;
 
-        public NameSwitcherQuery([NotNull] IRestCollectionQuery underlyingQuery, [NotNull] INamingConventionSwitcher switcher)
+        internal NameSwitcherQuery([NotNull] IRestCollectionQuery underlyingQuery, [NotNull] INamingConventionSwitcher switcher)
         {
             Debug.Assert(underlyingQuery != null);
             Debug.Assert(switcher != null);

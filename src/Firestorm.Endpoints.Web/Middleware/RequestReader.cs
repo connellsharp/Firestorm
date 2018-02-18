@@ -35,11 +35,7 @@ namespace Firestorm.Endpoints.Web
                 return null;
 
             var query = new QueryStringCollectionQuery(_config.QueryStringConfiguration, queryString);
-
-            if (_config.NamingConventionSwitcher != null)
-                return new NameSwitcherQuery(query, _config.NamingConventionSwitcher);
-
-            return query;
+            return NameSwitcherUtility.TryWrapQuery(query, _config.NamingConventionSwitcher);
         }
     }
 }
