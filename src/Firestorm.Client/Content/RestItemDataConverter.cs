@@ -11,9 +11,11 @@ namespace Firestorm.Client.Content
     /// </remarks>
     internal class RestItemDataConverter : JsonConverter
     {
+        public override bool CanWrite => false;
+
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Not implemented writing RestItemData to JSON yet.");
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -31,7 +33,7 @@ namespace Firestorm.Client.Content
             foreach (JProperty property in jObject.Properties())
             {
                 string key = ConvertRequestedToCoded(property.Name);
-                dictionary.Add(key, property.Value);
+                dictionary.Add(key, property.Value.ToObject<object>()); // TODO support sub collections and sub items
             }
 
             return obj;

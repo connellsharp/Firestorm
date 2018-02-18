@@ -28,7 +28,7 @@ namespace Firestorm.Client.Content
                 if (response.IsSuccessStatusCode)
                     return DeserializeFromStream<T>(stream);
 
-                var errorData = DeserializeFromStream<RestItemData>(stream);
+                var errorData = DeserializeFromStream<ExceptionResponse>(stream);
                 throw new ClientRestApiException(response.StatusCode, errorData);
             }
         }
