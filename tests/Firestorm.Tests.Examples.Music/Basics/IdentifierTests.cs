@@ -40,7 +40,7 @@ namespace Firestorm.Tests.Examples.Music.Basics
                 get { return a => a.Name; }
             }
 
-            [Identifier(Exactly = "Me")]
+            [Identifier(Exactly = "me")] // TODO casing?
             public Artist GetExactArtist()
             {
                 return new Artist { Name = "My artist" };
