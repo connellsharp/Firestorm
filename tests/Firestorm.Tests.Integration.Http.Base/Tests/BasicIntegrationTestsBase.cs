@@ -52,7 +52,7 @@ namespace Firestorm.Tests.Integration.Http.Base.Tests
         public async Task NonExistentItemID_Get_404()
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/artists/321");
-            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+            ResponseAssert.Status(response, HttpStatusCode.NotFound);
 
             string json = await response.Content.ReadAsStringAsync();
             dynamic obj = JsonConvert.DeserializeObject(json);
@@ -65,7 +65,7 @@ namespace Firestorm.Tests.Integration.Http.Base.Tests
         public async Task NonExistentScalarField_Get_404()
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/artists/123/ohdear");
-            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+            ResponseAssert.Status(response, HttpStatusCode.NotFound);
 
             string json = await response.Content.ReadAsStringAsync();
             dynamic obj = JsonConvert.DeserializeObject(json);

@@ -118,7 +118,7 @@ namespace Firestorm.Tests.Unit.Client
             RestCollectionData queriedData = await _collection.QueryDataAsync(new TestCollectionQuery());
 
             Assert.Equal(1, queriedData.Items.Count());
-            Assert.Equal(123, Convert.ToInt32(queriedData.Items.First()["id"]));
+            Assert.Equal(123, Convert.ToInt32(queriedData.Items.First()["Id"]));
         }
     }
 }

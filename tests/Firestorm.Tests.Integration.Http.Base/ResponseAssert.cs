@@ -1,8 +1,7 @@
-using System;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
-using JetBrains.Annotations;
 using Newtonsoft.Json;
 
 namespace Firestorm.Tests.Integration.Http.Base
@@ -14,13 +13,26 @@ namespace Firestorm.Tests.Integration.Http.Base
             if (response.IsSuccessStatusCode)
                 return;
 
-            var status = (ErrorStatus)response.StatusCode;
+            ThrowHelpfulAssertionException(response);
+        }
+
+        public static void Status(HttpResponseMessage response, HttpStatusCode statusCode)
+        {
+            if (response.StatusCode == statusCode)
+                return;
+
+            ThrowHelpfulAssertionException(response);
+        }
+
+        private static void ThrowHelpfulAssertionException(HttpResponseMessage response)
+        {
+            var status = (ErrorStatus) response.StatusCode;
 
             string errorJson = response.Content.ReadAsStringAsync().Result;
-
             var errorObj = JsonConvert.DeserializeObject<ErrorModel>(errorJson);
 
-            throw new RestApiException(status, GetMessage(status, errorObj));
+            string message = GetMessage(status, errorObj);
+            throw new RestApiException(status, message);
         }
 
         private static string GetMessage(ErrorStatus status, ErrorModel errorObj)
@@ -78,7 +90,7 @@ namespace Firestorm.Tests.Integration.Http.Base
             [JsonProperty("developer_info")]
             public DevInfo[] DeveloperInfo { get; set; }
         }
-        
+
         private class DevInfo
         {
             [JsonProperty("message")]
