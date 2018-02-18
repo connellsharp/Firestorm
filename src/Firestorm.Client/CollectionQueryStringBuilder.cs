@@ -8,17 +8,20 @@ namespace Firestorm.Client
     /// <summary>
     /// Capable of serialising queries that are deserialised at the other end using a <see cref="Endpoints.QueryStringCollectionQuery"/>.
     /// </summary>
-    public class CollectionQueryStringBuilder
+    internal class CollectionQueryStringBuilder
     {
         private readonly CollectionQueryStringConfiguration _configuration;
 
-        public CollectionQueryStringBuilder([NotNull] CollectionQueryStringConfiguration configuration)
+        internal CollectionQueryStringBuilder([NotNull] CollectionQueryStringConfiguration configuration)
         {
             _configuration = configuration;
         }
 
-        public string BuildString(IRestCollectionQuery query)
+        internal string BuildString([CanBeNull] IRestCollectionQuery query)
         {
+            if (query == null)
+                return null;
+
             var builder = new QueryStringBuilder();
 
             if (query.SelectFields != null)

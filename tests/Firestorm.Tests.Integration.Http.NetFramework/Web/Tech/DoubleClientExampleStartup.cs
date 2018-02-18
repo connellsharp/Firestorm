@@ -17,6 +17,13 @@ namespace Firestorm.Tests.Integration.Http.NetFramework.Web
         {
             app.UseFirestorm(new FirestormConfiguration
             {
+                EndpointConfiguration =
+                {
+                    ResponseConfiguration =
+                    {
+                        ShowDeveloperErrors = true
+                    }
+                },
                 StartResourceFactory = new DoubleTestStartResourceFactory("http://localhost:" + Port)
             });
         }

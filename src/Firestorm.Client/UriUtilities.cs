@@ -5,7 +5,7 @@ namespace Firestorm.Client
 {
     public static class UriUtilities
     {
-        public static string AppendQueryString(string path, string queryString)
+        public static string AppendQueryString(string path, [CanBeNull] string queryString)
         {
             if (string.IsNullOrEmpty(queryString))
                 return path;

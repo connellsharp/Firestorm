@@ -18,6 +18,7 @@ namespace Firestorm.Client
             {
                 var queryStringBuilder = new CollectionQueryStringBuilder(new CollectionQueryStringConfiguration());
                 string fullUrl = UriUtilities.AppendQueryString(Path, queryStringBuilder.BuildString(query));
+
                 HttpResponseMessage response = await client.GetAsync(fullUrl);
                 var queriedData = await DeserializeAsync<IEnumerable<RestItemData>>(response);
 
