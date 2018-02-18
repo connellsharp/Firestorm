@@ -28,7 +28,7 @@ namespace Firestorm.Client
             {
                 var fullUri = UriUtilities.AppendQueryString(Path, GetFieldNamesQueryString(fieldNames));
                 HttpResponseMessage response = await client.GetAsync(fullUri);
-                return await DeserializeAsync<RestItemData>(response);
+                return await Serializer.DeserializeAsync<RestItemData>(response);
             }
         }
 
@@ -44,7 +44,7 @@ namespace Firestorm.Client
         {
             using (HttpClient client = HttpClientCreator.Create())
             {
-                HttpResponseMessage response = await client.PutAsync(Path, SerializeItemToContent(itemData));
+                HttpResponseMessage response = await client.PutAsync(Path, Serializer.SerializeItemToContent(itemData));
                 return await EnsureSuccessAsync(response);
             }
         }

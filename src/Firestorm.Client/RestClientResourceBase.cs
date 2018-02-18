@@ -1,10 +1,7 @@
 ﻿using System;
-using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace Firestorm.Client
 {
@@ -14,58 +11,19 @@ namespace Firestorm.Client
         {
             HttpClientCreator = httpClientCreator;
             Path = path;
+            Serializer = new JsonContentSerializer();
         }
 
         internal IHttpClientCreator HttpClientCreator { get; }
 
         protected string Path { get; }
 
-        protected static async Task<T> DeserializeAsync<T>(HttpResponseMessage response)
+        internal IContentSerializer Serializer { get; }
+
+        protected async Task<Acknowledgment> EnsureSuccessAsync(HttpResponseMessage response)
         {
-            using (Stream stream = await response.Content.ReadAsStreamAsync())
-            {
-                if (response.IsSuccessStatusCode)
-                    return DeserializeFromStream<T>(stream);
-
-                var errorData = DeserializeFromStream<RestItemData>(stream);
-                throw new ClientRestApiException(response.StatusCode, errorData);
-            }
-        }
-
-        protected static T DeserializeFromStream<T>(Stream stream)
-        {
-            var serializer = new JsonSerializer();
-
-            using (var streamReader = new StreamReader(stream))
-            using (var jsonReader = new JsonTextReader(streamReader))
-            {
-                return serializer.Deserialize<T>(jsonReader);
-            }
-        }
-
-        protected static StringContent SerializeItemToContent(object obj)
-        {
-            var serializer = new JsonSerializer();
-
-            using (var stringWriter = new StringWriter())
-            {
-                serializer.Serialize(stringWriter, obj);
-                return new StringContent(stringWriter.ToString(), Encoding.UTF8, "application/json");
-            }
-        }
-
-        protected static async Task<Acknowledgment> EnsureSuccessAsync(HttpResponseMessage response)
-        {
-            var serializer = new JsonSerializer();
-
-            using (Stream stream = await response.Content.ReadAsStreamAsync())
-            using (var streamReader = new StreamReader(stream))
-            using (var jsonReader = new JsonTextReader(streamReader))
-            {
-                var model = serializer.Deserialize<SuccessOrFailModel>(jsonReader);
-
-                return EnsureSuccess(model, response.StatusCode);
-            }
+            var model = await Serializer.DeserializeAsync<SuccessOrFailModel>(response);
+            return EnsureSuccess(model, response.StatusCode);
         }
 
         private static Acknowledgment EnsureSuccess(SuccessOrFailModel model, HttpStatusCode responseStatusCode)

@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Firestorm.Tests.Models;
@@ -77,11 +78,11 @@ namespace Firestorm.Tests.Integration.Http.Base.Tests
         public async Task ArtistsCollection_GetWithFields_DeserialisesAndCorrect()
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/artists?fields=id,name");
-            
             ResponseAssert.Success(response);
 
             string json = await response.Content.ReadAsStringAsync();
             dynamic obj = JsonConvert.DeserializeObject(json);
+            Assert.NotNull(obj);
 
             string name = obj[0].name;
             Assert.Equal(TestRepositories.ArtistName, name);

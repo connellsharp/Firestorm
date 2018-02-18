@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Firestorm
@@ -21,6 +22,43 @@ namespace Firestorm
                 separated = separated.ToLower();
 
             return separated;
+        }
+
+        /// <summary>
+        /// Removes the <see cref="separator"/> characters and capitalises the letter that comes after.
+        /// </summary>
+        /// <remarks>
+        /// Idea from http://stackoverflow.com/a/5796427/369247
+        /// Should this be in the core? it's related to field naming conventions
+        /// </remarks>
+        public static string MakeCamelCase(this string str, char separator = ' ', bool firstCapital = false)
+        {
+            var builder = new StringBuilder();
+
+            int i = 0;
+
+            if (firstCapital)
+            {
+                builder.Append(char.ToUpper(str[i]));
+                i++;
+            }
+
+            while (i < str.Length)
+            {
+                if (str[i] == separator)
+                {
+                    i++;
+                    builder.Append(char.ToUpper(str[i]));
+                }
+                else
+                {
+                    builder.Append(char.ToLower(str[i]));
+                }
+
+                i++;
+            }
+
+            return builder.ToString();
         }
 
         // from http://stackoverflow.com/a/4335913/369247

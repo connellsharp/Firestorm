@@ -16,7 +16,7 @@ namespace Firestorm.Client
             using (HttpClient client = HttpClientCreator.Create())
             {
                 HttpResponseMessage response = await client.GetAsync(Path);
-                return await DeserializeAsync<object>(response);
+                return await Serializer.DeserializeAsync<object>(response);
             }
         }
 
@@ -24,7 +24,7 @@ namespace Firestorm.Client
         {
             using (HttpClient client = HttpClientCreator.Create())
             {
-                HttpResponseMessage response = await client.PutAsync(Path, SerializeItemToContent(value));
+                HttpResponseMessage response = await client.PutAsync(Path, Serializer.SerializeItemToContent(value));
                 return await EnsureSuccessAsync(response);
             }
         }

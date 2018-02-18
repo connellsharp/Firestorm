@@ -16,7 +16,7 @@ namespace Firestorm.Endpoints.Formatting.Json
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Not implemented writing RestItemData to JSON yet.");
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
