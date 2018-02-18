@@ -1,11 +1,10 @@
 using System;
-using System.Collections.Generic;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Web;
 
 namespace Firestorm.Tests.Unit.Endpoints.Stubs
 {
-    public class TestEndpointContext : IRestEndpointContext, IRestUser, IRestCollectionQuery
+    public class TestEndpointContext : IRestEndpointContext, IRestUser
     {
         public const string TestUsername = "TestUsername";
         public const string TestRole = "TestRole";
@@ -14,9 +13,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Stubs
 
         public IRestUser User => this;
 
-        public IRestCollectionQuery GetQuery() => this;
-
-        public string Username { get; set; } = TestUsername;
+        public string Username { get; } = TestUsername;
 
         public bool IsAuthenticated { get; } = true;
 
@@ -24,14 +21,6 @@ namespace Firestorm.Tests.Unit.Endpoints.Stubs
         {
             return role == TestRole;
         }
-
-        public IEnumerable<string> SelectFields { get; set; }
-
-        public IEnumerable<FilterInstruction> FilterInstructions { get; }
-
-        public IEnumerable<SortInstruction> SortInstructions { get; set; }
-
-        public PageInstruction PageInstruction { get; set; }
 
         public event EventHandler OnDispose;
 

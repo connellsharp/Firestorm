@@ -14,11 +14,6 @@ namespace Firestorm.Tests.Unit.Stems.Roots
 
         public IRestUser User { get; set; }
 
-        public IRestCollectionQuery GetQuery()
-        {
-            throw new NotImplementedException();
-        }
-
         public event EventHandler OnDispose;
     }
 }
