@@ -19,7 +19,7 @@
       <dependency id="Firestorm.EntityFrameworkCore2" version="$(FsVersion)" />
       <dependency id="Firestorm.Stems.Roots.DataSource" version="$(FsVersion)" />
       <dependency id="Firestorm.Fluent.Start" version="$(FsVersion)" />
-      <dependency id="Newtonsoft.Json" version="10.0" />
+      <dependency id="Newtonsoft.Json" version="10.0.1" />
       <dependency id="Microsoft.AspNetCore.Http" version="2.0.0" />
     </dependencies>
     

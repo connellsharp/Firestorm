@@ -23,6 +23,6 @@
     </references>
   </metadata>
   <files>
-    <file src="..\..\src\Firestorm.EntityFramework6\bin\$(FsConfiguration)\net45\*.dll" target="lib\net45\"  />
+    <file src="..\..\src\Firestorm.EntityFramework6\bin\$(FsConfiguration)\net452\*.dll" target="lib\net452\"  />
   </files>
 </package>

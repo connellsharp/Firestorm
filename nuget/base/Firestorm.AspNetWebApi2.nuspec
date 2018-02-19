@@ -16,7 +16,7 @@
     <dependencies>
       <dependency id="Firestorm.Core" version="$(FsVersion)" />
       <dependency id="Firestorm.Endpoints" version="$(FsVersion)" />
-      <dependency id="Newtonsoft.Json" version="10.0" />
+      <dependency id="Newtonsoft.Json" version="10.0.1" />
       <dependency id="Microsoft.AspNet.WebApi" version="5.2.3" />
     </dependencies>
 
@@ -25,6 +25,6 @@
     </references>
   </metadata>
   <files>
-    <file src="..\..\src\Firestorm.AspNetWebApi2\bin\$(FsConfiguration)\net45\*.dll" target="lib\net45\"  />
+    <file src="..\..\src\Firestorm.AspNetWebApi2\bin\$(FsConfiguration)\net452\*.dll" target="lib\net452\"  />
   </files>
 </package>
