@@ -1,3 +1,4 @@
+using System.Linq;
 using Firestorm.Engine.Defaults;
 using Firestorm.Tests.Models;
 
@@ -8,7 +9,7 @@ namespace Firestorm.Tests.Integration.Http.Base.Models
     public class ArtistMemoryRepository : MemoryRepository<Artist>
     {
         public ArtistMemoryRepository()
-            :base(TestRepositories.GetArtists())
+            :base(TestRepositories.GetArtists().ToList())
         {
             
         }

@@ -9,11 +9,11 @@ namespace Firestorm.Engine.Defaults
     public class MemoryRepository<TItem> : IEngineRepository<TItem>
         where TItem : class, new()
     {
-        private readonly IList<TItem> _list;
+        private readonly ICollection<TItem> _collection;
 
-        public MemoryRepository(IList<TItem> items)
+        public MemoryRepository(ICollection<TItem> collection)
         {
-            _list = items;
+            _collection = collection;
         }
 
         public Task InitializeAsync()
@@ -23,18 +23,18 @@ namespace Firestorm.Engine.Defaults
 
         public IQueryable<TItem> GetAllItems()
         {
-            return _list.AsQueryable();
+            return _collection.AsQueryable();
         }
 
         public void MarkDeleted(TItem item)
         {
-            _list.Remove(item);
+            _collection.Remove(item);
         }
 
         public TItem CreateAndAttachItem()
         {
             var item = new TItem();
-            _list.Add(item);
+            _collection.Add(item);
             return item;
         }
 
