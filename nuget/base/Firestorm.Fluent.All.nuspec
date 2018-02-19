@@ -4,7 +4,7 @@
     <id>Firestorm.Fluent.All</id>
     <version>$(FsVersion)</version>
     <title>All the Firestorm Fluent API packages</title>
-    <description>Build REST APIs using the Firestorm Fluent API.</description>
+    <description>Build and host REST APIs using all the Firestorm Fluent API packages.</description>
     <tags>firestorm rest api fluent</tags>
 
     <authors>Connell Watkins</authors>

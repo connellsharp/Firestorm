@@ -15,6 +15,7 @@
 
     <dependencies>
       <dependency id="Firestorm.Core" version="$(FsVersion)" />
+      <dependency id="Firestorm.Data" version="$(FsVersion)" />
       <dependency id="Firestorm.Endpoints" version="$(FsVersion)" />
       <dependency id="Firestorm.Fluent" version="$(FsVersion)" />
     </dependencies>

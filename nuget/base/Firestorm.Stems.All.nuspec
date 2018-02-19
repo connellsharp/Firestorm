@@ -4,7 +4,7 @@
     <id>Firestorm.Stems.All</id>
     <version>$(FsVersion)</version>
     <title>All the Firestorm Root packages</title>
-    <description>Build Root classes for Firestorm Stems.</description>
+    <description>Build and host REST APIs using all thge packages for Firestorm Stems.</description>
     <tags>firestorm rest api stems roots</tags>
 
     <authors>Connell Watkins</authors>
