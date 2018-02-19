@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -5,21 +6,23 @@ namespace Firestorm.Core.Web
 {
     public class DirectoryBody : ResourceBody
     {
-        public DirectoryBody(RestDirectoryInfo directory)
+        private readonly Func<string, string> _pathNameSwitcher;
+
+        public DirectoryBody(RestDirectoryInfo directory, Func<string, string> pathNameSwitcher)
         {
+            _pathNameSwitcher = pathNameSwitcher;
             Resources = directory.Resources.Select(GetOutputData);
         }
 
         private RestItemData GetOutputData(RestResourceInfo info)
         {
-            // TODO naming conventions? move to endpoints somehow?
             var data = new RestItemData();
-
-            data.Add("name", info.Name);
-            data.Add("type", info.Type.ToString().SeparateCamelCase("_", true));
+            
+            data.Add("Name", _pathNameSwitcher(info.Name)); // keys switch naming conventions in .Formatting, but values don't
+            data.Add("Type", info.Type.ToString().SeparateCamelCase("_", true)); // TODO naming convention? and error types too
 
             if (!string.IsNullOrEmpty(info.Description))
-                data.Add("description", info.Description);
+                data.Add("Description", info.Description);
 
             return data;
         }

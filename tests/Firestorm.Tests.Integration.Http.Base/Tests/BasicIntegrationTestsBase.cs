@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -15,21 +16,30 @@ namespace Firestorm.Tests.Integration.Http.Base.Tests
         { }
 
         [Fact]
-        public async Task RootDirectory_Get_StatusOK()
+        public async Task RootDirectory_Get_ContainsArtistsCollection()
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/");
             ResponseAssert.Success(response);
+
+            string json = await response.Content.ReadAsStringAsync();
+            var arr = JsonConvert.DeserializeObject<RestItemData[]>(json);
+
+            Assert.Equal("artists", arr[0]["name"]);
+            Assert.Equal("collection", arr[0]["type"]);
         }
 
         [Fact]
-        public async Task ArtistsCollection_Get_StatusOK()
+        public async Task ArtistsCollection_Get_SuccessAndDeserialises()
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/artists");
             ResponseAssert.Success(response);
+
+            string json = await response.Content.ReadAsStringAsync();
+            var arr = JsonConvert.DeserializeObject<RestItemData[]>(json);
         }
 
         [Fact]
-        public async Task ArtistItem_Get_Deserialises()
+        public async Task ArtistItem_Get_SuccessAndDeserialises()
         {
             HttpResponseMessage response = await HttpClient.GetAsync("/artists/123");
             ResponseAssert.Success(response);

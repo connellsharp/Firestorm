@@ -29,7 +29,7 @@ namespace Firestorm.Endpoints
         public async Task<ResourceBody> GetAsync(IRestCollectionQuery query)
         {
             RestDirectoryInfo directory = await Directory.GetInfoAsync();
-            return new DirectoryBody(directory);
+            return new DirectoryBody(directory, Context.Configuration.NamingConventionSwitcher.ConvertCodedToDefault);
         }
 
         public async Task<Options> OptionsAsync()
