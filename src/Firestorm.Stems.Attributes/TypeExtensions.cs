@@ -5,6 +5,11 @@ using JetBrains.Annotations;
 
 namespace Firestorm.Stems.Attributes
 {
+    /// <remarks>
+    /// These utilities are copied into Fluent, Stems.Attributes and one in Data.
+    /// All these are the 'bottom' of their architecture and, other than this, don't share any code.
+    /// Perhaps this belongs in something like Firestorm.Utilities?
+    /// </remarks>
     public static class TypeExtensions
     {
         public static IEnumerable<Type> WhereTypeOfGenericInterface(this IEnumerable<Type> types, Type genericInterfaceDefinition)
@@ -40,8 +45,6 @@ namespace Firestorm.Stems.Attributes
         [CanBeNull]
         public static Type GetGenericSubclass(this Type type, Type genericSubclass)
         {
-            // TODO Exact duplicate of this in Fluent.TypeExceptions. Starting to sense a pattern here...
-
             while (type != null && type != typeof(object))
             {
                 Type genericDefinition = type.IsGenericType ? type.GetGenericTypeDefinition() : type;
@@ -63,14 +66,6 @@ namespace Firestorm.Stems.Attributes
         public static bool InheritsInterface(this Type type, Type interfaceType)
         {
             return type.GetInterface(interfaceType.Name) != null;
-        }
-
-        // TODO exact same method appears in Engine.ScalarFieldHelper
-        public static bool IsScalarType(this Type fieldType)
-        {
-            Type type = Nullable.GetUnderlyingType(fieldType) ?? fieldType;
-            TypeCode typeCode = Type.GetTypeCode(type);
-            return typeCode != TypeCode.Empty && typeCode != TypeCode.Object;
         }
     }
 }

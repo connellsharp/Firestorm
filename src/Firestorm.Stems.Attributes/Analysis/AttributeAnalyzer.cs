@@ -19,7 +19,7 @@ namespace Firestorm.Stems.Attributes.Analysis
 
         public void Analyze(Type stemType, IStemConfiguration configuration)
         {
-            Type stemBaseType = stemType.GetGenericSubclass(typeof(Stem<>))
+            Type stemBaseType = stemType.GetGenericInterface(typeof(Stem<>))
                 ?? throw new StemAttributeSetupException("Stem attributes applied to a class that does not derive from Stem<>.");
 
             Type itemType = stemBaseType.GetGenericArguments()[0];

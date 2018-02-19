@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection;
+using Firestorm.Fluent.Sources;
 
 namespace Firestorm.Fluent
 {
     public static class ApiItemBuilderExtensions
     {
+        public static IApiItemBuilder<TItem> Configure<TItem>(this IApiItemBuilder<TItem> builder, Action<IApiItemBuilder<TItem>> configureAction)
+        {
+            configureAction(builder);
+            return builder;
+        }
+
         public static IApiItemBuilder<TItem> AutoConfigure<TItem>(this IApiItemBuilder<TItem> builder)
         {
             return builder.AutoConfigure(null);
@@ -25,10 +32,7 @@ namespace Firestorm.Fluent
                 ParameterExpression paramExpression = Expression.Parameter(itemType);
                 LambdaExpression expression = Expression.Lambda(Expression.Property(paramExpression, property), paramExpression);
 
-                MethodInfo method = typeof(ApiItemBuilderExtensions).GetMethod(nameof(AddField), BindingFlags.NonPublic | BindingFlags.Static);
-                MethodInfo genericMethod = method.MakeGenericMethod(typeof(TItem), property.PropertyType);
-                Debug.Assert(genericMethod != null, "Couldn't find generic method to add field with reflection.");
-                genericMethod.Invoke(null, new object[] { builder, expression, configuration });
+                InvokePrivateStatic(nameof(AddField), new[] { typeof(TItem), property.PropertyType }, builder, expression, configuration);
             }
 
             return builder;
@@ -36,22 +40,40 @@ namespace Firestorm.Fluent
 
         private static IApiItemBuilder<TItem> AddField<TItem, TField>(IApiItemBuilder<TItem> builder, Expression<Func<TItem, TField>> expression, AutoConfiguration configuration)
         {
-            var fieldBuilder = builder.Field(expression);
+            IApiFieldBuilder<TItem, TField> fieldBuilder = builder.Field(expression);
 
             if (configuration.AllowWrite)
                 fieldBuilder.AllowWrite();
 
-            // TODO auto configure sub items and collections
-            //fieldBuilder.IsItem<TField>().AutoConfigure(configuration);
-            //fieldBuilder.IsCollection<IEnumerable<TField>, TField>().AutoConfigure(configuration);
+            if (typeof(TField).GetConstructor(new Type[0]) != null)
+                InvokePrivateStatic(nameof(AddFieldAsItem), new[] { typeof(TItem), typeof(TField) }, configuration, fieldBuilder);
+
+            Type enumNav = typeof(TField).GetGenericInterface(typeof(IEnumerable<>))?.GetGenericArguments()[0];
+            if (enumNav != null)
+                InvokePrivateStatic(nameof(AddFieldAsCollection), new[] { typeof(TItem), typeof(TField), enumNav }, configuration, fieldBuilder);
 
             return builder;
         }
 
-        public static IApiItemBuilder<TItem> Configure<TItem>(this IApiItemBuilder<TItem> builder, Action<IApiItemBuilder<TItem>> configureAction)
+        private static void AddFieldAsItem<TItem, TField>(AutoConfiguration configuration, IApiFieldBuilder<TItem, TField> fieldBuilder)
+            where TField : class, new()
         {
-            configureAction(builder);
-            return builder;
+            fieldBuilder.IsItem<TField>().AutoConfigure(configuration);
+        }
+
+        private static void AddFieldAsCollection<TItem, TField, TNav>(AutoConfiguration configuration, IApiFieldBuilder<TItem, TField> fieldBuilder)
+            where TField : class, IEnumerable<TNav>
+            where TNav : class, new()
+        {
+            fieldBuilder.IsCollection<TField, TNav>().AutoConfigure(configuration);
+        }
+
+        private static void InvokePrivateStatic(string methodName, Type[] types, params object[] args)
+        {
+            MethodInfo method = typeof(ApiItemBuilderExtensions).GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo genericMethod = method?.MakeGenericMethod(types);
+            Debug.Assert(genericMethod != null, "Couldn't find generic method with reflection.");
+            genericMethod.Invoke(null, args);
         }
     }
 }
