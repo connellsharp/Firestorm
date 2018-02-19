@@ -9,11 +9,11 @@ namespace Firestorm.Engine.Defaults
     public class MemoryRepository<TItem> : IEngineRepository<TItem>
         where TItem : class, new()
     {
-        private readonly List<TItem> _list;
+        private readonly IList<TItem> _list;
 
-        public MemoryRepository(IEnumerable<TItem> items)
+        public MemoryRepository(IList<TItem> items)
         {
-            _list = items.ToList();
+            _list = items;
         }
 
         public Task InitializeAsync()
