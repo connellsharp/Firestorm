@@ -56,10 +56,10 @@ namespace Firestorm.Tests.Unit.Stems
             var artist = new Artist();
 
             provider1.GetWriter("Label").SetValueAsync(artist, "Awesome", new VoidTransaction());
-            Assert.Equal(artist.Label, "first_Awesome");
+            Assert.Equal("first_Awesome", artist.Label);
 
             provider2.GetWriter("Label").SetValueAsync(artist, "Awesome", new VoidTransaction());
-            Assert.Equal(artist.Label, "second_Awesome");
+            Assert.Equal("second_Awesome", artist.Label);
         }
 
         private class LabelSetterStem : Stem<Artist>

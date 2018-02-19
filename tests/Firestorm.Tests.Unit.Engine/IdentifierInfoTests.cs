@@ -12,7 +12,7 @@ namespace Firestorm.Tests.Unit.Engine
             var artist = new Artist(123, TestRepositories.ArtistName);
             var keyInfo = new IDConventionIdentifierInfo<Artist>();
             var key = keyInfo.GetValue(artist);
-            Assert.Equal(key, 123);
+            Assert.Equal(123, key);
         }
 
         private static FieldDictionary<Artist> GetArtistFieldMappings()

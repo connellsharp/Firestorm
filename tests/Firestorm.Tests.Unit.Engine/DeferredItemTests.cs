@@ -29,7 +29,7 @@ namespace Firestorm.Tests.Unit.Engine
             var postedNewItem = new IdentifiedItem<Artist>(testID.ToString(), repo, new IDConventionIdentifierInfo<Artist>());
             await postedNewItem.LoadAsync();
 
-            Assert.Equal(postedNewItem.LazyState, LazyState.Created);
+            Assert.Equal(LazyState.Created, postedNewItem.LazyState);
             Assert.NotNull(postedNewItem.LoadedItem);
         }
 
@@ -45,7 +45,7 @@ namespace Firestorm.Tests.Unit.Engine
             var postedNewItem = new IdentifiedItem<Artist>(testID.ToString(), repo, new IDConventionIdentifierInfo<Artist>());
             await postedNewItem.LoadAsync();
 
-            Assert.Equal(postedNewItem.LazyState, LazyState.LoadedItem);
+            Assert.Equal(LazyState.LoadedItem, postedNewItem.LazyState);
             Assert.Equal(postedNewItem.LoadedItem, artist);
         }
     }

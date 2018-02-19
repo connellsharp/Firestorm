@@ -21,7 +21,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             var itemData = await _restCollection.GetItem("123").GetDataAsync(new[] { "ID" });
 
-            Assert.Equal(itemData["ID"], 123);
+            Assert.Equal(123, itemData["ID"]);
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             object scalar = await _restCollection.GetItem("123").GetScalar("ID").GetAsync();
 
-            Assert.Equal(scalar, 123);
+            Assert.Equal(123, scalar);
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             var itemData = await _restCollection.GetItem("123").GetDataAsync(null);
 
-            Assert.Equal(itemData["ID"], 123);
+            Assert.Equal(123, itemData["ID"]);
             Assert.Equal(itemData["Name"], TestRepositories.ArtistName);
             Assert.False(itemData.ContainsKey("Albums"));
         }
@@ -67,7 +67,7 @@ namespace Firestorm.Tests.Functionality.Stems
             var collectionData = await _restCollection.QueryDataAsync(idFilterQuery);
             var itemData = collectionData.Items.Single();
 
-            Assert.Equal(itemData["ID"], 123);
+            Assert.Equal(123, itemData["ID"]);
             Assert.False(itemData.ContainsKey("Name"));
         }
 

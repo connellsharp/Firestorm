@@ -48,7 +48,7 @@ namespace Firestorm.Tests.Integration.Data.Base
         {
             var field = _collection.GetItem(1).GetScalar("id");
             int id = (int)await field.GetAsync();
-            Assert.Equal(id, 1);
+            Assert.Equal(1, id);
         }
 
         [Fact]
@@ -56,7 +56,7 @@ namespace Firestorm.Tests.Integration.Data.Base
         {
             var field = _collection.GetItem(1).GetScalar("name");
             string name = (string)await field.GetAsync();
-            Assert.Equal(name, "Eminem");
+            Assert.Equal("Eminem", name);
         }
 
         [Fact]
