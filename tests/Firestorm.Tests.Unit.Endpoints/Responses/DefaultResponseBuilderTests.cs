@@ -4,6 +4,7 @@ using Xunit;
 
 namespace Firestorm.Tests.Unit.Endpoints.Responses
 {
+
     public class DefaultResponseBuilderTests
     {
         public DefaultResponseBuilderTests()

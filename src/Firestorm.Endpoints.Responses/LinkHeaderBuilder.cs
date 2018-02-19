@@ -28,19 +28,19 @@ namespace Firestorm.Endpoints.Responses
 
         public void SetHeaders(Response response)
         {
-            string headerValue = GetHeaderValue(response.ResourcePath);
+            string headerValue = GetHeaderValue();
 
             if (headerValue != null)
                 response.Headers["Link"] = headerValue;
         }
 
-        public string GetHeaderValue(string resourcePath)
+        public string GetHeaderValue()
         {
             var builder = new StringBuilder();
 
             foreach (var link in _links)
             {
-                builder.AppendFormat("<{0}?{1}>;rel=\"{2}\", ", resourcePath, link.Value, link.Key);
+                builder.AppendFormat("<{0}>;rel=\"{1}\", ", link.Value, link.Key);
             }
 
             if (builder.Length == 0)

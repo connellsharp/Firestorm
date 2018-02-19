@@ -10,6 +10,9 @@ namespace Firestorm.Endpoints.Responses
             ResourcePath = resourcePath;
         }
 
+        /// <remarks>
+        /// This is here because some modifiers need to calculate a URI to add headers e.g. Location or Link.
+        /// </remarks>
         public string ResourcePath { get; private set; }
 
         public HttpStatusCode StatusCode { get; set; }
