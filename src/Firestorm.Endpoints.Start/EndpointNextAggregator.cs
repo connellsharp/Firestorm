@@ -50,14 +50,14 @@ namespace Firestorm.Endpoints.Start
         private class NextEndpointNotFoundException : RestApiException
         {
             public NextEndpointNotFoundException(AggregatorNextPath dir)
-                : base(ErrorStatus.NotFound, "The '" + dir + "' endpoint was not found.")
+                : base(ErrorStatus.NotFound, "The '" + dir.Raw + "' endpoint was not found.")
             { }
         }
 
         private class NextEndpointErrorException : RestApiException
         {
             public NextEndpointErrorException(AggregatorNextPath dir, Exception innerException)
-                : base("Error loading the '" + dir + "' endpoint: " + innerException.Message, innerException)
+                : base("Error loading the '" + dir.Raw + "' endpoint: " + innerException.Message, innerException)
             { }
         }
     }

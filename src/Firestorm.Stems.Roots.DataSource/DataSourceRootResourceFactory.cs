@@ -17,7 +17,7 @@ namespace Firestorm.Stems.Roots.DataSource
         public IEnumerable<Type> GetStemTypes()
         {
             if (DataSource == null) throw new StemStartSetupException("DataSource must be provided.");
-            if (StemTypeGetter == null) throw new StemStartSetupException("StemTypeLocaator must be provided.");
+            if (StemTypeGetter == null) throw new StemStartSetupException("StemTypeLocator must be provided.");
 
             _stemTypeDictionary = new AttributedSuffixedDerivedTypeDictionary(typeof(Stem), "Stem", typeof(DataSourceRootAttribute));
             _stemTypeDictionary.AddVaidTypes(StemTypeGetter);
