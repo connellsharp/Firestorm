@@ -14,8 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Firestorm.Stems.Attributes.Basic\Firestorm.Stems.Attributes.Basic.csproj" />
-    <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.DataSource\Firestorm.Stems.Roots.DataSource.csproj" />
-    <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.Derive\Firestorm.Stems.Roots.Derive.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.Start\Firestorm.Stems.Roots.Start.csproj" />
     <ProjectReference Include="..\Firestorm.Tests.Unit\Firestorm.Tests.Unit.csproj" />
   </ItemGroup>
