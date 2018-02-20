@@ -48,7 +48,7 @@ namespace Firestorm.Fluent
             if (typeof(TField).GetConstructor(new Type[0]) != null)
                 InvokePrivateStatic(nameof(AddFieldAsItem), new[] { typeof(TItem), typeof(TField) }, configuration, fieldBuilder);
 
-            Type enumNav = typeof(TField).GetGenericInterface(typeof(IEnumerable<>))?.GetGenericArguments()[0];
+            Type enumNav = typeof(TField).GetGenericInterface(typeof(ICollection<>))?.GetGenericArguments()[0];
             if (enumNav != null)
                 InvokePrivateStatic(nameof(AddFieldAsCollection), new[] { typeof(TItem), typeof(TField), enumNav }, configuration, fieldBuilder);
 
