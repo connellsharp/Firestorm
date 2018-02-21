@@ -4,6 +4,7 @@ using Firestorm.Data;
 using Firestorm.Engine.Subs;
 using Firestorm.Stems.Attributes;
 using Firestorm.Stems.Fuel.Resolving;
+using Firestorm.Stems.Roots.Combined;
 
 namespace Firestorm.Stems.Roots.DataSource
 {

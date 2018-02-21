@@ -1,4 +1,4 @@
-namespace Firestorm.Stems.Roots.DataSource
+namespace Firestorm.Stems.Roots.Combined
 {
     internal interface IDataSourceCollectionCreator
     {

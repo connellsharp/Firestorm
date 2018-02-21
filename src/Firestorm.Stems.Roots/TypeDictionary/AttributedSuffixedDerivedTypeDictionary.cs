@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Firestorm.Stems.Roots.DataSource
+namespace Firestorm.Stems.Roots
 {
     internal class AttributedSuffixedDerivedTypeDictionary : SuffixedDerivedTypeDictionary
     {

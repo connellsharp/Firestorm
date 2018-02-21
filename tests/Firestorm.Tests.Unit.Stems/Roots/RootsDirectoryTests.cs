@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Stems;
 using Firestorm.Stems.Roots;
+using Firestorm.Stems.Roots.Combined;
 using Firestorm.Stems.Roots.Derive;
 using Xunit;
 
@@ -13,9 +14,10 @@ namespace Firestorm.Tests.Unit.Stems.Roots
         [Fact]
         public async Task AddToCollection_EmptyObject_DoesntThrow()
         {
-            var namedTypeDictionary = new NamedTypeDictionary();
-            namedTypeDictionary.AddType(typeof(TestRoot));
-            var directory = new RootsDirectory(new DefaultStemConfiguration(), new TestRootRequest(), namedTypeDictionary);
+            var namedTypedDictionary = new NamedTypeDictionary();
+            namedTypedDictionary.AddType(typeof(TestRoot));
+
+            var directory = new RootsDirectory(new DefaultStemConfiguration(), new DerivedRootStartInfoFactory(namedTypedDictionary), new TestRootRequest());
 
             var rootCollection = directory.GetCollection("TestRoot"); // normally use the Suffixed type dictionary
 

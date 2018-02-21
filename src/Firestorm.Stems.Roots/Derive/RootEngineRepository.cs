@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Data;
-using Firestorm.Engine;
+using Firestorm.Stems.Roots.Combined;
 
 namespace Firestorm.Stems.Roots.Derive
 {
@@ -10,12 +10,10 @@ namespace Firestorm.Stems.Roots.Derive
         where TItem : class
     {
         private readonly Root<TItem> _root;
-        private readonly Stem<TItem> _stem;
 
-        public RootEngineRepository(Root<TItem> root, Stem<TItem> stem)
+        public RootEngineRepository(Root<TItem> root)
         {
             _root = root;
-            _stem = stem;
         }
 
         public Task ForEachAsync<T>(IQueryable<T> query, Action<T> action)
@@ -36,18 +34,12 @@ namespace Firestorm.Stems.Roots.Derive
         public TItem CreateAndAttachItem()
         {
             TItem newItem = _root.CreateAndAttachItem();
-            if (newItem == null)
-                return null;
-
-            _stem.OnItemCreated(newItem);
-            
             return newItem;
         }
 
         public void MarkDeleted(TItem item)
         {
-            if (!_stem.MarkDeleted(item))
-                _root.MarkDeleted(item);
+            _root.MarkDeleted(item);
         }
     }
 }

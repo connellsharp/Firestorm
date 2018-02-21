@@ -3,7 +3,7 @@ using Firestorm.Engine;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Stems.Fuel;
 
-namespace Firestorm.Stems.Roots.DataSource
+namespace Firestorm.Stems.Roots.Combined
 {
     internal class DataSourceCollectionCreator<TItem> : IDataSourceCollectionCreator
         where TItem : class, new()

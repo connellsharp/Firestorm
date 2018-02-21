@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Firestorm.Engine.Subs;
 using Firestorm.Stems.Attributes;
 using Firestorm.Stems.Attributes.Analysis;
 
