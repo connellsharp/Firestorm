@@ -16,8 +16,6 @@
     <dependencies>
       <dependency id="Firestorm.Stems" version="$(FsVersion)" />
       <dependency id="Firestorm.Stems.Roots" version="$(FsVersion)" />
-      <dependency id="Firestorm.Stems.Roots.Derive" version="$(FsVersion)" />
-      <dependency id="Firestorm.Stems.Roots.DataSource" version="$(FsVersion)" />
       <dependency id="Firestorm.Stems.Roots.Start" version="$(FsVersion)" />
     </dependencies>
   </metadata>
