@@ -31,9 +31,10 @@ namespace Firestorm.Stems.Roots.Derive
 
         public void Dispose()
         {
-            // this transaction doesn't actually get disposed by the RootCollectionCreator when the Root is disposed
-            // because the line below would cause an infinite loop. Perhaps it shouldn't be here anyway?
-            _root.Dispose();
+            // this transaction is actually disposed by the Stem and Root when they are disposed.
+            // therefore the line below would cause an infinite loop.
+            
+            //_root.Dispose();
         }
     }
 }
