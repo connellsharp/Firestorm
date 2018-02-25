@@ -1,4 +1,5 @@
-﻿using Firestorm.EntityFrameworkCore2;
+﻿using System.Linq;
+using Firestorm.EntityFrameworkCore2;
 using Firestorm.Tests.Integration.Data.Base;
 using Firestorm.Tests.Integration.Data.Base.Models;
 using JetBrains.Annotations;
@@ -12,6 +13,13 @@ namespace Firestorm.Tests.Integration.Data.EntityFrameworkCore2
         public EntityFrameworkCore2Tests(ExampleDataContext context) 
             : base(new EFCoreDataTransaction<ExampleDataContext>(context), new EFCoreRepository<Artist>(context.Artists))
         {
+            context.Database.EnsureCreated();
+
+            if (!context.Artists.Any())
+            {
+                context.Artists.AddRange(ExampleDataSets.GetArtists());
+                context.SaveChanges();
+            }
         }
     }
 }
