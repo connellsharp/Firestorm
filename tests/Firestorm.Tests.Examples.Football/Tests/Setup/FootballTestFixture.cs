@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using Remotion.Linq.Parsing.ExpressionVisitors.Transformation.PredefinedTransformations;
 
 namespace Firestorm.Tests.Examples.Football.Tests
 {
@@ -12,11 +13,13 @@ namespace Firestorm.Tests.Examples.Football.Tests
 
         public FootballTestFixture()
         {
-            _hostClientPairs = new Dictionary<FirestormApiTech, HostClientPair>
+            _hostClientPairs = new Dictionary<FirestormApiTech, HostClientPair>();
+
+            foreach (var args in new FootballHttpClientIndexes())
             {
-                { FirestormApiTech.Stems, new HostClientPair(_startPort++, FirestormApiTech.Stems)} ,
-                { FirestormApiTech.Fluent, new HostClientPair(_startPort++, FirestormApiTech.Fluent)}
-            };
+                var tech = (FirestormApiTech) args[0];
+                _hostClientPairs.Add(tech, new HostClientPair(_startPort++, tech));
+            }
         }
 
         public HttpClient GetClient(FirestormApiTech index)
