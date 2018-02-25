@@ -1,6 +1,10 @@
 ﻿namespace Firestorm.Fluent
 {
-    public abstract class ApiContext
+    /// <summary>
+    /// An abstract API context that can use <see cref="ApiRoot{TItem}"/>
+    /// properties and allows overriding <see cref="OnApiCreating"/> to use the builder pattern.
+    /// </summary>
+    public abstract class ApiContext : IApiContext
     {
         protected ApiContext(ApiContextOptions options)
         {
@@ -11,10 +15,18 @@
             : this(new ApiContextOptions())
         { }
 
-        protected internal virtual void OnApiCreating(IApiBuilder apiBuilder)
+        protected internal ApiContextOptions Options { get; }
+
+        public void CreateApi(IApiBuilder apiBuilder)
         {
+            var autoConfigurer = new AutoConfigurer(Options.RootConfiguration);
+            autoConfigurer.AddApiRootProperties(apiBuilder, GetType());
+            
+            OnApiCreating(apiBuilder);
         }
 
-        protected internal ApiContextOptions Options { get; }
+        protected virtual void OnApiCreating(IApiBuilder apiBuilder)
+        {
+        }
     }
 }

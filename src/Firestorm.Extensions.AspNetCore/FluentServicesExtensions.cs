@@ -16,14 +16,7 @@ namespace Firestorm.Extensions.AspNetCore
             where TApiContext : ApiContext, new()
         {
             var context = new TApiContext();
-
-            builder.AddStartResourceFactory(sp => new FluentStartResourceFactory
-            {
-                ApiContext = context,
-                DataSource = sp.GetService<IDataSource>()
-            });
-
-            return builder;
+            return builder.AddFluent(context);
         }
         
         /// <summary>
@@ -32,10 +25,17 @@ namespace Firestorm.Extensions.AspNetCore
         public static IFirestormServicesBuilder AddFluent(this IFirestormServicesBuilder builder, Action<IApiBuilder> buildAction)
         {
             var context = new DelegateApiContext(buildAction);
-            
+            return builder.AddFluent(context);
+        }
+        
+        /// <summary>
+        /// Configures Firestorm Fluent API using a <see cref="apiContext"/>.
+        /// </summary>
+        public static IFirestormServicesBuilder AddFluent(this IFirestormServicesBuilder builder, IApiContext apiContext)
+        {            
             builder.AddStartResourceFactory(sp => new FluentStartResourceFactory
             {
-                ApiContext = context,
+                ApiContext = apiContext,
                 DataSource = sp.GetService<IDataSource>()
             });
 

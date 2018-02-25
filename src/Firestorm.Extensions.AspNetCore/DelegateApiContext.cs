@@ -3,7 +3,7 @@ using Firestorm.Fluent;
 
 namespace Firestorm.Extensions.AspNetCore
 {
-    public class DelegateApiContext : ApiContext
+    public class DelegateApiContext : IApiContext
     {
         private readonly Action<IApiBuilder> _onApiCreatingAction;
 
@@ -12,10 +12,9 @@ namespace Firestorm.Extensions.AspNetCore
             _onApiCreatingAction = onApiCreatingAction;
         }
 
-        protected override void OnApiCreating(IApiBuilder apiBuilder)
+        public void CreateApi(IApiBuilder apiBuilder)
         {
             _onApiCreatingAction(apiBuilder);
-            base.OnApiCreating(apiBuilder);
         }
     }
 }

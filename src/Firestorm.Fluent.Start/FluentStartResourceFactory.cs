@@ -12,7 +12,7 @@ namespace Firestorm.Fluent.Start
     {
         private IApiDirectorySource _apiDirectorySource;
 
-        public ApiContext ApiContext { get; set; }
+        public IApiContext ApiContext { get; set; }
 
         public IDataSource DataSource { get; set; }
 
@@ -21,8 +21,9 @@ namespace Firestorm.Fluent.Start
             var engineModel = new EngineApiModel(DataSource);
             var builder = new EngineApiBuilder(engineModel);
 
-            var sourceCreator = new SourceCreator();
-            _apiDirectorySource = sourceCreator.CreateSource(ApiContext, builder);
+            ApiContext.CreateApi(builder);
+            
+            _apiDirectorySource = builder.BuildSource();
         }
 
         public IRestResource GetStartResource(IRestEndpointContext endpointContext)
