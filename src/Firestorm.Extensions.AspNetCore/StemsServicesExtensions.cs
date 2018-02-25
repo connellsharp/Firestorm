@@ -39,7 +39,7 @@ namespace Firestorm.Extensions.AspNetCore
                 RootResourceFactory = sp.GetService<IRootResourceFactory>()
             });
 
-            builder.Services.AddSingleton(new StemTypesLocation(assembly, baseNamespace));
+            builder.Services.AddSingleton(new AxisTypesLocation<Stem>(assembly, baseNamespace));
 
             return builder;
         }

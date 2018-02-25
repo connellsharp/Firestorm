@@ -2,8 +2,6 @@
 using Firestorm.Data;
 using Firestorm.EntityFrameworkCore2;
 using Firestorm.AspNetCore2;
-using Firestorm.Stems.Roots;
-using Firestorm.Stems.Roots.DataSource;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -42,12 +40,6 @@ namespace Firestorm.Extensions.AspNetCore
                 var requestProvider = new RequestServiceProvider(sp);
                 var dbContextFactory = new EntitiesContextFactory<TDbContext>(requestProvider, options);
                 return new EFCoreDataSource<TDbContext>(dbContextFactory);
-            });
-
-            builder.Services.AddSingleton<IRootResourceFactory>(sp => new DataSourceRootResourceFactory
-            {
-                DataSource = sp.GetService<IDataSource>(),
-                StemTypeGetter = sp.GetService<StemTypesLocation>().GetTypeGetter()
             });
 
             return builder;
