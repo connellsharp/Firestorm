@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Firestorm.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Firestorm.EntityFrameworkCore2
 {
-    public class EFCoreDataSource<TDbContext> : IDataSource
+    public class EFCoreDataSource<TDbContext> : IDiscoverableDataSource
         where TDbContext : DbContext
     {
         private readonly IDbContextFactory<TDbContext> _dbContextFactory;
@@ -29,6 +31,14 @@ namespace Firestorm.EntityFrameworkCore2
             TDbContext database = entitiesTransaction.DbContext;
             DbSet<TEntity> repo = database.Set<TEntity>();
             return new EFCoreRepository<TEntity>(repo);
+        }
+
+        public IEnumerable<Type> FindRespositoryTypes()
+        {
+            using (TDbContext database = _dbContextFactory.Create())
+            {
+                return database.Model.GetEntityTypes().Select(t => t.ClrType).ToList();
+            }
         }
     }
 }
