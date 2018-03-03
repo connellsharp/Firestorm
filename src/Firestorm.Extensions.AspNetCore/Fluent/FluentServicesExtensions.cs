@@ -29,10 +29,38 @@ namespace Firestorm.Extensions.AspNetCore
         }
         
         /// <summary>
+        /// Configures Firestorm Fluent API using the registered service for <see cref="IApiContext"/>.
+        /// </summary>
+        public static IFirestormServicesBuilder AddFluent(this IFirestormServicesBuilder builder)
+        {
+            builder.AddStartResourceFactory(sp => new FluentStartResourceFactory
+            {
+                ApiContext = sp.GetService<IApiContext>(),
+                DataSource = sp.GetService<IDataSource>()
+            });
+
+            return builder;
+        }
+        
+        /// <summary>
+        /// Configures Firestorm Fluent API by automatically finding the root item types and automatically configuring them.
+        /// </summary>
+        public static IFirestormServicesBuilder AddFluent(this IFirestormServicesBuilder builder, AutoConfiguration configuration)
+        {
+            builder.AddStartResourceFactory(sp => new FluentStartResourceFactory
+            {
+                ApiContext = new AutomaticApiContext(sp.GetService<IItemTypeFinder>().FindItemTypes(), configuration),
+                DataSource = sp.GetService<IDataSource>()
+            });
+
+            return builder;
+        }
+        
+        /// <summary>
         /// Configures Firestorm Fluent API using a <see cref="apiContext"/>.
         /// </summary>
         public static IFirestormServicesBuilder AddFluent(this IFirestormServicesBuilder builder, IApiContext apiContext)
-        {            
+        {
             builder.AddStartResourceFactory(sp => new FluentStartResourceFactory
             {
                 ApiContext = apiContext,

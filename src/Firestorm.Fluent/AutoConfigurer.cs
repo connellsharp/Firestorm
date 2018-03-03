@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection;
 using Firestorm.Fluent.Sources;
+using JetBrains.Annotations;
 
 namespace Firestorm.Fluent
 {
@@ -25,18 +26,23 @@ namespace Firestorm.Fluent
                     continue;
 
                 Type itemType = rootType.GetGenericArguments()[0];
-                
-                InvokePrivate(nameof(AddRootItem), new[] { itemType }, builder, property.Name);
+                AddRootItem(builder, itemType, property.Name);
             }
         }
 
-        private void AddRootItem<TItem>(IApiBuilder builder, string rootName)
+        public void AddRootItem(IApiBuilder builder, Type itemType, [CanBeNull] string rootName)
+        {
+            InvokePrivate(nameof(AddRootItem), new[] {itemType}, builder, rootName);
+        }
+
+        private void AddRootItem<TItem>(IApiBuilder builder, [CanBeNull] string rootName)
             where TItem : class, new()
         {
             var itemBuilder = builder.Item<TItem>();
             AddItem(itemBuilder);
-            
-            itemBuilder.RootName = rootName;
+
+            if (!string.IsNullOrEmpty(rootName))
+                itemBuilder.RootName = rootName;
         }
         
         public void AddItem<TItem>(IApiItemBuilder<TItem> builder)
@@ -84,12 +90,12 @@ namespace Firestorm.Fluent
             AddItem<TNav>(subItemBuilder);
         }
 
-        private static void InvokePrivate(string methodName, Type[] types, params object[] args)
+        private void InvokePrivate(string methodName, Type[] types, params object[] args)
         {
             MethodInfo method = typeof(AutoConfigurer).GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance);
             MethodInfo genericMethod = method?.MakeGenericMethod(types);
             Debug.Assert(genericMethod != null, "Couldn't find generic method with reflection.");
-            genericMethod.Invoke(null, args);
+            genericMethod.Invoke(this, args);
         }
 
     }

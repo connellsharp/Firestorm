@@ -9,4 +9,7 @@
     <ProjectReference Include="..\Firestorm.Fluent.Start\Firestorm.Fluent.Start.csproj" />
     <ProjectReference Include="..\Firestorm.Fluent\Firestorm.Fluent.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Fluebnt" />
+  </ItemGroup>
 </Project>

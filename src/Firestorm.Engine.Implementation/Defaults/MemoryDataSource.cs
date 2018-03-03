@@ -6,7 +6,7 @@ using Firestorm.Data;
 
 namespace Firestorm.Engine.Defaults
 {
-    public class MemoryDataSource : IDataSource, IEnumerable
+    public class MemoryDataSource : IDiscoverableDataSource, IEnumerable<IList>
     {
         private readonly ConcurrentDictionary<Type, IList> _lists = new ConcurrentDictionary<Type, IList>();
 
@@ -31,6 +31,16 @@ namespace Firestorm.Engine.Defaults
         private List<TEntity> GetList<TEntity>()
         {
             return (List<TEntity>)_lists.GetOrAdd(typeof(TEntity), t => new List<TEntity>());
+        }
+
+        public IEnumerable<Type> FindRespositoryTypes()
+        {
+            return _lists.Keys;
+        }
+
+        IEnumerator<IList> IEnumerable<IList>.GetEnumerator()
+        {
+            return _lists.Values.GetEnumerator();
         }
 
         public IEnumerator GetEnumerator()
