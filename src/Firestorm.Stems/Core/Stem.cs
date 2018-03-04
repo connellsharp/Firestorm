@@ -15,6 +15,11 @@ namespace Firestorm.Stems
         {
             get { return null; }
         }
+        
+        protected static Expression<Func<TItem, TField>> Expression<TField>(Expression<Func<TItem, TField>> expression)
+        {
+            return expression;
+        }
 
         public virtual void OnItemCreated(TItem newItem)
         {
