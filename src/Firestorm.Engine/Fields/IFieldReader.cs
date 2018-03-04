@@ -25,15 +25,5 @@ namespace Firestorm.Engine.Fields
         /// </summary>
         [CanBeNull]
         IFieldValueReplacer<TItem> Replacer { get; }
-
-        /// <summary>
-        /// Gets a predicate expression to filter the collection.
-        /// </summary>
-        Expression GetFilterExpression(ParameterExpression itemPram, FilterComparisonOperator comparisonOperator, string valueString);
-
-        /// <summary>
-        /// Gets a select expression to sort the collection by.
-        /// </summary>
-        LambdaExpression GetSortExpression(ParameterExpression itemPram);
     }
 }

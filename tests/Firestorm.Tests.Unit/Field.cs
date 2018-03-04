@@ -7,6 +7,8 @@ namespace Firestorm.Tests.Unit.Engine.Models
     {
         public IFieldReader<T> Reader { get; set; }
 
+        public IFieldCollator<T> Collator { get; set; }
+        
         public IFieldWriter<T> Writer { get; set; }
     }
 }

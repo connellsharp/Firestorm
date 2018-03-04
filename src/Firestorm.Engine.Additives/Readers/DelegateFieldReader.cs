@@ -28,15 +28,5 @@ namespace Firestorm.Engine.Additives.Readers
         }
 
         public IFieldValueReplacer<TItem> Replacer { get; } = null;
-
-        public Expression GetFilterExpression(ParameterExpression itemPram, FilterComparisonOperator comparisonOperator, string valueString)
-        {
-            throw new NotSupportedException("This field cannot be used as a filter.");
-        }
-
-        public LambdaExpression GetSortExpression(ParameterExpression itemPram)
-        {
-            throw new NotSupportedException("This field cannot be used in the sort clause.");
-        }
     }
 }

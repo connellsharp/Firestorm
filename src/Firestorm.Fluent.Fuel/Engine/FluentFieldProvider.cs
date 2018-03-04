@@ -43,6 +43,11 @@ namespace Firestorm.Fluent.Fuel.Engine
             return _fieldModels[fieldName].Reader;
         }
 
+        public IFieldCollator<TItem> GetCollator(string fieldName)
+        {
+            return _fieldModels[fieldName].Collator;
+        }
+
         public IFieldWriter<TItem> GetWriter(string fieldName)
         {
             ApiFieldModel<TItem> model = _fieldModels[fieldName];

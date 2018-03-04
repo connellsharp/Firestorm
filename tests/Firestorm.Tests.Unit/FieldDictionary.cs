@@ -10,13 +10,12 @@ using Firestorm.Engine.Additives.Writers;
 using Firestorm.Engine.Fields;
 using JetBrains.Annotations;
 
-namespace Firestorm.Tests.Unit.Stems
+namespace Firestorm.Tests.Unit.Engine.Models
 {
     /// <summary>
     /// Maps API field names to the relevent properties.
-    /// TODO exact duplicate of one in Firestorm.Tests.Engine.Models. Share?
     /// </summary>
-    ///  <typeparam name="TItem">The type of item to map field names for.</typeparam>
+    /// <typeparam name="TItem">The type of item to map field names for.</typeparam>
     public class FieldDictionary<TItem> : Dictionary<string, Field<TItem>>, IFieldProvider<TItem>
         where TItem : class
     {
@@ -43,6 +42,11 @@ namespace Firestorm.Tests.Unit.Stems
             return this[fieldName].Reader;
         }
 
+        public IFieldCollator<TItem> GetCollator(string fieldName)
+        {
+            return this[fieldName].Collator;
+        }
+
         public IFieldWriter<TItem> GetWriter(string fieldName)
         {
             return this[fieldName].Writer;
@@ -58,19 +62,14 @@ namespace Firestorm.Tests.Unit.Stems
         /// </summary>
         public void Add<TProperty>(string apiFieldName, [NotNull] Expression<Func<TItem, TProperty>> propertyExpression)
         {
+            var reader = new PropertyExpressionFieldReader<TItem, TProperty>(propertyExpression);
+            
             Add(apiFieldName, new Field<TItem>
             {
-                Reader = new PropertyExpressionFieldReader<TItem, TProperty>(propertyExpression),
+                Reader = reader,
+                Collator = new BasicFieldCollator<TItem>(reader),
                 Writer = new PropertyExpressionFieldWriter<TItem, TProperty>(propertyExpression)
             });
         }
-    }
-
-    public class Field<T>
-        where T : class
-    {
-        public IFieldReader<T> Reader { get; set; }
-
-        public IFieldWriter<T> Writer { get; set; }
     }
 }

@@ -41,7 +41,7 @@ namespace Firestorm.Engine.Queryable
 
                 IFieldReader<TItem> reader = fieldProvider.GetReader(fieldName);
                 if (reader == null)
-                    throw new FieldOperationNotAllowedException(fieldName, FieldOperationNotAllowedException.Operation.Read);
+                    throw new FieldOperationNotAllowedException(fieldName, FieldOperation.Read);
 
                 dict.Add(fieldName, reader);
             }

@@ -41,6 +41,12 @@ namespace Firestorm.Fluent.Fuel.Builder
             return this;
         }
 
+        public IApiFieldBuilder<TItem, TField> AllowCollate()
+        {
+            _fieldModel.Collator = new BasicFieldCollator<TItem>(_fieldModel.Reader);
+            return this;
+        }
+
         public IApiFieldBuilder<TItem, TField> AllowWrite()
         {
             _setter = new DefaultNavigationSetter<TItem, TField>(_expression);
@@ -72,6 +78,7 @@ namespace Firestorm.Fluent.Fuel.Builder
             var navTools = new SubWriterTools<TItem, TNavItem, TNavItem>(castedExpression, itemModel.Events, _setter);
 
             _fieldModel.Reader = new SubItemFieldReader<TItem, TNavItem>(castedExpression, subContext);
+            _fieldModel.Collator = new NotSupportedFieldCollator<TItem>("sub items");
             _fieldModel.ResourceGetter = new SubItemResourceGetter<TItem, TNavItem>(castedExpression, subContext);
             _fieldModel.Writer = new SubItemFieldWriter<TItem, TNavItem>(navTools, subContext);
 
@@ -92,6 +99,7 @@ namespace Firestorm.Fluent.Fuel.Builder
             var navTools = new SubWriterTools<TItem, TCollection, TNavItem>(castedExpression, itemModel.Events, castedSetter);
 
             _fieldModel.Reader = new SubCollectionFieldReader<TItem, TCollection, TNavItem>(castedExpression, subContext);
+            _fieldModel.Collator = new NotSupportedFieldCollator<TItem>("sub collections");
             _fieldModel.ResourceGetter = new SubCollectionResourceGetter<TItem, TCollection, TNavItem>(navTools, subContext);
             _fieldModel.Writer = new SubCollectionFieldWriter<TItem, TCollection, TNavItem>(navTools, subContext);
 

@@ -22,16 +22,5 @@ namespace Firestorm.Engine
         }
 
         public IFieldValueReplacer<TItem> Replacer { get; } = null;
-
-        public Expression GetFilterExpression(ParameterExpression itemPram, FilterComparisonOperator comparisonOperator, string valueString)
-        {
-            throw new NotSupportedException("Cannot filter with identifier info readers.");
-        }
-
-        public LambdaExpression GetSortExpression(ParameterExpression itemPram)
-        {
-            var getterExpression = _identifierInfo.GetGetterExpression(itemPram);
-            return Expression.Lambda(getterExpression, itemPram);
-        }
     }
 }

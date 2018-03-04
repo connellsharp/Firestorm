@@ -57,6 +57,14 @@ namespace Firestorm.Stems.Fuel.Fields
             return _implementations.ReaderFactories[fieldName].Get(_stem);
         }
 
+        public IFieldCollator<TItem> GetCollator(string fieldName)
+        {
+            if (!_implementations.CollatorFactories.ContainsKey(fieldName))
+                return null;
+
+            return _implementations.CollatorFactories[fieldName].Get(_stem);
+        }
+
         public IFieldWriter<TItem> GetWriter(string fieldName)
         {
             if (_implementations.WriterFactories.ContainsKey(fieldName))

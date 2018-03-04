@@ -1,16 +1,26 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="AutoFixture.AutoMoq" Version="4.0.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
-
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Firestorm.Core\Firestorm.Core.csproj">
+      <Project>{8A8BFE0E-1545-4152-96FC-23E72F1D0DF2}</Project>
+      <Name>Firestorm.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Engine.Additives\Firestorm.Engine.Additives.csproj">
+      <Project>{F482D521-0DDF-4703-B9EA-568652DB669A}</Project>
+      <Name>Firestorm.Engine.Additives</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Firestorm.Engine\Firestorm.Engine.csproj">
+      <Project>{AAE9E7FF-8EE5-4CA0-87CF-7E0026E62CC7}</Project>
+      <Name>Firestorm.Engine</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

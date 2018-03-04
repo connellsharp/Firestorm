@@ -12,11 +12,12 @@ namespace Firestorm.Stems.Fuel.Resolving.Analysis
     /// Dictionaries with factories and predicates to be used in the Engine.
     /// </summary>
     /// <typeparam name="TItem"></typeparam>
-    public class EngineImplementations<TItem>
+    public class EngineImplementations<TItem> // TODO rename?
         where TItem : class
     {
         public Dictionary<string, IFactory<IFieldResourceGetter<TItem>, TItem>> FullResourceFactories { get; } = new Dictionary<string, IFactory<IFieldResourceGetter<TItem>, TItem>>();
         public Dictionary<string, IFactory<IFieldReader<TItem>, TItem>> ReaderFactories { get; } = new Dictionary<string, IFactory<IFieldReader<TItem>, TItem>>();
+        public Dictionary<string, IFactory<IFieldCollator<TItem>, TItem>> CollatorFactories { get; } = new Dictionary<string, IFactory<IFieldCollator<TItem>, TItem>>();
         public Dictionary<string, IFactory<IFieldWriter<TItem>, TItem>> WriterFactories { get; } = new Dictionary<string, IFactory<IFieldWriter<TItem>, TItem>>();
         public Dictionary<string, IFactory<IItemLocator<TItem>, TItem>> LocatorFactories { get; } = new Dictionary<string, IFactory<IItemLocator<TItem>, TItem>>();
 

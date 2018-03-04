@@ -41,15 +41,15 @@ namespace Firestorm.Engine.Queryable
             if (!_fieldProvider.FieldExists(filterInstruction.FieldName))
                 throw new FieldNotFoundException(filterInstruction.FieldName, false);
 
-            IFieldReader<TItem> fieldReader = _fieldProvider.GetReader(filterInstruction.FieldName);
-            if(fieldReader == null)
-                    throw new FieldOperationNotAllowedException(filterInstruction.FieldName, FieldOperationNotAllowedException.Operation.Read);
+            IFieldCollator<TItem> fieldCollator = _fieldProvider.GetCollator(filterInstruction.FieldName);
+            if(fieldCollator == null)
+                    throw new FieldOperationNotAllowedException(filterInstruction.FieldName, FieldOperation.Filter);
 
             try
             {
                 ParameterExpression itemPram = Expression.Parameter(typeof(TItem), "fltr");
 
-                Expression filterExpression = fieldReader.GetFilterExpression(itemPram, filterInstruction.Operator, filterInstruction.ValueString);
+                Expression filterExpression = fieldCollator.GetFilterExpression(itemPram, filterInstruction.Operator, filterInstruction.ValueString);
                 if(filterExpression == null)
                     throw new ArgumentNullException(nameof(filterExpression), "No filter expression was defined for this field.");
 

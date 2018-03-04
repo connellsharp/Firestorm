@@ -44,6 +44,11 @@ namespace Firestorm.Tests.Integration.Http.Base.Models
             return this[fieldName].Reader;
         }
 
+        public IFieldCollator<TItem> GetCollator(string fieldName)
+        {
+            return this[fieldName].Collator;
+        }
+
         public IFieldWriter<TItem> GetWriter(string fieldName)
         {
             return this[fieldName].Writer;

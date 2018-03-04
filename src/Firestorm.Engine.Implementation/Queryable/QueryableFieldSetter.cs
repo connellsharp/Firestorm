@@ -35,7 +35,7 @@ namespace Firestorm.Engine.Queryable
                 
                 IFieldWriter<TItem> fieldWriter = _fieldProvider.GetWriter(kvp.Key);
                 if(fieldWriter == null)
-                    throw new FieldOperationNotAllowedException(kvp.Key, FieldOperationNotAllowedException.Operation.Write);
+                    throw new FieldOperationNotAllowedException(kvp.Key, FieldOperation.Write);
 
                 var namedField = new NamedField<TItem>(kvp.Key, _fieldProvider);
                 if (!_authChecker.CanEditField(deferredItem, namedField))

@@ -33,6 +33,9 @@ namespace Firestorm.Engine.Fields
         IFieldReader<TItem> GetReader(string fieldName);
 
         [CanBeNull]
+        IFieldCollator<TItem> GetCollator(string fieldName);
+
+        [CanBeNull]
         IFieldWriter<TItem> GetWriter(string fieldName);
 
         [CanBeNull]

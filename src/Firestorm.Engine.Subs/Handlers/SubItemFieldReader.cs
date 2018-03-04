@@ -25,15 +25,5 @@ namespace Firestorm.Engine.Subs.Handlers
         }
 
         public IFieldValueReplacer<TItem> Replacer { get; } = null;
-
-        public Expression GetFilterExpression(ParameterExpression itemPram, FilterComparisonOperator comparisonOperator, string valueString)
-        {
-            throw new NotSupportedException("Filtering is not supported for sub items.");
-        }
-
-        public LambdaExpression GetSortExpression(ParameterExpression itemPram)
-        {
-            throw new NotSupportedException("Sorting is not supported for sub items.");
-        }
     }
 }

@@ -16,7 +16,8 @@ namespace Firestorm.Engine.Subs.Handlers
         private readonly Expression<Func<TItem, TProperty>> _navigationExpression;
         private readonly IEngineSubContext<TNav> _substemSubContext;
 
-        public SubCollectionFieldReader(Expression<Func<TItem, TProperty>> navigationExpression, IEngineSubContext<TNav> substemSubContext)
+        public SubCollectionFieldReader(Expression<Func<TItem, TProperty>> navigationExpression,
+            IEngineSubContext<TNav> substemSubContext)
         {
             _navigationExpression = navigationExpression;
             _substemSubContext = substemSubContext;
@@ -26,25 +27,18 @@ namespace Firestorm.Engine.Subs.Handlers
 
         public Expression GetSelectExpression(ParameterExpression itemPram)
         {
-            var visitedNavigationExpr = (LambdaExpression) new ParameterReplacerVisitor(_navigationExpression.Parameters[0], itemPram).Visit(_navigationExpression);
+            var visitedNavigationExpr =
+                (LambdaExpression) new ParameterReplacerVisitor(_navigationExpression.Parameters[0], itemPram).Visit(
+                    _navigationExpression);
 
             LambdaExpression memberInitLambda = SubUtilities.GetMemberInitLambda(_substemSubContext.Fields);
 
             Type dynamicType = memberInitLambda.ReturnType;
-            MethodCallExpression selectMethodExpr = Expression.Call(typeof(Enumerable), "Select", new[] { typeof(TNav), dynamicType }, visitedNavigationExpr.Body, memberInitLambda);
+            MethodCallExpression selectMethodExpr = Expression.Call(typeof(Enumerable), "Select",
+                new[] {typeof(TNav), dynamicType}, visitedNavigationExpr.Body, memberInitLambda);
             return selectMethodExpr;
         }
 
         public IFieldValueReplacer<TItem> Replacer { get; } = null;
-
-        public Expression GetFilterExpression(ParameterExpression itemPram, FilterComparisonOperator comparisonOperator, string valueString)
-        {
-            throw new NotSupportedException("Filtering is not supported for sub collections.");
-        }
-
-        public LambdaExpression GetSortExpression(ParameterExpression itemPram)
-        {
-            throw new NotSupportedException("Sorting is not supported for sub collections.");
-        }
     }
 }

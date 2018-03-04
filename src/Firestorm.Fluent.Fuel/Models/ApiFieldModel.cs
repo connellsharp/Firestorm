@@ -12,6 +12,8 @@ namespace Firestorm.Fluent.Fuel.Models
 
         public IFieldReader<TItem> Reader { get; set; }
 
+        public IFieldCollator<TItem> Collator { get; set; }
+        
         public IFieldWriter<TItem> Writer { get; set; }
 
         public IFieldDescription Description { get; set; }

@@ -63,7 +63,7 @@ namespace Firestorm.Tests.Functionality.Stems
         [Fact]
         public async Task GetCollectionOnlyDisplaysNestedFields()
         {
-            var idFilterQuery = new StemCollectionTests.SimpleFilterQuery(new FilterInstruction("ID", FilterComparisonOperator.Equals, "123"));
+            var idFilterQuery = new SimpleFilterQuery(new FilterInstruction("ID", FilterComparisonOperator.Equals, "123"));
             var collectionData = await _restCollection.QueryDataAsync(idFilterQuery);
             var itemData = collectionData.Items.Single();
 

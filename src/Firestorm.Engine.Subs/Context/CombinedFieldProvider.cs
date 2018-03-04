@@ -35,6 +35,11 @@ namespace Firestorm.Engine.Subs.Context
             return GetThing(fieldName, m => m.GetReader(fieldName));
         }
 
+        public IFieldCollator<TItem> GetCollator(string fieldName)
+        {
+            return GetThing(fieldName, m => m.GetCollator(fieldName));
+        }
+
         public IFieldWriter<TItem> GetWriter(string fieldName)
         {
             return GetThing(fieldName, m => m.GetWriter(fieldName));

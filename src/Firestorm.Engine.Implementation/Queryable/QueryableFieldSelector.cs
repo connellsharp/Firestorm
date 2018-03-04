@@ -94,7 +94,7 @@ namespace Firestorm.Engine.Queryable
             var replacerDictionary = new ConcurrentDictionary<string, IFieldValueReplacer<TItem>>();
             var tasks = new List<Task>();
 
-            foreach (var fieldReader in _fieldReaders)
+            foreach (KeyValuePair<string, IFieldReader<TItem>> fieldReader in _fieldReaders)
             {
                 IFieldValueReplacer<TItem> replacer = fieldReader.Value.Replacer;
                 if (replacer == null)
