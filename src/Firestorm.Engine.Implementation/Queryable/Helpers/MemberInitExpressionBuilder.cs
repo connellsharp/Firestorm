@@ -31,7 +31,10 @@ namespace Firestorm.Engine.Queryable
             return Build(delegate (FieldInfo fi)
             {
                 Debug.Assert(fieldReaders.ContainsKey(fi.Name));
-                return Expression.Bind(fi, fieldReaders[fi.Name].GetSelectExpression(itemPram));
+                
+                IFieldReader<TItem> reader = fieldReaders[fi.Name];
+                
+                return Expression.Bind(fi, reader.GetSelectExpression(itemPram));
             });
         }
 
@@ -43,6 +46,7 @@ namespace Firestorm.Engine.Queryable
             {
                 IFieldReader<TItem> reader = fieldProvider.GetReader(fi.Name);
                 Debug.Assert(reader != null, "Reader should definitely not be null here.");
+                
                 return Expression.Bind(fi, reader.GetSelectExpression(itemPram));
             });
         }
