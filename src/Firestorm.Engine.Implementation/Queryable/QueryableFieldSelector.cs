@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -32,8 +30,9 @@ namespace Firestorm.Engine.Queryable
             object dynamicObj =  GetDynamicObject(item, dynamicType);
 
             IQueryable<TItem> items = new[] { item }.AsQueryable();
-            var replacerDictionary = await LoadAllReplacersAsync(items);
-            ReplaceWithDictionary(replacerDictionary, dynamicObj, dynamicType);
+            var replacementProcessor = new FieldReplacementProcesor<TItem>(_fieldReaders);
+            await replacementProcessor.LoadAllReplacersAsync(items);
+            replacementProcessor.ReplaceWithDictionary(dynamicObj, dynamicType);
 
             return new RestItemData(dynamicObj);
         }
@@ -46,8 +45,9 @@ namespace Firestorm.Engine.Queryable
             Type dynamicType = GetDynamicRuntimeType();
             IQueryable dynamicQueryable = GetDynamicQueryable(items, dynamicType);
 
-            var replacerDictionary = await LoadAllReplacersAsync(items);
-            List<object> dynamicObjects = await ExecuteWithReplacementsAsync(replacerDictionary, dynamicQueryable, forEachAsync);
+            var replacementProcessor = new FieldReplacementProcesor<TItem>(_fieldReaders);
+            await replacementProcessor.LoadAllReplacersAsync(items);
+            List<object> dynamicObjects = await replacementProcessor.ExecuteWithReplacementsAsync(dynamicQueryable, forEachAsync);
 
             return new QueriedDataIterator(dynamicObjects);
         }
@@ -87,65 +87,6 @@ namespace Firestorm.Engine.Queryable
             }
 
             return dynamicObj;
-        }
-
-        private async Task<IDictionary<string, IFieldValueReplacer<TItem>>> LoadAllReplacersAsync(IQueryable<TItem> items)
-        {
-            var replacerDictionary = new ConcurrentDictionary<string, IFieldValueReplacer<TItem>>();
-            var tasks = new List<Task>();
-
-            foreach (KeyValuePair<string, IFieldReader<TItem>> fieldReader in _fieldReaders)
-            {
-                IFieldValueReplacer<TItem> replacer = fieldReader.Value.Replacer;
-                if (replacer == null)
-                    continue;
-
-                Task preloadTask = replacer.LoadAsync(items).ContinueWith(task =>
-                {
-                    if (!replacerDictionary.TryAdd(fieldReader.Key, replacer))
-                        throw new InvalidOperationException("Error adding reader replacer to dictionary.");
-                });
-
-                tasks.Add(preloadTask);
-            }
-
-            await Task.WhenAll(tasks);
-
-            return replacerDictionary;
-        }
-
-        private async Task<List<object>> ExecuteWithReplacementsAsync(IDictionary<string, IFieldValueReplacer<TItem>> replacerDictionary, IQueryable dynamicQueryable, ForEachAsyncDelegate<object> forEachAsync)
-        {
-            var dynamicType = dynamicQueryable.ElementType;
-            var returnObjects = new List<object>();
-            
-            if (dynamicQueryable.IsInMemory())
-                await ItemQueryHelper.DefaultForEachAsync(dynamicQueryable.OfType<object>(), AddObjectToList);
-            else
-                await forEachAsync(dynamicQueryable.AsObjects(), AddObjectToList);
-
-            void AddObjectToList(object dynamicObj)
-            {
-                ReplaceWithDictionary(replacerDictionary, dynamicObj, dynamicType);
-                returnObjects.Add(dynamicObj);
-            }
-
-            return returnObjects;
-        }
-
-        private static void ReplaceWithDictionary(IDictionary<string, IFieldValueReplacer<TItem>> replacerDictionary, object dynamicObj, Type dynamicType)
-        {
-            foreach (var replacer in replacerDictionary)
-            {
-                Debug.Assert(replacer.Value != null, "Field value should not be in the preloaded list if there is no replacer.");
-
-                FieldInfo fieldInfo = dynamicType.GetField(replacer.Key);
-
-                object dbValue = fieldInfo.GetValue(dynamicObj);
-                object replacementValue = replacer.Value.GetReplacement(dbValue);
-
-                fieldInfo.SetValue(dynamicObj, replacementValue);
-            }
         }
     }
 }
