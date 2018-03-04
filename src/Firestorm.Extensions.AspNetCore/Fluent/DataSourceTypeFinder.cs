@@ -11,14 +11,10 @@ namespace Firestorm.Extensions.AspNetCore
 
         public DataSourceTypeFinder([NotNull] IDataSource dataSource)
         {
-            if (dataSource is IDiscoverableDataSource searchableDataSource)
-            {
-                _discoverableDataSource = searchableDataSource;
-            }
-            else
-            {
-                throw new ArgumentException("Data source must be searachable to automatically find the item types.", nameof(dataSource));
-            }
+            if (!(dataSource is IDiscoverableDataSource discoverableDataSource))
+                throw new ArgumentException("Data source cannot automatically find the item types.", nameof(dataSource));
+            
+            _discoverableDataSource = discoverableDataSource;
         }
 
         public IEnumerable<Type> FindItemTypes()

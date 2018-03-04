@@ -4,7 +4,6 @@ using Firestorm.Data;
 using Firestorm.Stems;
 using Microsoft.Extensions.DependencyInjection;
 using Firestorm.Stems.Roots;
-using Firestorm.Stems.Roots.DataSource;
 
 namespace Firestorm.Extensions.AspNetCore
 {
@@ -31,29 +30,6 @@ namespace Firestorm.Extensions.AspNetCore
             builder.AddDataSourceRoots();
             
             builder.Services.AddSingleton<IDataSource>(dataSourceFunc);
-            return builder;
-        }
-
-        /// <summary>
-        /// Configures the <see cref="DataSourceRootResourceFactory"/>.
-        /// </summary>
-        private static IFirestormServicesBuilder AddDataSourceRoots(this IFirestormServicesBuilder builder)
-        {
-            builder.Services.AddSingleton<IRootResourceFactory>(sp => new DataSourceRootResourceFactory
-            {
-                DataSource = sp.GetService<IDataSource>(),
-                StemTypeGetter = sp.GetService<AxisTypesLocation<Stem>>().GetTypeGetter()
-            });
-            
-            return builder;
-        }
-
-        /// <summary>
-        /// Configures the <see cref="DataSourceRootResourceFactory"/>.
-        /// </summary>
-        private static IFirestormServicesBuilder AddDataSourceTypeFinder(this IFirestormServicesBuilder builder)
-        {
-            builder.Services.AddSingleton<IItemTypeFinder, DataSourceTypeFinder>();
             return builder;
         }
     }
