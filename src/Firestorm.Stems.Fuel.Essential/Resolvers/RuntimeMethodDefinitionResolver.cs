@@ -26,8 +26,7 @@ namespace Firestorm.Stems.Fuel.Essential.Resolvers
                 if (FieldDefinition.Getter.Expression != null)
                 {
                     var middleExpression = FieldDefinition.Getter.Expression;
-                    Type getterType = typeof(InstanceMethodWithExpressionFieldReaderFactory<,,>).MakeGenericType(typeof(TItem), middleExpression.ReturnType,
-                        FieldDefinition.FieldType);
+                    Type getterType = typeof(InstanceMethodWithExpressionFieldReaderFactory<,,>).MakeGenericType(typeof(TItem), middleExpression.ReturnType, FieldDefinition.FieldType);
                     var getter = (IFactory<IFieldReader<TItem>, TItem>) Activator.CreateInstance(getterType, middleExpression, FieldDefinition.Getter.GetInstanceMethod);
                     implementations.ReaderFactories.Add(FieldDefinition.FieldName, getter);
                 }

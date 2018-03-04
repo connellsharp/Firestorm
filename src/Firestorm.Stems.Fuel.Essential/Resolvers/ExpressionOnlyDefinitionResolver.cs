@@ -38,6 +38,9 @@ namespace Firestorm.Stems.Fuel.Essential.Resolvers
                 var reader = (IFieldReader<TItem>) Activator.CreateInstance(readerFieldValueType, FieldDefinition.Getter.Expression);
                 var readerFactory = new SingletonFactory<IFieldReader<TItem>, TItem>(reader);
                 implementations.ReaderFactories.Add(FieldDefinition.FieldName, readerFactory);
+                
+                var collatorFactory = new SingletonFactory<IFieldCollator<TItem>,TItem>(new BasicFieldCollator<TItem>(reader));
+                implementations.CollatorFactories.Add(FieldDefinition.FieldName, collatorFactory);
             }
 
             if (FieldDefinition.Setter.Expression != null)
