@@ -26,7 +26,13 @@ namespace Firestorm.Engine.Queryable
             return dynamicType;
         }
 
-        internal static IDictionary<string, IFieldReader<TItem>> GetReaders<TItem>(this IFieldProvider<TItem> fieldProvider, [NotNull] IEnumerable<string> fieldNames)
+        public static IDictionary<string, IFieldReader<TItem>> GetReaders<TItem>(this IFieldProvider<TItem> fieldProvider, int nestedBy)
+            where TItem : class
+        {
+            return fieldProvider.GetReaders(fieldProvider.GetDefaultNames(nestedBy));
+        }
+
+        public static IDictionary<string, IFieldReader<TItem>> GetReaders<TItem>(this IFieldProvider<TItem> fieldProvider, [NotNull] IEnumerable<string> fieldNames)
             where TItem : class
         {
             if (fieldProvider == null) throw new ArgumentNullException(nameof(fieldProvider));

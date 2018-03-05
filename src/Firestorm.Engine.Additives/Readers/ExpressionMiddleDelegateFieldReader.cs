@@ -50,15 +50,5 @@ namespace Firestorm.Engine.Additives.Readers
                 return _delegateMethod((TMiddle)dbValue);
             }
         }
-
-        public Expression GetFilterExpression(ParameterExpression itemPram, FilterComparisonOperator comparisonOperator, string valueString)
-        {
-            throw new NotImplementedException("Cannot filter by a compelx field.");
-        }
-
-        public LambdaExpression GetSortExpression(ParameterExpression itemPram)
-        {
-            throw new NotImplementedException("Cannot sort by a compelx field.");
-        }
     }
 }

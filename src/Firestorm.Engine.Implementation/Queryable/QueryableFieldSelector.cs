@@ -31,8 +31,8 @@ namespace Firestorm.Engine.Queryable
 
             IQueryable<TItem> items = new[] { item }.AsQueryable();
             var replacementProcessor = new FieldReplacementProcesor<TItem>(_fieldReaders);
-            await replacementProcessor.LoadAllReplacersAsync(items);
-            replacementProcessor.ReplaceWithDictionary(dynamicObj, dynamicType);
+            await replacementProcessor.LoadAllAsync(items);
+            replacementProcessor.Replace(dynamicObj, dynamicType);
 
             return new RestItemData(dynamicObj);
         }
@@ -46,8 +46,8 @@ namespace Firestorm.Engine.Queryable
             IQueryable dynamicQueryable = GetDynamicQueryable(items, dynamicType);
 
             var replacementProcessor = new FieldReplacementProcesor<TItem>(_fieldReaders);
-            await replacementProcessor.LoadAllReplacersAsync(items);
-            List<object> dynamicObjects = await replacementProcessor.ExecuteWithReplacementsAsync(dynamicQueryable, forEachAsync);
+            await replacementProcessor.LoadAllAsync(items);
+            List<object> dynamicObjects = await ExecuteWithReplacementsAsync(replacementProcessor, dynamicQueryable, forEachAsync);
 
             return new QueriedDataIterator(dynamicObjects);
         }
@@ -87,6 +87,25 @@ namespace Firestorm.Engine.Queryable
             }
 
             return dynamicObj;
+        }
+
+        private static async Task<List<object>> ExecuteWithReplacementsAsync(FieldReplacementProcesor<TItem> replacementProcessor, IQueryable dynamicQueryable, ForEachAsyncDelegate<object> forEachAsync)
+        {
+            var dynamicType = dynamicQueryable.ElementType;
+            var returnObjects = new List<object>();
+            
+            if (dynamicQueryable.IsInMemory())
+                await ItemQueryHelper.DefaultForEachAsync(dynamicQueryable.OfType<object>(), AddObjectToList);
+            else
+                await forEachAsync(dynamicQueryable.AsObjects(), AddObjectToList);
+
+            void AddObjectToList(object dynamicObj)
+            {
+                replacementProcessor.Replace(dynamicObj, dynamicType);
+                returnObjects.Add(dynamicObj);
+            }
+
+            return returnObjects;
         }
     }
 }

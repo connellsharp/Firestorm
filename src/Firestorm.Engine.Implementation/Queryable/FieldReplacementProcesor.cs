@@ -10,7 +10,7 @@ using Firestorm.Engine.Fields;
 
 namespace Firestorm.Engine.Queryable
 {
-    internal class FieldReplacementProcesor<TItem>
+    public class FieldReplacementProcesor<TItem>
     {
         private readonly IDictionary<string, IFieldReader<TItem>> _fieldReaders;
         private ConcurrentDictionary<string, IFieldValueReplacer<TItem>> _replacerDictionary;
@@ -20,7 +20,7 @@ namespace Firestorm.Engine.Queryable
             _fieldReaders = fieldReaders;
         }
 
-        internal Task LoadAllReplacersAsync(IQueryable<TItem> items)
+        public Task LoadAllAsync(IQueryable<TItem> items)
         {
             _replacerDictionary = new ConcurrentDictionary<string, IFieldValueReplacer<TItem>>();
             var tasks = new List<Task>();
@@ -43,26 +43,7 @@ namespace Firestorm.Engine.Queryable
             return Task.WhenAll(tasks);
         }
 
-        internal async Task<List<object>> ExecuteWithReplacementsAsync(IQueryable dynamicQueryable, ForEachAsyncDelegate<object> forEachAsync)
-        {
-            var dynamicType = dynamicQueryable.ElementType;
-            var returnObjects = new List<object>();
-            
-            if (dynamicQueryable.IsInMemory())
-                await ItemQueryHelper.DefaultForEachAsync(dynamicQueryable.OfType<object>(), AddObjectToList);
-            else
-                await forEachAsync(dynamicQueryable.AsObjects(), AddObjectToList);
-
-            void AddObjectToList(object dynamicObj)
-            {
-                ReplaceWithDictionary(dynamicObj, dynamicType);
-                returnObjects.Add(dynamicObj);
-            }
-
-            return returnObjects;
-        }
-
-        internal void ReplaceWithDictionary(object dynamicObj, Type dynamicType)
+        public void Replace(object dynamicObj, Type dynamicType)
         {
             foreach (var replacer in _replacerDictionary)
             {

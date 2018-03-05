@@ -14,13 +14,15 @@ namespace Firestorm.Engine.Subs.Handlers
         where TProperty : IEnumerable<TNav>
     {
         private readonly Expression<Func<TItem, TProperty>> _navigationExpression;
-        private readonly IEngineSubContext<TNav> _substemSubContext;
+        private readonly IEngineSubContext<TNav> _engineSubContext;
 
-        public SubCollectionFieldReader(Expression<Func<TItem, TProperty>> navigationExpression,
-            IEngineSubContext<TNav> substemSubContext)
+        public SubCollectionFieldReader(Expression<Func<TItem, TProperty>> navigationExpression, IEngineSubContext<TNav> engineSubContext)
         {
             _navigationExpression = navigationExpression;
-            _substemSubContext = substemSubContext;
+            _engineSubContext = engineSubContext;
+
+            var castedNavExpr = _navigationExpression as Expression<Func<TItem, IEnumerable<TNav>>>; // works due to generic constraints
+            Replacer = new SubFieldReplacer<TItem, TNav>(engineSubContext, q => q.SelectMany(castedNavExpr));
         }
 
         public Type FieldType => typeof(IEnumerable); // TODO maybe just object ?
@@ -31,14 +33,15 @@ namespace Firestorm.Engine.Subs.Handlers
                 (LambdaExpression) new ParameterReplacerVisitor(_navigationExpression.Parameters[0], itemPram).Visit(
                     _navigationExpression);
 
-            LambdaExpression memberInitLambda = SubUtilities.GetMemberInitLambda(_substemSubContext.Fields);
+            LambdaExpression memberInitLambda = SubUtilities.GetMemberInitLambda(_engineSubContext.Fields);
 
             Type dynamicType = memberInitLambda.ReturnType;
             MethodCallExpression selectMethodExpr = Expression.Call(typeof(Enumerable), "Select",
                 new[] {typeof(TNav), dynamicType}, visitedNavigationExpr.Body, memberInitLambda);
+            
             return selectMethodExpr;
         }
 
-        public IFieldValueReplacer<TItem> Replacer { get; } = null;
+        public IFieldValueReplacer<TItem> Replacer { get; }
     }
 }
