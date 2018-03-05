@@ -49,6 +49,9 @@ namespace Firestorm.Stems.Attributes.Basic.Resolvers
                 Type delegateType = typeof(Func<,>).MakeGenericType(expression.ReturnType, returnType);
                 AddMethodToHandlerPart(FieldDefinition.Getter, method, delegateType);
 
+                if (expression.ReturnType == returnType)
+                    return expression.ReturnType;
+
                 // we must return a type that both db query type and replacement type derive from.
                 // we could find a common ancestor between them
                 return typeof(object);
