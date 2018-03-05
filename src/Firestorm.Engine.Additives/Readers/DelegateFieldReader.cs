@@ -24,7 +24,8 @@ namespace Firestorm.Engine.Additives.Readers
 
         public Expression GetSelectExpression(ParameterExpression itemPram)
         {
-            throw new NotSupportedException("This field cannot be used as part of an expression.");
+            throw new NotSupportedException("Plain old delegates cannot be selected in query expressions.");
+            // TODO but we could return the itemParam itself and use a replacer?
         }
 
         public IFieldValueReplacer<TItem> Replacer { get; } = null;

@@ -59,8 +59,8 @@ namespace Firestorm.Stems.Attributes.Basic.Resolvers
 
             if (parameters.Length == 0)
             {
-                if (!returnType.IsSubclassOf(typeof(Expression)))
-                    throw new StemAttributeSetupException("A getter method with no parameters must return an expression.");
+                if (!returnType.IsSubclassOfGeneric(typeof(Expression<>)))
+                    throw new StemAttributeSetupException("A getter method with no parameters must return a strongly typed Expression<>.");
 
                 Type delegateType = typeof(Func<>).MakeGenericType(returnType);
                 AddMethodToHandlerPart(FieldDefinition.Getter, method, delegateType);
