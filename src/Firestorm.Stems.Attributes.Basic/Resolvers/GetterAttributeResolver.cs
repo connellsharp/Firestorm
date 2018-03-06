@@ -42,6 +42,9 @@ namespace Firestorm.Stems.Attributes.Basic.Resolvers
             if (_argumentMemberName != null)
             {
                 PropertyInfo argumentProperty = method.ReflectedType.GetProperty(_argumentMemberName);
+                if (argumentProperty == null)
+                    throw new StemAttributeSetupException("Cannot find a property in this Stem with the name '" + _argumentMemberName + "'");
+                
                 LambdaExpression expression = GetExpressionFromProperty(argumentProperty);
 
                 FieldDefinition.Getter.Expression = expression;
