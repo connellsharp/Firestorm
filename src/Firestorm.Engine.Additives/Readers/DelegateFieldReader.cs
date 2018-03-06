@@ -12,22 +12,18 @@ namespace Firestorm.Engine.Additives.Readers
     public class DelegateFieldReader<TItem, TValue> : IFieldReader<TItem>
         where TItem : class
     {
-        private readonly Func<TItem, TValue> _getterFunc;
-
         public DelegateFieldReader([NotNull] Func<TItem, TValue> getterFunc)
         {
-            _getterFunc = getterFunc
-                          ?? throw new ArgumentNullException(nameof(getterFunc));
+            Replacer = new DelegateWholeItemReplacer<TItem, TValue>(getterFunc);
         }
 
-        public Type FieldType => typeof(TValue);
+        public Type FieldType => typeof(object); // typeof(TValue);
 
         public Expression GetSelectExpression(ParameterExpression itemPram)
         {
-            throw new NotSupportedException("Plain old delegates cannot be selected in query expressions.");
-            // TODO but we could return the itemParam itself and use a replacer?
+            return itemPram;
         }
 
-        public IFieldValueReplacer<TItem> Replacer { get; } = null;
+        public IFieldValueReplacer<TItem> Replacer { get; }
     }
 }
