@@ -19,6 +19,11 @@ namespace Firestorm
         {
             return new StrongReturnMethodInvoker<TInstance, TReturn>(_instance, expression);
         }
+
+        public StrongPropertyInvoker<TInstance, TProperty> GetProperty<TProperty>(Expression<Func<TInstance, TProperty>> propertyExpression)
+        {
+            return new StrongPropertyInvoker<TInstance, TProperty>(_instance, propertyExpression);
+        }
     }
 
     public class Invoker

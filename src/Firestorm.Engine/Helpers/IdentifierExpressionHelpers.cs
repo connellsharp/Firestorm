@@ -56,8 +56,7 @@ namespace Firestorm.Engine
 
         public static void SetIdentifier<TItem, TIdentifier>(TItem item, Expression<Func<TItem, TIdentifier>> identifierExpr, TIdentifier newIdentifier)
         {
-            PropertyInfo propertyInfo = LambdaMemberUtilities.GetPropertyInfoFromLambda(identifierExpr);
-            propertyInfo.SetValue(item, newIdentifier);
+            item.Invoker().GetProperty(identifierExpr).SetValue(newIdentifier);
         }
     }
 }
