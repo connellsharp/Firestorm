@@ -3,20 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace Firestorm.Fluent.Sources
+namespace Firestorm
 {
-    /// <remarks>
-    /// These utilities are copied into Fluent, Stems.Attributes and one in Data.
-    /// All these are the 'bottom' of their architecture and, other than this, don't share any code.
-    /// Perhaps this belongs in something like Firestorm.Utilities?
-    /// </remarks>
     public static class TypeExtensions
     {
         public static IEnumerable<Type> WhereTypeOfGenericInterface(this IEnumerable<Type> types, Type genericInterfaceDefinition)
         {
             foreach (Type type in types)
             {
-                if (GetGenericInterface(type, genericInterfaceDefinition) != null)
+                if (InheritsGenericInterface(type, genericInterfaceDefinition))
                     yield return type;
             }
         }
@@ -29,8 +24,6 @@ namespace Firestorm.Fluent.Sources
         [CanBeNull]
         public static Type GetGenericInterface(this Type type, Type genericInterfaceDefinition)
         {
-            // TODO Exact duplicate of this in Firestorm.Data.EnumerableTypeUtility
-
             if (type.IsOfGenericTypeDefinition(genericInterfaceDefinition))
                 return type;
 

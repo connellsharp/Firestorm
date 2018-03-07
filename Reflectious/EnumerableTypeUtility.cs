@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using JetBrains.Annotations;
 
-namespace Firestorm.Data
+namespace Firestorm
 {
     public static class EnumerableTypeUtility
     {
@@ -30,23 +28,6 @@ namespace Firestorm.Data
             Type listType = typeof(List<>).MakeGenericType(itemType);
             var newList = (IList) Activator.CreateInstance(listType);
             return newList;
-        }
-
-
-        // TODO Exact duplicates of these in Firestorm.Stems.Attributes.TypeExtensions
-
-        [CanBeNull]
-        private static Type GetGenericInterface(this Type type, Type genericInterfaceDefinition)
-        {
-            if (type.IsOfGenericTypeDefinition(genericInterfaceDefinition))
-                return type;
-
-            return type.GetInterfaces().FirstOrDefault(t => t.IsOfGenericTypeDefinition(genericInterfaceDefinition));
-        }
-
-        private static bool IsOfGenericTypeDefinition(this Type type, Type genericInterfaceDefinition)
-        {
-            return type.IsGenericType && type.GetGenericTypeDefinition() == genericInterfaceDefinition;
         }
     }
 }

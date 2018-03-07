@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection;
-using Firestorm.Fluent.Sources;
 using JetBrains.Annotations;
 
 namespace Firestorm.Fluent
@@ -32,7 +30,10 @@ namespace Firestorm.Fluent
 
         public void AddRootItem(IApiBuilder builder, Type itemType, [CanBeNull] string rootName)
         {
-            InvokePrivate(nameof(AddRootItem), new[] {itemType}, builder, rootName);
+            this.Invoker()
+                .GetMethod(nameof(AddRootItem))
+                .MakeGeneric(itemType)
+                .Invoke(builder, rootName);
         }
 
         private void AddRootItem<TItem>(IApiBuilder builder, [CanBeNull] string rootName)
@@ -54,7 +55,10 @@ namespace Firestorm.Fluent
                 ParameterExpression paramExpression = Expression.Parameter(itemType);
                 LambdaExpression expression = Expression.Lambda(Expression.Property(paramExpression, property), paramExpression);
 
-                InvokePrivate(nameof(AddField), new[] { typeof(TItem), property.PropertyType }, builder, expression);
+                this.Invoker()
+                    .GetMethod(nameof(AddField))
+                    .MakeGeneric(typeof(TItem), property.PropertyType)
+                    .Invoke(builder, expression);
             }
         }
 
@@ -66,11 +70,17 @@ namespace Firestorm.Fluent
                 fieldBuilder.AllowWrite();
 
             if (typeof(TField).GetConstructor(new Type[0]) != null)
-                InvokePrivate(nameof(AddFieldAsItem), new[] { typeof(TItem), typeof(TField) }, fieldBuilder);
+                this.Invoker()
+                    .GetMethod(nameof(AddFieldAsItem))
+                    .MakeGeneric<TItem, TField>()
+                    .Invoke(fieldBuilder);
 
             Type enumNav = typeof(TField).GetGenericInterface(typeof(ICollection<>))?.GetGenericArguments()[0];
             if (enumNav != null)
-                InvokePrivate(nameof(AddFieldAsCollection), new[] { typeof(TItem), typeof(TField), enumNav }, fieldBuilder);
+                this.Invoker()
+                    .GetMethod(nameof(AddFieldAsCollection))
+                    .MakeGeneric(typeof(TItem), typeof(TField), enumNav)
+                    .Invoke(fieldBuilder);
 
             return builder;
         }
@@ -89,14 +99,5 @@ namespace Firestorm.Fluent
             var subItemBuilder = fieldBuilder.IsCollection<TField, TNav>();
             AddItem<TNav>(subItemBuilder);
         }
-
-        private void InvokePrivate(string methodName, Type[] types, params object[] args)
-        {
-            MethodInfo method = typeof(AutoConfigurer).GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance);
-            MethodInfo genericMethod = method?.MakeGenericMethod(types);
-            Debug.Assert(genericMethod != null, "Couldn't find generic method with reflection.");
-            genericMethod.Invoke(this, args);
-        }
-
     }
 }

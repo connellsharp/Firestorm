@@ -56,32 +56,8 @@ namespace Firestorm.Engine
 
         public static void SetIdentifier<TItem, TIdentifier>(TItem item, Expression<Func<TItem, TIdentifier>> identifierExpr, TIdentifier newIdentifier)
         {
-            MemberExpression expr = GetMemberExpression(identifierExpr);
-            var propertyInfo = (PropertyInfo)expr.Member;
-            
+            PropertyInfo propertyInfo = LambdaMemberUtilities.GetPropertyInfoFromLambda(identifierExpr);
             propertyInfo.SetValue(item, newIdentifier);
-        }
-
-        /// <remarks>Taken from http://stackoverflow.com/a/17116267/369247 </remarks>
-        [Pure]
-        private static MemberExpression GetMemberExpression<TItem, TReference>(Expression<Func<TItem, TReference>> getPropertyLambda)
-        {
-            //this line is necessary, because sometimes the expression comes in as Convert(originalexpression)
-            var unExp = getPropertyLambda.Body as UnaryExpression;
-            if (unExp != null)
-            {
-                var operand = unExp.Operand as MemberExpression;
-                if (operand != null)
-                    return operand;
-
-                throw new ArgumentException();
-            }
-
-            var expr = getPropertyLambda.Body as MemberExpression;
-            if (expr != null)
-                return expr;
-
-            throw new ArgumentException();
         }
     }
 }

@@ -6,6 +6,10 @@
     <PackageReference Include="JetBrains.Annotations" Version="11.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Reflectious\Reflectious.csproj">
+      <Project>{86159115-B18C-4515-B14C-3BCEBA67AFE3}</Project>
+      <Name>Reflectious</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Firestorm.Core\Firestorm.Core.csproj" />
   </ItemGroup>
 </Project>

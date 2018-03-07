@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Firestorm.Stems.Attributes;
 using Firestorm.Stems.Attributes.Analysis;
 
 namespace Firestorm.Stems.Roots
