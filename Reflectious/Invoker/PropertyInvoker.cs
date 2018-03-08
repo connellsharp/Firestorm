@@ -1,26 +1,63 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace Firestorm
 {
-    public class PropertyInvoker
+    public class PropertyInvoker : PropertyInvoker<object>
     {
-        private readonly object _instance;
-        private readonly PropertyInfo _property;
-
-        protected PropertyInvoker(object instance, PropertyInfo property)
+        internal PropertyInvoker(object instance, IPropertyFinder propertyFinder) 
+            : base(instance, propertyFinder)
         {
-            _instance = instance;
-            _property = property;
         }
 
-        public object GetValue()
+        public PropertyInvoker<TInstance> WithInstanceType<TInstance>()
         {
-            return _property.GetValue(_instance);
+            if (!(Instance is TInstance castedInstance))
+                throw new IncorrectInstanceTypeException();
+            
+            return new PropertyInvoker<TInstance>(castedInstance, PropertyFinder);
+        }
+    }
+
+    public class PropertyInvoker<TInstance> : PropertyInvoker<TInstance, object>
+    {
+        internal PropertyInvoker(TInstance instance, IPropertyFinder propertyFinder) 
+            : base(instance, propertyFinder)
+        {
         }
 
-        public void SetValue(object value)
+        public PropertyInvoker<TInstance, TProperty> OfType<TProperty>()
         {
-            _property.SetValue(_instance, value);
+            if (PropertyFinder.PropertyType != typeof(TProperty))
+                throw new IncorrectPropertyTypeException();
+            
+            return new PropertyInvoker<TInstance, TProperty>(Instance, PropertyFinder);
+        }
+    }
+    
+    public class PropertyInvoker<TInstance, TProperty>
+    {
+        protected readonly TInstance Instance;
+        protected readonly IPropertyFinder PropertyFinder;
+
+        internal PropertyInvoker(TInstance instance, IPropertyFinder propertyFinder) 
+        {
+            Instance = instance;
+            PropertyFinder = propertyFinder;
+        }
+
+        public TProperty GetValue()
+        {
+            PropertyInfo property = PropertyFinder.Find();
+            return (TProperty)property.GetValue(Instance);
+        }
+
+        public void SetValue(TProperty value)
+        {
+            PropertyInfo property = PropertyFinder.Find();
+            property.SetValue(Instance, value);
         }
     }
 }

@@ -6,61 +6,99 @@ using JetBrains.Annotations;
 
 namespace Firestorm
 {
-    public class MethodInvoker
+    public class MethodInvoker<TInstance, TReturn>
     {
-        private readonly object _instance;
-        private readonly MethodInfo _method;
+        protected readonly TInstance Instance;
+        protected readonly IMethodFinder MethodFinder;
 
-        public MethodInvoker(object instance, [NotNull] MethodInfo method)
+        internal MethodInvoker(TInstance instance, [NotNull] IMethodFinder methodFinder)
         {
-            _instance = instance;
-            _method = method ?? throw new ArgumentNullException(nameof(method));
+            Instance = instance;
+            MethodFinder = methodFinder ?? throw new ArgumentNullException(nameof(methodFinder));
         }
 
-        public MethodInvoker MakeGeneric<T>()
+        [PublicAPI]
+        public TReturn Invoke(params object[] args)
         {
-            return MakeGeneric(typeof(T));
+            MethodInfo method = MethodFinder.Find();
+            object value = method.Invoke(Instance, args);
+            return (TReturn) value;
         }
 
-        public MethodInvoker MakeGeneric<T1, T2>()
+        [PublicAPI]
+        public MethodInvoker<TInstance, TReturn> MakeGeneric(params Type[] types)
+        {
+            MethodFinder.GenericArguments = types;
+            return this; //new MethodInvoker<TInstance>(Instance, MethodFinder);
+        }
+
+        [PublicAPI]
+        public MethodInvoker<TInstance, TReturn> MakeGeneric<T1>()
+        {
+            return MakeGeneric(typeof(T1));
+        }
+
+        [PublicAPI]
+        public MethodInvoker<TInstance, TReturn> MakeGeneric<T1, T2>()
         {
             return MakeGeneric(typeof(T1), typeof(T2));
         }
 
-        public MethodInvoker MakeGeneric<T1, T2, T3>()
+        [PublicAPI]
+        public MethodInvoker<TInstance, TReturn> MakeGeneric<T1, T2, T3>()
         {
             return MakeGeneric(typeof(T1), typeof(T2), typeof(T3));
         }
 
-        public MethodInvoker MakeGeneric<T1, T2, T3, T4>()
+        [PublicAPI]
+        public MethodInvoker<TInstance, TReturn> MakeGeneric<T1, T2, T3, T4>()
         {
             return MakeGeneric(typeof(T1), typeof(T2), typeof(T3), typeof(T4));
         }
 
-        public MethodInvoker MakeGeneric<T1, T2, T3, T4, T5>()
+        [PublicAPI]
+        public MethodInvoker<TInstance, TReturn> MakeGeneric<T1, T2, T3, T4, T5>()
         {
             return MakeGeneric(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5));
         }
 
-        public MethodInvoker MakeGeneric<T1, T2, T3, T4, T5, T6>()
+        [PublicAPI]
+        public MethodInvoker<TInstance, TReturn> MakeGeneric<T1, T2, T3, T4, T5, T6>()
         {
             return MakeGeneric(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6));
         }
 
-        public MethodInvoker MakeGeneric(params Type[] types)
-        {
-            var genericMethod = _method.MakeGenericMethod(types);
-            return new MethodInvoker(_instance, genericMethod);
-        }
-        
-        public MethodInvoker MakeGeneric(IEnumerable<Type> types)
+        [PublicAPI]
+        public MethodInvoker<TInstance, TReturn> MakeGeneric(IEnumerable<Type> types)
         {
             return MakeGeneric(types.ToArray());
         }
-        
-        public object Invoke(params object[] args)
+
+        public StrongMethodInvoker<TInstance, TReturn, TParam1, TParam2> WithParameters<TParam1, TParam2>()
         {
-            return _method.Invoke(_instance, args);
+            return new StrongMethodInvoker<TInstance, TReturn, TParam1, TParam2>(Instance, MethodFinder);
+        }
+    }
+
+    public class MethodInvoker<TInstance> : MethodInvoker<TInstance, object>
+    {
+        public MethodInvoker(TInstance instance, [NotNull] MethodFinder methodFinder) 
+            : base(instance, methodFinder)
+        {
+        }
+
+        [PublicAPI]
+        public MethodInvoker<TInstance, TReturn> ReturnsType<TReturn>()
+        {
+            return new MethodInvoker<TInstance, TReturn>(Instance, MethodFinder);
+        }
+    }
+
+    public class MethodInvoker : MethodInvoker<object>
+    {
+        public MethodInvoker(object instance, [NotNull] MethodFinder methodFinder)
+            : base(instance, methodFinder)
+        {
         }
     }
 }
