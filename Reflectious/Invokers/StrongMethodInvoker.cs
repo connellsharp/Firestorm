@@ -27,7 +27,7 @@ namespace Firestorm
         [PublicAPI]
         public TReturn Invoke(TArg1 arg1, TArg2 arg2)
         {
-            return base.Invoke(arg1);
+            return base.Invoke(arg1, arg2);
         }
     }
     

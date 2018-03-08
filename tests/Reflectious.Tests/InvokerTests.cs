@@ -5,7 +5,7 @@ using System.Reflection;
 using Firestorm;
 using Xunit;
 
-namespace Reflectious.Tests
+namespace Firestorm.Tests
 {
     public class InvokerTests
     {
@@ -69,19 +69,21 @@ namespace Reflectious.Tests
             Assert.Equal("Test change", Stub.StaticProperty);
         }
         
-        [Fact]
-        public void GetStaticMethod_LinqEnumerableType_FindsAnyMethod()
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void GetStaticMethod_LinqEnumerableType_FindsAnyMethod(bool value)
         {
             var stub = new Stub();
             
             var result = typeof(Enumerable).Invoker()
                 .GetMethod(nameof(Enumerable.Any))
-                .ReturnsType<IEnumerable<Stub>>()
+                .ReturnsType<bool>()
                 .MakeGeneric<Stub>()
                 .WithParameters<IEnumerable<Stub>, Func<Stub, bool>>()
-                .Invoke(new[] { stub }, s => false);
+                .Invoke(new[] { stub }, s => value);
             
-            Assert.Empty(result);
+            Assert.Equal(value, result);
         }
     }
 }

@@ -18,6 +18,14 @@ namespace Firestorm
             return _methodInfo;
         }
 
-        public Type[] GenericArguments { get; set; }
+        public Type[] GenericArguments
+        {
+            set => throw new NotSupportedException();
+        }
+
+        public Type[] ParameterTypes
+        {
+            set => throw new NotSupportedException();
+        }
     }
 }

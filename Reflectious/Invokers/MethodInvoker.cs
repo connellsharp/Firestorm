@@ -76,6 +76,7 @@ namespace Firestorm
 
         public StrongMethodInvoker<TInstance, TReturn, TParam1, TParam2> WithParameters<TParam1, TParam2>()
         {
+            MethodFinder.ParameterTypes = new[] {typeof(TParam1), typeof(TParam2)};
             return new StrongMethodInvoker<TInstance, TReturn, TParam1, TParam2>(Instance, MethodFinder);
         }
     }

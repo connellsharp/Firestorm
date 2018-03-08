@@ -7,5 +7,6 @@ namespace Firestorm
     {
         MethodInfo Find();
         Type[] GenericArguments { set; }
+        Type[] ParameterTypes { set; }
     }
 }
