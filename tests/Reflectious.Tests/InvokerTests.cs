@@ -87,12 +87,35 @@ namespace Firestorm.Tests
         }
         
         [Fact]
-        public void Constructor_GenericList_CreatesObject()
+        public void ConstructorMakeGeneric_GenericList_CreatesObject()
         {
             var result = typeof(List<>).Invoker()
                 .GetConstructor()
                 .MakeGeneric<Stub>()
                 .WithParameters() // TODO maybe default to parameterless ctor?
+                .Invoke();
+            
+            Assert.IsType<List<Stub>>(result);
+        }
+        
+        [Fact]
+        public void TypeMadeGenericConstructor_GenericList_CreatesObject()
+        {
+            var result = typeof(List<>).Invoker()
+                .MakeGeneric<Stub>()
+                .GetConstructor()
+                .WithParameters()
+                .Invoke();
+            
+            Assert.IsType<List<Stub>>(result);
+        }
+        
+        [Fact]
+        public void AlreadyGenericTypeConstructor_GenericList_CreatesObject()
+        {
+            var result = typeof(List<Stub>).Invoker()
+                .GetConstructor()
+                .WithParameters()
                 .Invoke();
             
             Assert.IsType<List<Stub>>(result);
