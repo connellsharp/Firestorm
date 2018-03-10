@@ -48,9 +48,12 @@ namespace Firestorm
             Type = type;
         }
 
-        public MethodInvoker GetMethod(string methodName)
+        public MethodInvoker GetMethod(string methodName, Assume assume = Assume.Nothing)
         {
-            var finder = new MethodFinder(Type, methodName, _instance == null);
+            var finder = assume.HasFlag(Assume.UnambiguousName)
+                ? new SingleMethodFinder(Type, methodName, _instance == null)
+                : (IMethodFinder) new MethodFinder(Type, methodName, _instance == null);
+            
             return new MethodInvoker(_instance, finder);
         }
 

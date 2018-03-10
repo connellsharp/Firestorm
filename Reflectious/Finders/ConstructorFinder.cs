@@ -27,16 +27,22 @@ namespace Firestorm
             IEnumerable<ConstructorInfo> ctors = type.GetConstructors();
 
             if (ParameterTypes != null)
-                ctors = ctors.Where(m => m.GetParameters().Length == ParameterTypes.Length); // TODO check types?
+                ctors = ctors.Where(c => MatchUtilities.MatchesParameterTypes(c, ParameterTypes));
 
             var ctorsList = ctors.ToList();
-            
-            if (ctorsList.Count == 0)
-                throw new MethodNotFoundException(".ctor");
 
-            ConstructorInfo ctor = ctorsList.Single();
+            switch (ctorsList.Count)
+            {
+                case 0:
+                    throw new MethodNotFoundException(".ctor");
 
-            return ctor;
+                case 1:
+                    return ctorsList[0];
+
+                default:
+                    var ctor = ctorsList.Find(c => c.GetParameters().Length == 0);
+                    return ctor ?? throw new MethodNotFoundException(".ctor");
+            }
         }
 
         public MethodInfo FindMethodInfo()
@@ -48,6 +54,9 @@ namespace Firestorm
         {
             if (instance != null)
                 throw new InvalidOperationException("A constructor cannot be called on an object that has already been instantiated.");
+
+            if (ParameterTypes == null)
+                ParameterTypes = args.Select(a => a?.GetType()).ToArray();
             
             ConstructorInfo ctor = FindConstructorInfo();
             return ctor.Invoke(args);

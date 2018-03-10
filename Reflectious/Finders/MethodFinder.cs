@@ -23,10 +23,10 @@ namespace Firestorm
                 .Where(m => m.Name == MemberName);
 
             if (GenericArguments != null)
-                methods = methods.Where(m => m.GetGenericArguments().Length == GenericArguments.Length);
+                methods = methods.Where(c => MatchUtilities.MatchesGenericArgumentCount(c, GenericArguments));
 
             if (ParameterTypes != null)
-                methods = methods.Where(m => m.GetParameters().Length == ParameterTypes.Length); // TODO check types?
+                methods = methods.Where(c => MatchUtilities.MatchesParameterCount(c, ParameterTypes));
 
             var methodsList = methods.ToList();
             
@@ -43,7 +43,7 @@ namespace Firestorm
 
         public object FindAndInvoke(object instance, object[] args)
         {
-            var method = FindMethodInfo();
+            MethodInfo method = FindMethodInfo();
             return method.Invoke(instance, args);
         }
     }

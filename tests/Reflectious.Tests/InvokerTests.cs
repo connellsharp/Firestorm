@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using Firestorm;
@@ -20,20 +21,20 @@ namespace Firestorm.Tests
             
             Assert.Equal(Stub.MethodExecutedString, returnValue);
         }
-        
+
         [Fact]
         public void GetMethod_Nameof_CorrectValue()
         {
             var stub = new Stub();
-            
+
             string returnValue = stub.Invoker()
                 .GetMethod(nameof(Stub.DoInstanceMethod))
                 .ReturnsType<string>()
                 .Invoke();
-            
+
             Assert.Equal(Stub.MethodExecutedString, returnValue);
         }
-        
+
         [Fact]
         public void GetProperty_Expression_CorrectValue()
         {
@@ -92,10 +93,23 @@ namespace Firestorm.Tests
             var result = typeof(List<>).Invoker()
                 .GetConstructor()
                 .MakeGeneric<Stub>()
-                .WithParameters() // TODO maybe default to parameterless ctor?
                 .Invoke();
             
             Assert.IsType<List<Stub>>(result);
+        }
+        
+        [Fact]
+        public void ConstructorWithParameter_GenericList_CreatesObject()
+        {
+            var arr = new[] {new Stub()};
+
+            var result = typeof(List<>).Invoker()
+                .GetConstructor()
+                .MakeGeneric<Stub>()
+                .Invoke(arr.AsEnumerable());
+
+            var castedResult = Assert.IsType<List<Stub>>(result);
+            Assert.Equal(arr[0], castedResult[0]);
         }
         
         [Fact]
