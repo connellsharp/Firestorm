@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 
 namespace Firestorm
 {
-    public class StaticInvoker : InstanceInvoker<object>
+    public class StaticInvoker : StaticInvoker<object>
     {
         internal StaticInvoker(Type type)
             : base(type)
@@ -14,16 +14,59 @@ namespace Firestorm
         }
 
         [PublicAPI]
-        public InstanceInvoker WithInstance(object instance)
+        public new InstanceInvoker WithInstance(object instance)
         {
             return new InstanceInvoker(instance);
         }
 
-        public MethodInvoker GetConstructor()
+        [PublicAPI]
+        public new MethodInvoker GetConstructor()
         {
             return new MethodInvoker(null, new ConstructorFinder(Type));
         }
+    }
 
+    public class StaticInvoker<TType> : InstanceInvoker<TType>
+        where TType : class
+    {
+        internal StaticInvoker(Type type)
+            : base(type)
+        {
+            Debug.Assert(typeof(TType).IsAssignableFrom(type));
+        }
+        
+        public StaticInvoker()
+            : base(typeof(TType))
+        {
+        }
+
+        [PublicAPI]
+        public MethodInvoker<TType, TType> GetConstructor()
+        {
+            return new MethodInvoker<TType, TType>(null, new ConstructorFinder(Type));
+        }
+
+        [PublicAPI]
+        public TType CreateInstance(params object[] args)
+        {
+            return GetConstructor()
+                .WithParameters(args.Select(a => a?.GetType()))
+                .Invoke(args);
+        }
+
+        [PublicAPI]
+        public InstanceInvoker<TType> WithNewInstance()
+        {
+            return WithInstance(CreateInstance());
+        }
+
+        [PublicAPI]
+        public InstanceInvoker<TType> WithInstance(TType instance)
+        {
+            return new InstanceInvoker<TType>(instance);
+        }
+
+        [PublicAPI]
         public StaticInvoker MakeGeneric(params Type[] types)
         {
             var genericType = Type.MakeGenericType(types);
@@ -70,21 +113,6 @@ namespace Firestorm
         public StaticInvoker MakeGeneric(IEnumerable<Type> types)
         {
             return MakeGeneric(types.ToArray());
-        }
-    }
-
-    public class StaticInvoker<TType> : InstanceInvoker<TType>
-        where TType : class
-    {
-        public StaticInvoker()
-            : base(typeof(TType))
-        {
-        }
-
-        [PublicAPI]
-        public InstanceInvoker<TType> WithInstance(TType instance)
-        {
-            return new InstanceInvoker<TType>(instance);
         }
     }
 }

@@ -120,5 +120,34 @@ namespace Firestorm.Tests
             
             Assert.IsType<List<Stub>>(result);
         }
+        
+        [Fact]
+        public void StrongStaticInvoker_GenericList_CreatesObject()
+        {
+            var result = new StaticInvoker<List<Stub>>()
+                .GetConstructor()
+                .WithParameters()
+                .Invoke();
+            
+            Assert.IsType<List<Stub>>(result);
+        }
+        
+        [Fact]
+        public void StrongStaticCreateInstance_GenericList_CreatesObject()
+        {
+            var result = new StaticInvoker<List<Stub>>()
+                .CreateInstance();
+            
+            Assert.IsType<List<Stub>>(result);
+        }
+        
+        [Fact]
+        public void WeakStaticCreateInstance_GenericList_CreatesObject()
+        {
+            var result = typeof(List<Stub>).Invoker()
+                .CreateInstance();
+            
+            Assert.IsType<List<Stub>>(result);
+        }
     }
 }
