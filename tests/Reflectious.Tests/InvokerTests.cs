@@ -85,5 +85,17 @@ namespace Firestorm.Tests
             
             Assert.Equal(value, result);
         }
+        
+        [Fact]
+        public void Constructor_GenericList_CreatesObject()
+        {
+            var result = typeof(List<>).Invoker()
+                .GetConstructor()
+                .MakeGeneric<Stub>()
+                .WithParameters() // TODO maybe default to parameterless ctor?
+                .Invoke();
+            
+            Assert.IsType<List<Stub>>(result);
+        }
     }
 }

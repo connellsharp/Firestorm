@@ -13,11 +13,6 @@ namespace Firestorm
             _methodInfo = LambdaMemberUtilities.GetMethodInfoFromLambda(expression);
         }
 
-        public MethodInfo Find()
-        {
-            return _methodInfo;
-        }
-
         public Type[] GenericArguments
         {
             set => throw new NotSupportedException();
@@ -26,6 +21,16 @@ namespace Firestorm
         public Type[] ParameterTypes
         {
             set => throw new NotSupportedException();
+        }
+
+        public MethodInfo FindMethodInfo()
+        {
+            return _methodInfo;
+        }
+
+        public object FindAndInvoke(object instance, object[] args)
+        {
+            return _methodInfo.Invoke(instance, args);
         }
     }
 }

@@ -5,8 +5,10 @@ namespace Firestorm
 {
     public interface IMethodFinder
     {
-        MethodInfo Find();
         Type[] GenericArguments { set; }
         Type[] ParameterTypes { set; }
+        
+        MethodInfo FindMethodInfo();
+        object FindAndInvoke(object instance, object[] args);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -14,11 +15,11 @@ namespace Firestorm
         public Type[] GenericArguments { get; set; }
         public Type[] ParameterTypes { get; set; }
 
-        public MethodInfo Find()
+        public MethodInfo FindMethodInfo()
         {
             //MethodInfo method = Type.GetMethod(MemberName, GetBindingFlags());
 
-            var methods = Type.GetMethods(GetBindingFlags())
+            IEnumerable<MethodInfo> methods = Type.GetMethods(GetBindingFlags())
                 .Where(m => m.Name == MemberName);
 
             if (GenericArguments != null)
@@ -38,6 +39,12 @@ namespace Firestorm
                 method = method.MakeGenericMethod(GenericArguments);
 
             return method;
+        }
+
+        public object FindAndInvoke(object instance, object[] args)
+        {
+            var method = FindMethodInfo();
+            return method.Invoke(instance, args);
         }
     }
 }

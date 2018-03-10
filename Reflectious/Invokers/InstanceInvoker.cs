@@ -35,28 +35,28 @@ namespace Firestorm
     public class InstanceInvoker
     {
         private readonly object _instance;
-        private readonly Type _type;
+        protected readonly Type Type;
 
         public InstanceInvoker([NotNull] object instance)
         {
             _instance = instance ?? throw new ArgumentNullException(nameof(instance));
-            _type = _instance.GetType();
+            Type = _instance.GetType();
         }
 
         internal InstanceInvoker(Type type)
         {
-            _type = type;
+            Type = type;
         }
 
         public MethodInvoker GetMethod(string methodName)
         {
-            var finder = new MethodFinder(_type, methodName, _instance == null);
+            var finder = new MethodFinder(Type, methodName, _instance == null);
             return new MethodInvoker(_instance, finder);
         }
 
         public PropertyInvoker GetProperty(string propertyName)
         {
-            var finder = new PropertyFinder(_type, propertyName, _instance == null);
+            var finder = new PropertyFinder(Type, propertyName, _instance == null);
             return new PropertyInvoker(_instance, finder);
         }
     }

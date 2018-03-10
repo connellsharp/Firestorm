@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 
 namespace Firestorm
@@ -14,6 +15,11 @@ namespace Firestorm
         public InstanceInvoker WithInstance(object instance)
         {
             return new InstanceInvoker(instance);
+        }
+
+        public MethodInvoker GetConstructor()
+        {
+            return new MethodInvoker(null, new ConstructorFinder(Type));
         }
     }
 

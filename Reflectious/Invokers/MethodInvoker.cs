@@ -18,10 +18,12 @@ namespace Firestorm
         }
 
         [PublicAPI]
+        public MethodInfo MethodInfo => MethodFinder.FindMethodInfo();
+
+        [PublicAPI]
         public TReturn Invoke(params object[] args)
         {
-            MethodInfo method = MethodFinder.Find();
-            object value = method.Invoke(Instance, args);
+            object value = MethodFinder.FindAndInvoke(Instance, args);
             return (TReturn) value;
         }
 
@@ -74,16 +76,51 @@ namespace Firestorm
             return MakeGeneric(types.ToArray());
         }
 
+        [PublicAPI]
+        public StrongMethodInvoker<TInstance, TReturn, TParam1> WithParameters<TParam1>()
+        {
+            WithParameters(typeof(TParam1));
+            return new StrongMethodInvoker<TInstance, TReturn, TParam1>(Instance, MethodFinder);
+        }
+
+        [PublicAPI]
         public StrongMethodInvoker<TInstance, TReturn, TParam1, TParam2> WithParameters<TParam1, TParam2>()
         {
-            MethodFinder.ParameterTypes = new[] {typeof(TParam1), typeof(TParam2)};
+            WithParameters(typeof(TParam1), typeof(TParam2));
             return new StrongMethodInvoker<TInstance, TReturn, TParam1, TParam2>(Instance, MethodFinder);
+        }
+
+        [PublicAPI]
+        public StrongMethodInvoker<TInstance, TReturn, TParam1, TParam2, TParam3> WithParameters<TParam1, TParam2, TParam3>()
+        {
+            WithParameters(typeof(TParam1), typeof(TParam2), typeof(TParam3));
+            return new StrongMethodInvoker<TInstance, TReturn, TParam1, TParam2, TParam3>(Instance, MethodFinder);
+        }
+
+        [PublicAPI]
+        public StrongMethodInvoker<TInstance, TReturn, TParam1, TParam2, TParam3, TParam4> WithParameters<TParam1, TParam2, TParam3, TParam4>()
+        {
+            WithParameters(typeof(TParam1), typeof(TParam2), typeof(TParam3), typeof(TParam4));
+            return new StrongMethodInvoker<TInstance, TReturn, TParam1, TParam2, TParam3, TParam4>(Instance, MethodFinder);
+        }
+
+        [PublicAPI]
+        public MethodInvoker<TInstance, TReturn> WithParameters(params Type[] parameterTypes)
+        {
+            MethodFinder.ParameterTypes = parameterTypes;
+            return this;
+        }
+
+        [PublicAPI]
+        public MethodInvoker<TInstance, TReturn> WithParameters(IEnumerable<Type> parameterTypes)
+        {
+            return WithParameters(parameterTypes.ToArray());
         }
     }
 
     public class MethodInvoker<TInstance> : MethodInvoker<TInstance, object>
     {
-        public MethodInvoker(TInstance instance, [NotNull] MethodFinder methodFinder) 
+        public MethodInvoker(TInstance instance, [NotNull] IMethodFinder methodFinder) 
             : base(instance, methodFinder)
         {
         }
@@ -97,7 +134,7 @@ namespace Firestorm
 
     public class MethodInvoker : MethodInvoker<object>
     {
-        public MethodInvoker(object instance, [NotNull] MethodFinder methodFinder)
+        public MethodInvoker(object instance, [NotNull] IMethodFinder methodFinder)
             : base(instance, methodFinder)
         {
         }
