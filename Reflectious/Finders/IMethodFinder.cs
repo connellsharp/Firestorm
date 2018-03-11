@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Reflection;
 
 namespace Firestorm
 {
-    public interface IMethodFinder
+    internal interface IMethodFinder
     {
         Type[] GenericArguments { set; }
         Type[] ParameterTypes { set; }
-        
-        MethodInfo FindMethodInfo();
-        object FindAndInvoke(object instance, object[] args);
+        bool WantsParameterTypes { get; }
+
+        string GetCacheKey();
+        IMethod Find();
     }
 }

@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Firestorm
 {
-    public class ExpressionPropertyFinder<TSource, TReturn> : IPropertyFinder
+    internal class ExpressionPropertyFinder<TSource, TReturn> : IPropertyFinder
     {
         private readonly PropertyInfo _propertyInfo;
 
@@ -13,14 +13,14 @@ namespace Firestorm
             _propertyInfo = LambdaMemberUtilities.GetPropertyInfoFromLambda(propertyExpression);
         }
 
-        public PropertyInfo Find()
+        public IProperty Find()
         {
-            return _propertyInfo;
+            return new ReflectionProperty(_propertyInfo);
         }
 
         public Type PropertyType
         {
-            get { return Find().PropertyType; }
+            get { return _propertyInfo.PropertyType; }
         }
     }
 }

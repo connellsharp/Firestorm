@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace Firestorm
 {
-    public class MethodFinder : MemberFinder, IMethodFinder
+    internal class MethodFinder : MemberFinder, IMethodFinder
     {
         public MethodFinder(Type type, string methodName, bool isStatic) 
             : base(type, methodName, isStatic)
@@ -14,11 +16,29 @@ namespace Firestorm
 
         public Type[] GenericArguments { get; set; }
         public Type[] ParameterTypes { get; set; }
+        public bool WantsParameterTypes => ParameterTypes == null;
 
-        public MethodInfo FindMethodInfo()
+        public string GetCacheKey()
         {
-            //MethodInfo method = Type.GetMethod(MemberName, GetBindingFlags());
+            var builder = new StringBuilder(MemberName);
+            builder.AppendFullTypeNames(GenericArguments);
+            builder.AppendFullTypeNames(ParameterTypes);
+            return builder.ToString();
+        }
 
+        public IMethod Find()
+        {
+            MethodInfo methodInfo = FindMethodInfo();
+
+            var delegateCreator = new FuncDelegateCreator(IsStatic ? null : Type, ParameterTypes, methodInfo.ReturnType);
+            Type delegateType = delegateCreator.GetDelegateType();
+            Delegate del = Delegate.CreateDelegate(delegateType, methodInfo);
+            
+            return new DelegateMethod(del);
+        }
+
+        private MethodInfo FindMethodInfo()
+        {
             IEnumerable<MethodInfo> methods = Type.GetMethods(GetBindingFlags())
                 .Where(m => m.Name == MemberName);
 
@@ -29,7 +49,7 @@ namespace Firestorm
                 methods = methods.Where(c => MatchUtilities.MatchesParameterCount(c, ParameterTypes));
 
             var methodsList = methods.ToList();
-            
+
             if (methodsList.Count == 0)
                 throw new MethodNotFoundException(MemberName);
 
@@ -39,12 +59,6 @@ namespace Firestorm
                 method = method.MakeGenericMethod(GenericArguments);
 
             return method;
-        }
-
-        public object FindAndInvoke(object instance, object[] args)
-        {
-            MethodInfo method = FindMethodInfo();
-            return method.Invoke(instance, args);
         }
     }
 }

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace Firestorm
 {
-    public class ConstructorFinder : IMethodFinder
+    internal class ConstructorFinder : IMethodFinder
     {
         protected readonly Type Type;
 
@@ -16,14 +17,29 @@ namespace Firestorm
 
         public Type[] GenericArguments { get; set; }
         public Type[] ParameterTypes { get; set; }
+        public bool WantsParameterTypes => ParameterTypes == null;
 
-        public ConstructorInfo FindConstructorInfo()
+        public string GetCacheKey()
         {
-            Type type = Type;
+            var builder = new StringBuilder(".ctor");
+            builder.AppendFullTypeNames(GenericArguments);
+            builder.AppendFullTypeNames(ParameterTypes);
+            return builder.ToString();
+        }
 
-            if (GenericArguments != null)
-                type = type.MakeGenericType(GenericArguments);
+        public IMethod Find()
+        {
+            Type type = GetGenericType();
             
+            return new ActivatorConstructor(type);
+            
+            var ctorInfo = FindConstructorInfo(type);
+            return new ReflectionConstructor(ctorInfo);
+        }
+
+        private ConstructorInfo FindConstructorInfo(Type type)
+        {
+
             IEnumerable<ConstructorInfo> ctors = type.GetConstructors();
 
             if (ParameterTypes != null)
@@ -45,21 +61,14 @@ namespace Firestorm
             }
         }
 
-        public MethodInfo FindMethodInfo()
+        private Type GetGenericType()
         {
-            throw new InvalidOperationException("Cannot get the MethodInfo for a constructor.");
-        }
+            Type type = Type;
 
-        public object FindAndInvoke(object instance, object[] args)
-        {
-            if (instance != null)
-                throw new InvalidOperationException("A constructor cannot be called on an object that has already been instantiated.");
-
-            if (ParameterTypes == null)
-                ParameterTypes = args.Select(a => a?.GetType()).ToArray();
+            if (GenericArguments != null)
+                type = type.MakeGenericType(GenericArguments);
             
-            ConstructorInfo ctor = FindConstructorInfo();
-            return ctor.Invoke(args);
+            return type;
         }
     }
 }

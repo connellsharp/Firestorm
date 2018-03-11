@@ -3,26 +3,26 @@ using System.Reflection;
 
 namespace Firestorm
 {
-    public class PropertyFinder : MemberFinder, IPropertyFinder
+    internal class PropertyFinder : MemberFinder, IPropertyFinder
     {
         public PropertyFinder(Type type, string propertyName, bool isStatic) 
             : base(type, propertyName, isStatic)
         {
         }
         
-        public PropertyInfo Find()
+        public IProperty Find()
         {
             PropertyInfo property = Type.GetProperty(MemberName, GetBindingFlags());
 
             if (property == null)
                 throw new PropertyNotFoundException(MemberName);
 
-            return property;
+            return new ReflectionProperty(property);
         }
 
         public Type PropertyType
         {
-            get { return Find().PropertyType; }
+            get { return Find().PropertyTyoe; }
         }
     }
 }

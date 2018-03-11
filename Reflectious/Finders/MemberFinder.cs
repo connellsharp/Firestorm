@@ -1,20 +1,20 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Reflection;
 
 namespace Firestorm
 {
-    public abstract class MemberFinder
+    internal abstract class MemberFinder
     {
         protected Type Type { get; }
         protected string MemberName { get; }
-        
-        private readonly bool _isStatic;
+        protected bool IsStatic { get; }
 
         internal MemberFinder(Type type, string memberName, bool isStatic)
         {
             Type = type;
             MemberName = memberName;
-            _isStatic = isStatic;
+            IsStatic = isStatic;
         }
 
         private const BindingFlags Flags = BindingFlags.Public |
@@ -24,7 +24,7 @@ namespace Firestorm
 
         protected BindingFlags GetBindingFlags()
         {
-            if (_isStatic)
+            if (IsStatic)
                 return BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
             else
                 return BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;

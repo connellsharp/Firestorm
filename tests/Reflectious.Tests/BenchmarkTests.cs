@@ -43,7 +43,8 @@ namespace Firestorm.Tests
                     LibraryCode = () =>
                     {
                         Stub stub = new StaticInvoker<Stub>()
-                            .CreateInstance();
+                            .GetConstructor()
+                            .Invoke();
                     },
                     NativeCode = () =>
                     {

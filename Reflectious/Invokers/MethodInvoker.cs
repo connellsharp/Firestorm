@@ -9,7 +9,7 @@ namespace Firestorm
     public class MethodInvoker<TInstance, TReturn>
     {
         protected readonly TInstance Instance;
-        protected readonly IMethodFinder MethodFinder;
+        internal readonly IMethodFinder MethodFinder;
 
         internal MethodInvoker(TInstance instance, [NotNull] IMethodFinder methodFinder)
         {
@@ -17,13 +17,25 @@ namespace Firestorm
             MethodFinder = methodFinder ?? throw new ArgumentNullException(nameof(methodFinder));
         }
 
+        private static readonly Cache<IMethod> MethodCache = new Cache<IMethod>();
+        
+        private IMethod GetMethod()
+        {
+            return MethodCache.GetOrAdd(MethodFinder.GetCacheKey(), () => MethodFinder.Find());
+        }
+
         [PublicAPI]
-        public MethodInfo MethodInfo => MethodFinder.FindMethodInfo();
+        public MethodInfo MethodInfo => GetMethod().GetMethodInfo();
 
         [PublicAPI]
         public TReturn Invoke(params object[] args)
         {
-            object value = MethodFinder.FindAndInvoke(Instance, args);
+            if(MethodFinder.WantsParameterTypes)
+                MethodFinder.ParameterTypes = args.Select(a => a.GetType()).ToArray();
+            
+            IMethod method = GetMethod();
+            
+            object value = method.Invoke(Instance, args);
             return (TReturn) value;
         }
 
@@ -120,7 +132,7 @@ namespace Firestorm
 
     public class MethodInvoker<TInstance> : MethodInvoker<TInstance, object>
     {
-        public MethodInvoker(TInstance instance, [NotNull] IMethodFinder methodFinder) 
+        internal MethodInvoker(TInstance instance, [NotNull] IMethodFinder methodFinder) 
             : base(instance, methodFinder)
         {
         }
@@ -134,7 +146,7 @@ namespace Firestorm
 
     public class MethodInvoker : MethodInvoker<object>
     {
-        public MethodInvoker(object instance, [NotNull] IMethodFinder methodFinder)
+        internal MethodInvoker(object instance, [NotNull] IMethodFinder methodFinder)
             : base(instance, methodFinder)
         {
         }

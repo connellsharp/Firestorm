@@ -40,7 +40,7 @@ namespace Firestorm
     public class PropertyInvoker<TInstance, TProperty>
     {
         protected readonly TInstance Instance;
-        protected readonly IPropertyFinder PropertyFinder;
+        internal readonly IPropertyFinder PropertyFinder;
 
         internal PropertyInvoker(TInstance instance, IPropertyFinder propertyFinder) 
         {
@@ -50,13 +50,13 @@ namespace Firestorm
 
         public TProperty GetValue()
         {
-            PropertyInfo property = PropertyFinder.Find();
+            IProperty property = PropertyFinder.Find();
             return (TProperty)property.GetValue(Instance);
         }
 
         public void SetValue(TProperty value)
         {
-            PropertyInfo property = PropertyFinder.Find();
+            IProperty property = PropertyFinder.Find();
             property.SetValue(Instance, value);
         }
     }

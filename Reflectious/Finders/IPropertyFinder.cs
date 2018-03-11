@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Reflection;
 
 namespace Firestorm
 {
-    public interface IPropertyFinder
+    internal interface IPropertyFinder
     {
-        PropertyInfo Find();
+        IProperty Find();
         Type PropertyType { get; }
     }
 }

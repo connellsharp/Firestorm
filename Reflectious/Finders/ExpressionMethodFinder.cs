@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Firestorm
 {
-    public class ExpressionMethodFinder<TSource, TReturn> : IMethodFinder
+    internal class ExpressionMethodFinder<TSource, TReturn> : IMethodFinder
     {
         private readonly MethodInfo _methodInfo;
 
@@ -15,22 +15,25 @@ namespace Firestorm
 
         public Type[] GenericArguments
         {
-            set => throw new NotSupportedException();
+            set { }
+
         }
 
         public Type[] ParameterTypes
         {
-            set => throw new NotSupportedException();
+            set { }
         }
 
-        public MethodInfo FindMethodInfo()
+        public bool WantsParameterTypes { get; } = false;
+
+        public string GetCacheKey()
         {
-            return _methodInfo;
+            return _methodInfo.DeclaringType.FullName + "." + _methodInfo.Name;
         }
 
-        public object FindAndInvoke(object instance, object[] args)
+        public IMethod Find()
         {
-            return _methodInfo.Invoke(instance, args);
+            return new ReflectionMethod(_methodInfo);
         }
     }
 }

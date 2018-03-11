@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Reflection;
+using System.Text;
 
 namespace Firestorm
 {
-    public class SingleMethodFinder : MemberFinder, IMethodFinder
+    internal class SingleMethodFinder : MemberFinder, IMethodFinder
     {
         public SingleMethodFinder(Type type, string methodName, bool isStatic) 
             : base(type, methodName, isStatic)
@@ -12,17 +13,20 @@ namespace Firestorm
 
         public Type[] GenericArguments { get; set; }
         public Type[] ParameterTypes { get; set; }
+        public bool WantsParameterTypes { get; } = false;
 
-        public MethodInfo FindMethodInfo()
+        public string GetCacheKey()
         {
-            MethodInfo method = Type.GetMethod(MemberName, GetBindingFlags());
-            return method;
+            var builder = new StringBuilder(MemberName);
+            builder.AppendFullTypeNames(GenericArguments);
+            builder.AppendFullTypeNames(ParameterTypes);
+            return builder.ToString();
         }
 
-        public object FindAndInvoke(object instance, object[] args)
+        public IMethod Find()
         {
-            MethodInfo method = FindMethodInfo();
-            return method.Invoke(instance, args);
+            MethodInfo method = Type.GetMethod(MemberName, GetBindingFlags());
+            return new ReflectionMethod(method);
         }
     }
 }
