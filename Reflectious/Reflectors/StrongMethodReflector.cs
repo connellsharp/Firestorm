@@ -3,9 +3,9 @@ using JetBrains.Annotations;
 
 namespace Firestorm
 {
-    public class StrongMethodInvoker<TInstance, TReturn, TArg1> : MethodInvoker<TInstance, TReturn>
+    public class StrongMethodReflector<TInstance, TReturn, TArg1> : MethodReflector<TInstance, TReturn>
     {
-        internal StrongMethodInvoker(TInstance instance, [NotNull] IMethodFinder methodFinder) 
+        internal StrongMethodReflector(TInstance instance, [NotNull] IMethodFinder methodFinder) 
             : base(instance, methodFinder)
         {
         }
@@ -17,9 +17,9 @@ namespace Firestorm
         }
     }
     
-    public class StrongMethodInvoker<TInstance, TReturn, TArg1, TArg2> : MethodInvoker<TInstance, TReturn>
+    public class StrongMethodReflector<TInstance, TReturn, TArg1, TArg2> : MethodReflector<TInstance, TReturn>
     {
-        internal StrongMethodInvoker(TInstance instance, [NotNull] IMethodFinder methodFinder) 
+        internal StrongMethodReflector(TInstance instance, [NotNull] IMethodFinder methodFinder) 
             : base(instance, methodFinder)
         {
         }
@@ -31,9 +31,9 @@ namespace Firestorm
         }
     }
     
-    public class StrongMethodInvoker<TInstance, TReturn, TArg1, TArg2, TArg3> : MethodInvoker<TInstance, TReturn>
+    public class StrongMethodReflector<TInstance, TReturn, TArg1, TArg2, TArg3> : MethodReflector<TInstance, TReturn>
     {
-        internal StrongMethodInvoker(TInstance instance, [NotNull] IMethodFinder methodFinder) 
+        internal StrongMethodReflector(TInstance instance, [NotNull] IMethodFinder methodFinder) 
             : base(instance, methodFinder)
         {
         }
@@ -45,9 +45,9 @@ namespace Firestorm
         }
     }
     
-    public class StrongMethodInvoker<TInstance, TReturn, TArg1, TArg2, TArg3, TArg4> : MethodInvoker<TInstance, TReturn>
+    public class StrongMethodReflector<TInstance, TReturn, TArg1, TArg2, TArg3, TArg4> : MethodReflector<TInstance, TReturn>
     {
-        internal StrongMethodInvoker(TInstance instance, [NotNull] IMethodFinder methodFinder) 
+        internal StrongMethodReflector(TInstance instance, [NotNull] IMethodFinder methodFinder) 
             : base(instance, methodFinder)
         {
         }

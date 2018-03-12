@@ -20,7 +20,7 @@ namespace Firestorm.Tests
                 {
                     LibraryCode = () =>
                     {
-                        string returnValue = stub.Invoker()
+                        string returnValue = stub.Reflect()
                             .GetMethod(methodName, Assume.UnambiguousName)
                             .ReturnsType<string>()
                             .Invoke();
@@ -42,7 +42,7 @@ namespace Firestorm.Tests
                 {
                     LibraryCode = () =>
                     {
-                        Stub stub = new StaticInvoker<Stub>()
+                        Stub stub = new StaticReflector<Stub>()
                             .GetConstructor()
                             .Invoke();
                     },
@@ -63,7 +63,7 @@ namespace Firestorm.Tests
                 {
                     LibraryCode = () =>
                     {
-                        Stub stub = new StaticInvoker<Stub>()
+                        Stub stub = new StaticReflector<Stub>()
                             .CreateInstance();
                     },
                     NativeCode = () =>
@@ -81,7 +81,7 @@ namespace Firestorm.Tests
                 {
                     LibraryCode = () =>
                     {
-                        MethodInfo anyMethod = typeof(Enumerable).Invoker()
+                        MethodInfo anyMethod = typeof(Enumerable).Reflect()
                             .GetMethod("Any")
                             .MakeGeneric<Stub>()
                             .WithParameters<IEnumerable<Stub>, Func<Stub, bool>>() // TODO handle List and arrays etc ?

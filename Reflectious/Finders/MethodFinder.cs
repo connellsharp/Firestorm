@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Firestorm
 {
-    internal class MethodFinder : MemberFinder, IMethodFinder
+    internal class MethodFinder : MemberFinder, ICacheableMethodFinder
     {
         public MethodFinder(Type type, string methodName, bool isStatic) 
             : base(type, methodName, isStatic)

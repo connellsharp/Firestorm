@@ -15,7 +15,7 @@ namespace Firestorm.Tests
         {
             var stub = new Stub();
             
-            string returnValue = stub.Invoker()
+            string returnValue = stub.Reflect()
                 .GetMethod(s => s.DoInstanceMethod())
                 .Invoke();
             
@@ -27,7 +27,7 @@ namespace Firestorm.Tests
         {
             var stub = new Stub();
 
-            string returnValue = stub.Invoker()
+            string returnValue = stub.Reflect()
                 .GetMethod(nameof(Stub.DoInstanceMethod))
                 .ReturnsType<string>()
                 .Invoke();
@@ -40,7 +40,7 @@ namespace Firestorm.Tests
         {
             var stub = new Stub();
             
-            string returnValue = stub.Invoker()
+            string returnValue = stub.Reflect()
                 .GetProperty(s => s.InstanceProperty)
                 .GetValue();
             
@@ -52,7 +52,7 @@ namespace Firestorm.Tests
         {
             var stub = new Stub();
             
-            stub.Invoker()
+            stub.Reflect()
                 .GetProperty(s => s.InstanceProperty)
                 .SetValue("Test change");
             
@@ -62,7 +62,7 @@ namespace Firestorm.Tests
         [Fact]
         public void SetStaticProperty_Expression_ChangesValue()
         {            
-            typeof(Stub).Invoker()
+            typeof(Stub).Reflect()
                 .GetProperty(nameof(Stub.StaticProperty))
                 .OfType<string>()
                 .SetValue("Test change");
@@ -77,7 +77,7 @@ namespace Firestorm.Tests
         {
             var stub = new Stub();
             
-            var result = typeof(Enumerable).Invoker()
+            var result = typeof(Enumerable).Reflect()
                 .GetMethod(nameof(Enumerable.Any))
                 .ReturnsType<bool>()
                 .MakeGeneric<Stub>()
@@ -90,7 +90,7 @@ namespace Firestorm.Tests
         [Fact]
         public void ConstructorMakeGeneric_GenericList_CreatesObject()
         {
-            var result = typeof(List<>).Invoker()
+            var result = typeof(List<>).Reflect()
                 .GetConstructor()
                 .MakeGeneric<Stub>()
                 .Invoke();
@@ -103,7 +103,7 @@ namespace Firestorm.Tests
         {
             var arr = new[] {new Stub()};
 
-            var result = typeof(List<>).Invoker()
+            var result = typeof(List<>).Reflect()
                 .GetConstructor()
                 .MakeGeneric<Stub>()
                 .Invoke(arr.AsEnumerable());
@@ -115,7 +115,7 @@ namespace Firestorm.Tests
         [Fact]
         public void TypeMadeGenericConstructor_GenericList_CreatesObject()
         {
-            var result = typeof(List<>).Invoker()
+            var result = typeof(List<>).Reflect()
                 .MakeGeneric<Stub>()
                 .GetConstructor()
                 .WithParameters()
@@ -127,7 +127,7 @@ namespace Firestorm.Tests
         [Fact]
         public void AlreadyGenericTypeConstructor_GenericList_CreatesObject()
         {
-            var result = typeof(List<Stub>).Invoker()
+            var result = typeof(List<Stub>).Reflect()
                 .GetConstructor()
                 .WithParameters()
                 .Invoke();
@@ -138,7 +138,7 @@ namespace Firestorm.Tests
         [Fact]
         public void StrongStaticInvoker_GenericList_CreatesObject()
         {
-            var result = new StaticInvoker<List<Stub>>()
+            var result = new StaticReflector<List<Stub>>()
                 .GetConstructor()
                 .WithParameters()
                 .Invoke();
@@ -149,7 +149,7 @@ namespace Firestorm.Tests
         [Fact]
         public void StrongStaticCreateInstance_GenericList_CreatesObject()
         {
-            var result = new StaticInvoker<List<Stub>>()
+            var result = new StaticReflector<List<Stub>>()
                 .CreateInstance();
             
             Assert.IsType<List<Stub>>(result);
@@ -158,7 +158,7 @@ namespace Firestorm.Tests
         [Fact]
         public void WeakStaticCreateInstance_GenericList_CreatesObject()
         {
-            var result = typeof(List<Stub>).Invoker()
+            var result = typeof(List<Stub>).Reflect()
                 .CreateInstance();
             
             Assert.IsType<List<Stub>>(result);

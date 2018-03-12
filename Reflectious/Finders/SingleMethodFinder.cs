@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Firestorm
 {
-    internal class SingleMethodFinder : MemberFinder, IMethodFinder
+    internal class SingleMethodFinder : MemberFinder, ICacheableMethodFinder
     {
         public SingleMethodFinder(Type type, string methodName, bool isStatic) 
             : base(type, methodName, isStatic)

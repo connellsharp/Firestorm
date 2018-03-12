@@ -8,7 +8,13 @@ namespace Firestorm
         Type[] ParameterTypes { set; }
         bool WantsParameterTypes { get; }
 
-        string GetCacheKey();
         IMethod Find();
+    }
+
+    internal interface ICacheableMethodFinder : IMethodFinder
+    {
+        new Type[] GenericArguments { get; set; }
+        new Type[] ParameterTypes { get; set; }
+        string GetCacheKey();
     }
 }
