@@ -4,61 +4,50 @@ using JetBrains.Annotations;
 
 namespace Firestorm
 {
+   
     public class InstanceReflector<TInstance> : InstanceReflector
     {
-        private readonly TInstance _instance;
-
-        public InstanceReflector([NotNull] TInstance instance)
-            : base(instance)
-        {
-            _instance = instance;
-        }
-
-        internal InstanceReflector(Type type)
-            : base(type)
+        internal InstanceReflector(IInstanceGetter instanceGetter)
+            : base(instanceGetter)
         {
         }
 
-        public MethodReflector<TInstance, TReturn> GetMethod<TReturn>(Expression<Func<TInstance, TReturn>> expression)
+        public WeakMethodReflector<TInstance, TReturn> GetMethod<TReturn>(Expression<Func<TInstance, TReturn>> expression)
         {
+            TInstance instance = (TInstance)InstanceGetter.GetInstance();
             var finder = new ExpressionMethodFinder<TInstance, TReturn>(expression);
-            return new MethodReflector<TInstance, TReturn>(_instance, finder);
+            return new WeakMethodReflector<TInstance, TReturn>(instance, finder);
         }
 
         public PropertyReflector<TInstance, TProperty> GetProperty<TProperty>(Expression<Func<TInstance, TProperty>> propertyExpression)
         {
+            TInstance instance = (TInstance)InstanceGetter.GetInstance();
             var finder = new ExpressionPropertyFinder<TInstance, TProperty>(propertyExpression);
-            return new PropertyReflector<TInstance, TProperty>(_instance, finder);
+            return new PropertyReflector<TInstance, TProperty>(instance, finder);
         }
     }
 
     public class InstanceReflector
     {
-        private readonly object _instance;
-        protected readonly Type Type;
+        internal readonly IInstanceGetter InstanceGetter;
 
-        public InstanceReflector([NotNull] object instance)
+        internal InstanceReflector([NotNull] IInstanceGetter instanceGetter)
         {
-            _instance = instance ?? throw new ArgumentNullException(nameof(instance));
-            Type = _instance.GetType();
+            InstanceGetter = instanceGetter;
         }
 
-        internal InstanceReflector(Type type)
+        public WeakMethodReflector GetMethod(string methodName, Assume assume = Assume.Nothing)
         {
-            Type = type;
-        }
-
-        public MethodReflector GetMethod(string methodName, Assume assume = Assume.Nothing)
-        {
-            var finder = FinderUtility.GetMethodFinder(Type, methodName, _instance, assume);
-            
-            return new MethodReflector(_instance, finder);
+            object instance = InstanceGetter.GetInstance();
+            var finder = FinderUtility.GetMethodFinder(InstanceGetter.Type, methodName, instance, assume);
+            return new WeakMethodReflector(instance, finder);
         }
 
         public PropertyReflector GetProperty(string propertyName)
         {
-            var finder = new PropertyFinder(Type, propertyName, _instance == null);
-            return new PropertyReflector(_instance, finder);
+            object instance = InstanceGetter.GetInstance();
+            var finder = new PropertyFinder(InstanceGetter.Type, propertyName, instance == null);
+            return new PropertyReflector(instance, finder);
         }
     }
 }

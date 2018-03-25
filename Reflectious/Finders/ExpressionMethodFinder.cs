@@ -15,12 +15,14 @@ namespace Firestorm
 
         public Type[] GenericArguments
         {
+            get { throw new NotSupportedException(); }
             set { }
 
         }
 
         public Type[] ParameterTypes
         {
+            get { throw new NotSupportedException(); }
             set { }
         }
 

@@ -6,7 +6,7 @@ namespace Firestorm
     {   
         public static InstanceReflector<T> Reflect<T>(this T instance)
         {
-            return new InstanceReflector<T>(instance);
+            return new InstanceReflector<T>(new StrongInstanceGetter<T>(instance));
         }
         
         public static StaticReflector Reflect(this Type type)

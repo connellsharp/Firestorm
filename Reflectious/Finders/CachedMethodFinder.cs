@@ -14,6 +14,7 @@ namespace Firestorm
 
         public Type[] GenericArguments
         {
+            get { return _underlyingFinder.GenericArguments; }
             set
             {
                 if (FoundItem != null && !_underlyingFinder.GenericArguments.SequenceEqual(value))
@@ -25,6 +26,7 @@ namespace Firestorm
 
         public Type[] ParameterTypes
         {
+            get { return _underlyingFinder.ParameterTypes; }
             set
             {
                 if(FoundItem != null && !_underlyingFinder.ParameterTypes.SequenceEqual(value))

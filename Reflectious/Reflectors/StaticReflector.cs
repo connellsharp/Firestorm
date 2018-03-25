@@ -9,41 +9,47 @@ namespace Firestorm
     public class StaticReflector : StaticReflector<object>
     {
         internal StaticReflector(Type type)
-            : base(type)
+            : base(new NullInstanceGetter(type))
         {
         }
 
         [PublicAPI]
         public new InstanceReflector WithInstance(object instance)
         {
-            return new InstanceReflector(instance);
+            return new InstanceReflector(new WeakInstanceGetter(instance));
         }
 
         [PublicAPI]
-        public new MethodReflector GetConstructor()
+        public new WeakMethodReflector GetConstructor()
         {
-            return new MethodReflector(null, new ConstructorFinder(Type));
+            
+            return new WeakMethodReflector(null, new ConstructorFinder(InstanceGetter.Type));
         }
     }
 
     public class StaticReflector<TType> : InstanceReflector<TType>
         where TType : class
     {
+        public StaticReflector()
+            : base(new NullInstanceGetter(typeof(TType)))
+        {
+        }
+        
+        internal StaticReflector(IInstanceGetter instanceGetter)
+            : base(instanceGetter)
+        {
+        }
+        
         internal StaticReflector(Type type)
-            : base(type)
+            : base(new NullInstanceGetter(type))
         {
             Debug.Assert(typeof(TType).IsAssignableFrom(type));
         }
-        
-        public StaticReflector()
-            : base(typeof(TType))
-        {
-        }
 
         [PublicAPI]
-        public MethodReflector<TType, TType> GetConstructor()
+        public WeakMethodReflector<TType, TType> GetConstructor()
         {
-            return new MethodReflector<TType, TType>(null, new ConstructorFinder(Type));
+            return new WeakMethodReflector<TType, TType>(null, new ConstructorFinder(InstanceGetter.Type));
         }
 
         [PublicAPI]
@@ -55,21 +61,27 @@ namespace Firestorm
         }
 
         [PublicAPI]
-        public InstanceReflector<TType> WithNewInstance()
+        public NewInstanceReflector<TType> WithNewInstance()
         {
-            return WithInstance(CreateInstance());
+            return new NewInstanceReflector<TType>(new ConstructorInstanceGetter(CreateInstance, InstanceGetter.Type));
         }
 
         [PublicAPI]
         public InstanceReflector<TType> WithInstance(TType instance)
         {
-            return new InstanceReflector<TType>(instance);
+            return new InstanceReflector<TType>(new StrongInstanceGetter<TType>(instance));
+        }
+
+        [PublicAPI]
+        public InstanceReflector<TType> WithInstance(Func<TType> getInstanceFunc)
+        {
+            return new InstanceReflector<TType>(new StrongInstanceFuncGetter<TType>(getInstanceFunc));
         }
 
         [PublicAPI]
         public StaticReflector MakeGeneric(params Type[] types)
         {
-            var genericType = Type.MakeGenericType(types);
+            var genericType = InstanceGetter.Type.MakeGenericType(types);
             return new StaticReflector(genericType);
         }
         

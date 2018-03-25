@@ -154,14 +154,5 @@ namespace Firestorm.Tests
             
             Assert.IsType<List<Stub>>(result);
         }
-        
-        [Fact]
-        public void WeakStaticCreateInstance_GenericList_CreatesObject()
-        {
-            var result = typeof(List<Stub>).Reflect()
-                .CreateInstance();
-            
-            Assert.IsType<List<Stub>>(result);
-        }
     }
 }

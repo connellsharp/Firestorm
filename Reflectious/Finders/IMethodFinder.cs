@@ -4,8 +4,8 @@ namespace Firestorm
 {
     internal interface IMethodFinder
     {
-        Type[] GenericArguments { set; }
-        Type[] ParameterTypes { set; }
+        Type[] GenericArguments { get; set; }
+        Type[] ParameterTypes { get; set; }
         bool WantsParameterTypes { get; }
 
         IMethod Find();
