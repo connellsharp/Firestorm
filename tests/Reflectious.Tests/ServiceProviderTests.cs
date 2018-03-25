@@ -21,7 +21,7 @@ namespace Firestorm.Tests
         }
         
         [Fact]
-        public void NewInstanceFromServiceProvider__()
+        public void ServiceProvider_NewInstance_CorrectValue()
         {
             var sp = new ActivatorServiceProvider();
             
@@ -35,7 +35,7 @@ namespace Firestorm.Tests
         }
         
         [Fact]
-        public void UsingConstructorArguments_ServiceProvider_()
+        public void ServiceProvider_ConstructorArgs_CorrectValue()
         {
             var sp = new ActivatorServiceProvider();
             

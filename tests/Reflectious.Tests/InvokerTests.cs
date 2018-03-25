@@ -154,5 +154,21 @@ namespace Firestorm.Tests
             
             Assert.IsType<List<Stub>>(result);
         }
+        
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void GetExtensionMethod_LinqAny_ReturnsPredicate(bool predicateValue)
+        {
+            IEnumerable<Stub> stubs = new[] { new Stub() };
+
+            bool hasAny = stubs.Reflect()
+                .GetExtensionMethod(typeof(Enumerable), "Any")
+                .ReturnsType<bool>()
+                .WithParameters<Func<Stub, bool>>()
+                .Invoke(p => predicateValue);
+            
+            Assert.Equal(predicateValue, hasAny);
+        }
     }
 }

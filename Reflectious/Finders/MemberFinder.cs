@@ -6,13 +6,13 @@ namespace Firestorm
 {
     internal abstract class MemberFinder
     {
-        protected Type Type { get; }
+        protected Type ClassType { get; }
         protected string MemberName { get; }
         protected bool IsStatic { get; }
 
-        internal MemberFinder(Type type, string memberName, bool isStatic)
+        internal MemberFinder(Type classType, string memberName, bool isStatic)
         {
-            Type = type;
+            ClassType = classType;
             MemberName = memberName;
             IsStatic = isStatic;
         }

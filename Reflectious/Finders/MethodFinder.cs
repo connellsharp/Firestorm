@@ -9,13 +9,15 @@ namespace Firestorm
 {
     internal class MethodFinder : MemberFinder, ICacheableMethodFinder
     {
-        public MethodFinder(Type type, string methodName, bool isStatic) 
-            : base(type, methodName, isStatic)
+        public MethodFinder(Type classType, string methodName, bool isStatic) 
+            : base(classType, methodName, isStatic)
         {
         }
 
         public Type[] GenericArguments { get; set; }
+        
         public Type[] ParameterTypes { get; set; }
+        
         public bool WantsParameterTypes => ParameterTypes == null;
 
         public string GetCacheKey()
@@ -30,7 +32,7 @@ namespace Firestorm
         {
             MethodInfo methodInfo = FindMethodInfo();
 
-            var delegateCreator = new FuncDelegateCreator(IsStatic ? null : Type, ParameterTypes, methodInfo.ReturnType);
+            var delegateCreator = new FuncDelegateCreator(IsStatic ? null : ClassType, ParameterTypes, methodInfo.ReturnType);
             Type delegateType = delegateCreator.GetDelegateType();
             Delegate del = Delegate.CreateDelegate(delegateType, methodInfo);
             
@@ -39,7 +41,7 @@ namespace Firestorm
 
         private MethodInfo FindMethodInfo()
         {
-            IEnumerable<MethodInfo> methods = Type.GetMethods(GetBindingFlags())
+            IEnumerable<MethodInfo> methods = ClassType.GetMethods(GetBindingFlags())
                 .Where(m => m.Name == MemberName);
 
             if (GenericArguments != null)
@@ -55,10 +57,32 @@ namespace Firestorm
 
             MethodInfo method = methodsList.Single();
 
-            if (GenericArguments != null)
+            if (method.IsGenericMethodDefinition)
+            {
+                if (GenericArguments == null)
+                    GenericArguments = InferGenericArguments(method);
+                
                 method = method.MakeGenericMethod(GenericArguments);
+            }
 
             return method;
+        }
+
+        private Type[] InferGenericArguments(MethodInfo method)
+        {
+            var genericParams = method.GetGenericArguments();
+            if(genericParams.Length != 1)
+                throw new NotImplementedException("Currently only implemented infering generic arguments for methods with one generic parameter.");
+            
+            ParameterInfo[] parameters = method.GetParameters();
+            
+            if(parameters.Length != ParameterTypes.Length)
+                throw new InvalidOperationException("Incorrect number of parameters.");
+            
+            if (!EnumerableTypeUtility.IsEnumerable(ParameterTypes[0]))
+                throw new NotImplementedException("Currently only implemented infering generic arguments when the first parameter is an enumerable type.");
+
+            return new[] { EnumerableTypeUtility.GetItemType(ParameterTypes[0]) };
         }
     }
 }

@@ -13,8 +13,6 @@ namespace Firestorm
 
     internal interface ICacheableMethodFinder : IMethodFinder
     {
-        new Type[] GenericArguments { get; set; }
-        new Type[] ParameterTypes { get; set; }
         string GetCacheKey();
     }
 }

@@ -5,14 +5,14 @@ namespace Firestorm
 {
     internal class PropertyFinder : MemberFinder, IPropertyFinder
     {
-        public PropertyFinder(Type type, string propertyName, bool isStatic) 
-            : base(type, propertyName, isStatic)
+        public PropertyFinder(Type classType, string propertyName, bool isStatic) 
+            : base(classType, propertyName, isStatic)
         {
         }
         
         public IProperty Find()
         {
-            PropertyInfo property = Type.GetProperty(MemberName, GetBindingFlags());
+            PropertyInfo property = ClassType.GetProperty(MemberName, GetBindingFlags());
 
             if (property == null)
                 throw new PropertyNotFoundException(MemberName);

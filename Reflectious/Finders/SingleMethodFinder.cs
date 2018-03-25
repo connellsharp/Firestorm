@@ -6,8 +6,8 @@ namespace Firestorm
 {
     internal class SingleMethodFinder : MemberFinder, ICacheableMethodFinder
     {
-        public SingleMethodFinder(Type type, string methodName, bool isStatic) 
-            : base(type, methodName, isStatic)
+        public SingleMethodFinder(Type classType, string methodName, bool isStatic) 
+            : base(classType, methodName, isStatic)
         {
         }
 
@@ -25,7 +25,7 @@ namespace Firestorm
 
         public IMethod Find()
         {
-            MethodInfo method = Type.GetMethod(MemberName, GetBindingFlags());
+            MethodInfo method = ClassType.GetMethod(MemberName, GetBindingFlags());
             return new ReflectionMethod(method);
         }
     }

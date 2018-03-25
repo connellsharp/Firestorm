@@ -39,7 +39,6 @@ namespace Firestorm
 
         private ConstructorInfo FindConstructorInfo(Type type)
         {
-
             IEnumerable<ConstructorInfo> ctors = type.GetConstructors();
 
             if (ParameterTypes != null)

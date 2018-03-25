@@ -39,7 +39,15 @@ namespace Firestorm
         public WeakMethodReflector GetMethod(string methodName, Assume assume = Assume.Nothing)
         {
             object instance = InstanceGetter.GetInstance();
-            var finder = FinderUtility.GetMethodFinder(InstanceGetter.Type, methodName, instance, assume);
+            var finder = FinderUtility.GetMethodFinder(InstanceGetter.Type, methodName, instance == null, assume);
+            return new WeakMethodReflector(instance, finder);
+        }
+
+        public WeakMethodReflector GetExtensionMethod(Type extenstionsClassType, string methodName, Assume assume = Assume.Nothing)
+        {
+            object instance = InstanceGetter.GetInstance();
+            var finder = FinderUtility.GetMethodFinder(extenstionsClassType, methodName, true, assume);
+            finder = FinderUtility.WrapForExtension(finder, InstanceGetter.Type);
             return new WeakMethodReflector(instance, finder);
         }
 
@@ -48,6 +56,15 @@ namespace Firestorm
             object instance = InstanceGetter.GetInstance();
             var finder = new PropertyFinder(InstanceGetter.Type, propertyName, instance == null);
             return new PropertyReflector(instance, finder);
+        }
+    }
+
+    public class WeakExtensionMethodReflector : WeakMethodReflector
+    {
+        internal WeakExtensionMethodReflector(object instance, IMethodFinder finder)
+            : base(instance, finder)
+        {
+            
         }
     }
 }
