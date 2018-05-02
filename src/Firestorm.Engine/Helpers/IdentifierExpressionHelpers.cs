@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using JetBrains.Annotations;
+using Reflectious;
 
 namespace Firestorm.Engine
 {
@@ -35,28 +36,20 @@ namespace Firestorm.Engine
             BinaryExpression predicateExpr = Expression.Equal(paramExpr, Expression.Constant(identifierObj, typeof(TIdentifier)));
             var singleItemPredicate = Expression.Lambda<Func<TIdentifier, bool>>(predicateExpr, paramExpr);
 
-            Type enumerableType = typeof(IEnumerable<TIdentifier>); // TODO handle List and arrays etc
+            MethodInfo anyMethod = typeof(Enumerable).Reflect()
+                .GetMethod("Any")
+                .MakeGeneric<TIdentifier>()
+                .WithParameters<IEnumerable<TIdentifier>, Func<TIdentifier, bool>>() // TODO handle List and arrays etc ?
+                .MethodInfo;
 
-            MethodInfo anyMethod = GetGenericMethod(typeof(Enumerable), "Any", new[] { typeof(TIdentifier) }, new[] { enumerableType, identifierExpr.Type }, BindingFlags.Static | BindingFlags.Public);
             var call = Expression.Call(anyMethod, identifierExpr.Body, singleItemPredicate);
 
             return Expression.Lambda<Func<TItem, bool>>(call, identifierExpr.Parameters);
         }
 
-        private static MethodInfo GetGenericMethod(Type type, string name, Type[] typeArgs, Type[] paramTypes, BindingFlags flags)
-        {
-            IEnumerable<MethodInfo> methods = type.GetMethods(flags)
-                .Where(m => m.Name == name)
-                .Where(m => m.GetGenericArguments().Length == typeArgs.Length)
-                .Where(m => m.GetParameters().Length == paramTypes.Length)
-                .Select(m => m.MakeGenericMethod(typeArgs));
-
-            return methods.First();
-        }
-
         public static void SetIdentifier<TItem, TIdentifier>(TItem item, Expression<Func<TItem, TIdentifier>> identifierExpr, TIdentifier newIdentifier)
         {
-            item.Invoker().GetProperty(identifierExpr).SetValue(newIdentifier);
+            item.Reflect().GetProperty(identifierExpr).SetValue(newIdentifier);
         }
     }
 }

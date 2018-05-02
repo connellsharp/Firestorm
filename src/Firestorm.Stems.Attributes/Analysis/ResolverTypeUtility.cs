@@ -1,4 +1,5 @@
 using System;
+using Reflectious;
 
 namespace Firestorm.Stems.Attributes.Analysis
 {

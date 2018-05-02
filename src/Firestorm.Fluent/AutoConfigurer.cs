@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 using JetBrains.Annotations;
+using Reflectious;
 
 namespace Firestorm.Fluent
 {
@@ -30,7 +31,7 @@ namespace Firestorm.Fluent
 
         public void AddRootItem(IApiBuilder builder, Type itemType, [CanBeNull] string rootName)
         {
-            this.Invoker()
+            this.Reflect()
                 .GetMethod(nameof(AddRootItem))
                 .MakeGeneric(itemType)
                 .Invoke(builder, rootName);
@@ -55,7 +56,7 @@ namespace Firestorm.Fluent
                 ParameterExpression paramExpression = Expression.Parameter(itemType);
                 LambdaExpression expression = Expression.Lambda(Expression.Property(paramExpression, property), paramExpression);
 
-                this.Invoker()
+                this.Reflect()
                     .GetMethod(nameof(AddField))
                     .MakeGeneric(typeof(TItem), property.PropertyType)
                     .Invoke(builder, expression);
@@ -70,14 +71,14 @@ namespace Firestorm.Fluent
                 fieldBuilder.AllowWrite();
 
             if (typeof(TField).GetConstructor(new Type[0]) != null)
-                this.Invoker()
+                this.Reflect()
                     .GetMethod(nameof(AddFieldAsItem))
                     .MakeGeneric<TItem, TField>()
                     .Invoke(fieldBuilder);
 
             Type enumNav = typeof(TField).GetGenericInterface(typeof(ICollection<>))?.GetGenericArguments()[0];
             if (enumNav != null)
-                this.Invoker()
+                this.Reflect()
                     .GetMethod(nameof(AddFieldAsCollection))
                     .MakeGeneric(typeof(TItem), typeof(TField), enumNav)
                     .Invoke(fieldBuilder);

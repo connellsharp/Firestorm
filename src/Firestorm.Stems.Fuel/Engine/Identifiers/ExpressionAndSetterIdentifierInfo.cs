@@ -7,6 +7,7 @@ using Firestorm.Engine.Subs;
 using Firestorm.Stems.Attributes;
 using Firestorm.Stems.Attributes.Analysis;
 using JetBrains.Annotations;
+using Reflectious;
 
 namespace Firestorm.Stems.Fuel.Identifiers
 {

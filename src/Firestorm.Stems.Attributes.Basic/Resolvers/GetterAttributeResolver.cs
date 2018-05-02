@@ -4,6 +4,7 @@ using System.Reflection;
 using Firestorm.Stems.Attributes.Analysis;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
+using Reflectious;
 
 namespace Firestorm.Stems.Attributes.Basic.Resolvers
 {
