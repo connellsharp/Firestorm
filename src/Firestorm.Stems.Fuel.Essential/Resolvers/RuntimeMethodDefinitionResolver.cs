@@ -4,6 +4,7 @@ using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.Fuel.Essential.Factories;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 using Firestorm.Stems.Fuel.Resolving.Factories;
+using Reflectious;
 
 namespace Firestorm.Stems.Fuel.Essential.Resolvers
 {
@@ -26,8 +27,15 @@ namespace Firestorm.Stems.Fuel.Essential.Resolvers
                 if (FieldDefinition.Getter.Expression != null)
                 {
                     var middleExpression = FieldDefinition.Getter.Expression;
+                    
                     Type getterType = typeof(InstanceMethodWithExpressionFieldReaderFactory<,,>).MakeGenericType(typeof(TItem), middleExpression.ReturnType, FieldDefinition.FieldType);
                     var getter = (IFactory<IFieldReader<TItem>, TItem>) Activator.CreateInstance(getterType, middleExpression, FieldDefinition.Getter.GetInstanceMethod);
+
+                    getter = typeof(InstanceMethodWithExpressionFieldReaderFactory<,,>).Reflect()
+                        .MakeGeneric(typeof(TItem), middleExpression.ReturnType, FieldDefinition.FieldType)
+                        .CreateInstance(middleExpression, FieldDefinition.Getter.GetInstanceMethod)
+                        as IFactory<IFieldReader<TItem>, TItem>;
+                    
                     implementations.ReaderFactories.Add(FieldDefinition.FieldName, getter);
                 }
                 else
@@ -36,7 +44,6 @@ namespace Firestorm.Stems.Fuel.Essential.Resolvers
                     var getter = (IFactory<IFieldReader<TItem>, TItem>) Activator.CreateInstance(getterType, FieldDefinition.Getter.GetInstanceMethod);
                     implementations.ReaderFactories.Add(FieldDefinition.FieldName, getter);
                 }
-
             }
 
             if (FieldDefinition.Setter.GetInstanceMethod != null)

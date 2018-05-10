@@ -74,6 +74,7 @@ namespace Firestorm.Engine.Queryable
         private object GetDynamicObject(TItem item, Type dynamicType)
         {
             ParameterExpression itemPram = Expression.Parameter(typeof(TItem), "itm");
+
             object dynamicObj = Activator.CreateInstance(dynamicType, new object[0]);
 
             foreach (var fieldReader in _fieldReaders)

@@ -39,13 +39,17 @@ namespace Firestorm.Stems.Fuel.Identifiers
 
                 Type itemType = enumerableType.GetGenericArguments()[0];
 
-                var type = typeof(MultiExpressionIdentifierInfo<,>).MakeGenericType(typeof(TItem), itemType);
-                return (IIdentifierInfo<TItem>) Activator.CreateInstance(type, getterExpr);
+                return typeof(MultiExpressionIdentifierInfo<,>).Reflect()
+                    .MakeGeneric(typeof(TItem), itemType)
+                    .CastTo<IIdentifierInfo<TItem>>()
+                    .CreateInstance(getterExpr);
             }
             else
             {
-                var type = typeof(ExpressionIdentifierInfo<,>).MakeGenericType(typeof(TItem), returnType);
-                return (IIdentifierInfo<TItem>) Activator.CreateInstance(type, getterExpr);
+                return typeof(ExpressionIdentifierInfo<,>).Reflect()
+                    .MakeGeneric(typeof(TItem), returnType)
+                    .CastTo<IIdentifierInfo<TItem>>()
+                    .CreateInstance(getterExpr);
             }
         }
 
