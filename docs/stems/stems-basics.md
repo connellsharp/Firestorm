@@ -5,7 +5,7 @@ The `Get` attribute marks a member as a field that an API client can read.
 
 #### Static Expressions
 
-Static properties that return `Expression<Func<Artist, int>>` are the most efficient field getters. Expressions are combined into parts of a query.
+Static properties that return `LambdaExpression` are the most efficient field getters. Expressions are combined into parts of a query.
 
 Getters can be given a Display.Nested argument to display the field even when nested in a collection.
 
@@ -127,7 +127,7 @@ The `Set` attribute marks a member as a field that an API client can write to.
 
 #### Static Expressions
 
-Simple static properties that return `Expression<Func<Artist, int>>` for a single property can also be used as setters.
+Simple static properties that return `LambdaExpression` for a single property can also be used as setters.
 
 ```csharp
 public class ArtistsStem : Stem<Artist>
@@ -196,14 +196,18 @@ public class ArtistsStem : Stem<Artist>
     {
         get { return a => a.Name; }
     }
-    
-    [Get]
-    public static Expression<Func<Artist, DateTime>> StartDate
+
+    [Set]
+    public void SetName(Artist artist, string name)
     {
-        get { return a => a.StartDate; }
+        artist.OldName = artist.Name;
+        artist.Name = name;
+        artist.NameChangedDate = DateTime.Now;
     }
 }
 ```
+
+Because we prefix the method name with `Set`, Firestorm ignores the prefix and regonises both the expression and method as the same field in your API.
 
 ```http
 POST /artists HTTP/1.1
@@ -225,7 +229,7 @@ HTTP/1.1 200 OK
 
 #### Instance Setter Methods
 
-Non-static methods of the same signature can be used too. These will use a single Stem instance per API request. This is very handy when combined with [Constructor Inection](http://localhost:63119/Stems/NOWHERE).
+Non-static methods of the same signature can be used too. These will use a single Stem instance per API request. This is very handy when combined with [Constructor Inection](dependency-injection.md).
 
 ```csharp
 public class ArtistsStem : Stem<Artist>
@@ -248,6 +252,7 @@ public class ArtistsStem : Stem<Artist>
     {
         if(_service.ArtistExistsWithName(name))
             throw new ArgumentException("An artist already exists with this name.");
+            
         artist.OldName = artist.Name;
         artist.Name = name;
         artist.NameChangedDate = DateTime.Now;

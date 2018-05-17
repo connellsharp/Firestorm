@@ -10,38 +10,33 @@ Stems describe how to handle an object of a specific type. Types can be Entities
 
 These example Stems describe the relationship between `Artist` and `Album` objects.
 
-
-
 ```csharp
 public class ArtistsStem : Stem<Artist>
 {
     [Get, Identifier]
-    public static int Id { get; }
+    public static Expression Id => Expression(a => a.Id);
 
     [Get, Set]
-    public static string Name { get; }
+    public static Expression Name => Expression(a => a.Name);
 
     [Get(Display.Hidden)]
     [Substem(typeof(AlbumSubstem))]
-    public static ICollection<Album> Albums { get; }
+    public static Expression Albums => Expression(a => a.Albums);
 }
 
 public class AlbumsStem : Stem<Album>
 {
     [Get, Identifier]
-    public static int Id { get; }
+    public static Expression Id => Expression(a => a.Id);
 
     [Get, Set]
-    public static string Title { get; }
+    public static Expression Title => Expression(a => a.Title);
 
     [Get, Set]
-    public static DateTime ReleaseDate { get; }
+    public static Expression ReleaseDate => Expression(a => a.ReleaseDate);
 
     [Get]
-    public static Expression<Func<Album, bool>> IsStreamable
-    {
-        get { return a => a.Streams.Any(s => s.IsAvailable); }
-    }
+    public static Expression IsStreamable => Expression(a => a.Streams.Any(s => s.IsAvailable));
 }
 ```
 

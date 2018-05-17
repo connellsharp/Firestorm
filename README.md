@@ -4,27 +4,27 @@
 
 Firestorm is a REST API framework for .NET. The aim is to provide a neat and easy ways to write standardised APIs with more of the leg-work taken care of.
 
-_Using **[Stems](docs/stems/stems-intro.md)** to describe your API_
+_Using [Stems](docs/stems/stems-intro.md) to describe your API_
 
 ```csharp
 public class ArtistsStem : Stem<Artist>
 {
     [Get, Identifier]
-    public static int ID { get; }
+    public static int Id { get; }
 
     [Get, Set]
     public static string Name { get; }
 }
 ```
 
-_Exposes RESTful endpoints_
+_Exposes [RESTful endpoints](docs/stems/stems-intro.md)_
 
 ```http
 GET /artists/123
 ```
 ```json
 {
-    "id": 321,
+    "id": 123,
     "name": "Noisia"
 }
 ```
@@ -38,6 +38,8 @@ GET /artists/123
 3. **Configurable.** Customise your conventions, response structure, verb strategies to suit your API needs. Integrate with your web host, ORM and IoC to fit nicely in your solution.
 
 4. **Agile.** It's easy to start a basic project with just a few endpoints and grow rapidly as requirements build.
+
+You can read more in the [documentation](https://firestorm.readthedocs.org), or jump straight into the [tutorials](https://github.com/connellw/Firestorm/wiki/Tutorials).
 
 ## Install
 
@@ -58,7 +60,7 @@ Firestorm is a bit of an experiment that grew into something I feel other develo
 It's still in active development. I have so many feature ideas for future versions!
 
 #### Copyright
-Copyright © 2017 Connell Watkins
+Copyright ï¿½ 2018 Connell Watkins
 
 #### License
 Firestorm is licensed under MIT. Refer to [LICENSE.txt](LICENSE.txt) for detailed information.
