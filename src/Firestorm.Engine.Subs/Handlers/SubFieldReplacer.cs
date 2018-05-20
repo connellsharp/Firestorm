@@ -12,12 +12,12 @@ namespace Firestorm.Engine.Subs.Handlers
         where TNav : class
     {
         private readonly Func<IQueryable<TItem>, IQueryable<TNav>> _selectAllNavFunc;
-        private readonly FieldReplacementProcesor<TNav> _replacementProcessor;
+        private readonly FieldReplacementProcessor<TNav> _replacementProcessor;
         
         public SubFieldReplacer(IEngineSubContext<TNav> engineSubContext, Func<IQueryable<TItem>, IQueryable<TNav>> selectAllNavFunc)
         {
             _selectAllNavFunc = selectAllNavFunc;
-            _replacementProcessor = new FieldReplacementProcesor<TNav>(engineSubContext.Fields.GetReaders(1));
+            _replacementProcessor = new FieldReplacementProcessor<TNav>(() => engineSubContext.Fields.GetReaders(1));
         }
 
         public Task LoadAsync(IQueryable<TItem> itemsQuery)

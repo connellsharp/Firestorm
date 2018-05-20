@@ -5,27 +5,32 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Firestorm.Data;
 using Firestorm.Engine.Fields;
 
 namespace Firestorm.Engine.Queryable
 {
-    public class FieldReplacementProcesor<TItem>
+    public class FieldReplacementProcessor<TItem>
     {
-        private readonly IDictionary<string, IFieldReader<TItem>> _fieldReaders;
+        private readonly Func<IEnumerable<KeyValuePair<string, IFieldReader<TItem>>>> _getFieldReadersFunc;
         private ConcurrentDictionary<string, IFieldValueReplacer<TItem>> _replacerDictionary;
 
-        public FieldReplacementProcesor(IDictionary<string, IFieldReader<TItem>> fieldReaders)
+        public FieldReplacementProcessor(IDictionary<string, IFieldReader<TItem>> fieldReaders)
         {
-            _fieldReaders = fieldReaders;
+            _getFieldReadersFunc = () => fieldReaders;
+        }
+
+        public FieldReplacementProcessor(Func<IEnumerable<KeyValuePair<string, IFieldReader<TItem>>>> getFieldReadersFunc)
+        {
+            _getFieldReadersFunc = getFieldReadersFunc;
         }
 
         public Task LoadAllAsync(IQueryable<TItem> items)
         {
             _replacerDictionary = new ConcurrentDictionary<string, IFieldValueReplacer<TItem>>();
             var tasks = new List<Task>();
+            var fieldReaders = _getFieldReadersFunc.Invoke();
 
-            foreach (KeyValuePair<string, IFieldReader<TItem>> fieldReader in _fieldReaders)
+            foreach (KeyValuePair<string, IFieldReader<TItem>> fieldReader in fieldReaders)
             {
                 IFieldValueReplacer<TItem> replacer = fieldReader.Value.Replacer;
                 if (replacer == null)

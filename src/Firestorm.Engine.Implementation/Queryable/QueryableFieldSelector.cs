@@ -30,7 +30,7 @@ namespace Firestorm.Engine.Queryable
             object dynamicObj =  GetDynamicObject(item, dynamicType);
 
             IQueryable<TItem> items = new[] { item }.AsQueryable();
-            var replacementProcessor = new FieldReplacementProcesor<TItem>(_fieldReaders);
+            var replacementProcessor = new FieldReplacementProcessor<TItem>(_fieldReaders);
             await replacementProcessor.LoadAllAsync(items);
             replacementProcessor.Replace(dynamicObj, dynamicType);
 
@@ -45,7 +45,7 @@ namespace Firestorm.Engine.Queryable
             Type dynamicType = GetDynamicRuntimeType();
             IQueryable dynamicQueryable = GetDynamicQueryable(items, dynamicType);
 
-            var replacementProcessor = new FieldReplacementProcesor<TItem>(_fieldReaders);
+            var replacementProcessor = new FieldReplacementProcessor<TItem>(_fieldReaders);
             await replacementProcessor.LoadAllAsync(items);
             List<object> dynamicObjects = await ExecuteWithReplacementsAsync(replacementProcessor, dynamicQueryable, forEachAsync);
 
@@ -90,7 +90,7 @@ namespace Firestorm.Engine.Queryable
             return dynamicObj;
         }
 
-        private static async Task<List<object>> ExecuteWithReplacementsAsync(FieldReplacementProcesor<TItem> replacementProcessor, IQueryable dynamicQueryable, ForEachAsyncDelegate<object> forEachAsync)
+        private static async Task<List<object>> ExecuteWithReplacementsAsync(FieldReplacementProcessor<TItem> replacementProcessor, IQueryable dynamicQueryable, ForEachAsyncDelegate<object> forEachAsync)
         {
             var dynamicType = dynamicQueryable.ElementType;
             var returnObjects = new List<object>();

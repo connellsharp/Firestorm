@@ -27,12 +27,12 @@ namespace Firestorm.Engine.Queryable
 
             bool doneOnce = false;
 
-            foreach (SortInstruction sortIntruction in _instructions)
+            foreach (SortInstruction sortInstruction in _instructions)
             {
-                Debug.Assert(sortIntruction != null);
+                Debug.Assert(sortInstruction != null);
 
-                LambdaExpression getterLambda = GetOrderSelectorExpression(sortIntruction);
-                items = ExpressionTreeHelpers.GetOrderByExpressionQuery(items, getterLambda, sortIntruction.Direction, doneOnce);
+                LambdaExpression getterLambda = GetOrderSelectorExpression(sortInstruction);
+                items = ExpressionTreeHelpers.GetOrderByExpressionQuery(items, getterLambda, sortInstruction.Direction, doneOnce);
 
                 doneOnce = true;
             }
