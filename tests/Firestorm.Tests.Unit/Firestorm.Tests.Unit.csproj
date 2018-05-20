@@ -10,6 +10,7 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Firestorm.Core\Firestorm.Core.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Engine.Additives\Firestorm.Engine.Additives.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Engine\Firestorm.Engine.csproj" />
   </ItemGroup>

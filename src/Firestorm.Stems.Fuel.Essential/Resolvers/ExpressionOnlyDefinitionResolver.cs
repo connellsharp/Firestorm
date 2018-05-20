@@ -30,7 +30,7 @@ namespace Firestorm.Stems.Fuel.Essential.Resolvers
             if (FieldDefinition.Getter.GetInstanceMethod != null)
                 return; // handled by the RuntimeMethodDefinitionResolver instead
 
-            // TODO: refactor below
+            // TODO: refactor below - use Expression.ReturnType?
 
             if (FieldDefinition.Getter.Expression != null)
             {

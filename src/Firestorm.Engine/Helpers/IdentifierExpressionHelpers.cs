@@ -19,8 +19,7 @@ namespace Firestorm.Engine
         [Pure]
         public static Expression<Func<TItem, bool>> GetIdentifierPredicate<TItem, TIdentifier>(Expression<Func<TItem, TIdentifier>> identifierExpr, TIdentifier identifierObj)
         {
-            BinaryExpression predicateExpr = Expression.Equal(identifierExpr.Body, Expression.Constant(identifierObj, typeof(TIdentifier)));
-            return Expression.Lambda<Func<TItem, bool>>(predicateExpr, identifierExpr.Parameters);
+            return identifierExpr.ChainEquals(identifierObj);
         }
 
         /// <summary>
@@ -32,18 +31,16 @@ namespace Firestorm.Engine
         [Pure]
         public static Expression<Func<TItem, bool>> GetAnyIdentifierPredicate<TItem, TIdentifier>(Expression<Func<TItem, IEnumerable<TIdentifier>>> identifierExpr, TIdentifier identifierObj)
         {
-            var paramExpr = Expression.Parameter(typeof(TIdentifier), "r");
-            BinaryExpression predicateExpr = Expression.Equal(paramExpr, Expression.Constant(identifierObj, typeof(TIdentifier)));
-            var singleItemPredicate = Expression.Lambda<Func<TIdentifier, bool>>(predicateExpr, paramExpr);
-
             MethodInfo anyMethod = typeof(Enumerable).Reflect()
                 .GetMethod("Any")
+                .ReturnsType<bool>()
                 .MakeGeneric<TIdentifier>()
                 .WithParameters<IEnumerable<TIdentifier>, Func<TIdentifier, bool>>() // TODO handle List and arrays etc ?
                 .MethodInfo;
 
+            var singleItemPredicate = Expressions.Identity<TIdentifier>().ChainEquals(identifierObj);
+            
             var call = Expression.Call(anyMethod, identifierExpr.Body, singleItemPredicate);
-
             return Expression.Lambda<Func<TItem, bool>>(call, identifierExpr.Parameters);
         }
 

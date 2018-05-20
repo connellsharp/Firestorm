@@ -26,7 +26,7 @@ namespace Firestorm.Engine.Additives
         internal static PropertyInfo GetPropertyInfoFromLambda<TItem, TProperty>([NotNull] Expression<Func<TItem, TProperty>> propertyExpression) 
             where TItem : class
         {
-            return LambdaMemberUtilities.GetPropertyInfoFromLambda<TItem, TProperty>(propertyExpression);
+            return propertyExpression.Reflect().GetPropertyInfo();
         }
     }
 }
