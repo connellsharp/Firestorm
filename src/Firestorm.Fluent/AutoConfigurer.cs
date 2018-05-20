@@ -37,6 +37,11 @@ namespace Firestorm.Fluent
                 .Invoke(builder, rootName);
         }
 
+        public void AddItem<TItem>(IApiItemBuilder<TItem> builder)
+        {
+            AddItem(builder, 0);
+        }
+
         private void AddRootItem<TItem>(IApiBuilder builder, [CanBeNull] string rootName)
             where TItem : class, new()
         {
@@ -47,7 +52,7 @@ namespace Firestorm.Fluent
                 itemBuilder.RootName = rootName;
         }
         
-        public void AddItem<TItem>(IApiItemBuilder<TItem> builder)
+        private void AddItem<TItem>(IApiItemBuilder<TItem> builder, int nesting)
         {
             Type itemType = typeof(TItem);
 
@@ -59,46 +64,53 @@ namespace Firestorm.Fluent
                 this.Reflect()
                     .GetMethod(nameof(AddField))
                     .MakeGeneric(typeof(TItem), property.PropertyType)
-                    .Invoke(builder, expression);
+                    .Invoke(builder, expression, nesting);
             }
         }
 
-        private IApiItemBuilder<TItem> AddField<TItem, TField>(IApiItemBuilder<TItem> builder, Expression<Func<TItem, TField>> expression)
+        private IApiItemBuilder<TItem> AddField<TItem, TField>(IApiItemBuilder<TItem> builder, Expression<Func<TItem, TField>> expression, int nesting)
         {
             IApiFieldBuilder<TItem, TField> fieldBuilder = builder.Field(expression);
 
             if (_configuration.AllowWrite)
                 fieldBuilder.AllowWrite();
 
+            if (nesting >= _configuration.MaxNesting)
+                return builder;
+
             if (typeof(TField).GetConstructor(new Type[0]) != null)
+            {
                 this.Reflect()
                     .GetMethod(nameof(AddFieldAsItem))
                     .MakeGeneric<TItem, TField>()
-                    .Invoke(fieldBuilder);
+                    .Invoke(fieldBuilder, nesting);
+            }
 
             Type enumNav = typeof(TField).GetGenericInterface(typeof(ICollection<>))?.GetGenericArguments()[0];
             if (enumNav != null)
+            {
                 this.Reflect()
                     .GetMethod(nameof(AddFieldAsCollection))
                     .MakeGeneric(typeof(TItem), typeof(TField), enumNav)
-                    .Invoke(fieldBuilder);
+                    .Invoke(fieldBuilder, nesting);
+            }
 
             return builder;
         }
 
-        private void AddFieldAsItem<TItem, TField>(IApiFieldBuilder<TItem, TField> fieldBuilder)
+        private void AddFieldAsItem<TItem, TField>(IApiFieldBuilder<TItem, TField> fieldBuilder, int nesting)
             where TField : class, new()
         {
             var subItemBuilder = fieldBuilder.IsItem<TField>();
-            AddItem<TField>(subItemBuilder);
+            AddItem<TField>(subItemBuilder, nesting + 1);
         }
 
-        private void AddFieldAsCollection<TItem, TField, TNav>(IApiFieldBuilder<TItem, TField> fieldBuilder)
+        private void AddFieldAsCollection<TItem, TField, TNav>(IApiFieldBuilder<TItem, TField> fieldBuilder, int nesting)
             where TField : class, IEnumerable<TNav>
             where TNav : class, new()
         {
             var subItemBuilder = fieldBuilder.IsCollection<TField, TNav>();
-            AddItem<TNav>(subItemBuilder);
+            AddItem<TNav>(subItemBuilder, nesting + 1);
         }
     }
 }

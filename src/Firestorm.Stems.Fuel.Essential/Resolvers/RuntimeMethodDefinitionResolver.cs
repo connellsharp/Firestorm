@@ -34,7 +34,6 @@ namespace Firestorm.Stems.Fuel.Essential.Resolvers
                         .MakeGeneric(typeof(TItem), middleExpression.ReturnType, FieldDefinition.FieldType)
                         .CastTo<IFactory<IFieldReader<TItem>, TItem>>()
                         .CreateInstance(middleExpression, FieldDefinition.Getter.GetInstanceMethod);
-
                 }
                 else
                 {

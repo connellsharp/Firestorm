@@ -6,5 +6,7 @@
     public class AutoConfiguration
     {
         public bool AllowWrite { get; set; } = false;
+
+        public int MaxNesting { get; set; } = 4;
     }
 }
