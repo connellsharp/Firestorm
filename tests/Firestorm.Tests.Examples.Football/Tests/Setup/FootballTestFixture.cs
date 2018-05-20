@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using Remotion.Linq.Parsing.ExpressionVisitors.Transformation.PredefinedTransformations;
 
 namespace Firestorm.Tests.Examples.Football.Tests
 {

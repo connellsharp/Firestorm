@@ -4,7 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.0" />
-    <PackageReference Include="Reflectious" Version="0.9" />
+    <PackageReference Include="Reflectious" Version="0.9.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Firestorm.Data\Firestorm.Data.csproj" />

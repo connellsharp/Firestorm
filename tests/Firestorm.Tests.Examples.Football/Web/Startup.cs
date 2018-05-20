@@ -1,11 +1,9 @@
 using System;
-using Firestorm.Endpoints;
 using Firestorm.AspNetCore2;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Web;
 using Firestorm.Extensions.AspNetCore;
 using Firestorm.Tests.Examples.Football.Data;
-using Firestorm.Tests.Examples.Football.Models;
 using Firestorm.Tests.Examples.Football.Tests;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
@@ -27,7 +25,7 @@ namespace Firestorm.Tests.Examples.Football.Web
         [UsedImplicitly]
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddEntityFrameworkSqlServer()
+            services
                 .AddDbContext<FootballDbContext>(builder =>
                 {
                     const string connection = @"Server=(localdb)\mssqllocaldb;Database=Firestorm.Tests.Examples.Football;Trusted_Connection=True;ConnectRetryCount=0";
