@@ -24,26 +24,28 @@ namespace Firestorm.Stems.Fuel.Essential.Resolvers
 
             if (FieldDefinition.Getter.GetInstanceMethod != null)
             {
+                IFactory<IFieldReader<TItem>, TItem> factory;
+
                 if (FieldDefinition.Getter.Expression != null)
                 {
                     var middleExpression = FieldDefinition.Getter.Expression;
-                    
-                    Type getterType = typeof(InstanceMethodWithExpressionFieldReaderFactory<,,>).MakeGenericType(typeof(TItem), middleExpression.ReturnType, FieldDefinition.FieldType);
-                    var getter = (IFactory<IFieldReader<TItem>, TItem>) Activator.CreateInstance(getterType, middleExpression, FieldDefinition.Getter.GetInstanceMethod);
 
-                    getter = typeof(InstanceMethodWithExpressionFieldReaderFactory<,,>).Reflect()
+                    factory = typeof(InstanceMethodWithExpressionFieldReaderFactory<,,>).Reflect()
                         .MakeGeneric(typeof(TItem), middleExpression.ReturnType, FieldDefinition.FieldType)
-                        .CreateInstance(middleExpression, FieldDefinition.Getter.GetInstanceMethod)
-                        as IFactory<IFieldReader<TItem>, TItem>;
-                    
-                    implementations.ReaderFactories.Add(FieldDefinition.FieldName, getter);
+                        .CastTo<IFactory<IFieldReader<TItem>, TItem>>()
+                        .CreateInstance(middleExpression, FieldDefinition.Getter.GetInstanceMethod);
+
                 }
                 else
                 {
-                    Type getterType = typeof(InstanceMethodFieldReaderFactory<,>).MakeGenericType(typeof(TItem), FieldDefinition.FieldType);
-                    var getter = (IFactory<IFieldReader<TItem>, TItem>) Activator.CreateInstance(getterType, FieldDefinition.Getter.GetInstanceMethod);
-                    implementations.ReaderFactories.Add(FieldDefinition.FieldName, getter);
+                    factory = typeof(InstanceMethodFieldReaderFactory<,>).Reflect()
+                        .MakeGeneric(typeof(TItem), FieldDefinition.FieldType)
+                        .CastTo<IFactory<IFieldReader<TItem>, TItem>>()
+                        .CreateInstance(FieldDefinition.Getter.GetInstanceMethod);
                 }
+
+                implementations.ReaderFactories.Add(FieldDefinition.FieldName, factory);
+                implementations.CollatorFactories.Add(FieldDefinition.FieldName, new BasicCollatorFactory<TItem>(factory));
             }
 
             if (FieldDefinition.Setter.GetInstanceMethod != null)
