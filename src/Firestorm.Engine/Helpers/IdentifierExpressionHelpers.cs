@@ -19,7 +19,8 @@ namespace Firestorm.Engine
         [Pure]
         public static Expression<Func<TItem, bool>> GetIdentifierPredicate<TItem, TIdentifier>(Expression<Func<TItem, TIdentifier>> identifierExpr, TIdentifier identifierObj)
         {
-            return identifierExpr.ChainEquals(identifierObj);
+            return identifierExpr
+                .ChainEquals(identifierObj);
         }
 
         /// <summary>
@@ -38,7 +39,8 @@ namespace Firestorm.Engine
                 .WithParameters<IEnumerable<TIdentifier>, Func<TIdentifier, bool>>() // TODO handle List and arrays etc ?
                 .MethodInfo;
 
-            var singleItemPredicate = Expressions.Identity<TIdentifier>().ChainEquals(identifierObj);
+            var singleItemPredicate = Expressions.Identity<TIdentifier>()
+                .ChainEquals(identifierObj);
             
             var call = Expression.Call(anyMethod, identifierExpr.Body, singleItemPredicate);
             return Expression.Lambda<Func<TItem, bool>>(call, identifierExpr.Parameters);
@@ -46,7 +48,9 @@ namespace Firestorm.Engine
 
         public static void SetIdentifier<TItem, TIdentifier>(TItem item, Expression<Func<TItem, TIdentifier>> identifierExpr, TIdentifier newIdentifier)
         {
-            item.Reflect().GetProperty(identifierExpr).SetValue(newIdentifier);
+            item.Reflect()
+                .GetProperty(identifierExpr)
+                .SetValue(newIdentifier);
         }
     }
 }
