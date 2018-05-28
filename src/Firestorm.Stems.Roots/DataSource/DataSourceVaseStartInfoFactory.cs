@@ -9,22 +9,25 @@ namespace Firestorm.Stems.Roots.DataSource
     {
         private readonly IDataSource _dataSource;
         private readonly ITypeGetter _stemTypeGetter;
+        private readonly DataSourceRootAttributeBehavior _rootBehavior;
+
         private NamedTypeDictionary _stemTypeDictionary;
 
-        public DataSourceVaseStartInfoFactory(IDataSource dataSource, ITypeGetter stemTypeGetter)
+        public DataSourceVaseStartInfoFactory(IDataSource dataSource, ITypeGetter stemTypeGetter, DataSourceRootAttributeBehavior rootBehavior)
         {
             _dataSource = dataSource;
             _stemTypeGetter = stemTypeGetter;
+            _rootBehavior = rootBehavior;
         }
 
         public IEnumerable<Type> GetStemTypes()
         {
+            _stemTypeDictionary = new SuffixedNamedTypeDictionary("Stem");
+
             var validator = new AggregateTypeValidator(
-                new AttributedTypeValidator(typeof(DataSourceRootAttribute), true),
+                GetAttributedTypeValidator(),
                 new DerivedTypeValidator(typeof(Stem))
             );
-
-            _stemTypeDictionary = new SuffixedNamedTypeDictionary("Stem");
 
             var populator = new TypeDictionaryPopulator(_stemTypeDictionary, validator);
             populator.AddValidTypes(_stemTypeGetter);
@@ -40,6 +43,21 @@ namespace Firestorm.Stems.Roots.DataSource
         public RestDirectoryInfo CreateDirectoryInfo()
         {
             return _stemTypeDictionary.CreateDirectoryInfo();
+        }
+
+        private AttributedTypeValidator GetAttributedTypeValidator()
+        {
+            switch (_rootBehavior)
+            {
+                case DataSourceRootAttributeBehavior.OnlyUseAllowedStems:
+                    return new AttributedTypeValidator(typeof(DataSourceRootAttribute), true);
+
+                case DataSourceRootAttributeBehavior.UseAllStemsExceptDisallowed:
+                    return new AttributedTypeValidator(typeof(NoDataSourceRootAttribute), false);
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(DataSourceRootAttributeBehavior), "DataSourceRootAttributeBehavior was invalid.");
+            }
         }
     }
 }

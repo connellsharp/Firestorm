@@ -1,5 +1,4 @@
-﻿using System;
-using Firestorm.AspNetCore2;
+﻿using Firestorm.AspNetCore2;
 using Firestorm.Data;
 using Firestorm.Stems;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +17,8 @@ namespace Firestorm.Extensions.AspNetCore
             builder.Services.AddSingleton<IRootResourceFactory>(sp => new DataSourceRootResourceFactory
             {
                 DataSource = sp.GetService<IDataSource>(),
-                StemTypeGetter = sp.GetService<AxisTypesLocation<Stem>>().GetTypeGetter()
+                StemTypeGetter = sp.GetService<AxisTypesLocation<Stem>>().GetTypeGetter(),
+                RootBehavior = sp.GetService<DataSourceRootAttributeBehavior>()
             });
             
             return builder;

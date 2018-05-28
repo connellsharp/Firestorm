@@ -1,7 +1,5 @@
-﻿using Firestorm.Endpoints;
-using Firestorm.Endpoints.Naming;
+﻿using Firestorm.Endpoints.Naming;
 using Firestorm.Endpoints.Responses;
-using Firestorm.Endpoints.Start;
 using Firestorm.Endpoints.Web;
 using Firestorm.EntityFramework6;
 using Firestorm.Stems.AutoMap;
