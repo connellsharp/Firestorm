@@ -3,14 +3,18 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="DataSource\**" />
+    <Compile Remove="Fluebnt\**" />
+    <EmbeddedResource Remove="DataSource\**" />
+    <EmbeddedResource Remove="Fluebnt\**" />
+    <None Remove="DataSource\**" />
+    <None Remove="Fluebnt\**" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Firestorm.AspNetCore2\Firestorm.AspNetCore2.csproj" />
     <ProjectReference Include="..\Firestorm.EntityFrameworkCore2\Firestorm.EntityFrameworkCore2.csproj" />
     <ProjectReference Include="..\Firestorm.Stems.Roots.Start\Firestorm.Stems.Roots.Start.csproj" />
     <ProjectReference Include="..\Firestorm.Fluent.Start\Firestorm.Fluent.Start.csproj" />
     <ProjectReference Include="..\Firestorm.Fluent\Firestorm.Fluent.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataSource" />
-    <Folder Include="Fluebnt" />
   </ItemGroup>
 </Project>
