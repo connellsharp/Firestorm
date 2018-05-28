@@ -15,10 +15,11 @@
 
     <dependencies>
       <dependency id="Firestorm.Core" version="$(FsVersion)" />
+      <dependency id="Firestorm.Data" version="$(FsVersion)" />
       <dependency id="Firestorm.AspNetCore2" version="$(FsVersion)" />
       <dependency id="Firestorm.EntityFrameworkCore2" version="$(FsVersion)" />
-      <dependency id="Firestorm.Stems.Roots.DataSource" version="$(FsVersion)" />
-      <dependency id="Firestorm.Fluent.All" version="$(FsVersion)" />
+      <dependency id="Firestorm.Stems.Start" version="$(FsVersion)" />
+      <dependency id="Firestorm.Fluent.Start" version="$(FsVersion)" />
     </dependencies>
   </metadata>
 </package>

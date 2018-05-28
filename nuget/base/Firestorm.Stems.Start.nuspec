@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Firestorm.Stems.Roots.Start</id>
+    <id>Firestorm.Stems.Start</id>
     <version>$(FsVersion)</version>
-    <title>Firestorm Roots Start</title>
-    <description>Ties in Endpoints by providing a StartResourceFactory for Roots.</description>
+    <title>Firestorm Stems Start</title>
+    <description>Build and host REST APIs using Firestorm Stems.</description>
     <tags>firestorm rest api stems roots endpoints start</tags>
 
     <authors>Connell Watkins</authors>
-    <copyright>Copyright © Connell Watkins 2017</copyright>
+    <copyright>Copyright © Connell Watkins 2018</copyright>
     <projectUrl>https://github.com/connellw/Firestorm</projectUrl>
     <licenseUrl>https://github.com/connellw/Firestorm/blob/master/LICENSE.txt</licenseUrl>
     <iconUrl>https://github.com/connellw/Firestorm/raw/master/nuget/icon.png</iconUrl>
@@ -21,8 +21,6 @@
     </dependencies>
     
     <references>
-      <!--reference file="Firestorm.Core.Web.dll" /-->
-      <!--reference file="Firestorm.Endpoints.Start.dll" /-->
       <reference file="Firestorm.Stems.Fuel.Essential.dll" />
       <reference file="Firestorm.Stems.Fuel.Substems.dll" />
       <reference file="Firestorm.Stems.Roots.Start.dll" />

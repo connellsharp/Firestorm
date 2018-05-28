@@ -4,7 +4,7 @@
     <id>Firestorm.Fluent.Start</id>
     <version>$(FsVersion)</version>
     <title>Firestorm Fluent Start</title>
-    <description>Ties in Endpoints by providing a StartResourceFactory for the Fluent API.</description>
+    <description>Build and host REST APIs using the Firestorm Fluent API.</description>
     <tags>firestorm rest api fluent endpoints start</tags>
 
     <authors>Connell Watkins</authors>
@@ -21,6 +21,10 @@
     </dependencies>
     
     <references>
+      <reference file="Firestorm.Engine.dll" />
+      <reference file="Firestorm.Engine.Implementation.dll" />
+      <reference file="Firestorm.Engine.Additives.dll" />
+      <reference file="Firestorm.Engine.Subs.dll" />
       <reference file="Firestorm.Fluent.Fuel.dll" />
       <reference file="Firestorm.Fluent.Start.dll" />
     </references>
