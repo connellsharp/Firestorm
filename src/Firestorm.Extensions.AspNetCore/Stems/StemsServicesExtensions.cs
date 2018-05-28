@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using Firestorm.Endpoints.Start;
 using Firestorm.Stems;
 using Firestorm.Stems.Roots;
 using Firestorm.AspNetCore2;
@@ -10,7 +9,7 @@ namespace Firestorm.Extensions.AspNetCore
     public static class StemsServicesExtensions
     {
         /// <summary>
-        /// Configures Firestorm Stems using Stem tpes from the application's entry assembly.
+        /// Configures Firestorm Stems using Stem types from the application's entry assembly.
         /// </summary>
         public static IFirestormServicesBuilder AddStems(this IFirestormServicesBuilder builder)
         {
@@ -18,7 +17,7 @@ namespace Firestorm.Extensions.AspNetCore
         }
 
         /// <summary>
-        /// Configures Firestorm Stems using Stem tpes from the given <see cref="Assembly"/>.
+        /// Configures Firestorm Stems using Stem types from the given <see cref="Assembly"/>.
         /// </summary>
         public static IFirestormServicesBuilder AddStems(this IFirestormServicesBuilder builder, Assembly assembly)
         {
@@ -26,7 +25,7 @@ namespace Firestorm.Extensions.AspNetCore
         }
 
         /// <summary>
-        /// Configures Firestorm Stems using Stem tpes from the given <see cref="Assembly"/> within the given <see cref="baseNamespace"/>.
+        /// Configures Firestorm Stems using Stem types from the given <see cref="Assembly"/> within the given <see cref="baseNamespace"/>.
         /// </summary>
         public static IFirestormServicesBuilder AddStems(this IFirestormServicesBuilder builder, Assembly assembly, string baseNamespace)
         {
