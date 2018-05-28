@@ -27,7 +27,7 @@ namespace Firestorm.EntityFramework6
             return new EntitiesRepository<TEntity>(repo);
         }
 
-        public IEnumerable<Type> FindRespositoryTypes()
+        public IEnumerable<Type> FindRepositoryTypes()
         {
             using (var context = new TDbContext())
             {
