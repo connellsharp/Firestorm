@@ -16,17 +16,4 @@ namespace Firestorm.Stems.Roots.DataSource
             return new DataSourceVaseStartInfoFactory(DataSource, StemTypeGetter, RootBehavior);
         }
     }
-    
-    public enum DataSourceRootAttributeBehavior
-    {
-        /// <summary>
-        /// Only use Stems marked with the <see cref="DataSourceRootAttribute"/>.
-        /// </summary>
-        OnlyUseAllowedStems,
-
-        /// <summary>
-        /// Use all Stems except those marked with the <see cref="NoDataSourceRootAttribute"/>.
-        /// </summary>
-        UseAllStemsExceptDisallowed
-    }
 }
