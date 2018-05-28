@@ -10,7 +10,7 @@ namespace Firestorm.Extensions.AspNetCore
     internal static class DataSourceRootsServicesExtensions
     {
         /// <summary>
-        /// Configures the <see cref="DataSourceRootResourceFactory"/>.
+        /// Configures the <see cref="DataSourceRootResourceFactory"/> for Stems.
         /// </summary>
         internal static IFirestormServicesBuilder AddDataSourceRoots(this IFirestormServicesBuilder builder)
         {
@@ -18,7 +18,7 @@ namespace Firestorm.Extensions.AspNetCore
             {
                 DataSource = sp.GetService<IDataSource>(),
                 StemTypeGetter = sp.GetService<AxisTypesLocation<Stem>>().GetTypeGetter(),
-                RootBehavior = sp.GetService<DataSourceRootAttributeBehavior>()
+                RootBehavior = DataSourceRootAttributeBehavior.UseAllStemsExceptDisallowed // TODO support this option
             });
             
             return builder;
