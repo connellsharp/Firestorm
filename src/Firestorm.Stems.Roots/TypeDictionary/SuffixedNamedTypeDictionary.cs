@@ -2,14 +2,12 @@ using System;
 
 namespace Firestorm.Stems.Roots
 {
-    public class SuffixedDerivedTypeDictionary : NamedTypeDictionary
+    public class SuffixedNamedTypeDictionary : NamedTypeDictionary
     {
-        private readonly Type _baseType;
         private readonly string _nameSuffix;
 
-        public SuffixedDerivedTypeDictionary(Type baseType, string nameSuffix)
+        public SuffixedNamedTypeDictionary(string nameSuffix)
         {
-            _baseType = baseType;
             _nameSuffix = nameSuffix;
         }
 
@@ -22,11 +20,6 @@ namespace Firestorm.Stems.Roots
                 name = name.Substring(0, index);
 
             return name.TrimEnd(_nameSuffix);
-        }
-
-        protected override bool IsValidType(Type type)
-        {
-            return _baseType.IsAssignableFrom(type);
         }
     }
 }

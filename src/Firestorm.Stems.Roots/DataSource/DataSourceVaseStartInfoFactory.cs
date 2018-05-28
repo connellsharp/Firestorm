@@ -19,8 +19,15 @@ namespace Firestorm.Stems.Roots.DataSource
 
         public IEnumerable<Type> GetStemTypes()
         {
-            _stemTypeDictionary = new AttributedSuffixedDerivedTypeDictionary(typeof(Stem), "Stem", typeof(DataSourceRootAttribute));
-            _stemTypeDictionary.AddVaidTypes(_stemTypeGetter);
+            var validator = new AggregateTypeValidator(
+                new AttributedTypeValidator(typeof(DataSourceRootAttribute), true),
+                new DerivedTypeValidator(typeof(Stem))
+            );
+
+            _stemTypeDictionary = new SuffixedNamedTypeDictionary("Stem");
+
+            var populator = new TypeDictionaryPopulator(_stemTypeDictionary, validator);
+            populator.AddValidTypes(_stemTypeGetter);
 
             return _stemTypeDictionary.GetAllTypes();
         }
