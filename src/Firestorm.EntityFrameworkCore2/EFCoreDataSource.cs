@@ -33,7 +33,7 @@ namespace Firestorm.EntityFrameworkCore2
             return new EFCoreRepository<TEntity>(repo);
         }
 
-        public IEnumerable<Type> FindRespositoryTypes()
+        public IEnumerable<Type> FindRepositoryTypes()
         {
             using (TDbContext database = _dbContextFactory.Create())
             {

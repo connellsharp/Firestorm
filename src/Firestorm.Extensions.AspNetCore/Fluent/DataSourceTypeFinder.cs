@@ -19,7 +19,7 @@ namespace Firestorm.Extensions.AspNetCore
 
         public IEnumerable<Type> FindItemTypes()
         {
-            return _discoverableDataSource.FindRespositoryTypes();
+            return _discoverableDataSource.FindRepositoryTypes();
         }
     }
 }

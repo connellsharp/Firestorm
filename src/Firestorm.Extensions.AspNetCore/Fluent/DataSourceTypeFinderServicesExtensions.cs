@@ -7,7 +7,7 @@ namespace Firestorm.Extensions.AspNetCore
     internal static class DataSourceTypeFinderServicesExtensions
     {
         /// <summary>
-        /// Configures the <see cref="DataSourceRootResourceFactory"/>.
+        /// Configures a <see cref="IItemTypeFinder"/> that finds the entity types in the data source.
         /// </summary>
         internal static IFirestormServicesBuilder AddDataSourceTypeFinder(this IFirestormServicesBuilder builder)
         {

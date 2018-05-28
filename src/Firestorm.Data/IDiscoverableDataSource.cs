@@ -8,6 +8,6 @@ namespace Firestorm.Data
     /// </summary>
     public interface IDiscoverableDataSource : IDataSource
     {
-        IEnumerable<Type> FindRespositoryTypes();
+        IEnumerable<Type> FindRepositoryTypes();
     }
 }

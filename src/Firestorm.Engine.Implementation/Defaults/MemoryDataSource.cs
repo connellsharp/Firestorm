@@ -33,7 +33,7 @@ namespace Firestorm.Engine.Defaults
             return (List<TEntity>)_lists.GetOrAdd(typeof(TEntity), t => new List<TEntity>());
         }
 
-        public IEnumerable<Type> FindRespositoryTypes()
+        public IEnumerable<Type> FindRepositoryTypes()
         {
             return _lists.Keys;
         }
