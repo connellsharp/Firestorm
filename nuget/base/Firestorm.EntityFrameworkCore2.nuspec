@@ -16,6 +16,7 @@
     <dependencies>
       <dependency id="Firestorm.Data" version="$(FsVersion)" />
       <dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="2.0.0" />
+      <dependency id="Reflectious" version="0.9.3" />
     </dependencies>
     
     <references>
