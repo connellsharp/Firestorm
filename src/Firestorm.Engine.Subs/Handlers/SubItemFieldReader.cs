@@ -15,7 +15,7 @@ namespace Firestorm.Engine.Subs.Handlers
             IEngineSubContext<TNav> engineSubContext)
             : base(navigationExpression, engineSubContext)
         {
-            Replacer = new SubFieldReplacer<TItem, TNav>(engineSubContext, q => q.Select(navigationExpression));
+            Replacer = new SubItemReplacer<TItem, TNav>(engineSubContext, q => q.Select(navigationExpression));
         }
 
         public IFieldValueReplacer<TItem> Replacer { get; }

@@ -21,8 +21,8 @@ namespace Firestorm.Engine.Subs.Handlers
             _navigationExpression = navigationExpression;
             _engineSubContext = engineSubContext;
 
-            var castedNavExpr = _navigationExpression as Expression<Func<TItem, IEnumerable<TNav>>>; // works due to generic constraints
-            Replacer = new SubFieldReplacer<TItem, TNav>(engineSubContext, q => q.SelectMany(castedNavExpr));
+            Func<IQueryable<TItem>, IQueryable<IEnumerable<TNav>>> selectAllNavFunc = q => q.Select(_navigationExpression).Cast<IEnumerable<TNav>>();
+            Replacer = new SubCollectionReplacer<TItem, TNav>(engineSubContext, selectAllNavFunc);
         }
 
         public Type FieldType => typeof(IEnumerable); // TODO maybe just object ?

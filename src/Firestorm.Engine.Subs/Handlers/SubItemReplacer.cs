@@ -7,13 +7,13 @@ using Firestorm.Engine.Subs.Context;
 
 namespace Firestorm.Engine.Subs.Handlers
 {
-    public class SubFieldReplacer<TItem, TNav> : IFieldValueReplacer<TItem> 
+    public class SubItemReplacer<TItem, TNav> : IFieldValueReplacer<TItem> 
         where TNav : class
     {
         private readonly Func<IQueryable<TItem>, IQueryable<TNav>> _selectAllNavFunc;
         private readonly FieldReplacementProcessor<TNav> _replacementProcessor;
         
-        public SubFieldReplacer(IEngineSubContext<TNav> engineSubContext, Func<IQueryable<TItem>, IQueryable<TNav>> selectAllNavFunc)
+        public SubItemReplacer(IEngineSubContext<TNav> engineSubContext, Func<IQueryable<TItem>, IQueryable<TNav>> selectAllNavFunc)
         {
             _selectAllNavFunc = selectAllNavFunc;
             _replacementProcessor = new FieldReplacementProcessor<TNav>(() => engineSubContext.Fields.GetReaders(1));
