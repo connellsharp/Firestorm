@@ -31,7 +31,7 @@ namespace Firestorm.Stems.Fuel.Identifiers
             if (identifierName == null)
             {
                 if(_stemDefinition.IdentifierDefinitions.Count == 0)
-                    return new IDConventionIdentifierInfo<TItem>();
+                    return new IdConventionIdentifierInfo<TItem>();
 
                 var infos = _stemDefinition.IdentifierDefinitions.Values.Select(GetIdentifierInfoFromDefinition);
                 return new CombinedIdentifierInfo<TItem>(infos);

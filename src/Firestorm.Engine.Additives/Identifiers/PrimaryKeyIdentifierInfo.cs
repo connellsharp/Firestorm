@@ -16,7 +16,7 @@ namespace Firestorm.Engine.Additives.Identifiers
         private static PropertyInfo GetPropertyInfo(IPrimaryKeyFinder keyfinder)
         {
             return keyfinder.GetPrimaryKeyInfo(typeof(TItem))
-                   ?? IDConventionIdentifierInfo<TItem>.GetKeyPropertyByName();
+                   ?? IdConventionIdentifierInfo<TItem>.GetKeyPropertyByName();
         }
     }
 }

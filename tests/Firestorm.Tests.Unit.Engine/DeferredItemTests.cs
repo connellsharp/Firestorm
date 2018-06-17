@@ -26,7 +26,7 @@ namespace Firestorm.Tests.Unit.Engine
             Artist artist = repo.GetAllItems().FirstOrDefault(a => a.ID == testID);
             Assert.Null(artist);
 
-            var postedNewItem = new IdentifiedItem<Artist>(testID.ToString(), repo, new IDConventionIdentifierInfo<Artist>());
+            var postedNewItem = new IdentifiedItem<Artist>(testID.ToString(), repo, new IdConventionIdentifierInfo<Artist>());
             await postedNewItem.LoadAsync();
 
             Assert.Equal(LazyState.Created, postedNewItem.LazyState);
@@ -42,7 +42,7 @@ namespace Firestorm.Tests.Unit.Engine
             Artist artist = repo.GetAllItems().FirstOrDefault(a => a.ID == testID);
             Assert.NotNull(artist);
 
-            var postedNewItem = new IdentifiedItem<Artist>(testID.ToString(), repo, new IDConventionIdentifierInfo<Artist>());
+            var postedNewItem = new IdentifiedItem<Artist>(testID.ToString(), repo, new IdConventionIdentifierInfo<Artist>());
             await postedNewItem.LoadAsync();
 
             Assert.Equal(LazyState.LoadedItem, postedNewItem.LazyState);

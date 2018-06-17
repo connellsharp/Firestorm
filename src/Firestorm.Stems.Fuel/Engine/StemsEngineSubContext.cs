@@ -21,7 +21,7 @@ namespace Firestorm.Stems.Fuel
         {
             _stem = stem;
 
-            Identifiers = new AttributeIdentifierProvider<TItem>(stem); //new IDConventionIdentifierInfo<TItem>();
+            Identifiers = new AttributeIdentifierProvider<TItem>(stem); //new IdConventionIdentifierInfo<TItem>();
             Fields = new AttributeFieldProvider<TItem>(stem);
             AuthorizationChecker = new StemAuthorizationChecker<TItem>(stem);
         }

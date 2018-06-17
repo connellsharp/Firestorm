@@ -10,7 +10,7 @@ namespace Firestorm.Tests.Unit.Engine
         public void CheckArtistIDConventionKey()
         {
             var artist = new Artist(123, TestRepositories.ArtistName);
-            var keyInfo = new IDConventionIdentifierInfo<Artist>();
+            var keyInfo = new IdConventionIdentifierInfo<Artist>();
             var key = keyInfo.GetValue(artist);
             Assert.Equal(123, key);
         }
