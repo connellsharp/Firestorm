@@ -83,5 +83,26 @@ namespace Firestorm.Tests.Functionality.Fluent
 
             Assert.Equal("Man City", teamName);
         }
+
+        [Fact]
+        public async Task AutoRoots_TestData_ReturnsTeamsData()
+        {
+            var resourceFactory = new FluentStartResourceFactory
+            {
+                ApiContext = new AutoRootFluentContext(),
+                DataSource = _memoryDataSource
+            };
+
+            var startResource = resourceFactory.GetStartResource(null); // TODO we don't actually use the context yet?
+            var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
+
+            var teamsCollection = startDirectory.GetCollection("Teams");
+            var item = teamsCollection.GetItem("mancity");
+            var teamData = await item.GetDataAsync(null);
+
+            string teamName = (string)teamData["Name"];
+
+            Assert.Equal("Man City", teamName);
+        }
     }
 }
