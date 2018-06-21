@@ -8,14 +8,14 @@ namespace Firestorm.Engine
     public static class ExpressionTreeHelpers
     {
         [Pure]
-        public static IQueryable GetSelectByExpressionQuery(IQueryable sourceQuery, ParameterExpression itemPram, Expression selectExpression)
+        public static IQueryable GetSelectExpressionQuery(IQueryable sourceQuery, ParameterExpression itemPram, Expression selectExpression)
         {
             LambdaExpression selectorLambda = Expression.Lambda(selectExpression, itemPram);
-            return GetSelectByExpressionQuery(sourceQuery, selectorLambda);
+            return GetSelectExpressionQuery(sourceQuery, selectorLambda);
         }
 
         [Pure]
-        public static IQueryable GetSelectByExpressionQuery(IQueryable sourceQuery, LambdaExpression selectorLambda)
+        public static IQueryable GetSelectExpressionQuery(IQueryable sourceQuery, LambdaExpression selectorLambda)
         {
             Debug.Assert(selectorLambda.Parameters.Count == 1);
             Debug.Assert(sourceQuery.ElementType == selectorLambda.Parameters[0].Type);

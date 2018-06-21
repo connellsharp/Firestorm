@@ -73,7 +73,7 @@ namespace Firestorm.Engine.Queryable
             
             Expression nullCondition = ExpressionTreeHelpers.NullConditional(memberInitExpr, itemPram);
 
-            IQueryable selectDynamicQuery = ExpressionTreeHelpers.GetSelectByExpressionQuery(items, itemPram, nullCondition);
+            IQueryable selectDynamicQuery = ExpressionTreeHelpers.GetSelectExpressionQuery(items, itemPram, nullCondition);
             return selectDynamicQuery;
         }
 
