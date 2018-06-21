@@ -16,12 +16,16 @@ namespace Firestorm.Engine.Subs
             var initExpressionBuilder = new MemberInitExpressionBuilder(dynamicType);
             MemberInitExpression memberInitExpr = initExpressionBuilder.Build(navigationParam, fieldProvider);
 
-            //var memberInitLambda = Expression.Lambda(memberInitExpr, navigationParam);
+            //return Expression.Lambda(memberInitExpr, navigationParam);
+            return NullConditionalLambda(memberInitExpr, navigationParam);
+        }
 
-            BinaryExpression nullCheck = Expression.Equal(navigationParam, Expression.Constant(null, typeof(TNav)));
-            var nullCondition = Expression.Condition(nullCheck, Expression.Constant(null, dynamicType), memberInitExpr);
+        private static LambdaExpression NullConditionalLambda(Expression body, ParameterExpression parameter)
+        {
+            BinaryExpression nullCheck = Expression.Equal(parameter, Expression.Constant(null, parameter.Type));
+            var nullCondition = Expression.Condition(nullCheck, Expression.Constant(null, body.Type), body);
 
-            var nullCheckInitLambda = Expression.Lambda(nullCondition, navigationParam);
+            var nullCheckInitLambda = Expression.Lambda(nullCondition, parameter);
             return nullCheckInitLambda;
         }
     }
