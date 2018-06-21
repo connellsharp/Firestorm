@@ -33,17 +33,16 @@ namespace Firestorm.Engine.Subs.Handlers
             var enumerableType = dbValue.GetType().GetGenericInterface(typeof(IEnumerable<>));
             var itemType = enumerableType.GetGenericArguments()[0];
 
-            throw new NotImplementedException("Not completed implementation for sub collection replacers yet.");
-            // Note: somehow the test for Stems didn't fail until the split for Items and Collection replacers
+            return NewMethod((IEnumerable)dbValue, itemType);
+        }
 
-            var dbList = ((IEnumerable) dbValue).OfType<object>().ToList();
-
-            foreach (object dbItem in dbList)
+        private IEnumerable<object> NewMethod(IEnumerable dbEnumerable, Type itemType)
+        {
+            foreach (object dbItem in dbEnumerable)
             {
                 _replacementProcessor.Replace(dbItem, itemType);
+                yield return dbItem;
             }
-
-            return dbList;
         }
     }
 }

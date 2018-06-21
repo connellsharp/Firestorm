@@ -37,11 +37,6 @@ namespace Firestorm.Fluent
                 .Invoke(builder, rootName);
         }
 
-        public void AddItem<TItem>(IApiItemBuilder<TItem> builder)
-        {
-            AddItem(builder, 0);
-        }
-
         private void AddRootItem<TItem>(IApiBuilder builder, [CanBeNull] string rootName)
             where TItem : class, new()
         {
@@ -51,8 +46,13 @@ namespace Firestorm.Fluent
             if (!string.IsNullOrEmpty(rootName))
                 itemBuilder.RootName = rootName;
         }
-        
-        private void AddItem<TItem>(IApiItemBuilder<TItem> builder, int nesting)
+
+        public void AddItem<TItem>(IApiItemBuilder<TItem> builder)
+        {
+            AddNestedItem(builder, 0);
+        }
+
+        private void AddNestedItem<TItem>(IApiItemBuilder<TItem> builder, int nesting)
         {
             Type itemType = typeof(TItem);
 
@@ -102,7 +102,7 @@ namespace Firestorm.Fluent
             where TField : class, new()
         {
             var subItemBuilder = fieldBuilder.IsItem<TField>();
-            AddItem<TField>(subItemBuilder, nesting + 1);
+            AddNestedItem<TField>(subItemBuilder, nesting + 1);
         }
 
         private void AddFieldAsCollection<TItem, TField, TNav>(IApiFieldBuilder<TItem, TField> fieldBuilder, int nesting)
@@ -110,7 +110,7 @@ namespace Firestorm.Fluent
             where TNav : class, new()
         {
             var subItemBuilder = fieldBuilder.IsCollection<TField, TNav>();
-            AddItem<TNav>(subItemBuilder, nesting + 1);
+            AddNestedItem<TNav>(subItemBuilder, nesting + 1);
         }
     }
 }

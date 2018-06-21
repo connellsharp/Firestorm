@@ -52,6 +52,12 @@ namespace Firestorm.Fluent
             return builder.IsCollection<TItem, ICollection<TNavItem>, TNavItem>(configureAction);
         }
 
+        public static IApiFieldBuilder<TItem, IList<TNavItem>> IsCollection<TItem, TNavItem>(this IApiFieldBuilder<TItem, IList<TNavItem>> builder, [NotNull] Action<IApiItemBuilder<TNavItem>> configureAction)
+            where TNavItem : class, new()
+        {
+            return builder.IsCollection<TItem, IList<TNavItem>, TNavItem>(configureAction);
+        }
+
         public static IApiFieldBuilder<TItem, IEnumerable<TNavItem>> IsCollection<TItem, TNavItem>(this IApiFieldBuilder<TItem, IEnumerable<TNavItem>> builder, [NotNull] Action<IApiItemBuilder<TNavItem>> configureAction)
             where TNavItem : class, new()
         {

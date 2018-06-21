@@ -98,11 +98,60 @@ namespace Firestorm.Tests.Functionality.Fluent
 
             var teamsCollection = startDirectory.GetCollection("Teams");
             var item = teamsCollection.GetItem("mancity");
-            var teamData = await item.GetDataAsync(null);
 
+            var teamData = await item.GetDataAsync(null);
             string teamName = (string)teamData["Name"];
 
             Assert.Equal("Man City", teamName);
+        }
+
+        [Fact]
+        public async Task AutoRoots_NestingWithNullObject_ReturnsNull()
+        {
+            var resourceFactory = new FluentStartResourceFactory
+            {
+                ApiContext = new AutoRootFluentContext(),
+                DataSource = _memoryDataSource
+            };
+
+            var startResource = resourceFactory.GetStartResource(null);
+            var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
+
+            var teamsCollection = startDirectory.GetCollection("Teams");
+            var team = teamsCollection.GetItem("mancity");
+            var players = team.GetCollection("Players");
+            var player = players.GetItem(7);
+
+            var playerData = await player.GetDataAsync(null);
+            string teamName = (string)playerData["Name"];
+
+            Assert.Equal("Raheem Sterling", teamName);
+        }
+
+        [Fact]
+        public async Task AutoRoots_NestingIntoNullObject_ReturnsNull()
+        {
+            var resourceFactory = new FluentStartResourceFactory
+            {
+                ApiContext = new AutoRootFluentContext(),
+                DataSource = _memoryDataSource
+            };
+
+            var startResource = resourceFactory.GetStartResource(null);
+            var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
+
+            var teamsCollection = startDirectory.GetCollection("Teams");
+            var team = teamsCollection.GetItem("mancity");
+            var players = team.GetCollection("Players");
+            var player = players.GetItem(7);
+            var team2 = player.GetItem("Team");
+
+            var teamData = await team2.GetDataAsync(null);
+            Assert.Null(teamData);
+
+            //var name = team2.GetScalar("Name");
+            //var nameData = await name.GetAsync();
+            //Assert.Equal("Man City", nameData);
         }
     }
 }

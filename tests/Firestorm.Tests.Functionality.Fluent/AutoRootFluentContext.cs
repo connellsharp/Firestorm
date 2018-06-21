@@ -18,6 +18,12 @@ namespace Firestorm.Tests.Functionality.Fluent
             {
                 i.Identifier(t => t.Name.Replace(" ", "").ToLower())
                     .HasName("key");
+
+                i.Field(t => t.Players)
+                    .IsCollection(b => {
+                        b.Identifier(p => p.SquadNumber);
+                        b.AutoConfigure(Options.RootConfiguration);
+                    });
             });
         }
     }

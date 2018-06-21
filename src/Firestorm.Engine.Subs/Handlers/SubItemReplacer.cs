@@ -27,7 +27,9 @@ namespace Firestorm.Engine.Subs.Handlers
 
         public object GetReplacement(object dbValue)
         {
-            _replacementProcessor.Replace(dbValue, dbValue.GetType());
+            if (dbValue != null)
+                _replacementProcessor.Replace(dbValue, dbValue.GetType());
+
             return dbValue;
         }
     }
