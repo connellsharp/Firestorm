@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -148,10 +149,31 @@ namespace Firestorm.Tests.Functionality.Fluent
 
             var teamData = await team2.GetDataAsync(null);
             Assert.Null(teamData);
+        }
 
-            //var name = team2.GetScalar("Name");
-            //var nameData = await name.GetAsync();
-            //Assert.Equal("Man City", nameData);
+        [Fact]
+        public async Task AutoRoots_NestingBeyondNullObject_ReturnsNull()
+        {
+            var resourceFactory = new FluentStartResourceFactory
+            {
+                ApiContext = new AutoRootFluentContext(),
+                DataSource = _memoryDataSource
+            };
+
+            var startResource = resourceFactory.GetStartResource(null);
+            var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
+
+            var teamsCollection = startDirectory.GetCollection("Teams");
+            var team = teamsCollection.GetItem("mancity");
+            var players = team.GetCollection("Players");
+            var player = players.GetItem(7);
+            var team2 = player.GetItem("Team");
+            var name = team2.GetScalar("Name");
+
+            await Assert.ThrowsAsync<NullReferenceException>(async delegate 
+            {
+                await name.GetAsync();
+            });
         }
     }
 }

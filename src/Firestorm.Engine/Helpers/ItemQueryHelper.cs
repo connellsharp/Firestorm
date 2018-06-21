@@ -117,5 +117,15 @@ namespace Firestorm.Engine
 
             return Task.FromResult(false);
         }
+
+        public static Task DefaultForEachAsync(IQueryable source, Action<object> action)
+        {
+            foreach (object obj in source)
+            {
+                action(obj);
+            }
+
+            return Task.FromResult(false);
+        }
     }
 }

@@ -29,6 +29,9 @@ namespace Firestorm.Engine.Queryable
             Type dynamicType = GetDynamicRuntimeType();
             object dynamicObj =  GetDynamicObject(item, dynamicType);
 
+            if (dynamicObj == null)
+                return null;
+
             IQueryable<TItem> items = new[] { item }.AsQueryable();
             var replacementProcessor = new FieldReplacementProcessor<TItem>(_fieldReaders);
             await replacementProcessor.LoadAllAsync(items);
@@ -67,7 +70,10 @@ namespace Firestorm.Engine.Queryable
 
             var initExpressionBuilder = new MemberInitExpressionBuilder(dynamicType);
             MemberInitExpression memberInitExpr = initExpressionBuilder.Build(itemPram, _fieldReaders);
-            IQueryable selectDynamicQuery = ExpressionTreeHelpers.GetSelectByExpressionQuery(items, itemPram, memberInitExpr);
+            
+            Expression nullCondition = ExpressionTreeHelpers.NullConditional(memberInitExpr, itemPram);
+
+            IQueryable selectDynamicQuery = ExpressionTreeHelpers.GetSelectByExpressionQuery(items, itemPram, nullCondition);
             return selectDynamicQuery;
         }
 
@@ -96,13 +102,15 @@ namespace Firestorm.Engine.Queryable
             var returnObjects = new List<object>();
             
             if (dynamicQueryable.IsInMemory())
-                await ItemQueryHelper.DefaultForEachAsync(dynamicQueryable.OfType<object>(), AddObjectToList);
+                await ItemQueryHelper.DefaultForEachAsync(dynamicQueryable, AddObjectToList);
             else
                 await forEachAsync(dynamicQueryable.AsObjects(), AddObjectToList);
 
             void AddObjectToList(object dynamicObj)
             {
-                replacementProcessor.Replace(dynamicObj, dynamicType);
+                if (dynamicObj != null)
+                    replacementProcessor.Replace(dynamicObj, dynamicType);
+
                 returnObjects.Add(dynamicObj);
             }
 

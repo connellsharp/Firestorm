@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Firestorm.Engine.Fields;
+using JetBrains.Annotations;
 
 namespace Firestorm.Engine.Queryable
 {
@@ -48,8 +49,10 @@ namespace Firestorm.Engine.Queryable
             return Task.WhenAll(tasks);
         }
 
-        public void Replace(object dynamicObj, Type dynamicType)
+        public void Replace([NotNull] object dynamicObj, Type dynamicType)
         {
+            Debug.Assert(dynamicObj != null, "dynamicObj should not be null.");
+
             foreach (var replacer in _replacerDictionary)
             {
                 Debug.Assert(replacer.Value != null, "Field value should not be in the preloaded list if there is no replacer.");

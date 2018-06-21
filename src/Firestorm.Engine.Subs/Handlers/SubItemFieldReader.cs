@@ -25,8 +25,7 @@ namespace Firestorm.Engine.Subs.Handlers
         public Expression GetSelectExpression(ParameterExpression itemPram)
         {
             var visitedNavigationExpr =
-                (LambdaExpression) new ParameterReplacerVisitor(NavigationExpression.Parameters[0], itemPram).Visit(
-                    NavigationExpression);
+                (LambdaExpression) new ParameterReplacerVisitor(NavigationExpression.Parameters[0], itemPram).Visit(NavigationExpression);
 
             LambdaExpression memberInitLambda = SubUtilities.GetMemberInitLambda(EngineSubContext.Fields);
 

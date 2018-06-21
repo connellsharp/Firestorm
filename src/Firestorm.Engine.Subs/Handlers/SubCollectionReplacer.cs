@@ -40,7 +40,9 @@ namespace Firestorm.Engine.Subs.Handlers
         {
             foreach (object dbItem in dbEnumerable)
             {
-                _replacementProcessor.Replace(dbItem, itemType);
+                if (dbItem != null)
+                    _replacementProcessor.Replace(dbItem, itemType);
+
                 yield return dbItem;
             }
         }

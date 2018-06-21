@@ -22,7 +22,7 @@ namespace Firestorm.Engine.Queryable
         {
             foreach (object obj in _queriedDynamicObjects)
             {
-                yield return new RestItemData(obj);
+                yield return obj == null ? null : new RestItemData(obj);
             }
         }
 

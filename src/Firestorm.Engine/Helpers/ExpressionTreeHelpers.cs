@@ -40,5 +40,13 @@ namespace Firestorm.Engine
             IQueryable query = sourceQuery.Provider.CreateQuery(orderMethodExpr);
             return (IQueryable<TItem>)query;
         }
+
+        [Pure]
+        public static Expression NullConditional(Expression expressionBody, ParameterExpression parameter)
+        {
+            BinaryExpression nullCheck = Expression.Equal(parameter, Expression.Constant(null, parameter.Type));
+            var nullCondition = Expression.Condition(nullCheck, Expression.Constant(null, expressionBody.Type), expressionBody);
+            return nullCondition;
+        }
     }
 }
