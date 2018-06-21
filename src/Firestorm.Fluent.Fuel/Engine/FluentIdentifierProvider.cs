@@ -26,7 +26,7 @@ namespace Firestorm.Fluent.Fuel.Engine
             if (identifierName == null)
             {
                 if (_identifierModels.Count == 0)
-                    return new IDConventionIdentifierInfo<TItem>();
+                    return new IdConventionIdentifierInfo<TItem>();
 
                 var infos = _identifierModels.Values.Select(m => m.IdentifierInfo);
                 return new CombinedIdentifierInfo<TItem>(infos);

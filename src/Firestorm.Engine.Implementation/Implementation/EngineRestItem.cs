@@ -82,6 +82,5 @@ namespace Firestorm.Engine
             RestItemData loadedObject = ItemQueryHelper.SingleOrThrow(loadedObjects);
             return loadedObject;
         }
-
     }
 }

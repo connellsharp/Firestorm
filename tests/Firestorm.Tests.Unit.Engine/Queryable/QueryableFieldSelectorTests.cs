@@ -101,16 +101,6 @@ namespace Firestorm.Tests.Unit.Engine.Queryable
 
             public IFieldValueReplacer<Artist> Replacer => this;
 
-            public Expression GetFilterExpression(ParameterExpression itemPram, FilterComparisonOperator comparisonOperator, string valueString)
-            {
-                return _fieldReaderImplementation.GetFilterExpression(itemPram, comparisonOperator, valueString);
-            }
-
-            public LambdaExpression GetSortExpression(ParameterExpression itemPram)
-            {
-                return _fieldReaderImplementation.GetSortExpression(itemPram);
-            }
-
             public Task LoadAsync(IQueryable<Artist> itemsQuery)
             {
                 return Task.CompletedTask;

@@ -50,7 +50,7 @@ namespace Firestorm.Stems.Attributes.Analysis
 
         protected virtual LambdaExpression GetExpressionFromProperty(PropertyInfo property)
         {
-            if (property.PropertyType.IsSubclassOfGeneric(typeof(Expression<>)))
+            if (typeof(Expression).IsAssignableFrom(property.PropertyType))
                 return GetPropertyReturnExpression(property);
             else
                 return GetAutoMapExpression(property);
@@ -58,14 +58,15 @@ namespace Firestorm.Stems.Attributes.Analysis
 
         private LambdaExpression GetPropertyReturnExpression(PropertyInfo property)
         {
-            var exprBodyType = ResolverTypeUtility.GetPropertyLambdaReturnType(ItemType, property.PropertyType);
-
-            var expression = property.GetValue(null) as LambdaExpression;
+            var expression = property.GetValue(null);
 
             if (expression == null)
-                throw new StemAttributeSetupException("Returned lambda expression from property was null.");
+                throw new StemAttributeSetupException("Returned expression from property was null.");
 
-            return expression;
+            if (!(expression is LambdaExpression lambdaExpression))
+                throw new StemAttributeSetupException("Returned expression from property was not a LambdaExpression.");
+            
+            return lambdaExpression;
         }
 
         protected virtual void IncludeExpression([NotNull] LambdaExpression expression)

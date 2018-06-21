@@ -17,18 +17,18 @@ namespace Firestorm.Stems.Fuel.Essential.Factories
         where TItem : class
     {
         private readonly Expression<Func<TItem, TMiddle>> _middleExpression;
-        private readonly FieldDefinitionHandlerPart.GetInstanceMethodDelegate _getInstanceLocatorMethod;
+        private readonly FieldDefinitionHandlerPart.GetInstanceMethodDelegate _getInstanceReaderMethod;
 
-        public InstanceMethodWithExpressionFieldReaderFactory(Expression<Func<TItem, TMiddle>> middleExpression, [NotNull] FieldDefinitionHandlerPart.GetInstanceMethodDelegate getInstanceLocatorMethod)
+        public InstanceMethodWithExpressionFieldReaderFactory(Expression<Func<TItem, TMiddle>> middleExpression, [NotNull] FieldDefinitionHandlerPart.GetInstanceMethodDelegate getInstanceReaderMethod)
         {
             _middleExpression = middleExpression;
-            _getInstanceLocatorMethod = getInstanceLocatorMethod
-                                        ?? throw new ArgumentNullException(nameof(getInstanceLocatorMethod));
+            _getInstanceReaderMethod = getInstanceReaderMethod
+                                        ?? throw new ArgumentNullException(nameof(getInstanceReaderMethod));
         }
 
         public IFieldReader<TItem> Get(Stem<TItem> stem)
         {
-            var instanceMethod = _getInstanceLocatorMethod.Invoke(stem);
+            var instanceMethod = _getInstanceReaderMethod.Invoke(stem);
 
             if (instanceMethod is Func<TMiddle, TValue> delegateMethod)
             {

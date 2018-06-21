@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Firestorm.Fluent;
-using Firestorm.Fluent.Sources;
 using Firestorm.Tests.Examples.Football.Models;
 
 namespace Firestorm.Tests.Examples.Football.Web

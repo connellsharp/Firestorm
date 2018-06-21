@@ -8,13 +8,14 @@
     <tags>firestorm rest api stems attributes</tags>
 
     <authors>Connell Watkins</authors>
-    <copyright>Copyright © Connell Watkins 2017</copyright>
+    <copyright>Copyright © Connell Watkins 2018</copyright>
     <projectUrl>https://github.com/connellw/Firestorm</projectUrl>
     <licenseUrl>https://github.com/connellw/Firestorm/blob/master/LICENSE.txt</licenseUrl>
     <iconUrl>https://github.com/connellw/Firestorm/raw/master/nuget/icon.png</iconUrl>
 
     <dependencies>
       <dependency id="Firestorm.Core" version="$(FsVersion)" />
+      <dependency id="Reflectious" version="0.9.3" />
     </dependencies>
     
     <references>

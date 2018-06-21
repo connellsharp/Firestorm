@@ -20,23 +20,6 @@ namespace Firestorm.Stems.Roots
 
         public void AddType(Type type)
         {
-            if (!IsValidType(type))
-                throw new StemStartSetupException(type.Name + " is not a valid type to use in this dictionary.");
-
-            AddTypeInternal(type);
-        }
-
-        public void AddVaidTypes(ITypeGetter typeGetter)
-        {
-            foreach (Type type in typeGetter.GetAvailableTypes())
-            {
-                if (IsValidType(type))
-                    AddTypeInternal(type);
-            }
-        }
-
-        private void AddTypeInternal(Type type)
-        {
             string key = GetKey(GetName(type));
             _loadedTypes.Add(key, type);
         }
@@ -69,11 +52,6 @@ namespace Firestorm.Stems.Roots
         protected virtual string GetName(Type type)
         {
             return type.Name;
-        }
-
-        protected virtual bool IsValidType(Type type)
-        {
-            return true;
         }
     }
 }

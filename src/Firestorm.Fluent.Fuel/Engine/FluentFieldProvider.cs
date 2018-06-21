@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using Firestorm.Data;
 using Firestorm.Engine;
 using Firestorm.Engine.Additives.Writers;
@@ -41,6 +39,11 @@ namespace Firestorm.Fluent.Fuel.Engine
         public IFieldReader<TItem> GetReader(string fieldName)
         {
             return _fieldModels[fieldName].Reader;
+        }
+
+        public IFieldCollator<TItem> GetCollator(string fieldName)
+        {
+            return _fieldModels[fieldName].Collator;
         }
 
         public IFieldWriter<TItem> GetWriter(string fieldName)

@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using Firestorm.Stems.Attributes.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
+using Reflectious;
 
 namespace Firestorm.Stems.Attributes.Analysis
 {

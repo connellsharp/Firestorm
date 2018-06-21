@@ -4,6 +4,7 @@ using System.Reflection;
 using Firestorm.Stems.Attributes.Analysis;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
+using Reflectious;
 
 namespace Firestorm.Stems.Attributes.Basic.Resolvers
 {
@@ -42,19 +43,28 @@ namespace Firestorm.Stems.Attributes.Basic.Resolvers
             if (_argumentMemberName != null)
             {
                 PropertyInfo argumentProperty = method.ReflectedType.GetProperty(_argumentMemberName);
+                if (argumentProperty == null)
+                    throw new StemAttributeSetupException("Cannot find a property in this Stem with the name '" + _argumentMemberName + "'");
+                
                 LambdaExpression expression = GetExpressionFromProperty(argumentProperty);
 
                 FieldDefinition.Getter.Expression = expression;
 
                 Type delegateType = typeof(Func<,>).MakeGenericType(expression.ReturnType, returnType);
                 AddMethodToHandlerPart(FieldDefinition.Getter, method, delegateType);
-                return method.ReturnType;
+
+                if (expression.ReturnType == returnType)
+                    return expression.ReturnType;
+
+                // we must return a type that both db query type and replacement type derive from.
+                // we could find a common ancestor between them
+                return typeof(object);
             }
 
             if (parameters.Length == 0)
             {
-                if (!returnType.IsSubclassOf(typeof(Expression)))
-                    throw new StemAttributeSetupException("A getter method with no parameters must return an expression.");
+                if (!returnType.IsSubclassOfGeneric(typeof(Expression<>)))
+                    throw new StemAttributeSetupException("A getter method with no parameters must return a strongly typed Expression<>.");
 
                 Type delegateType = typeof(Func<>).MakeGenericType(returnType);
                 AddMethodToHandlerPart(FieldDefinition.Getter, method, delegateType);

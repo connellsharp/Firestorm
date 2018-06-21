@@ -49,7 +49,10 @@ namespace Firestorm.Fluent.Fuel.Builder
             var fieldBuilder = new EngineFieldBuilder<TItem, TField>(fieldModel, expression);
 
             if (fieldModel.Reader == null) // only models created above
+            {
                 fieldBuilder.AllowRead();
+                fieldBuilder.AllowCollate();
+            }
 
             return fieldBuilder;
         }

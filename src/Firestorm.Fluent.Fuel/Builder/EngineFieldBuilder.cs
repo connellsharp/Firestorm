@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Firestorm.Data;
-using Firestorm.Engine;
 using Firestorm.Engine.Additives.Readers;
 using Firestorm.Engine.Additives.Writers;
-using Firestorm.Engine.Fields;
 using Firestorm.Engine.Subs;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Engine.Subs.Handlers;
-using Firestorm.Engine.Subs.Repositories;
 using Firestorm.Fluent.Fuel.Engine;
 using Firestorm.Fluent.Fuel.Models;
 
@@ -38,6 +33,12 @@ namespace Firestorm.Fluent.Fuel.Builder
         public IApiFieldBuilder<TItem, TField> AllowRead()
         {
             _fieldModel.Reader = new ExpressionFieldReader<TItem, TField>(_expression);
+            return this;
+        }
+
+        public IApiFieldBuilder<TItem, TField> AllowCollate()
+        {
+            _fieldModel.Collator = new BasicFieldCollator<TItem>(_fieldModel.Reader);
             return this;
         }
 
@@ -72,6 +73,7 @@ namespace Firestorm.Fluent.Fuel.Builder
             var navTools = new SubWriterTools<TItem, TNavItem, TNavItem>(castedExpression, itemModel.Events, _setter);
 
             _fieldModel.Reader = new SubItemFieldReader<TItem, TNavItem>(castedExpression, subContext);
+            _fieldModel.Collator = new NotSupportedFieldCollator<TItem>("sub items");
             _fieldModel.ResourceGetter = new SubItemResourceGetter<TItem, TNavItem>(castedExpression, subContext);
             _fieldModel.Writer = new SubItemFieldWriter<TItem, TNavItem>(navTools, subContext);
 
@@ -92,6 +94,7 @@ namespace Firestorm.Fluent.Fuel.Builder
             var navTools = new SubWriterTools<TItem, TCollection, TNavItem>(castedExpression, itemModel.Events, castedSetter);
 
             _fieldModel.Reader = new SubCollectionFieldReader<TItem, TCollection, TNavItem>(castedExpression, subContext);
+            _fieldModel.Collator = new NotSupportedFieldCollator<TItem>("sub collections");
             _fieldModel.ResourceGetter = new SubCollectionResourceGetter<TItem, TCollection, TNavItem>(navTools, subContext);
             _fieldModel.Writer = new SubCollectionFieldWriter<TItem, TCollection, TNavItem>(navTools, subContext);
 

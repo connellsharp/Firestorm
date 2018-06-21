@@ -27,7 +27,7 @@ namespace Firestorm.Engine
             ParameterExpression itemPram = Expression.Parameter(typeof(TItem), "itm");
             Expression selectExpression = reader.GetSelectExpression(itemPram);
             
-            IQueryable selectScalarOnlyQuery = ExpressionTreeHelpers.GetSelectByExpressionQuery(itemQuery, itemPram, selectExpression);
+            IQueryable selectScalarOnlyQuery = ExpressionTreeHelpers.GetSelectExpressionQuery(itemQuery, itemPram, selectExpression);
             object loadedValue = await ItemQueryHelper.SingleOrCreateAsync(selectScalarOnlyQuery, forEachAsync, () => throw new ParentItemNotFoundException());
 
             if (reader.Replacer != null)

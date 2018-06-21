@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -31,9 +29,13 @@ namespace Firestorm.Engine.Queryable
             Type dynamicType = GetDynamicRuntimeType();
             object dynamicObj =  GetDynamicObject(item, dynamicType);
 
+            if (dynamicObj == null)
+                return null;
+
             IQueryable<TItem> items = new[] { item }.AsQueryable();
-            var replacerDictionary = await LoadAllReplacersAsync(items);
-            ReplaceWithDictionary(replacerDictionary, dynamicObj, dynamicType);
+            var replacementProcessor = new FieldReplacementProcessor<TItem>(_fieldReaders);
+            await replacementProcessor.LoadAllAsync(items);
+            replacementProcessor.Replace(dynamicObj, dynamicType);
 
             return new RestItemData(dynamicObj);
         }
@@ -46,8 +48,9 @@ namespace Firestorm.Engine.Queryable
             Type dynamicType = GetDynamicRuntimeType();
             IQueryable dynamicQueryable = GetDynamicQueryable(items, dynamicType);
 
-            var replacerDictionary = await LoadAllReplacersAsync(items);
-            List<object> dynamicObjects = await ExecuteWithReplacementsAsync(replacerDictionary, dynamicQueryable, forEachAsync);
+            var replacementProcessor = new FieldReplacementProcessor<TItem>(_fieldReaders);
+            await replacementProcessor.LoadAllAsync(items);
+            List<object> dynamicObjects = await ExecuteWithReplacementsAsync(replacementProcessor, dynamicQueryable, forEachAsync);
 
             return new QueriedDataIterator(dynamicObjects);
         }
@@ -67,13 +70,17 @@ namespace Firestorm.Engine.Queryable
 
             var initExpressionBuilder = new MemberInitExpressionBuilder(dynamicType);
             MemberInitExpression memberInitExpr = initExpressionBuilder.Build(itemPram, _fieldReaders);
-            IQueryable selectDynamicQuery = ExpressionTreeHelpers.GetSelectByExpressionQuery(items, itemPram, memberInitExpr);
+            
+            Expression nullCondition = ExpressionTreeHelpers.NullConditional(memberInitExpr, itemPram);
+
+            IQueryable selectDynamicQuery = ExpressionTreeHelpers.GetSelectExpressionQuery(items, itemPram, nullCondition);
             return selectDynamicQuery;
         }
 
         private object GetDynamicObject(TItem item, Type dynamicType)
         {
             ParameterExpression itemPram = Expression.Parameter(typeof(TItem), "itm");
+
             object dynamicObj = Activator.CreateInstance(dynamicType, new object[0]);
 
             foreach (var fieldReader in _fieldReaders)
@@ -89,63 +96,25 @@ namespace Firestorm.Engine.Queryable
             return dynamicObj;
         }
 
-        private async Task<IDictionary<string, IFieldValueReplacer<TItem>>> LoadAllReplacersAsync(IQueryable<TItem> items)
-        {
-            var replacerDictionary = new ConcurrentDictionary<string, IFieldValueReplacer<TItem>>();
-            var tasks = new List<Task>();
-
-            foreach (var fieldReader in _fieldReaders)
-            {
-                IFieldValueReplacer<TItem> replacer = fieldReader.Value.Replacer;
-                if (replacer == null)
-                    continue;
-
-                Task preloadTask = replacer.LoadAsync(items).ContinueWith(task =>
-                {
-                    if (!replacerDictionary.TryAdd(fieldReader.Key, replacer))
-                        throw new InvalidOperationException("Error adding reader replacer to dictionary.");
-                });
-
-                tasks.Add(preloadTask);
-            }
-
-            await Task.WhenAll(tasks);
-
-            return replacerDictionary;
-        }
-
-        private async Task<List<object>> ExecuteWithReplacementsAsync(IDictionary<string, IFieldValueReplacer<TItem>> replacerDictionary, IQueryable dynamicQueryable, ForEachAsyncDelegate<object> forEachAsync)
+        private static async Task<List<object>> ExecuteWithReplacementsAsync(FieldReplacementProcessor<TItem> replacementProcessor, IQueryable dynamicQueryable, ForEachAsyncDelegate<object> forEachAsync)
         {
             var dynamicType = dynamicQueryable.ElementType;
             var returnObjects = new List<object>();
             
             if (dynamicQueryable.IsInMemory())
-                await ItemQueryHelper.DefaultForEachAsync(dynamicQueryable.OfType<object>(), AddObjectToList);
+                await ItemQueryHelper.DefaultForEachAsync(dynamicQueryable, AddObjectToList);
             else
                 await forEachAsync(dynamicQueryable.AsObjects(), AddObjectToList);
 
             void AddObjectToList(object dynamicObj)
             {
-                ReplaceWithDictionary(replacerDictionary, dynamicObj, dynamicType);
+                if (dynamicObj != null)
+                    replacementProcessor.Replace(dynamicObj, dynamicType);
+
                 returnObjects.Add(dynamicObj);
             }
 
             return returnObjects;
-        }
-
-        private static void ReplaceWithDictionary(IDictionary<string, IFieldValueReplacer<TItem>> replacerDictionary, object dynamicObj, Type dynamicType)
-        {
-            foreach (var replacer in replacerDictionary)
-            {
-                Debug.Assert(replacer.Value != null, "Field value should not be in the preloaded list if there is no replacer.");
-
-                FieldInfo fieldInfo = dynamicType.GetField(replacer.Key);
-
-                object dbValue = fieldInfo.GetValue(dynamicObj);
-                object replacementValue = replacer.Value.GetReplacement(dbValue);
-
-                fieldInfo.SetValue(dynamicObj, replacementValue);
-            }
         }
     }
 }

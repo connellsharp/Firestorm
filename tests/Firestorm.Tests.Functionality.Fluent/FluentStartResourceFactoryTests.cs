@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -82,6 +83,97 @@ namespace Firestorm.Tests.Functionality.Fluent
             string teamName = (string)teamData["name"];
 
             Assert.Equal("Man City", teamName);
+        }
+
+        [Fact]
+        public async Task AutoRoots_TestData_ReturnsTeamsData()
+        {
+            var resourceFactory = new FluentStartResourceFactory
+            {
+                ApiContext = new AutoRootFluentContext(),
+                DataSource = _memoryDataSource
+            };
+
+            var startResource = resourceFactory.GetStartResource(null); // TODO we don't actually use the context yet?
+            var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
+
+            var teamsCollection = startDirectory.GetCollection("Teams");
+            var item = teamsCollection.GetItem("mancity");
+
+            var teamData = await item.GetDataAsync(null);
+            string teamName = (string)teamData["Name"];
+
+            Assert.Equal("Man City", teamName);
+        }
+
+        [Fact]
+        public async Task AutoRoots_NestingWithNullObject_ReturnsNull()
+        {
+            var resourceFactory = new FluentStartResourceFactory
+            {
+                ApiContext = new AutoRootFluentContext(),
+                DataSource = _memoryDataSource
+            };
+
+            var startResource = resourceFactory.GetStartResource(null);
+            var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
+
+            var teamsCollection = startDirectory.GetCollection("Teams");
+            var team = teamsCollection.GetItem("mancity");
+            var players = team.GetCollection("Players");
+            var player = players.GetItem(7);
+
+            var playerData = await player.GetDataAsync(null);
+            string teamName = (string)playerData["Name"];
+
+            Assert.Equal("Raheem Sterling", teamName);
+        }
+
+        [Fact]
+        public async Task AutoRoots_NestingIntoNullObject_ReturnsNull()
+        {
+            var resourceFactory = new FluentStartResourceFactory
+            {
+                ApiContext = new AutoRootFluentContext(),
+                DataSource = _memoryDataSource
+            };
+
+            var startResource = resourceFactory.GetStartResource(null);
+            var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
+
+            var teamsCollection = startDirectory.GetCollection("Teams");
+            var team = teamsCollection.GetItem("mancity");
+            var players = team.GetCollection("Players");
+            var player = players.GetItem(7);
+            var team2 = player.GetItem("Team");
+
+            var teamData = await team2.GetDataAsync(null);
+            Assert.Null(teamData);
+        }
+
+        [Fact]
+        public async Task AutoRoots_NestingBeyondNullObject_ReturnsNull()
+        {
+            var resourceFactory = new FluentStartResourceFactory
+            {
+                ApiContext = new AutoRootFluentContext(),
+                DataSource = _memoryDataSource
+            };
+
+            var startResource = resourceFactory.GetStartResource(null);
+            var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
+
+            var teamsCollection = startDirectory.GetCollection("Teams");
+            var team = teamsCollection.GetItem("mancity");
+            var players = team.GetCollection("Players");
+            var player = players.GetItem(7);
+            var team2 = player.GetItem("Team");
+            var name = team2.GetScalar("Name");
+
+            await Assert.ThrowsAsync<NullReferenceException>(async delegate 
+            {
+                await name.GetAsync();
+            });
         }
     }
 }

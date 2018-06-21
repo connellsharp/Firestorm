@@ -8,7 +8,7 @@ That's all you need to start writing Stems! For good separation, you can keep yo
 
 # StemsStartResourceFactory
 
-To run Stems in your application, you must reference the `Firestorm.Stems.All`.
+To run Stems in your application, you must reference the `Firestorm.Stems.All` package.
 
 ```
 PM> Install-Package Firestorm.Stems.All
@@ -39,7 +39,7 @@ StartResourceFactory = new StemsStartResourceFactory
 The factory requires a `StemConfiguration` object, which contains your stem configuration. This contains further settings related to Stems.
 
 - The **NamingConventionSwitcher** switches the request/response naming conventions with your Stem members'.
-- The **AutoPropertyMapper** automatically gets `Expression`s from a [simpler property signature](auto-mapping.md).
+- The **AutoPropertyMapper** automatically gets `Expression`s from a [simpler property signature](expression-syntax-options.md#auto-mapping).
 - The **DependencyResolver** provides the services used for [dependency injection](dependency-injection.md).
 
 ### RootResourceFactory 

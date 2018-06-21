@@ -14,37 +14,34 @@ namespace Firestorm.Engine.Subs.Handlers
         where TProperty : IEnumerable<TNav>
     {
         private readonly Expression<Func<TItem, TProperty>> _navigationExpression;
-        private readonly IEngineSubContext<TNav> _substemSubContext;
+        private readonly IEngineSubContext<TNav> _engineSubContext;
 
-        public SubCollectionFieldReader(Expression<Func<TItem, TProperty>> navigationExpression, IEngineSubContext<TNav> substemSubContext)
+        public SubCollectionFieldReader(Expression<Func<TItem, TProperty>> navigationExpression, IEngineSubContext<TNav> engineSubContext)
         {
             _navigationExpression = navigationExpression;
-            _substemSubContext = substemSubContext;
+            _engineSubContext = engineSubContext;
+
+            Func<IQueryable<TItem>, IQueryable<IEnumerable<TNav>>> selectAllNavFunc = q => q.Select(_navigationExpression).Cast<IEnumerable<TNav>>();
+            Replacer = new SubCollectionReplacer<TItem, TNav>(engineSubContext, selectAllNavFunc);
         }
 
         public Type FieldType => typeof(IEnumerable); // TODO maybe just object ?
 
         public Expression GetSelectExpression(ParameterExpression itemPram)
         {
-            var visitedNavigationExpr = (LambdaExpression) new ParameterReplacerVisitor(_navigationExpression.Parameters[0], itemPram).Visit(_navigationExpression);
+            var visitedNavigationExpr =
+                (LambdaExpression) new ParameterReplacerVisitor(_navigationExpression.Parameters[0], itemPram).Visit(
+                    _navigationExpression);
 
-            LambdaExpression memberInitLambda = SubUtilities.GetMemberInitLambda(_substemSubContext.Fields);
+            LambdaExpression memberInitLambda = SubUtilities.GetMemberInitLambda(_engineSubContext.Fields);
 
             Type dynamicType = memberInitLambda.ReturnType;
-            MethodCallExpression selectMethodExpr = Expression.Call(typeof(Enumerable), "Select", new[] { typeof(TNav), dynamicType }, visitedNavigationExpr.Body, memberInitLambda);
+            MethodCallExpression selectMethodExpr = Expression.Call(typeof(Enumerable), "Select",
+                new[] {typeof(TNav), dynamicType}, visitedNavigationExpr.Body, memberInitLambda);
+            
             return selectMethodExpr;
         }
 
-        public IFieldValueReplacer<TItem> Replacer { get; } = null;
-
-        public Expression GetFilterExpression(ParameterExpression itemPram, FilterComparisonOperator comparisonOperator, string valueString)
-        {
-            throw new NotSupportedException("Filtering is not supported for sub collections.");
-        }
-
-        public LambdaExpression GetSortExpression(ParameterExpression itemPram)
-        {
-            throw new NotSupportedException("Sorting is not supported for sub collections.");
-        }
+        public IFieldValueReplacer<TItem> Replacer { get; }
     }
 }

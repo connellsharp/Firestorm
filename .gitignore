@@ -250,3 +250,4 @@ ModelManifest.xml
 /nuget/v0*
 /nuget/v1*
 *.zip
+.idea

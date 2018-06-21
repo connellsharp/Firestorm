@@ -2,6 +2,7 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using JetBrains.Annotations;
+using Reflectious;
 
 namespace Firestorm.Engine.Additives
 {
@@ -25,18 +26,7 @@ namespace Firestorm.Engine.Additives
         internal static PropertyInfo GetPropertyInfoFromLambda<TItem, TProperty>([NotNull] Expression<Func<TItem, TProperty>> propertyExpression) 
             where TItem : class
         {
-            if (propertyExpression == null)
-                throw new ArgumentNullException(nameof(propertyExpression));
-
-            var memberExpr = propertyExpression.Body as MemberExpression;
-            if (memberExpr == null)
-                throw new ArgumentException(String.Format("Expression '{0}' refers to a method, not a property.", propertyExpression));
-
-            var propInfo = memberExpr.Member as PropertyInfo;
-            if (propInfo == null)
-                throw new ArgumentException(String.Format("Expression '{0}' refers to a field, not a property.", propertyExpression));
-
-            return propInfo;
+            return propertyExpression.Reflect().GetPropertyInfo();
         }
     }
 }

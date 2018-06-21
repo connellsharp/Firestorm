@@ -13,7 +13,7 @@ namespace Firestorm.Tests.Unit.Engine.Implementation
         
         public EngineRestDictionaryTests()
         {
-            _artistDictionary = new EngineRestDictionary<Artist>(new CodedArtistEntityContext(null), new IDConventionIdentifierInfo<Artist>());
+            _artistDictionary = new EngineRestDictionary<Artist>(new CodedArtistEntityContext(null), new IdConventionIdentifierInfo<Artist>());
         }
 
         [Fact]

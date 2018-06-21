@@ -15,9 +15,11 @@ namespace Firestorm.Engine.Subs
             Type dynamicType = FieldProviderUtility.GetDynamicType(fieldProvider);
             var initExpressionBuilder = new MemberInitExpressionBuilder(dynamicType);
             MemberInitExpression memberInitExpr = initExpressionBuilder.Build(navigationParam, fieldProvider);
+            
+            var nullCondition = ExpressionTreeHelpers.NullConditional(memberInitExpr, navigationParam);
 
-            var memberInitLambda = Expression.Lambda(memberInitExpr, navigationParam);
-            return memberInitLambda;
+            var nullCheckInitLambda = Expression.Lambda(nullCondition, navigationParam);
+            return nullCheckInitLambda;
         }
     }
 }

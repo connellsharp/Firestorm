@@ -2,15 +2,22 @@
 {
     internal class FieldOperationNotAllowedException : RestApiException
     {
-        internal FieldOperationNotAllowedException(string fieldName, Operation operation)
-            : base(ErrorStatus.Forbidden, "The '" + fieldName + "' field does not allow the "+ operation + " operation.")
+        internal FieldOperationNotAllowedException(string fieldName, FieldOperation operation)
+            : base(ErrorStatus.Forbidden, GetMessage(fieldName, operation))
         {
         }
 
-        internal enum Operation
+        private static string GetMessage(string fieldName, FieldOperation operation)
         {
-            Read,
-            Write
+            return "The '" + fieldName + "' field does not allow the "+ operation.ToString().ToLowerInvariant() + " operation.";
         }
+    }
+
+    internal enum FieldOperation
+    {
+        Read,
+        Write,
+        Sort,
+        Filter
     }
 }

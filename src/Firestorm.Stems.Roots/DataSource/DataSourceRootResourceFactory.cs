@@ -9,9 +9,11 @@ namespace Firestorm.Stems.Roots.DataSource
 
         public ITypeGetter StemTypeGetter { get; set; }
 
+        public DataSourceRootAttributeBehavior RootBehavior { get; set; }
+
         protected override IRootStartInfoFactory CreateStartInfoFactory()
         {
-            return new DataSourceVaseStartInfoFactory(DataSource, StemTypeGetter);
+            return new DataSourceVaseStartInfoFactory(DataSource, StemTypeGetter, RootBehavior);
         }
     }
 }

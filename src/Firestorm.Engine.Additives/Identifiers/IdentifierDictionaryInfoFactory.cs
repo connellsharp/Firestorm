@@ -28,7 +28,7 @@ namespace Firestorm.Engine.Additives.Identifiers
             if (identifierName == null)
             {
                 if (_definitions.Count == 0)
-                    return new IDConventionIdentifierInfo<TItem>();
+                    return new IdConventionIdentifierInfo<TItem>();
 
                 var infos = _definitions.Values.Select(_getIdentifierInfoFromDefinition);
                 return new CombinedIdentifierInfo<TItem>(infos);

@@ -19,7 +19,6 @@ public class ArtistsStem : Stem<Artist>
     public static IEnumerable<Album> Albums { get; }
 }
 
-[DataSourceRoot]
 public class AlbumsStem : Stem<Album>
 {
     [Identifier]
@@ -31,7 +30,6 @@ public class AlbumsStem : Stem<Album>
     public static IEnumerable<Track> Tracks { get; }
 }
 
-[DataSourceRoot]
 public class TracksStem : Stem<Track>
 {
     [Identifier]

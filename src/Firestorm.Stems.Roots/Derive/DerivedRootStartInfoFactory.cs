@@ -12,8 +12,12 @@ namespace Firestorm.Stems.Roots.Derive
 
         public DerivedRootStartInfoFactory(ITypeGetter rootTypeGetter)
         {
-            _rootTypeDictionary = new SuffixedDerivedTypeDictionary(typeof(Root), "Root");
-            _rootTypeDictionary.AddVaidTypes(rootTypeGetter);
+            _rootTypeDictionary = new SuffixedNamedTypeDictionary("Root");
+
+            var validator = new DerivedTypeValidator(typeof(Root));
+            var populator = new TypeDictionaryPopulator(_rootTypeDictionary, validator);
+
+            populator.AddValidTypes(rootTypeGetter);
         }
 
         public DerivedRootStartInfoFactory(NamedTypeDictionary rootTypeDictionary)

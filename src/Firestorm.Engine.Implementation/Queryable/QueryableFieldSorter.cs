@@ -27,12 +27,12 @@ namespace Firestorm.Engine.Queryable
 
             bool doneOnce = false;
 
-            foreach (SortInstruction sortIntruction in _instructions)
+            foreach (SortInstruction sortInstruction in _instructions)
             {
-                Debug.Assert(sortIntruction != null);
+                Debug.Assert(sortInstruction != null);
 
-                LambdaExpression getterLambda = GetOrderSelectorExpression(sortIntruction);
-                items = ExpressionTreeHelpers.GetOrderByExpressionQuery(items, getterLambda, sortIntruction.Direction, doneOnce);
+                LambdaExpression getterLambda = GetOrderSelectorExpression(sortInstruction);
+                items = ExpressionTreeHelpers.GetOrderByExpressionQuery(items, getterLambda, sortInstruction.Direction, doneOnce);
 
                 doneOnce = true;
             }
@@ -45,14 +45,14 @@ namespace Firestorm.Engine.Queryable
             if (!_fieldProvider.FieldExists(sortInstruction.FieldName))
                 throw new FieldNotFoundException(sortInstruction.FieldName, false);
 
-            IFieldReader<TItem> fieldReader = _fieldProvider.GetReader(sortInstruction.FieldName);
-            if (fieldReader == null)
-                throw new FieldOperationNotAllowedException(sortInstruction.FieldName, FieldOperationNotAllowedException.Operation.Read);
+            IFieldCollator<TItem> fieldCollator = _fieldProvider.GetCollator(sortInstruction.FieldName);
+            if (fieldCollator == null)
+                throw new FieldOperationNotAllowedException(sortInstruction.FieldName, FieldOperation.Sort);
 
             try
             {
                 ParameterExpression itemPram = Expression.Parameter(typeof(TItem), "srt");
-                LambdaExpression getterLambda = fieldReader.GetSortExpression(itemPram);
+                LambdaExpression getterLambda = fieldCollator.GetSortExpression(itemPram);
 
                 if (getterLambda == null)
                     throw new NullReferenceException("No sort expression was defined for this field.");

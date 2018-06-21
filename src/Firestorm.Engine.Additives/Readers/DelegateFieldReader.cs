@@ -12,31 +12,18 @@ namespace Firestorm.Engine.Additives.Readers
     public class DelegateFieldReader<TItem, TValue> : IFieldReader<TItem>
         where TItem : class
     {
-        private readonly Func<TItem, TValue> _getterFunc;
-
         public DelegateFieldReader([NotNull] Func<TItem, TValue> getterFunc)
         {
-            _getterFunc = getterFunc
-                          ?? throw new ArgumentNullException(nameof(getterFunc));
+            Replacer = new DelegateWholeItemReplacer<TItem, TValue>(getterFunc);
         }
 
-        public Type FieldType => typeof(TValue);
+        public Type FieldType => typeof(object); // typeof(TValue);
 
         public Expression GetSelectExpression(ParameterExpression itemPram)
         {
-            throw new NotSupportedException("This field cannot be used as part of an expression.");
+            return itemPram;
         }
 
-        public IFieldValueReplacer<TItem> Replacer { get; } = null;
-
-        public Expression GetFilterExpression(ParameterExpression itemPram, FilterComparisonOperator comparisonOperator, string valueString)
-        {
-            throw new NotSupportedException("This field cannot be used as a filter.");
-        }
-
-        public LambdaExpression GetSortExpression(ParameterExpression itemPram)
-        {
-            throw new NotSupportedException("This field cannot be used in the sort clause.");
-        }
+        public IFieldValueReplacer<TItem> Replacer { get; }
     }
 }

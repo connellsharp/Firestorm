@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Data;
 using Firestorm.Stems;
@@ -35,7 +34,7 @@ namespace Firestorm.Tests.Unit.Stems.Roots
             var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
             var info = await startDirectory.GetInfoAsync();
 
-            Assert.Equal(1, info.Resources.Count());
+            Assert.Single(info.Resources);
             Assert.Equal("Test", info.Resources.Single().Name);
         }
 

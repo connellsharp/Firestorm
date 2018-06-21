@@ -14,13 +14,18 @@ namespace Firestorm.Engine.Additives
         where TItem : class
     {
         readonly Dictionary<string, IFieldReader<TItem>> _readers = new Dictionary<string, IFieldReader<TItem>>();
+        readonly Dictionary<string, IFieldCollator<TItem>> _collators = new Dictionary<string, IFieldCollator<TItem>>();
         readonly Dictionary<string, IFieldWriter<TItem>> _writers = new Dictionary<string, IFieldWriter<TItem>>();
         private readonly List<LambdaExpression> _expressions = new List<LambdaExpression>();
 
         public void Add<TValue>(string name, Expression<Func<TItem, TValue>> getValue)
         {
             _expressions.Add(getValue);
-            _readers.Add(name, new ExpressionFieldReader<TItem, TValue>(getValue));
+            
+            var reader = new ExpressionFieldReader<TItem, TValue>(getValue);
+            
+            _readers.Add(name, reader);
+            _collators.Add(name, new BasicFieldCollator<TItem>(reader));
             _writers.Add(name, new PropertyExpressionFieldWriter<TItem, TValue>(getValue));
         }
 
@@ -42,6 +47,11 @@ namespace Firestorm.Engine.Additives
         public IFieldReader<TItem> GetReader(string fieldName)
         {
             return _readers[fieldName];
+        }
+
+        public IFieldCollator<TItem> GetCollator(string fieldName)
+        {
+            return _collators[fieldName];
         }
 
         public IFieldWriter<TItem> GetWriter(string fieldName)
