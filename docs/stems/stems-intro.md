@@ -19,7 +19,7 @@ public class ArtistsStem : Stem<Artist>
     [Get, Set]
     public static Expression Name => Expression(a => a.Name);
 
-    [Get(Display.Hidden)]
+    [Get]
     [Substem(typeof(AlbumSubstem))]
     public static Expression Albums => Expression(a => a.Albums);
 }
@@ -45,10 +45,10 @@ public class AlbumsStem : Stem<Album>
 The consumer can request certain fields in the artists collection.
 
 ```http
-GET /artists?fields=id,name,albums HTTP/1.1
+GET /artists?fields=id,name,albums
 
 
-HTTP/1.1 200 OK
+200 OK
 
 [
     {
@@ -74,10 +74,10 @@ HTTP/1.1 200 OK
 Or a list of albums by a specific artist.
 
 ```http
-GET /artists/123/albums?fields=id,title&streamable=true&sort=release_date HTTP/1.1
+GET /artists/123/albums?fields=id,title&streamable=true&sort=release_date
 
 
-HTTP/1.1 200 OK
+200 OK
 
 [
     {
@@ -98,14 +98,14 @@ HTTP/1.1 200 OK
 Add an album.
 
 ```http
-POST /artists/123/albums HTTP/1.1
+POST /artists/123/albums
 
 {
     "title": "Outer Edges Remixes"
 }
 
 
-HTTP/1.1 201 Created
+201 Created
 
 {
     "id": 9476

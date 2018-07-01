@@ -8,10 +8,10 @@ That's all you need to start writing Stems! For good separation, you can keep yo
 
 # StemsStartResourceFactory
 
-To run Stems in your application, you must reference the `Firestorm.Stems.All` package.
+To run Stems in your application, you must reference the `Firestorm.Stems.Start` package.
 
 ```
-PM> Install-Package Firestorm.Stems.All
+PM> Install-Package Firestorm.Stems.Start
 ```
 
 In your startup configuration, set the `StartResourceFactory` in your [configuration object](../setup/configuration-object.md) property to `StemsStartResourceFactory`.

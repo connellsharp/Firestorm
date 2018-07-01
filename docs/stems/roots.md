@@ -5,13 +5,13 @@ Whichever way you choose, you will be given an implementation of `IRootResourceF
 !!!note
     There are plans to redesign Roots as a separate `IDataSource` implementation, meaning there would be no need for the extra `RootResourceFactory`.
 
+```
+PM> Install-Package Firestorm.Stems.Roots
+```
+
 # Derive
 
 You can create `Root` classes for each `Stem` you want to expose as a starting resource.
-
-```
-PM> Install-Package Firestorm.Stems.Roots.Derive
-```
 
 Like our familiar friend, the `Stem<>`, you can derive from `Root<>` to create Root classes.
 
@@ -46,10 +46,6 @@ Firestorm will set the `User` and `Configuration` properties straight after cons
 # Data Source
 
 Often, the **Derive** methodology produces a lot of very similar Root classes. The alternative is to use a single `IDataSource` implementation to drive all your Roots.
-
-```
-PM> Install-Package Firestorm.Stems.Roots.DataSource
-```
 
 ### IDataSource
 
