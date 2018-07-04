@@ -21,7 +21,15 @@ namespace Firestorm.Stems
             return expression;
         }
 
-        public virtual void OnItemCreated(TItem newItem)
+        public virtual void OnCreating(TItem newItem)
+        {
+        }
+
+        public virtual void OnSavingAsync(TItem item)
+        {
+        }
+
+        public virtual void OnSavedAsync(TItem item)
         {
         }
 
