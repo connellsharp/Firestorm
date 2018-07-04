@@ -2,18 +2,31 @@ using Firestorm.Stems.Fuel.Resolving;
 
 namespace Firestorm.Stems.Fuel.Substems.Factories
 {
-    internal static class SubstemEngineSubContextCreator<TItem, TNav, TSubstem>
+    internal class SubstemEngineSubContextCreator<TItem, TNav, TSubstem>
         where TItem : class 
         where TNav : class
         where TSubstem : Stem<TNav>
     {
-        internal static StemsEngineSubContext<TNav> StemEngineContextFields(Stem<TItem> stem)
-        {
-            var autoActivator = new AutoActivator(stem.Configuration.DependencyResolver);
-            var substem = autoActivator.CreateInstance<TSubstem>();
-            substem.SetParent(stem);
+        private readonly Stem<TItem> _stem;
+        private readonly TSubstem _substem;
 
-            return new StemsEngineSubContext<TNav>(substem);
+        public SubstemEngineSubContextCreator(Stem<TItem> stem)
+        {
+            _stem = stem;
+
+            var autoActivator = new AutoActivator(_stem.Configuration.DependencyResolver);
+            _substem = autoActivator.CreateInstance<TSubstem>();
+            _substem.SetParent(_stem);
+        }
+
+        internal StemsEngineSubContext<TNav> GetEngineContext()
+        {
+            return new StemsEngineSubContext<TNav>(_substem);
+        }
+
+        internal StemRepositoryEvents<TNav> GetRepositoryEvents()
+        {
+            return new StemRepositoryEvents<TNav>( _substem);
         }
     }
 }

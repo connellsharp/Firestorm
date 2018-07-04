@@ -5,7 +5,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Firestorm.Data;
-using Firestorm.Engine.Subs.Handlers;
 
 namespace Firestorm.Engine.Subs.Repositories
 {
@@ -20,7 +19,6 @@ namespace Firestorm.Engine.Subs.Repositories
         private readonly IDeferredItem<TParent> _parentItem;
         private readonly SubWriterTools<TParent, TCollection, TNav> _tools;
         private readonly Expression<Func<TParent, IEnumerable<TNav>>> _castedExpression;
-        private readonly INavigationSetter<TParent, TCollection> _navSetter;
 
         public NavigationCollectionRepository(IDeferredItem<TParent> parentItem, SubWriterTools<TParent, TCollection, TNav> tools)
         {
@@ -46,14 +44,18 @@ namespace Firestorm.Engine.Subs.Repositories
             ICollection<TNav> navCollection = GetNavCollection();
 
             var item = new TNav();
+
             _tools.RepoEvents?.OnCreating(item);
             navCollection.Add(item);
+
             return item;
         }
 
         public void MarkDeleted(TNav item)
         {
             ICollection<TNav> navCollection = GetNavCollection();
+
+            _tools.RepoEvents?.OnDeleting(item);
             navCollection.Remove(item);
         }
 

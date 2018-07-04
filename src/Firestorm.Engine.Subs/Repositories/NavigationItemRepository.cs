@@ -1,9 +1,7 @@
 using System;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Firestorm.Data;
-using Firestorm.Engine.Subs.Handlers;
 
 namespace Firestorm.Engine.Subs.Repositories
 {
@@ -39,13 +37,17 @@ namespace Firestorm.Engine.Subs.Repositories
         public TNav CreateAndAttachItem()
         {
             var item = new TNav();
+
             _tools.RepoEvents?.OnCreating(item);
             SetParentNavItem(item);
+
             return item;
         }
 
         public void MarkDeleted(TNav item)
         {
+            _tools.RepoEvents?.OnDeleting(item);
+
             SetParentNavItem(null);
         }
 

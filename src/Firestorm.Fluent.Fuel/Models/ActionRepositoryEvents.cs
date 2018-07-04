@@ -1,6 +1,5 @@
 using System;
 using Firestorm.Engine.Subs;
-using Firestorm.Engine.Subs.Handlers;
 
 namespace Firestorm.Fluent.Fuel.Models
 {
@@ -14,11 +13,18 @@ namespace Firestorm.Fluent.Fuel.Models
             OnCreatingAction?.Invoke(item);
         }
 
+        public void OnDeleting(T item)
+        {
+            OnDeletingAction?.Invoke(item);
+        }
+
         public Action<T> OnCreatingAction { get; set; }
+
+        public Action<T> OnDeletingAction { get; set; }
 
         public bool HasAnyEvent
         {
-            get { return OnCreatingAction != null; }
+            get { return OnCreatingAction != null || OnDeletingAction != null; }
         }
     }
 }

@@ -12,11 +12,17 @@ namespace Firestorm.Stems.Fuel.Substems.Factories
             _stem = stem;
         }
 
-        public bool HasAnyEvent { get; }
+        public bool HasAnyEvent { get; } = true;
 
         public void OnCreating(TItem item)
         {
             _stem.OnCreating(item);
+        }
+
+        public void OnDeleting(TItem item)
+        {
+            // TODO name
+            _stem.MarkDeleted(item);
         }
     }
 }

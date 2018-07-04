@@ -26,7 +26,9 @@ namespace Firestorm.Stems.Fuel.Substems.Factories
 
         public IFieldResourceGetter<TItem> Get(Stem<TItem> stem)
         {
-            StemsEngineSubContext<TNav> subContext = SubstemEngineSubContextCreator<TItem, TNav, TSubstem>.StemEngineContextFields(stem);
+            var substemCreator = new SubstemEngineSubContextCreator<TItem, TNav, TSubstem>(stem);
+            StemsEngineSubContext<TNav> subContext = substemCreator.GetEngineContext();
+
             return new SubItemResourceGetter<TItem, TNav>(_navigationExpression, subContext);
         }
     }

@@ -45,7 +45,7 @@ namespace Firestorm.Engine.Subs.Repositories
 
         public void MarkDeleted(TItem item)
         {
-            //_events?.OnDeleting(item);
+            _events?.OnDeleting(item);
             _repository.MarkDeleted(item);
         }
     }
