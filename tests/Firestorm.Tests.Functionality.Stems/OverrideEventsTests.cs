@@ -97,6 +97,14 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
+        public async Task TestDependency_Add_OnUpdatingWasNotCalled()
+        {
+            await _restCollection.AddAsync(new { Name = "Test" });
+
+            Assert.False(_dependency.OnUpdatingCalled);
+        }
+
+        [Fact]
         public async Task TestDependency_Add_OnSavingWasCalled()
         {
             await _restCollection.AddAsync(new { Name = "Test" });
@@ -118,6 +126,22 @@ namespace Firestorm.Tests.Functionality.Stems
             await _restCollection.GetItem("123").EditAsync(new { Name = "Test" });
 
             Assert.True(_dependency.OnUpdatingCalled);
+        }
+
+        [Fact]
+        public async Task TestDependency_Edit_OnCreatingWasNotCalled()
+        {
+            await _restCollection.GetItem("123").EditAsync(new { Name = "Test" });
+
+            Assert.False(_dependency.OnCreatingCalled);
+        }
+
+        [Fact]
+        public async Task TestDependency_Edit_MarkDeletedWasNotCalled()
+        {
+            await _restCollection.GetItem("123").EditAsync(new { Name = "Test" });
+
+            Assert.False(_dependency.MarkDeletedCalled);
         }
 
         [Fact]
@@ -145,6 +169,22 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
+        public async Task TestDependency_Delete_OnUpdatingWasNotCalled()
+        {
+            await _restCollection.GetItem("123").DeleteAsync();
+
+            Assert.False(_dependency.OnUpdatingCalled);
+        }
+
+        [Fact]
+        public async Task TestDependency_Delete_OnCreatingWasNotCalled()
+        {
+            await _restCollection.GetItem("123").DeleteAsync();
+
+            Assert.False(_dependency.OnCreatingCalled);
+        }
+
+        [Fact]
         public async Task TestDependency_Delete_OnSavingWasCalled()
         {
             await _restCollection.GetItem("123").DeleteAsync();
@@ -158,6 +198,46 @@ namespace Firestorm.Tests.Functionality.Stems
             await _restCollection.GetItem("123").DeleteAsync();
 
             Assert.True(_dependency.OnSavedCalled);
+        }
+
+        [Fact]
+        public async Task TestDependency_Get_OnCreatingWasNotCalled()
+        {
+            await _restCollection.GetItem("123").GetDataAsync(null);
+
+            Assert.False(_dependency.OnCreatingCalled);
+        }
+
+        [Fact]
+        public async Task TestDependency_Get_MarkDeletedWasNotCalled()
+        {
+            await _restCollection.GetItem("123").GetDataAsync(null);
+
+            Assert.False(_dependency.MarkDeletedCalled);
+        }
+
+        [Fact]
+        public async Task TestDependency_Get_OnUpdatingWasNotCalled()
+        {
+            await _restCollection.GetItem("123").GetDataAsync(null);
+
+            Assert.False(_dependency.OnUpdatingCalled);
+        }
+
+        [Fact]
+        public async Task TestDependency_Get_OnSavingWasNotCalled()
+        {
+            await _restCollection.GetItem("123").GetDataAsync(null);
+
+            Assert.False(_dependency.OnSavingCalled);
+        }
+
+        [Fact]
+        public async Task TestDependency_Get_OnSavedWasNotCalled()
+        {
+            await _restCollection.GetItem("123").GetDataAsync(null);
+
+            Assert.False(_dependency.OnSavedCalled);
         }
     }
 }
