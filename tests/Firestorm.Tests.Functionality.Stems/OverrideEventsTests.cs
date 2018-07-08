@@ -12,17 +12,17 @@ namespace Firestorm.Tests.Functionality.Stems
     public class OverrideEventsTests
     {
         private readonly IRestCollection _restCollection;
-        private readonly Dependency _dependency;
+        private readonly EventChecker _eventChecker;
 
         public OverrideEventsTests()
         {
-            _dependency = new Dependency();
-            StemTestUtility.TestDependencyResolver.Add(_dependency);
+            _eventChecker = new EventChecker();
+            StemTestUtility.TestDependencyResolver.Add(_eventChecker);
 
             _restCollection = StemTestUtility.GetArtistsCollection<ArtistsStem>();
         }
 
-        private class Dependency
+        private class EventChecker
         {
             public bool OnSavingCalled { get; set; }
             public bool OnSavedCalled { get; set; }
@@ -33,11 +33,11 @@ namespace Firestorm.Tests.Functionality.Stems
 
         private class ArtistsStem : Stem<Artist>
         {
-            private readonly Dependency _dependency;
+            private readonly EventChecker _eventChecker;
 
-            public ArtistsStem(Dependency dependency)
+            public ArtistsStem(EventChecker eventChecker)
             {
-                _dependency = dependency;
+                _eventChecker = eventChecker;
             }
             
             [Get]
@@ -54,31 +54,31 @@ namespace Firestorm.Tests.Functionality.Stems
 
             public override Task OnSavingAsync(Artist item)
             {
-                _dependency.OnSavingCalled = true;
+                _eventChecker.OnSavingCalled = true;
                 return base.OnSavingAsync(item);
             }
 
             public override Task OnSavedAsync(Artist item)
             {
-                _dependency.OnSavedCalled = true;
+                _eventChecker.OnSavedCalled = true;
                 return base.OnSavedAsync(item);
             }
 
             public override void OnCreating(Artist newItem)
             {
-                _dependency.OnCreatingCalled = true;
+                _eventChecker.OnCreatingCalled = true;
                 base.OnSavedAsync(newItem);
             }
 
             public override void OnUpdating(Artist newItem)
             {
-                _dependency.OnUpdatingCalled = true;
+                _eventChecker.OnUpdatingCalled = true;
                 base.OnUpdating(newItem);
             }
 
             public override bool MarkDeleted(Artist item)
             {
-                _dependency.MarkDeletedCalled = true;
+                _eventChecker.MarkDeletedCalled = true;
                 return base.MarkDeleted(item);
             }
 
@@ -93,7 +93,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.AddAsync(new { Name = "Test" });
 
-            Assert.True(_dependency.OnCreatingCalled);
+            Assert.True(_eventChecker.OnCreatingCalled);
         }
 
         [Fact]
@@ -101,7 +101,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.AddAsync(new { Name = "Test" });
 
-            Assert.False(_dependency.OnUpdatingCalled);
+            Assert.False(_eventChecker.OnUpdatingCalled);
         }
 
         [Fact]
@@ -109,7 +109,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.AddAsync(new { Name = "Test" });
 
-            Assert.True(_dependency.OnSavingCalled);
+            Assert.True(_eventChecker.OnSavingCalled);
         }
 
         [Fact]
@@ -117,7 +117,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.AddAsync(new { Name = "Test" });
 
-            Assert.True(_dependency.OnSavedCalled);
+            Assert.True(_eventChecker.OnSavedCalled);
         }
 
         [Fact]
@@ -125,7 +125,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.GetItem("123").EditAsync(new { Name = "Test" });
 
-            Assert.True(_dependency.OnUpdatingCalled);
+            Assert.True(_eventChecker.OnUpdatingCalled);
         }
 
         [Fact]
@@ -133,7 +133,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.GetItem("123").EditAsync(new { Name = "Test" });
 
-            Assert.False(_dependency.OnCreatingCalled);
+            Assert.False(_eventChecker.OnCreatingCalled);
         }
 
         [Fact]
@@ -141,7 +141,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.GetItem("123").EditAsync(new { Name = "Test" });
 
-            Assert.False(_dependency.MarkDeletedCalled);
+            Assert.False(_eventChecker.MarkDeletedCalled);
         }
 
         [Fact]
@@ -149,7 +149,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.GetItem("123").EditAsync(new { Name = "Test" });
 
-            Assert.True(_dependency.OnSavingCalled);
+            Assert.True(_eventChecker.OnSavingCalled);
         }
 
         [Fact]
@@ -157,7 +157,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.GetItem("123").EditAsync(new { Name = "Test" });
 
-            Assert.True(_dependency.OnSavedCalled);
+            Assert.True(_eventChecker.OnSavedCalled);
         }
 
         [Fact]
@@ -165,7 +165,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.GetItem("123").DeleteAsync();
 
-            Assert.True(_dependency.MarkDeletedCalled);
+            Assert.True(_eventChecker.MarkDeletedCalled);
         }
 
         [Fact]
@@ -173,7 +173,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.GetItem("123").DeleteAsync();
 
-            Assert.False(_dependency.OnUpdatingCalled);
+            Assert.False(_eventChecker.OnUpdatingCalled);
         }
 
         [Fact]
@@ -181,7 +181,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.GetItem("123").DeleteAsync();
 
-            Assert.False(_dependency.OnCreatingCalled);
+            Assert.False(_eventChecker.OnCreatingCalled);
         }
 
         [Fact]
@@ -189,7 +189,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.GetItem("123").DeleteAsync();
 
-            Assert.True(_dependency.OnSavingCalled);
+            Assert.True(_eventChecker.OnSavingCalled);
         }
 
         [Fact]
@@ -197,7 +197,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.GetItem("123").DeleteAsync();
 
-            Assert.True(_dependency.OnSavedCalled);
+            Assert.True(_eventChecker.OnSavedCalled);
         }
 
         [Fact]
@@ -205,7 +205,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.GetItem("123").GetDataAsync(null);
 
-            Assert.False(_dependency.OnCreatingCalled);
+            Assert.False(_eventChecker.OnCreatingCalled);
         }
 
         [Fact]
@@ -213,7 +213,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.GetItem("123").GetDataAsync(null);
 
-            Assert.False(_dependency.MarkDeletedCalled);
+            Assert.False(_eventChecker.MarkDeletedCalled);
         }
 
         [Fact]
@@ -221,7 +221,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.GetItem("123").GetDataAsync(null);
 
-            Assert.False(_dependency.OnUpdatingCalled);
+            Assert.False(_eventChecker.OnUpdatingCalled);
         }
 
         [Fact]
@@ -229,7 +229,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.GetItem("123").GetDataAsync(null);
 
-            Assert.False(_dependency.OnSavingCalled);
+            Assert.False(_eventChecker.OnSavingCalled);
         }
 
         [Fact]
@@ -237,7 +237,7 @@ namespace Firestorm.Tests.Functionality.Stems
         {
             await _restCollection.GetItem("123").GetDataAsync(null);
 
-            Assert.False(_dependency.OnSavedCalled);
+            Assert.False(_eventChecker.OnSavedCalled);
         }
     }
 }
