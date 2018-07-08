@@ -74,7 +74,7 @@ namespace Firestorm.Fluent.Fuel.Builder
 
             _fieldModel.Reader = new SubItemFieldReader<TItem, TNavItem>(castedExpression, subContext);
             _fieldModel.Collator = new NotSupportedFieldCollator<TItem>("sub items");
-            _fieldModel.ResourceGetter = new SubItemResourceGetter<TItem, TNavItem>(castedExpression, subContext);
+            _fieldModel.ResourceGetter = new SubItemResourceGetter<TItem, TNavItem>(navTools, subContext);
             _fieldModel.Writer = new SubItemFieldWriter<TItem, TNavItem>(navTools, subContext);
 
             var itemBuilder = new EngineItemBuilder<TNavItem>(itemModel);

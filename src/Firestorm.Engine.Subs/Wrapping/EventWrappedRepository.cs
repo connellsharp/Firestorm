@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Data;
-using Firestorm.Engine.Subs.Repositories;
 
 namespace Firestorm.Engine.Subs.Wrapping
 {
     /// <summary>
     /// Wraps and implements <see cref="IEngineRepository{TItem}"/> and calls methods on the given events object when repository methods are called.
-    /// Note: You do not need to wrap <see cref="NavigationItemRepository{TParent,TNav}"/> or <see cref="NavigationCollectionRepository{TParent,TCollection,TNav}"/>.
     /// </summary>
     internal class EventWrappedRepository<TItem> : IEngineRepository<TItem>, ITransactionEvents
         where TItem : class
