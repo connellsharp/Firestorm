@@ -8,23 +8,32 @@ One instance of each `Stem` class is created per request that uses it. A request
 
 ## Constructor parameters
 
-For example, you may way to inject a push notification service to notify subscribers when fields are set.
+For example, you may want to inject an event publisher to notify subscribers when fields are set.
 
 ```csharp
 public class ArtistsStem : Stem<Artist>
 {
-    private readonly IPushNotificationService _pushService;
+    private readonly IEventPublisher _eventPublisher;
 
-    public ArtistsStem(IPushNotificationService pushService)
+    public ArtistsStem(IEventPublisher eventPublisher)
     {
-        _pushService = pushService;
+        _eventPublisher = eventPublisher;
     }
 
+    [Set]
     public void SetName(Artist artist, string name)
     {
         string oldName = artist.Name;
         artist.Name = name;
-        _pushService.NotifyChange("name", oldName, name);
+
+        _eventPublisher.Publish(new ArtistNameChangingEvent 
+        {
+            ArtistId = artist.Id,
+            OldName = oldName,
+            NewName = name
+        });
     }
 }
 ```
+
+It is worth noting that the changes have not been saved to the database at this point. It would be better practice to queue the event in the Stem instance and raise it in the [`OnSaved` method](events.md).

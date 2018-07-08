@@ -1,18 +1,17 @@
-GetAttribute
-------------
+# GetAttribute
 
 The `Get` attribute marks a member as a field that an API client can read.
 
 #### Static Expressions
 
-Static properties that return `LambdaExpression` are the most efficient field getters. Expressions are combined into parts of a query.
+Properties that return `LambdaExpression` are combined into parts of a query.
 
-Getters can be given a Display.Nested argument to display the field even when nested in a collection.
+Static properties are loaded once on application startup, making them the most efficient field getters.
 
 ```csharp
 public class ArtistsStem : Stem<Artist>
 {
-    [Get(Display.Nested)]
+    [Get]
     public static Expression<Func<Artist, int>> Id
     {
         get { return a => a.Id; }
@@ -33,9 +32,9 @@ public class ArtistsStem : Stem<Artist>
 ```
 
 ```http
-GET /artists HTTP/1.1
+GET /artists
 
-HTTP/1.1 200 OK
+200 OK
 [        
     { "id": 122 },
     { "id": 123 },
@@ -44,9 +43,9 @@ HTTP/1.1 200 OK
 ```
 
 ```http
-GET /artists/123 HTTP/1.1
+GET /artists/123
 
-HTTP/1.1 200 OK
+200 OK
 {
     "id": 123,
     "name": "Periphery",
@@ -55,21 +54,21 @@ HTTP/1.1 200 OK
 ```
 
 ```http
-GET /artists/123/name HTTP/1.1
+GET /artists/123/name
 
-HTTP/1.1 200 OK
+200 OK
 "Periphery"
 ```
 
 
 #### Sorting and filtering
 
-The Firestorm Engine provides querying functionality.
+The Firestorm Engine provides [querying functionality](../endpoints/basic-requests.md).
 
 ```http
-GET /artists?fields=id,name HTTP/1.1
+GET /artists?fields=id,name
 
-HTTP/1.1 200 OK
+200 OK
 [                        
     {
         "id": 122,
@@ -87,9 +86,9 @@ HTTP/1.1 200 OK
 ```
 
 ```http
-GET /artists?fields=id,name&sort=start_date HTTP/1.1
+GET /artists?fields=id,name&sort=start_date
 
-HTTP/1.1 200 OK
+200 OK
 [
     {
         "id": 124,
@@ -107,9 +106,9 @@ HTTP/1.1 200 OK
 ```
 
 ```http
-GET /artists?fields=name&where=id>122 HTTP/1.1
+GET /artists?fields=name&where=id>122
 
-HTTP/1.1 200 OK                
+200 OK                
 [       
     {
         "name": "Periphery"
@@ -120,19 +119,18 @@ HTTP/1.1 200 OK
 ]
 ```
 
-SetAttribute
-------------
+# SetAttribute
 
 The `Set` attribute marks a member as a field that an API client can write to.
 
 #### Static Expressions
 
-Simple static properties that return `LambdaExpression` for a single property can also be used as setters.
+Simple properties that return `LambdaExpression` for a single property can also be used as setters.
 
 ```csharp
 public class ArtistsStem : Stem<Artist>
 {
-    [Get(Display.Nested)]
+    [Get]
     public static Expression<Func<Artist, int>> ID
     {
         get { return a => a.ID; }
@@ -154,28 +152,28 @@ public class ArtistsStem : Stem<Artist>
 ```
 
 ```http
-POST /artists HTTP/1.1
+POST /artists
 {
     "name": "Fred"
 }
 
-HTTP/1.1 201 Created
+201 Created
 ```
 
 ```http
-PUT /artists/123 HTTP/1.1
+PUT /artists/123
 {
     "name": "Fred"
 }
 
-HTTP/1.1 200 OK
+200 OK
 ```
 
 ```http
-PUT /artists/123/name HTTP/1.1
+PUT /artists/123/name
 "Fred"
 
-HTTP/1.1 200 OK
+200 OK
 ```
 
 #### Static Setter Methods
@@ -210,21 +208,21 @@ public class ArtistsStem : Stem<Artist>
 Because we prefix the method name with `Set`, Firestorm ignores the prefix and regonises both the expression and method as the same field in your API.
 
 ```http
-POST /artists HTTP/1.1
+POST /artists
 {
     "name": "Fred"
 }
 
-HTTP/1.1 201 Created
+201 Created
 ```
 
 ```http
-PUT /artists/123 HTTP/1.1
+PUT /artists/123
 {
     "name": "Fred"
 }
 
-HTTP/1.1 200 OK
+200 OK
 ```
 
 #### Instance Setter Methods
@@ -261,12 +259,12 @@ public class ArtistsStem : Stem<Artist>
 ```
 
 ```http
-POST /artists HTTP/1.1
+POST /artists
 {
     "name": "The Beatles"
 }
 
-HTTP/1.1 400 Bad Request
+400 Bad Request
 {
     "error": "argument",
     "message": "An artist already exists with this name."

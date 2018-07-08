@@ -1,11 +1,10 @@
-IdentifierAttribute
--------------------
+# IdentifierAttribute
 
 The `Identifier` attribute marks a member as a unique identifier for an item in the collection. Identifiers are used in URLs to navigate to a specific item.
 
 #### Static Expressions
 
-Static properties that return `Expression<Func<Artist, int>>` can be used to match the requested identifier in the URL.
+Properties that return a `LambdaExpression` can be used to match the requested identifier in the URL.
 
 This is particularly handy when the identifier is also a field.
 
@@ -13,7 +12,7 @@ This is particularly handy when the identifier is also a field.
 public class ArtistsStem : Stem<Artist>
 {
     [Identifier]
-    [Get(Display.Nested)]
+    [Get]
     public static int Id { get; }
     
     [Get]
@@ -25,9 +24,9 @@ public class ArtistsStem : Stem<Artist>
 ```
 
 ```http
-GET /artists HTTP/1.1
+GET /artists
 
-HTTP/1.1 200 OK
+200 OK
 [        
     { "id": 122 },
     { "id": 123 },
@@ -36,22 +35,22 @@ HTTP/1.1 200 OK
 ```
 
 ```http
-GET /artists/123 HTTP/1.1
+GET /artists/123
 
-HTTP/1.1 200 OK
+200 OK
 {
     "id": 123,
-    "name": "Wattitude"
+    "name": "Periphery"
 }
 ```
 
 ```http
-GET /artists/by_id/123 HTTP/1.1
+GET /artists/by_id/123
 
-HTTP/1.1 200 OK
+200 OK
 {
     "id": 123,
-    "name": "Wattitude"
+    "name": "Periphery"
 }
 ```
 
@@ -63,8 +62,8 @@ Methods that take a single argument and return an item can also be used directly
 public class ArtistsStem : Stem<Artist>
 {
     [Identifier]
-    [Get(Display.Nested)]
-    public static int ID { get; }
+    [Get]
+    public static int Id { get; }
 
     [Identifier]
     public Artist FindByName(string name)
@@ -82,9 +81,9 @@ public class ArtistsStem : Stem<Artist>
 ```
 
 ```http
-GET /artists/noisia HTTP/1.1
+GET /artists/noisia
 
-HTTP/1.1 200 OK
+200 OK
 {
     "id": 124,
     "name": "Noisia"
@@ -92,9 +91,9 @@ HTTP/1.1 200 OK
 ```
 
 ```http
-GET /artists/by_name/noisia HTTP/1.1
+GET /artists/by_name/noisia
 
-HTTP/1.1 200 OK
+200 OK
 {                
     "id": 124,
     "name": "Noisia"
@@ -102,9 +101,9 @@ HTTP/1.1 200 OK
 ```
 
 ```http
-GET /artists/by_id/124 HTTP/1.1
+GET /artists/by_id/124
 
-HTTP/1.1 200 OK
+200 OK
 {                
     "id": 124,
     "name": "Noisia"
@@ -121,8 +120,8 @@ Properties or parameterless methods that return an item can be used for special 
 public class ArtistsStem : Stem<Artist>
 {
     [Identifier]
-    [Get(Display.Nested)]
-    public static int ID { get; }
+    [Get]
+    public static int Id { get; }
 
     [Identifier]
     public Artist FindByName(string name)
@@ -151,9 +150,9 @@ public class ArtistsStem : Stem<Artist>
 ```
 
 ```http
-GET /artists/me HTTP/1.1
+GET /artists/me
 
-HTTP/1.1 200 OK
+200 OK
 {
     "id": 7654,
     "name": "My Awesome Band"

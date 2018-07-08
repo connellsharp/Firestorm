@@ -9,7 +9,7 @@ public class ArtistsStem : Stem<Artist>
 {
     [Identifier]
     [Get(Display.Nested)]
-    public static int ID { get; }
+    public static int Id { get; }
     
     [Get]
     public static string Name { get; }
@@ -23,7 +23,7 @@ public class AlbumsStem : Stem<Album>
 {
     [Identifier]
     [Get(Display.Nested)]
-    public static int ID { get; }
+    public static int Id { get; }
             
     [Get]
     [Substem(typeof(TracksStem))]
@@ -34,7 +34,7 @@ public class TracksStem : Stem<Track>
 {
     [Identifier]
     [Get(Display.Nested)]
-    public static int ID { get; }
+    public static int Id { get; }
             
     [Get]
     [Substem(typeof(TracksStem))]
@@ -45,9 +45,9 @@ public class TracksStem : Stem<Track>
 These define the paths used to navigate the API.
 
 ```http
-GET /artists/123/tracks HTTP/1.1
+GET /artists/123/tracks
 
-HTTP/1.1 200 OK
+200 OK
 [        
     { "id": 12345},
     { "id": 12346},
@@ -56,9 +56,9 @@ HTTP/1.1 200 OK
 ```
 
 ```http
-GET /artists/123/tracks/by_index/1 HTTP/1.1
+GET /artists/123/tracks/by_index/1
 
-HTTP/1.1 200 OK
+200 OK
 {
     "id": 12345,
     "title": "Awesome Song"
