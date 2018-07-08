@@ -1,12 +1,13 @@
 using System;
+using System.Threading.Tasks;
 using Firestorm.Engine.Subs;
 
 namespace Firestorm.Fluent.Fuel.Models
 {
     /// <summary>
-    /// An implementation of <see cref="IRepositoryEvents{TItem}"/> where all events are <see cref="Action"/> delegate properties.
+    /// An implementation of <see cref="IDataChangeEvents{TItem}"/> where all events are <see cref="Action"/> delegate properties.
     /// </summary>
-    internal class ActionRepositoryEvents<T> : IRepositoryEvents<T>
+    internal class ActionDataChangeEvents<T> : IDataChangeEvents<T>
     {
         public void OnCreating(T item)
         {
@@ -16,6 +17,16 @@ namespace Firestorm.Fluent.Fuel.Models
         public void OnDeleting(T item)
         {
             OnDeletingAction?.Invoke(item);
+        }
+
+        public Task OnSavingAsync(T item)
+        {
+            return Task.FromResult(false);
+        }
+
+        public Task OnSavedAsync(T item)
+        {
+            return Task.FromResult(false);
         }
 
         public Action<T> OnCreatingAction { get; set; }

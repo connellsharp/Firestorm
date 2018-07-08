@@ -1,13 +1,14 @@
+using System.Threading.Tasks;
 using Firestorm.Engine.Subs;
 
-namespace Firestorm.Stems.Fuel.Substems.Factories
+namespace Firestorm.Stems.Fuel
 {
-    internal class StemRepositoryEvents<TItem> : IRepositoryEvents<TItem>
+    public class StemDataChangeEvents<TItem> : IDataChangeEvents<TItem>
         where TItem : class
     {
         private readonly Stem<TItem> _stem;
 
-        public StemRepositoryEvents(Stem<TItem> stem)
+        public StemDataChangeEvents(Stem<TItem> stem)
         {
             _stem = stem;
         }
@@ -23,6 +24,16 @@ namespace Firestorm.Stems.Fuel.Substems.Factories
         {
             // TODO name
             _stem.MarkDeleted(item);
+        }
+
+        public Task OnSavingAsync(TItem item)
+        {
+            return _stem.OnSavingAsync(item);
+        }
+
+        public Task OnSavedAsync(TItem item)
+        {
+            return _stem.OnSavedAsync(item);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using JetBrains.Annotations;
 
 namespace Firestorm.Stems
@@ -25,12 +26,14 @@ namespace Firestorm.Stems
         {
         }
 
-        public virtual void OnSavingAsync(TItem item)
+        public virtual Task OnSavingAsync(TItem item)
         {
+            return Task.FromResult(false);
         }
 
-        public virtual void OnSavedAsync(TItem item)
+        public virtual Task OnSavedAsync(TItem item)
         {
+            return Task.FromResult(false);
         }
 
         public virtual bool MarkDeleted(TItem item)

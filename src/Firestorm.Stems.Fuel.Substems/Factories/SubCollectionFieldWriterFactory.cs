@@ -32,7 +32,7 @@ namespace Firestorm.Stems.Fuel.Substems.Factories
         public IFieldWriter<TItem> Get(Stem<TItem> stem)
         {
             var substemCreator = new SubstemEngineSubContextCreator<TItem, TNav, TSubstem>(stem);
-            StemRepositoryEvents<TNav> repoEvents = substemCreator.GetRepositoryEvents();
+            StemDataChangeEvents<TNav> repoEvents = substemCreator.GetRepositoryEvents();
             StemsEngineSubContext<TNav> subContext = substemCreator.GetEngineContext();
 
             MethodSetter<TItem, TCollection> setter = MethodSetter<TItem, TCollection>.FromDefinition(_definition, stem);

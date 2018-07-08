@@ -12,10 +12,10 @@ namespace Firestorm.Engine.Subs
         where TNav : class, new()
     {
         internal Expression<Func<TItem, TProperty>> NavExpression { get; }
-        internal IRepositoryEvents<TNav> RepoEvents { get; }
+        internal IDataChangeEvents<TNav> RepoEvents { get; }
         internal INavigationSetter<TItem, TProperty> Setter { get; }
 
-        public SubWriterTools(Expression<Func<TItem, TProperty>> navExpression, IRepositoryEvents<TNav> repoEvents, [CanBeNull] INavigationSetter<TItem, TProperty> setter)
+        public SubWriterTools(Expression<Func<TItem, TProperty>> navExpression, IDataChangeEvents<TNav> repoEvents, [CanBeNull] INavigationSetter<TItem, TProperty> setter)
         {
             NavExpression = navExpression;
             RepoEvents = repoEvents;
