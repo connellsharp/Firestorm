@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Firestorm.Stems;
@@ -52,6 +53,10 @@ namespace Firestorm.Tests.Functionality.Stems
             [Get]
             [Substem(typeof(AlbumSubstem))]
             public static Expression<Func<Artist, ICollection<Album>>> Albums { get; } = a => a.Albums;
+
+            [Get]
+            [Substem(typeof(AlbumSubstem))]
+            public static Expression<Func<Artist, Album>> FirstAlbum { get; } = a => a.Albums.First();
 
             public override void OnUpdating(Artist item)
             {
@@ -111,7 +116,7 @@ namespace Firestorm.Tests.Functionality.Stems
             }
         }
 
-        private Task UpdateAlbumAsync()
+        private Task UpdateAlbumByCollectionAsync()
         {
             return _artistCollection.GetItem("123").GetCollection("Albums").GetItem("1").EditAsync(new
             {
@@ -119,45 +124,74 @@ namespace Firestorm.Tests.Functionality.Stems
             });
         }
 
-        [Fact]
-        public async Task ParentStemDependency_Add_OnUpdatingWasNotCount()
+        private Task UpdateAlbumByItemAsync()
         {
-            await UpdateAlbumAsync();
+            return _artistCollection.GetItem("123").GetItem("FirstAlbum").EditAsync(new
+            {
+                Name = "Test album"
+            });
+        }
+
+        [Fact]
+        public async Task ParentStemDependency_Edit_OnUpdatingWasNotCalled()
+        {
+            await UpdateAlbumByCollectionAsync();
             Assert.Equal(0, _eventCounter.OnParentUpdatingCount);
         }
 
         [Fact]
-        public async Task ParentStemDependency_Add_OnSavingWasNotCount()
+        public async Task ParentStemDependency_Edit_OnSavingWasNotCalled()
         {
-            await UpdateAlbumAsync();
+            await UpdateAlbumByCollectionAsync();
             Assert.Equal(0, _eventCounter.OnParentSavingCount);
         }
 
         [Fact]
-        public async Task ParentStemDependency_Add_OnSavedWasNotCount()
+        public async Task ParentStemDependency_Edit_OnSavedWasNotCalled()
         {
-            await UpdateAlbumAsync();
+            await UpdateAlbumByCollectionAsync();
             Assert.Equal(0, _eventCounter.OnParentSavedCount);
         }
 
         [Fact]
-        public async Task SubstemDependency_Add_OnUpdatingWasCount()
+        public async Task SubCollection_Edit_OnUpdatingWasCalledOnce()
         {
-            await UpdateAlbumAsync();
+            await UpdateAlbumByCollectionAsync();
             Assert.Equal(1, _eventCounter.OnChildUpdatingCount);
         }
 
         [Fact]
-        public async Task SubstemDependency_Add_OnSavingWasCount()
+        public async Task SubCollection_Edit_OnSavingWasCalledOnce()
         {
-            await UpdateAlbumAsync();
+            await UpdateAlbumByCollectionAsync();
             Assert.Equal(1, _eventCounter.OnChildSavingCount);
         }
 
         [Fact]
-        public async Task SubstemDependency_Add_OnSavedWasCount()
+        public async Task SubCollection_Edit_OnSavedWasCalledOnce()
         {
-            await UpdateAlbumAsync();
+            await UpdateAlbumByCollectionAsync();
+            Assert.Equal(1, _eventCounter.OnChildSavedCount);
+        }
+
+        [Fact]
+        public async Task SubItem_Edit_OnUpdatingWasCalledOnce()
+        {
+            await UpdateAlbumByItemAsync();
+            Assert.Equal(1, _eventCounter.OnChildUpdatingCount);
+        }
+
+        [Fact]
+        public async Task SubItem_Edit_OnSavingWasCalledOnce()
+        {
+            await UpdateAlbumByItemAsync();
+            Assert.Equal(1, _eventCounter.OnChildSavingCount);
+        }
+
+        [Fact]
+        public async Task SubItem_Edit_OnSavedWasCalledOnce()
+        {
+            await UpdateAlbumByItemAsync();
             Assert.Equal(1, _eventCounter.OnChildSavedCount);
         }
     }
