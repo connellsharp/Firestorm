@@ -37,6 +37,11 @@ namespace Firestorm.Stems.Roots.Derive
             return newItem;
         }
 
+        public void MarkUpdated(TItem item)
+        {
+            _root.MarkUpdated(item);
+        }
+
         public void MarkDeleted(TItem item)
         {
             _root.MarkDeleted(item);

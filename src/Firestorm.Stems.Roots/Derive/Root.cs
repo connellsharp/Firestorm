@@ -21,6 +21,8 @@ namespace Firestorm.Stems.Roots.Derive
 
         public abstract TItem CreateAndAttachItem();
 
+        public abstract void MarkUpdated(TItem item);
+
         public abstract void MarkDeleted(TItem item);
     }
 

@@ -9,9 +9,14 @@ namespace Firestorm.Fluent.Fuel.Models
     /// </summary>
     internal class ActionDataChangeEvents<T> : IDataChangeEvents<T>
     {
-        public void OnCreating(T item)
+        public void OnCreating(T newItem)
         {
-            OnCreatingAction?.Invoke(item);
+            OnCreatingAction?.Invoke(newItem);
+        }
+
+        public void OnUpdating(T item)
+        {
+            // TODO no updating event in fluent yet
         }
 
         public void OnDeleting(T item)

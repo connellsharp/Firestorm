@@ -44,6 +44,11 @@ namespace Firestorm.Engine.Subs.Repositories
             return item;
         }
 
+        public void MarkUpdated(TNav item)
+        {
+            _tools.RepoEvents?.OnUpdating(item);
+        }
+
         public void MarkDeleted(TNav item)
         {
             _tools.RepoEvents?.OnDeleting(item);

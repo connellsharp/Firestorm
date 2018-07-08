@@ -15,9 +15,14 @@ namespace Firestorm.Stems.Fuel
 
         public bool HasAnyEvent { get; } = true;
 
-        public void OnCreating(TItem item)
+        public void OnCreating(TItem newItem)
         {
-            _stem.OnCreating(item);
+            _stem.OnCreating(newItem);
+        }
+
+        public void OnUpdating(TItem item)
+        {
+            _stem.OnUpdating(item);
         }
 
         public void OnDeleting(TItem item)

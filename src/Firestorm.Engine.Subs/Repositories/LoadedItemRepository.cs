@@ -24,6 +24,11 @@ namespace Firestorm.Engine.Subs.Repositories
             return Task.FromResult(false);
         }
 
+        public IQueryable<T> GetAllItems()
+        {
+            return new[] { _item }.AsQueryable();
+        }
+
         public T CreateAndAttachItem()
         {
             const string msg = "Shouldn't get here because GetAllItems always returns some values.";
@@ -31,9 +36,9 @@ namespace Firestorm.Engine.Subs.Repositories
             throw new NotImplementedException(msg);
         }
 
-        public IQueryable<T> GetAllItems()
+        public void MarkUpdated(T item)
         {
-            return new[] { _item }.AsQueryable();
+            throw new NotImplementedException("Not implemented updating a loaded sub-item.");
         }
 
         public void MarkDeleted(T item)

@@ -10,7 +10,9 @@ namespace Firestorm.Engine.Subs
     {
         bool HasAnyEvent { get; }
 
-        void OnCreating(TItem item);
+        void OnCreating(TItem newItem);
+
+        void OnUpdating(TItem item);
 
         void OnDeleting(TItem item);
 

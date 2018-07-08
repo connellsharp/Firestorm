@@ -28,6 +28,11 @@ namespace Firestorm.Engine.Subs.Repositories
             return _emptyArray.AsQueryable();
         }
 
+        public void MarkUpdated(T item)
+        {
+            throw new NotImplementedException("Not implemented updating a created sub-item.");
+        }
+
         public void MarkDeleted(T item)
         {
             throw new NotImplementedException("Not implemented deleting a created sub-item.");

@@ -28,6 +28,7 @@ namespace Firestorm.Tests.Functionality.Stems
             public bool OnSavedCalled { get; set; }
             public bool OnCreatingCalled { get; set; }
             public bool MarkDeletedCalled { get; set; }
+            public bool OnUpdatingCalled { get; set; }
         }
 
         private class ArtistsStem : Stem<Artist>
@@ -69,6 +70,12 @@ namespace Firestorm.Tests.Functionality.Stems
                 base.OnSavedAsync(newItem);
             }
 
+            public override void OnUpdating(Artist newItem)
+            {
+                _dependency.OnUpdatingCalled = true;
+                base.OnUpdating(newItem);
+            }
+
             public override bool MarkDeleted(Artist item)
             {
                 _dependency.MarkDeletedCalled = true;
@@ -103,6 +110,14 @@ namespace Firestorm.Tests.Functionality.Stems
             await _restCollection.AddAsync(new { Name = "Test" });
 
             Assert.True(_dependency.OnSavedCalled);
+        }
+
+        [Fact]
+        public async Task TestDependency_Edit_OnUpdateWasCalled()
+        {
+            await _restCollection.GetItem("123").EditAsync(new { Name = "Test" });
+
+            Assert.True(_dependency.OnUpdatingCalled);
         }
 
         [Fact]

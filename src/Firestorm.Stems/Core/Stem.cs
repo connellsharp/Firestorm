@@ -26,6 +26,15 @@ namespace Firestorm.Stems
         {
         }
 
+        public virtual void OnUpdating(TItem item)
+        {
+        }
+
+        public virtual bool MarkDeleted(TItem item)
+        {
+            return false;
+        }
+
         public virtual Task OnSavingAsync(TItem item)
         {
             return Task.FromResult(false);
@@ -34,11 +43,6 @@ namespace Firestorm.Stems
         public virtual Task OnSavedAsync(TItem item)
         {
             return Task.FromResult(false);
-        }
-
-        public virtual bool MarkDeleted(TItem item)
-        {
-            return false;
         }
     }
 

@@ -48,6 +48,13 @@ namespace Firestorm.Engine.Subs.Wrapping
             return item;
         }
 
+        public void MarkUpdated(TItem item)
+        {
+            _events?.OnUpdating(item);
+            _repository.MarkUpdated(item);
+            _savableItems.Add(item);
+        }
+
         public void MarkDeleted(TItem item)
         {
             _events?.OnDeleting(item);
