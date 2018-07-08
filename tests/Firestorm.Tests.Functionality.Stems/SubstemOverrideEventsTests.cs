@@ -14,33 +14,33 @@ namespace Firestorm.Tests.Functionality.Stems
     public class SubstemOverrideEventsTests
     {
         private readonly IRestCollection _artistCollection;
-        private readonly EventChecker _eventChecker;
+        private readonly EventCounter _eventCounter;
 
         public SubstemOverrideEventsTests()
         {
-            _eventChecker = new EventChecker();
-            StemTestUtility.TestDependencyResolver.Add(_eventChecker);
+            _eventCounter = new EventCounter();
+            StemTestUtility.TestDependencyResolver.Add(_eventCounter);
 
             _artistCollection = StemTestUtility.GetArtistsCollection<ArtistsStem>();
         }
 
-        private class EventChecker
+        private class EventCounter
         {
-            public bool OnParentUpdatingCalled { get; set; }
-            public bool OnParentSavingCalled { get; set; }
-            public bool OnParentSavedCalled { get; set; }
-            public bool OnChildSavingCalled { get; set; }
-            public bool OnChildSavedCalled { get; set; }
-            public bool OnChildUpdatingCalled { get; set; }
+            public int OnParentUpdatingCount { get; set; }
+            public int OnParentSavingCount { get; set; }
+            public int OnParentSavedCount { get; set; }
+            public int OnChildSavingCount { get; set; }
+            public int OnChildSavedCount { get; set; }
+            public int OnChildUpdatingCount { get; set; }
         }
 
         private class ArtistsStem : Stem<Artist>
         {
-            private readonly EventChecker _eventChecker;
+            private readonly EventCounter _eventCounter;
 
-            public ArtistsStem(EventChecker eventChecker)
+            public ArtistsStem(EventCounter eventCounter)
             {
-                _eventChecker = eventChecker;
+                _eventCounter = eventCounter;
             }
 
             [Get]
@@ -55,30 +55,30 @@ namespace Firestorm.Tests.Functionality.Stems
 
             public override void OnUpdating(Artist item)
             {
-                _eventChecker.OnParentUpdatingCalled = true;
+                _eventCounter.OnParentUpdatingCount++;
                 base.OnUpdating(item);
             }
 
             public override Task OnSavingAsync(Artist item)
             {
-                _eventChecker.OnParentSavingCalled = true;
+                _eventCounter.OnParentSavingCount++;
                 return base.OnSavingAsync(item);
             }
 
             public override Task OnSavedAsync(Artist item)
             {
-                _eventChecker.OnParentSavedCalled = true;
+                _eventCounter.OnParentSavedCount++;
                 return base.OnSavedAsync(item);
             }
         }
 
         private class AlbumSubstem : Stem<Album>
         {
-            private readonly EventChecker _eventChecker;
+            private readonly EventCounter _eventCounter;
 
-            public AlbumSubstem(EventChecker eventChecker)
+            public AlbumSubstem(EventCounter eventCounter)
             {
-                _eventChecker = eventChecker;
+                _eventCounter = eventCounter;
             }
 
             [Get(Display.Nested), Identifier]
@@ -94,24 +94,24 @@ namespace Firestorm.Tests.Functionality.Stems
 
             public override void OnUpdating(Album item)
             {
-                _eventChecker.OnChildUpdatingCalled = true;
+                _eventCounter.OnChildUpdatingCount++;
                 base.OnUpdating(item);
             }
 
             public override Task OnSavingAsync(Album item)
             {
-                _eventChecker.OnChildSavingCalled = true;
+                _eventCounter.OnChildSavingCount++;
                 return base.OnSavingAsync(item);
             }
 
             public override Task OnSavedAsync(Album item)
             {
-                _eventChecker.OnChildSavedCalled = true;
+                _eventCounter.OnChildSavedCount++;
                 return base.OnSavedAsync(item);
             }
         }
 
-        private Task UpdateAlbum()
+        private Task UpdateAlbumAsync()
         {
             return _artistCollection.GetItem("123").GetCollection("Albums").GetItem("1").EditAsync(new
             {
@@ -120,45 +120,45 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task ParentStemDependency_Add_OnUpdatingWasCalled()
+        public async Task ParentStemDependency_Add_OnUpdatingWasNotCount()
         {
-            await UpdateAlbum();
-            Assert.True(_eventChecker.OnParentUpdatingCalled);
+            await UpdateAlbumAsync();
+            Assert.Equal(0, _eventCounter.OnParentUpdatingCount);
         }
 
         [Fact]
-        public async Task ParentStemDependency_Add_OnSavingWasCalled()
+        public async Task ParentStemDependency_Add_OnSavingWasNotCount()
         {
-            await UpdateAlbum();
-            Assert.True(_eventChecker.OnParentSavingCalled);
+            await UpdateAlbumAsync();
+            Assert.Equal(0, _eventCounter.OnParentSavingCount);
         }
 
         [Fact]
-        public async Task ParentStemDependency_Add_OnSavedWasCalled()
+        public async Task ParentStemDependency_Add_OnSavedWasNotCount()
         {
-            await UpdateAlbum();
-            Assert.True(_eventChecker.OnParentSavedCalled);
+            await UpdateAlbumAsync();
+            Assert.Equal(0, _eventCounter.OnParentSavedCount);
         }
 
         [Fact]
-        public async Task SubstemDependency_Add_OnUpdatingWasCalled()
+        public async Task SubstemDependency_Add_OnUpdatingWasCount()
         {
-            await UpdateAlbum();
-            Assert.True(_eventChecker.OnChildUpdatingCalled);
+            await UpdateAlbumAsync();
+            Assert.Equal(1, _eventCounter.OnChildUpdatingCount);
         }
 
         [Fact]
-        public async Task SubstemDependency_Add_OnSavingWasCalled()
+        public async Task SubstemDependency_Add_OnSavingWasCount()
         {
-            await UpdateAlbum();
-            Assert.True(_eventChecker.OnChildSavingCalled);
+            await UpdateAlbumAsync();
+            Assert.Equal(1, _eventCounter.OnChildSavingCount);
         }
 
         [Fact]
-        public async Task SubstemDependency_Add_OnSavedWasCalled()
+        public async Task SubstemDependency_Add_OnSavedWasCount()
         {
-            await UpdateAlbum();
-            Assert.True(_eventChecker.OnChildSavedCalled);
+            await UpdateAlbumAsync();
+            Assert.Equal(1, _eventCounter.OnChildSavedCount);
         }
     }
 }

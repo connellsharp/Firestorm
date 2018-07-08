@@ -24,7 +24,7 @@ namespace Firestorm.Stems.Fuel.Substems.Factories
             return new StemsEngineSubContext<TNav>(_substem);
         }
 
-        internal StemDataChangeEvents<TNav> GetRepositoryEvents()
+        internal StemDataChangeEvents<TNav> GetDataChangeEvents()
         {
             return new StemDataChangeEvents<TNav>( _substem);
         }
