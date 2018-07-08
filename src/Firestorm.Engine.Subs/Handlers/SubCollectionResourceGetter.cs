@@ -22,7 +22,7 @@ namespace Firestorm.Engine.Subs.Handlers
 
         public IRestResource GetFullResource(IDeferredItem<TItem> item, IDataTransaction dataTransaction)
         {
-            IEngineRepository<TNav> navRepository = new NavigationCollectionRepository<TItem, TCollection, TNav>(item, _navTools);
+            IEngineRepository<TNav> navRepository = new NavigationCollectionRepository<TItem, TCollection, TNav>(item, _navTools.NavExpression, _navTools.Setter);
 
             var eventWrapper = new DataEventWrapper<TNav>(dataTransaction, navRepository);
             eventWrapper.TryWrapEvents(_navTools.RepoEvents);

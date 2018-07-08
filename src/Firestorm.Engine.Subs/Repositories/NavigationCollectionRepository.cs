@@ -17,15 +17,17 @@ namespace Firestorm.Engine.Subs.Repositories
         where TCollection : class, IEnumerable<TNav>
     {
         private readonly IDeferredItem<TParent> _parentItem;
-        private readonly SubWriterTools<TParent, TCollection, TNav> _tools;
+        private readonly Expression<Func<TParent, TCollection>> _navExpression;
+        private readonly INavigationSetter<TParent, TCollection> _setter;
         private readonly Expression<Func<TParent, IEnumerable<TNav>>> _castedExpression;
 
-        public NavigationCollectionRepository(IDeferredItem<TParent> parentItem, SubWriterTools<TParent, TCollection, TNav> tools)
+        public NavigationCollectionRepository(IDeferredItem<TParent> parentItem, Expression<Func<TParent, TCollection>> navExpression, INavigationSetter<TParent, TCollection> setter)
         {
             _parentItem = parentItem;
-            _tools = tools;
-            
-            _castedExpression = Expression.Lambda<Func<TParent, IEnumerable<TNav>>>(_tools.NavExpression.Body, _tools.NavExpression.Parameters);
+            _navExpression = navExpression;
+            _setter = setter;
+
+            _castedExpression = Expression.Lambda<Func<TParent, IEnumerable<TNav>>>(_navExpression.Body, _navExpression.Parameters);
         }
 
         public async Task InitializeAsync()
@@ -44,23 +46,18 @@ namespace Firestorm.Engine.Subs.Repositories
             ICollection<TNav> navCollection = GetNavCollection();
 
             var item = new TNav();
-
-            _tools.RepoEvents?.OnCreating(item);
             navCollection.Add(item);
-
             return item;
         }
 
         public void MarkUpdated(TNav item)
         {
-            _tools.RepoEvents?.OnUpdating(item);
         }
 
         public void MarkDeleted(TNav item)
         {
             ICollection<TNav> navCollection = GetNavCollection();
-
-            _tools.RepoEvents?.OnDeleting(item);
+            
             navCollection.Remove(item);
         }
 
@@ -72,7 +69,7 @@ namespace Firestorm.Engine.Subs.Repositories
             try
             {
                 parentItem = _parentItem.LoadedItem;
-                navEnumerable = _tools.NavExpression.Compile().Invoke(parentItem);
+                navEnumerable = _navExpression.Compile().Invoke(parentItem);
             }
             catch (Exception ex)
             {
@@ -85,7 +82,7 @@ namespace Firestorm.Engine.Subs.Repositories
                 var castedList = newList as TCollection;
                 Debug.Assert(castedList != null, "This should always cast. Is it not covariant?");
 
-                _tools.Setter.SetNavItem(parentItem, castedList);
+                _setter.SetNavItem(parentItem, castedList);
                 return newList;
             }
 

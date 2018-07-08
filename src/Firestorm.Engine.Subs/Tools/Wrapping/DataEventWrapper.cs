@@ -1,12 +1,10 @@
 ﻿using Firestorm.Data;
-using Firestorm.Engine.Subs.Repositories;
 using JetBrains.Annotations;
 
 namespace Firestorm.Engine.Subs.Wrapping
 {
     /// <summary>
     /// If there are any events, wraps the repo in another implementation that triggers the events.
-    /// Note: You do not need to wrap <see cref="NavigationItemRepository{TParent,TNav}"/> or <see cref="NavigationCollectionRepository{TParent,TCollection,TNav}"/>.
     /// </summary>
     public class DataEventWrapper<TItem>
         where TItem : class

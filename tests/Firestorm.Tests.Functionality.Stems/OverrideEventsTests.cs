@@ -89,7 +89,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Add_OnCreatingWasCalled()
+        public async Task Item_Add_OnCreatingWasCalled()
         {
             await _restCollection.AddAsync(new { Name = "Test" });
 
@@ -97,7 +97,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Add_OnUpdatingWasNotCalled()
+        public async Task Item_Add_OnUpdatingWasNotCalled()
         {
             await _restCollection.AddAsync(new { Name = "Test" });
 
@@ -105,7 +105,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Add_OnSavingWasCalled()
+        public async Task Item_Add_OnSavingWasCalled()
         {
             await _restCollection.AddAsync(new { Name = "Test" });
 
@@ -113,7 +113,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Add_OnSavedWasCalled()
+        public async Task Item_Add_OnSavedWasCalled()
         {
             await _restCollection.AddAsync(new { Name = "Test" });
 
@@ -121,7 +121,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Edit_OnUpdateWasCalled()
+        public async Task Item_Edit_OnUpdateWasCalled()
         {
             await _restCollection.GetItem("123").EditAsync(new { Name = "Test" });
 
@@ -129,7 +129,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Edit_OnCreatingWasNotCalled()
+        public async Task Item_Edit_OnCreatingWasNotCalled()
         {
             await _restCollection.GetItem("123").EditAsync(new { Name = "Test" });
 
@@ -137,7 +137,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Edit_MarkDeletedWasNotCalled()
+        public async Task Item_Edit_MarkDeletedWasNotCalled()
         {
             await _restCollection.GetItem("123").EditAsync(new { Name = "Test" });
 
@@ -145,7 +145,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Edit_OnSavingWasCalled()
+        public async Task Item_Edit_OnSavingWasCalled()
         {
             await _restCollection.GetItem("123").EditAsync(new { Name = "Test" });
 
@@ -153,7 +153,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Edit_OnSavedWasCalled()
+        public async Task Item_Edit_OnSavedWasCalled()
         {
             await _restCollection.GetItem("123").EditAsync(new { Name = "Test" });
 
@@ -161,7 +161,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Delete_MarkDeletedWasCalled()
+        public async Task Item_Delete_MarkDeletedWasCalled()
         {
             await _restCollection.GetItem("123").DeleteAsync();
 
@@ -169,7 +169,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Delete_OnUpdatingWasNotCalled()
+        public async Task Item_Delete_OnUpdatingWasNotCalled()
         {
             await _restCollection.GetItem("123").DeleteAsync();
 
@@ -177,7 +177,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Delete_OnCreatingWasNotCalled()
+        public async Task Item_Delete_OnCreatingWasNotCalled()
         {
             await _restCollection.GetItem("123").DeleteAsync();
 
@@ -185,7 +185,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Delete_OnSavingWasCalled()
+        public async Task Item_Delete_OnSavingWasCalled()
         {
             await _restCollection.GetItem("123").DeleteAsync();
 
@@ -193,7 +193,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Delete_OnSavedWasCalled()
+        public async Task Item_Delete_OnSavedWasCalled()
         {
             await _restCollection.GetItem("123").DeleteAsync();
 
@@ -201,7 +201,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Get_OnCreatingWasNotCalled()
+        public async Task Item_Get_OnCreatingWasNotCalled()
         {
             await _restCollection.GetItem("123").GetDataAsync(null);
 
@@ -209,7 +209,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Get_MarkDeletedWasNotCalled()
+        public async Task Item_Get_MarkDeletedWasNotCalled()
         {
             await _restCollection.GetItem("123").GetDataAsync(null);
 
@@ -217,7 +217,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Get_OnUpdatingWasNotCalled()
+        public async Task Item_Get_OnUpdatingWasNotCalled()
         {
             await _restCollection.GetItem("123").GetDataAsync(null);
 
@@ -225,7 +225,7 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Get_OnSavingWasNotCalled()
+        public async Task Item_Get_OnSavingWasNotCalled()
         {
             await _restCollection.GetItem("123").GetDataAsync(null);
 
@@ -233,11 +233,19 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
-        public async Task TestDependency_Get_OnSavedWasNotCalled()
+        public async Task Item_Get_OnSavedWasNotCalled()
         {
             await _restCollection.GetItem("123").GetDataAsync(null);
 
             Assert.False(_eventChecker.OnSavedCalled);
+        }
+
+        [Fact]
+        public async Task ScalarField_Edit_OnUpdateWasCalled()
+        {
+            await _restCollection.GetItem("123").GetScalar("Name").EditAsync("Test");
+
+            Assert.True(_eventChecker.OnUpdatingCalled);
         }
     }
 }

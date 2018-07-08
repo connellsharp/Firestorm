@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using AutoFixture;
 using Firestorm.Engine.Deferring;
-using Firestorm.Engine.Subs;
 using Firestorm.Engine.Subs.Repositories;
 using Xunit;
 
@@ -21,8 +19,7 @@ namespace Firestorm.Tests.Unit.Engine.Subs
         private static NavigationCollectionRepository<Author, ICollection<Book>, Book> GetBooksNavRepo(Author author)
         {
             var item = new AlreadyLoadedItem<Author>(author, null);
-            var tools = new SubWriterTools<Author, ICollection<Book>, Book>(a => a.Books, null, null);
-            var repo = new NavigationCollectionRepository<Author, ICollection<Book>, Book>(item, tools);
+            var repo = new NavigationCollectionRepository<Author, ICollection<Book>, Book>(item, a => a.Books, null);
             return repo;
         }
 

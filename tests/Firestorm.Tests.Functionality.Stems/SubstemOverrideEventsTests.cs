@@ -116,7 +116,7 @@ namespace Firestorm.Tests.Functionality.Stems
             }
         }
 
-        private Task UpdateAlbumByCollectionAsync()
+        private Task UpdateCollectionAsync()
         {
             return _artistCollection.GetItem("123").GetCollection("Albums").GetItem("1").EditAsync(new
             {
@@ -124,7 +124,7 @@ namespace Firestorm.Tests.Functionality.Stems
             });
         }
 
-        private Task UpdateAlbumByItemAsync()
+        private Task UpdateItemAsync()
         {
             return _artistCollection.GetItem("123").GetItem("FirstAlbum").EditAsync(new
             {
@@ -132,66 +132,92 @@ namespace Firestorm.Tests.Functionality.Stems
             });
         }
 
+        private Task UpdateScalarAsync()
+        {
+            return _artistCollection.GetItem("123").GetItem("FirstAlbum").GetScalar("Name").EditAsync("Test album");
+        }
+
         [Fact]
         public async Task ParentStemDependency_Edit_OnUpdatingWasNotCalled()
         {
-            await UpdateAlbumByCollectionAsync();
+            await UpdateCollectionAsync();
             Assert.Equal(0, _eventCounter.OnParentUpdatingCount);
         }
 
         [Fact]
         public async Task ParentStemDependency_Edit_OnSavingWasNotCalled()
         {
-            await UpdateAlbumByCollectionAsync();
+            await UpdateCollectionAsync();
             Assert.Equal(0, _eventCounter.OnParentSavingCount);
         }
 
         [Fact]
         public async Task ParentStemDependency_Edit_OnSavedWasNotCalled()
         {
-            await UpdateAlbumByCollectionAsync();
+            await UpdateCollectionAsync();
             Assert.Equal(0, _eventCounter.OnParentSavedCount);
         }
 
         [Fact]
         public async Task SubCollection_Edit_OnUpdatingWasCalledOnce()
         {
-            await UpdateAlbumByCollectionAsync();
+            await UpdateCollectionAsync();
             Assert.Equal(1, _eventCounter.OnChildUpdatingCount);
         }
 
         [Fact]
         public async Task SubCollection_Edit_OnSavingWasCalledOnce()
         {
-            await UpdateAlbumByCollectionAsync();
+            await UpdateCollectionAsync();
             Assert.Equal(1, _eventCounter.OnChildSavingCount);
         }
 
         [Fact]
         public async Task SubCollection_Edit_OnSavedWasCalledOnce()
         {
-            await UpdateAlbumByCollectionAsync();
+            await UpdateCollectionAsync();
             Assert.Equal(1, _eventCounter.OnChildSavedCount);
         }
 
         [Fact]
         public async Task SubItem_Edit_OnUpdatingWasCalledOnce()
         {
-            await UpdateAlbumByItemAsync();
+            await UpdateItemAsync();
             Assert.Equal(1, _eventCounter.OnChildUpdatingCount);
         }
 
         [Fact]
         public async Task SubItem_Edit_OnSavingWasCalledOnce()
         {
-            await UpdateAlbumByItemAsync();
+            await UpdateItemAsync();
             Assert.Equal(1, _eventCounter.OnChildSavingCount);
         }
 
         [Fact]
         public async Task SubItem_Edit_OnSavedWasCalledOnce()
         {
-            await UpdateAlbumByItemAsync();
+            await UpdateItemAsync();
+            Assert.Equal(1, _eventCounter.OnChildSavedCount);
+        }
+
+        [Fact]
+        public async Task SubScalar_Edit_OnUpdatingWasCalledOnce()
+        {
+            await UpdateScalarAsync();
+            Assert.Equal(1, _eventCounter.OnChildUpdatingCount);
+        }
+
+        [Fact]
+        public async Task SubScalar_Edit_OnSavingWasCalledOnce()
+        {
+            await UpdateScalarAsync();
+            Assert.Equal(1, _eventCounter.OnChildSavingCount);
+        }
+
+        [Fact]
+        public async Task SubScalar_Edit_OnSavedWasCalledOnce()
+        {
+            await UpdateScalarAsync();
             Assert.Equal(1, _eventCounter.OnChildSavedCount);
         }
     }

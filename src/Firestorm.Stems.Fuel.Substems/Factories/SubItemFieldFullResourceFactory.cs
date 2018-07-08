@@ -1,8 +1,9 @@
 using System;
 using System.Linq.Expressions;
+using Firestorm.Engine.Subs;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Engine.Subs.Handlers;
-using Firestorm.Stems.Fuel.Fields;
+using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 using JetBrains.Annotations;
 
@@ -17,19 +18,25 @@ namespace Firestorm.Stems.Fuel.Substems.Factories
         where TSubstem : Stem<TNav>
     {
         private readonly Expression<Func<TItem, TNav>> _navigationExpression;
+        private readonly FieldDefinition _definition;
 
         [UsedImplicitly]
-        public SubItemFieldFullResourceFactory(Expression<Func<TItem, TNav>> navigationExpression)
+        public SubItemFieldFullResourceFactory(Expression<Func<TItem, TNav>> navigationExpression, FieldDefinition definition)
         {
             _navigationExpression = navigationExpression;
+            _definition = definition;
         }
 
         public IFieldResourceGetter<TItem> Get(Stem<TItem> stem)
         {
             var substemCreator = new SubstemEngineSubContextCreator<TItem, TNav, TSubstem>(stem);
+            StemDataChangeEvents<TNav> stemEvents = substemCreator.GetDataChangeEvents();
             StemsEngineSubContext<TNav> subContext = substemCreator.GetEngineContext();
 
-            return new SubItemResourceGetter<TItem, TNav>(_navigationExpression, subContext);
+            MethodSetter<TItem, TNav> setter = MethodSetter<TItem, TNav>.FromDefinition(_definition, stem);
+            var tools = new SubWriterTools<TItem, TNav, TNav>(_navigationExpression, stemEvents, setter);
+
+            return new SubItemResourceGetter<TItem, TNav>(tools, subContext);
         }
     }
 }
