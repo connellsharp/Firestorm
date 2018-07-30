@@ -17,7 +17,7 @@ public class ArtistsStem : Stem<Artist>
 }
 ```
 
-_Exposes [RESTful endpoints](docs/stems/stems-intro.md)_
+_Exposes [RESTful endpoints](docs/endpoints/querying.md)_
 
 ```http
 GET /artists/123

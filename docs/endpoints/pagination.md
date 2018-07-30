@@ -1,10 +1,12 @@
 # Pagination
 
-The Pagination strategy is configurable.
+There are several ways to navigate through pages of data without any configuration.
 
 - Use `sort` and `where` automatically e.g. `sort=name&where=name>Frank`.
 - A classic `page=2` parameter. Maybe with `size=100` parameter.
 - Another classic `limit` and `offset` parameters. Or `skip` and `take`.
+
+How to include links to the next and previous pages in the response is configurable.
 
 ## Link header
 

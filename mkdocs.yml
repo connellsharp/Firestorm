@@ -7,8 +7,9 @@ pages:
     - Aims: 'intro/aims.md'
 
 - Endpoints:
-    - Basic Requests: 'endpoints/basic-requests.md'
+    - Querying: 'endpoints/querying.md'
     - Pagination: 'endpoints/pagination.md'
+    - Write Operations: 'endpoints/write-operations.md'
     
 - Installation and Setup:
     - Installation: 'setup/installation.md'

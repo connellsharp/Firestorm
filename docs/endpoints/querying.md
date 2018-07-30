@@ -1,8 +1,8 @@
 # Basic Requests
 
-All examples we will describe the default parameter names and delimiters. These can be configured in the `EndpointConfiguration.QueryStringConfiguration` property.
+All query examples will use the default parameter names and delimiters. These can be configured in the `EndpointConfiguration.QueryStringConfiguration` property.
 
-# Collections
+## Collections
 
 List items in a collection simply by requesting the collection resource.
 
@@ -11,13 +11,13 @@ GET /people
 ```
 ```json
 [
-    { id: 1, name: "Bilbo Baggins", age: 111 }
-    { id: 2, name: "Albus Dumbledore", age: 115 },
-    { id: 3, name: "Peter Pan", age: 13 }
+    { "id": 1, "name": "Bilbo Baggins", "age": 111 },
+    { "id": 2, "name": "Albus Dumbledore", "age": 115 },
+    { "id": 3, "name": "Peter Pan", "age": 13 }
 ]
 ```
 
-## Filtering
+### Filtering
 
 By default, the `where` and `filter` querystring parameters can filter the collection results.
 
@@ -26,7 +26,7 @@ GET /people?where=age=111
 ```
 ```json
 [
-    { id: 1, name: "Bilbo Baggins", age: 111 }
+    { "id": 1, "name": "Bilbo Baggins", "age": 111 }
 ]
 ```
 
@@ -50,10 +50,12 @@ GET /people?where=age>100
 ```
 ```json
 [
-    { id: 1, name: "Bilbo Baggins", age: 111 },
-    { id: 2, name: "Albus Dumbledore", age: 115 }
+    { "id": 1, "name": "Bilbo Baggins", "age": 111 },
+    { "id": 2, "name": "Albus Dumbledore", "age": 115 }
 ]
 ```
+
+#### Fields as querysring keys
 
 You can also completely omit the `where` or `filter` parameter and use the field name as the parameter directly.
 
@@ -67,7 +69,7 @@ This can even be used with other operations, although the querystring would not 
 GET /people?age>100
 ```
 
-## Sorting
+### Sorting
 
 The `sort`, `order` or `orderby` querystring parameters can all be used to sort the collection results.
 
@@ -78,9 +80,9 @@ GET /people?sort=age
 ```
 ```json
 [
-    { id: 3, name: "Peter Pan", age: 13 },
-    { id: 1, name: "Bilbo Baggins", age: 111 },
-    { id: 2, name: "Albus Dumbledore", age: 115 }
+    { "id": 3, "name": "Peter Pan", "age": 13 },
+    { "id": 1, "name": "Bilbo Baggins", "age": 111 },
+    { "id": 2, "name": "Albus Dumbledore", "age": 115 }
 ]
 ```
 
@@ -97,7 +99,7 @@ Multiple sort instructions can be chained using a different delimiter (`,` or `;
 GET /people?sort=age,id+desc,name
 ```
 
-## Selecting fields
+### Selecting fields
 
 The `fields` or `select` parameters can specify which fields you want in the response.
 
@@ -108,9 +110,9 @@ GET /people?fields=name,age
 ```
 ```json
 [
-    { name: "Peter Pan", age: 13 },
-    { name: "Bilbo Baggins", age: 111 },
-    { name: "Albus Dumbledore", age: 115 }
+    { "name": "Peter Pan", "age": 13 },
+    { "name": "Bilbo Baggins", "age": 111 },
+    { "name": "Albus Dumbledore", "age": 115 }
 ]
 ```
 
@@ -120,32 +122,7 @@ You can also select hidden fields this way.
 GET /people?fields=name,date_of_birth
 ```
 
-## Adding items to collections
-
-You can add a new item using the `POST` method.
-
-```http
-POST /people
-{
-    name: "Eddard Stark",
-    age: 36
-}
-```
-
-Depending on how the server is configured in the `EndpointConfiguration.ResponseContentGenerator` property, the server might return a JSON body response containing the new ID.
-
-The URL to the newly created resource will be in the Location header.
-
-```http
-201 Created
-Location: /people/4
-{
-    status: "created",
-    id: 4
-}
-```
-
-# Items
+## Items
 
 Identifiers can be used to drill-down into a single item within the collection.
 
@@ -154,22 +131,23 @@ GET /people/3
 ```
 ```json
 {
-    id: 3,
-    name: "Peter Pan",
-    age: 13
+    "id": 3,
+    "name": "Peter Pan",
+    "age": 13
 }
 ```
 
 If an item with the given identifier does not exist, a 404 response will be given.
+
 ```http
 GET /people/9999
 ```
 ```http
 404 Not Found
 {
-    status: "not_found",
-    error: "identifier_not_found",
-    message: "An item was not found with the identifier '9999'."
+    "status": "not_found",
+    "error": "identifier_not_found",
+    "message": "An item was not found with the identifier '9999'."
 }
 ```
 
@@ -182,20 +160,20 @@ GET /people/2?fields=name,age
 ```
 ```json
 {
-    name: "Albus Dumbledore",
-    age: 115
+    "name": "Albus Dumbledore",
+    "age": 115
 }
 ```
 
-## Editing items
+### Editing items
 
 You can perform a _partial_ update of an item using the `PUT` or `PATCH` methods, depending on the server's `EndpointConfiguration.RequestStrategies` property.
 
 ```http
 PUT /people/2
 {
-    name: "Professor Albus Percival Wulfric Brian Dumbledore",
-    age: 116
+    "name": "Professor Albus Percival Wulfric Brian Dumbledore",
+    "age": 116
 }
 ```
 ```http
@@ -205,6 +183,8 @@ PUT /people/2
 }
 ```
 
+#### Upserting
+
 Even if a resource at this URL with this identifier does not exist, the server may be configured to allow an 'upsert'. This will attempt to create the resource at the URL.
 
 If this is the case, the server will respond with a 201 status code.
@@ -212,13 +192,13 @@ If this is the case, the server will respond with a 201 status code.
 ```http
 201 Created
 {
-    status: "created"
+    "status": "created"
 }
 ```
 
 If the URL cannot be edited or created, a 404 will be returned.
 
-# Scalars
+## Scalars
 
 Each field can also be navigated to directly. Scalar fields will return just their value on their own.
 
@@ -239,7 +219,6 @@ PUT /people/1/name
 ```http
 200 OK
 {
-    status: "ok"
+    "status": "ok"
 }
 ```
-
