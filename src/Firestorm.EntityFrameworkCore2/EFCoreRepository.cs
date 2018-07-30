@@ -37,6 +37,11 @@ namespace Firestorm.EntityFrameworkCore2
             return _table.Where(AvailableToApiPredicate);
         }
 
+        public void MarkUpdated(TEntity item)
+        {
+            // entity framework is automatically tracking changes
+        }
+
         public void MarkDeleted(TEntity item)
         {
             _table.Remove(item);

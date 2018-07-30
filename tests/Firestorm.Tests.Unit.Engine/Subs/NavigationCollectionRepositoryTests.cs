@@ -21,8 +21,7 @@ namespace Firestorm.Tests.Unit.Engine.Subs
         private static NavigationCollectionRepository<Author, ICollection<Book>, Book> GetBooksNavRepo(Author author)
         {
             var item = new AlreadyLoadedItem<Author>(author, null);
-            var tools = new SubWriterTools<Author, ICollection<Book>, Book>(a => a.Books, null, null);
-            var repo = new NavigationCollectionRepository<Author, ICollection<Book>, Book>(item, tools);
+            var repo = new NavigationCollectionRepository<Author, ICollection<Book>, Book>(item, a => a.Books, new DefaultNavigationSetter<Author, ICollection<Book>>(a => a.Books));
             return repo;
         }
 

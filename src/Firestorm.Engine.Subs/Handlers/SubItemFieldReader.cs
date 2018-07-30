@@ -7,14 +7,17 @@ using Reflectious;
 
 namespace Firestorm.Engine.Subs.Handlers
 {
-    public class SubItemFieldReader<TItem, TNav> : SubItemFieldHandlerBase<TItem, TNav>, IFieldReader<TItem>
+    public class SubItemFieldReader<TItem, TNav> : IFieldReader<TItem>
         where TItem : class
         where TNav : class
     {
-        public SubItemFieldReader(Expression<Func<TItem, TNav>> navigationExpression,
-            IEngineSubContext<TNav> engineSubContext)
-            : base(navigationExpression, engineSubContext)
+        private readonly Expression<Func<TItem, TNav>> _navigationExpression;
+        private readonly IEngineSubContext<TNav> _engineSubContext;
+
+        public SubItemFieldReader(Expression<Func<TItem, TNav>> navigationExpression, IEngineSubContext<TNav> engineSubContext)
         {
+            _navigationExpression = navigationExpression;
+            _engineSubContext = engineSubContext;
             Replacer = new SubItemReplacer<TItem, TNav>(engineSubContext, q => q.Select(navigationExpression));
         }
 
@@ -25,9 +28,9 @@ namespace Firestorm.Engine.Subs.Handlers
         public Expression GetSelectExpression(ParameterExpression itemPram)
         {
             var visitedNavigationExpr =
-                (LambdaExpression) new ParameterReplacerVisitor(NavigationExpression.Parameters[0], itemPram).Visit(NavigationExpression);
+                (LambdaExpression) new ParameterReplacerVisitor(_navigationExpression.Parameters[0], itemPram).Visit(_navigationExpression);
 
-            LambdaExpression memberInitLambda = SubUtilities.GetMemberInitLambda(EngineSubContext.Fields);
+            LambdaExpression memberInitLambda = SubUtilities.GetMemberInitLambda(_engineSubContext.Fields);
 
             return visitedNavigationExpr.Chain(memberInitLambda).Body;
         }

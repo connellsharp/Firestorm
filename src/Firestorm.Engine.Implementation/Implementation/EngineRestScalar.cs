@@ -36,7 +36,11 @@ namespace Firestorm.Engine
                 throw new NotAuthorizedForFieldException(AuthorizableVerb.Edit, _field.Name);
 
             await _item.LoadAsync(); // TODO: is this necessary?
+
             await _field.Writer.SetValueAsync(_item, value, _context.Transaction);
+            
+            _context.Repository.MarkUpdated(_item.LoadedItem);
+
             await _context.Transaction.SaveChangesAsync();
 
             return new Acknowledgment();

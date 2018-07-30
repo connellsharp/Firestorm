@@ -1,13 +1,14 @@
 ﻿using System;
 using Firestorm.Data;
 using Firestorm.Engine.Defaults;
-using Firestorm.Stems.Roots.Derive;
+using Firestorm.Stems;
 using Firestorm.Stems.Roots;
+using Firestorm.Stems.Roots.Derive;
 using Firestorm.Tests.Unit;
 using Firestorm.Tests.Unit.Endpoints.Stubs;
 using Firestorm.Tests.Unit.Engine.Models;
 
-namespace Firestorm.Tests.Functionality.Stems.Models
+namespace Firestorm.Tests.Functionality.Stems.Helpers
 {
     internal static class StemTestUtility
     {
@@ -18,7 +19,10 @@ namespace Firestorm.Tests.Functionality.Stems.Models
                 RootResourceFactory = new DerivedRootsResourceFactory {
                     RootTypeGetter = new ManualTypeGetter(rootTypes)
                 },
-                StemConfiguration = new DefaultStemConfiguration()
+                StemConfiguration = new DefaultStemConfiguration
+                {
+                    DependencyResolver = TestDependencyResolver
+                }
             };
 
             stemStartResources.Initialize();
@@ -26,6 +30,8 @@ namespace Firestorm.Tests.Functionality.Stems.Models
             var directory = (IRestDirectory) stemStartResources.GetStartResource(new TestEndpointContext());
             return directory;
         }
+
+        public static TestDependencyResolver TestDependencyResolver { get; } = new TestDependencyResolver();
 
         public static IRestCollection GetArtistsCollection<TStem>()
         {

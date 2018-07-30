@@ -52,6 +52,9 @@ namespace Firestorm.Engine
             var setter = new QueryableFieldSetter<TItem>(_context);
             await setter.SetMappedValuesAsync(_item, itemData);
 
+            await _item.LoadAsync();
+            _context.Repository.MarkUpdated(_item.LoadedItem);
+
             await _context.Transaction.SaveChangesAsync();
             
             if(_item.WasCreated)
@@ -67,6 +70,7 @@ namespace Firestorm.Engine
 
             await _item.LoadAsync();
             _context.Repository.MarkDeleted(_item.LoadedItem);
+
             await _context.Transaction.SaveChangesAsync();
 
             return new Acknowledgment();

@@ -36,6 +36,11 @@ namespace Firestorm.Engine.Subs.Repositories
             throw new NotSupportedException("Cannot add items to a single item repository.");
         }
 
+        public void MarkUpdated(TNav item)
+        {
+            // relying on in-memory tracking
+        }
+
         public void MarkDeleted(TNav item)
         {
             throw new NotSupportedException("Cannot delete items from a single item repository.");

@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Firestorm.Data;
 using Firestorm.Engine.Defaults;
@@ -8,7 +5,6 @@ using Firestorm.Engine.Deferring;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Engine.Subs.Repositories;
-using JetBrains.Annotations;
 
 namespace Firestorm.Engine.Subs.Handlers
 {
@@ -27,15 +23,12 @@ namespace Firestorm.Engine.Subs.Handlers
 
         public async Task SetValueAsync(IDeferredItem<TItem> item, object deserializedValue, IDataTransaction dataTransaction)
         {
-            //IQueryableSingle<TNav> navigationQuery = item.Query.Select(_navigationExpression).SingleDefferred();
-            //IEngineRepository<TNav> navRepository = new QueryableSingleRepository<TNav>(navigationQuery);
-            IEngineRepository<TNav> navRepository = new NavigationItemRepository<TItem, TNav>(item, _navTools);
+            IEngineRepository<TNav> navRepository = new NavigationItemRepository<TItem, TNav>(item, _navTools.NavExpression, _navTools.Setter);
 
             var itemData = new RestItemData(deserializedValue);
 
             var navLocatorCreator = new NavigationItemLocatorCreator<TNav>(_subContext);
             DeferredItemBase<TNav> deferredItem = await navLocatorCreator.LocateOrCreateItemAsync(navRepository, itemData, item.LoadAsync);
-            //DeferredItemBase<TNav> deferredItem = new RepositoryDeferredItem<TNav>(navSingleRepository);
 
             try
             {

@@ -31,9 +31,13 @@ namespace Firestorm.Stems.Fuel.Substems.Factories
 
         public IFieldWriter<TItem> Get(Stem<TItem> stem)
         {
-            StemsEngineSubContext<TNav> subContext = SubstemEngineSubContextCreator<TItem, TNav, TSubstem>.StemEngineContextFields(stem);
+            var substemCreator = new SubstemEngineSubContextCreator<TItem, TNav, TSubstem>(stem);
+            StemDataChangeEvents<TNav> repoEvents = substemCreator.GetDataChangeEvents();
+            StemsEngineSubContext<TNav> subContext = substemCreator.GetEngineContext();
+
             MethodSetter<TItem, TCollection> setter = MethodSetter<TItem, TCollection>.FromDefinition(_definition, stem);
-            var tools = new SubWriterTools<TItem, TCollection, TNav>(_navigationExpression, null, setter);
+            var tools = new SubWriterTools<TItem, TCollection, TNav>(_navigationExpression, repoEvents, setter);
+
             return new SubCollectionFieldWriter<TItem, TCollection, TNav>(tools, subContext);
         }
     }

@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using JetBrains.Annotations;
 
 namespace Firestorm.Stems
@@ -21,13 +22,27 @@ namespace Firestorm.Stems
             return expression;
         }
 
-        public virtual void OnItemCreated(TItem newItem)
+        public virtual void OnCreating(TItem newItem)
+        {
+        }
+
+        public virtual void OnUpdating(TItem item)
         {
         }
 
         public virtual bool MarkDeleted(TItem item)
         {
             return false;
+        }
+
+        public virtual Task OnSavingAsync(TItem item)
+        {
+            return Task.FromResult(false);
+        }
+
+        public virtual Task OnSavedAsync(TItem item)
+        {
+            return Task.FromResult(false);
         }
     }
 

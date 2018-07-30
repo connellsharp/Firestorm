@@ -46,6 +46,11 @@ namespace Firestorm.Tests.Unit.Stems.Roots
                 return new Artist();
             }
 
+            public override void MarkUpdated(Artist item)
+            {
+                throw new NotImplementedException();
+            }
+
             public override void MarkDeleted(Artist item)
             {
                 throw new NotImplementedException();

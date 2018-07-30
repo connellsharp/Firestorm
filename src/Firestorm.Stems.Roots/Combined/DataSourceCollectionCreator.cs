@@ -1,6 +1,9 @@
+using System.Threading.Tasks;
 using Firestorm.Data;
 using Firestorm.Engine;
 using Firestorm.Engine.Subs.Context;
+using Firestorm.Engine.Subs.Repositories;
+using Firestorm.Engine.Subs.Wrapping;
 using Firestorm.Stems.Fuel;
 
 namespace Firestorm.Stems.Roots.Combined
@@ -27,8 +30,11 @@ namespace Firestorm.Stems.Roots.Combined
 
             IEngineRepository<TItem> repository = _dataSource.GetRepository<TItem>(transaction);
 
+            var wrapper = new DataEventWrapper<TItem>(transaction, repository);
+            wrapper.TryWrapEvents(new StemDataChangeEvents<TItem>(stem));
+
             var subContext = new StemsEngineSubContext<TItem>(stem);
-            var context = new FullEngineContext<TItem>(transaction, repository, subContext);
+            var context = new FullEngineContext<TItem>(wrapper.Transaction, wrapper.Repository, subContext);
 
             return new EngineRestCollection<TItem>(context);
         }

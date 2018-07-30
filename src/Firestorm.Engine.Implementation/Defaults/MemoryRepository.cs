@@ -26,6 +26,11 @@ namespace Firestorm.Engine.Defaults
             return _collection.AsQueryable();
         }
 
+        public void MarkUpdated(TItem item)
+        {
+            // memory repo doesn't need to mark updates
+        }
+
         public void MarkDeleted(TItem item)
         {
             _collection.Remove(item);

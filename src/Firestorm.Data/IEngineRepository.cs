@@ -15,6 +15,8 @@ namespace Firestorm.Data
 
         TItem CreateAndAttachItem();
 
+        void MarkUpdated(TItem item);
+
         void MarkDeleted(TItem item);
     }
 }

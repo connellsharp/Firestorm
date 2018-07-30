@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Firestorm.Data;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Engine.Subs.Repositories;
+using Firestorm.Engine.Subs.Wrapping;
 
 namespace Firestorm.Engine.Subs.Handlers
 {
@@ -21,9 +22,12 @@ namespace Firestorm.Engine.Subs.Handlers
 
         public IRestResource GetFullResource(IDeferredItem<TItem> item, IDataTransaction dataTransaction)
         {
-            IEngineRepository<TNav> navRepository = new NavigationCollectionRepository<TItem, TCollection, TNav>(item, _navTools);
+            IEngineRepository<TNav> navRepository = new NavigationCollectionRepository<TItem, TCollection, TNav>(item, _navTools.NavExpression, _navTools.Setter);
 
-            var context = new FullEngineContext<TNav>(dataTransaction, navRepository, _subContext);
+            var eventWrapper = new DataEventWrapper<TNav>(dataTransaction, navRepository);
+            eventWrapper.TryWrapEvents(_navTools.RepoEvents);
+
+            var context = new FullEngineContext<TNav>(eventWrapper.Transaction, eventWrapper.Repository, _subContext);
 
             return new EngineRestCollection<TNav>(context);
         }
