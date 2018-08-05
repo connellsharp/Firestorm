@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Firestorm.Data;
 
 namespace Firestorm.Engine.Additives.Identifiers
 {
@@ -18,12 +19,12 @@ namespace Firestorm.Engine.Additives.Identifiers
         public static PropertyInfo GetKeyPropertyByName()
         {
             string typeName = typeof(TItem).Name;
-            var possibleNames = new[] { "Id", typeName + "Id", typeName + "_Id" };
+            var possibleNames = IdConventionPrimaryKeyFinder.GetPossibleIdNames(typeName);
 
             PropertyInfo[] properties = typeof(TItem).GetProperties();
             foreach (PropertyInfo property in properties)
             {
-                if (possibleNames.Any(name => string.Equals(property.Name, name, StringComparison.OrdinalIgnoreCase)))
+                if (possibleNames.Contains(property.Name))
                     return property;
             }
 

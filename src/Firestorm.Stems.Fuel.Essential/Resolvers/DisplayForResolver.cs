@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Firestorm.Data;
 using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 
@@ -17,7 +18,10 @@ namespace Firestorm.Stems.Fuel.Essential.Resolvers
 
             foreach (Display displayFor in Enum.GetValues(typeof(Display)))
             {
-                if (FieldDefinition.Display >= displayFor)
+                var display = FieldDefinition.Display ??
+                              GetDefaultDisplayFromName(typeof(TItem).Name, FieldDefinition.FieldName);
+                
+                if (display >= displayFor)
                 {
                     if (!defaults.ContainsKey(displayFor))
                         defaults.Add(displayFor, new List<string>());
@@ -25,6 +29,12 @@ namespace Firestorm.Stems.Fuel.Essential.Resolvers
                     defaults[displayFor].Add(FieldDefinition.FieldName);
                 }
             }
+        }
+
+        private static Display GetDefaultDisplayFromName(string itemName, string fieldName)
+        {
+            bool isId = IdConventionPrimaryKeyFinder.GetPossibleIdNames(itemName).Contains(fieldName);
+            return isId ? Display.Nested : Display.FullItem;
         }
     }
 }

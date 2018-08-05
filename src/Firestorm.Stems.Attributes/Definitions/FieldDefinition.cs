@@ -12,7 +12,7 @@ namespace Firestorm.Stems.Attributes.Definitions
 
         public Type FieldType { get; set; }
 
-        public Display Display { get; set; }
+        public Display? Display { get; set; }
 
         public FieldDefinitionHandlerPart Getter { get; } = new FieldDefinitionHandlerPart();
 

@@ -29,7 +29,7 @@ namespace Firestorm.Stems.Attributes.Basic.Attributes
         /// <summary>
         /// Defines the nesting levels that will display this field if the field names are not specified in the request.
         /// </summary>
-        public Display Display { get; set; }
+        public Display? Display { get; set; }
 
         /// <summary>
         /// The name of the member that defines an Expression.

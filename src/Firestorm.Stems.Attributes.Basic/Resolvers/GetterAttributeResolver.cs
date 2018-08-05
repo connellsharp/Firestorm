@@ -13,15 +13,14 @@ namespace Firestorm.Stems.Attributes.Basic.Resolvers
     /// </summary>
     internal class GetterAttributeResolver : FieldAttributeResolverBase
     {
+        private readonly Display? _display;
         private readonly string _argumentMemberName;
 
-        public GetterAttributeResolver(Display display, string argumentMemberName)
+        public GetterAttributeResolver(Display? display, string argumentMemberName)
         {
             _display = display;
             _argumentMemberName = argumentMemberName;
         }
-
-        private readonly Display _display;
 
         protected override void AddExpressionToDefinition(LambdaExpression expression)
         {
