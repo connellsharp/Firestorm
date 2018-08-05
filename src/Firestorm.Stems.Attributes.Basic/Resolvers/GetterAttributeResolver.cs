@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Firestorm.Stems.Attributes.Analysis;
@@ -13,13 +14,35 @@ namespace Firestorm.Stems.Attributes.Basic.Resolvers
     /// </summary>
     internal class GetterAttributeResolver : FieldAttributeResolverBase
     {
-        private readonly Display? _display;
         private readonly string _argumentMemberName;
+        private Display? _display;
 
-        public GetterAttributeResolver(Display? display, string argumentMemberName)
+        public GetterAttributeResolver(string argumentMemberName, Display? display)
         {
-            _display = display;
             _argumentMemberName = argumentMemberName;
+            _display = display;
+        }
+
+        public override void IncludeMember(MemberInfo member)
+        {
+            SetDisplayFromSugarAttribute(member);
+            
+            base.IncludeMember(member);
+        }
+
+        private void SetDisplayFromSugarAttribute(MemberInfo member)
+        {
+            var sugarAttributes = member.GetCustomAttributes<NestedAttribute>().ToArray();
+            if (sugarAttributes.Length == 0)
+                return;
+            
+            if(sugarAttributes.Length > 1)
+                throw new StemAttributeSetupException("Cannot set multiple NestedAttributes on the same field.");
+            
+            if(_display.HasValue)
+                throw new StemAttributeSetupException("Cannot use a NestedAttribute on a field that is already setting the Display property on the GetAttribute.");
+
+            _display = (Display)sugarAttributes[0].NestingLevel;
         }
 
         protected override void AddExpressionToDefinition(LambdaExpression expression)

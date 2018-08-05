@@ -24,15 +24,30 @@ namespace Firestorm.Tests.Functionality.Stems
 
         private class ArtistsStem : Stem<Artist>
         {
-            [Get(Display.FullItem)]
+            [Get]
             public static Expression Id
             {
                 get { return Expression(a => a.ID); }
             }
-
-            public static Expression<Func<Artist, string>> Name
+            
+            [Get(Display.FullItem)]
+            public static Expression Name
             {
-                get { return a => a.Name; }
+                get { return Expression(a => a.Name); }
+            }
+            
+            [Get]
+            [Nested]
+            public static Expression NestedName
+            {
+                get { return Expression(a => a.Name); }
+            }
+            
+            [Get]
+            [Hidden]
+            public static Expression HiddenName
+            {
+                get { return Expression(a => a.Name); }
             }
 
             [Get]
@@ -59,13 +74,49 @@ namespace Firestorm.Tests.Functionality.Stems
         }
 
         [Fact]
+        public async Task FullItemOnly_GetCollectionData_DoesntContainField()
+        {
+            var collectionData = await _restCollection.QueryDataAsync(null);
+
+            var firstItem = collectionData.Items.First();
+            
+            Assert.DoesNotContain(firstItem.Keys, s => s == "Name");
+        }
+
+        [Fact]
+        public async Task FullItemOnly_GetItemData_ContainsField()
+        {
+            var itemData = await _restCollection.GetItem("123").GetDataAsync(null);
+            
+            Assert.Contains(itemData.Keys, s => s == "Name");
+        }
+
+        [Fact]
+        public async Task NestedAttributeSugar_GetCollectionData_ContainsNestedField()
+        {
+            var collectionData = await _restCollection.QueryDataAsync(null);
+
+            var firstItem = collectionData.Items.First();
+            
+            Assert.Contains(firstItem.Keys, s => s == "NestedName");
+        }
+
+        [Fact]
+        public async Task HiddenAttributeSugar_GetCollectionData_DoesntContainField()
+        {
+            var itemData = await _restCollection.GetItem("123").GetDataAsync(null);
+            
+            Assert.DoesNotContain(itemData.Keys, s => s == "HiddenName");
+        }
+
+        [Fact]
         public async Task NestedManyWithoutNestingSubstem_GetCollectionData_DoesntContainNestedSubstem()
         {
             var collectionData = await _restCollection.QueryDataAsync(null);
 
             var firstItem = collectionData.Items.First();
             
-            Assert.Contains(firstItem.Keys, s => s == "Albums");
+            Assert.DoesNotContain(firstItem.Keys, s => s == "Albums");
         }
 
         [Fact]

@@ -44,7 +44,7 @@ namespace Firestorm.Stems.Attributes.Basic.Attributes
 
         public override IAttributeResolver GetResolver()
         {
-            return new GetterAttributeResolver(Display, Argument);
+            return new GetterAttributeResolver(Argument, Display);
         }
     }
 }

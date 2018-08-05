@@ -17,7 +17,7 @@ namespace Firestorm.Tests.Unit.Stems.Attributes.Basic
         {
             _definition = new StemDefinition();
 
-            _resolver = new GetterAttributeResolver(Display.FullItem, null)
+            _resolver = new GetterAttributeResolver(null, Display.FullItem)
             {
                 Definition = _definition,
                 Attribute = new GetAttribute(),
