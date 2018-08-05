@@ -30,45 +30,69 @@ public class ArtistsStem : Stem<Artist>
 }
 ```
 
-## Create
+## OnCreating
 
-The `Create` method is called to instantiate a new entity. By default, this is called when a client performs a `POST` request to the collection.
+The `OnCreating` method is called just after a new entity is instantiated.
+
+By default, this is called when a client performs a `POST` request to the collection.
 
 ```c#
 public class ArtistsStem : Stem<Artist>
 {
     // Contructor and properties omitted for brevity.
 
-    protected override Artist Create()
+    public override void OnCreating(Artist newArtist)
     {
-        return new Artist
-        {
-            CreatedDate = DateTime.UtcNow,
-            CreatedByUserName = User.Identity.Name
-        };
+        newArtist.CreatedDate = DateTime.UtcNow,
+        newArtist.CreatedByUserName = User.Identity.Name
+    }
+}
+```
+
+## OnUpdating
+
+The `OnUpdating` method is called just before an updated entity is saved to the database.
+
+```c#
+public class ArtistsStem : Stem<Artist>
+{
+    // Contructor and properties omitted for brevity.
+
+    public override void OnUpdating(Artist artist)
+    {
+        newArtist.ModifiedDate = DateTime.UtcNow,
+        newArtist.ModifiedByUserName = User.Identity.Name
     }
 }
 ```
 
 ## MarkDeleted
 
-The `MarkDeleted` method is called when the entity is deleted. As with `Create`, the deletion is not committed to the repository until `OnSavedAsync` is called.
+The `MarkDeleted` method is called when the entity is deleted. As with `OnCreating`, the deletion is not committed to the repository until `OnSavedAsync` is called.
 
-Overriding this method allows you to perform a "soft delete" where the entity remains in the database. To ensure these entities don't appear in your API queries after being marked as deleted, you can override `IsVisibleExpression`.
+Overriding this method allows you to perform a "soft delete" where the entity remains in the database. In this case, the method should return `true` to indicate that it has handled the deletion.
+
+To ensure these entities don't appear in your API queries after being marked as deleted, you could override `PermissionExpression` to indicate that deleted items are not readable.
 
 ```c#
 public class ArtistsStem : Stem<Artist>
 {
     // Contructor and properties omitted for brevity.
 
-    protected override Task MarkDeleted(Artist artist)
+    protected override bool MarkDeleted(Artist artist)
     {
         artist.IsDeleted = true;
+        return true;
     }
 
-    protected override Expression<Func<Artist, bool>> IsVisibleExpression
+    protected override Expression<Func<Artist, ItemPermission>> PermissionExpression
     {
-        get { return a => !a.IsDeleted; }
+        get
+        {
+            return a => a.IsDeleted
+                ? ItemPermission.None
+                : ItemPermission.ReadWriteDelete;
+        }
     }
 }
 ```
