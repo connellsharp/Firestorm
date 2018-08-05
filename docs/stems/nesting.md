@@ -26,3 +26,7 @@ GET /artists
     { "id": 124, "name": "Infected Mushroom" }
 ]
 ```
+
+## Defaults
+
+If no `Display` argument is given, the default is usually `Display.FullItem`. However, if the name matches the ID convention rules, `Display.Nested` is used by default.
