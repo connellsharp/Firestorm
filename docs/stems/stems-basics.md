@@ -119,6 +119,47 @@ GET /artists?fields=name&where=id>122
 ]
 ```
 
+### Instance Getter Methods
+
+You can also add the `Get` attribute to methods that return the type. This code is not used in the database query and is executed in your application.
+
+Alone, this may not be very useful, but you can set the `Argument` property to pass in the value of an expression to make the value dynamic.
+
+```csharp
+public class ArtistsStem : Stem<Artist>
+{
+    [Get]
+    public static Expression<Func<Artist, int>> Id
+    {
+        get { return a => a.Id; }
+    }
+    
+    [Get]
+    public static Expression<Func<Artist, DateTime>> StartDate
+    {
+        get { return a => a.StartDate; }
+    }
+    
+    [Get(Argument = nameof(StartDate))]
+    public static int GetYearsActive(DateTime startDate)
+    {
+        return (DateTime.Today - startDate).Years;
+    }
+}
+```
+
+```http
+GET /artists/123
+
+200 OK
+{
+    "id": 123,
+    "start_date": "2005-01-01",
+    "years_active": 13
+}
+```
+
+
 # SetAttribute
 
 The `Set` attribute marks a member as a field that an API client can write to.
@@ -196,7 +237,7 @@ public class ArtistsStem : Stem<Artist>
     }
 
     [Set]
-    public void SetName(Artist artist, string name)
+    public static void SetName(Artist artist, string name)
     {
         artist.OldName = artist.Name;
         artist.Name = name;

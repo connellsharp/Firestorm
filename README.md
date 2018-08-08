@@ -45,8 +45,10 @@ You can read more in the [documentation](https://firestorm.readthedocs.org), or 
 
 Firestorm is available from the GitHub repository and as NuGet Packages.
 
+While it's still in early stages, packages are available from the [MyGet feed](https://www.myget.org/F/firestorm/api/v3/index.json). Be sure to use the `-prerelease` flag.
+
 ```
-PM> Install-Package Firestorm.Stems.All
+PM> Install-Package Firestorm.Stems.Start
 PM> Install-Package Firestorm.AspNetCore2
 PM> Install-Package Firestorm.EntityFrameworkCore2
 ```
