@@ -82,11 +82,6 @@ namespace Firestorm.Tests.Functionality.Stems
                 _eventChecker.MarkDeletedCalled = true;
                 return base.MarkDeleted(item);
             }
-
-            public override bool CanAddItem()
-            {
-                return true;
-            }
         }
 
         [Fact]

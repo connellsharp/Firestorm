@@ -94,11 +94,6 @@ namespace Firestorm.Tests.Functionality.Stems
             [Get, Set]
             public static Expression<Func<Album, string>> Name { get; } = a => a.Name;
 
-            public override bool CanAddItem()
-            {
-                return true;
-            }
-
             public override void OnUpdating(Album item)
             {
                 _eventCounter.OnChildUpdatingCount++;

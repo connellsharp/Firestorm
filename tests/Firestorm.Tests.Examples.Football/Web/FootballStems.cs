@@ -17,11 +17,6 @@ namespace Firestorm.Tests.Examples.Football.Web
 
         [Get]
         public static int SquadNumber { get; }
-
-        public override bool CanAddItem()
-        {
-            return true;
-        }
     }
 
     [DataSourceRoot]
@@ -60,11 +55,6 @@ namespace Firestorm.Tests.Examples.Football.Web
 
         [Get, Substem(typeof(GoalsStem))]
         public static Expression<Func<FixtureTeam, ICollection<Goal>>> Goals { get; } = ft => ft.Fixture.Goals;
-
-        public override bool CanAddItem()
-        {
-            return true;
-        }
     }
 
     [DataSourceRoot] // TODO not

@@ -90,11 +90,6 @@ namespace Firestorm.Tests.Examples.Music.Basics
             {
                 get { return a => a.Title; }
             }
-
-            public override bool CanAddItem()
-            {
-                return true;
-            }
         }
 
         #endregion

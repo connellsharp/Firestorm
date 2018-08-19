@@ -69,11 +69,6 @@ namespace Firestorm.Tests.Functionality.Stems
 
             [Get, Set]
             public static Expression<Func<Album, DateTime>> ReleaseDate { get; } = a => a.ReleaseDate;
-
-            public override bool CanAddItem()
-            {
-                return true;
-            }
         }
 
         [Fact]

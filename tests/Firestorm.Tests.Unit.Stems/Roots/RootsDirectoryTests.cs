@@ -60,10 +60,6 @@ namespace Firestorm.Tests.Unit.Stems.Roots
 
     public class TestStem : Stem<Artist>
     {
-        public override bool CanAddItem()
-        {
-            return true;
-        }
     }
 
     public class TestRootRequest : IRootRequest

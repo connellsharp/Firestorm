@@ -40,11 +40,6 @@ namespace Firestorm.Tests.Functionality.Stems
             {
                 get { return a => a.Label; }
             }
-
-            public override bool CanAddItem()
-            {
-                return true; // yeah i don't like this...
-            }
         }
 
         [Fact]

@@ -56,11 +56,6 @@ namespace Firestorm.Tests.Functionality.Stems
             {
                 return _testDeletedValue.SoftDeleted;
             }
-
-            public override bool CanAddItem()
-            {
-                return true;
-            }
         }
 
         [Fact]

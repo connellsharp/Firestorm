@@ -58,10 +58,6 @@ namespace Firestorm.Tests.Unit.Stems.Roots
         [DataSourceRoot]
         public class TestStem : Stem<Artist>
         {
-            public override bool CanAddItem()
-            {
-                return true;
-            }
         }
     }
 }
