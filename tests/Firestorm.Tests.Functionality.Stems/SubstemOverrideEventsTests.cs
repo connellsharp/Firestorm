@@ -20,9 +20,11 @@ namespace Firestorm.Tests.Functionality.Stems
         public SubstemOverrideEventsTests()
         {
             _eventCounter = new EventCounter();
-            StemTestUtility.TestDependencyResolver.Add(_eventCounter);
+            var testContext = new StemTestContext();
+            
+            testContext.TestDependencyResolver.Add(_eventCounter);
 
-            _artistCollection = StemTestUtility.GetArtistsCollection<ArtistsStem>();
+            _artistCollection = testContext.GetArtistsCollection<ArtistsStem>();
         }
 
         private class EventCounter

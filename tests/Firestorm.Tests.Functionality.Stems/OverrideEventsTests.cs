@@ -17,9 +17,10 @@ namespace Firestorm.Tests.Functionality.Stems
         public OverrideEventsTests()
         {
             _eventChecker = new EventChecker();
-            StemTestUtility.TestDependencyResolver.Add(_eventChecker);
 
-            _restCollection = StemTestUtility.GetArtistsCollection<ArtistsStem>();
+            var testContext = new StemTestContext();
+            testContext.TestDependencyResolver.Add(_eventChecker);
+            _restCollection = testContext.GetArtistsCollection<ArtistsStem>();
         }
 
         private class EventChecker

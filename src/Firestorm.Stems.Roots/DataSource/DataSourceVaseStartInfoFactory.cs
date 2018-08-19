@@ -20,7 +20,7 @@ namespace Firestorm.Stems.Roots.DataSource
             _rootBehavior = rootBehavior;
         }
 
-        public IEnumerable<Type> GetStemTypes()
+        public IEnumerable<Type> GetStemTypes(IStemConfiguration configuration)
         {
             _stemTypeDictionary = new SuffixedNamedTypeDictionary("Stem");
 

@@ -10,10 +10,12 @@ using Firestorm.Tests.Unit.Engine.Models;
 
 namespace Firestorm.Tests.Functionality.Stems.Helpers
 {
-    internal static class StemTestUtility
+    internal class StemTestContext
     {
-        public static IRestDirectory GetDirectoryFromRoots(params Type[] rootTypes)
+        private IRestDirectory GetDirectoryFromRoots(params Type[] rootTypes)
         {
+            TestDependencyResolver.Add(TestRepository);
+            
             var stemStartResources = new StemsStartResourceFactory
             {
                 RootResourceFactory = new DerivedRootsResourceFactory {
@@ -31,9 +33,11 @@ namespace Firestorm.Tests.Functionality.Stems.Helpers
             return directory;
         }
 
-        public static TestDependencyResolver TestDependencyResolver { get; } = new TestDependencyResolver();
+        public TestDependencyResolver TestDependencyResolver { get; } = new TestDependencyResolver();
+        
+        public ArtistMemoryRepository TestRepository { get; } = new ArtistMemoryRepository();
 
-        public static IRestCollection GetArtistsCollection<TStem>()
+        public IRestCollection GetArtistsCollection<TStem>()
         {
             IRestDirectory directory = GetDirectoryFromRoots(typeof(ArtistsRoot<TStem>));
             var restCollection = (IRestCollection)directory.GetChild("Artists");
@@ -42,11 +46,16 @@ namespace Firestorm.Tests.Functionality.Stems.Helpers
 
         public class ArtistsRoot<TStem> : EngineRoot<Artist>
         {
+            public ArtistsRoot(ArtistMemoryRepository repository)
+            {
+                Repository = repository;
+            }
+            
             public override Type StartStemType { get; } = typeof(TStem);
 
             protected override IDataTransaction DataTransaction { get; } = new VoidTransaction();
 
-            protected override IEngineRepository<Artist> Repository { get; } = new ArtistMemoryRepository();
+            protected override IEngineRepository<Artist> Repository { get; }
         }
     }
 }

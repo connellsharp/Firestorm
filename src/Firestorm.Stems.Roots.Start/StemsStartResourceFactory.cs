@@ -24,7 +24,7 @@ namespace Firestorm.Stems.Roots
 
         public void Initialize()
         {
-            IEnumerable<Type> stemTypes = RootResourceFactory.GetStemTypes();
+            IEnumerable<Type> stemTypes = RootResourceFactory.GetStemTypes(StemConfiguration);
 
             var cacheBuilder = new AnalyzerCacheBuilder(StemConfiguration);
             cacheBuilder.AnalyzeAllStems(stemTypes);
@@ -39,7 +39,7 @@ namespace Firestorm.Stems.Roots
 
             var rootRequest = new EndpointRootRequest(endpointContext);
 
-            return RootResourceFactory.GetStartResource(rootRequest, StemConfiguration);
+            return RootResourceFactory.GetStartResource(StemConfiguration, rootRequest);
         }
     }
 }

@@ -20,9 +20,9 @@ namespace Firestorm.Tests.Unit.Stems.Roots
                 RootTypeGetter = new NestedTypeGetter(GetType())
             };
 
-            factory.GetStemTypes();
+            factory.GetStemTypes(stemConfig);
 
-            var startResource = factory.GetStartResource(new TestRootRequest(), stemConfig);
+            var startResource = factory.GetStartResource(stemConfig, new TestRootRequest());
 
             var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
             var info = await startDirectory.GetInfoAsync();

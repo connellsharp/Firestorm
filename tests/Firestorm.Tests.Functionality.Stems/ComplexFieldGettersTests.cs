@@ -15,7 +15,8 @@ namespace Firestorm.Tests.Functionality.Stems
 
         public ComplexFieldGettersTests()
         {
-            _restCollection = StemTestUtility.GetArtistsCollection<ArtistsStem>();
+            var testContext = new StemTestContext();
+            _restCollection = testContext.GetArtistsCollection<ArtistsStem>();
         }
 
         public class ArtistsStem : Stem<Artist>

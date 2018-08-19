@@ -19,9 +19,12 @@ namespace Firestorm.Fluent.Fuel.Models
             // TODO no updating event in fluent yet
         }
 
-        public void OnDeleting(T item)
+        public DeletingResult OnDeleting(T item)
         {
             OnDeletingAction?.Invoke(item);
+            
+            // TODO no soft delete in fluent yet
+            return DeletingResult.Continue;
         }
 
         public Task OnSavingAsync(T item)

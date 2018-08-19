@@ -14,7 +14,8 @@ namespace Firestorm.Tests.Functionality.Stems
 
         public StemCollectionTests()
         {
-            _restCollection = StemTestUtility.GetArtistsCollection<ArtistsStem>();
+            var testContext = new StemTestContext();
+            _restCollection = testContext.GetArtistsCollection<ArtistsStem>();
         }
 
         [Fact]
