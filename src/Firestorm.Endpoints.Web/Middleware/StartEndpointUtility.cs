@@ -1,33 +1,61 @@
 ﻿using Firestorm.Endpoints.Naming;
 using Firestorm.Endpoints.Start;
+using Firestorm.Host;
 using JetBrains.Annotations;
 
 namespace Firestorm.Endpoints.Web
 {
-    public static class StartEndpointUtility
+    public class EndpointNavigator
     {
-        public static IRestEndpoint GetEndpointFromPath(FirestormConfiguration configuration, IRestEndpointContext endpointContext, string resourcePath)
+        private readonly IRequestContext _requestContext;
+        private readonly IStartResourceFactory _startResourceFactory;
+        private readonly RestEndpointConfiguration _configuration;
+
+        public EndpointNavigator(IRequestContext requestContext, FirestormConfiguration configuration)
         {
-            INamingConventionSwitcher switcher = configuration.EndpointConfiguration.NamingConventionSwitcher ?? new VoidNamingConventionSwitcher();
-            return GetEndpointFromPath(configuration.StartResourceFactory, endpointContext, resourcePath, switcher);
+            _requestContext = requestContext;
+            _startResourceFactory = configuration.StartResourceFactory;
+            _configuration = configuration.EndpointConfiguration;
+
+        }
+        
+        public EndpointNavigator(IRequestContext requestContext, IStartResourceFactory startResourceFactory, RestEndpointConfiguration configuration)
+        {
+            _requestContext = requestContext;
+            _startResourceFactory = startResourceFactory;
+            _configuration = configuration;
         }
 
-        public static IRestEndpoint GetEndpointFromPath(IStartResourceFactory startResourceFactory, IRestEndpointContext endpointContext, string resourcePath)
+        public IRestEndpoint GetEndpointFromPath(string resourcePath)
         {
-            return GetEndpointFromPath(startResourceFactory, endpointContext, resourcePath, new VoidNamingConventionSwitcher());
-        }
+            IRestResource startResource = _startResourceFactory.GetStartResource(_requestContext);
 
-        public static IRestEndpoint GetEndpointFromPath(IStartResourceFactory startResourceFactory, IRestEndpointContext endpointContext, string resourcePath, [NotNull] INamingConventionSwitcher namingConventionSwitcher)
-        {
-            IRestResource startResource = startResourceFactory.GetStartResource(endpointContext);
-            IRestEndpoint startEndpoint = Endpoint.GetFromResource(endpointContext, startResource);
+            var context = new RestEndpointContext(_requestContext, _configuration);
+            IRestEndpoint startEndpoint = Endpoint.GetFromResource(context, startResource);
 
-            var nextAggregator = new EndpointNextAggregator(startEndpoint, namingConventionSwitcher);
+            var nextAggregator = new EndpointNextAggregator(startEndpoint, _configuration.NamingConventionSwitcher ?? new VoidNamingConventionSwitcher());
             IRestEndpoint endpoint = nextAggregator.AggregateNext(resourcePath);
 
             //var wrappedEndpoint = new NamingSwitcherEndpointWrapper(endpoint, namingConventionSwitcher);
 
             return endpoint;
         }
+    }
+
+    public class RestEndpointContext : IRestEndpointContext
+    {
+        public RestEndpointContext(IRequestContext endpointContext, RestEndpointConfiguration configuration)
+        {
+            Request = endpointContext;
+            Configuration = configuration;
+        }
+
+        public void Dispose()
+        {
+            Request.Dispose();
+        }
+
+        public RestEndpointConfiguration Configuration { get; }
+        public IRequestContext Request { get; }
     }
 }

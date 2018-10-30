@@ -5,11 +5,11 @@ using Firestorm.Endpoints.Web;
 
 namespace Firestorm.AspNetCore2.HttpContext
 {
-    internal class HttpContextHandler : IHttpRequestHandler
+    internal class HttpContextReader : IHttpRequestReader
     {
         private readonly Microsoft.AspNetCore.Http.HttpContext _httpContext;
 
-        public HttpContextHandler(Microsoft.AspNetCore.Http.HttpContext httpContext)
+        public HttpContextReader(Microsoft.AspNetCore.Http.HttpContext httpContext)
         {
             _httpContext = httpContext;
         }
@@ -17,11 +17,6 @@ namespace Firestorm.AspNetCore2.HttpContext
         public string RequestMethod => _httpContext.Request.Method;
 
         public string ResourcePath => _httpContext.Request.Path.Value;
-
-        public void SetStatusCode(HttpStatusCode statusCode)
-        {
-            _httpContext.Response.StatusCode = (int) statusCode;
-        }
 
         public IPreconditions GetPreconditions()
         {
@@ -37,23 +32,5 @@ namespace Firestorm.AspNetCore2.HttpContext
         {
             return _httpContext.Request.QueryString.Value;
         }
-
-        public void SetResponseHeader(string key, string value)
-        {
-            _httpContext.Response.Headers[key] = value;
-        }
-
-        public IContentAccepts GetAcceptHeaders()
-        {
-            return new HttpContentAccepts();
-        }
-
-        public IContentWriter GetContentWriter()
-        {
-            return new HttpContentWriter(_httpContext);
-        }
     }
-
-    internal class HttpContentAccepts : IContentAccepts
-    { }
 }

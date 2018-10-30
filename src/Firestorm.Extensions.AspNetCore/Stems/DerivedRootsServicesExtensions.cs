@@ -31,7 +31,7 @@ namespace Firestorm.Extensions.AspNetCore
         {
             builder.AddDerivedRoots();       
 
-            builder.Services.AddSingleton(new AxisTypesLocation<Root>(assembly, baseNamespace));
+            builder.Add(new AxisTypesLocation<Root>(assembly, baseNamespace));
             return builder;
         }
 
@@ -40,7 +40,7 @@ namespace Firestorm.Extensions.AspNetCore
         /// </summary>
         private static IFirestormServicesBuilder AddDerivedRoots(this IFirestormServicesBuilder builder)
         {
-            builder.Services.AddSingleton<IRootResourceFactory>(sp => new DerivedRootsResourceFactory
+            builder.Add<IRootResourceFactory>(sp => new DerivedRootsResourceFactory
             {
                 RootTypeGetter = sp.GetService<AxisTypesLocation<Root>>().GetTypeGetter()
             });

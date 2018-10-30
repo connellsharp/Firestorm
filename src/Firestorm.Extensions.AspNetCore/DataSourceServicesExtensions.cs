@@ -15,7 +15,7 @@ namespace Firestorm.Extensions.AspNetCore
             builder.AddDataSourceTypeFinder();
             builder.AddDataSourceRoots();
             
-            builder.Services.AddSingleton<IDataSource>(dataSource);
+            builder.Add<IDataSource>(dataSource);
             return builder;
         }
 
@@ -27,7 +27,7 @@ namespace Firestorm.Extensions.AspNetCore
             builder.AddDataSourceTypeFinder();
             builder.AddDataSourceRoots();
             
-            builder.Services.AddSingleton<IDataSource>(dataSourceFunc);
+            builder.Add<IDataSource>(dataSourceFunc);
             return builder;
         }
     }

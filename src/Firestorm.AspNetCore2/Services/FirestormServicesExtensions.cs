@@ -3,8 +3,6 @@ using Firestorm.Endpoints;
 using Firestorm.Endpoints.Start;
 using Firestorm.Endpoints.Web;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
 namespace Firestorm.AspNetCore2
 {
@@ -43,7 +41,7 @@ namespace Firestorm.AspNetCore2
         /// </summary>
         public static IFirestormServicesBuilder ConfigureEndpoints(this IFirestormServicesBuilder builder, RestEndpointConfiguration endpointConfiguration)
         {
-            builder.Services.AddSingleton(endpointConfiguration);
+            builder.Add(endpointConfiguration);
             return builder;
         }
 
@@ -53,7 +51,7 @@ namespace Firestorm.AspNetCore2
         public static IFirestormServicesBuilder ConfigureEndpoints(this IFirestormServicesBuilder builder, Action<RestEndpointConfiguration> configureEndpointsAction)
         {
             builder.Services.Configure<DefaultRestEndpointConfiguration>(configureEndpointsAction);
-            builder.Services.AddSingleton<RestEndpointConfiguration>(sp => sp.GetService<IOptions<DefaultRestEndpointConfiguration>>().Value);
+            builder.Add<RestEndpointConfiguration>(sp => sp.GetService<IOptions<DefaultRestEndpointConfiguration>>().Value);
             return builder;
         }
 
@@ -62,7 +60,7 @@ namespace Firestorm.AspNetCore2
         /// </summary>
         public static IFirestormServicesBuilder AddStartResourceFactory(this IFirestormServicesBuilder builder, IStartResourceFactory startResourceFactory)
         {
-            builder.Services.AddSingleton<IStartResourceFactory>(startResourceFactory);
+            builder.Add<IStartResourceFactory>(startResourceFactory);
             return builder;
         }
 
@@ -71,7 +69,7 @@ namespace Firestorm.AspNetCore2
         /// </summary>
         public static IFirestormServicesBuilder AddStartResourceFactory(this IFirestormServicesBuilder builder, Func<IServiceProvider,IStartResourceFactory> startResourceFactoryFunc)
         {
-            builder.Services.AddSingleton<IStartResourceFactory>(startResourceFactoryFunc);
+            builder.Add<IStartResourceFactory>(startResourceFactoryFunc);
             return builder;
         }
 
@@ -82,9 +80,9 @@ namespace Firestorm.AspNetCore2
         {
             builder.Services.AddOptions();
 
-            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Add<IHttpContextAccessor, HttpContextAccessor>();
 
-            builder.Services.AddSingleton<FirestormConfiguration>(sp => new FirestormConfiguration
+            builder.Add<FirestormConfiguration>(sp => new FirestormConfiguration
             {
                 EndpointConfiguration = sp.GetService<RestEndpointConfiguration>() ?? new DefaultRestEndpointConfiguration(),
                 StartResourceFactory = sp.GetService<IStartResourceFactory>()

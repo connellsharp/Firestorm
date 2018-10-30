@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Firestorm.Core\Firestorm.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Jetbrains.Annotations" Version="11.0.0" />
+  </ItemGroup>
+</Project>

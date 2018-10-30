@@ -1,35 +1,37 @@
 ﻿using System.Threading.Tasks;
 using Firestorm.AspNetCore2.HttpContext;
+using Firestorm.Endpoints.Start;
 using Firestorm.Endpoints.Web;
+using Firestorm.Host;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Firestorm.AspNetCore2
 {
     [UsedImplicitly]
     public class FirestormMiddleware
     {
-        private readonly FirestormConfiguration _configuration;
+        private readonly IRequestInvoker _invoker;
         private readonly RequestDelegate _next;
 
-        public FirestormMiddleware(RequestDelegate next, FirestormConfiguration configuration)
+        public FirestormMiddleware(RequestDelegate next, IRequestInvoker invoker)
         {
             _next = next;
-            _configuration = configuration;
+            _invoker = invoker;
 
             // middlewares are singletons constructed during WebHostBuilder.Build(), we can initialize here
-            _configuration.StartResourceFactory.Initialize();
+            invoker.Initialize();
         }
 
         [UsedImplicitly]
         public async Task Invoke(Microsoft.AspNetCore.Http.HttpContext httpContext)
         {
-            IHttpRequestHandler requestHandler = new HttpContextHandler(httpContext);
-            var middlewareHelper = new FirestormMiddlewareHelper(_configuration, requestHandler);
-            
-            var restContext = new HttpContextRestEndpointContext(httpContext, _configuration.EndpointConfiguration);
+            var reader = new HttpContextReader(httpContext);
+            var responder = new HttpContextResponder(httpContext);
+            var context = new HttpContextRequestContext(httpContext);
 
-            await middlewareHelper.InvokeAsync(restContext);
+            await _invoker.InvokeAsync(reader, responder, context);
 
             //await _next.Invoke(httpContext);
         }

@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
 
 namespace Firestorm.AspNetCore2
 {
@@ -7,6 +7,16 @@ namespace Firestorm.AspNetCore2
     /// </summary>
     public interface IFirestormServicesBuilder
     {
-        IServiceCollection Services { get; }
+        IFirestormServicesBuilder Add<TService>(Func<IServiceProvider, TService> implementationFactory) 
+            where TService : class;
+        
+        IFirestormServicesBuilder Add(Type serviceType);
+        
+        IFirestormServicesBuilder Add<TService>(TService implementationInstance)
+            where TService : class;
+
+        IFirestormServicesBuilder Add<TAbstraction, TImplementation>()
+            where TImplementation : class, TAbstraction
+            where TAbstraction : class;
     }
 }

@@ -14,7 +14,7 @@ namespace Firestorm.Extensions.AspNetCore
         /// </summary>
         internal static IFirestormServicesBuilder AddDataSourceRoots(this IFirestormServicesBuilder builder)
         {
-            builder.Services.AddSingleton<IRootResourceFactory>(sp => new DataSourceRootResourceFactory
+            builder.Add<IRootResourceFactory>(sp => new DataSourceRootResourceFactory
             {
                 DataSource = sp.GetService<IDataSource>(),
                 StemTypeGetter = sp.GetService<AxisTypesLocation<Stem>>().GetTypeGetter(),

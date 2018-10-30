@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Start;
+using Firestorm.Host;
 
 namespace Firestorm.Stems.Roots
 {
@@ -32,12 +33,12 @@ namespace Firestorm.Stems.Roots
             _initialized = true;
         }
 
-        public IRestResource GetStartResource(IRestEndpointContext endpointContext)
+        public IRestResource GetStartResource(IRequestContext hostContext)
         {
             if(!_initialized)
                 Initialize();
 
-            var rootRequest = new EndpointRootRequest(endpointContext);
+            var rootRequest = new EndpointRootRequest(hostContext);
 
             return RootResourceFactory.GetStartResource(StemConfiguration, rootRequest);
         }

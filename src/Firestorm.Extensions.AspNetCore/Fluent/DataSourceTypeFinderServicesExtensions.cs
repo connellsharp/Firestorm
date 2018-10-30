@@ -11,7 +11,7 @@ namespace Firestorm.Extensions.AspNetCore
         /// </summary>
         internal static IFirestormServicesBuilder AddDataSourceTypeFinder(this IFirestormServicesBuilder builder)
         {
-            builder.Services.AddSingleton<IItemTypeFinder, DataSourceTypeFinder>();
+            builder.Add<IItemTypeFinder, DataSourceTypeFinder>();
             return builder;
         }
     }

@@ -1,3 +1,5 @@
+using Firestorm.Host;
+
 namespace Firestorm.Endpoints.Start
 {
     /// <summary>
@@ -5,7 +7,7 @@ namespace Firestorm.Endpoints.Start
     /// </summary>
     public interface IStartResourceFactory
     {
-        IRestResource GetStartResource(IRestEndpointContext endpointContext);
+        IRestResource GetStartResource(IRequestContext requestContext);
 
         void Initialize();
     }

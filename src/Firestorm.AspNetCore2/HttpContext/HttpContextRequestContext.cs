@@ -1,20 +1,18 @@
 ﻿using System;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Web.Defaults;
+using Firestorm.Host;
 
 namespace Firestorm.AspNetCore2.HttpContext
 {
     using HttpContext = Microsoft.AspNetCore.Http.HttpContext;
 
-    internal class HttpContextRestEndpointContext : IRestEndpointContext
+    internal class HttpContextRequestContext : IRequestContext
     {
-        public HttpContextRestEndpointContext(HttpContext httpContext, RestEndpointConfiguration configuration)
+        public HttpContextRequestContext(HttpContext httpContext)
         {
-            Configuration = configuration;
             User = new PrincipalUser(httpContext.User);
         }
-
-        public RestEndpointConfiguration Configuration { get; }
 
         public IRestUser User { get; }
 

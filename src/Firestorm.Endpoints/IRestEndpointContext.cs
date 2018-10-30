@@ -1,4 +1,5 @@
 using System;
+using Firestorm.Host;
 using JetBrains.Annotations;
 
 namespace Firestorm.Endpoints
@@ -15,14 +16,8 @@ namespace Firestorm.Endpoints
         RestEndpointConfiguration Configuration { get; }
 
         /// <summary>
-        /// The logged in user calling the endpoint.
+        /// An object containing information about the request.
         /// </summary>
-        IRestUser User { get; }
-
-        /// <summary>
-        /// Event that is called when the endpoint is disposed.
-        /// Can/should be used to attach handlers that dispose of dependencies too e.g. Stems.
-        /// </summary>
-        event EventHandler OnDispose;
+        IRequestContext Request { get; }
     }
 }
