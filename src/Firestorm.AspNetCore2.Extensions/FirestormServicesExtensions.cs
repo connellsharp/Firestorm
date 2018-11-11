@@ -8,24 +8,16 @@ using Microsoft.Extensions.Options;
 
 namespace Firestorm.AspNetCore2
 {
+
     public static class FirestormServicesExtensions
     {
-        /// <summary>
-        /// Adds Firestorm services.
-        /// </summary>
-        public static IFirestormServicesBuilder AddFirestorm(this IServiceCollection services)
-        {
-            IFirestormServicesBuilder builder = new FirestormServicesBuilder(services);
-            builder.AddRequiredFirestormServices();
-            return builder;
-        }
-
         /// <summary>
         /// Adds Firestorm services and configures them using <see cref="IOptions{TOptions}"/> and the given action.
         /// </summary>
         public static IFirestormServicesBuilder AddFirestorm(this IServiceCollection services, RestEndpointConfiguration endpointConfiguration)
         {
             return services.AddFirestorm()
+                .AddRequiredFirestormServices()
                 .ConfigureEndpoints(endpointConfiguration);
         }
 
@@ -35,6 +27,7 @@ namespace Firestorm.AspNetCore2
         public static IFirestormServicesBuilder AddFirestorm(this IServiceCollection services, Action<RestEndpointConfiguration> configureEndpointsAction)
         {
             return services.AddFirestorm()
+                .AddRequiredFirestormServices()
                 .ConfigureEndpoints(configureEndpointsAction);
         }
 

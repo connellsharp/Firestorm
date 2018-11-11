@@ -5,6 +5,7 @@ using Firestorm.Host;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using ServiceProviderServiceExtensions = Firestorm.Host.ServiceProviderServiceExtensions;
 
 namespace Firestorm.AspNetCore2
 {
@@ -45,7 +46,11 @@ namespace Firestorm.AspNetCore2
             configuration.EnsureValid();
 
             app.UseFirestorm();
-            app.a
+                
+                ap
+                .AddStartResoureFactory(configuration.StartResourceFactory)
+                .AddEndpoints(configuration.EndpointConfiguration);
+            
             return app;
         }
 
@@ -63,13 +68,13 @@ namespace Firestorm.AspNetCore2
 
         private static TService GetScopedService<TService>(this IApplicationBuilder app)
         {
-            var scopeFactory = app.ApplicationServices.GetService<IServiceScopeFactory>();
+            var scopeFactory = ServiceProviderServiceExtensions.GetService<IServiceScopeFactory>(app.ApplicationServices);
 
             using (IServiceScope scope = scopeFactory.CreateScope())
             {
                 IServiceProvider services = scope.ServiceProvider;
 
-                return services.GetService<TService>();
+                return ServiceProviderServiceExtensions.GetService<TService>(services);
             }
         }
     }
