@@ -10,5 +10,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Firestorm.Core\Firestorm.Core.csproj" />
     <ProjectReference Include="..\Firestorm.Data\Firestorm.Data.csproj" />
+    <ProjectReference Include="..\Firestorm.Rest\Firestorm.Rest.csproj" />
   </ItemGroup>
 </Project>
