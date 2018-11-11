@@ -1,6 +1,7 @@
 ﻿using Firestorm.Owin;
 using Firestorm.Endpoints.Start;
 using Firestorm.Endpoints.Web;
+using Firestorm.Host;
 using Firestorm.Tests.Integration.Http.Base;
 using Firestorm.Tests.Integration.Http.NetFramework.Web;
 using JetBrains.Annotations;
@@ -16,9 +17,9 @@ namespace Firestorm.Tests.Integration.Http.NetFramework.Web
         [UsedImplicitly]
         public void Configuration(IAppBuilder app)
         {
-            app.UseFirestorm(new FirestormConfiguration
+            app.UseFirestorm(c =>
             {
-                StartResourceFactory = new IntegratedStartResourceFactory()
+                c.AddStartResourceFactory(new IntegratedStartResourceFactory());
             });
         }
     }

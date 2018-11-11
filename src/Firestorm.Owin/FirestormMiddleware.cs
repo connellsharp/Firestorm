@@ -1,7 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Firestorm.Endpoints.Responses;
-using Firestorm.Endpoints.Start;
-using Firestorm.Endpoints.Web;
 using Firestorm.Host;
 using JetBrains.Annotations;
 using Microsoft.Owin;
@@ -22,19 +19,12 @@ namespace Firestorm.Owin
         }
 
         public override async Task Invoke(IOwinContext owinContext)
-        {
-            IHttpRequestHandler requestHandler = new OwinContextHandler(owinContext);
-            
-            var reader = new HttpContextReader(httpContext);
-            var responder = new HttpContextResponder(httpContext);
-            var context = new HttpContextRequestContext(httpContext);
-            
-            var middlewareHelper = new FirestormMiddlewareHelper(_configuration, requestHandler);
+        {            
+            var reader = new OwinContextReader(owinContext);
+            var responder = new OwinContextResponder(owinContext);
+            var context = new OwinRequestContext(owinContext);
 
-            var restContext = new OwinRestEndpointContext(owinContext, _configuration.EndpointConfiguration);
-
-            await middlewareHelper.InvokeAsync(restContext);
-            _invoker.InvokeAsync(restContextm )
+            await _invoker.InvokeAsync(reader, responder, context);
 
             //await Next.Invoke(owinContext);
         }

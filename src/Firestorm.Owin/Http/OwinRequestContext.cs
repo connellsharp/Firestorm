@@ -1,18 +1,16 @@
 ﻿using System;
 using Firestorm.Endpoints;
+using Firestorm.Host;
 using Microsoft.Owin;
 
 namespace Firestorm.Owin
 {
-    public class OwinRestEndpointContext : IRestEndpointContext
+    public class OwinRequestContext : IRequestContext
     {
-        public OwinRestEndpointContext(IOwinContext owinContext, RestEndpointConfiguration configuration)
+        public OwinRequestContext(IOwinContext owinContext)
         {
-            Configuration = configuration;
             User = new PrincipalUser(owinContext.Request.User);
         }
-
-        public RestEndpointConfiguration Configuration { get; }
 
         public IRestUser User { get; }
 

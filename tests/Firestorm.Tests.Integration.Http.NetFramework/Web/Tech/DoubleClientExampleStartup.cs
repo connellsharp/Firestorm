@@ -1,4 +1,5 @@
-﻿using Firestorm.Owin;
+﻿using Firestorm.Endpoints;
+using Firestorm.Owin;
 using Firestorm.Endpoints.Start;
 using Firestorm.Endpoints.Web;
 using Firestorm.Tests.Integration.Http.NetFramework.Web;
@@ -15,16 +16,24 @@ namespace Firestorm.Tests.Integration.Http.NetFramework.Web
         [UsedImplicitly]
         public void Configuration(IAppBuilder app)
         {
-            app.UseFirestorm(new FirestormConfiguration
+            app.UseFirestorm(c =>
             {
-                EndpointConfiguration =
+                c.AddEndpoints(new RestEndpointConfiguration
                 {
                     ResponseConfiguration =
                     {
                         ShowDeveloperErrors = true
                     }
-                },
-                StartResourceFactory = new DoubleTestStartResourceFactory("http://localhost:" + Port)
+                });
+                
+                c.
+                new FirestormConfiguration
+                {
+                    EndpointConfiguration =
+                    {
+                    },
+                    StartResourceFactory = new DoubleTestStartResourceFactory("http://localhost:" + Port)
+                };
             });
         }
 

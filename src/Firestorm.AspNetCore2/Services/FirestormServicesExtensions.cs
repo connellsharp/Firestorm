@@ -10,7 +10,7 @@ namespace Firestorm.AspNetCore2
         /// </summary>
         public static IFirestormServicesBuilder AddFirestorm(this IServiceCollection services)
         {
-            IFirestormServicesBuilder builder = new FirestormServicesBuilder(services);
+            IFirestormServicesBuilder builder = new AspNetCoreServicesBuilder(services);
             return builder;
         }
     }

@@ -4,11 +4,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Firestorm.AspNetCore2
 {
-    internal class FirestormServicesBuilder : IFirestormServicesBuilder
+    internal class AspNetCoreServicesBuilder : IFirestormServicesBuilder
     {
         private readonly IServiceCollection _services;
 
-        public FirestormServicesBuilder(IServiceCollection services)
+        public AspNetCoreServicesBuilder(IServiceCollection services)
         {
             _services = services;
         }

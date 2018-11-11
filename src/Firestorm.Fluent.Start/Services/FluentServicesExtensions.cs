@@ -1,10 +1,8 @@
 ﻿using System;
 using Firestorm.Data;
-using Firestorm.AspNetCore2;
 using Firestorm.Fluent;
 using Firestorm.Fluent.Start;
 using Firestorm.Host;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Firestorm.Extensions.AspNetCore
 {
