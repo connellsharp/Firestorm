@@ -14,17 +14,25 @@ namespace Firestorm.Endpoints.Web
 
             if (configuration.EndpointConfiguration == null)
                 throw new FirestormConfigurationException("EndpointConfiguration cannot be null.");
+            
+            configuration.EndpointConfiguration.EnsureValid();
+        }
+        
+        public static void EnsureValid([NotNull] this RestEndpointConfiguration configuration)
+        {
+            if (configuration == null)
+                throw new FirestormConfigurationException("EndpointConfiguration cannot be null.");
 
-            if (configuration.EndpointConfiguration.QueryStringConfiguration == null)
+            if (configuration.QueryStringConfiguration == null)
                 throw new FirestormConfigurationException("EndpointConfiguration.QueryStringConfiguration cannot be null.");
 
-            if (configuration.EndpointConfiguration.RequestStrategies == null)
+            if (configuration.RequestStrategies == null)
                 throw new FirestormConfigurationException("EndpointConfiguration.RequestStrategies cannot be null.");
 
-            if (configuration.EndpointConfiguration.ResponseConfiguration == null)
+            if (configuration.ResponseConfiguration == null)
                 throw new FirestormConfigurationException("EndpointConfiguration.ResponseConfiguration cannot be null.");
 
-            if (configuration.EndpointConfiguration.ResponseConfiguration.PageConfiguration == null)
+            if (configuration.ResponseConfiguration.PageConfiguration == null)
                 throw new FirestormConfigurationException("EndpointConfiguration.PageConfiguration cannot be null.");
         }
     }

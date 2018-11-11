@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 
 namespace Firestorm.Endpoints.Web
 {
-    public class EndpointNavigator
+    internal class EndpointNavigator
     {
         private readonly IRequestContext _requestContext;
         private readonly IStartResourceFactory _startResourceFactory;
@@ -40,22 +40,5 @@ namespace Firestorm.Endpoints.Web
 
             return endpoint;
         }
-    }
-
-    public class RestEndpointContext : IRestEndpointContext
-    {
-        public RestEndpointContext(IRequestContext endpointContext, RestEndpointConfiguration configuration)
-        {
-            Request = endpointContext;
-            Configuration = configuration;
-        }
-
-        public void Dispose()
-        {
-            Request.Dispose();
-        }
-
-        public RestEndpointConfiguration Configuration { get; }
-        public IRequestContext Request { get; }
     }
 }

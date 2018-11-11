@@ -1,6 +1,6 @@
 ﻿using System;
 using Firestorm.EntityFrameworkCore2;
-using Firestorm.AspNetCore2;
+using Firestorm.Host;
 using Microsoft.EntityFrameworkCore;
 
 namespace Firestorm.Extensions.AspNetCore

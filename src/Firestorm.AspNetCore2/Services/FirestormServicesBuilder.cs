@@ -1,4 +1,5 @@
 ﻿using System;
+using Firestorm.Host;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Firestorm.AspNetCore2

@@ -1,8 +1,10 @@
 ﻿using System;
 using Firestorm.Endpoints;
-using Firestorm.Endpoints.Start;
 using Firestorm.Endpoints.Web;
+using Firestorm.Host;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Firestorm.AspNetCore2
 {
@@ -19,7 +21,7 @@ namespace Firestorm.AspNetCore2
         }
 
         /// <summary>
-        /// Adds Firestorm services and configures them using <see cref="IOptions{RestEndpointConfiguration}"/> and the given action.
+        /// Adds Firestorm services and configures them using <see cref="IOptions{TOptions}"/> and the given action.
         /// </summary>
         public static IFirestormServicesBuilder AddFirestorm(this IServiceCollection services, RestEndpointConfiguration endpointConfiguration)
         {
@@ -52,24 +54,6 @@ namespace Firestorm.AspNetCore2
         {
             builder.Services.Configure<DefaultRestEndpointConfiguration>(configureEndpointsAction);
             builder.Add<RestEndpointConfiguration>(sp => sp.GetService<IOptions<DefaultRestEndpointConfiguration>>().Value);
-            return builder;
-        }
-
-        /// <summary>
-        /// Configures the start resource for this Firestorm API.
-        /// </summary>
-        public static IFirestormServicesBuilder AddStartResourceFactory(this IFirestormServicesBuilder builder, IStartResourceFactory startResourceFactory)
-        {
-            builder.Add<IStartResourceFactory>(startResourceFactory);
-            return builder;
-        }
-
-        /// <summary>
-        /// Configures the start resource for this Firestorm API.
-        /// </summary>
-        public static IFirestormServicesBuilder AddStartResourceFactory(this IFirestormServicesBuilder builder, Func<IServiceProvider,IStartResourceFactory> startResourceFactoryFunc)
-        {
-            builder.Add<IStartResourceFactory>(startResourceFactoryFunc);
             return builder;
         }
 

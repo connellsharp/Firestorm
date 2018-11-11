@@ -1,6 +1,6 @@
 using System.Security.Principal;
 
-namespace Firestorm.Endpoints.Web.Defaults
+namespace Firestorm.Host
 {
     public class PrincipalUser : IRestUser
     {

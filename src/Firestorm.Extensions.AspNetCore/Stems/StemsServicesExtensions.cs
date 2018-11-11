@@ -2,6 +2,7 @@
 using Firestorm.Stems;
 using Firestorm.Stems.Roots;
 using Firestorm.AspNetCore2;
+using Firestorm.Host;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Firestorm.Extensions.AspNetCore

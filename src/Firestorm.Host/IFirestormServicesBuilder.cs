@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Firestorm.AspNetCore2
+namespace Firestorm.Host
 {
     /// <summary>
     /// An interface that can be extended to inject Firestorm services.

@@ -1,6 +1,4 @@
-using Firestorm.Host;
-
-namespace Firestorm.Endpoints.Start
+namespace Firestorm.Host
 {
     /// <summary>
     /// Factory interface defines how to get the starting resource (i.e. first directory) of a REST API.

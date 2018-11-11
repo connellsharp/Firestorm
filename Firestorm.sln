@@ -136,6 +136,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Engine.Fuel", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Host", "src\Firestorm.Host\Firestorm.Host.csproj", "{2CAAEBFC-C40E-463A-A6B7-55E00DA701AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.AspNetCore2.Extensions", "src\Firestorm.AspNetCore2.Extensions\Firestorm.AspNetCore2.Extensions.csproj", "{5F16D832-6F34-405E-91E9-AD593C2BE490}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -342,6 +344,10 @@ Global
 		{2CAAEBFC-C40E-463A-A6B7-55E00DA701AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CAAEBFC-C40E-463A-A6B7-55E00DA701AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CAAEBFC-C40E-463A-A6B7-55E00DA701AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F16D832-6F34-405E-91E9-AD593C2BE490}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F16D832-6F34-405E-91E9-AD593C2BE490}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F16D832-6F34-405E-91E9-AD593C2BE490}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F16D832-6F34-405E-91E9-AD593C2BE490}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -412,6 +418,7 @@ Global
 		{C3B0C396-765D-4689-8233-DF2F17C1419B} = {34A7625D-A639-4855-B49F-FA1EF91377A4}
 		{F5CCEB00-FC4E-432D-A0C2-3167A4E07F17} = {FA828466-0901-42FA-8BE9-FE3DA18E589D}
 		{2CAAEBFC-C40E-463A-A6B7-55E00DA701AA} = {08517E60-A9EA-4803-AB2D-5A15C6608C3E}
+		{5F16D832-6F34-405E-91E9-AD593C2BE490} = {17B2F597-9A74-4B24-83E1-07CD8FF9B9B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E07ED662-9390-431F-B4D6-BDA65FE4169A}
