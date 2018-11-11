@@ -35,7 +35,7 @@ namespace Firestorm.Extensions.AspNetCore
         {
             builder.AddDataSource(sp =>
             {
-                var requestProvider = new RequestServiceProvider(sp);
+                var requestProvider = sp.GetRequestServiceProvider();
                 var dbContextFactory = new EntitiesContextFactory<TDbContext>(requestProvider, options);
                 return new EFCoreDataSource<TDbContext>(dbContextFactory);
             });

@@ -21,7 +21,7 @@ namespace Firestorm.Extensions.AspNetCore
         /// <summary>
         /// Configures the data source for this Firestorm API.
         /// </summary>
-        public static IFirestormServicesBuilder AddDataSource(this IFirestormServicesBuilder builder, Func<IServiceProvider, IDataSource> dataSourceFunc)
+        public static IFirestormServicesBuilder AddDataSource(this IFirestormServicesBuilder builder, Func<IFirestormServiceProvider, IDataSource> dataSourceFunc)
         {
             //builder.AddDataSourceTypeFinder();
             //builder.AddDataSourceRoots();

@@ -7,7 +7,7 @@ namespace Firestorm.Host
     /// </summary>
     public interface IFirestormServicesBuilder
     {
-        IFirestormServicesBuilder Add<TService>(Func<IServiceProvider, TService> implementationFactory) 
+        IFirestormServicesBuilder Add<TService>(Func<IFirestormServiceProvider, TService> implementationFactory) 
             where TService : class;
         
         IFirestormServicesBuilder Add(Type serviceType);
@@ -18,5 +18,10 @@ namespace Firestorm.Host
         IFirestormServicesBuilder Add<TAbstraction, TImplementation>()
             where TImplementation : class, TAbstraction
             where TAbstraction : class;
+    }
+
+    public interface IFirestormServiceProvider : IServiceProvider
+    {
+        IServiceProvider GetRequestServiceProvider();
     }
 }

@@ -32,7 +32,7 @@ namespace Firestorm.Extensions.AspNetCore
             {
                 StemConfiguration = new DefaultStemConfiguration
                 {
-                    DependencyResolver = new DefaultDependencyResolver(new RequestServiceProvider(sp))
+                    DependencyResolver = new DefaultDependencyResolver(sp.GetRequestServiceProvider())
                 },
                 RootResourceFactory = sp.GetService<IRootResourceFactory>()
             });
