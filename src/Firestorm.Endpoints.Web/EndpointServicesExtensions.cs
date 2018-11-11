@@ -1,8 +1,6 @@
-﻿using System;
-using Firestorm.Endpoints.Web;
-using Firestorm.Host;
+﻿using Firestorm.Host;
 
-namespace Firestorm.Extensions.AspNetCore
+namespace Firestorm.Endpoints.Web
 {
     public static class EndpointServicesExtensions
     {

@@ -1,7 +1,6 @@
 ﻿using Firestorm.Data;
 using Firestorm.Host;
 using Firestorm.Stems;
-using Microsoft.Extensions.DependencyInjection;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.DataSource;
 

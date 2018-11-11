@@ -1,7 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-    </PropertyGroup>
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Firestorm.AspNetCore2\Firestorm.AspNetCore2.csproj" />
+    <ProjectReference Include="..\Firestorm.Endpoints.Web\Firestorm.Endpoints.Web.csproj" />
+    <ProjectReference Include="..\Firestorm.Endpoints\Firestorm.Endpoints.csproj" />
+  </ItemGroup>
 </Project>
