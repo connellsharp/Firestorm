@@ -14,7 +14,7 @@ namespace Firestorm.Tests.Functionality.Stems
         [Fact]
         public void DisposeEndpointContextDisposesStem()
         {
-            var endpointContext = new TestEndpointContext();
+            var endpointContext = new TestRequestContext();
             var stemStartResources = new StemsStartResourceFactory
             {
                 RootResourceFactory = new DerivedRootsResourceFactory

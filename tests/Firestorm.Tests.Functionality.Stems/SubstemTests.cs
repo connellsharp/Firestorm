@@ -10,7 +10,6 @@ using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.Roots.Derive;
 using Firestorm.Tests.Functionality.Stems.Helpers;
-using Firestorm.Tests.Functionality.Stems.Models;
 using Firestorm.Tests.Unit;
 using Firestorm.Tests.Unit.Endpoints.Stubs;
 using Firestorm.Tests.Unit.Engine.Implementation;
@@ -64,7 +63,7 @@ namespace Firestorm.Tests.Functionality.Stems
             public static Expression<Func<Album, string>> SecretName { get; } = a => "OMG you got the secret: " + a.Name;
 
             [Get]
-            [Authorize(Users = TestEndpointContext.TestUsername)]
+            [Authorize(Users = TestRequestContext.TestUsername)]
             public static Expression<Func<Album, string>> AllowedName { get; } = a => "You're allowed this one: " + a.Name;
 
             [Get, Set]

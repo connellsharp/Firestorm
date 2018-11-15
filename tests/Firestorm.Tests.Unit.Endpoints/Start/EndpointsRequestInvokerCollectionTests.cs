@@ -12,23 +12,21 @@ using Xunit;
 
 namespace Firestorm.Tests.Unit.Endpoints.Start
 {
-    public class FirestormMiddlewareHelperCollectionTests
+    public class EndpointsRequestInvokerCollectionTests
     {
         private readonly MockStartResource _startResource;
-        private readonly FirestormConfiguration _firestormConfiguration;
+        private EndpointsRequestInvoker _invoker;
 
-        public FirestormMiddlewareHelperCollectionTests()
+        public EndpointsRequestInvokerCollectionTests()
         {
             _startResource = new MockStartResource();
 
-            _firestormConfiguration = new FirestormConfiguration
-            {
-                StartResourceFactory = new SingletonStartResourceFactory(_startResource)
-            };
+            var startResourceFactory = new SingletonStartResourceFactory(_startResource);
+            _invoker = new EndpointsRequestInvoker(startResourceFactory, new DefaultRestEndpointConfiguration());
         }
 
         [Fact]
-        public async Task Middleware_Get_ReturnsCollectionBody()
+        public async Task Invoker_Get_ReturnsCollectionBody()
         {
             var handler = new MockHttpRequestHandler
             {
@@ -36,9 +34,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
                 ResourcePath = ""
             };
 
-            var helper = new FirestormMiddlewareHelper(_firestormConfiguration, handler);
-
-            await helper.InvokeAsync(new TestEndpointContext());
+            await _invoker.InvokeAsync(handler, handler, new TestRequestContext());
 
             Assert.Equal(HttpStatusCode.OK, handler.ResponseStatusCode);
             // TODO test the response is the collection
@@ -47,7 +43,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
         }
 
         [Fact]
-        public async Task Middleware_Post_AddsToList()
+        public async Task Invoker_Post_AddsToList()
         {
             var handler = new MockHttpRequestHandler
             {
@@ -55,19 +51,17 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
                 RequestContentReader = new MockJsonReader(@"{ value: ""New value"" }"),
                 ResourcePath = ""
             };
-
-            var helper = new FirestormMiddlewareHelper(_firestormConfiguration, handler);
-
+            
             int startCount = _startResource.List.Count;
-
-            await helper.InvokeAsync(new TestEndpointContext());
-
+            
+            await _invoker.InvokeAsync(handler, handler, new TestRequestContext());
+            
             Assert.Equal(startCount + 1, _startResource.List.Count);
             Assert.Equal(HttpStatusCode.Created, handler.ResponseStatusCode);
         }
 
         [Fact]
-        public async Task Middleware_Put_405()
+        public async Task Invoker_Put_405()
         {
             var handler = new MockHttpRequestHandler
             {
@@ -76,15 +70,13 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
                 ResourcePath = ""
             };
 
-            var helper = new FirestormMiddlewareHelper(_firestormConfiguration, handler);
-
-            await helper.InvokeAsync(new TestEndpointContext());
+            await _invoker.InvokeAsync(handler, handler, new TestRequestContext());
 
             Assert.Equal(HttpStatusCode.MethodNotAllowed, handler.ResponseStatusCode);
         }
 
         [Fact]
-        public async Task Middleware_Delete_405()
+        public async Task Invoker_Delete_405()
         {
             var handler = new MockHttpRequestHandler
             {
@@ -92,15 +84,13 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
                 ResourcePath = ""
             };
 
-            var helper = new FirestormMiddlewareHelper(_firestormConfiguration, handler);
-
-            await helper.InvokeAsync(new TestEndpointContext());
+            await _invoker.InvokeAsync(handler, handler, new TestRequestContext());
 
             Assert.Equal(HttpStatusCode.MethodNotAllowed, handler.ResponseStatusCode);
         }
 
         [Fact]
-        public async Task Middleware_PostSalarBody_400()
+        public async Task Invoker_PostSalarBody_400()
         {
             var handler = new MockHttpRequestHandler
             {
@@ -109,15 +99,13 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
                 ResourcePath = ""
             };
 
-            var helper = new FirestormMiddlewareHelper(_firestormConfiguration, handler);
-
-            await helper.InvokeAsync(new TestEndpointContext());
+            await _invoker.InvokeAsync(handler, handler, new TestRequestContext());
 
             Assert.Equal(HttpStatusCode.BadRequest, handler.ResponseStatusCode);
         }
 
         [Fact]
-        public async Task Middleware_Options_Dunno()
+        public async Task Invoker_Options_Dunno() // TODO
         {
             var handler = new MockHttpRequestHandler
             {
@@ -125,14 +113,12 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
                 ResourcePath = ""
             };
 
-            var helper = new FirestormMiddlewareHelper(_firestormConfiguration, handler);
 
-            await helper.InvokeAsync(new TestEndpointContext());
-
+            await _invoker.InvokeAsync(handler, handler, new TestRequestContext());
         }
 
         [Fact]
-        public async Task Middleware_InvalidMethod_405()
+        public async Task Invoker_InvalidMethod_405()
         {
             var handler = new MockHttpRequestHandler
             {
@@ -140,9 +126,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
                 ResourcePath = ""
             };
 
-            var helper = new FirestormMiddlewareHelper(_firestormConfiguration, handler);
-
-            await helper.InvokeAsync(new TestEndpointContext());
+            await _invoker.InvokeAsync(handler, handler, new TestRequestContext());
 
             Assert.Equal(HttpStatusCode.MethodNotAllowed, handler.ResponseStatusCode);
         }

@@ -65,7 +65,7 @@ namespace Firestorm.Tests.Unit.Stems.Roots
 
     public class TestRequestContext : IRequestContext
     {
-        public IRestUser User { get; }
+        public IRestUser User { get; set; }
 
         public event EventHandler OnDispose;
         

@@ -95,9 +95,9 @@ namespace Firestorm.Tests.Unit.Endpoints.Functionality
         public void DisposeHttpEndpointContextDisposesParent()
         {
             bool disposed = false;
-            IRestEndpointContext endpointContext = new TestEndpointContext(); // TODO: kinda just tests the test...
-            endpointContext.OnDispose += delegate { disposed = true; };
-            endpointContext.Dispose();
+            var requestContext = new TestRequestContext(); // TODO: kinda just tests the test...
+            requestContext.OnDispose += delegate { disposed = true; };
+            requestContext.Dispose();
             Assert.True(disposed);
         }
     }

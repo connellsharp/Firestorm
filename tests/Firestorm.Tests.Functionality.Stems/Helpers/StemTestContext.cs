@@ -29,7 +29,7 @@ namespace Firestorm.Tests.Functionality.Stems.Helpers
 
             stemStartResources.Initialize();
 
-            var directory = (IRestDirectory) stemStartResources.GetStartResource(new TestEndpointContext());
+            var directory = (IRestDirectory) stemStartResources.GetStartResource(new TestRequestContext());
             return directory;
         }
 

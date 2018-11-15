@@ -6,23 +6,21 @@ using Xunit;
 
 namespace Firestorm.Tests.Unit.Endpoints.Start
 {
-    public class FirestormMiddlewareHelperTests
+    public class EndpointsRequestInvokerTests
     {
         private readonly MockStartResource _startResource;
-        private readonly FirestormConfiguration _firestormConfiguration;
+        private readonly EndpointsRequestInvoker _invoker;
 
-        public FirestormMiddlewareHelperTests()
+        public EndpointsRequestInvokerTests()
         {
             _startResource = new MockStartResource();
 
-            _firestormConfiguration = new FirestormConfiguration
-            {
-                StartResourceFactory = new SingletonStartResourceFactory(_startResource)
-            };
+            var startResourceFactory = new SingletonStartResourceFactory(_startResource);
+            _invoker = new EndpointsRequestInvoker(startResourceFactory, new DefaultRestEndpointConfiguration());
         }
 
         [Fact]
-        public async Task Middleware_Get_ReturnsStartResourceBody()
+        public async Task Invoker_Get_ReturnsStartResourceBody()
         {
             var handler = new MockHttpRequestHandler
             {
@@ -30,9 +28,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
                 ResourcePath = ""
             };
 
-            var helper = new FirestormMiddlewareHelper(_firestormConfiguration, handler);
-
-            await helper.InvokeAsync(new TestEndpointContext());
+            await _invoker.InvokeAsync(handler, handler, new TestRequestContext());
 
             Assert.Equal(HttpStatusCode.OK, handler.ResponseStatusCode);
             // TODO too big-a-test. Maybe test invoker alone?
@@ -40,7 +36,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
         }
 
         [Fact]
-        public async Task Middleware_Put_EditsScalar()
+        public async Task Invoker_Put_EditsScalar()
         {
             var handler = new MockHttpRequestHandler
             {
@@ -49,15 +45,13 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
                 ResourcePath = ""
             };
 
-            var helper = new FirestormMiddlewareHelper(_firestormConfiguration, handler);
-            
-            await helper.InvokeAsync(new TestEndpointContext());
+            await _invoker.InvokeAsync(handler, handler, new TestRequestContext());
 
             Assert.Equal("New value", _startResource.ObjectValue);
         }
 
         [Fact]
-        public async Task Middleware_Delete_SetsToNull()
+        public async Task Invoker_Delete_SetsToNull()
         {
             var handler = new MockHttpRequestHandler
             {
@@ -65,15 +59,13 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
                 ResourcePath = ""
             };
 
-            var helper = new FirestormMiddlewareHelper(_firestormConfiguration, handler);
-
-            await helper.InvokeAsync(new TestEndpointContext());
+            await _invoker.InvokeAsync(handler, handler, new TestRequestContext());
 
             Assert.Equal(null, _startResource.ObjectValue);
         }
 
         [Fact]
-        public async Task Middleware_Options_Dunno()
+        public async Task Invoker_Options_Dunno() // TODO
         {
             var handler = new MockHttpRequestHandler
             {
@@ -81,14 +73,11 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
                 ResourcePath = ""
             };
 
-            var helper = new FirestormMiddlewareHelper(_firestormConfiguration, handler);
-
-            await helper.InvokeAsync(new TestEndpointContext());
-
+            await _invoker.InvokeAsync(handler, handler, new TestRequestContext());
         }
 
         [Fact]
-        public async Task Middleware_InvalidMethod_405()
+        public async Task Invoker_InvalidMethod_405()
         {
             var handler = new MockHttpRequestHandler
             {
@@ -96,9 +85,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
                 ResourcePath = ""
             };
 
-            var helper = new FirestormMiddlewareHelper(_firestormConfiguration, handler);
-
-            await helper.InvokeAsync(new TestEndpointContext());
+            await _invoker.InvokeAsync(handler, handler, new TestRequestContext());
 
             Assert.Equal(HttpStatusCode.MethodNotAllowed, handler.ResponseStatusCode);
         }
