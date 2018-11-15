@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Firestorm.Host
+namespace Firestorm
 {
     /// <summary>
     /// Extension methods for getting services from an <see cref="IServiceProvider" />.

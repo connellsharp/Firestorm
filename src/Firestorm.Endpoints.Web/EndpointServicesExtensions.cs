@@ -22,6 +22,7 @@ namespace Firestorm.Endpoints.Web
         public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder, RestEndpointConfiguration config)
         {
             builder.AddEndpoints();
+            
             builder.Add<RestEndpointConfiguration>(config);
             
             return builder;
@@ -32,10 +33,23 @@ namespace Firestorm.Endpoints.Web
         /// </summary>
         public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder, Action<RestEndpointConfiguration> configureAction)
         {   
+            builder.AddEndpoints();
+            
             var config = new DefaultRestEndpointConfiguration();
             configureAction(config);
+            builder.Add<RestEndpointConfiguration>(config);
+            
+            return builder;
+        }
 
-            builder.AddEndpoints(config);
+        /// <summary>
+        /// Configures Firestorm endpoints.
+        /// </summary>
+        public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder, Func<IServiceProvider, RestEndpointConfiguration> factoryFunction)
+        {
+            builder.AddEndpoints();
+            
+            builder.Add<RestEndpointConfiguration>(factoryFunction);
             
             return builder;
         }
