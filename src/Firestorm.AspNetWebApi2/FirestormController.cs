@@ -13,6 +13,7 @@ using Firestorm.Endpoints;
 using Firestorm.Endpoints.Formatting.Naming;
 using Firestorm.Endpoints.Query;
 using Firestorm.Endpoints.Web;
+using Firestorm.Host;
 
 namespace Firestorm.AspNetWebApi2
 {
@@ -162,12 +163,13 @@ namespace Firestorm.AspNetWebApi2
             get { return (string) ControllerContext.RouteData.Values["path"]; }
         }
 
-        private IEndpointContext _context;
+        private IRequestContext _context;
 
         private IRestEndpoint GetEndpoint()
         {
-            _context = new HttpRequestEndpointContext(RequestContext, _config.EndpointConfiguration);
-            return StartEndpointUtility.GetEndpointFromPath(_config, _context, ResourcePath);
+            _context = new WebApiRequestContext(RequestContext);
+            var navigator = new EndpointNavigator(_context, _config.StartResourceFactory, _config.EndpointConfiguration);
+            return navigator.GetEndpointFromPath(ResourcePath);
         }
 
         protected override void Dispose(bool disposing)

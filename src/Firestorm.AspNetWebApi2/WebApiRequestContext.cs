@@ -1,19 +1,15 @@
 using System;
 using System.Web.Http.Controllers;
-using Firestorm.Endpoints;
 using Firestorm.Host;
 
 namespace Firestorm.AspNetWebApi2
 {
-    public class HttpRequestEndpointContext : IEndpointContext
+    public class WebApiRequestContext : IRequestContext
     {
-        public HttpRequestEndpointContext(HttpRequestContext requestContext, RestEndpointConfiguration configuration)
+        public WebApiRequestContext(HttpRequestContext requestContext)
         {
             User = new PrincipalUser(requestContext.Principal);
-            Configuration = configuration;
         }
-
-        public RestEndpointConfiguration Configuration { get; }
 
         public IRestUser User { get; }
 

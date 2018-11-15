@@ -5,19 +5,11 @@ using JetBrains.Annotations;
 
 namespace Firestorm.Endpoints.Web
 {
-    internal class EndpointNavigator
+    public class EndpointNavigator
     {
         private readonly IRequestContext _requestContext;
         private readonly IStartResourceFactory _startResourceFactory;
         private readonly RestEndpointConfiguration _configuration;
-
-        public EndpointNavigator(IRequestContext requestContext, FirestormConfiguration configuration)
-        {
-            _requestContext = requestContext;
-            _startResourceFactory = configuration.StartResourceFactory;
-            _configuration = configuration.EndpointConfiguration;
-
-        }
         
         public EndpointNavigator(IRequestContext requestContext, IStartResourceFactory startResourceFactory, RestEndpointConfiguration configuration)
         {
