@@ -1,10 +1,10 @@
 ﻿using System;
 using Firestorm.Data;
-using Firestorm.Fluent;
+using Firestorm.Extensions.AspNetCore;
 using Firestorm.Fluent.Start;
 using Firestorm.Host;
 
-namespace Firestorm.Extensions.AspNetCore
+namespace Firestorm.Fluent
 {
     public static class FluentServicesExtensions
     {

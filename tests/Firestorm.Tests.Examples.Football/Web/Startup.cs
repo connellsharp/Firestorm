@@ -3,6 +3,7 @@ using Firestorm.AspNetCore2;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Web;
 using Firestorm.Extensions.AspNetCore;
+using Firestorm.Fluent;
 using Firestorm.Tests.Examples.Football.Data;
 using Firestorm.Tests.Examples.Football.Tests;
 using JetBrains.Annotations;
@@ -33,6 +34,18 @@ namespace Firestorm.Tests.Examples.Football.Web
                 });
 
             var fsBuilder = services.AddFirestorm()
+                .AddEndpoints(new DefaultRestEndpointConfiguration
+                {
+                    ResponseConfiguration =
+                    {
+                        StatusField = ResponseStatusField.StatusCode,
+                        PageConfiguration =
+                        {
+                            UseLinkHeaders = true
+                        },
+                        ShowDeveloperErrors = true
+                    }
+                })
                 .AddEntityFramework<FootballDbContext>();
 
             switch (_tech)
@@ -61,18 +74,7 @@ namespace Firestorm.Tests.Examples.Football.Web
 
             app.UseMiddleware<CriticalJsonErrorMiddleware>();
 
-            app.UseFirestorm(new DefaultRestEndpointConfiguration
-            {
-                ResponseConfiguration =
-                {
-                    StatusField = ResponseStatusField.StatusCode,
-                    PageConfiguration =
-                    {
-                        UseLinkHeaders = true
-                    },
-                    ShowDeveloperErrors = true
-                }
-            });
+            app.UseFirestorm();
         }
     }
 }
