@@ -8,7 +8,7 @@ namespace Firestorm.Endpoints
     /// </summary>
     public static class Endpoint
     {
-        public static IRestEndpoint GetFromResource(IRestEndpointContext endpointContext, [NotNull] IRestResource resource)
+        public static IRestEndpoint GetFromResource(IEndpointContext endpointContext, [NotNull] IRestResource resource)
         {
             if (resource == null)
                 throw new ArgumentNullException(nameof(resource));

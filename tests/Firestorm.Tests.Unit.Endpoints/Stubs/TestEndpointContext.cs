@@ -5,7 +5,7 @@ using Firestorm.Host;
 
 namespace Firestorm.Tests.Unit.Endpoints.Stubs
 {
-    public class TestEndpointContext : IRestEndpointContext
+    public class TestEndpointContext : IEndpointContext
     {
         public IRequestContext Request => new TestRequestContext();
 

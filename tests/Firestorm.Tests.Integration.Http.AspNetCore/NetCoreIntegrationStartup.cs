@@ -73,7 +73,7 @@ namespace Firestorm.Tests.Integration.Http.AspNetCore
         {
             app.UseFirestorm(config =>
                 {
-                    config.ResponseConfiguration.ShowDeveloperErrors = true;
+                    config.EndpointConfiguration.ResponseConfiguration.ShowDeveloperErrors = true;
                     //
                 });
         }

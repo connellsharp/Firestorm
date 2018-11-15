@@ -2,9 +2,9 @@
 
 namespace Firestorm.Endpoints.Web
 {
-    internal class RestEndpointContext : IRestEndpointContext
+    internal class EndpointContext : IEndpointContext
     {
-        public RestEndpointContext(IRequestContext endpointContext, RestEndpointConfiguration configuration)
+        public EndpointContext(IRequestContext endpointContext, RestEndpointConfiguration configuration)
         {
             Request = endpointContext;
             Configuration = configuration;

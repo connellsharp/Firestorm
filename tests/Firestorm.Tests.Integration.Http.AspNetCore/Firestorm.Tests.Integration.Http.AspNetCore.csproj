@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Firestorm.AspNetCore2.Extensions\Firestorm.AspNetCore2.Extensions.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.AspNetCore2\Firestorm.AspNetCore2.csproj" />
     <ProjectReference Include="..\Firestorm.Tests.Integration.Http.Base\Firestorm.Tests.Integration.Http.Base.csproj" />
   </ItemGroup>

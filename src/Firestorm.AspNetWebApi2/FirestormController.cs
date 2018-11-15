@@ -162,11 +162,11 @@ namespace Firestorm.AspNetWebApi2
             get { return (string) ControllerContext.RouteData.Values["path"]; }
         }
 
-        private IRestEndpointContext _context;
+        private IEndpointContext _context;
 
         private IRestEndpoint GetEndpoint()
         {
-            _context = new HttpRequestRestEndpointContext(RequestContext, _config.EndpointConfiguration);
+            _context = new HttpRequestEndpointContext(RequestContext, _config.EndpointConfiguration);
             return StartEndpointUtility.GetEndpointFromPath(_config, _context, ResourcePath);
         }
 

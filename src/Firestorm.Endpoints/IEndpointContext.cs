@@ -6,7 +6,7 @@ namespace Firestorm.Endpoints
     /// <summary>
     /// The context for the request to an <see cref="IRestEndpoint"/>.
     /// </summary>
-    public interface IRestEndpointContext
+    public interface IEndpointContext
     {
         /// <summary>
         /// The global configuration for all endpoints in this API.

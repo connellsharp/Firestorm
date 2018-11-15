@@ -20,7 +20,7 @@ namespace Firestorm.Tests.Integration.Http.NetFramework
         [Fact]
         public async Task FieldSelector_ManualNext_CorrectName()
         {
-            IRestEndpointContext endpointContext = new TestEndpointContext();
+            IEndpointContext endpointContext = new TestEndpointContext();
 
             var testQuery = new TestCollectionQuery
             {
@@ -38,7 +38,7 @@ namespace Firestorm.Tests.Integration.Http.NetFramework
         [Fact]
         public async Task FieldSelector_Collection_DoesntThrow()
         {
-            IRestEndpointContext endpointContext = new TestEndpointContext();
+            IEndpointContext endpointContext = new TestEndpointContext();
 
             var testQuery = new TestCollectionQuery
             {

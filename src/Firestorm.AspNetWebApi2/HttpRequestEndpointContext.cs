@@ -5,9 +5,9 @@ using Firestorm.Host;
 
 namespace Firestorm.AspNetWebApi2
 {
-    public class HttpRequestRestEndpointContext : IRestEndpointContext
+    public class HttpRequestEndpointContext : IEndpointContext
     {
-        public HttpRequestRestEndpointContext(HttpRequestContext requestContext, RestEndpointConfiguration configuration)
+        public HttpRequestEndpointContext(HttpRequestContext requestContext, RestEndpointConfiguration configuration)
         {
             User = new PrincipalUser(requestContext.Principal);
             Configuration = configuration;

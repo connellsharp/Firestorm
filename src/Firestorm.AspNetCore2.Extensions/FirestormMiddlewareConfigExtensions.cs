@@ -45,9 +45,7 @@ namespace Firestorm.AspNetCore2
         {
             configuration.EnsureValid();
 
-            app.UseFirestorm();
-                
-                ap
+            app.UseFirestorm()
                 .AddStartResoureFactory(configuration.StartResourceFactory)
                 .AddEndpoints(configuration.EndpointConfiguration);
             

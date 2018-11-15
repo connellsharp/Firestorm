@@ -8,13 +8,13 @@ namespace Firestorm.Endpoints
 {
     internal class RestItemEndpoint : IRestEndpoint
     {
-        internal RestItemEndpoint(IRestEndpointContext endpointContext, IRestItem item)
+        internal RestItemEndpoint(IEndpointContext endpointContext, IRestItem item)
         {
             Context = endpointContext;
             Item = item;
         }
 
-        IRestEndpointContext Context { get; }
+        IEndpointContext Context { get; }
 
         IRestItem Item { get; }
 

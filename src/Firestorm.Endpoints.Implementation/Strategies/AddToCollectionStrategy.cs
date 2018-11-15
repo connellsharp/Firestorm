@@ -7,7 +7,7 @@ namespace Firestorm.Endpoints.Strategies
 {
     internal class AddToCollectionStrategy : IUnsafeRequestStrategy<IRestCollection>
     {
-        public async Task<Feedback>  ExecuteAsync(IRestCollection collection, IRestEndpointContext context, ResourceBody body)
+        public async Task<Feedback>  ExecuteAsync(IRestCollection collection, IEndpointContext context, ResourceBody body)
         {
             var collectionBody = body as CollectionBody;
             if (collectionBody != null)

@@ -12,13 +12,13 @@ namespace Firestorm.Endpoints
     /// </summary>
     internal class RestDictionaryEndpoint : IRestEndpoint
     {
-        internal RestDictionaryEndpoint(IRestEndpointContext endpointContext, IRestDictionary dictionary)
+        internal RestDictionaryEndpoint(IEndpointContext endpointContext, IRestDictionary dictionary)
         {
             Context = endpointContext;
             Dictionary = dictionary;
         }
 
-        public IRestEndpointContext Context { get; }
+        public IEndpointContext Context { get; }
 
         public IRestDictionary Dictionary { get; }
 

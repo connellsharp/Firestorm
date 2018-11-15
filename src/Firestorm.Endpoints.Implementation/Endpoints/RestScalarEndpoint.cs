@@ -10,13 +10,13 @@ namespace Firestorm.Endpoints
 {
     internal class RestScalarEndpoint : IRestEndpoint
     {
-        internal RestScalarEndpoint(IRestEndpointContext endpointContext, IRestScalar scalar)
+        internal RestScalarEndpoint(IEndpointContext endpointContext, IRestScalar scalar)
         {
             Context = endpointContext;
             Scalar = scalar;
         }
 
-        public IRestEndpointContext Context { get; }
+        public IEndpointContext Context { get; }
 
         public IRestScalar Scalar { get; }
 

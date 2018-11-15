@@ -5,7 +5,7 @@ using Firestorm.Host;
 
 namespace Firestorm.Tests.Integration.Http.NetFramework
 {
-    public class TestEndpointContext : IRestEndpointContext
+    public class TestEndpointContext : IEndpointContext
     {
         public RestEndpointConfiguration Configuration { get; } = new DefaultRestEndpointConfiguration();
         

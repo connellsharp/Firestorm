@@ -9,7 +9,7 @@ namespace Firestorm.Endpoints.Strategies
     /// </summary>
     internal class SetScalarToNullStrategy : IUnsafeRequestStrategy<IRestScalar>
     {
-        public async Task<Feedback> ExecuteAsync(IRestScalar scalar, IRestEndpointContext context, ResourceBody body)
+        public async Task<Feedback> ExecuteAsync(IRestScalar scalar, IEndpointContext context, ResourceBody body)
         {
             Acknowledgment acknowledgment = await scalar.EditAsync(null);
             return new AcknowledgmentFeedback(acknowledgment);

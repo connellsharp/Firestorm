@@ -7,13 +7,13 @@ namespace Firestorm.Endpoints
 {
     internal class RestDirectoryEndpoint : IRestEndpoint
     {
-        internal RestDirectoryEndpoint(IRestEndpointContext endpointContext, IRestDirectory directory)
+        internal RestDirectoryEndpoint(IEndpointContext endpointContext, IRestDirectory directory)
         {
             Context = endpointContext;
             Directory = directory;
         }
 
-        private IRestEndpointContext Context { get; }
+        private IEndpointContext Context { get; }
 
         private IRestDirectory Directory { get; }
 
