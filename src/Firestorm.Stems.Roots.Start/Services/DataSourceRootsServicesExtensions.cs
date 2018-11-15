@@ -1,11 +1,12 @@
-﻿using Firestorm.Data;
-using Firestorm.Host;
-using Firestorm.Stems;
+﻿using System;
+using Firestorm.Data;
+using Firestorm.Extensions.AspNetCore;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.DataSource;
 
-namespace Firestorm.Extensions.AspNetCore
+namespace Firestorm.Stems
 {
+    [Obsolete("Automatically detected in AddStems now")]
     internal static class DataSourceRootsServicesExtensions
     {
         /// <summary>

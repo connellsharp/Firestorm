@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Net.Http;
 using Firestorm.Endpoints;
-using Firestorm.Endpoints.Naming;
-using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Web;
 using Firestorm.EntityFramework6;
 using Firestorm.Extensions.AspNetCore;
-using Firestorm.Host;
 using Firestorm.Owin;
+using Firestorm.Stems;
 using Firestorm.Stems.Roots;
-using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Tests.Examples.Music.Data;
 using Firestorm.Tests.Integration.Http.Base;
 using Microsoft.Owin.Hosting;
@@ -36,15 +33,12 @@ namespace Firestorm.Tests.Examples.Music.Web
             WebApplication = WebApp.Start(_url, delegate(IAppBuilder app)
             {
                 app.Use<SpoofUserMiddleware>();
-                
+
                 app.UseFirestorm(c => c
                     .AddEndpoints(_config)
                     .AddStems()
-                    .Add<IRootResourceFactory>(new DataSourceRootResourceFactory
-                    {
-                        StemTypeGetter = new NestedTypeGetter(_testClassType),
-                        DataSource = new EntitiesDataSource<ExampleDataContext>(),
-                    })
+                    .Add<ITypeGetter>(new NestedTypeGetter(_testClassType))
+                    .AddDataSource(new EntitiesDataSource<ExampleDataContext>())
                 );
             });
 

@@ -1,10 +1,11 @@
-﻿using System.Reflection;
-using Firestorm.Stems.Roots;
-using Firestorm.Host;
+﻿using System;
+using System.Reflection;
+using Firestorm.Extensions.AspNetCore;
 using Firestorm.Stems.Roots.Derive;
 
-namespace Firestorm.Extensions.AspNetCore
+namespace Firestorm.Stems.Roots
 {
+    [Obsolete("Automatically detected in AddStems now")]
     public static class DerivedRootsServicesExtensions
     {
         /// <summary>

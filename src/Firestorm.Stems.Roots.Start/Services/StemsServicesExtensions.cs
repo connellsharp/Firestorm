@@ -1,10 +1,12 @@
 ﻿using System.Reflection;
-using Firestorm.Stems;
-using Firestorm.Stems.Roots;
+using Firestorm.Data;
+using Firestorm.Extensions.AspNetCore;
 using Firestorm.Host;
+using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.DataSource;
+using Firestorm.Stems.Roots.Derive;
 
-namespace Firestorm.Extensions.AspNetCore
+namespace Firestorm.Stems
 {
     public static class StemsServicesExtensions
     {
@@ -35,12 +37,34 @@ namespace Firestorm.Extensions.AspNetCore
                 {
                     DependencyResolver = new DefaultDependencyResolver(sp.GetRequestServiceProvider())
                 },
-                RootResourceFactory = sp.GetService<IRootResourceFactory>()
+                RootResourceFactory = CreateRootResourceFactory(sp)
             });
 
             builder.Add(new AxisTypesLocation<Stem>(assembly, baseNamespace));
 
             return builder;
+        }
+
+        private static IRootResourceFactory CreateRootResourceFactory(IFirestormServiceProvider sp)
+        {
+            var dataSource = sp.GetService<IDataSource>();
+            if (dataSource != null)
+            {
+                return new DataSourceRootResourceFactory
+                {
+                    StemTypeGetter = sp.GetService<ITypeGetter>()
+                                  ?? sp.GetService<AxisTypesLocation<Stem>>().GetTypeGetter(),
+                    DataSource = dataSource,
+                    RootBehavior = DataSourceRootAttributeBehavior.UseAllStemsExceptDisallowed // TODO support option
+                };
+            }
+            else
+            {
+                return new DerivedRootsResourceFactory
+                {
+                    RootTypeGetter = sp.GetService<AxisTypesLocation<Root>>().GetTypeGetter()
+                };
+            }
         }
     }
 }
