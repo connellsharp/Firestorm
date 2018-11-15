@@ -18,18 +18,7 @@ namespace Firestorm.Tests.Examples.Music.Web
         {
             return new FirestormConfiguration
             {
-                EndpointConfiguration = new DefaultRestEndpointConfiguration
-                {
-                    ResponseConfiguration = new ResponseConfiguration
-                    {
-                        StatusField = ResponseStatusField.StatusCode,
-                        ShowDeveloperErrors = true
-                    },
-                    NamingConventionSwitcher = new DefaultNamingConventionSwitcher(new NamingConventionOptions
-                    {
-                        TwoLetterAcronyms = new[] { "ID" }
-                    }),
-                },
+                EndpointConfiguration = EndpointConfiguration,
                 StartResourceFactory = new StemsStartResourceFactory
                 {
                     RootResourceFactory = new DataSourceRootResourceFactory
@@ -43,6 +32,25 @@ namespace Firestorm.Tests.Examples.Music.Web
                     }
                 }
             };
+        }
+
+        public static DefaultRestEndpointConfiguration EndpointConfiguration
+        {
+            get
+            {
+                return new DefaultRestEndpointConfiguration
+                {
+                    ResponseConfiguration = new ResponseConfiguration
+                    {
+                        StatusField = ResponseStatusField.StatusCode,
+                        ShowDeveloperErrors = true
+                    },
+                    NamingConventionSwitcher = new DefaultNamingConventionSwitcher(new NamingConventionOptions
+                    {
+                        TwoLetterAcronyms = new[] { "ID" }
+                    }),
+                };
+            }
         }
     }
 }

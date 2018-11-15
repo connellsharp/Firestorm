@@ -2,6 +2,7 @@
 using Firestorm.Stems;
 using Firestorm.Stems.Roots;
 using Firestorm.Host;
+using Firestorm.Stems.Roots.DataSource;
 
 namespace Firestorm.Extensions.AspNetCore
 {

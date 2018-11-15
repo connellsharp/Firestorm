@@ -18,6 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Firestorm.Endpoints.Formatting\Firestorm.Endpoints.Formatting.csproj" />
+    <ProjectReference Include="..\..\src\Firestorm.Endpoints.Web\Firestorm.Endpoints.Web.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.EntityFramework6\Firestorm.EntityFramework6.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Owin\Firestorm.Owin.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Stems.Attributes.Basic\Firestorm.Stems.Attributes.Basic.csproj" />
