@@ -71,8 +71,7 @@ namespace Firestorm.Tests.Integration.Http.AspNetCore
         [UsedImplicitly]
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseFirestorm()
-                .AddEndpoints(config =>
+            app.UseFirestorm(config =>
                 {
                     config.ResponseConfiguration.ShowDeveloperErrors = true;
                     //
