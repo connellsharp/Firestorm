@@ -2,6 +2,7 @@
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Start;
 using Firestorm.Endpoints.Web;
+using Firestorm.Host;
 using Firestorm.Tests.Integration.Http.Base;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
@@ -40,7 +41,8 @@ namespace Firestorm.Tests.Integration.Http.AspNetCore
         [UsedImplicitly]
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddFirestorm(config =>
+            services.AddFirestorm()
+                .AddEndpoints(config =>
                 {
                     config.ResponseConfiguration.ShowDeveloperErrors = true;
                     //
@@ -69,11 +71,12 @@ namespace Firestorm.Tests.Integration.Http.AspNetCore
         [UsedImplicitly]
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseFirestorm(config =>
-            {
-                config.EndpointConfiguration.ResponseConfiguration.ShowDeveloperErrors = true;
-                //
-            });
+            app.UseFirestorm()
+                .AddEndpoints(config =>
+                {
+                    config.ResponseConfiguration.ShowDeveloperErrors = true;
+                    //
+                });
         }
     }
 }

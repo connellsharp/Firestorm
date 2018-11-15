@@ -1,5 +1,4 @@
-using Firestorm.Endpoints;
-using Firestorm.Endpoints.Start;
+using Firestorm.Host;
 
 namespace Firestorm.Tests.Unit.Endpoints.Stubs
 {
@@ -12,7 +11,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Stubs
             _singletonResource = singletonResource;
         }
 
-        public IRestResource GetStartResource(IRestEndpointContext endpointContext)
+        public IRestResource GetStartResource(IRequestContext endpointContext)
         {
             return _singletonResource;
         }

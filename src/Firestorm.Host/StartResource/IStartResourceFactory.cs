@@ -5,8 +5,8 @@ namespace Firestorm.Host
     /// </summary>
     public interface IStartResourceFactory
     {
-        IRestResource GetStartResource(IRequestContext requestContext);
-
         void Initialize();
+        
+        IRestResource GetStartResource(IRequestContext requestContext);
     }
 }

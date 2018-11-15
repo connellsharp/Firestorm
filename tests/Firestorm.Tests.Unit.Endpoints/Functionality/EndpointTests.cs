@@ -4,6 +4,7 @@ using Firestorm.Core.Web;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Start;
 using Firestorm.Endpoints.Web;
+using Firestorm.Host;
 using Firestorm.Tests.Unit.Endpoints.Stubs;
 using Xunit;
 
@@ -27,8 +28,9 @@ namespace Firestorm.Tests.Unit.Endpoints.Functionality
         [Fact]
         public async Task ListArtists()
         {
-
-            IRestEndpoint endpoint = StartEndpointUtility.GetEndpointFromPath(StartResourceFactory, EndpointContext, "artists");
+            var navigator = new EndpointNavigator(EndpointContext.Request, StartResourceFactory, EndpointContext.Configuration);
+            IRestEndpoint endpoint = navigator.GetEndpointFromPath("artists");
+            
             var response = (CollectionBody)(await endpoint.GetAsync(null));
 
             RestItemData[] arr = response.Items.ToArray();
@@ -39,7 +41,9 @@ namespace Firestorm.Tests.Unit.Endpoints.Functionality
         [Fact]
         public async Task ItemEndpoint()
         {
-            IRestEndpoint endpoint = StartEndpointUtility.GetEndpointFromPath(StartResourceFactory, EndpointContext, "artists/123");
+            var navigator = new EndpointNavigator(EndpointContext.Request, StartResourceFactory, EndpointContext.Configuration);
+            IRestEndpoint endpoint = navigator.GetEndpointFromPath("artists/123");
+            
             ItemBody itemBody = (ItemBody)(await endpoint.GetAsync(null));
 
             RestItemData itemData = itemBody.Item;
@@ -52,7 +56,9 @@ namespace Firestorm.Tests.Unit.Endpoints.Functionality
         [Fact]
         public async Task DictionaryEndpoint()
         {
-            IRestEndpoint endpoint = StartEndpointUtility.GetEndpointFromPath(StartResourceFactory, EndpointContext, "artists/by_ID");
+            var navigator = new EndpointNavigator(EndpointContext.Request, StartResourceFactory, EndpointContext.Configuration);
+            IRestEndpoint endpoint = navigator.GetEndpointFromPath("artists/by_ID");
+            
             DictionaryBody dictionaryBody = (DictionaryBody)(await endpoint.GetAsync(null));
 
             foreach (var pair in dictionaryBody.Items)
@@ -68,7 +74,10 @@ namespace Firestorm.Tests.Unit.Endpoints.Functionality
         [Fact]
         public async Task FieldEndpoint()
         {
-            IRestEndpoint endpoint = StartEndpointUtility.GetEndpointFromPath(StartResourceFactory, EndpointContext, "artists/123/Name");
+            var navigator = new EndpointNavigator(EndpointContext.Request, StartResourceFactory, EndpointContext.Configuration);
+            IRestEndpoint endpoint = navigator.GetEndpointFromPath("artists/123/Name");
+
+
             ResourceBody response = await endpoint.GetAsync(null);
             Assert.Equal(response.GetObject(), TestRepositories.ArtistName);
         }

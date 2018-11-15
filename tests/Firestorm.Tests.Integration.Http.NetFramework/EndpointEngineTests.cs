@@ -5,6 +5,7 @@ using Firestorm.Endpoints;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Start;
 using Firestorm.Engine;
+using Firestorm.Host;
 using Firestorm.Tests.Integration.Http.Base;
 using Firestorm.Tests.Models;
 using Xunit;
@@ -26,7 +27,7 @@ namespace Firestorm.Tests.Integration.Http.NetFramework
                 SelectFields = new[] { "Name" }
             };
 
-            EngineRestCollection<Artist> artistsCollection = IntegratedRestDirectory.GetArtistCollection(endpointContext);
+            EngineRestCollection<Artist> artistsCollection = IntegratedRestDirectory.GetArtistCollection(endpointContext.Request);
             IRestEndpoint endpoint = Endpoint.GetFromResource(endpointContext, artistsCollection);
             endpoint = endpoint.Next(new AggregatorNextPath("123", endpointContext.Configuration.NamingConventionSwitcher));
             var response = (ItemBody)(await endpoint.GetAsync(testQuery));
@@ -44,7 +45,7 @@ namespace Firestorm.Tests.Integration.Http.NetFramework
                 SelectFields = new[] { "Id", "Name" }
             };
 
-            EngineRestCollection<Artist> artistsCollection = IntegratedRestDirectory.GetArtistCollection(endpointContext);
+            EngineRestCollection<Artist> artistsCollection = IntegratedRestDirectory.GetArtistCollection(endpointContext.Request);
             IRestEndpoint endpoint = Endpoint.GetFromResource(endpointContext, artistsCollection);
             var resource = (CollectionBody)(await endpoint.GetAsync(testQuery));
 

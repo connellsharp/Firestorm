@@ -37,9 +37,7 @@ namespace Firestorm.Stems.Roots
             if(!_initialized)
                 Initialize();
 
-            var rootRequest = new EndpointRootRequest(hostContext);
-
-            return RootResourceFactory.GetStartResource(StemConfiguration, rootRequest);
+            return RootResourceFactory.GetStartResource(StemConfiguration, hostContext);
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using Firestorm.Host;
 using JetBrains.Annotations;
 
@@ -7,7 +6,7 @@ namespace Firestorm.Endpoints
     /// <summary>
     /// The context for the request to an <see cref="IRestEndpoint"/>.
     /// </summary>
-    public interface IRestEndpointContext : IDisposable
+    public interface IRestEndpointContext
     {
         /// <summary>
         /// The global configuration for all endpoints in this API.

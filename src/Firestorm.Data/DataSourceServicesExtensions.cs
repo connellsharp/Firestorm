@@ -1,6 +1,5 @@
 ﻿using System;
 using Firestorm.Data;
-using Firestorm.Host;
 
 namespace Firestorm.Extensions.AspNetCore
 {

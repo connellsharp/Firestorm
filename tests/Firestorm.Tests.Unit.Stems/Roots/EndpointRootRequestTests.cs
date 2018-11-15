@@ -9,7 +9,7 @@ namespace Firestorm.Tests.Unit.Stems.Roots
         [Fact]
         public void Ctor_TestContext_UserIsSame()
         {
-            var context = new TestEndpointContext();
+            var context = new TestRequestContext();
             context.User = new TestRestUser();
 
             var request = new EndpointRootRequest(context);
@@ -20,8 +20,7 @@ namespace Firestorm.Tests.Unit.Stems.Roots
         [Fact]
         public void OnDispose_DisposeOfContext_CallsEvent()
         {
-            var context = new TestEndpointContext();
-            context.User = new TestRestUser();
+            var context = new TestRequestContext();
 
             var request = new EndpointRootRequest(context);
             bool disposeEventCalled = false;

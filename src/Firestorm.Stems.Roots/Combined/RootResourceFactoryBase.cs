@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Firestorm.Host;
 
 namespace Firestorm.Stems.Roots.Combined
 {
@@ -17,9 +18,9 @@ namespace Firestorm.Stems.Roots.Combined
             return _startInfoFactory.GetStemTypes(configuration);
         }
 
-        public IRestResource GetStartResource(IStemConfiguration configuration, IRootRequest request)
+        public IRestResource GetStartResource(IStemConfiguration configuration, IRequestContext requestContext)
         {
-            return new RootsDirectory(configuration, _startInfoFactory, request, _creators);
+            return new RootsDirectory(configuration, _startInfoFactory, requestContext, _creators);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Firestorm.Host
+namespace Firestorm
 {
     /// <summary>
     /// An interface that can be extended to inject Firestorm services.
@@ -18,10 +18,5 @@ namespace Firestorm.Host
         IFirestormServicesBuilder Add<TAbstraction, TImplementation>()
             where TImplementation : class, TAbstraction
             where TAbstraction : class;
-    }
-
-    public interface IFirestormServiceProvider : IServiceProvider
-    {
-        IServiceProvider GetRequestServiceProvider();
     }
 }

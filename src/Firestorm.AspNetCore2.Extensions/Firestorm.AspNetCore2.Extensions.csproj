@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Firestorm.AspNetCore2</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Firestorm.AspNetCore2\Firestorm.AspNetCore2.csproj" />

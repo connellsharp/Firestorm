@@ -31,7 +31,7 @@ namespace Firestorm.Tests.Unit.Stems.Roots
             
             _factory.GetStemTypes(stemConfig);
 
-            var startResource = _factory.GetStartResource(stemConfig, new TestRootRequest());
+            var startResource = _factory.GetStartResource(stemConfig, new TestRequestContext());
 
             var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
             var info = await startDirectory.GetInfoAsync();
@@ -47,7 +47,7 @@ namespace Firestorm.Tests.Unit.Stems.Roots
             
             _factory.GetStemTypes(stemConfig);
 
-            var startResource = _factory.GetStartResource(stemConfig, new TestRootRequest());
+            var startResource = _factory.GetStartResource(stemConfig, new TestRequestContext());
 
             var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
             var resource = startDirectory.GetChild("Test");

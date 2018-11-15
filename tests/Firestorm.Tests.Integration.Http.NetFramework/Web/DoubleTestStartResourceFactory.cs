@@ -17,9 +17,9 @@ namespace Firestorm.Tests.Integration.Http.NetFramework.Web
             _selfRestClient = new RestClient(selfBaseAddress);
         }
 
-        public IRestResource GetStartResource(IRestEndpointContext endpointContext)
+        public IRestResource GetStartResource(IRequestContext requestContext)
         {
-            return new DoubleTestDirectory(endpointContext, _selfRestClient);
+            return new DoubleTestDirectory(requestContext, _selfRestClient);
         }
 
         public void Initialize()

@@ -7,7 +7,7 @@ namespace Firestorm.Stems.Roots
     /// <summary>
     /// Adapter that wraps an <see cref="IRestEndpointContext"/> and implements <see cref="IRootRequest"/>.
     /// </summary>
-    [Obsolete()]
+    [Obsolete("Just is IRootRequest where this is used.")]
     public class EndpointRootRequest : IRootRequest
     {
         private readonly IRequestContext _requestContext;

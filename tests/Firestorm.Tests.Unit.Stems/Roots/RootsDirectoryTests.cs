@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Firestorm.Host;
 using Firestorm.Stems;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.Combined;
@@ -17,7 +18,7 @@ namespace Firestorm.Tests.Unit.Stems.Roots
             var namedTypedDictionary = new NamedTypeDictionary();
             namedTypedDictionary.AddType(typeof(TestRoot));
 
-            var directory = new RootsDirectory(new DefaultStemConfiguration(), new DerivedRootStartInfoFactory(namedTypedDictionary), new TestRootRequest());
+            var directory = new RootsDirectory(new DefaultStemConfiguration(), new DerivedRootStartInfoFactory(namedTypedDictionary), new TestRequestContext());
 
             var rootCollection = directory.GetCollection("TestRoot"); // normally use the Suffixed type dictionary
 
@@ -62,10 +63,15 @@ namespace Firestorm.Tests.Unit.Stems.Roots
     {
     }
 
-    public class TestRootRequest : IRootRequest
+    public class TestRequestContext : IRequestContext
     {
         public IRestUser User { get; }
 
         public event EventHandler OnDispose;
+        
+        public void Dispose()
+        {
+            OnDispose?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

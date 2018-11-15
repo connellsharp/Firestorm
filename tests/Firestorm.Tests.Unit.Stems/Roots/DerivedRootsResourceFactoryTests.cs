@@ -22,7 +22,7 @@ namespace Firestorm.Tests.Unit.Stems.Roots
 
             factory.GetStemTypes(stemConfig);
 
-            var startResource = factory.GetStartResource(stemConfig, new TestRootRequest());
+            var startResource = factory.GetStartResource(stemConfig, new TestRequestContext());
 
             var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
             var info = await startDirectory.GetInfoAsync();
