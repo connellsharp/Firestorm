@@ -16,4 +16,10 @@
     <ProjectReference Include="..\Firestorm.Host\Firestorm.Host.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Reflectious, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\.nuget\packages\reflectious\0.9.3\lib\net452\Reflectious.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
