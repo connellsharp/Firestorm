@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Firestorm.Stems;
+using Firestorm.Stems.Attributes.Attributes;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Tests.Examples.Music.Data.Models;
@@ -29,9 +30,11 @@ namespace Firestorm.Tests.Examples.Music.Basics
         {
             [Identifier]
             [Get(Name = "ID")]
+            [AutoExpr]
             public static int TrackID { get; set; }
             
             [Get]
+            [AutoExpr]
             public static string Title { get; set; }
 
             [Get]
