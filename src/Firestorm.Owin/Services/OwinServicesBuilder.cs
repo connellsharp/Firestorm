@@ -53,24 +53,4 @@ namespace Firestorm.Owin
             return new OwinServicesProvider(_dictionary);
         }
     }
-
-    public class OwinServicesProvider : IFirestormServiceProvider
-    {
-        private readonly IDictionary<Type, Func<IFirestormServiceProvider, object>> _dictionary;
-
-        public OwinServicesProvider(IDictionary<Type,Func<IFirestormServiceProvider,object>> dictionary)
-        {
-            _dictionary = dictionary;
-        }
-
-        public object GetService(Type serviceType)
-        {
-            return _dictionary[serviceType].Invoke(this);
-        }
-
-        public IServiceProvider GetRequestServiceProvider()
-        {
-            throw new NotImplementedException();
-        }
-    }
 }
