@@ -42,7 +42,7 @@ namespace Firestorm.Owin
 
         private static object CreateService(IServiceProvider serviceProvider, Type serviceType)
         {
-            return serviceType.Reflect()
+            return Reflect.Type(serviceType)
                 .GetConstructor()
                 .FromServiceProvider(serviceProvider)
                 .Invoke();
