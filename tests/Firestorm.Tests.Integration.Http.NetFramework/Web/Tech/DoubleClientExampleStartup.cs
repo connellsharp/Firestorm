@@ -17,7 +17,8 @@ namespace Firestorm.Tests.Integration.Http.NetFramework.Web
         [UsedImplicitly]
         public void Configuration(IAppBuilder app)
         {
-            app.UseFirestorm(c => c.AddEndpoints(new RestEndpointConfiguration
+            app.UseFirestorm(c => c
+                .AddEndpoints(new RestEndpointConfiguration
                 {
                     ResponseConfiguration =
                     {

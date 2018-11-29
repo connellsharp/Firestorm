@@ -31,5 +31,10 @@ namespace Firestorm.Endpoints
         /// </summary>
         [CanBeNull]
         public INamingConventionSwitcher NamingConventionSwitcher { get; set; }
+
+        /// <summary>
+        /// The object used to resolve <see cref="IRestEndpoint"/> instances from a <see cref="IRestResource"/>.
+        /// </summary>
+        public IEndpointResolver Resolver { get; set; }
     }
 }

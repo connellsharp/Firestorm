@@ -6,9 +6,9 @@ namespace Firestorm.Endpoints
     /// <summary>
     /// Provides a utility to get an <see cref="IRestEndpoint"/> implementation.
     /// </summary>
-    public static class Endpoint
+    public class EndpointResolver : IEndpointResolver
     {
-        public static IRestEndpoint GetFromResource(IEndpointContext endpointContext, [NotNull] IRestResource resource)
+        public IRestEndpoint GetFromResource(IEndpointContext endpointContext, [NotNull] IRestResource resource)
         {
             if (resource == null)
                 throw new ArgumentNullException(nameof(resource));

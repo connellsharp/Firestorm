@@ -1,4 +1,3 @@
-using Firestorm.Endpoints.Start;
 using Firestorm.Host;
 
 namespace Firestorm.Endpoints.Web

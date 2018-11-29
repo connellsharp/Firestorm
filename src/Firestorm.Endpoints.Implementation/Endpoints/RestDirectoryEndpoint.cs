@@ -23,7 +23,7 @@ namespace Firestorm.Endpoints
             if (resource == null)
                 return null;
 
-            return Endpoint.GetFromResource(Context, resource);
+            return Context.Configuration.Resolver.GetFromResource(Context, resource);
         }
 
         public async Task<ResourceBody> GetAsync(IRestCollectionQuery query)

@@ -18,8 +18,13 @@ namespace Firestorm.Tests.Unit.Endpoints.Functionality
         public EndpointNavigatorTests()
         {
             var startResourceFactory = new SingletonStartResourceFactory(new TestRestDirectory());
+
+            var config = new RestEndpointConfiguration
+            {
+                Resolver = new EndpointResolver()
+            };
             
-            _navigator = new EndpointNavigator(new TestRequestContext(), startResourceFactory, new RestEndpointConfiguration());
+            _navigator = new EndpointNavigator(new TestRequestContext(), startResourceFactory, config);
         }
 
         [Fact]

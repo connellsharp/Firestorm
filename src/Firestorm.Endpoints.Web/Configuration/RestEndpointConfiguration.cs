@@ -12,6 +12,7 @@ namespace Firestorm.Endpoints.Web
         {
             RequestStrategies = new UnsafeRequestStrategySets();
             NamingConventionSwitcher = new DefaultNamingConventionSwitcher();
+            Resolver = new EndpointResolver();
         }
     }
 }

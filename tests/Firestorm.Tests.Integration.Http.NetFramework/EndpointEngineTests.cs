@@ -28,7 +28,7 @@ namespace Firestorm.Tests.Integration.Http.NetFramework
             };
 
             EngineRestCollection<Artist> artistsCollection = IntegratedRestDirectory.GetArtistCollection(endpointContext.Request);
-            IRestEndpoint endpoint = Endpoint.GetFromResource(endpointContext, artistsCollection);
+            IRestEndpoint endpoint = endpointContext.Configuration.Resolver.GetFromResource(endpointContext, artistsCollection);
             endpoint = endpoint.Next(new AggregatorNextPath("123", endpointContext.Configuration.NamingConventionSwitcher));
             var response = (ItemBody)(await endpoint.GetAsync(testQuery));
 
@@ -46,7 +46,7 @@ namespace Firestorm.Tests.Integration.Http.NetFramework
             };
 
             EngineRestCollection<Artist> artistsCollection = IntegratedRestDirectory.GetArtistCollection(endpointContext.Request);
-            IRestEndpoint endpoint = Endpoint.GetFromResource(endpointContext, artistsCollection);
+            IRestEndpoint endpoint = endpointContext.Configuration.Resolver.GetFromResource(endpointContext, artistsCollection);
             var resource = (CollectionBody)(await endpoint.GetAsync(testQuery));
 
             Assert.Equal(1, resource.Items.Count());
