@@ -1,5 +1,4 @@
 ﻿using Firestorm.Endpoints.Naming;
-using Firestorm.Endpoints.Start;
 using Firestorm.Host;
 using JetBrains.Annotations;
 

@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Firestorm.Core.Web;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Responses;
-using Firestorm.Endpoints.Start;
 using Firestorm.Engine;
 using Firestorm.Host;
 using Firestorm.Tests.Integration.Http.Base;

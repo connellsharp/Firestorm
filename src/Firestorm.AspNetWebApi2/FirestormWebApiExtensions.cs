@@ -3,7 +3,6 @@ using System.Web.Http;
 using System.Web.Http.Routing;
 using Firestorm.Endpoints.Formatting.Json;
 using Firestorm.Endpoints.Formatting.Xml;
-using Firestorm.Endpoints.Start;
 using Firestorm.AspNetWebApi2.ErrorHandling;
 using Firestorm.Endpoints.Web;
 using Newtonsoft.Json;

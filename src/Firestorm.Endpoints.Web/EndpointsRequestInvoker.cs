@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Firestorm.Endpoints.Responses;
-using Firestorm.Endpoints.Start;
 using Firestorm.Host;
 
 namespace Firestorm.Endpoints.Web

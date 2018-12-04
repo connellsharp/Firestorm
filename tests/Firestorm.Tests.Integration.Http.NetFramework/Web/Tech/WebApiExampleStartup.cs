@@ -1,5 +1,4 @@
 ﻿using System.Web.Http;
-using Firestorm.Endpoints.Start;
 using Firestorm.AspNetWebApi2;
 using Firestorm.Endpoints.Web;
 using Firestorm.Tests.Integration.Http.Base;

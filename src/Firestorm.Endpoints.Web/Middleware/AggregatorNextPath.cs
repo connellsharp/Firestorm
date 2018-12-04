@@ -1,4 +1,4 @@
-namespace Firestorm.Endpoints.Start
+namespace Firestorm.Endpoints.Web
 {
     /// <summary>
     /// The <see cref="INextPath"/> implementation used in <see cref="NextAggregator"/>.

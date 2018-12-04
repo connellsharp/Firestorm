@@ -7,7 +7,6 @@ using Firestorm.Core.Web;
 using Firestorm.Core.Web.Options;
 using Firestorm.Endpoints.Preconditions;
 using Firestorm.Endpoints.Responses;
-using Firestorm.Endpoints.Start;
 using Firestorm.AspNetWebApi2.ErrorHandling;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Formatting.Naming;
