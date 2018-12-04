@@ -1,5 +1,4 @@
 ﻿using Firestorm.AspNetCore2;
-using Firestorm.Endpoints;
 using Firestorm.Endpoints.Web;
 using Firestorm.Host;
 using Firestorm.Tests.Integration.Http.Base;
@@ -22,6 +21,7 @@ namespace Firestorm.Tests.Integration.Http.AspNetCore
             services.AddFirestorm()
                 .AddEndpoints(config =>
                 {
+                    config.Resolver = new DecoratedResolver(config.Resolver);
                     config.ResponseConfiguration.ShowDeveloperErrors = true;
                     //
                 })

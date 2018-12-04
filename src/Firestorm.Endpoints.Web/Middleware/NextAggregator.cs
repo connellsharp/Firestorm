@@ -6,12 +6,12 @@ namespace Firestorm.Endpoints.Start
     /// <summary>
     /// Aggregates calls to <see cref="IRestEndpoint.Next"/> based on the full resource path.
     /// </summary>
-    public class EndpointNextAggregator
+    internal class NextAggregator
     {
         private readonly IRestEndpoint _startEndpoint;
         private readonly INamingConventionSwitcher _namingConventionSwitcher;
 
-        public EndpointNextAggregator([NotNull] IRestEndpoint startEndpoint, [NotNull] INamingConventionSwitcher namingConventionSwitcher)
+        public NextAggregator([NotNull] IRestEndpoint startEndpoint, [NotNull] INamingConventionSwitcher namingConventionSwitcher)
         {
             _startEndpoint = startEndpoint ?? throw new ArgumentNullException(nameof(startEndpoint));
             _namingConventionSwitcher = namingConventionSwitcher ?? throw new ArgumentNullException(nameof(namingConventionSwitcher));

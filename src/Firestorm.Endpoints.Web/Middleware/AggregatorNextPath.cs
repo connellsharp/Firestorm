@@ -1,7 +1,7 @@
 namespace Firestorm.Endpoints.Start
 {
     /// <summary>
-    /// The <see cref="INextPath"/> implementation used in <see cref="EndpointNextAggregator"/>.
+    /// The <see cref="INextPath"/> implementation used in <see cref="NextAggregator"/>.
     /// </summary>
     public class AggregatorNextPath : INextPath
     {

@@ -25,7 +25,7 @@ namespace Firestorm.Endpoints.Web
             var context = new EndpointContext(_requestContext, _configuration);
             IRestEndpoint startEndpoint = _configuration.Resolver.GetFromResource(context, startResource);
 
-            var nextAggregator = new EndpointNextAggregator(startEndpoint, _configuration.NamingConventionSwitcher ?? new VoidNamingConventionSwitcher());
+            var nextAggregator = new NextAggregator(startEndpoint, _configuration.NamingConventionSwitcher ?? new VoidNamingConventionSwitcher());
             IRestEndpoint endpoint = nextAggregator.AggregateNext(resourcePath);
 
             //var wrappedEndpoint = new NamingSwitcherEndpointWrapper(endpoint, namingConventionSwitcher);
