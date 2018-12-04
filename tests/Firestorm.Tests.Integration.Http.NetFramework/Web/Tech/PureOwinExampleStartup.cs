@@ -18,7 +18,7 @@ namespace Firestorm.Tests.Integration.Http.NetFramework.Web
         public void Configuration(IAppBuilder app)
         {
             app.UseFirestorm(c => c
-                .AddEndpointsWithDefaultConfig()
+                .AddEndpoints()
                 .AddStartResourceFactory(new IntegratedStartResourceFactory())
             );
         }

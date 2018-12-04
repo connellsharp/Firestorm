@@ -9,7 +9,7 @@ namespace Firestorm.Endpoints.Web
         /// Configures Firestorm endpoints.
         /// Assumes <see cref="RestEndpointConfiguration"/> is already configured elsewhere.
         /// </summary>
-        public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder)
+        public static IFirestormServicesBuilder AddEndpointsInvoker(this IFirestormServicesBuilder builder)
         {   
             builder.Add<IRequestInvoker, EndpointsRequestInvoker>();
             
@@ -21,7 +21,7 @@ namespace Firestorm.Endpoints.Web
         /// </summary>
         public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder, RestEndpointConfiguration config)
         {
-            builder.AddEndpoints();
+            builder.AddEndpointsInvoker();
             
             builder.Add<RestEndpointConfiguration>(config);
             
@@ -33,7 +33,7 @@ namespace Firestorm.Endpoints.Web
         /// </summary>
         public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder, Action<RestEndpointConfiguration> configureAction)
         {   
-            builder.AddEndpoints();
+            builder.AddEndpointsInvoker();
             
             var config = new DefaultRestEndpointConfiguration();
             configureAction(config);
@@ -47,7 +47,7 @@ namespace Firestorm.Endpoints.Web
         /// </summary>
         public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder, Func<IServiceProvider, RestEndpointConfiguration> factoryFunction)
         {
-            builder.AddEndpoints();
+            builder.AddEndpointsInvoker();
             
             builder.Add<RestEndpointConfiguration>(factoryFunction);
             
@@ -57,7 +57,7 @@ namespace Firestorm.Endpoints.Web
         /// <summary>
         /// Configures Firestorm endpoints with the default settings.
         /// </summary>
-        public static IFirestormServicesBuilder AddEndpointsWithDefaultConfig(this IFirestormServicesBuilder builder)
+        public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder)
         {
             builder.AddEndpoints(new DefaultRestEndpointConfiguration());
             
