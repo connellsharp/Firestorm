@@ -8,18 +8,14 @@ using Xunit;
 namespace Firestorm.Tests.Integration.Data.EntityFrameworkCore2
 {
     [UsedImplicitly]
-    public class EntityFrameworkCore2Tests : BasicDataTests, IClassFixture<ExampleDataContext>
+    public class EntityFrameworkCore2Tests : BasicDataTests, IClassFixture<ExampleFixture>
     {
-        public EntityFrameworkCore2Tests(ExampleDataContext context) 
-            : base(new EFCoreDataTransaction<ExampleDataContext>(context), new EFCoreRepository<Artist>(context.Artists))
+        public EntityFrameworkCore2Tests(ExampleFixture fixture)
+            : base(
+                new EFCoreDataTransaction<ExampleDataContext>(fixture.Context),
+                new EFCoreRepository<Artist>(fixture.Context.Artists)
+            )
         {
-            context.Database.EnsureCreated();
-
-            if (!context.Artists.Any())
-            {
-                context.Artists.AddRange(ExampleDataSets.GetArtists());
-                context.SaveChanges();
-            }
         }
     }
 }

@@ -31,6 +31,7 @@
     <ProjectReference Include="..\..\src\Firestorm.Fluent.Start\Firestorm.Fluent.Start.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Stems.Attributes.Basic\Firestorm.Stems.Attributes.Basic.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.Start\Firestorm.Stems.Roots.Start.csproj" />
+    <ProjectReference Include="..\Firestorm.Tests.Integration.Data.Base\Firestorm.Tests.Integration.Data.Base.csproj" />
     <ProjectReference Include="..\Firestorm.Tests.Integration.Http.Base\Firestorm.Tests.Integration.Http.Base.csproj" />
   </ItemGroup>
 

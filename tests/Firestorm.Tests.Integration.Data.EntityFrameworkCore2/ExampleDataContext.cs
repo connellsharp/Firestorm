@@ -7,16 +7,9 @@ namespace Firestorm.Tests.Integration.Data.EntityFrameworkCore2
     [UsedImplicitly]
     public class ExampleDataContext : DbContext
     {
-        public ExampleDataContext() 
-            : base(GetOptions())
+        public ExampleDataContext(DbContextOptions options) 
+            : base(options)
         { }
-
-        private static DbContextOptions GetOptions()
-        {
-            return new DbContextOptionsBuilder<ExampleDataContext>()
-                .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Firestorm.Tests.Integration.Data.EntityFramework6.ExampleDataContext;integrated security=True;Trusted_Connection=True;MultipleActiveResultSets=true")
-                .Options;
-        }
 
         public virtual DbSet<Artist> Artists { get; set; }
 
