@@ -9,39 +9,19 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
     public class ValidationExtensionTests
     {
         [Fact]
-        public void EnsureValid_BasicConfigWithStartResourceFactory_DoesntThrow()
+        public void EnsureValid_DefaultConfiguration_DoesntThrow()
         {
-            var config = new FirestormConfiguration
-            {
-                StartResourceFactory = new SingletonStartResourceFactory(null)
-            };
+            var config = new DefaultRestEndpointConfiguration();
 
             config.EnsureValid();
         }
 
         [Fact]
-        public void EnsureValid_BasicConfigWithNullStartResourceFactory_Throws()
-        {
-            var config = new FirestormConfiguration
-            {
-                StartResourceFactory = null
-            };
-
-            Action ensureValid = () => config.EnsureValid();
-
-            Assert.Throws<FirestormConfigurationException>(ensureValid);
-        }
-
-        [Fact]
         public void EnsureValid_NullQueryStringConfiguration_Throws()
         {
-            var config = new FirestormConfiguration
+            var config = new RestEndpointConfiguration
             {
-                StartResourceFactory = new SingletonStartResourceFactory(null),
-                EndpointConfiguration = new RestEndpointConfiguration
-                {
-                    QueryStringConfiguration = null
-                }
+                QueryStringConfiguration = null
             };
 
             Action ensureValid = () => config.EnsureValid();
@@ -52,13 +32,9 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
         [Fact]
         public void EnsureValid_NullRequestStrategies_Throws()
         {
-            var config = new FirestormConfiguration
+            var config = new RestEndpointConfiguration
             {
-                StartResourceFactory = new SingletonStartResourceFactory(null),
-                EndpointConfiguration = new RestEndpointConfiguration
-                {
-                    RequestStrategies = null
-                }
+                RequestStrategies = null
             };
 
             Action ensureValid = () => config.EnsureValid();
@@ -69,14 +45,10 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
         [Fact]
         public void EnsureValid_NullResponseConfiguration_Throws()
         {
-            var config = new FirestormConfiguration
+            var config = new RestEndpointConfiguration
             {
-                StartResourceFactory = new SingletonStartResourceFactory(null),
-                EndpointConfiguration = new RestEndpointConfiguration
-                {
-                    ResponseConfiguration = null
-                }
-            };
+                ResponseConfiguration = null
+            }
 
             Action ensureValid = () => config.EnsureValid();
 

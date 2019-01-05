@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 using Firestorm.AspNetWebApi2;
-using Firestorm.Endpoints.Web;
+using Firestorm.Host;
 using Firestorm.Tests.Integration.Http.Base;
 using Firestorm.Tests.Integration.Http.NetFramework.Web;
 using JetBrains.Annotations;
@@ -18,10 +18,7 @@ namespace Firestorm.Tests.Integration.Http.NetFramework.Web
         {
             var config = new HttpConfiguration();
 
-            config.SetupFirestorm(new FirestormConfiguration
-            {
-                StartResourceFactory = new IntegratedStartResourceFactory()
-            });
+            config.SetupFirestorm(c => { c.AddStartResourceFactory(new IntegratedStartResourceFactory()); });
 
             app.UseWebApi(config);
         }

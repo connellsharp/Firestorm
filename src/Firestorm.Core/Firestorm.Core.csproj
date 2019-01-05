@@ -6,4 +6,9 @@
   <ItemGroup>
     <PackageReference Include="Jetbrains.Annotations" Version="11.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Reflectious, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\.nuget\packages\reflectious\0.9.4\lib\netstandard2.0\Reflectious.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

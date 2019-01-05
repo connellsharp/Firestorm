@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Routing;
 using Firestorm.Endpoints.Formatting.Json;
 using Firestorm.Endpoints.Formatting.Xml;
 using Firestorm.AspNetWebApi2.ErrorHandling;
-using Firestorm.Endpoints.Web;
+using Firestorm.Endpoints;
+using Firestorm.Host;
+using Firestorm.Owin;
 using Newtonsoft.Json;
 
 namespace Firestorm.AspNetWebApi2
@@ -14,25 +17,25 @@ namespace Firestorm.AspNetWebApi2
         /// <summary>Maps the specified route template for a REST API running within Web API.</summary>
         /// <returns>A reference to the mapped route.</returns>
         /// <param name="httpConfig">The Web API configuration.</param>
-        /// <param name="firestormConfig">The Firestorm configuration.</param>
-        public static void SetupFirestorm(this HttpConfiguration httpConfig, FirestormConfiguration firestormConfig)
+        /// <param name="configureAction">The Firestorm configuration.</param>
+        public static void SetupFirestorm(this HttpConfiguration httpConfig, Action<IFirestormServicesBuilder> configureAction)
         {
-            SetupFirestorm(httpConfig, null, firestormConfig);
+            SetupFirestorm(httpConfig, null, configureAction);
         }
 
         /// <summary>Maps the specified route template for a REST API running within Web API.</summary>
         /// <returns>A reference to the mapped route.</returns>
         /// <param name="httpConfig">The Web API configuration.</param>
         /// <param name="directory">The starting directory of the REST API.</param>
-        /// <param name="firestormConfig">The Firestorm configuration.</param>
-        public static void SetupFirestorm(this HttpConfiguration httpConfig, string directory, FirestormConfiguration firestormConfig)
+        /// <param name="configureAction">The Firestorm configuration.</param>
+        public static void SetupFirestorm(this HttpConfiguration httpConfig, string directory, Action<IFirestormServicesBuilder> configureAction)
         {
-            httpConfig.Routes.MapFirestorm(directory, firestormConfig);
+            httpConfig.Routes.MapFirestorm(directory, configureAction);
 
             //httpConfig.Filters.Add(new RestApiExceptionFilterAttribute()); // global filter
             //config.Services.Replace(typeof(IExceptionHandler), new OopsExceptionHandler()); // global handler
 
-            var nameSwitcher = firestormConfig.EndpointConfiguration.NamingConventionSwitcher;
+            var nameSwitcher = FirestormController.GlobalConfig.EndpointConfiguration.NamingConventionSwitcher;
 
             httpConfig.Formatters.JsonFormatter.SerializerSettings = new JsonSerializerSettings
             {
@@ -49,12 +52,22 @@ namespace Firestorm.AspNetWebApi2
         /// <returns>A reference to the mapped route.</returns>
         /// <param name="routes">A collection of routes for the application.</param>
         /// <param name="directory">The starting directory of the REST API.</param>
-        /// <param name="firestormConfig">The Firestorm configuration.</param>
-        public static IHttpRoute MapFirestorm(this HttpRouteCollection routes, string directory, FirestormConfiguration firestormConfig)
+        /// <param name="configureAction">The Firestorm configuration.</param>
+        public static IHttpRoute MapFirestorm(this HttpRouteCollection routes, string directory, Action<IFirestormServicesBuilder> configureAction)
         {
-            FirestormController.GlobalConfig = firestormConfig;
+            var servicesBuilder = new DefaultServicesBuilder();
+            configureAction(servicesBuilder);
+            var serviceProvider = servicesBuilder.Build();
 
-            firestormConfig.StartResourceFactory.Initialize();
+            var config = new FirestormConfiguration
+            {
+                EndpointConfiguration = serviceProvider.GetService<RestEndpointConfiguration>(),
+                StartResourceFactory = serviceProvider.GetService<IStartResourceFactory>(),
+            };
+
+            FirestormController.GlobalConfig = config;
+
+            config.StartResourceFactory.Initialize();
 
             return routes.MapHttpRoute(name: "Firestorm" + (directory != null ? "_" + directory : "Root"), routeTemplate: (directory != null ? directory + "/" : string.Empty) + "{*path}", defaults: new
             {

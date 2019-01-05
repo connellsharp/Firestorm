@@ -8,7 +8,7 @@ namespace Firestorm.Owin
     {   
         public static IAppBuilder UseFirestorm(this IAppBuilder app, Action<IFirestormServicesBuilder> configureAction)
         {
-            var servicesBuilder = new OwinServicesBuilder();
+            var servicesBuilder = new DefaultServicesBuilder();
             configureAction(servicesBuilder);
             var serviceProvider = servicesBuilder.Build();
             
