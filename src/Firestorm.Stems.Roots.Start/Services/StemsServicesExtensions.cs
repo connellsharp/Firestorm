@@ -2,6 +2,7 @@
 using Firestorm.Data;
 using Firestorm.Extensions.AspNetCore;
 using Firestorm.Host;
+using Firestorm.Stems.AutoMap;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Stems.Roots.Derive;
@@ -35,7 +36,8 @@ namespace Firestorm.Stems
             {
                 StemConfiguration = new DefaultStemConfiguration
                 {
-                    DependencyResolver = new DefaultDependencyResolver(sp.GetRequestServiceProvider())
+                    DependencyResolver = new DefaultDependencyResolver(sp.GetRequestServiceProvider()),
+                    AutoPropertyMapper = sp.GetService<IPropertyAutoMapper>() ?? new DefaultPropertyAutoMapper()
                 },
                 RootResourceFactory = CreateRootResourceFactory(sp)
             });
