@@ -1,6 +1,4 @@
 ﻿using System;
-using Firestorm.Extensions.AspNetCore;
-using Firestorm.Host;
 
 namespace Firestorm.AspNetCore2
 {

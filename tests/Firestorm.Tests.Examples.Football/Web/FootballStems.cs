@@ -3,23 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Firestorm.Stems;
+using Firestorm.Stems.Attributes.Attributes;
 using Firestorm.Tests.Examples.Football.Models;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Roots.DataSource;
 
 namespace Firestorm.Tests.Examples.Football.Web
 {
-    [DataSourceRoot]
     public class PlayersStem : Stem<Player>
     {
-        [Get, Set]
+        [Get, Set, AutoExpr]
         public static string Name { get; }
 
-        [Get]
+        [Get,  AutoExpr]
         public static int SquadNumber { get; }
     }
 
-    [DataSourceRoot]
     public class FixturesStem : Stem<FixtureTeam>
     {
         [Get, Identifier]
@@ -57,44 +56,41 @@ namespace Firestorm.Tests.Examples.Football.Web
         public static Expression<Func<FixtureTeam, ICollection<Goal>>> Goals { get; } = ft => ft.Fixture.Goals;
     }
 
-    [DataSourceRoot] // TODO not
+    [NoDataSourceRoot]
     public class VsTeamStem : Stem<FixtureTeam>
     {
         [Get, Set]
         public static Expression<Func<FixtureTeam, int>> Id { get; } = ft => ft.TeamId;
     }
 
-    [DataSourceRoot]
     public class GoalsStem : Stem<Goal>
     {
     }
 
-    [DataSourceRoot]
     public class TeamsStem : Stem<Team>
     {
-        [Get]
+        [Get, AutoExpr]
         public static string Name { get; }
 
-        [Get]
+        [Get, AutoExpr]
         public static int FoundedYear { get; }
 
-        [Get, Substem(typeof(PlayersStem))]
+        [Get, Substem(typeof(PlayersStem)), AutoExpr]
         public static ICollection<Player> Players { get; }
 
-        [Get, Substem(typeof(FixturesStem))]
+        [Get, Substem(typeof(FixturesStem)), AutoExpr]
         public static ICollection<FixtureTeam> Fixtures { get; }
 
-        [Get]
+        [Get, Substem(typeof(LeaguesStem)), AutoExpr]
         public static League League { get; }
     }
 
-    [DataSourceRoot]
     public class LeaguesStem : Stem<League>
     {
         [Get, Identifier]
         public static Expression<Func<League, string>> Key { get; } = l => l.Name.Replace(" ", string.Empty).ToLower();
 
-        [Get]
+        [Get, AutoExpr]
         public static string Name { get; }
 
         [Get, Substem(typeof(TeamPositionsStem))]
@@ -119,13 +115,13 @@ namespace Firestorm.Tests.Examples.Football.Web
         }
     }
 
-    [DataSourceRoot]
+    [NoDataSourceRoot]
     public class TeamPositionsStem : Stem<TeamPosition>
     {
-        [Get]
+        [Get, AutoExpr]
         public static int Points { get; }
 
-        [Get]
+        [Get, AutoExpr]
         public static string Team { get; }
     }
 }

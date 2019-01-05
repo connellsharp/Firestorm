@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Firestorm.Owin
+namespace Firestorm.Defaults
 {
     public class DefaultServicesProvider : IFirestormServiceProvider
     {
@@ -14,6 +14,9 @@ namespace Firestorm.Owin
 
         public object GetService(Type serviceType)
         {
+            if (!_dictionary.ContainsKey(serviceType))
+                return null;
+            
             return _dictionary[serviceType].Invoke(this);
         }
 

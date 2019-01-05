@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Reflectious;
 
-namespace Firestorm.Owin
+namespace Firestorm.Defaults
 {
     public class DefaultServicesBuilder : IFirestormServicesBuilder
     {

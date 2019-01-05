@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Firestorm.Owin
+namespace Firestorm.Defaults
 {
     public class NotImplementedServiceProvider : IServiceProvider
     {

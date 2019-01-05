@@ -21,7 +21,6 @@ namespace Firestorm.Tests.Integration.Http.AspNetCore
             services.AddFirestorm()
                 .AddEndpoints(config =>
                 {
-                    config.Resolver = new DecoratedResolver(config.Resolver);
                     config.ResponseConfiguration.ShowDeveloperErrors = true;
                     //
                 })
