@@ -10,10 +10,12 @@ _Using [Stems](docs/stems/stems-intro.md) to describe your API_
 public class ArtistsStem : Stem<Artist>
 {
     [Get, Identifier]
-    public static int Id { get; }
+    public static Expression Id
+        => Expression(a => a.Id);
 
     [Get, Set]
-    public static string Name { get; }
+    public static Expression Name
+        => Expression(a => a.Name);
 }
 ```
 
@@ -39,7 +41,7 @@ GET /artists/123
 
 4. **Agile.** It's easy to start a basic project with just a few endpoints and grow rapidly as requirements build.
 
-You can read more in the [documentation](https://firestorm.readthedocs.org), or jump straight into the [tutorials](https://github.com/connellw/Firestorm/wiki/Tutorials).
+You can read more in the [documentation](https://firestorm.readthedocs.org), jump straight into the [tutorials](https://github.com/connellw/Firestorm/wiki/Tutorials) or check out the [samples](https://github.com/connellw/FirestormSamples).
 
 ## Install
 

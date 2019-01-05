@@ -4,35 +4,18 @@
 PM> Install-Package Firestorm.Stems
 ```
 
-That's all you need to start writing Stems! For good separation, you can keep your Stem classes in their own assembly.
+That's all you need to start writing Stem classes! For good separation, you can keep your Stem classes in their own assembly.
 
-# StemsStartResourceFactory
+# Configuring Stems
 
-To run Stems in your application, you must reference the `Firestorm.Stems.Start` package.
-
-```
-PM> Install-Package Firestorm.Stems.Start
-```
-
-In your startup configuration, set the `StartResourceFactory` in your [configuration object](../setup/configuration-object.md) property to `StemsStartResourceFactory`.
-
-A typical resource factory may look like this.
+In your [configuration](../setup/configuration-builder.md) builder, use the `AddStems` extension.
 
 ```csharp
-StartResourceFactory = new StemsStartResourceFactory
-{
-	StemConfiguration = new DefaultStemConfiguration
-	{
-		NamingConventionSwitcher = new DefaultNamingConventionSwitcher(),
-		AutoPropertyMapper = new DefaultPropertyAutoMapper()
-	},
-	RootResourceFactory = new DataSourceRootResourceFactory
-	{
-		StemTypeGetter = new NestedTypeGetter(typeof(TTest)),
-		DataSource = new EntitiesDataSource<ExampleDataContext>(),
-	}
-}
+services.AddFirestorm()
+	.AddStems()
 ```
+
+
 
 ### StemConfiguration
 

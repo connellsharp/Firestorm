@@ -66,6 +66,4 @@ public class FootballRestContext : RestContext
 }
 ```
 
-
-
 You can also extend the auto configured items this way.

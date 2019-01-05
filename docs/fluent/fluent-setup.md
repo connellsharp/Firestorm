@@ -8,96 +8,41 @@ That's all you need to start using the Fluent API!
 
 You could put your fluent API file in a whole library to itself if you want.
 
-# Web Startup
+# Configuration
 
-To use the Fluent API, you must set the `EndpointConfiguration.StartResourceFactory` property to `FluentStartResourceFactory`.
+To use the Fluent API, you must use the `AddFluent` extension for your [configuration builder](../setup/configuration-builder.md) and register your implementation of `IApiContext`.
+
+There are several overloads to register your context by type or by instance. The default parameterless overload will use the context instance registered in the container.
 
 ```csharp
-internal static class FirestormStartup
-{
-    internal static FirestormConfiguration Configuration = new FirestormConfiguration
-    {
-        StartResourceFactory = new FluentStartResourceFactory
+services.AddFirestorm()
+    .AddFluent();
+```
+
+# No Context
+
+For simple APIs, it might be overkill to create a context class, so an overload is provided to allow direct configuration using the `IApiBuilder`.
+
+```csharp
+services.AddFirestorm()
+    .AddFluent(builder => {
+        builder.Item<Team>(e =>
         {
-			Context = new YourApplication.RestContext(),
-			DataSource = new EntitiesDataSource<YourApplication.EntitiesContext>()
-        }
-    };
-}
+            e.Identifier(t => t.Id);
+            e.Field(t => t.Name);
+        });
+    });
 ```
 
-Now we can use that config in our [web application's startup](../setup/installation.md).
+# Auto Configuration
 
-## ASP<span>.</span>NET Core 2.0
-
-```
-PM> Install-Package Firestorm.AspNetCore2
-```
+The Fluent API can also be used to automatically detect and configure your API. An overload is provided that accepts an `AutoConfiguration` object.
 
 ```csharp
-public class Startup
-{
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+services.AddFirestorm()
+    .AddFluent(new AutoConfiguration
     {
-        app.UseFirestorm(FirestormStartup.Configuration);
-    }
-}
-```
-
-#### Extensions
-
-Alternatively you can use the extensions.
-
-```
-PM> Install-Package Firestorm.AspNetCore2
-```
-
-```csharp
-public class Startup
-{
-    public void ConfigureServices(IServiceCollection services)
-    {
-        services.AddFirestorm()
-			.AddFluent();
-    }
-	
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-    {
-        app.UseFirestorm();
-    }
-}
-```
-
-
-
-## OWIN
-
-```
-PM> Install-Package Firestorm.Endpoints.Owin
-```
-
-```csharp
-public class Startup
-{
-    public void Configure(IAppBuilder app)
-    {
-        app.UseFirestorm(FirestormStartup.Configuration);
-    }
-}
-```
-
-### WebAPI 2.0
-
-```
-PM> Install-Package Firestorm.Endpoints.WebApi2
-```
-
-```csharp
-public static class WebApiConfig
-{
-    public static void Register(HttpConfiguration config)
-    {
-        config.SetupFirestorm(FirestormStartup.Configuration);
-    }
-}
+        AllowWrite = true,
+        MaxNesting = 4
+    });
 ```

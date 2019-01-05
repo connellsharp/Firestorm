@@ -13,8 +13,7 @@ pages:
     
 - Installation and Setup:
     - Installation: 'setup/installation.md'
-    - Configuration Object: 'setup/configuration-object.md'
-    - ASP.NET Core Startup: 'setup/aspnetcore-startup.md'
+    - Configuration Object: 'setup/configuration-builder.md'
     - Chosing a Methodology: 'setup/chosing-a-methodology.md'
     
 - Stems: 
