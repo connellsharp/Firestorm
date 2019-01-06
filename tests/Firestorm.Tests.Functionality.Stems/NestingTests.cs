@@ -8,7 +8,7 @@ using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Tests.Functionality.Stems.Helpers;
 using Firestorm.Tests.Unit;
-using Firestorm.Tests.Unit.Engine.Implementation;
+using Firestorm.Engine.Tests.Implementation;
 using Xunit;
 
 namespace Firestorm.Tests.Functionality.Stems

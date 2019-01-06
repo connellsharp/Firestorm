@@ -5,8 +5,8 @@ using Firestorm.Stems;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.Derive;
 using Firestorm.Tests.Unit;
-using Firestorm.Tests.Unit.Endpoints.Stubs;
-using Firestorm.Tests.Unit.Engine.Models;
+using Firestorm.Endpoints.Tests.Stubs;
+using Firestorm.Engine.Tests.Models;
 
 namespace Firestorm.Tests.Functionality.Stems.Helpers
 {

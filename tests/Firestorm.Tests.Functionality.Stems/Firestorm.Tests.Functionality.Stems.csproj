@@ -10,8 +10,8 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Firestorm.Tests.Unit.Endpoints\Firestorm.Tests.Unit.Endpoints.csproj" />
-    <ProjectReference Include="..\Firestorm.Tests.Unit.Engine\Firestorm.Tests.Unit.Engine.csproj" />
-    <ProjectReference Include="..\Firestorm.Tests.Unit.Stems\Firestorm.Tests.Unit.Stems.csproj" />
+    <ProjectReference Include="..\Firestorm.Endpoints.Tests\Firestorm.Endpoints.Tests.csproj" />
+    <ProjectReference Include="..\Firestorm.Engine.Tests\Firestorm.Engine.Tests.csproj" />
+    <ProjectReference Include="..\Firestorm.Stems.Tests\Firestorm.Stems.Tests.csproj" />
   </ItemGroup>
 </Project>

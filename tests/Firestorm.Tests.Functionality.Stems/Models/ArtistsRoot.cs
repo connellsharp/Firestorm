@@ -3,7 +3,7 @@ using Firestorm.Data;
 using Firestorm.Engine.Defaults;
 using Firestorm.Stems.Roots.Derive;
 using Firestorm.Tests.Unit;
-using Firestorm.Tests.Unit.Engine.Models;
+using Firestorm.Engine.Tests.Models;
 
 namespace Firestorm.Tests.Functionality.Stems.Models
 {

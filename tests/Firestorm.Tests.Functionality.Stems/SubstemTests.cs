@@ -11,9 +11,9 @@ using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.Roots.Derive;
 using Firestorm.Tests.Functionality.Stems.Helpers;
 using Firestorm.Tests.Unit;
-using Firestorm.Tests.Unit.Endpoints.Stubs;
-using Firestorm.Tests.Unit.Engine.Implementation;
-using Firestorm.Tests.Unit.Engine.Models;
+using Firestorm.Endpoints.Tests.Stubs;
+using Firestorm.Engine.Tests.Implementation;
+using Firestorm.Engine.Tests.Models;
 using Xunit;
 
 namespace Firestorm.Tests.Functionality.Stems

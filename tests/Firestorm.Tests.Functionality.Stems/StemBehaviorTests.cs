@@ -4,7 +4,7 @@ using Firestorm.Stems;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.Derive;
 using Firestorm.Tests.Unit;
-using Firestorm.Tests.Unit.Endpoints.Stubs;
+using Firestorm.Endpoints.Tests.Stubs;
 using Xunit;
 
 namespace Firestorm.Tests.Functionality.Stems
