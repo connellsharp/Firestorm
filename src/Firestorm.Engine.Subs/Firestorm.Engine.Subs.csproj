@@ -4,6 +4,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Firestorm.Engine.Implementation\Firestorm.Engine.Implementation.csproj" />
-    <ProjectReference Include="..\Firestorm.Engine\Firestorm.Engine.csproj" />
+    <ProjectReference Include="..\Firestorm.Engine.Core\Firestorm.Engine.Core.csproj" />
   </ItemGroup>
 </Project>

@@ -4,7 +4,6 @@
     <RootNamespace>Firestorm.Engine</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Firestorm.Core\Firestorm.Core.csproj" />
-    <ProjectReference Include="..\Firestorm.Engine\Firestorm.Engine.csproj" />
+    <ProjectReference Include="..\Firestorm.Engine.Core\Firestorm.Engine.Core.csproj" />
   </ItemGroup>
 </Project>
