@@ -3,11 +3,7 @@
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Jetbrains.Annotations" Version="11.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Firestorm.Core\Firestorm.Core.csproj" />
-    <ProjectReference Include="..\Firestorm.Engine.Fuel\Firestorm.Engine.Fuel.csproj" />
-    <ProjectReference Include="..\Firestorm.Stems\Firestorm.Stems.csproj" />
+    <ProjectReference Include="..\Firestorm.Engine\Firestorm.Engine.csproj" />
+    <ProjectReference Include="..\Firestorm.Stems.Core\Firestorm.Stems.Core.csproj" />
   </ItemGroup>
 </Project>
