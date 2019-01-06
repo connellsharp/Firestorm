@@ -1,4 +1,4 @@
-namespace Firestorm.Core.Web
+namespace Firestorm.Rest.Web
 {
     /// <summary>
     /// Can be an acknowledgment, error or multi-status response from an endpoint.

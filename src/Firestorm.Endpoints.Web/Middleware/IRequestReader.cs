@@ -1,4 +1,4 @@
-﻿using Firestorm.Core.Web;
+﻿using Firestorm.Rest.Web;
 using Firestorm.Endpoints.Preconditions;
 
 namespace Firestorm.Endpoints.Web

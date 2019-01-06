@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Firestorm.Core.Web;
+using Firestorm.Rest.Web;
 using Firestorm.Endpoints.Strategies;
 using Firestorm.Tests.Unit.Endpoints.Stubs;
 using Xunit;

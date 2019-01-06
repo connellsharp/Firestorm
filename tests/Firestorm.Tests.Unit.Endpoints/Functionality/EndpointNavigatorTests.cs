@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Firestorm.Core.Web;
+using Firestorm.Rest.Web;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Web;
 using Firestorm.Tests.Unit.Endpoints.Stubs;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using AutoFixture;
 using AutoFixture.AutoMoq;
-using Firestorm.Core.Web;
+using Firestorm.Rest.Web;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Web;
 using Xunit;

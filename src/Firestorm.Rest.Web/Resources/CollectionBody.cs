@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Firestorm.Core.Web
+namespace Firestorm.Rest.Web
 {
     public class CollectionBody : ResourceBody, IPagedResourceBody
     {

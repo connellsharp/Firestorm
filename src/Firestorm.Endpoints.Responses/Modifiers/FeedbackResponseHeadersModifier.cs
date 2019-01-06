@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
-using Firestorm.Core.Web;
-using Firestorm.Core.Web.Options;
+using Firestorm.Rest.Web;
+using Firestorm.Rest.Web.Options;
 
 namespace Firestorm.Endpoints.Responses
 {

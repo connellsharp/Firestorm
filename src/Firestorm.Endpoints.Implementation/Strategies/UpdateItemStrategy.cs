@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
-using Firestorm.Core;
-using Firestorm.Core.Web;
+using Firestorm.Rest.Web;
 
 namespace Firestorm.Endpoints.Strategies
 {

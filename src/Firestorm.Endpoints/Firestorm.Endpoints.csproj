@@ -6,7 +6,7 @@
     <PackageReference Include="Jetbrains.Annotations" Version="11.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Firestorm.Core.Web\Firestorm.Core.Web.csproj" />
+    <ProjectReference Include="..\Firestorm.Rest.Web\Firestorm.Rest.Web.csproj" />
     <ProjectReference Include="..\Firestorm.Core\Firestorm.Core.csproj" />
     <ProjectReference Include="..\Firestorm.Host\Firestorm.Host.csproj" />
   </ItemGroup>

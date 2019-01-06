@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net;
 using Firestorm.Client.Content;
-using Firestorm.Core.Web;
 
 namespace Firestorm.Client
 {

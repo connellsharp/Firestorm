@@ -1,4 +1,4 @@
-namespace Firestorm.Core.Web
+namespace Firestorm.Rest.Web
 {
     /// <summary>
     /// The body of a request from a Firestorm API endpoint.

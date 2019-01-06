@@ -1,4 +1,4 @@
-namespace Firestorm.Core.Web
+namespace Firestorm.Rest.Web
 {
     public class ErrorFeedback : Feedback
     {

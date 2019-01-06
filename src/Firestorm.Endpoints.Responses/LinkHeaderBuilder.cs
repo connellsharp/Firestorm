@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using Firestorm.Core.Web;
+using Firestorm.Rest.Web;
 
 namespace Firestorm.Endpoints.Responses
 {

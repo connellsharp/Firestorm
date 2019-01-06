@@ -1,4 +1,4 @@
-namespace Firestorm.Core.Web
+namespace Firestorm.Rest.Web
 {
     /// <remarks>
     /// Similar to <see cref="CollectionBody"/>

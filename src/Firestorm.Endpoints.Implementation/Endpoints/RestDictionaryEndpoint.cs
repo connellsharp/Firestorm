@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using Firestorm.Core.Web;
-using Firestorm.Core.Web.Options;
+using Firestorm.Rest.Web;
+using Firestorm.Rest.Web.Options;
 using Firestorm.Endpoints.Pagination;
 using Firestorm.Endpoints.Preconditions;
 

@@ -26,7 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{08517E60-A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Engine.Additives", "src\Firestorm.Engine.Additives\Firestorm.Engine.Additives.csproj", "{F482D521-0DDF-4703-B9EA-568652DB669A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Core.Web", "src\Firestorm.Core.Web\Firestorm.Core.Web.csproj", "{318AA51A-C5C1-40D0-B3AB-D15CFF4565FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Rest.Web", "src\Firestorm.Rest.Web\Firestorm.Rest.Web.csproj", "{318AA51A-C5C1-40D0-B3AB-D15CFF4565FC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{FA828466-0901-42FA-8BE9-FE3DA18E589D}"
 EndProject

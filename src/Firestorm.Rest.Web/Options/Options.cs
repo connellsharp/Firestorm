@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Firestorm.Core.Web.Options
+namespace Firestorm.Rest.Web.Options
 {
     public class Options
     {

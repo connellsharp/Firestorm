@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using Firestorm.Core.Web;
+using Firestorm.Rest.Web;
 using Firestorm.Endpoints.Responses;
 using Xunit;
 

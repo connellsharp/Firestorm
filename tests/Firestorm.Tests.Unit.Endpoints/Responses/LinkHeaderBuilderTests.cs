@@ -1,4 +1,5 @@
 ﻿using Firestorm.Endpoints.Responses;
+using Firestorm.Rest.Web;
 using Xunit;
 
 namespace Firestorm.Tests.Unit.Endpoints.Responses
@@ -10,7 +11,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         {
             var builder = new LinkHeaderBuilder(new UrlCalculator("/films"));
 
-            builder.AddDetails(new Core.Web.PageLinks
+            builder.AddDetails(new PageLinks
             {
                 Next = new PageInstruction { Offset = 600, Size = 100 }
             });
@@ -24,7 +25,7 @@ namespace Firestorm.Tests.Unit.Endpoints.Responses
         {
             var builder = new LinkHeaderBuilder(new UrlCalculator("/films"));
 
-            builder.AddDetails(new Core.Web.PageLinks
+            builder.AddDetails(new PageLinks
             {
                 Next = new PageInstruction { Offset = 600, Size = 100 },
                 Previous = new PageInstruction { Offset = 400, Size = 100 },

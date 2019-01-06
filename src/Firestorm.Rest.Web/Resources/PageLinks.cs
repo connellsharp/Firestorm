@@ -1,4 +1,4 @@
-namespace Firestorm.Core.Web
+namespace Firestorm.Rest.Web
 {
     /// <summary>
     /// Links to the previous and next pages.

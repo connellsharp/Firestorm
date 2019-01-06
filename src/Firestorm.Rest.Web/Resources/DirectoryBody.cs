@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Firestorm.Core.Web
+namespace Firestorm.Rest.Web
 {
     public class DirectoryBody : ResourceBody
     {
