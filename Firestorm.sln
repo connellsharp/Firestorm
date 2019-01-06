@@ -124,6 +124,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Stems.Tests", "te
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Functional", "Functional", "{8637EC3F-59AC-44AA-8248-05A60C7CDCFC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Owin.IntegrationTests", "tests\Firestorm.Owin.IntegrationTests\Firestorm.Owin.IntegrationTests.csproj", "{BD3FF89B-7D36-4316-9FBD-A6323BCE44A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.AspNetWebApi2.IntegrationTests", "tests\Firestorm.AspNetWebApi2.IntegrationTests\Firestorm.AspNetWebApi2.IntegrationTests.csproj", "{7308E9CC-066E-45EF-9F30-02D1A61CF70A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -314,6 +318,14 @@ Global
 		{86D0FCB7-7B52-4BB4-AFF9-ABB9F1CF583D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86D0FCB7-7B52-4BB4-AFF9-ABB9F1CF583D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86D0FCB7-7B52-4BB4-AFF9-ABB9F1CF583D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD3FF89B-7D36-4316-9FBD-A6323BCE44A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD3FF89B-7D36-4316-9FBD-A6323BCE44A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD3FF89B-7D36-4316-9FBD-A6323BCE44A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD3FF89B-7D36-4316-9FBD-A6323BCE44A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7308E9CC-066E-45EF-9F30-02D1A61CF70A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7308E9CC-066E-45EF-9F30-02D1A61CF70A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7308E9CC-066E-45EF-9F30-02D1A61CF70A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7308E9CC-066E-45EF-9F30-02D1A61CF70A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -378,6 +390,8 @@ Global
 		{3312904B-E11E-4934-8752-DBC0250D61E5} = {1A353687-93AC-4112-87CF-42CFE6E2F84C}
 		{61421B86-680A-451E-AC0D-3E5837515809} = {1A353687-93AC-4112-87CF-42CFE6E2F84C}
 		{28B146D0-3785-4386-BD4F-55DD29A1C76D} = {33A230CD-37B2-455D-AE98-F8917AD6F158}
+		{BD3FF89B-7D36-4316-9FBD-A6323BCE44A2} = {1A353687-93AC-4112-87CF-42CFE6E2F84C}
+		{7308E9CC-066E-45EF-9F30-02D1A61CF70A} = {1A353687-93AC-4112-87CF-42CFE6E2F84C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E07ED662-9390-431F-B4D6-BDA65FE4169A}
