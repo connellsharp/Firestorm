@@ -7,7 +7,7 @@ using Firestorm.Tests.Unit;
 using Firestorm.Endpoints.Tests.Stubs;
 using Xunit;
 
-namespace Firestorm.Tests.Functionality.Stems
+namespace Firestorm.Stems.IntegrationTests
 {
     public class StemBehaviorTests
     {

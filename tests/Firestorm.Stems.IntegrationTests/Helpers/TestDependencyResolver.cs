@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Firestorm.Stems;
 
-namespace Firestorm.Tests.Functionality.Stems.Helpers
+namespace Firestorm.Stems.IntegrationTests.Helpers
 {
     internal class TestDependencyResolver : IDependencyResolver
     {

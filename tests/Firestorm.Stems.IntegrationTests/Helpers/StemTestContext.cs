@@ -8,7 +8,7 @@ using Firestorm.Tests.Unit;
 using Firestorm.Endpoints.Tests.Stubs;
 using Firestorm.Engine.Tests.Models;
 
-namespace Firestorm.Tests.Functionality.Stems.Helpers
+namespace Firestorm.Stems.IntegrationTests.Helpers
 {
     internal class StemTestContext
     {

@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using Firestorm.Stems;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
-using Firestorm.Tests.Functionality.Stems.Helpers;
+using Firestorm.Stems.IntegrationTests.Helpers;
 using Firestorm.Tests.Unit;
 using Xunit;
 
-namespace Firestorm.Tests.Functionality.Stems
+namespace Firestorm.Stems.IntegrationTests
 {
     public class IdentifierUpsertTests
     {

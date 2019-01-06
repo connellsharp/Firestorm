@@ -1,3 +1,3 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Firestorm.Tests.Integration.Data.EntityFramework6")]
+[assembly: InternalsVisibleTo("Firestorm.EntityFramework6.IntegrationTests")]

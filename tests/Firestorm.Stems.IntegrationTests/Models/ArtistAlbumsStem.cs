@@ -5,7 +5,7 @@ using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Tests.Unit;
 
-namespace Firestorm.Tests.Functionality.Stems.Models
+namespace Firestorm.Stems.IntegrationTests.Models
 {
     internal class ArtistAlbumsStem : Stem<Album>
     {

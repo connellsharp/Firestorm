@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Firestorm.Tests.Functionality.Stems.Helpers;
-using Firestorm.Tests.Functionality.Stems.Models;
+using Firestorm.Stems.IntegrationTests.Helpers;
+using Firestorm.Stems.IntegrationTests.Models;
 using Firestorm.Tests.Unit;
 using Xunit;
 
-namespace Firestorm.Tests.Functionality.Stems
+namespace Firestorm.Stems.IntegrationTests
 {
     public class StemCollectionTests
     {

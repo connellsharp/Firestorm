@@ -1,4 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Firestorm.Tests.Unit.Engine")]
-[assembly: InternalsVisibleTo("Firestorm.Tests.Unit.Stems")]
+[assembly: InternalsVisibleTo("Firestorm.Engine.Tests")]
+[assembly: InternalsVisibleTo("Firestorm.Stems.Tests")]

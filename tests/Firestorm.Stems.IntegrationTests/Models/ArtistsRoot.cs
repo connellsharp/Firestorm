@@ -5,7 +5,7 @@ using Firestorm.Stems.Roots.Derive;
 using Firestorm.Tests.Unit;
 using Firestorm.Engine.Tests.Models;
 
-namespace Firestorm.Tests.Functionality.Stems.Models
+namespace Firestorm.Stems.IntegrationTests.Models
 {
     internal class ArtistsRoot : EngineRoot<Artist>
     {

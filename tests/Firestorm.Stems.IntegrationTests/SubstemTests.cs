@@ -9,14 +9,14 @@ using Firestorm.Stems;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.Roots.Derive;
-using Firestorm.Tests.Functionality.Stems.Helpers;
+using Firestorm.Stems.IntegrationTests.Helpers;
 using Firestorm.Tests.Unit;
 using Firestorm.Endpoints.Tests.Stubs;
 using Firestorm.Engine.Tests.Implementation;
 using Firestorm.Engine.Tests.Models;
 using Xunit;
 
-namespace Firestorm.Tests.Functionality.Stems
+namespace Firestorm.Stems.IntegrationTests
 {
     public class SubstemsTests
     {
