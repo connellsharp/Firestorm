@@ -5,9 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Firestorm.Data\Firestorm.Data.csproj" />
-    <ProjectReference Include="..\Firestorm.Fluent\Firestorm.Fluent.csproj" />
-    <ProjectReference Include="..\Firestorm.Engine.Fuel\Firestorm.Engine.Fuel.csproj" />
+    <ProjectReference Include="..\Firestorm.Fluent.Core\Firestorm.Fluent.Core.csproj" />
+    <ProjectReference Include="..\Firestorm.Engine\Firestorm.Engine.csproj" />
   </ItemGroup>
 
 </Project>
