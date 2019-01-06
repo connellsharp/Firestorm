@@ -15,14 +15,13 @@ services.AddFirestorm()
 	.AddStems()
 ```
 
-
+By default, this will scan the calling assembly for all classes that derive from `Stem`. There are other overloads of `AddStems` that allow you to specify the assembly and root namespace of your Stems.
 
 ### StemConfiguration
 
 The factory requires a `StemConfiguration` object, which contains your stem configuration. This contains further settings related to Stems.
 
-- The **NamingConventionSwitcher** switches the request/response naming conventions with your Stem members'.
-- The **AutoPropertyMapper** automatically gets `Expression`s from a [simpler property signature](expression-syntax-options.md#auto-mapping).
+- The **AutoPropertyMapper** automatically gets `Expression`s from a [simpler property signature](other-expressions.md#auto-mapping).
 - The **DependencyResolver** provides the services used for [dependency injection](dependency-injection.md).
 
 ### RootResourceFactory 
