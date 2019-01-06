@@ -1,19 +1,19 @@
 using System.Threading.Tasks;
-using Firestorm.Core.Web;
-using Firestorm.Core.Web.Options;
+using Firestorm.Rest.Web;
+using Firestorm.Rest.Web.Options;
 using Firestorm.Endpoints.Preconditions;
 
 namespace Firestorm.Endpoints
 {
     internal class RestDirectoryEndpoint : IRestEndpoint
     {
-        internal RestDirectoryEndpoint(IRestEndpointContext endpointContext, IRestDirectory directory)
+        internal RestDirectoryEndpoint(IEndpointContext endpointContext, IRestDirectory directory)
         {
             Context = endpointContext;
             Directory = directory;
         }
 
-        private IRestEndpointContext Context { get; }
+        private IEndpointContext Context { get; }
 
         private IRestDirectory Directory { get; }
 
@@ -23,7 +23,7 @@ namespace Firestorm.Endpoints
             if (resource == null)
                 return null;
 
-            return Endpoint.GetFromResource(Context, resource);
+            return Context.Configuration.Resolver.GetFromResource(Context, resource);
         }
 
         public async Task<ResourceBody> GetAsync(IRestCollectionQuery query)

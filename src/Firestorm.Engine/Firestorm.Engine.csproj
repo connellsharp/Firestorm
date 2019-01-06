@@ -4,11 +4,12 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Jetbrains.Annotations" Version="11.0.0" />
-    <PackageReference Include="Reflectious" Version="0.9.3" />
+    <PackageReference Include="Reflectious" Version="0.9.4" />
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Firestorm.Core\Firestorm.Core.csproj" />
     <ProjectReference Include="..\Firestorm.Data\Firestorm.Data.csproj" />
+    <ProjectReference Include="..\Firestorm.Rest\Firestorm.Rest.csproj" />
   </ItemGroup>
 </Project>

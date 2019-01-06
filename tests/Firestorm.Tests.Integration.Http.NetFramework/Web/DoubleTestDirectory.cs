@@ -2,18 +2,19 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Firestorm.Client;
 using Firestorm.Endpoints;
+using Firestorm.Host;
 using Firestorm.Tests.Integration.Http.Base;
 
 namespace Firestorm.Tests.Integration.Http.NetFramework.Web
 {
     public class DoubleTestDirectory : IRestDirectory
     {
-        private readonly IRestEndpointContext _endpointContext;
+        private readonly IRequestContext _requestContext;
         private readonly RestClient _selfRestClient;
 
-        public DoubleTestDirectory(IRestEndpointContext endpointContext, RestClient selfRestClient)
+        public DoubleTestDirectory(IRequestContext requestContext, RestClient selfRestClient)
         {
-            _endpointContext = endpointContext;
+            _requestContext = requestContext;
             _selfRestClient = selfRestClient;
         }
 
@@ -22,7 +23,7 @@ namespace Firestorm.Tests.Integration.Http.NetFramework.Web
             switch (startResourceName)
             {
                 case "ArtistCore":
-                    return IntegratedRestDirectory.GetArtistCollection(_endpointContext);
+                    return IntegratedRestDirectory.GetArtistCollection(_requestContext);
 
                 case "Artists":
                     return _selfRestClient.RequestCollection("ArtistCore");

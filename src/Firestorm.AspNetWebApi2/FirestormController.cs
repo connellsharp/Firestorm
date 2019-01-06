@@ -3,16 +3,16 @@ using System.Diagnostics;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Firestorm.Core.Web;
-using Firestorm.Core.Web.Options;
+using Firestorm.Rest.Web;
+using Firestorm.Rest.Web.Options;
 using Firestorm.Endpoints.Preconditions;
 using Firestorm.Endpoints.Responses;
-using Firestorm.Endpoints.Start;
 using Firestorm.AspNetWebApi2.ErrorHandling;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Formatting.Naming;
 using Firestorm.Endpoints.Query;
 using Firestorm.Endpoints.Web;
+using Firestorm.Host;
 
 namespace Firestorm.AspNetWebApi2
 {
@@ -162,12 +162,13 @@ namespace Firestorm.AspNetWebApi2
             get { return (string) ControllerContext.RouteData.Values["path"]; }
         }
 
-        private IRestEndpointContext _context;
+        private IRequestContext _context;
 
         private IRestEndpoint GetEndpoint()
         {
-            _context = new HttpRequestRestEndpointContext(RequestContext, _config.EndpointConfiguration);
-            return StartEndpointUtility.GetEndpointFromPath(_config, _context, ResourcePath);
+            _context = new WebApiRequestContext(RequestContext);
+            var navigator = new EndpointNavigator(_context, _config.StartResourceFactory, _config.EndpointConfiguration);
+            return navigator.GetEndpointFromPath(ResourcePath);
         }
 
         protected override void Dispose(bool disposing)

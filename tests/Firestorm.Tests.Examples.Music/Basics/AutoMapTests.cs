@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Firestorm.Stems;
+using Firestorm.Stems.Attributes.Attributes;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Tests.Examples.Music.Data.Models;
@@ -25,13 +26,13 @@ namespace Firestorm.Tests.Examples.Music.Basics
         [DataSourceRoot]
         public class ArtistsStem : Stem<Artist>
         {
-            [Identifier]
+            [Identifier, AutoExpr]
             public static int ArtistID { get; set; }
 
-            [Get]
+            [Get, AutoExpr]
             public static string Name { get; set; }
 
-            [Get]
+            [Get, AutoExpr]
             public static DateTime StartDate { get; set; }
         }
 

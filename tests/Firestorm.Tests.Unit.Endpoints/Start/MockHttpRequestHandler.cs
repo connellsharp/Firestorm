@@ -4,12 +4,11 @@ using System.Net;
 using System.Threading.Tasks;
 using Firestorm.Endpoints.Formatting;
 using Firestorm.Endpoints.Preconditions;
-using Firestorm.Endpoints.Start;
 using Firestorm.Endpoints.Web;
 
 namespace Firestorm.Tests.Unit.Endpoints.Start
 {
-    internal class MockHttpRequestHandler : IHttpRequestHandler, IContentWriter
+    internal class MockHttpRequestHandler : IHttpRequestReader, IHttpRequestResponder, IContentWriter
     {
         public string RequestMethod { get; internal set; }
 
@@ -50,8 +49,6 @@ namespace Firestorm.Tests.Unit.Endpoints.Start
         {
             return null;
         }
-
-        public IContentWriter ResponseContentWriter { get; set; }
 
         public IContentWriter GetContentWriter()
         {

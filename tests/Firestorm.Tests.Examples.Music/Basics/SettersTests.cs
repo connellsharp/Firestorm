@@ -48,12 +48,6 @@ namespace Firestorm.Tests.Examples.Music.Basics
             {
                 get { return a => a.StartDate; }
             }
-
-            public override bool CanAddItem()
-            {
-                // TODO not so happy with this anyway...
-                return true;
-            }
         }
 
         [Fact]

@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Firestorm.Data;
+using Firestorm.Host;
 using Firestorm.Stems.Attributes;
 using Firestorm.Stems.Fuel.Resolving;
 using Firestorm.Stems.Roots.DataSource;
@@ -17,13 +18,13 @@ namespace Firestorm.Stems.Roots.Combined
         private readonly IStemConfiguration _configuration;
         private readonly CollectionCreatorCache _creatorCache;
         private readonly IRootStartInfoFactory _startInfoFactory;
-        private readonly IRootRequest _request;
+        private readonly IRequestContext _request;
 
-        public RootsDirectory(IStemConfiguration configuration, IRootStartInfoFactory startInfoFactory, IRootRequest request)
+        public RootsDirectory(IStemConfiguration configuration, IRootStartInfoFactory startInfoFactory, IRequestContext request)
             : this(configuration, startInfoFactory, request, new CollectionCreatorCache())
         { }
 
-        internal RootsDirectory(IStemConfiguration configuration, IRootStartInfoFactory startInfoFactory, IRootRequest request, CollectionCreatorCache creatorCache)
+        internal RootsDirectory(IStemConfiguration configuration, IRootStartInfoFactory startInfoFactory, IRequestContext request, CollectionCreatorCache creatorCache)
         {
             _configuration = configuration;
             _startInfoFactory = startInfoFactory;

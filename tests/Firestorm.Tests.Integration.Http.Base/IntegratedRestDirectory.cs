@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Firestorm.Endpoints;
 using Firestorm.Engine;
+using Firestorm.Host;
 using Firestorm.Tests.Integration.Http.Base.Models;
 using Firestorm.Tests.Models;
 
@@ -11,11 +12,11 @@ namespace Firestorm.Tests.Integration.Http.Base
     {
         private const string ArtistRootName = nameof(Artist) + "s";
 
-        private readonly IRestEndpointContext _endpointContext;
+        private readonly IRequestContext _requestContext;
 
-        public IntegratedRestDirectory(IRestEndpointContext endpointContext)
+        public IntegratedRestDirectory(IRequestContext requestContext)
         {
-            _endpointContext = endpointContext;
+            _requestContext = requestContext;
         }
 
         public IRestResource GetChild(string startResourceName)
@@ -23,16 +24,16 @@ namespace Firestorm.Tests.Integration.Http.Base
             switch (startResourceName)
             {
                 case ArtistRootName:
-                    return GetArtistCollection(_endpointContext);
+                    return GetArtistCollection(_requestContext);
 
                 default:
                     return null;
             }
         }
 
-        public static EngineRestCollection<Artist> GetArtistCollection(IRestEndpointContext endpointContext)
+        public static EngineRestCollection<Artist> GetArtistCollection(IRequestContext requestContext)
         {
-            return new EngineRestCollection<Artist>(new CodedArtistEntityContext(endpointContext.User));
+            return new EngineRestCollection<Artist>(new CodedArtistEntityContext(requestContext.User));
         }
 
         public Task<RestDirectoryInfo> GetInfoAsync()

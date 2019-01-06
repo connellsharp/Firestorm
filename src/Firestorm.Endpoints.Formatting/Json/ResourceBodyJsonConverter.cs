@@ -1,5 +1,5 @@
 ﻿using System;
-using Firestorm.Core.Web;
+using Firestorm.Rest.Web;
 using Newtonsoft.Json;
 
 namespace Firestorm.Endpoints.Formatting.Json

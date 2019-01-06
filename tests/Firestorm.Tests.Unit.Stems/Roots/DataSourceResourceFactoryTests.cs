@@ -27,9 +27,11 @@ namespace Firestorm.Tests.Unit.Stems.Roots
         [Fact]
         public async Task GetStartResource_MockRootFactory_CallsGetStartResource()
         {
-            _factory.GetStemTypes();
+            var stemConfig = new DefaultStemConfiguration();
+            
+            _factory.GetStemTypes(stemConfig);
 
-            var startResource = _factory.GetStartResource(new TestRootRequest(), new DefaultStemConfiguration());
+            var startResource = _factory.GetStartResource(stemConfig, new TestRequestContext());
 
             var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
             var info = await startDirectory.GetInfoAsync();
@@ -41,9 +43,11 @@ namespace Firestorm.Tests.Unit.Stems.Roots
         [Fact]
         public void GetChild_MockRootFactory_CallsGetStartResource()
         {
-            _factory.GetStemTypes();
+            var stemConfig = new DefaultStemConfiguration();
+            
+            _factory.GetStemTypes(stemConfig);
 
-            var startResource = _factory.GetStartResource(new TestRootRequest(), new DefaultStemConfiguration());
+            var startResource = _factory.GetStartResource(stemConfig, new TestRequestContext());
 
             var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
             var resource = startDirectory.GetChild("Test");
@@ -54,10 +58,6 @@ namespace Firestorm.Tests.Unit.Stems.Roots
         [DataSourceRoot]
         public class TestStem : Stem<Artist>
         {
-            public override bool CanAddItem()
-            {
-                return true;
-            }
         }
     }
 }

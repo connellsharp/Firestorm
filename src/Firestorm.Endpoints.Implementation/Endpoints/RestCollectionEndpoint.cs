@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using Firestorm.Core.Web;
-using Firestorm.Core.Web.Options;
+using Firestorm.Rest.Web;
+using Firestorm.Rest.Web.Options;
 using Firestorm.Endpoints.Pagination;
 using Firestorm.Endpoints.Preconditions;
 using Firestorm.Endpoints.Strategies;
@@ -13,13 +13,13 @@ namespace Firestorm.Endpoints
     /// </summary>
     internal class RestCollectionEndpoint : IRestEndpoint
     {
-        internal RestCollectionEndpoint(IRestEndpointContext endpointContext, IRestCollection collection)
+        internal RestCollectionEndpoint(IEndpointContext endpointContext, IRestCollection collection)
         {
             Context = endpointContext;
             Collection = collection;
         }
 
-        public IRestEndpointContext Context { get; }
+        public IEndpointContext Context { get; }
 
         public IRestCollection Collection { get; }
 

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Firestorm.Endpoints;
-using Firestorm.Endpoints.Start;
+using Firestorm.Host;
 
 namespace Firestorm.Stems.Roots
 {
@@ -24,7 +24,7 @@ namespace Firestorm.Stems.Roots
 
         public void Initialize()
         {
-            IEnumerable<Type> stemTypes = RootResourceFactory.GetStemTypes();
+            IEnumerable<Type> stemTypes = RootResourceFactory.GetStemTypes(StemConfiguration);
 
             var cacheBuilder = new AnalyzerCacheBuilder(StemConfiguration);
             cacheBuilder.AnalyzeAllStems(stemTypes);
@@ -32,14 +32,12 @@ namespace Firestorm.Stems.Roots
             _initialized = true;
         }
 
-        public IRestResource GetStartResource(IRestEndpointContext endpointContext)
+        public IRestResource GetStartResource(IRequestContext hostContext)
         {
             if(!_initialized)
                 Initialize();
 
-            var rootRequest = new EndpointRootRequest(endpointContext);
-
-            return RootResourceFactory.GetStartResource(rootRequest, StemConfiguration);
+            return RootResourceFactory.GetStartResource(StemConfiguration, hostContext);
         }
     }
 }

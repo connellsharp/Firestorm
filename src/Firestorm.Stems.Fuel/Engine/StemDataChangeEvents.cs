@@ -25,10 +25,9 @@ namespace Firestorm.Stems.Fuel
             _stem.OnUpdating(item);
         }
 
-        public void OnDeleting(TItem item)
+        public DeletingResult OnDeleting(TItem item)
         {
-            // TODO name
-            _stem.MarkDeleted(item);
+            return _stem.MarkDeleted(item) ? DeletingResult.Handled : DeletingResult.Continue;
         }
 
         public Task OnSavingAsync(TItem item)

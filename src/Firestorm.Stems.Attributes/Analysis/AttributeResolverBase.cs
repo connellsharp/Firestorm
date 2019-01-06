@@ -52,8 +52,11 @@ namespace Firestorm.Stems.Attributes.Analysis
         {
             if (typeof(Expression).IsAssignableFrom(property.PropertyType))
                 return GetPropertyReturnExpression(property);
-            else
+            
+            if(property.GetCustomAttribute<AutoExprAttribute>() != null)
                 return GetAutoMapExpression(property);
+            
+            throw new StemAttributeSetupException("Attribute has been applied to a property that cannot be resolved.");
         }
 
         private LambdaExpression GetPropertyReturnExpression(PropertyInfo property)
@@ -78,7 +81,7 @@ namespace Firestorm.Stems.Attributes.Analysis
         {
             IPropertyAutoMapper autoPropertyMapper = Configuration?.AutoPropertyMapper;
             if (autoPropertyMapper == null)
-                throw new StemAttributeSetupException("Attribute has been applied to a mappable property, which cannot be resolved.");
+                throw new StemAttributeSetupException("Attribute has been applied to an auto expression property, but no AutoPropertyMapper is set up.");
 
             LambdaExpression expression;
 

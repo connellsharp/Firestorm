@@ -25,20 +25,21 @@ namespace Firestorm.Stems.Roots.Derive
             _rootTypeDictionary = rootTypeDictionary;
         }
 
-        public IEnumerable<Type> GetStemTypes()
+        public IEnumerable<Type> GetStemTypes(IStemConfiguration stemConfiguration)
         {
-            return _rootTypeDictionary.GetAllTypes().Select(GetStemFromRoot);
-        }
+            var autoActivator = new AutoActivator(stemConfiguration.DependencyResolver);
 
-        private static Type GetStemFromRoot(Type rootType)
-        {
-            var root = (Root)Activator.CreateInstance(rootType);
-            return root.StartStemType;
+            return _rootTypeDictionary.GetAllTypes().Select(delegate(Type rootType)
+            {
+                var root = (Root)autoActivator.CreateInstance(rootType);
+                return root.StartStemType;
+            });
         }
 
         public IRootStartInfo Get(IStemConfiguration stemConfiguration, string startResourceName)
         {
             var autoActivator = new AutoActivator(stemConfiguration.DependencyResolver);
+            
             var rootType = _rootTypeDictionary.GetType(startResourceName);
             var root = (Root)autoActivator.CreateInstance(rootType);
 

@@ -32,7 +32,7 @@ namespace Firestorm.Engine
         [Pure]
         public static Expression<Func<TItem, bool>> GetAnyIdentifierPredicate<TItem, TIdentifier>(Expression<Func<TItem, IEnumerable<TIdentifier>>> identifierExpr, TIdentifier identifierObj)
         {
-            MethodInfo anyMethod = typeof(Enumerable).Reflect()
+            MethodInfo anyMethod = Reflect.Type(typeof(Enumerable))
                 .GetMethod("Any")
                 .ReturnsType<bool>()
                 .MakeGeneric<TIdentifier>()
@@ -48,7 +48,7 @@ namespace Firestorm.Engine
 
         public static void SetIdentifier<TItem, TIdentifier>(TItem item, Expression<Func<TItem, TIdentifier>> identifierExpr, TIdentifier newIdentifier)
         {
-            item.Reflect()
+            Reflect.Instance(item)
                 .GetProperty(identifierExpr)
                 .SetValue(newIdentifier);
         }

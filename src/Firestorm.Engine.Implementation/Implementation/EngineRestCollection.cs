@@ -24,13 +24,13 @@ namespace Firestorm.Engine
         public async Task<RestCollectionData> QueryDataAsync(IRestCollectionQuery query)
         {
             await _context.Repository.InitializeAsync();
-
-            var queryBuilder = new ContextQueryBuilder<TItem>(_context, query);
-            IQueryable<TItem> items = queryBuilder.BuildQueryable();
             
             var fieldAuth = new FieldAuthChecker<TItem>(_context.Fields, _context.AuthorizationChecker, null);
             IEnumerable<string> fields = fieldAuth.GetOrEnsureFields(query?.SelectFields, 1);
             var selector = new QueryableFieldSelector<TItem>(_context.Fields.GetReaders(fields));
+
+            var queryBuilder = new ContextQueryBuilder<TItem>(_context, query);
+            IQueryable<TItem> items = queryBuilder.BuildQueryable();
 
             QueriedDataIterator queriedData = await selector.SelectFieldsOnlyAsync(items, _context.Repository.ForEachAsync);
             PageDetails pageDetails = queryBuilder.GetPageDetails(queriedData);

@@ -14,7 +14,7 @@ namespace Firestorm.Engine.Subs
 
         void OnUpdating(TItem item);
 
-        void OnDeleting(TItem item);
+        DeletingResult OnDeleting(TItem item);
 
         Task OnSavingAsync(TItem item);
 

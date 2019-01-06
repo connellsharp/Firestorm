@@ -90,4 +90,4 @@ public class ArtistsStem : Stem<Artist>
 }
 ```
 
-This method defaults to always return `false`, not allowing any user to add new items to the collection.
+This method defaults to always return `true`, allowing any user to add new items to the collection.

@@ -1,8 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using Firestorm.Core;
-using Firestorm.Core.Web;
-using Firestorm.Core.Web.Options;
+using Firestorm.Rest.Web;
+using Firestorm.Rest.Web.Options;
 using Firestorm.Endpoints.Preconditions;
 using Firestorm.Endpoints.Strategies;
 
@@ -10,13 +9,13 @@ namespace Firestorm.Endpoints
 {
     internal class RestScalarEndpoint : IRestEndpoint
     {
-        internal RestScalarEndpoint(IRestEndpointContext endpointContext, IRestScalar scalar)
+        internal RestScalarEndpoint(IEndpointContext endpointContext, IRestScalar scalar)
         {
             Context = endpointContext;
             Scalar = scalar;
         }
 
-        public IRestEndpointContext Context { get; }
+        public IEndpointContext Context { get; }
 
         public IRestScalar Scalar { get; }
 

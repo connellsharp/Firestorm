@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Firestorm.Host;
 
 namespace Firestorm.Stems.Roots.Combined
 {
@@ -8,18 +9,18 @@ namespace Firestorm.Stems.Roots.Combined
         private readonly CollectionCreatorCache _creators = new CollectionCreatorCache();
         private IRootStartInfoFactory _startInfoFactory;
 
-        public IEnumerable<Type> GetStemTypes()
+        protected abstract IRootStartInfoFactory CreateStartInfoFactory();
+
+        public IEnumerable<Type> GetStemTypes(IStemConfiguration configuration)
         {
             _startInfoFactory = CreateStartInfoFactory();
 
-            return _startInfoFactory.GetStemTypes();
+            return _startInfoFactory.GetStemTypes(configuration);
         }
 
-        protected abstract IRootStartInfoFactory CreateStartInfoFactory();
-
-        public IRestResource GetStartResource(IRootRequest request, IStemConfiguration configuration)
+        public IRestResource GetStartResource(IStemConfiguration configuration, IRequestContext requestContext)
         {
-            return new RootsDirectory(configuration, _startInfoFactory, request, _creators);
+            return new RootsDirectory(configuration, _startInfoFactory, requestContext, _creators);
         }
     }
 }

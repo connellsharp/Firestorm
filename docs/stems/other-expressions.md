@@ -67,11 +67,15 @@ public class ArtistsStem : Stem<Artist>
 
 ### Using your own mapping rules
 
-You can extend or override the mapping rules in your `StemConfiguration` object.
+You can extend or override the mapping rules by registering your own implementation of `IPropertyAutoMapper`. For example, you could use your own rules from AutoMapper.
 
-You can create your own implementation of `IPropertyAutoMapper` and set is as the `IStemConfiguration.AutoPropertyMapper` property. For example, you could use your own rules from AutoMapper.
+```csharp
+services.AddFirestorm()
+    .AddStems()
+    .Add<IPropertyAutoMapper, MyPropertyAutoMapper>();
+```
 
-By default, this will use the `DefaultPropertyAutoMapper`. You could also use this as a fallback in your own implementation.
+By default, Firestorm will use the `DefaultPropertyAutoMapper`. You could also use this as a fallback in your own implementation.
 
 ```csharp
 public class DefaultPropertyAutoMapper : IPropertyAutoMapper

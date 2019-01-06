@@ -1,28 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Web;
+using Firestorm.Host;
 
 namespace Firestorm.Tests.Integration.Http.NetFramework
 {
-    public class TestEndpointContext : IRestEndpointContext
+    public class TestEndpointContext : IEndpointContext
     {
-        public void Dispose()
-        {
-        }
-
         public RestEndpointConfiguration Configuration { get; } = new DefaultRestEndpointConfiguration();
+        
+        public IRequestContext Request { get; } = new TestRequestContext();
+    }
 
+    public class TestRequestContext : IRequestContext
+    {
         public IRestUser User { get; }
 
         public event EventHandler OnDispose;
-    }
 
-    public class TestCollectionQuery : IRestCollectionQuery
-    {
-        public IEnumerable<string> SelectFields { get; set; }
-        public IEnumerable<FilterInstruction> FilterInstructions { get; }
-        public IEnumerable<SortInstruction> SortInstructions { get; }
-        public PageInstruction PageInstruction { get; }
+        public void Dispose()
+        {
+            OnDispose?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

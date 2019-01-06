@@ -2,7 +2,7 @@
 
 Your `Stem` classes can also use constructor parameters for dependency injection.
 
-Arguments will be injected into the constructor based on the `IDependencyResolver` used in the `StemConfiguration`.
+Arguments will be injected into the constructor based on the registered `IDependencyResolver`. If this is not configured explicitly, your application's default container will be used.
 
 One instance of each `Stem` class is created per request that uses it. A request to `/artists/123/albums/` will instantiate an `ArtistsStem` and an `AlbumsStem`.
 

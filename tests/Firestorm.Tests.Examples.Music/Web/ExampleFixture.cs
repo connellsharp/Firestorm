@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using Firestorm.Endpoints.Start;
-using Firestorm.Endpoints.Web;
 using Firestorm.Tests.Integration.Http.Base;
 
 namespace Firestorm.Tests.Examples.Music.Web
@@ -12,8 +10,7 @@ namespace Firestorm.Tests.Examples.Music.Web
 
         public ExampleFixture()
         {
-            FirestormConfiguration configuration = ExampleConfiguration.GetFirestormConfig<TTest>();
-            _testSuite = new ExampleItegrationSuite(configuration);
+            _testSuite = new ExampleItegrationSuite(ExampleConfiguration.EndpointConfiguration, typeof(TTest));
             _testSuite.Start();
         }
 

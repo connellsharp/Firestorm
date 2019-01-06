@@ -38,7 +38,4 @@ namespace Firestorm.Endpoints.Formatting
             await _writer.WriteBytesAsync(bytes);
         }
     }
-
-    public interface IContentAccepts
-    { }
 }

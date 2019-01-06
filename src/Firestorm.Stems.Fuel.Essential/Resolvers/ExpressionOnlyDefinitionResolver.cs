@@ -36,7 +36,7 @@ namespace Firestorm.Stems.Fuel.Essential.Resolvers
             {
                 Type readerPropertyValueType = ResolverTypeUtility.GetPropertyLambdaReturnType<TItem>(FieldDefinition.Getter.Expression.GetType());
                 
-                var reader =  typeof(ExpressionFieldReader<,>).Reflect()
+                var reader = Reflect.Type(typeof(ExpressionFieldReader<,>))
                     .MakeGeneric(typeof(TItem), readerPropertyValueType)
                     .CastTo<IFieldReader<TItem>>()
                     .CreateInstance(FieldDefinition.Getter.Expression);
@@ -52,7 +52,7 @@ namespace Firestorm.Stems.Fuel.Essential.Resolvers
             {
                 Type writerPropertyValueType = ResolverTypeUtility.GetPropertyLambdaReturnType<TItem>(FieldDefinition.Setter.Expression.GetType());
                 
-                var writer = typeof(PropertyExpressionFieldWriter<,>).Reflect()
+                var writer = Reflect.Type(typeof(PropertyExpressionFieldWriter<,>))
                     .MakeGeneric(typeof(TItem), writerPropertyValueType)
                     .CastTo<IFieldWriter<TItem>>()
                     .CreateInstance(FieldDefinition.Setter.Expression);
@@ -66,7 +66,7 @@ namespace Firestorm.Stems.Fuel.Essential.Resolvers
                 Type locatorPropertyValueType = ResolverTypeUtility.GetPropertyLambdaReturnType<TItem>(FieldDefinition.Locator.Expression.GetType());
                 Debug.Assert(locatorPropertyValueType == FieldDefinition.FieldType, "FieldType is incorrect");
                 
-                var locator = typeof(IdentifierExpressionItemLocator<,>).Reflect()
+                var locator = Reflect.Type(typeof(IdentifierExpressionItemLocator<,>))
                     .MakeGeneric(typeof(TItem), locatorPropertyValueType)
                     .CastTo<IItemLocator<TItem>>()
                     .CreateInstance(FieldDefinition.Locator.Expression);

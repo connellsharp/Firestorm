@@ -1,6 +1,6 @@
 using Firestorm.Client;
 using Firestorm.Endpoints;
-using Firestorm.Endpoints.Start;
+using Firestorm.Host;
 
 namespace Firestorm.Tests.Integration.Http.NetFramework.Web
 {
@@ -16,9 +16,9 @@ namespace Firestorm.Tests.Integration.Http.NetFramework.Web
             _selfRestClient = new RestClient(selfBaseAddress);
         }
 
-        public IRestResource GetStartResource(IRestEndpointContext endpointContext)
+        public IRestResource GetStartResource(IRequestContext requestContext)
         {
-            return new DoubleTestDirectory(endpointContext, _selfRestClient);
+            return new DoubleTestDirectory(requestContext, _selfRestClient);
         }
 
         public void Initialize()

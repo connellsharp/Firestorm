@@ -5,7 +5,7 @@ using Reflectious;
 
 namespace Firestorm.Stems.Roots
 {
-    public class AnalyzerCacheBuilder
+    internal class AnalyzerCacheBuilder
     {
         private readonly AnalyzerCache _analyzerCache;
         private readonly IStemConfiguration _stemConfiguration;
@@ -36,7 +36,7 @@ namespace Firestorm.Stems.Roots
             //AnalyzerCache.LoadAnalyzer(typeof(FieldDefinitionAnalyzer<>).MakeGenericType(itemType), type, stemConfiguration);
         }
 
-        private Type GetStemItemType(Type type)
+        private static Type GetStemItemType(Type type)
         {
             var stemType = type.GetGenericSubclass(typeof(Stem<>));
 

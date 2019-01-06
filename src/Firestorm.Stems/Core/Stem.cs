@@ -70,7 +70,7 @@ namespace Firestorm.Stems
         
         public virtual bool CanAddItem()
         {
-            return false; // TODO: good default?
+            return true;
         }
 
         public event EventHandler OnDispose;

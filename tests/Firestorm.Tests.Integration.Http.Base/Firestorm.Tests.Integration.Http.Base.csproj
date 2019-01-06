@@ -16,11 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Firestorm.Endpoints.Start\Firestorm.Endpoints.Start.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Endpoints\Firestorm.Endpoints.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Client\Firestorm.Client.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Core\Firestorm.Core.csproj" />
-    <ProjectReference Include="..\..\src\Firestorm.Endpoints.Start\Firestorm.Endpoints.Start.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Endpoints\Firestorm.Endpoints.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Engine.Additives\Firestorm.Engine.Additives.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Engine.Implementation\Firestorm.Engine.Implementation.csproj" />

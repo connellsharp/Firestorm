@@ -30,14 +30,14 @@ namespace Firestorm.Stems.Fuel.Essential.Resolvers
                 {
                     var middleExpression = FieldDefinition.Getter.Expression;
 
-                    factory = typeof(InstanceMethodWithExpressionFieldReaderFactory<,,>).Reflect()
+                    factory = Reflect.Type(typeof(InstanceMethodWithExpressionFieldReaderFactory<,,>))
                         .MakeGeneric(typeof(TItem), middleExpression.ReturnType, FieldDefinition.FieldType)
                         .CastTo<IFactory<IFieldReader<TItem>, TItem>>()
                         .CreateInstance(middleExpression, FieldDefinition.Getter.GetInstanceMethod);
                 }
                 else
                 {
-                    factory = typeof(InstanceMethodFieldReaderFactory<,>).Reflect()
+                    factory = Reflect.Type(typeof(InstanceMethodFieldReaderFactory<,>))
                         .MakeGeneric(typeof(TItem), FieldDefinition.FieldType)
                         .CastTo<IFactory<IFieldReader<TItem>, TItem>>()
                         .CreateInstance(FieldDefinition.Getter.GetInstanceMethod);

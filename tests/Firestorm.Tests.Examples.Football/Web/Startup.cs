@@ -3,8 +3,11 @@ using Firestorm.AspNetCore2;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Web;
 using Firestorm.Extensions.AspNetCore;
+using Firestorm.Fluent;
+using Firestorm.Stems;
 using Firestorm.Tests.Examples.Football.Data;
 using Firestorm.Tests.Examples.Football.Tests;
+using Firestorm.Tests.Integration.Data.Base;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,11 +31,23 @@ namespace Firestorm.Tests.Examples.Football.Web
             services
                 .AddDbContext<FootballDbContext>(builder =>
                 {
-                    const string connection = @"Server=(localdb)\mssqllocaldb;Database=Firestorm.Tests.Examples.Football;Trusted_Connection=True;ConnectRetryCount=0";
-                    builder.UseSqlServer(connection);
+                    string connectionString = DbConnectionStrings.Resolve("Firestorm.FootballExample");
+                    builder.UseSqlServer(connectionString);
                 });
 
             var fsBuilder = services.AddFirestorm()
+                .AddEndpoints(new DefaultRestEndpointConfiguration
+                {
+                    ResponseConfiguration =
+                    {
+                        StatusField = ResponseStatusField.StatusCode,
+                        PageConfiguration =
+                        {
+                            UseLinkHeaders = true
+                        },
+                        ShowDeveloperErrors = true
+                    }
+                })
                 .AddEntityFramework<FootballDbContext>();
 
             switch (_tech)
@@ -61,18 +76,7 @@ namespace Firestorm.Tests.Examples.Football.Web
 
             app.UseMiddleware<CriticalJsonErrorMiddleware>();
 
-            app.UseFirestorm(new DefaultRestEndpointConfiguration
-            {
-                ResponseConfiguration =
-                {
-                    StatusField = ResponseStatusField.StatusCode,
-                    PageConfiguration =
-                    {
-                        UseLinkHeaders = true
-                    },
-                    ShowDeveloperErrors = true
-                }
-            });
+            app.UseFirestorm();
         }
     }
 }

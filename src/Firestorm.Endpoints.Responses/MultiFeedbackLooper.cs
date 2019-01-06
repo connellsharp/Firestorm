@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Firestorm.Core.Web;
+using Firestorm.Rest.Web;
 
 namespace Firestorm.Endpoints.Responses
 {

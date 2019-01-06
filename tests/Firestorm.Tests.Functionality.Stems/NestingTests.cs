@@ -19,7 +19,8 @@ namespace Firestorm.Tests.Functionality.Stems
         
         public NestingTests()
         {
-            _restCollection = StemTestUtility.GetArtistsCollection<ArtistsStem>();
+            var testContext = new StemTestContext();
+            _restCollection = testContext.GetArtistsCollection<ArtistsStem>();
         }
 
         private class ArtistsStem : Stem<Artist>

@@ -16,7 +16,6 @@
     <ProjectReference Include="..\..\src\Firestorm.Endpoints.Formatting\Firestorm.Endpoints.Formatting.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Endpoints.Implementation\Firestorm.Endpoints.Implementation.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Endpoints.Responses\Firestorm.Endpoints.Responses.csproj" />
-    <ProjectReference Include="..\..\src\Firestorm.Endpoints.Start\Firestorm.Endpoints.Start.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Endpoints.Web\Firestorm.Endpoints.Web.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Endpoints\Firestorm.Endpoints.csproj" />
     <ProjectReference Include="..\Firestorm.Tests.Unit\Firestorm.Tests.Unit.csproj" />

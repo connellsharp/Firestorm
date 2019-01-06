@@ -1,13 +1,12 @@
 using System;
 using System.Threading.Tasks;
-using Firestorm.Core;
-using Firestorm.Core.Web;
+using Firestorm.Rest.Web;
 
 namespace Firestorm.Endpoints.Strategies
 {
     internal class ReplaceScalarStrategy : IUnsafeRequestStrategy<IRestScalar>
     {
-        public async Task<Feedback> ExecuteAsync(IRestScalar scalar, IRestEndpointContext context, ResourceBody body)
+        public async Task<Feedback> ExecuteAsync(IRestScalar scalar, IEndpointContext context, ResourceBody body)
         {
             var scalarBody = body as ScalarBody;
             if (scalarBody == null)

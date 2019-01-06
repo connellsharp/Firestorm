@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
-using Firestorm.Core;
-using Firestorm.Core.Web;
+using Firestorm.Rest.Web;
 
 namespace Firestorm.Endpoints.Strategies
 {
@@ -10,7 +9,7 @@ namespace Firestorm.Endpoints.Strategies
     /// </summary>
     internal class UpdateItemStrategy : IUnsafeRequestStrategy<IRestItem>
     {
-        public async Task<Feedback> ExecuteAsync(IRestItem item, IRestEndpointContext context, ResourceBody body)
+        public async Task<Feedback> ExecuteAsync(IRestItem item, IEndpointContext context, ResourceBody body)
         {
             var itemBody = body as ItemBody;
             if (itemBody == null)

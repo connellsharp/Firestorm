@@ -31,7 +31,7 @@ namespace Firestorm.Fluent
 
         public void AddRootItem(IApiBuilder builder, Type itemType, [CanBeNull] string rootName)
         {
-            this.Reflect()
+            Reflect.Instance(this)
                 .GetMethod(nameof(AddRootItem))
                 .MakeGeneric(itemType)
                 .Invoke(builder, rootName);
@@ -61,7 +61,7 @@ namespace Firestorm.Fluent
                 ParameterExpression paramExpression = Expression.Parameter(itemType);
                 LambdaExpression expression = Expression.Lambda(Expression.Property(paramExpression, property), paramExpression);
 
-                this.Reflect()
+                Reflect.Instance(this)
                     .GetMethod(nameof(AddField))
                     .MakeGeneric(typeof(TItem), property.PropertyType)
                     .Invoke(builder, expression, nesting);
@@ -80,7 +80,7 @@ namespace Firestorm.Fluent
 
             if (typeof(TField).GetConstructor(new Type[0]) != null)
             {
-                this.Reflect()
+                Reflect.Instance(this)
                     .GetMethod(nameof(AddFieldAsItem))
                     .MakeGeneric<TItem, TField>()
                     .Invoke(fieldBuilder, nesting);
@@ -89,7 +89,7 @@ namespace Firestorm.Fluent
             Type enumNav = typeof(TField).GetGenericInterface(typeof(ICollection<>))?.GetGenericArguments()[0];
             if (enumNav != null)
             {
-                this.Reflect()
+                Reflect.Instance(this)
                     .GetMethod(nameof(AddFieldAsCollection))
                     .MakeGeneric(typeof(TItem), typeof(TField), enumNav)
                     .Invoke(fieldBuilder, nesting);

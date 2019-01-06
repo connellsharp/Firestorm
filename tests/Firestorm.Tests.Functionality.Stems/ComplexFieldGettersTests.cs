@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Stems;
+using Firestorm.Stems.Attributes.Attributes;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Tests.Functionality.Stems.Helpers;
 using Firestorm.Tests.Unit;
@@ -15,16 +16,19 @@ namespace Firestorm.Tests.Functionality.Stems
 
         public ComplexFieldGettersTests()
         {
-            _restCollection = StemTestUtility.GetArtistsCollection<ArtistsStem>();
+            var testContext = new StemTestContext();
+            _restCollection = testContext.GetArtistsCollection<ArtistsStem>();
         }
 
         public class ArtistsStem : Stem<Artist>
         {
             [Identifier]
             [Get]
+            [AutoExpr]
             public static int ID { get; }
 
             [Get]
+            [AutoExpr]
             public static string Name { get; set; }
 
             [Get(Argument = nameof(Name))]

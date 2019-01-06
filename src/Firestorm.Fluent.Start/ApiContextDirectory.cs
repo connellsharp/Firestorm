@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Firestorm.Endpoints;
 using Firestorm.Fluent.Sources;
+using Firestorm.Host;
 
 namespace Firestorm.Fluent.Start
 {
@@ -10,7 +10,7 @@ namespace Firestorm.Fluent.Start
     {
         private readonly IApiDirectorySource _directorySource;
 
-        internal ApiContextDirectory(IRestEndpointContext apiContext, IApiDirectorySource directorySource)
+        internal ApiContextDirectory(IRequestContext requestContext, IApiDirectorySource directorySource)
         {
             _directorySource = directorySource;
         }

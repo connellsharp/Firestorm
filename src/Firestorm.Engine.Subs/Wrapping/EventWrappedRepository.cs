@@ -55,8 +55,11 @@ namespace Firestorm.Engine.Subs.Wrapping
 
         public void MarkDeleted(TItem item)
         {
-            _events?.OnDeleting(item);
-            _repository.MarkDeleted(item);
+            var deleteResult = _events?.OnDeleting(item) ?? DeletingResult.Continue;
+            
+            if (deleteResult == DeletingResult.Continue)
+                _repository.MarkDeleted(item);
+            
             _savableItems.Add(item);
         }
 

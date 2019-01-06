@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Firestorm.Host;
 
 namespace Firestorm.Stems.Roots
 {
@@ -8,8 +9,8 @@ namespace Firestorm.Stems.Roots
     /// </summary>
     public interface IRootResourceFactory
     {
-        IEnumerable<Type> GetStemTypes();
+        IEnumerable<Type> GetStemTypes(IStemConfiguration configuration);
 
-        IRestResource GetStartResource(IRootRequest request, IStemConfiguration configuration);
+        IRestResource GetStartResource(IStemConfiguration configuration, IRequestContext requestContext);
     }
 }

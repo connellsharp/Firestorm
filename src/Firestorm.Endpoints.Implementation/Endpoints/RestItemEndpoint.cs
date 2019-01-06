@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
-using Firestorm.Core.Web;
-using Firestorm.Core.Web.Options;
+using Firestorm.Rest.Web;
+using Firestorm.Rest.Web.Options;
 using Firestorm.Endpoints.Preconditions;
 using Firestorm.Endpoints.Strategies;
 
@@ -8,20 +8,20 @@ namespace Firestorm.Endpoints
 {
     internal class RestItemEndpoint : IRestEndpoint
     {
-        internal RestItemEndpoint(IRestEndpointContext endpointContext, IRestItem item)
+        internal RestItemEndpoint(IEndpointContext endpointContext, IRestItem item)
         {
             Context = endpointContext;
             Item = item;
         }
 
-        IRestEndpointContext Context { get; }
+        IEndpointContext Context { get; }
 
         IRestItem Item { get; }
 
         public IRestEndpoint Next(INextPath fieldName)
         {
             IRestResource resource = Item.GetField(fieldName.GetCoded());
-            return Endpoint.GetFromResource(Context, resource);
+            return Context.Configuration.Resolver.GetFromResource(Context, resource);
         }
 
         public async Task<ResourceBody> GetAsync(IRestCollectionQuery query)

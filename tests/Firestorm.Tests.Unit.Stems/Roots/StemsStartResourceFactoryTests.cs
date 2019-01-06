@@ -18,11 +18,11 @@ namespace Firestorm.Tests.Unit.Stems.Roots
                 RootResourceFactory = rootFactoryMock.Object
             };
 
-            var context = new TestEndpointContext();
+            var context = new TestRequestContext();
 
             var startResource = factory.GetStartResource(context);
 
-            rootFactoryMock.Verify(f => f.GetStartResource(It.IsAny<EndpointRootRequest>(), stemConfig));
+            rootFactoryMock.Verify(f => f.GetStartResource(stemConfig, context));
         }
     }
 }

@@ -16,7 +16,8 @@ namespace Firestorm.Tests.Functionality.Stems
         
         public IdentifierUpsertTests()
         {
-            _restCollection = StemTestUtility.GetArtistsCollection<ArtistsStem>();
+            var testContext = new StemTestContext();
+            _restCollection = testContext.GetArtistsCollection<ArtistsStem>();
         }
 
         private class ArtistsStem : Stem<Artist>
@@ -38,11 +39,6 @@ namespace Firestorm.Tests.Functionality.Stems
             public static Expression<Func<Artist, string>> Label
             {
                 get { return a => a.Label; }
-            }
-
-            public override bool CanAddItem()
-            {
-                return true; // yeah i don't like this...
             }
         }
 

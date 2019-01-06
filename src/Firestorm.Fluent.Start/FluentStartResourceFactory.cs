@@ -1,10 +1,10 @@
 ﻿using System.Collections.Concurrent;
 using Firestorm.Data;
 using Firestorm.Endpoints;
-using Firestorm.Endpoints.Start;
 using Firestorm.Fluent.Fuel.Builder;
 using Firestorm.Fluent.Fuel.Models;
 using Firestorm.Fluent.Sources;
+using Firestorm.Host;
 
 namespace Firestorm.Fluent.Start
 {
@@ -26,12 +26,12 @@ namespace Firestorm.Fluent.Start
             _apiDirectorySource = builder.BuildSource();
         }
 
-        public IRestResource GetStartResource(IRestEndpointContext endpointContext)
+        public IRestResource GetStartResource(IRequestContext requestContext)
         {
             if(_apiDirectorySource == null)
                 Initialize();
 
-            return new ApiContextDirectory(endpointContext, _apiDirectorySource);
+            return new ApiContextDirectory(requestContext, _apiDirectorySource);
         }
     }
 }
