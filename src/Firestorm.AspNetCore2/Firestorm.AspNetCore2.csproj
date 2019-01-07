@@ -3,8 +3,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
 
     <Version>0.9.5-alpha</Version>
-    <Description></Description>
-    <PackageTags></PackageTags>
+    <Description>ASP.NET Core 2.0 middleware and helpers for Firestorm.</Description>
+    <PackageTags>firestorm rest api aspnetcore</PackageTags>
 
     <Authors>Connell Watkins</Authors>
     <Copyright>Copyright © Connell Watkins 2017</Copyright>

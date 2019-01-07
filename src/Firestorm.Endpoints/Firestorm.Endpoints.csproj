@@ -3,8 +3,8 @@
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
 
     <Version>0.9.5-alpha</Version>
-    <Description></Description>
-    <PackageTags></PackageTags>
+    <Description>Exposes an HTTP API for Firestorm.Rest.</Description>
+    <PackageTags>firestorm rest api endpoints</PackageTags>
 
     <Authors>Connell Watkins</Authors>
     <Copyright>Copyright © Connell Watkins 2017</Copyright>

@@ -4,8 +4,8 @@
     <RootNamespace>Firestorm.Engine</RootNamespace>
 
     <Version>0.9.5-alpha</Version>
-    <Description></Description>
-    <PackageTags></PackageTags>
+    <Description>Main implementation of basic Firestorm.Rest interfaces.</Description>
+    <PackageTags>firestorm rest engine linq query sort filter pagination</PackageTags>
 
     <Authors>Connell Watkins</Authors>
     <Copyright>Copyright © Connell Watkins 2017</Copyright>

@@ -3,8 +3,8 @@
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
 
       <Version>0.9.5-alpha</Version>
-      <Description></Description>
-      <PackageTags></PackageTags>
+      <Description>Essential attributes for decorating Stem classes.</Description>
+      <PackageTags>firestorm stems attributes</PackageTags>
 
       <Authors>Connell Watkins</Authors>
       <Copyright>Copyright © Connell Watkins 2017</Copyright>

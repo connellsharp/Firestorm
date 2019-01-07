@@ -4,8 +4,8 @@
         <RootNamespace>Firestorm.Endpoints</RootNamespace>
 
         <Version>0.9.5-alpha</Version>
-        <Description></Description>
-        <PackageTags></PackageTags>
+        <Description>Core components for Firestorm.Endpoints.</Description>
+        <PackageTags>firestorm endpoints</PackageTags>
 
         <Authors>Connell Watkins</Authors>
         <Copyright>Copyright © Connell Watkins 2017</Copyright>

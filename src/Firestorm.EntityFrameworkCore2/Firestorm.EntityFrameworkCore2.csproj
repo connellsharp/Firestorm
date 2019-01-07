@@ -3,8 +3,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
 
     <Version>0.9.5-alpha</Version>
-    <Description></Description>
-    <PackageTags></PackageTags>
+    <Description>Use Entity Framework Core 2 as a data source for Firestorm.</Description>
+    <PackageTags>firestorm rest orm entityframeworkcore efcore efcore2</PackageTags>
 
     <Authors>Connell Watkins</Authors>
     <Copyright>Copyright © Connell Watkins 2017</Copyright>

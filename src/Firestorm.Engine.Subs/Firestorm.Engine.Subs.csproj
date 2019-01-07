@@ -3,8 +3,8 @@
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
 
     <Version>0.9.5-alpha</Version>
-    <Description></Description>
-    <PackageTags></PackageTags>
+    <Description>Firestorm.Engine objects that allow navigating through an object's properties and collections.</Description>
+    <PackageTags>firestorm rest engine sub navigation</PackageTags>
 
     <Authors>Connell Watkins</Authors>
     <Copyright>Copyright © Connell Watkins 2017</Copyright>
