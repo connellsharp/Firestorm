@@ -4,9 +4,9 @@ using JetBrains.Annotations;
 namespace Firestorm.Owin.IntegrationTests
 {
     [UsedImplicitly]
-    public class OwinIntegrationTests : BasicIntegrationTestsBase
+    public class OwinTests : BasicIntegrationTestsBase
     {
-        public OwinIntegrationTests()
+        public OwinTests()
             : base(new OwinItegrationSuite<Startup>(1111))
         { }
     }

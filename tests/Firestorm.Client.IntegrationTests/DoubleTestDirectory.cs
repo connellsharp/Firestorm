@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Firestorm.Client;
-using Firestorm.Endpoints;
 using Firestorm.Host;
 using Firestorm.Testing.Http;
 
-namespace Firestorm.Tests.Integration.Http.NetFramework.Web
+namespace Firestorm.Client.IntegrationTests
 {
     public class DoubleTestDirectory : IRestDirectory
     {

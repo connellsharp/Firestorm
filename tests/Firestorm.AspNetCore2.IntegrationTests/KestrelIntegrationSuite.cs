@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Firestorm.AspNetCore2.IntegrationTests
 {
-    internal class NetCoreIntegrationSuite<TStartup> : IHttpIntegrationSuite
+    internal class KestrelIntegrationSuite<TStartup> : IHttpIntegrationSuite
         where TStartup : class
     {
         private readonly int _portNumber;
         private IWebHost _host;
 
-        public NetCoreIntegrationSuite(int portNumber)
+        public KestrelIntegrationSuite(int portNumber)
         {
             _portNumber = portNumber;
         }

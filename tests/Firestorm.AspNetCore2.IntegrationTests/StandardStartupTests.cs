@@ -7,7 +7,7 @@ namespace Firestorm.AspNetCore2.IntegrationTests
     public class StandardStartupTests : BasicIntegrationTestsBase
     {
         public StandardStartupTests()
-            : base(new NetCoreIntegrationSuite<StandardStartup>(2223))
+            : base(new KestrelIntegrationSuite<StandardStartup>(2223))
         { }
     }
 }

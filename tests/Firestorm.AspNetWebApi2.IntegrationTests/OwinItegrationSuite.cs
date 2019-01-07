@@ -5,15 +5,16 @@ using Microsoft.Owin.Hosting;
 
 namespace Firestorm.AspNetWebApi2.IntegrationTests
 {
-    internal class NetFrameworkItegrationSuite<TStartup> : IHttpIntegrationSuite
+    // Exact copy of class in Owin tests
+    internal class OwinItegrationSuite<TStartup> : IHttpIntegrationSuite
     {
         private readonly string _baseAddress;
 
-        public NetFrameworkItegrationSuite(int localPortNumber)
+        public OwinItegrationSuite(int localPortNumber)
             : this("http://localhost:" + localPortNumber)
         { }
 
-        public NetFrameworkItegrationSuite(string baseAddress)
+        public OwinItegrationSuite(string baseAddress)
         {
             _baseAddress = baseAddress;
 

@@ -126,6 +126,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.AspNetWebApi2.Int
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Testing", "tests\Firestorm.Testing\Firestorm.Testing.csproj", "{F86C93FA-558B-4BD7-87BF-1E770DD5FE79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Client.IntegrationTests", "tests\Firestorm.Client.IntegrationTests\Firestorm.Client.IntegrationTests.csproj", "{4BCC6C25-78E6-4429-BCDD-54B8088D8779}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -320,6 +322,10 @@ Global
 		{F86C93FA-558B-4BD7-87BF-1E770DD5FE79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F86C93FA-558B-4BD7-87BF-1E770DD5FE79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F86C93FA-558B-4BD7-87BF-1E770DD5FE79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BCC6C25-78E6-4429-BCDD-54B8088D8779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BCC6C25-78E6-4429-BCDD-54B8088D8779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BCC6C25-78E6-4429-BCDD-54B8088D8779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BCC6C25-78E6-4429-BCDD-54B8088D8779}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -385,6 +391,7 @@ Global
 		{BD3FF89B-7D36-4316-9FBD-A6323BCE44A2} = {1A353687-93AC-4112-87CF-42CFE6E2F84C}
 		{7308E9CC-066E-45EF-9F30-02D1A61CF70A} = {1A353687-93AC-4112-87CF-42CFE6E2F84C}
 		{F86C93FA-558B-4BD7-87BF-1E770DD5FE79} = {33A230CD-37B2-455D-AE98-F8917AD6F158}
+		{4BCC6C25-78E6-4429-BCDD-54B8088D8779} = {1A353687-93AC-4112-87CF-42CFE6E2F84C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E07ED662-9390-431F-B4D6-BDA65FE4169A}

@@ -7,7 +7,7 @@ namespace Firestorm.AspNetCore2.IntegrationTests
     public class OptionsStartupTests : BasicIntegrationTestsBase
     {
         public OptionsStartupTests()
-            : base(new NetCoreIntegrationSuite<OptionsStartup>(2224))
+            : base(new KestrelIntegrationSuite<OptionsStartup>(2224))
         { }
     }
 }
