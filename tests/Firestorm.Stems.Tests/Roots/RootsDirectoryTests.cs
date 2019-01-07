@@ -6,6 +6,7 @@ using Firestorm.Stems;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.Combined;
 using Firestorm.Stems.Roots.Derive;
+using Firestorm.Testing.Models;
 using Xunit;
 
 namespace Firestorm.Stems.Tests.Roots

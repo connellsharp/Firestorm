@@ -1,7 +1,7 @@
 using System.Data.Entity;
 using Firestorm.Testing.Models;
 using Firestorm.Tests.Integration.Data.Base;
-using Firestorm.Tests.Unit;
+using Firestorm.Testing;
 using JetBrains.Annotations;
 
 namespace Firestorm.EntityFramework6.IntegrationTests

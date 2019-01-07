@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Firestorm.Testing.Models;
 
-namespace Firestorm.Tests.Unit
+namespace Firestorm.Testing
 {
     [Obsolete("Tests that use this should probably be refactored to be more data-driven tests.")]
     public static class TestRepositories

@@ -10,6 +10,8 @@ using Firestorm.Stems;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.Fuel;
+using Firestorm.Testing.Models;
+using Firestorm.Tests.Unit;
 using Xunit;
 
 namespace Firestorm.Stems.Tests.Substems

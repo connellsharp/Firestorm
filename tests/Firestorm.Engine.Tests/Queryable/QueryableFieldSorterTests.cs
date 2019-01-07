@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Firestorm.Engine.Queryable;
 using Firestorm.Engine.Tests.Models;
+using Firestorm.Testing.Models;
 using Xunit;
 
 namespace Firestorm.Engine.Tests.Queryable

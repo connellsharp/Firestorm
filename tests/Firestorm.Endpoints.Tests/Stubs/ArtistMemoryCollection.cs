@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Firestorm.Endpoints.Tests.Stubs.MemoryResources;
+using Firestorm.Testing.Models;
+using Firestorm.Tests.Unit;
 
 namespace Firestorm.Endpoints.Tests.Stubs
 {

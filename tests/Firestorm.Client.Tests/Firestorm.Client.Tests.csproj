@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Firestorm.Client\Firestorm.Client.csproj" />
-    <ProjectReference Include="..\Firestorm.Tests.Unit\Firestorm.Tests.Unit.csproj" />
+    <ProjectReference Include="..\Firestorm.Testing\Firestorm.Testing.csproj" />
   </ItemGroup>
 
 </Project>

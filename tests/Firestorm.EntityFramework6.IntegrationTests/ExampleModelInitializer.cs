@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using Firestorm.Testing.Data;
-using Firestorm.Tests.Unit;
+using Firestorm.Testing;
 using JetBrains.Annotations;
 
 namespace Firestorm.EntityFramework6.IntegrationTests

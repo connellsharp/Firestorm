@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Stems.IntegrationTests.Helpers;
 using Firestorm.Stems.IntegrationTests.Models;
-using Firestorm.Tests.Unit;
+using Firestorm.Testing;
 using Xunit;
 
 namespace Firestorm.Stems.IntegrationTests

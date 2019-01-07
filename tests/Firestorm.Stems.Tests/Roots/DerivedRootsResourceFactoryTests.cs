@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.Derive;
+using Firestorm.Testing.Models;
 using Moq;
 using Xunit;
 

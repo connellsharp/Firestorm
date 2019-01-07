@@ -4,7 +4,7 @@ using AutoFixture;
 using AutoFixture.Kernel;
 using Moq;
 
-namespace Firestorm.Tests.Unit
+namespace Firestorm.Testing
 {
     public static class AutoMoqExtensions
     {

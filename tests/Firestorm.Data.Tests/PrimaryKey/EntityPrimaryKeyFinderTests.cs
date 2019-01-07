@@ -1,4 +1,4 @@
-﻿namespace Firestorm.Tests.Unit.Data.PrimaryKey
+﻿namespace Firestorm.Testing.Data.PrimaryKey
 {
     // TODO Entity framework test proj
     //public class EntityPrimaryKeyFinderTests

@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Firestorm.Tests.Integration.Http.Base;
-using Firestorm.Tests.Unit;
+using Firestorm.Testing;
 using Newtonsoft.Json;
 using Xunit;
 

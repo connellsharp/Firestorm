@@ -5,6 +5,7 @@ using Firestorm.Stems;
 using Firestorm.Stems.Roots;
 using Xunit;
 using Firestorm.Stems.Roots.DataSource;
+using Firestorm.Testing.Models;
 using Moq;
 
 namespace Firestorm.Stems.Tests.Roots

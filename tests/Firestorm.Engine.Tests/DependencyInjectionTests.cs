@@ -7,6 +7,8 @@ using Firestorm.Engine.Defaults;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Identifiers;
 using Firestorm.Engine.Tests.Models;
+using Firestorm.Testing.Models;
+using Firestorm.Tests.Unit;
 using Ninject;
 using Xunit;
 

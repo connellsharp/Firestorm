@@ -4,7 +4,7 @@ using Firestorm.Rest.Web;
 using Firestorm.Endpoints;
 using Firestorm.Host;
 using Firestorm.Endpoints.Tests.Stubs;
-using Firestorm.Tests.Unit;
+using Firestorm.Testing;
 using Xunit;
 
 namespace Firestorm.Endpoints.Tests.Functionality

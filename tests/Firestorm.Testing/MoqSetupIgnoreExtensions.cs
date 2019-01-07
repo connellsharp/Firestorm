@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using Moq;
 using Moq.Language.Flow;
 
-namespace Firestorm.Tests.Unit
+namespace Firestorm.Testing
 {
     /// <remarks>
     /// From https://gist.github.com/7Pass/1c6b329e85ca29071f42

@@ -1,5 +1,5 @@
 using Firestorm.Testing.Models;
-using Firestorm.Tests.Unit;
+using Firestorm.Testing;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 
