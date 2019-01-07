@@ -1,7 +1,7 @@
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Firestorm.Tests.Examples.Music.Data.Models;
-using Firestorm.Tests.Integration.Data.Base;
+using Firestorm.Testing.Data;
 using JetBrains.Annotations;
 
 namespace Firestorm.Tests.Examples.Music.Data

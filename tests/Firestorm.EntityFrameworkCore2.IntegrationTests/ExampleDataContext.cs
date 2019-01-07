@@ -1,4 +1,4 @@
-using Firestorm.Tests.Integration.Data.Base.Models;
+using Firestorm.Testing.Data.Models;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 

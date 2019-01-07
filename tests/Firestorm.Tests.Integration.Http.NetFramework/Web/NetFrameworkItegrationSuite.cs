@@ -1,6 +1,6 @@
 using System;
 using System.Net.Http;
-using Firestorm.Tests.Integration.Http.Base;
+using Firestorm.Testing.Http;
 using Microsoft.Owin.Hosting;
 
 namespace Firestorm.Tests.Integration.Http.NetFramework.Web

@@ -7,7 +7,7 @@ using Firestorm.Fluent;
 using Firestorm.Stems;
 using Firestorm.Tests.Examples.Football.Data;
 using Firestorm.Tests.Examples.Football.Tests;
-using Firestorm.Tests.Integration.Data.Base;
+using Firestorm.Testing.Data;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

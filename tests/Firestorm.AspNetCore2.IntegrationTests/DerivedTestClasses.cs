@@ -1,4 +1,4 @@
-﻿using Firestorm.Tests.Integration.Http.Base.Tests;
+﻿using Firestorm.Testing.Http.Tests;
 using JetBrains.Annotations;
 
 namespace Firestorm.Tests.Integration.Http.AspNetCore

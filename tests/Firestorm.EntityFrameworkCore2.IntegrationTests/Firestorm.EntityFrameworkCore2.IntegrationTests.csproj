@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Firestorm.EntityFrameworkCore2\Firestorm.EntityFrameworkCore2.csproj" />
-    <ProjectReference Include="..\Firestorm.Tests.Integration.Data.Base\Firestorm.Tests.Integration.Data.Base.csproj" />
+    <ProjectReference Include="..\Firestorm.Testing.Data\Firestorm.Testing.Data.csproj" />
   </ItemGroup>
 
 </Project>

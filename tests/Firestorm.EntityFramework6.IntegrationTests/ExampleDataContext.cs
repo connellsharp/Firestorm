@@ -1,6 +1,6 @@
 using System.Data.Entity;
-using Firestorm.Tests.Integration.Data.Base;
-using Firestorm.Tests.Integration.Data.Base.Models;
+using Firestorm.Testing.Data;
+using Firestorm.Testing.Data.Models;
 using JetBrains.Annotations;
 
 namespace Firestorm.Tests.Integration.Data.EntityFramework6

@@ -23,7 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Firestorm.AspNetWebApi2\Firestorm.AspNetWebApi2.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Owin\Firestorm.Owin.csproj" />
-    <ProjectReference Include="..\Firestorm.Tests.Integration.Http.Base\Firestorm.Tests.Integration.Http.Base.csproj" />
+    <ProjectReference Include="..\Firestorm.Testing.Http\Firestorm.Testing.Http.csproj" />
   </ItemGroup>
 
 </Project>

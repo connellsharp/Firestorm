@@ -7,12 +7,11 @@ using Firestorm.Engine.Additives.Identifiers;
 using Firestorm.Engine.Defaults;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Identifiers;
-using Firestorm.Tests.Models;
+using Firestorm.Tests.Integration.Http.Base.Models;
+using Firestorm.Tests.Unit;
 
-namespace Firestorm.Tests.Integration.Http.Base.Models
+namespace Firestorm.Testing.Http.Models
 {
-    // TODO all these were taking from the Engine Unit tests. Probably should stay here and be removed from the unit tests?
-
     public class CodedArtistEntityContext : IEngineContext<Artist>
     {
         public CodedArtistEntityContext(IRestUser user)

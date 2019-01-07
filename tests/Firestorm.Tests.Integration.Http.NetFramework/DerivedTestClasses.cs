@@ -1,4 +1,4 @@
-﻿using Firestorm.Tests.Integration.Http.Base.Tests;
+﻿using Firestorm.Testing.Http.Tests;
 using Firestorm.Tests.Integration.Http.NetFramework.Web;
 using JetBrains.Annotations;
 

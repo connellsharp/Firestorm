@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Firestorm.Tests.Models;
+using Firestorm.Tests.Integration.Http.Base;
+using Firestorm.Tests.Unit;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace Firestorm.Tests.Integration.Http.Base.Tests
+namespace Firestorm.Testing.Http.Tests
 {
     public abstract class BasicIntegrationTestsBase : HttpIntegrationTestsBase
     {

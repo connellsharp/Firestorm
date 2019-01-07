@@ -16,8 +16,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Owin", "src\Fires
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{C2F6430A-4C2E-495B-9556-7EF1A3A1C2B8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Models", "tests\Firestorm.Tests.Models\Firestorm.Tests.Models.csproj", "{28B146D0-3785-4386-BD4F-55DD29A1C76D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8F0499A9-8EBD-4C79-9555-F29F29B9A734}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Client", "src\Firestorm.Client\Firestorm.Client.csproj", "{AD76D2CC-3AEC-424C-B2BE-67084A0EFE43}"
@@ -56,13 +54,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{70
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.AspNetCore2.IntegrationTests", "tests\Firestorm.AspNetCore2.IntegrationTests\Firestorm.AspNetCore2.IntegrationTests.csproj", "{93A1D90B-E5E8-4DB1-ABCA-F6DBBC162B0C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Integration.Http.Base", "tests\Firestorm.Tests.Integration.Http.Base\Firestorm.Tests.Integration.Http.Base.csproj", "{FC008C16-D570-450B-8A62-6064E80595EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Testing.Http", "tests\Firestorm.Testing.Http\Firestorm.Testing.Http.csproj", "{FC008C16-D570-450B-8A62-6064E80595EB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Integration.Http.NetFramework", "tests\Firestorm.Tests.Integration.Http.NetFramework\Firestorm.Tests.Integration.Http.NetFramework.csproj", "{F1A283CC-86E6-4194-98F7-C987CA5693C9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Http", "Http", "{1A6FE096-2D99-4CB7-B6ED-C0E71E3FE9E6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Integration.Data.Base", "tests\Firestorm.Tests.Integration.Data.Base\Firestorm.Tests.Integration.Data.Base.csproj", "{EC9ABBE4-01A9-4F8F-BEA8-CFB0F2E1B4E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Testing.Data", "tests\Firestorm.Testing.Data\Firestorm.Testing.Data.csproj", "{EC9ABBE4-01A9-4F8F-BEA8-CFB0F2E1B4E4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.EntityFrameworkCore2.IntegrationTests", "tests\Firestorm.EntityFrameworkCore2.IntegrationTests\Firestorm.EntityFrameworkCore2.IntegrationTests.csproj", "{7F0D2B4F-2BD3-4F17-867B-94EF4CB3E2DE}"
 EndProject
@@ -85,8 +83,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Fluent.Fuel", "src\Firestorm.Fluent.Fuel\Firestorm.Fluent.Fuel.csproj", "{0710A765-E0DF-4E04-A088-0AAF154FE40A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Engine.Subs", "src\Firestorm.Engine.Subs\Firestorm.Engine.Subs.csproj", "{33EE0031-B1AA-4C02-912E-86A29413D039}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Unit", "tests\Firestorm.Tests.Unit\Firestorm.Tests.Unit.csproj", "{2261A0EA-B171-428C-AC42-85DE04E805B1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints.Responses", "src\Firestorm.Endpoints.Responses\Firestorm.Endpoints.Responses.csproj", "{BF21E40E-5ECB-4407-956D-CE1AC624C431}"
 EndProject
@@ -128,6 +124,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Owin.IntegrationT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.AspNetWebApi2.IntegrationTests", "tests\Firestorm.AspNetWebApi2.IntegrationTests\Firestorm.AspNetWebApi2.IntegrationTests.csproj", "{7308E9CC-066E-45EF-9F30-02D1A61CF70A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Testing", "tests\Firestorm.Testing\Firestorm.Testing.csproj", "{F86C93FA-558B-4BD7-87BF-1E770DD5FE79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -158,10 +156,6 @@ Global
 		{BE5C7EC3-7379-4D87-89EB-F3705182B873}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE5C7EC3-7379-4D87-89EB-F3705182B873}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE5C7EC3-7379-4D87-89EB-F3705182B873}.Release|Any CPU.Build.0 = Release|Any CPU
-		{28B146D0-3785-4386-BD4F-55DD29A1C76D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{28B146D0-3785-4386-BD4F-55DD29A1C76D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{28B146D0-3785-4386-BD4F-55DD29A1C76D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{28B146D0-3785-4386-BD4F-55DD29A1C76D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AD76D2CC-3AEC-424C-B2BE-67084A0EFE43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AD76D2CC-3AEC-424C-B2BE-67084A0EFE43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD76D2CC-3AEC-424C-B2BE-67084A0EFE43}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -250,10 +244,6 @@ Global
 		{33EE0031-B1AA-4C02-912E-86A29413D039}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33EE0031-B1AA-4C02-912E-86A29413D039}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33EE0031-B1AA-4C02-912E-86A29413D039}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2261A0EA-B171-428C-AC42-85DE04E805B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2261A0EA-B171-428C-AC42-85DE04E805B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2261A0EA-B171-428C-AC42-85DE04E805B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2261A0EA-B171-428C-AC42-85DE04E805B1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BF21E40E-5ECB-4407-956D-CE1AC624C431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BF21E40E-5ECB-4407-956D-CE1AC624C431}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF21E40E-5ECB-4407-956D-CE1AC624C431}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -326,6 +316,10 @@ Global
 		{7308E9CC-066E-45EF-9F30-02D1A61CF70A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7308E9CC-066E-45EF-9F30-02D1A61CF70A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7308E9CC-066E-45EF-9F30-02D1A61CF70A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F86C93FA-558B-4BD7-87BF-1E770DD5FE79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F86C93FA-558B-4BD7-87BF-1E770DD5FE79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F86C93FA-558B-4BD7-87BF-1E770DD5FE79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F86C93FA-558B-4BD7-87BF-1E770DD5FE79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -372,7 +366,6 @@ Global
 		{1B1F1984-8C59-4D40-B529-8B734A6384C8} = {3B09F420-8C13-4A60-ACC0-41E9F0AF48F8}
 		{A2F5FAA9-3212-4613-807A-284EB39534C8} = {C7F0DB78-F8D7-4074-A2D7-A14490AAA398}
 		{870FC38F-5811-41FB-A42A-9965AF26C201} = {C7F0DB78-F8D7-4074-A2D7-A14490AAA398}
-		{2261A0EA-B171-428C-AC42-85DE04E805B1} = {33A230CD-37B2-455D-AE98-F8917AD6F158}
 		{EC9ABBE4-01A9-4F8F-BEA8-CFB0F2E1B4E4} = {33A230CD-37B2-455D-AE98-F8917AD6F158}
 		{FC008C16-D570-450B-8A62-6064E80595EB} = {33A230CD-37B2-455D-AE98-F8917AD6F158}
 		{5FA35477-8BBC-42C3-A41D-133B04707C69} = {D8DE754F-9C93-49C4-9117-B0CB7ABBA023}
@@ -389,9 +382,9 @@ Global
 		{306B8FC0-EF02-423E-8D6B-6BCE8141FF52} = {8637EC3F-59AC-44AA-8248-05A60C7CDCFC}
 		{3312904B-E11E-4934-8752-DBC0250D61E5} = {1A353687-93AC-4112-87CF-42CFE6E2F84C}
 		{61421B86-680A-451E-AC0D-3E5837515809} = {1A353687-93AC-4112-87CF-42CFE6E2F84C}
-		{28B146D0-3785-4386-BD4F-55DD29A1C76D} = {33A230CD-37B2-455D-AE98-F8917AD6F158}
 		{BD3FF89B-7D36-4316-9FBD-A6323BCE44A2} = {1A353687-93AC-4112-87CF-42CFE6E2F84C}
 		{7308E9CC-066E-45EF-9F30-02D1A61CF70A} = {1A353687-93AC-4112-87CF-42CFE6E2F84C}
+		{F86C93FA-558B-4BD7-87BF-1E770DD5FE79} = {33A230CD-37B2-455D-AE98-F8917AD6F158}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E07ED662-9390-431F-B4D6-BDA65FE4169A}

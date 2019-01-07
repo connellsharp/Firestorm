@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Firestorm.EntityFrameworkCore2;
-using Firestorm.Tests.Integration.Data.Base;
-using Firestorm.Tests.Integration.Data.Base.Models;
+using Firestorm.Testing.Data;
+using Firestorm.Testing.Data.Models;
 using JetBrains.Annotations;
 using Xunit;
 

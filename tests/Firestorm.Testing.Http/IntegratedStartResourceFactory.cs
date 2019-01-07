@@ -1,4 +1,5 @@
 ﻿using Firestorm.Host;
+using Firestorm.Testing.Http;
 
 namespace Firestorm.Tests.Integration.Http.Base
 {

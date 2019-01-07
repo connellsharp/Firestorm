@@ -1,7 +1,7 @@
 ﻿using Firestorm.Owin;
 using Firestorm.Endpoints.Web;
 using Firestorm.Host;
-using Firestorm.Tests.Integration.Http.Base;
+using Firestorm.Testing.Http;
 using Firestorm.Tests.Integration.Http.NetFramework.Web;
 using JetBrains.Annotations;
 using Microsoft.Owin;

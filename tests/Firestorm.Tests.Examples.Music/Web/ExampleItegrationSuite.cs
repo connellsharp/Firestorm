@@ -8,7 +8,7 @@ using Firestorm.Owin;
 using Firestorm.Stems;
 using Firestorm.Stems.Roots;
 using Firestorm.Tests.Examples.Music.Data;
-using Firestorm.Tests.Integration.Http.Base;
+using Firestorm.Testing.Http;
 using Microsoft.Owin.Hosting;
 using Owin;
 

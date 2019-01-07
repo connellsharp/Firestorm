@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Firestorm.Endpoints;
 using Firestorm.Engine;
 using Firestorm.Host;
+using Firestorm.Testing.Http.Models;
 using Firestorm.Tests.Integration.Http.Base.Models;
-using Firestorm.Tests.Models;
+using Firestorm.Tests.Unit;
 
-namespace Firestorm.Tests.Integration.Http.Base
+namespace Firestorm.Testing.Http
 {
     public class IntegratedRestDirectory : IRestDirectory
     {

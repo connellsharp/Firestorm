@@ -1,7 +1,7 @@
 ﻿using Firestorm.AspNetCore2;
 using Firestorm.Endpoints.Web;
 using Firestorm.Host;
-using Firestorm.Tests.Integration.Http.Base;
+using Firestorm.Testing.Http;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
