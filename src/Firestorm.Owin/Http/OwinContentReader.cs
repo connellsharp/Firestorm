@@ -2,9 +2,9 @@
 using Firestorm.Host.Infrastructure;
 using Microsoft.Owin;
 
-namespace Firestorm.Owin
+namespace Firestorm.Owin.Http
 {
-    public class OwinContentReader : IContentReader
+    internal class OwinContentReader : IContentReader
     {
         private readonly IOwinContext _owinContext;
 

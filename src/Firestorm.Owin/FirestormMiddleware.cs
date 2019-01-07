@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Firestorm.Host;
+using Firestorm.Owin.Http;
 using JetBrains.Annotations;
 using Microsoft.Owin;
 

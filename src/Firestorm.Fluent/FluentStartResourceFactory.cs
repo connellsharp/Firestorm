@@ -7,7 +7,7 @@ using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.Fluent
 {
-    internal class FluentStartResourceFactory : IStartResourceFactory
+    public class FluentStartResourceFactory : IStartResourceFactory
     {
         private IApiDirectorySource _apiDirectorySource;
 

@@ -1,7 +1,7 @@
 ﻿using Firestorm.Host.Infrastructure;
 
-namespace Firestorm.Owin
+namespace Firestorm.Owin.Http
 {
-    public class OwinContentAccepts : IContentAccepts
+    internal class OwinContentAccepts : IContentAccepts
     { }
 }

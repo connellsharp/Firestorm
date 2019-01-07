@@ -1,7 +1,7 @@
 ﻿using Firestorm.Host.Infrastructure;
 using Microsoft.Owin;
 
-namespace Firestorm.Owin
+namespace Firestorm.Owin.Http
 {
     internal class OwinPreconditions : IPreconditions
     {
