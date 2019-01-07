@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace Firestorm.Engine
+namespace Firestorm.Engine.Deferring
 {
     /// <summary>
     /// An <see cref="IQueryable"/> implementation where the response is expected to contain a single element.</summary>

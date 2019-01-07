@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Firestorm.Engine
+namespace Firestorm.Engine.Deferring
 {
     /// <summary>
     /// A reference to a single item described by an API user. Contains string identifier and the engine's <see cref="IQueryable"/>.

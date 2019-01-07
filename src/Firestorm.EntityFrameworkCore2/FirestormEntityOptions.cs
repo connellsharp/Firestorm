@@ -1,4 +1,4 @@
-﻿namespace Firestorm.Extensions.AspNetCore
+﻿namespace Firestorm.EntityFrameworkCore2
 {
     public class FirestormEntityOptions
     {

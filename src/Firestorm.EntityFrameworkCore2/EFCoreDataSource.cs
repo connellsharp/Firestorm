@@ -11,7 +11,7 @@ namespace Firestorm.EntityFrameworkCore2
     {
         private readonly IDbContextFactory<TDbContext> _dbContextFactory;
 
-        public EFCoreDataSource(IDbContextFactory<TDbContext> dbContextFactory)
+        internal EFCoreDataSource(IDbContextFactory<TDbContext> dbContextFactory)
         {
             _dbContextFactory = dbContextFactory;
         }

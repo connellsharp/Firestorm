@@ -1,4 +1,4 @@
-namespace Firestorm.Engine
+namespace Firestorm.Engine.Deferring
 {
     public interface IDeferredItemInfo
     {

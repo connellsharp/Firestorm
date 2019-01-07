@@ -1,9 +1,8 @@
 ﻿using System;
-using Firestorm.EntityFrameworkCore2;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Firestorm.Extensions.AspNetCore
+namespace Firestorm.EntityFrameworkCore2
 {
     internal class EntitiesContextFactory<TDbContext> : IDbContextFactory<TDbContext>
         where TDbContext : DbContext

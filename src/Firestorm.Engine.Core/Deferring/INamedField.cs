@@ -1,6 +1,6 @@
 using Firestorm.Engine.Fields;
 
-namespace Firestorm.Engine
+namespace Firestorm.Engine.Deferring
 {
     /// <summary>
     /// A reference to an item's field, as described by an API user.

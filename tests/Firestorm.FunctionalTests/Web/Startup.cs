@@ -3,6 +3,7 @@ using Firestorm.AspNetCore2;
 using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Web;
+using Firestorm.EntityFrameworkCore2;
 using Firestorm.Extensions.AspNetCore;
 using Firestorm.Fluent;
 using Firestorm.FunctionalTests.Data;

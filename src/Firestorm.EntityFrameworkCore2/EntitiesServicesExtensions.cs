@@ -1,9 +1,8 @@
 ﻿using System;
 using Firestorm.Data;
-using Firestorm.EntityFrameworkCore2;
 using Microsoft.EntityFrameworkCore;
 
-namespace Firestorm.Extensions.AspNetCore
+namespace Firestorm.EntityFrameworkCore2
 {
     public static class EntitiesServicesExtensions
     {
