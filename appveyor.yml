@@ -1,0 +1,27 @@
+version: '{build}'
+pull_requests:
+  do_not_increment_build_number: true
+branches:
+  only:
+  - master
+build_script:
+- ps: .\build.ps1
+test: off
+artifacts:
+- path: .\artifacts\**\*.nupkg
+  name: NuGet
+deploy:
+- provider: NuGet
+  server: https://www.myget.org/F/firestorm/api/v2/package
+  api_key:
+    secure: n9HswXCR8jJn1EUwIADbgVRa3YIbshz6lQXO2fAabYiBSBsadUl3AQuHkn7T8Gfi
+  skip_symbols: true
+  on:
+    branch: master
+- provider: NuGet
+  name: production
+  api_key:
+    secure: securekeyhere
+  on:
+    branch: master
+    appveyor_repo_tag: true
