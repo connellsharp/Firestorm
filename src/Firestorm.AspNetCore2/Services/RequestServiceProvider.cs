@@ -1,4 +1,5 @@
 ﻿using System;
+using Firestorm.Host;
 using Microsoft.AspNetCore.Http;
 
 namespace Firestorm.AspNetCore2

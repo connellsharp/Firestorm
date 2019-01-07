@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Firestorm.Rest.Web;
 using Firestorm.Rest.Web.Options;
 using Firestorm.Endpoints.Pagination;
-using Firestorm.Endpoints.Preconditions;
+using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.Endpoints
 {

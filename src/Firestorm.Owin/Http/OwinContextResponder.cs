@@ -1,6 +1,5 @@
 ﻿using System.Net;
-using Firestorm.Endpoints.Formatting;
-using Firestorm.Endpoints.Web;
+using Firestorm.Host.Infrastructure;
 using Microsoft.Owin;
 
 namespace Firestorm.Owin

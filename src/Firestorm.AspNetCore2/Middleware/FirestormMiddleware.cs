@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Firestorm.AspNetCore2.HttpContext;
-using Firestorm.Endpoints.Web;
 using Firestorm.Host;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;

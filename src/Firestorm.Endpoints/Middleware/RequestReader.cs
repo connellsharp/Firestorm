@@ -1,8 +1,8 @@
 ﻿using Firestorm.Rest.Web;
 using Firestorm.Endpoints.Formatting;
 using Firestorm.Endpoints.Formatting.Naming;
-using Firestorm.Endpoints.Preconditions;
 using Firestorm.Endpoints.Query;
+using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.Endpoints.Web
 {

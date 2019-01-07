@@ -1,7 +1,6 @@
 using System.Net;
-using Firestorm.Endpoints.Formatting;
 
-namespace Firestorm.Endpoints.Web
+namespace Firestorm.Host.Infrastructure
 {
     public interface IHttpRequestResponder
     {

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Firestorm.Host;
+using Firestorm.Host.Infrastructure;
 using Firestorm.Testing.Http;
 
 namespace Firestorm.Client.IntegrationTests

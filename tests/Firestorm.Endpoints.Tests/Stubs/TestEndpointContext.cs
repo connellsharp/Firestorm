@@ -2,6 +2,7 @@ using System;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Web;
 using Firestorm.Host;
+using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.Endpoints.Tests.Stubs
 {

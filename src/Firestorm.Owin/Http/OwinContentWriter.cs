@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Firestorm.Endpoints.Formatting;
+using Firestorm.Host.Infrastructure;
 using Microsoft.Owin;
 
 namespace Firestorm.Owin

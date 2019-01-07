@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Firestorm.Rest.Web;
 using Firestorm.Rest.Web.Options;
-using Firestorm.Endpoints.Preconditions;
 using Firestorm.Endpoints.Responses;
 using Firestorm.AspNetWebApi2.ErrorHandling;
 using Firestorm.Endpoints;
@@ -13,6 +12,7 @@ using Firestorm.Endpoints.Formatting.Naming;
 using Firestorm.Endpoints.Query;
 using Firestorm.Endpoints.Web;
 using Firestorm.Host;
+using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.AspNetWebApi2
 {

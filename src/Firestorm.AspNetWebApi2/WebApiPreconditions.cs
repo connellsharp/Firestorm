@@ -1,5 +1,5 @@
 using System.Net.Http.Headers;
-using Firestorm.Endpoints.Preconditions;
+using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.AspNetWebApi2
 {

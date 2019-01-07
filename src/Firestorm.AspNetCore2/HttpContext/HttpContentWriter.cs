@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Firestorm.Endpoints.Formatting;
+using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.AspNetCore2.HttpContext
 {

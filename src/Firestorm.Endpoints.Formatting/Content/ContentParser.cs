@@ -1,6 +1,7 @@
 using System.IO;
 using Firestorm.Rest.Web;
 using Firestorm.Endpoints.Formatting.Json;
+using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.Endpoints.Formatting
 {

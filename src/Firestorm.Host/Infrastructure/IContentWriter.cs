@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Firestorm.Endpoints.Formatting
+namespace Firestorm.Host.Infrastructure
 {
     public interface IContentWriter
     {

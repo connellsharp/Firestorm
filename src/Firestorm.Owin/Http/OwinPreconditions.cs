@@ -1,4 +1,4 @@
-﻿using Firestorm.Endpoints.Preconditions;
+﻿using Firestorm.Host.Infrastructure;
 using Microsoft.Owin;
 
 namespace Firestorm.Owin

@@ -1,4 +1,5 @@
 using Firestorm.Host;
+using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.Client.IntegrationTests
 {

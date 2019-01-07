@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Fluent.Sources;
 using Firestorm.Host;
+using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.Fluent.Start
 {

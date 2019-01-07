@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Firestorm.Host
+namespace Firestorm.Host.Infrastructure
 {
     public interface IRequestContext : IDisposable
     {

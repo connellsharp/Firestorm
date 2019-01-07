@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Firestorm.Data;
 using Firestorm.Host;
+using Firestorm.Host.Infrastructure;
 using Firestorm.Stems.Attributes;
 using Firestorm.Stems.Fuel.Resolving;
 using Firestorm.Stems.Roots.DataSource;

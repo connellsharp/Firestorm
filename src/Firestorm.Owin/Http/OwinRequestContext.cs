@@ -1,6 +1,6 @@
 ﻿using System;
-using Firestorm.Endpoints;
 using Firestorm.Host;
+using Firestorm.Host.Infrastructure;
 using Microsoft.Owin;
 
 namespace Firestorm.Owin

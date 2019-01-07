@@ -1,4 +1,4 @@
-﻿using Firestorm.Endpoints.Preconditions;
+﻿using Firestorm.Host.Infrastructure;
 using Microsoft.AspNetCore.Http;
 
 namespace Firestorm.AspNetCore2.HttpContext

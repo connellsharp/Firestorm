@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using ServiceProviderServiceExtensions = Firestorm.Host.ServiceProviderServiceExtensions;
 
 namespace Firestorm.AspNetCore2.IntegrationTests
 {
@@ -24,7 +25,7 @@ namespace Firestorm.AspNetCore2.IntegrationTests
             });
             
             services.AddFirestorm()
-                .AddEndpoints(sp => sp.GetService<IOptions<DefaultRestEndpointConfiguration>>().Value)
+                .AddEndpoints(sp => ServiceProviderServiceExtensions.GetService<IOptions<DefaultRestEndpointConfiguration>>(sp).Value)
                 .AddStartResourceFactory(new IntegratedStartResourceFactory());
         }
 

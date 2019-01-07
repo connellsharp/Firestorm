@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Firestorm.Engine;
 using Firestorm.Host;
+using Firestorm.Host.Infrastructure;
 using Firestorm.Testing.Http.Models;
 using Firestorm.Testing.Models;
 using Firestorm.Testing;
