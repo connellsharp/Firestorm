@@ -1,6 +1,6 @@
 using System;
 
-namespace Firestorm.Tests.Integration.Data.Base
+namespace Firestorm.Testing.Data
 {
     public static class DbConnectionStrings
     {

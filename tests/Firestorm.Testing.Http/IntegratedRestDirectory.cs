@@ -4,7 +4,6 @@ using Firestorm.Engine;
 using Firestorm.Host;
 using Firestorm.Testing.Http.Models;
 using Firestorm.Testing.Models;
-using Firestorm.Tests.Integration.Http.Base.Models;
 using Firestorm.Testing;
 
 namespace Firestorm.Testing.Http

@@ -4,6 +4,7 @@ using Firestorm.Stems;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Testing;
+using Firestorm.Testing.Models;
 
 namespace Firestorm.Stems.IntegrationTests.Models
 {

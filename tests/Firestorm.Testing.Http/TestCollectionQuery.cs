@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Firestorm.Tests.Integration.Http.NetFramework
+namespace Firestorm.Testing.Http
 {
     public class TestCollectionQuery : IRestCollectionQuery
     {

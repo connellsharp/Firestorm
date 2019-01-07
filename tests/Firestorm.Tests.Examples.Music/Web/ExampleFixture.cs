@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using Firestorm.Testing.Http;
 
 namespace Firestorm.Tests.Examples.Music.Web
 {

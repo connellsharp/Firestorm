@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using Firestorm.Testing.Data;
-using Firestorm.Tests.Integration.Data.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace Firestorm.EntityFrameworkCore2.IntegrationTests

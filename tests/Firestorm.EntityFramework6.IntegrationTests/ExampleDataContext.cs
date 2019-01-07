@@ -1,6 +1,5 @@
 using System.Data.Entity;
 using Firestorm.Testing.Models;
-using Firestorm.Tests.Integration.Data.Base;
 using Firestorm.Testing;
 using JetBrains.Annotations;
 

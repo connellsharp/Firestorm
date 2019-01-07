@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Firestorm.Tests.Integration.Http.Base
+namespace Firestorm.Testing.Http
 {
     public static class ResponseAssert
     {

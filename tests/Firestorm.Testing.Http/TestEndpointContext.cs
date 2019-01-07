@@ -3,7 +3,7 @@ using Firestorm.Endpoints;
 using Firestorm.Endpoints.Web;
 using Firestorm.Host;
 
-namespace Firestorm.Tests.Integration.Http.NetFramework
+namespace Firestorm.Testing.Http
 {
     public class TestEndpointContext : IEndpointContext
     {

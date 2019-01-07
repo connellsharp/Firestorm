@@ -6,11 +6,7 @@ using Firestorm.Stems.Attributes.Attributes;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Tests.Examples.Music.Data.Models;
-using Firestorm.Tests.Examples.Music.Web;
-using Firestorm.Testing.Http;
-using Xunit;
-
-namespace Firestorm.Tests.Examples.Music.Basics
+using Firestorm.Tests.Examples.Music.Web;namespace Firestorm.Tests.Examples.Music.Basics
 {
     public class ComplexFieldGettersTests : IClassFixture<ExampleFixture<ComplexFieldGettersTests>>
     {

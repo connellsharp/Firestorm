@@ -1,7 +1,6 @@
 using System;
-using Firestorm.Testing.Models;
 
-namespace Firestorm.Testing
+namespace Firestorm.Testing.Models
 {
     public class Album
     {

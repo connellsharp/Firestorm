@@ -6,7 +6,7 @@ using AutoFixture.AutoMoq;
 using Firestorm.Rest.Web;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Web;
-using Firestorm.Tests.Unit;
+using Firestorm.Testing;
 using Moq;
 using Xunit;
 

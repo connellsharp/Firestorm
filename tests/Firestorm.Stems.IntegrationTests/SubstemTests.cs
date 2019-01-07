@@ -14,6 +14,7 @@ using Firestorm.Testing;
 using Firestorm.Endpoints.Tests.Stubs;
 using Firestorm.Engine.Tests.Implementation;
 using Firestorm.Engine.Tests.Models;
+using Firestorm.Testing.Models;
 using Xunit;
 
 namespace Firestorm.Stems.IntegrationTests

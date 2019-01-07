@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Net.Http;
-using Firestorm.Testing.Http;
 
-namespace Firestorm.Tests.Integration.Http.Base
+namespace Firestorm.Testing.Http
 {
     public abstract class HttpIntegrationTestsBase : IDisposable
     {

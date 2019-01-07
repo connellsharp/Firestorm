@@ -7,9 +7,7 @@ using Firestorm.Stems.Attributes.Attributes;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Tests.Examples.Music.Data.Models;
-using Firestorm.Tests.Examples.Music.Web;
-using Firestorm.Testing.Http;
-using Newtonsoft.Json;
+using Firestorm.Tests.Examples.Music.Web;ft.Json;
 using Xunit;
 
 namespace Firestorm.Tests.Examples.Music.Basics
