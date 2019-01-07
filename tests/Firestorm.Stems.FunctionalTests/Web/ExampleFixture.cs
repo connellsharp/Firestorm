@@ -10,7 +10,7 @@ namespace Firestorm.Stems.FunctionalTests.Web
 
         public ExampleFixture()
         {
-            _testSuite = new ExampleItegrationSuite(ExampleConfiguration.EndpointConfiguration, typeof(TTest));
+            _testSuite = new ExampleIntegrationSuite(ExampleConfiguration.EndpointConfiguration, typeof(TTest));
             _testSuite.Start();
         }
 

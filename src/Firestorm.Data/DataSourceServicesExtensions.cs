@@ -1,7 +1,6 @@
 ﻿using System;
-using Firestorm.Data;
 
-namespace Firestorm.Extensions.AspNetCore
+namespace Firestorm.Data
 {
     public static class DataSourceServicesExtensions
     {

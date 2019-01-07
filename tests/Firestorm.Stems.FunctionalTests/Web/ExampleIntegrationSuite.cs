@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net.Http;
+using Firestorm.Data;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Web;
 using Firestorm.EntityFramework6;
-using Firestorm.Extensions.AspNetCore;
 using Firestorm.Owin;
 using Firestorm.Stems.FunctionalTests.Data;
 using Firestorm.Stems.Roots;
@@ -13,7 +13,7 @@ using Owin;
 
 namespace Firestorm.Stems.FunctionalTests.Web
 {
-    public class ExampleItegrationSuite : IHttpIntegrationSuite
+    public class ExampleIntegrationSuite : IHttpIntegrationSuite
     {
         private readonly RestEndpointConfiguration _config;
         private readonly Type _testClassType;
@@ -21,7 +21,7 @@ namespace Firestorm.Stems.FunctionalTests.Web
         private static readonly Random Random = new Random();
         private readonly string _url = "http://localhost:" + Random.Next(1200, 1500);
 
-        public ExampleItegrationSuite(RestEndpointConfiguration config, Type testClassType)
+        public ExampleIntegrationSuite(RestEndpointConfiguration config, Type testClassType)
         {
             _config = config;
             _testClassType = testClassType;
@@ -37,7 +37,7 @@ namespace Firestorm.Stems.FunctionalTests.Web
                     .AddEndpoints(_config)
                     .AddStems()
                     .Add<ITypeGetter>(new NestedTypeGetter(_testClassType))
-                    .AddDataSource(new EntitiesDataSource<ExampleDataContext>())
+                    .AddEntityFramework<ExampleDataContext>()
                 );
             });
 

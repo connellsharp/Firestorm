@@ -10,11 +10,4 @@ namespace Firestorm.Rest.Web.Options
 
         public List<RestResourceInfo> SubResources { get; set; }
     }
-
-    public class OptionsMethod
-    {
-        public string Verb { get; set; }
-
-        public string Description { get; set; }
-    }
 }
