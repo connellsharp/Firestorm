@@ -6,7 +6,6 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Firestorm.Endpoints.Formatting;
-using Firestorm.Endpoints.Web;
 using Firestorm.Endpoints.Tests.Stubs;
 using Firestorm.Host.Infrastructure;
 using Xunit;

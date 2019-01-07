@@ -1,6 +1,6 @@
 using Firestorm.Endpoints.Configuration;
 
-namespace Firestorm.Endpoints.Web
+namespace Firestorm.Endpoints
 {
     /// <summary>
     /// The <see cref="INextPath"/> implementation used in <see cref="NextAggregator"/>.

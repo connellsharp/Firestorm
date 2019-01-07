@@ -1,7 +1,7 @@
 using Firestorm.Endpoints.Configuration;
 using JetBrains.Annotations;
 
-namespace Firestorm.Endpoints.Web
+namespace Firestorm.Endpoints
 {
     public static class ValidationExtension
     {   

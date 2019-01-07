@@ -1,7 +1,7 @@
 using System;
 using JetBrains.Annotations;
 
-namespace Firestorm.Endpoints.Web
+namespace Firestorm.Endpoints.Directories
 {
     [MeansImplicitUse]
     [AttributeUsage(AttributeTargets.Class)]

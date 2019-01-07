@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Firestorm.Endpoints.Web
+namespace Firestorm.Endpoints.Directories
 {
     public class DictionaryDirectory : IRestDirectory, IEnumerable<KeyValuePair<string, Type>>
     {

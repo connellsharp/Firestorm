@@ -1,7 +1,7 @@
 using System;
 using System.Net.Http;
 using System.Web.Http.Filters;
-using Firestorm.Endpoints.Web;
+using Firestorm.Endpoints;
 
 namespace Firestorm.AspNetWebApi2.ErrorHandling
 {

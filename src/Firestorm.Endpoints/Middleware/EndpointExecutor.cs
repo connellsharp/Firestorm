@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
+using Firestorm.Endpoints.Responses;
 using Firestorm.Rest.Web;
 using Firestorm.Rest.Web.Options;
-using Firestorm.Endpoints.Responses;
 
-namespace Firestorm.Endpoints.Web
+namespace Firestorm.Endpoints
 {
     /// <summary>
     /// Executes the request from the given <see cref="IHttpRequestHandler"/> onto the given <see cref="IRestEndpoint"/>

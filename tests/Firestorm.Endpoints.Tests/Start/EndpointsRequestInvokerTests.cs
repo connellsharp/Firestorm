@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
-using Firestorm.Endpoints.Web;
 using Firestorm.Endpoints.Tests.Stubs;
 using Xunit;
 

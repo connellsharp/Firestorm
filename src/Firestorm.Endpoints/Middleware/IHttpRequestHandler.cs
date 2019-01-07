@@ -1,7 +1,7 @@
 using System;
 using Firestorm.Host.Infrastructure;
 
-namespace Firestorm.Endpoints.Web
+namespace Firestorm.Endpoints
 {
     [Obsolete("Split")]
     public interface IHttpRequestHandler : IHttpRequestResponder, IHttpRequestReader

@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Firestorm.Endpoints.Web;
+using Firestorm.Endpoints.Directories;
 using Xunit;
 
 namespace Firestorm.Endpoints.Tests.Start

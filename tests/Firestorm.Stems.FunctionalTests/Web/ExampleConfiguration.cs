@@ -2,7 +2,6 @@
 using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Formatting.Naming;
 using Firestorm.Endpoints.Responses;
-using Firestorm.Endpoints.Web;
 
 namespace Firestorm.Stems.FunctionalTests.Web
 {

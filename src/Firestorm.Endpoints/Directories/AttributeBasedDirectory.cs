@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Firestorm.Endpoints.Web
+namespace Firestorm.Endpoints.Directories
 {
     /// <summary>
     /// The root directory when using Endpoints alone.

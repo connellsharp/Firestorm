@@ -1,6 +1,6 @@
 using System;
 
-namespace Firestorm.Endpoints.Web
+namespace Firestorm.Endpoints
 {
     public class FirestormConfigurationException : Exception
     {

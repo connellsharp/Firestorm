@@ -3,7 +3,6 @@ using AutoFixture;
 using AutoFixture.AutoMoq;
 using Firestorm.Rest.Web;
 using Firestorm.Endpoints.Responses;
-using Firestorm.Endpoints.Web;
 using Xunit;
 
 namespace Firestorm.Endpoints.Tests.Responses

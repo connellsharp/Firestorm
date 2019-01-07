@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Firestorm.Endpoints.Formatting;
-using Firestorm.Endpoints.Web;
 using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.Endpoints.Tests.Start

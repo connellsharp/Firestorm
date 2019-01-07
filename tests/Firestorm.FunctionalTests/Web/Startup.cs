@@ -1,10 +1,8 @@
 using System;
 using Firestorm.AspNetCore2;
+using Firestorm.Endpoints;
 using Firestorm.Endpoints.Configuration;
-using Firestorm.Endpoints.Responses;
-using Firestorm.Endpoints.Web;
 using Firestorm.EntityFrameworkCore2;
-using Firestorm.Extensions.AspNetCore;
 using Firestorm.Fluent;
 using Firestorm.FunctionalTests.Data;
 using Firestorm.FunctionalTests.Tests.Setup;

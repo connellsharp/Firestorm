@@ -2,7 +2,7 @@ using System;
 using Firestorm.Endpoints.Configuration;
 using JetBrains.Annotations;
 
-namespace Firestorm.Endpoints.Web
+namespace Firestorm.Endpoints
 {
     /// <summary>
     /// Aggregates calls to <see cref="IRestEndpoint.Next"/> based on the full resource path.

@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 using Firestorm.AspNetWebApi2.IntegrationTests;
-using Firestorm.Endpoints.Web;
+using Firestorm.Endpoints;
 using Firestorm.Host;
 using Firestorm.Testing.Http;
 using JetBrains.Annotations;

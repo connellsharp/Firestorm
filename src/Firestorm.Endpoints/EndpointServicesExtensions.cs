@@ -2,7 +2,7 @@
 using Firestorm.Endpoints.Configuration;
 using Firestorm.Host;
 
-namespace Firestorm.Endpoints.Web
+namespace Firestorm.Endpoints
 {
     public static class EndpointServicesExtensions
     {

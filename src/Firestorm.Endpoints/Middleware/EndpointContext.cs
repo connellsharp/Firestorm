@@ -1,8 +1,7 @@
 ﻿using Firestorm.Endpoints.Configuration;
-using Firestorm.Host;
 using Firestorm.Host.Infrastructure;
 
-namespace Firestorm.Endpoints.Web
+namespace Firestorm.Endpoints
 {
     internal class EndpointContext : IEndpointContext
     {

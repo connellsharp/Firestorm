@@ -1,4 +1,4 @@
-﻿using Firestorm.Endpoints.Web;
+﻿using Firestorm.Endpoints;
 using Firestorm.Host;
 using Firestorm.Owin.IntegrationTests;
 using Firestorm.Testing.Http;

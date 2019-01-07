@@ -4,7 +4,7 @@ using Firestorm.Endpoints.Formatting;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Host.Infrastructure;
 
-namespace Firestorm.Endpoints.Web
+namespace Firestorm.Endpoints
 {
     internal class ResponseWriter
     {

@@ -1,11 +1,11 @@
 ﻿using Firestorm.Endpoints.Configuration;
-using Firestorm.Rest.Web;
 using Firestorm.Endpoints.Formatting;
 using Firestorm.Endpoints.Formatting.Naming;
 using Firestorm.Endpoints.Query;
 using Firestorm.Host.Infrastructure;
+using Firestorm.Rest.Web;
 
-namespace Firestorm.Endpoints.Web
+namespace Firestorm.Endpoints
 {
     internal class RequestReader : IRequestReader
     {

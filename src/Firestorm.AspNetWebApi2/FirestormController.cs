@@ -10,7 +10,6 @@ using Firestorm.AspNetWebApi2.ErrorHandling;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Formatting.Naming;
 using Firestorm.Endpoints.Query;
-using Firestorm.Endpoints.Web;
 using Firestorm.Host;
 using Firestorm.Host.Infrastructure;
 

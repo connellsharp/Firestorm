@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Responses;
-using Firestorm.Endpoints.Web;
 using Firestorm.Engine;
 using Firestorm.Rest.Web;
 using Firestorm.Testing;
