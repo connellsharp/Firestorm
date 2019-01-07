@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Firestorm.Endpoints.Naming
+namespace Firestorm.Endpoints.Formatting.Naming.Conventions
 {
     internal class CamelCaseConvention : ICaseConvention
     {

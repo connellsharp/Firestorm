@@ -1,4 +1,4 @@
-﻿namespace Firestorm.Endpoints.Naming
+﻿namespace Firestorm.Endpoints.Formatting.Naming
 {
     public class NamingConventionOptions
     {

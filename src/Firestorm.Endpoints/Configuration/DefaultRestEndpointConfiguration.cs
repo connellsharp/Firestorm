@@ -1,5 +1,5 @@
 using Firestorm.Endpoints.Configuration;
-using Firestorm.Endpoints.Naming;
+using Firestorm.Endpoints.Formatting.Naming;
 using Firestorm.Endpoints.Strategies;
 
 namespace Firestorm.Endpoints.Web

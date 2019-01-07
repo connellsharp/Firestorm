@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Firestorm.Endpoints.Configuration;
+using Firestorm.Endpoints.Formatting.Naming.Conventions;
 
-namespace Firestorm.Endpoints.Naming
+namespace Firestorm.Endpoints.Formatting.Naming
 {
     /// <summary>
     /// The object used to convert from .NET Stem member naming conventions to client-side API conventions.

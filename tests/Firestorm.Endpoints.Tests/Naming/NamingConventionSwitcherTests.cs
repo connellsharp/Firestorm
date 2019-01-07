@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Firestorm.Endpoints.Naming;
+using Firestorm.Endpoints.Formatting.Naming;
+using Firestorm.Endpoints.Formatting.Naming.Conventions;
 using Xunit;
 
 namespace Firestorm.Endpoints.Tests.Naming
