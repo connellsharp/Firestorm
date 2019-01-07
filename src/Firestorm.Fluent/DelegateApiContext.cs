@@ -1,9 +1,8 @@
 ﻿using System;
-using Firestorm.Fluent;
 
-namespace Firestorm.Extensions.AspNetCore
+namespace Firestorm.Fluent
 {
-    public class DelegateApiContext : IApiContext
+    internal class DelegateApiContext : IApiContext
     {
         private readonly Action<IApiBuilder> _onApiCreatingAction;
 

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Firestorm.Engine.Defaults;
 using Firestorm.Fluent.IntegrationTests.Contexts;
 using Firestorm.Fluent.IntegrationTests.Models;
-using Firestorm.Fluent.Start;
 using Xunit;
 
 namespace Firestorm.Fluent.IntegrationTests

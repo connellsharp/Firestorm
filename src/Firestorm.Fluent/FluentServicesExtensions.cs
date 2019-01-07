@@ -1,7 +1,5 @@
 ﻿using System;
 using Firestorm.Data;
-using Firestorm.Extensions.AspNetCore;
-using Firestorm.Fluent.Start;
 using Firestorm.Host;
 
 namespace Firestorm.Fluent
@@ -46,6 +44,8 @@ namespace Firestorm.Fluent
         /// </summary>
         public static IFirestormServicesBuilder AddFluent(this IFirestormServicesBuilder builder, AutoConfiguration configuration)
         {
+            builder.AddDataSourceTypeFinder();
+            
             builder.AddStartResourceFactory(sp => new FluentStartResourceFactory
             {
                 ApiContext = new AutomaticApiContext(sp.GetService<IItemTypeFinder>().FindItemTypes(), configuration),

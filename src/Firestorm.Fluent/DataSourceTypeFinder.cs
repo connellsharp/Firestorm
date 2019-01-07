@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Firestorm.Data;
 using JetBrains.Annotations;
 
-namespace Firestorm.Extensions.AspNetCore
+namespace Firestorm.Fluent
 {
     internal class DataSourceTypeFinder : IItemTypeFinder
     {

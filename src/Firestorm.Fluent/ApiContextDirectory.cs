@@ -2,12 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Fluent.Sources;
-using Firestorm.Host;
 using Firestorm.Host.Infrastructure;
 
-namespace Firestorm.Fluent.Start
+namespace Firestorm.Fluent
 {
-    public class ApiContextDirectory : IRestDirectory
+    internal class ApiContextDirectory : IRestDirectory
     {
         private readonly IApiDirectorySource _directorySource;
 

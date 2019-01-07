@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Firestorm.Extensions.AspNetCore
+namespace Firestorm.Fluent
 {
     internal interface IItemTypeFinder
     {

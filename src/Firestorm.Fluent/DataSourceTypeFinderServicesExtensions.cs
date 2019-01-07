@@ -1,6 +1,4 @@
-﻿using Firestorm.Host;
-
-namespace Firestorm.Extensions.AspNetCore
+﻿namespace Firestorm.Fluent
 {
     internal static class DataSourceTypeFinderServicesExtensions
     {

@@ -1,14 +1,13 @@
-﻿using System.Collections.Concurrent;
-using Firestorm.Data;
+﻿using Firestorm.Data;
 using Firestorm.Fluent.Fuel.Builder;
 using Firestorm.Fluent.Fuel.Models;
 using Firestorm.Fluent.Sources;
 using Firestorm.Host;
 using Firestorm.Host.Infrastructure;
 
-namespace Firestorm.Fluent.Start
+namespace Firestorm.Fluent
 {
-    public class FluentStartResourceFactory : IStartResourceFactory
+    internal class FluentStartResourceFactory : IStartResourceFactory
     {
         private IApiDirectorySource _apiDirectorySource;
 
