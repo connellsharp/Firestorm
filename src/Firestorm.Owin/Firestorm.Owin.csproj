@@ -2,15 +2,23 @@
 
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
+
+    <Version>0.9.5-alpha</Version>
+    <Description>OWIN middleware and helpers for Firestorm.</Description>
+    <PackageTags>firestorm rest api owin</PackageTags>
+
+    <Authors>Connell Watkins</Authors>
+    <Copyright>Copyright © Connell Watkins 2017</Copyright>
+    <PackageProjectUrl>https://github.com/connellw/Firestorm</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/connellw/Firestorm/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageIconUrl>https://github.com/connellw/Firestorm/raw/master/icon.png</PackageIconUrl>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="JetBrains.Annotations" Version="11.0" />
     <PackageReference Include="Microsoft.Owin" Version="3.1.0" />
     <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="3.0.1" />
     <PackageReference Include="Owin" Version="1.0" />
-    <PackageReference Include="Reflectious" Version="0.9.4" />
   </ItemGroup>
 
   <ItemGroup>
