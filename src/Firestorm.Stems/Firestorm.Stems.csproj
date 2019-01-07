@@ -1,6 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+
+    <Version>0.9.5-alpha</Version>
+    <Description></Description>
+    <PackageTags></PackageTags>
+
+    <Authors>Connell Watkins</Authors>
+    <Copyright>Copyright © Connell Watkins 2017</Copyright>
+    <PackageProjectUrl>https://github.com/connellw/Firestorm</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/connellw/Firestorm/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageIconUrl>https://github.com/connellw/Firestorm/raw/master/icon.png</PackageIconUrl>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Firestorm.Stems.Essentials\Firestorm.Stems.Essentials.csproj" />
