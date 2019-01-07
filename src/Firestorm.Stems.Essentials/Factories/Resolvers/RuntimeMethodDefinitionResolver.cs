@@ -1,12 +1,12 @@
 using System;
 using Firestorm.Engine.Fields;
 using Firestorm.Stems.Definitions;
-using Firestorm.Stems.Fuel.Essential.Factories;
+using Firestorm.Stems.Essentials.Factories.Factories;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 using Reflectious;
 
-namespace Firestorm.Stems.Fuel.Essential.Resolvers
+namespace Firestorm.Stems.Essentials.Factories.Resolvers
 {
     /// <summary>
     /// Resolves factories using delegates created from methods in the Stem classes.

@@ -4,7 +4,7 @@ using Firestorm.Engine.Subs.Context;
 using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 
-namespace Firestorm.Stems.Fuel.Essential.Factories
+namespace Firestorm.Stems.Essentials.Factories.Factories
 {
     internal class DelegateItemLocatorFactory<TItem> : IFactory<IItemLocator<TItem>, TItem>
         where TItem : class

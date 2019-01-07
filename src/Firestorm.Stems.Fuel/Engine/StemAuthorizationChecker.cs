@@ -7,7 +7,7 @@ using Firestorm.Engine.Deferring;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 using Reflectious;
 
-namespace Firestorm.Stems.Fuel.Authorization
+namespace Firestorm.Stems.Fuel
 {
     internal class StemAuthorizationChecker<TItem> : IAuthorizationChecker<TItem>
         where TItem : class

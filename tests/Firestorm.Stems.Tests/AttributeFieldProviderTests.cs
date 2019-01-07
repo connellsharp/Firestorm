@@ -7,7 +7,7 @@ using Firestorm.Engine.Fields;
 using Firestorm.Stems;
 using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Essentials;
-using Firestorm.Stems.Fuel.Fields;
+using Firestorm.Stems.Fuel;
 using Firestorm.Testing;
 using Firestorm.Testing.Models;
 using Xunit;

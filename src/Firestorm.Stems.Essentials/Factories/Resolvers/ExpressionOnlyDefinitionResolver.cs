@@ -11,7 +11,7 @@ using Firestorm.Stems.Fuel.Resolving.Analysis;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 using Reflectious;
 
-namespace Firestorm.Stems.Fuel.Essential.Resolvers
+namespace Firestorm.Stems.Essentials.Factories.Resolvers
 {
     /// <summary>
     /// Resolves reusable expression readers for Stem static expression properties.

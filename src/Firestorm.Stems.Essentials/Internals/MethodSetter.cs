@@ -3,7 +3,7 @@ using Firestorm.Engine.Subs;
 using Firestorm.Stems.Definitions;
 using JetBrains.Annotations;
 
-namespace Firestorm.Stems.Fuel.Substems
+namespace Firestorm.Stems.Essentials
 {
     /// <summary>
     /// An <see cref="INavigationSetter{TParent,TNav}"/> implementation that uses Stem methods (instance and static) 

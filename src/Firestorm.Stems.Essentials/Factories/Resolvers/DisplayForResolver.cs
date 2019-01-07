@@ -4,7 +4,7 @@ using Firestorm.Data;
 using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 
-namespace Firestorm.Stems.Fuel.Essential.Resolvers
+namespace Firestorm.Stems.Essentials.Factories.Resolvers
 {
     internal class DisplayForResolver : IFieldDefinitionResolver
     {

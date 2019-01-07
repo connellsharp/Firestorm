@@ -4,7 +4,7 @@ using Firestorm.Engine.Fields;
 using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 
-namespace Firestorm.Stems.Fuel.Essential.Factories
+namespace Firestorm.Stems.Essentials.Factories.Factories
 {
     internal class ActionFieldWriterFactory<TItem, TValue> : IFactory<IFieldWriter<TItem>, TItem>
         where TItem : class

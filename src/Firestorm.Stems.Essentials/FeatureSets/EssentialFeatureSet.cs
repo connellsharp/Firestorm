@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using Firestorm.Stems.Fuel.Essential.Resolvers;
+using Firestorm.Stems.Essentials.Factories.Resolvers;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 
-namespace Firestorm.Stems.Fuel.Essential
+namespace Firestorm.Stems.Essentials
 {
     /// <summary>
     /// Essential features for Firestorm Stems such as Expressions and runtime method resolvers.

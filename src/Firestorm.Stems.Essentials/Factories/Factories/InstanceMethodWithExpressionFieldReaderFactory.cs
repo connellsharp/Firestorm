@@ -7,7 +7,7 @@ using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 using JetBrains.Annotations;
 
-namespace Firestorm.Stems.Fuel.Essential.Factories
+namespace Firestorm.Stems.Essentials.Factories.Factories
 {
     /// <summary>
     /// Creates field readers for instance methods coupled with an expression.

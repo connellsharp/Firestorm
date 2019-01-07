@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using Firestorm.Stems.Essentials.Factories.Resolvers;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 
-namespace Firestorm.Stems.Fuel.Substems
+namespace Firestorm.Stems.Essentials
 {
     /// <summary>
     /// Feature set for substems.

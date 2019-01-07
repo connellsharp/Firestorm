@@ -1,7 +1,7 @@
 using Firestorm.Engine.Fields;
 using Firestorm.Stems.Definitions;
 
-namespace Firestorm.Stems.Fuel.Essential.Factories
+namespace Firestorm.Stems.Essentials.Factories.Factories
 {
     internal class AttributeFieldDescription : IFieldDescription
     {

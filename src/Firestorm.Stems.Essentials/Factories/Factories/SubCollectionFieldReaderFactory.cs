@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Subs.Handlers;
+using Firestorm.Stems.Fuel;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 using JetBrains.Annotations;
 
-namespace Firestorm.Stems.Fuel.Substems.Factories
+namespace Firestorm.Stems.Essentials.Factories.Factories
 {
     /// <summary>
     /// Field value factory to create <see cref="SubCollectionFieldReader{TItem,TProperty,TNav}"/>.

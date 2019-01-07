@@ -2,7 +2,7 @@
 using Firestorm.Engine.Fields;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 
-namespace Firestorm.Stems.Fuel.Essential.Resolvers
+namespace Firestorm.Stems.Essentials.Factories.Factories
 {
     /// <summary>
     /// Creates new <see cref="BasicFieldCollator{TItem}"/> objects from the readers provided from the given reader factory.

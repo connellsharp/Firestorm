@@ -6,12 +6,12 @@ using System.Linq.Expressions;
 using Firestorm.Engine.Fields;
 using Firestorm.Stems.Analysis;
 using Firestorm.Stems.Definitions;
+using Firestorm.Stems.Essentials.Factories.Factories;
 using Firestorm.Stems.Fuel.Resolving;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 using Firestorm.Stems.Fuel.Resolving.Factories;
-using Firestorm.Stems.Fuel.Substems.Factories;
 
-namespace Firestorm.Stems.Fuel.Substems
+namespace Firestorm.Stems.Essentials.Factories.Resolvers
 {
     internal class SubstemDefinitionResolver : IFieldDefinitionResolver
     {

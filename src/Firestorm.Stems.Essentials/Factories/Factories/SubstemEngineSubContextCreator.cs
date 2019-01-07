@@ -1,6 +1,7 @@
+using Firestorm.Stems.Fuel;
 using Firestorm.Stems.Fuel.Resolving;
 
-namespace Firestorm.Stems.Fuel.Substems.Factories
+namespace Firestorm.Stems.Essentials.Factories.Factories
 {
     internal class SubstemEngineSubContextCreator<TItem, TNav, TSubstem>
         where TItem : class 

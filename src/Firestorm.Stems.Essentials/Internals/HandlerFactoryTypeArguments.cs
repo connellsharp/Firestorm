@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Firestorm.Engine.Subs;
 using Firestorm.Stems.Analysis;
-using Firestorm.Stems.Attributes;
+using Firestorm.Stems.Essentials.Factories.Resolvers;
 using Reflectious;
 
-namespace Firestorm.Stems.Fuel.Substems
+namespace Firestorm.Stems.Essentials
 {
     /// <summary>
     /// Contains the generic type arguments used to create handler factories in the <see cref="SubstemDefinitionResolver"/>.

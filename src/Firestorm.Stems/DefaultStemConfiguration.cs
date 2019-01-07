@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using Firestorm.Stems.Analysis;
 using Firestorm.Stems.AutoMap;
-using Firestorm.Stems.Fuel.Essential;
-using Firestorm.Stems.Fuel.Substems;
+using Firestorm.Stems.Essentials;
 
 namespace Firestorm.Stems
 {

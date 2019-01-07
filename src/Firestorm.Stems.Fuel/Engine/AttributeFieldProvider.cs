@@ -1,17 +1,14 @@
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Firestorm.Data;
-using Firestorm.Engine;
 using Firestorm.Engine.Additives.Writers;
 using Firestorm.Engine.Deferring;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Subs.Context;
-using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 
-namespace Firestorm.Stems.Fuel.Fields
+namespace Firestorm.Stems.Fuel
 {
     /// <summary>
     /// Fields provider built using reflection to look at <see cref="FieldAttribute"/>s on a class.
