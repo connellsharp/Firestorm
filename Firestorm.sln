@@ -38,7 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{D8DE754F-9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{1A353687-93AC-4112-87CF-42CFE6E2F84C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Examples.Music", "tests\Firestorm.Tests.Examples.Music\Firestorm.Tests.Examples.Music.csproj", "{306B8FC0-EF02-423E-8D6B-6BCE8141FF52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Stems.FunctionalTests", "tests\Firestorm.Stems.FunctionalTests\Firestorm.Stems.FunctionalTests.csproj", "{306B8FC0-EF02-423E-8D6B-6BCE8141FF52}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints.Formatting", "src\Firestorm.Endpoints.Formatting\Firestorm.Endpoints.Formatting.csproj", "{E172D3FF-C931-495E-A5DB-3AF5C45B26AF}"
 EndProject
@@ -84,7 +84,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints.Respons
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Fluent.IntegrationTests", "tests\Firestorm.Fluent.IntegrationTests\Firestorm.Fluent.IntegrationTests.csproj", "{61421B86-680A-451E-AC0D-3E5837515809}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Tests.Examples.Football", "tests\Firestorm.Tests.Examples.Football\Firestorm.Tests.Examples.Football.csproj", "{30DD9A72-A393-41D1-BF98-CBA1BF82F6DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.FunctionalTests", "tests\Firestorm.FunctionalTests\Firestorm.FunctionalTests.csproj", "{30DD9A72-A393-41D1-BF98-CBA1BF82F6DF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Endpoints.Implementation", "src\Firestorm.Endpoints.Implementation\Firestorm.Endpoints.Implementation.csproj", "{F00AEB35-21EB-4AB6-B8CA-06071C11667F}"
 EndProject
