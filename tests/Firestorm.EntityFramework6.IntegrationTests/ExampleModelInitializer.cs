@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using Firestorm.Testing.Data;
-using Firestorm.Testing.Data.Models;
+using Firestorm.Tests.Unit;
 using JetBrains.Annotations;
 
-namespace Firestorm.Tests.Integration.Data.EntityFramework6
+namespace Firestorm.EntityFramework6.IntegrationTests
 {
     [UsedImplicitly]
     public class ExampleModelInitializer : DropCreateDatabaseAlways<ExampleDataContext>

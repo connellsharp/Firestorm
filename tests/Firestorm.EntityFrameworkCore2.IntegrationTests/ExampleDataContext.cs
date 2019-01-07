@@ -1,8 +1,9 @@
-using Firestorm.Testing.Data.Models;
+using Firestorm.Testing.Models;
+using Firestorm.Tests.Unit;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Firestorm.Tests.Integration.Data.EntityFrameworkCore2
+namespace Firestorm.EntityFrameworkCore2.IntegrationTests
 {
     [UsedImplicitly]
     public class ExampleDataContext : DbContext
@@ -17,8 +18,8 @@ namespace Firestorm.Tests.Integration.Data.EntityFrameworkCore2
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Artist>().HasKey(a => a.ArtistID);
-            modelBuilder.Entity<Album>().HasKey(a => a.AlbumID);
+            modelBuilder.Entity<Artist>().HasKey(a => a.ID);
+            modelBuilder.Entity<Album>().HasKey(a => a.Id);
 
             base.OnModelCreating(modelBuilder);
         }

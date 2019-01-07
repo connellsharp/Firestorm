@@ -7,6 +7,7 @@ using Firestorm.Engine.Additives.Identifiers;
 using Firestorm.Engine.Defaults;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Identifiers;
+using Firestorm.Testing.Models;
 using Firestorm.Tests.Integration.Http.Base.Models;
 using Firestorm.Tests.Unit;
 

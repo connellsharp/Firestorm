@@ -1,9 +1,10 @@
 using System;
 using System.Linq;
 using Firestorm.Testing.Data;
+using Firestorm.Tests.Integration.Data.Base;
 using Microsoft.EntityFrameworkCore;
 
-namespace Firestorm.Tests.Integration.Data.EntityFrameworkCore2
+namespace Firestorm.EntityFrameworkCore2.IntegrationTests
 {
     public class ExampleFixture : IDisposable
     {

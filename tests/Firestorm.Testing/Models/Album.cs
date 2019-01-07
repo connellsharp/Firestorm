@@ -1,4 +1,5 @@
 using System;
+using Firestorm.Testing.Models;
 
 namespace Firestorm.Tests.Unit
 {

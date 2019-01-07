@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Firestorm.Tests.Integration.Data.Base.Models;
+using Firestorm.Testing.Models;
 
-namespace Firestorm.Tests.Integration.Data.Base
+namespace Firestorm.Testing.Data
 {
     public class ExampleDataSets
     {

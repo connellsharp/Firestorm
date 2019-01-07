@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Firestorm.Data;
 using Firestorm.Engine;
-using Firestorm.Tests.Integration.Data.Base.Models;
+using Firestorm.Testing.Models;
 using Xunit;
 
-namespace Firestorm.Tests.Integration.Data.Base
+namespace Firestorm.Testing.Data
 {
     public abstract class BasicDataTests
     {

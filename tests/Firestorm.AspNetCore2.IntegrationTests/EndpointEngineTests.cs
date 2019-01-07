@@ -6,6 +6,7 @@ using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Web;
 using Firestorm.Engine;
 using Firestorm.Testing.Http;
+using Firestorm.Testing.Models;
 using Firestorm.Tests.Unit;
 using Xunit;
 

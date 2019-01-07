@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Firestorm.Testing.Models;
 
 namespace Firestorm.Tests.Unit
 {

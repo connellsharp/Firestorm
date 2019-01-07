@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
+using Firestorm.Tests.Unit;
 
-namespace Firestorm.Tests.Unit
+namespace Firestorm.Testing.Models
 {
     public class Artist
     {
@@ -21,5 +23,7 @@ namespace Firestorm.Tests.Unit
         public string Label { get; set; }
 
         public ICollection<Album> Albums { get; set; }
+        
+        public DateTime? StartDate { get; set; }
     }
 }

@@ -6,9 +6,9 @@ using Firestorm.Engine.Additives.Identifiers;
 using Firestorm.Engine.Defaults;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Identifiers;
-using Firestorm.Tests.Integration.Data.Base.Models;
+using Firestorm.Testing.Models;
 
-namespace Firestorm.Tests.Integration.Data.Base
+namespace Firestorm.Testing.Data
 {
     public class TestEngineContext : IEngineContext<Artist>
     {
@@ -22,11 +22,11 @@ namespace Firestorm.Tests.Integration.Data.Base
 
         public IEngineRepository<Artist> Repository { get; }
 
-        public IIdentifierProvider<Artist> Identifiers { get; } = new SingleIdentifierProvider<Artist>(new ExpressionIdentifierInfo<Artist,int>(a => a.ArtistID));
+        public IIdentifierProvider<Artist> Identifiers { get; } = new SingleIdentifierProvider<Artist>(new ExpressionIdentifierInfo<Artist,int>(a => a.ID));
 
         public IFieldProvider<Artist> Fields { get; } = new ExpressionListFieldProvider<Artist>
         {
-            { "id", a => a.ArtistID },
+            { "id", a => a.ID },
             { "name", a => a.Name },
         };
 
