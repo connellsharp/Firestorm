@@ -1,6 +1,6 @@
-using Firestorm.Fluent;
+using Firestorm.Fluent.IntegrationTests.Models;
 
-namespace Firestorm.Tests.Functionality.Fluent
+namespace Firestorm.Fluent.IntegrationTests.Contexts
 {
     public class AutoRootFluentContext : ApiContext
     {

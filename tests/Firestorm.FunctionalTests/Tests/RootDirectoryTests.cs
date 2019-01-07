@@ -1,8 +1,9 @@
 using System.Net.Http;
 using System.Threading.Tasks;
+using Firestorm.FunctionalTests.Tests.Setup;
 using Xunit;
 
-namespace Firestorm.Tests.Examples.Football.Tests
+namespace Firestorm.FunctionalTests.Tests
 {
     public class RootDirectoryTests : IClassFixture<FootballTestFixture>
     {

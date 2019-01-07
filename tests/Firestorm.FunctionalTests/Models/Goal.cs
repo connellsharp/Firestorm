@@ -1,4 +1,4 @@
-﻿namespace Firestorm.Tests.Examples.Football.Models
+﻿namespace Firestorm.FunctionalTests.Models
 {
     public class Goal
     {

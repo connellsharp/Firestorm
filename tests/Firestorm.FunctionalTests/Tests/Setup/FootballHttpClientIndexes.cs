@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Firestorm.Tests.Examples.Football.Tests
+namespace Firestorm.FunctionalTests.Tests.Setup
 {
     public class FootballHttpClientIndexes : IEnumerable<object[]>
     {

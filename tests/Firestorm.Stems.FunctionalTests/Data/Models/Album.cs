@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Firestorm.Tests.Examples.Music.Data.Models
+namespace Firestorm.Stems.FunctionalTests.Data.Models
 {
     public class Album
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Firestorm.Tests.Functionality.Fluent
+namespace Firestorm.Fluent.IntegrationTests.Models
 {
     public class Team
     {

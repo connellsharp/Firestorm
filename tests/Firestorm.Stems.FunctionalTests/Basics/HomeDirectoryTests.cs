@@ -1,12 +1,12 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Firestorm.Tests.Examples.Music.Web;
+using Firestorm.Stems.FunctionalTests.Web;
 using Firestorm.Testing.Http;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace Firestorm.Tests.Examples.Music.Basics
+namespace Firestorm.Stems.FunctionalTests.Basics
 {
     public class HomeDirectoryTests : IClassFixture<ExampleFixture<HomeDirectoryTests>>
     {

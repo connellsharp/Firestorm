@@ -3,7 +3,7 @@ using Firestorm.Endpoints.Naming;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Web;
 
-namespace Firestorm.Tests.Examples.Music.Web
+namespace Firestorm.Stems.FunctionalTests.Web
 {
     internal static class ExampleConfiguration
     {

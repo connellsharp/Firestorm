@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Firestorm.FunctionalTests.Models;
 using Firestorm.Stems;
 using Firestorm.Stems.Attributes.Attributes;
-using Firestorm.Tests.Examples.Football.Models;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Roots.DataSource;
 
-namespace Firestorm.Tests.Examples.Football.Web
+namespace Firestorm.FunctionalTests.Web
 {
     public class PlayersStem : Stem<Player>
     {

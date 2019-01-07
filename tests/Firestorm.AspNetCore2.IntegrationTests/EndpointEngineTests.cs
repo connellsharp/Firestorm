@@ -1,16 +1,16 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Firestorm.Rest.Web;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Web;
 using Firestorm.Engine;
+using Firestorm.Rest.Web;
+using Firestorm.Testing;
 using Firestorm.Testing.Http;
 using Firestorm.Testing.Models;
-using Firestorm.Testing;
 using Xunit;
 
-namespace Firestorm.Tests.Integration.Http.NetFramework
+namespace Firestorm.AspNetCore2.IntegrationTests
 {
     /// <summary>
     /// Some basic tests for the Endpoint chains using the <see cref="IntegratedRestDirectory"/>.

@@ -5,14 +5,13 @@ using Firestorm.Endpoints.Web;
 using Firestorm.EntityFramework6;
 using Firestorm.Extensions.AspNetCore;
 using Firestorm.Owin;
-using Firestorm.Stems;
+using Firestorm.Stems.FunctionalTests.Data;
 using Firestorm.Stems.Roots;
-using Firestorm.Tests.Examples.Music.Data;
 using Firestorm.Testing.Http;
 using Microsoft.Owin.Hosting;
 using Owin;
 
-namespace Firestorm.Tests.Examples.Music.Web
+namespace Firestorm.Stems.FunctionalTests.Web
 {
     public class ExampleItegrationSuite : IHttpIntegrationSuite
     {

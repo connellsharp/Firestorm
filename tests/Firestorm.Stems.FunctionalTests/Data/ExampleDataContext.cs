@@ -1,10 +1,10 @@
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using Firestorm.Tests.Examples.Music.Data.Models;
+using Firestorm.Stems.FunctionalTests.Data.Models;
 using Firestorm.Testing.Data;
 using JetBrains.Annotations;
 
-namespace Firestorm.Tests.Examples.Music.Data
+namespace Firestorm.Stems.FunctionalTests.Data
 {
     [UsedImplicitly]
     public class ExampleDataContext : DbContext

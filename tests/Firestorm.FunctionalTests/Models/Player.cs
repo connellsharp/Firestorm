@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Firestorm.Tests.Examples.Football.Models
+namespace Firestorm.FunctionalTests.Models
 {
     public class Player
     {

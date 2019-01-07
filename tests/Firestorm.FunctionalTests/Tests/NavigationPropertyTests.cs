@@ -1,11 +1,11 @@
-using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Firestorm.FunctionalTests.Tests.Setup;
 using Firestorm.Testing.Http;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace Firestorm.Tests.Examples.Football.Tests
+namespace Firestorm.FunctionalTests.Tests
 {
     public class NavigationPropertyTests : IClassFixture<FootballTestFixture>
     {

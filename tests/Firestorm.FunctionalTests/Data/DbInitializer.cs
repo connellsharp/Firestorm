@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Firestorm.Tests.Examples.Football.Models;
+using Firestorm.FunctionalTests.Models;
 
-namespace Firestorm.Tests.Examples.Football.Data
+namespace Firestorm.FunctionalTests.Data
 {
     public static class DbInitializer
     {

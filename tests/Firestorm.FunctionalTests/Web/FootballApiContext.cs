@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Firestorm.Fluent;
-using Firestorm.Tests.Examples.Football.Models;
+using Firestorm.FunctionalTests.Models;
 
-namespace Firestorm.Tests.Examples.Football.Web
+namespace Firestorm.FunctionalTests.Web
 {
     public class FootballApiContext : ApiContext
     {

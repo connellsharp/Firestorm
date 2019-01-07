@@ -1,4 +1,4 @@
-namespace Firestorm.Tests.Functionality.Fluent
+namespace Firestorm.Fluent.IntegrationTests.Models
 {
     public class Player
     {

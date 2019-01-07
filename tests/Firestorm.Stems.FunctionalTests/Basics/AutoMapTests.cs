@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Firestorm.Stems;
 using Firestorm.Stems.Attributes.Attributes;
 using Firestorm.Stems.Attributes.Basic.Attributes;
+using Firestorm.Stems.FunctionalTests.Data.Models;
+using Firestorm.Stems.FunctionalTests.Web;
 using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Testing.Http;
-using Firestorm.Tests.Examples.Music.Data.Models;
-using Firestorm.Tests.Examples.Music.Web;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace Firestorm.Tests.Examples.Music.Basics
+namespace Firestorm.Stems.FunctionalTests.Basics
 {
     public class AutoMapTests : IClassFixture<ExampleFixture<AutoMapTests>>
     {

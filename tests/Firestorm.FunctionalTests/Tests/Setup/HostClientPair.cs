@@ -1,11 +1,11 @@
 using System;
 using System.IO;
 using System.Net.Http;
-using Firestorm.Tests.Examples.Football.Web;
+using Firestorm.FunctionalTests.Web;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Firestorm.Tests.Examples.Football.Tests
+namespace Firestorm.FunctionalTests.Tests.Setup
 {
     public class HostClientPair : IDisposable
     {

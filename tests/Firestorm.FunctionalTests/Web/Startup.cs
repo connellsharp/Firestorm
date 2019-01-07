@@ -4,9 +4,9 @@ using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Web;
 using Firestorm.Extensions.AspNetCore;
 using Firestorm.Fluent;
+using Firestorm.FunctionalTests.Data;
+using Firestorm.FunctionalTests.Tests.Setup;
 using Firestorm.Stems;
-using Firestorm.Tests.Examples.Football.Data;
-using Firestorm.Tests.Examples.Football.Tests;
 using Firestorm.Testing.Data;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Firestorm.Tests.Examples.Football.Web
+namespace Firestorm.FunctionalTests.Web
 {
     public class Startup
     {

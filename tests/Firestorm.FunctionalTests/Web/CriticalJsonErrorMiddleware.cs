@@ -4,7 +4,7 @@ using Firestorm.Endpoints.Responses;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;
 
-namespace Firestorm.Tests.Examples.Football.Web
+namespace Firestorm.FunctionalTests.Web
 {
     /// <summary>
     /// Middleware for when the Firestorm middleware can't even handle the errors.

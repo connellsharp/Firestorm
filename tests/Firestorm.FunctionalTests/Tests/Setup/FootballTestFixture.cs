@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 
-namespace Firestorm.Tests.Examples.Football.Tests
+namespace Firestorm.FunctionalTests.Tests.Setup
 {
     public class FootballTestFixture : IDisposable
     {
