@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8F0499A9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Client", "src\Firestorm.Client\Firestorm.Client.csproj", "{AD76D2CC-3AEC-424C-B2BE-67084A0EFE43}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{08517E60-A9EA-4803-AB2D-5A15C6608C3E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Core", "_Core", "{08517E60-A9EA-4803-AB2D-5A15C6608C3E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Engine.Additives", "src\Firestorm.Engine.Additives\Firestorm.Engine.Additives.csproj", "{F482D521-0DDF-4703-B9EA-568652DB669A}"
 EndProject
@@ -102,7 +102,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Stems.Core", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Stems.Essentials", "src\Firestorm.Stems.Essentials\Firestorm.Stems.Essentials.csproj", "{870FC38F-5811-41FB-A42A-9965AF26C201}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{33A230CD-37B2-455D-AE98-F8917AD6F158}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Testing", "_Testing", "{33A230CD-37B2-455D-AE98-F8917AD6F158}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Client.Tests", "tests\Firestorm.Client.Tests\Firestorm.Client.Tests.csproj", "{5FA35477-8BBC-42C3-A41D-133B04707C69}"
 EndProject
