@@ -1,18 +1,17 @@
 ﻿using System.Web.Http;
-using Firestorm.AspNetWebApi2;
+using Firestorm.AspNetWebApi2.IntegrationTests;
 using Firestorm.Endpoints.Web;
 using Firestorm.Host;
 using Firestorm.Testing.Http;
-using Firestorm.Tests.Integration.Http.NetFramework.Web;
 using JetBrains.Annotations;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(WebApiExampleStartup))]
+[assembly: OwinStartup(typeof(Startup))]
 
-namespace Firestorm.Tests.Integration.Http.NetFramework.Web
+namespace Firestorm.AspNetWebApi2.IntegrationTests
 {
-    public class WebApiExampleStartup
+    public class Startup
     {
         [UsedImplicitly]
         public void Configuration(IAppBuilder app)

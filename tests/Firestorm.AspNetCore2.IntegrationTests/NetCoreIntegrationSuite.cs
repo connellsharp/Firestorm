@@ -3,9 +3,9 @@ using System.Net.Http;
 using Firestorm.Testing.Http;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Firestorm.Tests.Integration.Http.AspNetCore
+namespace Firestorm.AspNetCore2.IntegrationTests
 {
-    public class NetCoreIntegrationSuite<TStartup> : IHttpIntegrationSuite
+    internal class NetCoreIntegrationSuite<TStartup> : IHttpIntegrationSuite
         where TStartup : class
     {
         private readonly int _portNumber;

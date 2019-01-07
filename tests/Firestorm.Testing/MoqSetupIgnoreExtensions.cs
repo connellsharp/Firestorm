@@ -30,26 +30,6 @@ namespace Firestorm.Tests.Unit
             return mock.Setup(expression);
         }
 
-        public static void VerifyIgnoreArgs<T>(this Mock<T> mock,
-            Expression<Action<T>> expression, Func<Times> times = null)
-            where T : class
-        {
-            expression = new MakeAnyVisitor().VisitAndConvert(
-                expression, "VerifyIgnoreArgs");
-
-            mock.Verify(expression, times ?? Times.AtLeastOnce);
-        }
-
-        public static void VerifyIgnoreArgs<T, TResult>(this Mock<T> mock,
-            Expression<Func<T, TResult>> expression, Func<Times> times = null)
-            where T : class
-        {
-            expression = new MakeAnyVisitor().VisitAndConvert(
-                expression, "VerifyIgnoreArgs");
-
-            mock.Verify(expression, times ?? Times.AtLeastOnce);
-        }
-
         private class MakeAnyVisitor : ExpressionVisitor
         {
             protected override Expression VisitConstant(ConstantExpression node)

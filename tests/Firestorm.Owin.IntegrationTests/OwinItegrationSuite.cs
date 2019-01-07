@@ -3,17 +3,17 @@ using System.Net.Http;
 using Firestorm.Testing.Http;
 using Microsoft.Owin.Hosting;
 
-namespace Firestorm.Tests.Integration.Http.NetFramework.Web
+namespace Firestorm.Owin.IntegrationTests
 {
-    internal class NetFrameworkItegrationSuite<TStartup> : IHttpIntegrationSuite
+    internal class OwinItegrationSuite<TStartup> : IHttpIntegrationSuite
     {
         private readonly string _baseAddress;
 
-        public NetFrameworkItegrationSuite(int localPortNumber)
+        public OwinItegrationSuite(int localPortNumber)
             : this("http://localhost:" + localPortNumber)
         { }
 
-        public NetFrameworkItegrationSuite(string baseAddress)
+        public OwinItegrationSuite(string baseAddress)
         {
             _baseAddress = baseAddress;
 

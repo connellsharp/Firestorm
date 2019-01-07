@@ -1,7 +1,6 @@
 ﻿using Firestorm.Host;
-using Firestorm.Testing.Http;
 
-namespace Firestorm.Tests.Integration.Http.Base
+namespace Firestorm.Testing.Http
 {
     public class IntegratedStartResourceFactory : IStartResourceFactory
     {

@@ -1,17 +1,16 @@
-﻿using Firestorm.Owin;
-using Firestorm.Endpoints.Web;
+﻿using Firestorm.Endpoints.Web;
 using Firestorm.Host;
+using Firestorm.Owin.IntegrationTests;
 using Firestorm.Testing.Http;
-using Firestorm.Tests.Integration.Http.NetFramework.Web;
 using JetBrains.Annotations;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(PureOwinExampleStartup))]
+[assembly: OwinStartup(typeof(Startup))]
 
-namespace Firestorm.Tests.Integration.Http.NetFramework.Web
+namespace Firestorm.Owin.IntegrationTests
 {
-    public class PureOwinExampleStartup
+    public class Startup
     {
         [UsedImplicitly]
         public void Configuration(IAppBuilder app)

@@ -6,7 +6,7 @@ using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Web;
 using Firestorm.Engine;
 using Firestorm.Testing.Http;
-using Firestorm.Tests.Models;
+using Firestorm.Tests.Unit;
 using Xunit;
 
 namespace Firestorm.Tests.Integration.Http.NetFramework
