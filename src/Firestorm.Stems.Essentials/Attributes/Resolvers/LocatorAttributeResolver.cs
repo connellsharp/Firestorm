@@ -1,9 +1,9 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using Firestorm.Stems.Attributes.Analysis;
+using Firestorm.Stems.Analysis;
 
-namespace Firestorm.Stems.Attributes.Basic.Resolvers
+namespace Firestorm.Stems.Essentials.Resolvers
 {
     internal class LocatorAttributeResolver : FieldAttributeResolverBase
     {

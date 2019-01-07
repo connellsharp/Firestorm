@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Firestorm.Stems.Attributes.Analysis
+namespace Firestorm.Stems.Analysis
 {
     /// <summary>
     /// Resolves <see cref="IAnalyzer"/> instances using an internal cache for a supplied analyzer type.

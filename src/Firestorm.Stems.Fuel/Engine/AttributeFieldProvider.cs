@@ -8,7 +8,7 @@ using Firestorm.Engine.Additives.Writers;
 using Firestorm.Engine.Deferring;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Subs.Context;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 
 namespace Firestorm.Stems.Fuel.Fields

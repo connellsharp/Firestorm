@@ -1,7 +1,6 @@
 using System;
-using Firestorm.Stems.Attributes.Attributes;
 
-namespace Firestorm.Stems.Attributes.Basic.Attributes
+namespace Firestorm.Stems.Essentials
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]
     public class NestedAttribute : StemHelperAttribute

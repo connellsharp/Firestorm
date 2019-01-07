@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using Firestorm.Stems.Attributes.Analysis;
+using Firestorm.Stems.Analysis;
 using Firestorm.Stems.AutoMap;
 using Firestorm.Stems.Fuel.Essential;
 using Firestorm.Stems.Fuel.Substems;
 
-namespace Firestorm.Stems.Roots
+namespace Firestorm.Stems
 {
     public class DefaultStemConfiguration : IStemConfiguration
     {

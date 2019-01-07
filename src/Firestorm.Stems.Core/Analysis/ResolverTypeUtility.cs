@@ -1,7 +1,7 @@
 using System;
 using Reflectious;
 
-namespace Firestorm.Stems.Attributes.Analysis
+namespace Firestorm.Stems.Analysis
 {
     public static class ResolverTypeUtility
     {

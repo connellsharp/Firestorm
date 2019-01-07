@@ -1,6 +1,6 @@
 using System;
 
-namespace Firestorm.Stems.Attributes.Attributes
+namespace Firestorm.Stems
 {
     /// <summary>
     /// Indicates that the property should be interpreted as an Expression by its name and type.

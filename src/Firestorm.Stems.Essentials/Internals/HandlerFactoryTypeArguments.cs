@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Firestorm.Engine.Subs;
+using Firestorm.Stems.Analysis;
 using Firestorm.Stems.Attributes;
-using Firestorm.Stems.Attributes.Analysis;
 using Reflectious;
 
 namespace Firestorm.Stems.Fuel.Substems

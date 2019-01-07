@@ -1,7 +1,6 @@
-using Firestorm.Stems.Attributes.Attributes;
 using JetBrains.Annotations;
 
-namespace Firestorm.Stems.Attributes.Basic.Attributes
+namespace Firestorm.Stems.Essentials
 {
     [MeansImplicitUse]
     public abstract class FieldAttribute : StemAttribute

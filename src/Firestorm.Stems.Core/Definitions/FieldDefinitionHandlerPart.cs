@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Firestorm.Stems.Attributes.Definitions
+namespace Firestorm.Stems.Definitions
 {
     /// <summary>
     /// Part of a <see cref="FieldDefinition{TItem}"/> that can be used to get field values in Firestorm.

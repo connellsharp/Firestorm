@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Firestorm.Data;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 
 namespace Firestorm.Stems.Fuel.Essential.Resolvers

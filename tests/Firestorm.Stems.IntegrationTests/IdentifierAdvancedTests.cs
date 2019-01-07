@@ -2,8 +2,8 @@
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Firestorm.Stems;
-using Firestorm.Stems.Attributes.Basic.Attributes;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Definitions;
+using Firestorm.Stems.Essentials;
 using Firestorm.Stems.IntegrationTests.Helpers;
 using Firestorm.Testing;
 using Firestorm.Testing.Models;

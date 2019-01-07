@@ -1,7 +1,6 @@
 using System;
-using Firestorm.Stems.Attributes.Attributes;
 
-namespace Firestorm.Stems.Attributes.Analysis
+namespace Firestorm.Stems.Analysis
 {
     /// <summary>
     /// Exception that is thrown when <see cref="StemAttribute"/>s have been setup incorrectly.

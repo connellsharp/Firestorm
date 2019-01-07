@@ -1,6 +1,6 @@
 using System;
 
-namespace Firestorm.Stems.Attributes.Analysis
+namespace Firestorm.Stems.Analysis
 {
     /// <summary>
     /// Creates <see cref="IAnalyzer"/> instances for a supplied analyzer type.

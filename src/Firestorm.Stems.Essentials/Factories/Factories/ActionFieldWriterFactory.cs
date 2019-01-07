@@ -1,7 +1,7 @@
 using System;
 using Firestorm.Engine.Additives.Writers;
 using Firestorm.Engine.Fields;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 
 namespace Firestorm.Stems.Fuel.Essential.Factories

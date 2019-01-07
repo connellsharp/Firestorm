@@ -1,4 +1,4 @@
-namespace Firestorm.Stems.Attributes.Definitions
+namespace Firestorm.Stems.Definitions
 {
     public class FieldDescription
     {

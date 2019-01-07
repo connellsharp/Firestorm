@@ -1,10 +1,10 @@
-using Firestorm.Stems.Attributes.Analysis;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Analysis;
+using Firestorm.Stems.Definitions;
 
 namespace Firestorm.Stems.Fuel.Resolving.Analysis
 {
     /// <summary>
-    /// Adds to a <see cref="EngineImplementations{TItem}"/> with information about a <see cref="Attributes.Definitions.FieldDefinition"/>.
+    /// Adds to a <see cref="EngineImplementations{TItem}"/> with information about a <see cref="Definitions.FieldDefinition"/>.
     /// </summary>
     /// <remarks>
     /// Similar design to the <see cref="IAttributeResolver"/>.

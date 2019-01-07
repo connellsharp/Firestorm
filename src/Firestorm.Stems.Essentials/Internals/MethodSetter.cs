@@ -1,6 +1,6 @@
 using System;
 using Firestorm.Engine.Subs;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Definitions;
 using JetBrains.Annotations;
 
 namespace Firestorm.Stems.Fuel.Substems

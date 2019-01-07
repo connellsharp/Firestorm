@@ -1,8 +1,8 @@
 using System;
-using Firestorm.Stems.Attributes.Analysis;
+using Firestorm.Stems.Analysis;
 using JetBrains.Annotations;
 
-namespace Firestorm.Stems.Attributes.Attributes
+namespace Firestorm.Stems
 {
     /// <summary>
     /// Base class for an attribute that allows a member to be used by Firestorm Stems.

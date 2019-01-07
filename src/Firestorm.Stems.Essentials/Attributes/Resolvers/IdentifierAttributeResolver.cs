@@ -1,14 +1,13 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using Firestorm.Stems.Attributes.Analysis;
-using Firestorm.Stems.Attributes.Basic.Attributes;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Analysis;
+using Firestorm.Stems.Definitions;
 using Reflectious;
 
-namespace Firestorm.Stems.Attributes.Basic.Resolvers
+namespace Firestorm.Stems.Essentials.Resolvers
 {
-    public class IdentifierAttributeResolver : AttributeResolverBase
+    internal class IdentifierAttributeResolver : AttributeResolverBase
     {
         private readonly bool _isMultiReference;
 

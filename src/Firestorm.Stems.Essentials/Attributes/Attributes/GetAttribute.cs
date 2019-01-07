@@ -1,9 +1,9 @@
 using System;
-using Firestorm.Stems.Attributes.Analysis;
-using Firestorm.Stems.Attributes.Basic.Resolvers;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Analysis;
+using Firestorm.Stems.Definitions;
+using Firestorm.Stems.Essentials.Resolvers;
 
-namespace Firestorm.Stems.Attributes.Basic.Attributes
+namespace Firestorm.Stems.Essentials
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]
     public class GetAttribute : FieldAttribute

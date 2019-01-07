@@ -1,7 +1,7 @@
 using System;
 using Firestorm.Data;
 using Firestorm.Engine.Subs.Context;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 
 namespace Firestorm.Stems.Fuel.Essential.Factories

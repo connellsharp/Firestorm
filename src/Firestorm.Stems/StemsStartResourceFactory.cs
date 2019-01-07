@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using Firestorm.Host;
 using Firestorm.Host.Infrastructure;
+using Firestorm.Stems.Roots;
 
-namespace Firestorm.Stems.Roots
+namespace Firestorm.Stems
 {
     /// <summary>
     /// Contains the user configuration for Stems and creates starting collection Stem types from an <see cref="IRootResourceFactory"/> implementation.

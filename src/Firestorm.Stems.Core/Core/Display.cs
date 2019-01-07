@@ -1,4 +1,4 @@
-namespace Firestorm.Stems.Attributes.Definitions
+namespace Firestorm.Stems
 {
     /// <summary>
     /// Defines how many levels of nesting the field is visible under.

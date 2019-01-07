@@ -1,8 +1,8 @@
 using System;
-using Firestorm.Stems.Attributes.Analysis;
-using Firestorm.Stems.Attributes.Basic.Resolvers;
+using Firestorm.Stems.Analysis;
+using Firestorm.Stems.Essentials.Resolvers;
 
-namespace Firestorm.Stems.Attributes.Basic.Attributes
+namespace Firestorm.Stems.Essentials
 {
     /// <summary>
     /// Marks a locator field that can be used to find an item in a Substem instead of setting the value of another.

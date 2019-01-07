@@ -1,11 +1,11 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using Firestorm.Stems.Attributes.Analysis;
+using Firestorm.Stems.Analysis;
 
-namespace Firestorm.Stems.Attributes.Basic.Resolvers
+namespace Firestorm.Stems.Essentials.Resolvers
 {
-    public class SetterAttributeResolver : FieldAttributeResolverBase
+    internal class SetterAttributeResolver : FieldAttributeResolverBase
     {
         protected override void AddExpressionToDefinition(LambdaExpression expression)
         {

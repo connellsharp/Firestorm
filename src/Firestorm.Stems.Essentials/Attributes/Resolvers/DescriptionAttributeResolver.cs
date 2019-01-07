@@ -1,11 +1,10 @@
 using System.Reflection;
-using Firestorm.Stems.Attributes.Analysis;
-using Firestorm.Stems.Attributes.Basic.Attributes;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Analysis;
+using Firestorm.Stems.Definitions;
 
-namespace Firestorm.Stems.Attributes.Basic.Resolvers
+namespace Firestorm.Stems.Essentials.Resolvers
 {
-    public class DescriptionAttributeResolver : AttributeResolverBase
+    internal class DescriptionAttributeResolver : AttributeResolverBase
     {
         public override void IncludeMember(MemberInfo member)
         {

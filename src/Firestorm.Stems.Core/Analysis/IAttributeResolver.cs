@@ -1,9 +1,8 @@
 using System;
 using System.Reflection;
-using Firestorm.Stems.Attributes.Attributes;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Definitions;
 
-namespace Firestorm.Stems.Attributes.Analysis
+namespace Firestorm.Stems.Analysis
 {
     /// <summary>
     /// Adds to a <see cref="StemDefinition"/> with information about a Stem member with a <see cref="StemAttribute"/>.

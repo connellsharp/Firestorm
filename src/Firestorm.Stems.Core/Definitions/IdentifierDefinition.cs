@@ -2,7 +2,7 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Firestorm.Stems.Attributes.Definitions
+namespace Firestorm.Stems.Definitions
 {
     public class IdentifierDefinition
     {

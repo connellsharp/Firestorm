@@ -1,7 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using Firestorm.Stems.Attributes.Attributes;
-using Firestorm.Stems.Attributes.Basic.Attributes;
+using Firestorm.Stems.Essentials;
 using Firestorm.Stems.FunctionalTests.Data.Models;
 using Firestorm.Stems.FunctionalTests.Web;
 using Firestorm.Stems.Roots.DataSource;

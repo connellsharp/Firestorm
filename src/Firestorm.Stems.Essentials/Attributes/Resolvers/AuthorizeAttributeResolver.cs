@@ -3,11 +3,11 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
-using Firestorm.Stems.Attributes.Analysis;
+using Firestorm.Stems.Analysis;
 
-namespace Firestorm.Stems.Attributes.Basic.Resolvers
+namespace Firestorm.Stems.Essentials.Resolvers
 {
-    public class AuthorizeAttributeResolver : FieldAttributeResolverBase
+    internal class AuthorizeAttributeResolver : FieldAttributeResolverBase
     {
         private readonly Func<IRestUser, bool> _isAuthorized;
 

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Firestorm.Stems.Attributes.Definitions
+namespace Firestorm.Stems.Definitions
 {
     public class FieldDefinitionDictionary : Dictionary<string, FieldDefinition>
     {

@@ -1,5 +1,5 @@
 using Firestorm.Engine.Fields;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Definitions;
 
 namespace Firestorm.Stems.Fuel.Essential.Factories
 {

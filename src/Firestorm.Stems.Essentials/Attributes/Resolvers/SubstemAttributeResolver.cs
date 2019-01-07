@@ -2,9 +2,9 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Firestorm.Stems.Attributes.Basic.Resolvers
+namespace Firestorm.Stems.Essentials.Resolvers
 {
-    public class SubstemAttributeResolver : FieldAttributeResolverBase
+    internal class SubstemAttributeResolver : FieldAttributeResolverBase
     {
         private readonly Type _substemType;
 

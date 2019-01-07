@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Firestorm.Engine.Additives.Identifiers;
 using Firestorm.Engine.Identifiers;
-using Firestorm.Stems.Attributes.Analysis;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Analysis;
+using Firestorm.Stems.Definitions;
 
 namespace Firestorm.Stems.Fuel.Identifiers
 {

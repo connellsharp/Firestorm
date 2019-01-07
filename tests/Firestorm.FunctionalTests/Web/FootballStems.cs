@@ -4,8 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Firestorm.FunctionalTests.Models;
 using Firestorm.Stems;
-using Firestorm.Stems.Attributes.Attributes;
-using Firestorm.Stems.Attributes.Basic.Attributes;
+using Firestorm.Stems.Essentials;
 using Firestorm.Stems.Roots.DataSource;
 
 namespace Firestorm.FunctionalTests.Web

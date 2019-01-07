@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using Firestorm.Stems.Attributes.Analysis;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Analysis;
+using Firestorm.Stems.Definitions;
 
 namespace Firestorm.Stems.Fuel.Resolving.Analysis
 {

@@ -2,8 +2,8 @@ using System;
 using System.Linq.Expressions;
 using Firestorm.Engine.Additives.Readers;
 using Firestorm.Engine.Fields;
-using Firestorm.Stems.Attributes.Analysis;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Analysis;
+using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 using JetBrains.Annotations;
 

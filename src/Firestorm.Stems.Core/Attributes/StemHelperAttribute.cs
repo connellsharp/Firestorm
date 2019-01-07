@@ -1,6 +1,6 @@
 using System;
 
-namespace Firestorm.Stems.Attributes.Attributes
+namespace Firestorm.Stems
 {
     /// <summary>
     /// Base class for a helper attribute, usually proving syntactic sugar for functionality in a <see cref="StemAttribute"/>.

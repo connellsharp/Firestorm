@@ -1,12 +1,11 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using Firestorm.Stems.Attributes.Attributes;
-using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.AutoMap;
+using Firestorm.Stems.Definitions;
 using JetBrains.Annotations;
 
-namespace Firestorm.Stems.Attributes.Analysis
+namespace Firestorm.Stems.Analysis
 {
     /// <summary>
     /// Base class for most <see cref="IAttributeResolver"/>s.

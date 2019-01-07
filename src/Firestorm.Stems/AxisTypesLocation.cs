@@ -1,8 +1,7 @@
 ﻿using System.Reflection;
-using Firestorm.Stems;
 using Firestorm.Stems.Roots;
 
-namespace Firestorm.Extensions.AspNetCore
+namespace Firestorm.Stems
 {
     /// <summary>
     /// Provides a method to get an <see cref="ITypeGetter"/>.

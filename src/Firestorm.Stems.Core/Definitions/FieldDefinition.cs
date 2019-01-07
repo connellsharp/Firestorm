@@ -1,6 +1,6 @@
 using System;
 
-namespace Firestorm.Stems.Attributes.Definitions
+namespace Firestorm.Stems.Definitions
 {
     /// <summary>
     /// Defines a field with weakly-typed expressions, delegates and types that can be used to build <see cref="IFactory{TFieldHandler,TItem}"/> objects.

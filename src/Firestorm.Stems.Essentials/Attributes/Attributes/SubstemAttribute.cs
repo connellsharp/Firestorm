@@ -1,8 +1,8 @@
 using System;
-using Firestorm.Stems.Attributes.Analysis;
-using Firestorm.Stems.Attributes.Basic.Resolvers;
+using Firestorm.Stems.Analysis;
+using Firestorm.Stems.Essentials.Resolvers;
 
-namespace Firestorm.Stems.Attributes.Basic.Attributes
+namespace Firestorm.Stems.Essentials
 {
     public class SubstemAttribute : FieldAttribute
     {

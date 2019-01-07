@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Subs.Context;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 
 namespace Firestorm.Stems.Fuel.Resolving.Analysis

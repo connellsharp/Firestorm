@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using Firestorm.Stems.Attributes.Basic.Attributes;
-using Firestorm.Stems.Attributes.Basic.Resolvers;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Definitions;
+using Firestorm.Stems.Essentials;
+using Firestorm.Stems.Essentials.Resolvers;
 using Xunit;
 
 namespace Firestorm.Stems.Tests.Attributes.Basic

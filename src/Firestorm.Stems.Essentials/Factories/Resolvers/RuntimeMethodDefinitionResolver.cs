@@ -1,6 +1,6 @@
 using System;
 using Firestorm.Engine.Fields;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Essential.Factories;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 using Firestorm.Stems.Fuel.Resolving.Factories;

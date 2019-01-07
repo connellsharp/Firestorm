@@ -1,16 +1,17 @@
 using System;
 using System.Collections.Generic;
-using Firestorm.Stems.Attributes.Analysis;
+using Firestorm.Stems.Analysis;
+using Firestorm.Stems.Roots;
 using Reflectious;
 
-namespace Firestorm.Stems.Roots
+namespace Firestorm.Stems
 {
     internal class AnalyzerCacheBuilder
     {
         private readonly AnalyzerCache _analyzerCache;
         private readonly IStemConfiguration _stemConfiguration;
 
-        public AnalyzerCacheBuilder(IStemConfiguration stemConfiguration)
+        internal AnalyzerCacheBuilder(IStemConfiguration stemConfiguration)
         {
             _stemConfiguration = stemConfiguration;
             _analyzerCache = stemConfiguration.AnalyzerCache as AnalyzerCache;

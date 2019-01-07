@@ -3,7 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Firestorm.Stems;
-using Firestorm.Stems.Attributes.Basic.Attributes;
+using Firestorm.Stems.Essentials;
 using Firestorm.Stems.IntegrationTests.Helpers;
 using Firestorm.Testing;
 using Firestorm.Testing.Models;

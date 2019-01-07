@@ -5,7 +5,7 @@ using Firestorm.Engine.Defaults;
 using Firestorm.Engine.Subs;
 using Firestorm.Engine.Subs.Handlers;
 using Firestorm.Stems;
-using Firestorm.Stems.Attributes.Basic.Attributes;
+using Firestorm.Stems.Essentials;
 using Firestorm.Stems.Fuel;
 using Firestorm.Testing;
 using Firestorm.Testing.Models;

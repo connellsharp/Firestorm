@@ -1,10 +1,9 @@
 using System;
 using System.Reflection;
-using Firestorm.Stems.Attributes.Attributes;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Definitions;
 using Reflectious;
 
-namespace Firestorm.Stems.Attributes.Analysis
+namespace Firestorm.Stems.Analysis
 {
     /// <summary>
     /// Analyzes stem types to build a <see cref="StemDefinition"/> model from members with custom <see cref="StemAttribute"/>s using their <see cref="IAttributeResolver"/> implementations.
