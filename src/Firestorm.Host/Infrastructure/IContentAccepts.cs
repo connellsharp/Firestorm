@@ -1,4 +1,4 @@
-namespace Firestorm.Endpoints.Formatting
+namespace Firestorm.Host.Infrastructure
 {
     public interface IContentAccepts
     { }

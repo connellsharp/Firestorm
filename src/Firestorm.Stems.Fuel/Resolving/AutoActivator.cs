@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using Firestorm.Stems.Fuel.Resolving.Exceptions;
@@ -9,7 +8,7 @@ using JetBrains.Annotations;
 namespace Firestorm.Stems.Fuel.Resolving
 {
     /// <summary>
-    /// Contains methosd to construct instances of objects using automatically resolved constructor arguments.
+    /// Contains methods to construct instances of objects using automatically resolved constructor arguments.
     /// </summary>
     public sealed class AutoActivator
     {

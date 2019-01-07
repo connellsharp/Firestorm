@@ -2,7 +2,7 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using Firestorm.Engine.Additives.Identifiers;
-using Firestorm.Stems.Attributes.Analysis;
+using Firestorm.Stems.Analysis;
 using JetBrains.Annotations;
 
 namespace Firestorm.Stems.Fuel.Identifiers

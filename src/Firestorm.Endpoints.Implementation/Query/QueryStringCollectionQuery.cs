@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using Firestorm.Endpoints.Configuration;
 using JetBrains.Annotations;
 
 namespace Firestorm.Endpoints.Query

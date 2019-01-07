@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Firestorm.Endpoints\Firestorm.Endpoints.csproj" />
+    <ProjectReference Include="..\Firestorm.Endpoints.Core\Firestorm.Endpoints.Core.csproj" />
   </ItemGroup>
 
 </Project>

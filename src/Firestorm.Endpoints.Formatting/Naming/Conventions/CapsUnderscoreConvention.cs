@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Firestorm.Endpoints.Naming
+namespace Firestorm.Endpoints.Formatting.Naming.Conventions
 {
     public class CapsUnderscoreConvention : ICaseConvention
     {

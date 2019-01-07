@@ -1,12 +1,9 @@
-﻿using System.Threading.Tasks;
-using Firestorm.Endpoints.Formatting;
-using Firestorm.Endpoints.Preconditions;
-using Firestorm.Endpoints.Web;
+﻿using Firestorm.Host.Infrastructure;
 using Microsoft.Owin;
 
-namespace Firestorm.Owin
+namespace Firestorm.Owin.Http
 {
-    public class OwinContextReader : IHttpRequestReader
+    internal class OwinContextReader : IHttpRequestReader
     {
         private readonly IOwinContext _owinContext;
 

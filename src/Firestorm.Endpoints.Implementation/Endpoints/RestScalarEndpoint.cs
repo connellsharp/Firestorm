@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
+using Firestorm.Endpoints.Requests;
 using Firestorm.Rest.Web;
 using Firestorm.Rest.Web.Options;
-using Firestorm.Endpoints.Preconditions;
-using Firestorm.Endpoints.Strategies;
+using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.Endpoints
 {

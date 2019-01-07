@@ -1,12 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Firestorm.Engine.Additives.Identifiers;
 using Firestorm.Engine.Identifiers;
-using Firestorm.Stems.Attributes.Analysis;
-using Firestorm.Stems.Attributes.Definitions;
+using Firestorm.Stems.Analysis;
+using Firestorm.Stems.Definitions;
+using Firestorm.Stems.Fuel.Identifiers;
 
-namespace Firestorm.Stems.Fuel.Identifiers
+namespace Firestorm.Stems.Fuel
 {
     /// <summary>
     /// Builds <see cref="IIdentifierInfo{TItem}"/> from <see cref="IdentifierAttribute"/>s placed on properties and predicate methods in a Stem.

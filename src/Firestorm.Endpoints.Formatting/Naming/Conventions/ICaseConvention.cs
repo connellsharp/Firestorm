@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Firestorm.Endpoints.Naming
+namespace Firestorm.Endpoints.Formatting.Naming.Conventions
 {
     public interface ICaseConvention
     {

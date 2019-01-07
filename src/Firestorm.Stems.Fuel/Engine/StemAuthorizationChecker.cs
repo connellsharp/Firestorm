@@ -3,10 +3,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using Firestorm.Engine;
 using Firestorm.Engine.Additives.Authorization;
+using Firestorm.Engine.Deferring;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 using Reflectious;
 
-namespace Firestorm.Stems.Fuel.Authorization
+namespace Firestorm.Stems.Fuel
 {
     internal class StemAuthorizationChecker<TItem> : IAuthorizationChecker<TItem>
         where TItem : class

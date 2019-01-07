@@ -1,11 +1,11 @@
 ﻿using System;
-using Firestorm.Endpoints;
 using Firestorm.Host;
+using Firestorm.Host.Infrastructure;
 using Microsoft.Owin;
 
-namespace Firestorm.Owin
+namespace Firestorm.Owin.Http
 {
-    public class OwinRequestContext : IRequestContext
+    internal class OwinRequestContext : IRequestContext
     {
         public OwinRequestContext(IOwinContext owinContext)
         {

@@ -1,3 +1,5 @@
+using Firestorm.Endpoints.Requests;
+
 namespace Firestorm.Endpoints.Strategies
 {
     /// <summary>

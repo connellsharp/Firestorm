@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using Firestorm.Endpoints.Configuration;
 using Firestorm.Rest.Web;
 using JetBrains.Annotations;
 using Newtonsoft.Json;

@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
+using Firestorm.Host.Infrastructure;
 using Firestorm.Rest.Web;
 using Firestorm.Rest.Web.Options;
-using Firestorm.Endpoints.Preconditions;
 
 namespace Firestorm.Endpoints
 {

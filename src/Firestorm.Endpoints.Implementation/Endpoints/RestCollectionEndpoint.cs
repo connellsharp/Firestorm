@@ -1,10 +1,11 @@
 using System;
 using System.Threading.Tasks;
+using Firestorm.Endpoints.Pagination;
+using Firestorm.Endpoints.Query;
 using Firestorm.Rest.Web;
 using Firestorm.Rest.Web.Options;
-using Firestorm.Endpoints.Pagination;
-using Firestorm.Endpoints.Preconditions;
-using Firestorm.Endpoints.Strategies;
+using Firestorm.Endpoints.Requests;
+using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.Endpoints
 {

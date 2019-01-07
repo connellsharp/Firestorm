@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Firestorm.Endpoints.Naming;
+using Firestorm.Endpoints.Configuration;
+using Firestorm.Endpoints.Formatting.Naming;
 using JetBrains.Annotations;
 using Newtonsoft.Json.Linq;
 

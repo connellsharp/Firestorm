@@ -1,4 +1,6 @@
-﻿namespace Firestorm.Endpoints.Naming
+﻿using Firestorm.Endpoints.Formatting.Naming.Conventions;
+
+namespace Firestorm.Endpoints.Formatting.Naming
 {
     public class DefaultNamingConventionSwitcher : NamingConventionSwitcher
     {

@@ -1,4 +1,5 @@
 using Firestorm.Endpoints;
+using Firestorm.Endpoints.Configuration;
 using Firestorm.Host;
 
 namespace Firestorm.AspNetWebApi2

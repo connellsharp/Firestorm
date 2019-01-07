@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Firestorm.Endpoints.Web\Firestorm.Endpoints.Web.csproj" />
+    <ProjectReference Include="..\Firestorm.Endpoints\Firestorm.Endpoints.csproj" />
   </ItemGroup>
 
   <ItemGroup>

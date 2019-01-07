@@ -1,7 +1,7 @@
 using System.IO;
 using JetBrains.Annotations;
 
-namespace Firestorm.Endpoints.Formatting
+namespace Firestorm.Host.Infrastructure
 {
     public interface IContentReader
     {

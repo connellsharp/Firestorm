@@ -1,6 +1,6 @@
 ﻿using System;
-using Firestorm.Endpoints;
 using Firestorm.Host;
+using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.AspNetCore2.HttpContext
 {

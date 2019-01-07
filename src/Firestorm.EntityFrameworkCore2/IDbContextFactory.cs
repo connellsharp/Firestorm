@@ -2,7 +2,7 @@
 
 namespace Firestorm.EntityFrameworkCore2
 {
-    public interface IDbContextFactory<out TDbContext>
+    internal interface IDbContextFactory<out TDbContext>
         where TDbContext : DbContext
     {
         TDbContext Create();

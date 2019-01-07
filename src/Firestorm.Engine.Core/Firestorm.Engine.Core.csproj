@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+        <RootNamespace>Firestorm.Engine</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Firestorm.Core\Firestorm.Core.csproj" />
+      <ProjectReference Include="..\Firestorm.Rest\Firestorm.Rest.csproj" />
+      <ProjectReference Include="..\Firestorm.Data\Firestorm.Data.csproj" />
+    </ItemGroup>
+
+</Project>

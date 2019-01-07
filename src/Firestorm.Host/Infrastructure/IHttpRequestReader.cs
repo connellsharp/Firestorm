@@ -1,7 +1,4 @@
-using Firestorm.Endpoints.Formatting;
-using Firestorm.Endpoints.Preconditions;
-
-namespace Firestorm.Endpoints.Web
+namespace Firestorm.Host.Infrastructure
 {
     public interface IHttpRequestReader
     {

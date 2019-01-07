@@ -1,7 +1,5 @@
 ﻿using System.Net;
-using Firestorm.Endpoints.Formatting;
-using Firestorm.Endpoints.Preconditions;
-using Firestorm.Endpoints.Web;
+using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.AspNetCore2.HttpContext
 {

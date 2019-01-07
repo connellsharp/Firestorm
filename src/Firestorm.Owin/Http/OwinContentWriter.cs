@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using Firestorm.Endpoints.Formatting;
+using Firestorm.Host.Infrastructure;
 using Microsoft.Owin;
 
-namespace Firestorm.Owin
+namespace Firestorm.Owin.Http
 {
-    public class OwinContentWriter : IContentWriter
+    internal class OwinContentWriter : IContentWriter
     {
         private readonly IOwinContext _owinContext;
 

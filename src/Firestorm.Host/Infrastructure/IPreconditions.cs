@@ -1,4 +1,4 @@
-namespace Firestorm.Endpoints.Preconditions
+namespace Firestorm.Host.Infrastructure
 {
     public interface IPreconditions
     {

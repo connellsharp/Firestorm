@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Firestorm.Endpoints.Web;
+using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.Host
 {
