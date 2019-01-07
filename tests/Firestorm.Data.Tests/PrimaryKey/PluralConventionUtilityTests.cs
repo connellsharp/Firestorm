@@ -1,7 +1,6 @@
-﻿using Firestorm.Data;
-using Xunit;
+﻿using Xunit;
 
-namespace Firestorm.Testing.Data.PrimaryKey
+namespace Firestorm.Data.Tests.PrimaryKey
 {
     public class PluralConventionUtilityTests
     {
