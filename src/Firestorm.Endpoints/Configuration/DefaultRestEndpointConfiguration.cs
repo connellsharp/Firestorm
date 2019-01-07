@@ -1,3 +1,4 @@
+using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Naming;
 using Firestorm.Endpoints.Strategies;
 

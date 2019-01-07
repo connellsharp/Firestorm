@@ -1,6 +1,6 @@
 using System;
 
-namespace Firestorm.Endpoints.Strategies
+namespace Firestorm.Endpoints.Requests
 {
     internal class MethodNotAllowedException : RestApiException
     {

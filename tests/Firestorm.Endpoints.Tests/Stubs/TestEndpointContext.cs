@@ -1,5 +1,6 @@
 using System;
 using Firestorm.Endpoints;
+using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Web;
 using Firestorm.Host;
 using Firestorm.Host.Infrastructure;

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Firestorm.Endpoints.Requests;
 using Firestorm.Rest.Web;
 
 namespace Firestorm.Endpoints.Strategies

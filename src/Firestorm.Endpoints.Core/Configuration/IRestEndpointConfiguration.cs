@@ -1,9 +1,7 @@
-using Firestorm.Endpoints.Query;
-using Firestorm.Endpoints.Responses;
-using Firestorm.Endpoints.Strategies;
+using Firestorm.Endpoints.Requests;
 using JetBrains.Annotations;
 
-namespace Firestorm.Endpoints
+namespace Firestorm.Endpoints.Configuration
 {
     /// <summary>
     /// The options and services required to setup a Firestorm REST API server.

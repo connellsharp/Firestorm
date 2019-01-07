@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Http;
-using Firestorm.Data;
-using Firestorm.Endpoints;
+using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Web;
 using Firestorm.EntityFramework6;
 using Firestorm.Owin;

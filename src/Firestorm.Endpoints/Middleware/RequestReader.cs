@@ -1,4 +1,5 @@
-﻿using Firestorm.Rest.Web;
+﻿using Firestorm.Endpoints.Configuration;
+using Firestorm.Rest.Web;
 using Firestorm.Endpoints.Formatting;
 using Firestorm.Endpoints.Formatting.Naming;
 using Firestorm.Endpoints.Query;

@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Threading.Tasks;
+using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Formatting.Json;
 using Firestorm.Host.Infrastructure;
 using Newtonsoft.Json;

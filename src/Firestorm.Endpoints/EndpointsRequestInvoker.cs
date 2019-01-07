@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Host;
 using Firestorm.Host.Infrastructure;

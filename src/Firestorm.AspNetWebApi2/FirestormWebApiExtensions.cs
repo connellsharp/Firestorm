@@ -7,6 +7,7 @@ using Firestorm.Endpoints.Formatting.Xml;
 using Firestorm.AspNetWebApi2.ErrorHandling;
 using Firestorm.Defaults;
 using Firestorm.Endpoints;
+using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Web;
 using Firestorm.Host;
 using Newtonsoft.Json;

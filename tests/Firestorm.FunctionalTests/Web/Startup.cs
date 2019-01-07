@@ -1,5 +1,6 @@
 using System;
 using Firestorm.AspNetCore2;
+using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Web;
 using Firestorm.Extensions.AspNetCore;

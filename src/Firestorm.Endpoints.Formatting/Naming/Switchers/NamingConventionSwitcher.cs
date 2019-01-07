@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Firestorm.Endpoints.Configuration;
 
 namespace Firestorm.Endpoints.Naming
 {

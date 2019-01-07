@@ -1,4 +1,5 @@
 ﻿using System;
+using Firestorm.Endpoints.Configuration;
 using Firestorm.Host;
 
 namespace Firestorm.Endpoints.Web

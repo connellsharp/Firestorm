@@ -1,4 +1,5 @@
 using System;
+using Firestorm.Endpoints.Configuration;
 using JetBrains.Annotations;
 
 namespace Firestorm.Endpoints.Web

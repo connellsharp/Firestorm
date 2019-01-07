@@ -1,12 +1,10 @@
-using Firestorm.Endpoints.Pagination;
-
-namespace Firestorm.Endpoints.Responses
+namespace Firestorm.Endpoints.Configuration
 {
     /// <summary>
     /// The options used to build the responses to return to the client.
     /// </summary>
     /// <remarks>
-    /// Response builders are built in the <see cref="Endpoints.Responses"/> library, but this config object needs to be in the overall <see cref="RestEndpointConfiguration"/>,
+    /// Response builders are built in the <see cref="Firestorm.Endpoints.Responses"/> library, but this config object needs to be in the overall <see cref="RestEndpointConfiguration"/>,
     /// so these settings feel like they're defined at the wrong level.
     /// </remarks>
     public class ResponseConfiguration

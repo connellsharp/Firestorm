@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Firestorm.Endpoints.Strategies
+namespace Firestorm.Endpoints.Requests
 {
     public class UnsafeRequestStrategies<TResource> : Dictionary<UnsafeMethod, IUnsafeRequestStrategy<TResource>>
         where TResource : IRestResource

@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Firestorm.Rest.Web;
 
-namespace Firestorm.Endpoints.Strategies
+namespace Firestorm.Endpoints.Requests
 {
     public interface IUnsafeRequestStrategy<in TResource>
         where TResource : IRestResource

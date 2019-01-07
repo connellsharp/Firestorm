@@ -1,4 +1,5 @@
 using System;
+using Firestorm.Endpoints.Configuration;
 
 namespace Firestorm.Endpoints.Query
 {

@@ -1,4 +1,5 @@
 ﻿using Firestorm.Endpoints;
+using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Naming;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Endpoints.Web;

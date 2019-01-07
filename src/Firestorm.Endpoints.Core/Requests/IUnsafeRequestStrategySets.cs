@@ -1,4 +1,4 @@
-namespace Firestorm.Endpoints.Strategies
+namespace Firestorm.Endpoints.Requests
 {
     /// <summary>
     /// Contains 3 sets of strategies (for collection, items and scalars) defining how endpoints behave to unsafe requests.

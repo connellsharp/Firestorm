@@ -1,4 +1,6 @@
-﻿namespace Firestorm.Endpoints.Naming
+﻿using Firestorm.Endpoints.Configuration;
+
+namespace Firestorm.Endpoints.Naming
 {
     /// <summary>
     /// A naming <see cref="INamingConventionSwitcher"/> implementation that does nothing.

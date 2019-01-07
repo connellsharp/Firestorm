@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Firestorm.Endpoints.Query
+namespace Firestorm.Endpoints.Configuration
 {
     /// <summary>
     /// The configuration used to build the <see cref="QueryStringCollectionQuery"/> from a requested query string.
