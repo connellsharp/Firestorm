@@ -1,7 +1,7 @@
 using System;
 using JetBrains.Annotations;
 
-namespace Firestorm.Endpoints
+namespace Firestorm.Endpoints.Query
 {
     internal static class QueryValidationUtility
     {
