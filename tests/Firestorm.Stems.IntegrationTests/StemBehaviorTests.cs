@@ -1,10 +1,9 @@
 using System;
 using Firestorm.Data;
-using Firestorm.Stems;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.Derive;
-using Firestorm.Testing;
-using Firestorm.Endpoints.Tests.Stubs;
+using Firestorm.Testing.Http;
+using Firestorm.Testing.Models;
 using Xunit;
 
 namespace Firestorm.Stems.IntegrationTests

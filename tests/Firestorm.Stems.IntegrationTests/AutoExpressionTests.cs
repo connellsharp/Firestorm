@@ -5,7 +5,7 @@ using Firestorm.Stems.Attributes.Attributes;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.IntegrationTests.Helpers;
 using Firestorm.Testing;
-using Firestorm.Engine.Tests.Implementation;
+using Firestorm.Testing.Models;
 using Xunit;
 
 namespace Firestorm.Stems.IntegrationTests

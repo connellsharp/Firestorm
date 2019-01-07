@@ -14,7 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Firestorm.Fluent.Start\Firestorm.Fluent.Start.csproj" />
+    <ProjectReference Include="..\..\src\Firestorm.Fluent\Firestorm.Fluent.csproj" />
+    <ProjectReference Include="..\..\src\Firestorm.Engine\Firestorm.Engine.csproj" />
+    <ProjectReference Include="..\Firestorm.Testing\Firestorm.Testing.csproj" />
   </ItemGroup>
 
 </Project>

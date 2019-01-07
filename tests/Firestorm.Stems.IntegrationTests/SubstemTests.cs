@@ -5,15 +5,13 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Firestorm.Data;
 using Firestorm.Engine.Defaults;
-using Firestorm.Stems;
 using Firestorm.Stems.Attributes.Basic.Attributes;
 using Firestorm.Stems.Attributes.Definitions;
 using Firestorm.Stems.Roots.Derive;
 using Firestorm.Stems.IntegrationTests.Helpers;
 using Firestorm.Testing;
-using Firestorm.Endpoints.Tests.Stubs;
-using Firestorm.Engine.Tests.Implementation;
-using Firestorm.Engine.Tests.Models;
+using Firestorm.Testing.Http;
+using Firestorm.Testing.Http.Models;
 using Firestorm.Testing.Models;
 using Xunit;
 

@@ -2,8 +2,8 @@
 using Firestorm.Data;
 using Firestorm.Engine.Defaults;
 using Firestorm.Stems.Roots.Derive;
-using Firestorm.Testing;
-using Firestorm.Engine.Tests.Models;
+using Firestorm.Testing.Http.Models;
+using Firestorm.Testing.Models;
 
 namespace Firestorm.Stems.IntegrationTests.Models
 {

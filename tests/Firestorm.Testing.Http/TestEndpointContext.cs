@@ -14,6 +14,9 @@ namespace Firestorm.Testing.Http
 
     public class TestRequestContext : IRequestContext
     {
+        public const string TestUsername = "TestUsername";
+        public const string TestRole = "TestRole";
+        
         public IRestUser User { get; }
 
         public event EventHandler OnDispose;
