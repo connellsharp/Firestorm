@@ -2,8 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
-
-    <IsPackable>false</IsPackable>
+    <IsPackable>False</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,12 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Firestorm.Endpoints.Formatting\Firestorm.Endpoints.Formatting.csproj" />
-    <ProjectReference Include="..\..\src\Firestorm.Endpoints.Web\Firestorm.Endpoints.Web.csproj" />
+    <ProjectReference Include="..\..\src\Firestorm.Endpoints\Firestorm.Endpoints.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.EntityFramework6\Firestorm.EntityFramework6.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Owin\Firestorm.Owin.csproj" />
-    <ProjectReference Include="..\..\src\Firestorm.Stems.Attributes.Basic\Firestorm.Stems.Attributes.Basic.csproj" />
-    <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.Start\Firestorm.Stems.Roots.Start.csproj" />
+    <ProjectReference Include="..\..\src\Firestorm.Stems\Firestorm.Stems.csproj" />
     <ProjectReference Include="..\Firestorm.Testing.Data\Firestorm.Testing.Data.csproj" />
     <ProjectReference Include="..\Firestorm.Testing.Http\Firestorm.Testing.Http.csproj" />
   </ItemGroup>

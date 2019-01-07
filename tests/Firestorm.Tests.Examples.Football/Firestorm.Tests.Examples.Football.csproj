@@ -2,8 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-
-    <IsPackable>false</IsPackable>
+    <IsPackable>False</IsPackable>
 
     <ApplicationIcon />
   </PropertyGroup>
@@ -26,11 +25,10 @@
   
   <ItemGroup>
     <ProjectReference Include="..\..\src\Firestorm.AspNetCore2\Firestorm.AspNetCore2.csproj" />
-    <ProjectReference Include="..\..\src\Firestorm.Endpoints.Web\Firestorm.Endpoints.Web.csproj" />
+    <ProjectReference Include="..\..\src\Firestorm.Endpoints\Firestorm.Endpoints.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.EntityFrameworkCore2\Firestorm.EntityFrameworkCore2.csproj" />
-    <ProjectReference Include="..\..\src\Firestorm.Fluent.Start\Firestorm.Fluent.Start.csproj" />
-    <ProjectReference Include="..\..\src\Firestorm.Stems.Attributes.Basic\Firestorm.Stems.Attributes.Basic.csproj" />
-    <ProjectReference Include="..\..\src\Firestorm.Stems.Roots.Start\Firestorm.Stems.Roots.Start.csproj" />
+    <ProjectReference Include="..\..\src\Firestorm.Fluent\Firestorm.Fluent.csproj" />
+    <ProjectReference Include="..\..\src\Firestorm.Stems\Firestorm.Stems.csproj" />
     <ProjectReference Include="..\Firestorm.Testing.Data\Firestorm.Testing.Data.csproj" />
     <ProjectReference Include="..\Firestorm.Testing.Http\Firestorm.Testing.Http.csproj" />
   </ItemGroup>
