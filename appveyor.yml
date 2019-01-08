@@ -1,7 +1,15 @@
-version: 0.9.5-{branch}.{build}
+version: 0.9.5-alpha.{build}
 branches:
   only:
   - master
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
 build_script:
 - ps: .\build.ps1
 test: off
