@@ -1,12 +1,9 @@
-using System;
 using Firestorm.AspNetCore2;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Configuration;
 using Firestorm.EntityFrameworkCore2;
-using Firestorm.Fluent;
 using Firestorm.FunctionalTests.Data;
-using Firestorm.FunctionalTests.Tests.Setup;
-using Firestorm.Stems;
+using Firestorm.FunctionalTests.Setup;
 using Firestorm.Testing.Data;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
@@ -19,11 +16,11 @@ namespace Firestorm.FunctionalTests.Web
 {
     public class Startup
     {
-        private readonly FirestormApiTech _tech;
+        private readonly IStartupConfigurer _tech;
 
-        public Startup(StartupTechSettings tech)
+        public Startup(IStartupConfigurer tech)
         {
-            _tech = tech.Tech;
+            _tech = tech;
         }
 
         [UsedImplicitly]
@@ -51,19 +48,7 @@ namespace Firestorm.FunctionalTests.Web
                 })
                 .AddEntityFramework<FootballDbContext>();
 
-            switch (_tech)
-            {
-                case FirestormApiTech.Stems:
-                    fsBuilder.AddStems();
-                    break;
-
-                case FirestormApiTech.Fluent:
-                    fsBuilder.AddFluent<FootballApiContext>();
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            _tech.Configure(fsBuilder);
         }
 
         [UsedImplicitly]
