@@ -45,7 +45,7 @@ namespace Firestorm.Stems.Essentials
 
         public bool IsAuthorized(IRestUser user)
         {
-            if (!user.IsAuthenticated)
+            if (user == null || !user.IsAuthenticated)
             {
                 return false;
             }
