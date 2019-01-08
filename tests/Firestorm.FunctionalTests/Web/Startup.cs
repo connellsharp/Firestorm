@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using ServiceProviderServiceExtensions = Firestorm.Host.ServiceProviderServiceExtensions;
 
 namespace Firestorm.FunctionalTests.Web
 {
@@ -54,11 +53,7 @@ namespace Firestorm.FunctionalTests.Web
         [UsedImplicitly]
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            using (var dbContext = ServiceProviderServiceExtensions.GetService<FootballDbContext>(app.ApplicationServices))
-            {
-                dbContext.Database.EnsureCreated();
-                DbInitializer.Initialize(dbContext);
-            }
+            DatabaseInitializer.EnsureInitialized(app);
 
             app.UseMiddleware<CriticalJsonErrorMiddleware>();
 
