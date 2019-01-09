@@ -29,6 +29,8 @@ echo "build: Build version suffix is $buildSuffix"
 
 exec { & dotnet build Firestorm.sln -c Release --version-suffix=$buildSuffix }
 
-exec { & dotnet test -c Release --no-build --no-restore }
+ForEach ($folder in (Get-ChildItem -Path tests -Include *Tests -Directory)) { 
+    exec { & dotnet test $folder.FullName -c Release --no-build --no-restore }
+}
 
 exec { & dotnet pack -c Release -o $artifactsPath --include-symbols --no-build $versionSuffix }
