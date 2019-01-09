@@ -50,7 +50,8 @@ Firestorm is available from the GitHub repository and as NuGet Packages.
 While it's still in early stages, packages are available from the [MyGet feed](https://www.myget.org/F/firestorm/api/v3/index.json). Be sure to use the `-prerelease` flag.
 
 ```
-PM> Install-Package Firestorm.Stems.Start
+PM> Install-Package Firestorm
+PM> Install-Package Firestorm.Stems
 PM> Install-Package Firestorm.AspNetCore2
 PM> Install-Package Firestorm.EntityFrameworkCore2
 ```
@@ -61,7 +62,7 @@ See the [Installation](docs/setup/installation.md) section for more detailed set
 
 Firestorm is a bit of an experiment that grew into something I feel other developers could use. It was never a clearly defined project, but I decided to set some milestones and make it my first open-source project.
 
-It's still in active development. I have so many feature ideas for future versions!
+It's still in active development. There are a lot of features I want to add!
 
 #### Copyright
 Copyright &copy; 2018 Connell Watkins
