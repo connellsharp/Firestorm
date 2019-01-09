@@ -64,7 +64,7 @@ Firestorm is a bit of an experiment that grew into something I feel other develo
 It's still in active development. I have so many feature ideas for future versions!
 
 #### Copyright
-Copyright � 2018 Connell Watkins
+Copyright &copy; 2018 Connell Watkins
 
 #### License
 Firestorm is licensed under MIT. Refer to [LICENSE.txt](LICENSE.txt) for detailed information.
