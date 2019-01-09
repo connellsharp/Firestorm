@@ -2,28 +2,26 @@
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Firestorm.FunctionalTests.Tests.Setup;
+using Firestorm.FunctionalTests.Setup;
 using Firestorm.Testing.Http;
 using Newtonsoft.Json;
 using Xunit;
 
 namespace Firestorm.FunctionalTests.Tests
 {
-    public class PaginationTests : IClassFixture<FootballTestFixture>
+    public abstract class PaginationTestsBase
     {
-        private readonly FootballTestFixture _fixture;
+        private readonly HttpClient _client;
 
-        public PaginationTests(FootballTestFixture fixture)
+        protected PaginationTestsBase(IFunctionalTestFixture fixture)
         {
-            _fixture = fixture;
+            _client = fixture.Client;
         }
         
-        [Theory, ClassData(typeof(FootballHttpClientIndexes))]
-        public async Task PlayersCollection_PostMulti_MultiResponseAllSuccess(FirestormApiTech tech)
+        [Fact]
+        public async Task PlayersCollection_PostMulti_MultiResponseAllSuccess()
         {
-            HttpClient client = _fixture.GetClient(tech);
-
-            HttpResponseMessage response = await client.PostAsync("/players", new StringContent(@"[
+            HttpResponseMessage response = await _client.PostAsync("/players", new StringContent(@"[
                 { name: ""Romelu Lukaku"" },
                 { name: ""Anthony Martial"" },
                 { name: ""Marcus Rashford"" },
@@ -47,17 +45,15 @@ namespace Firestorm.FunctionalTests.Tests
             public string Status { get; set; }
         }
 
-        [Theory, ClassData(typeof(FootballHttpClientIndexes))]
-        public async Task PlayersCollection_PageSize1_NextInLinkHeader(FirestormApiTech tech)
+        [Fact]
+        public async Task PlayersCollection_PageSize1_NextInLinkHeader()
         {
-            HttpClient client = _fixture.GetClient(tech);
-
-            HttpResponseMessage response = await client.GetAsync("/players?size=1&fields=name");
+            HttpResponseMessage response = await _client.GetAsync("/players?size=1&fields=name");
             
             ResponseAssert.Success(response);
 
             IEnumerable<string> linkHeaders = response.Headers.GetValues("Link");
-            Assert.Equal(1, linkHeaders.Count());
+            Assert.Single(linkHeaders);
 
             string linkHeaderValue = response.Headers.GetValues("Link").Single();
             Assert.Contains("next", linkHeaderValue);

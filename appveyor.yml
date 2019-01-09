@@ -1,0 +1,33 @@
+version: 0.9.3-alpha.{build}
+branches:
+  only:
+  - master
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
+build_script:
+- ps: .\build.ps1
+test: off
+artifacts:
+- path: .\artifacts\**\*.nupkg
+  name: NuGet
+deploy:
+- provider: NuGet
+  server: https://www.myget.org/F/firestorm/api/v2/package
+  api_key:
+    secure: n9HswXCR8jJn1EUwIADbgVRa3YIbshz6lQXO2fAabYiBSBsadUl3AQuHkn7T8Gfi
+  skip_symbols: true
+  on:
+    branch: master
+- provider: NuGet
+  name: production
+  api_key:
+    secure: A8ERYdPuCzg1dgdNkDr/cvUy+e8Bw8lBb22fUHWdAlrw2gHCk30DZBAEt96fvQLg
+  on:
+    branch: master
+    appveyor_repo_tag: true

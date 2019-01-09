@@ -62,7 +62,7 @@ namespace Firestorm.Stems.IntegrationTests
             public static Expression<Func<Album, string>> SecretName { get; } = a => "OMG you got the secret: " + a.Name;
 
             [Get]
-            [Authorize(Users = TestRequestContext.TestUsername)]
+            [Authorize(Users = TestUser.TestUsername)]
             public static Expression<Func<Album, string>> AllowedName { get; } = a => "You're allowed this one: " + a.Name;
 
             [Get, Set]

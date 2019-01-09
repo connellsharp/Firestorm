@@ -1,5 +1,4 @@
 using Firestorm.Endpoints.Configuration;
-using Firestorm.Host;
 using Firestorm.Host.Infrastructure;
 using JetBrains.Annotations;
 

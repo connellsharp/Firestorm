@@ -5,21 +5,23 @@ using Firestorm.FunctionalTests.Web;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Firestorm.FunctionalTests.Tests.Setup
+namespace Firestorm.FunctionalTests.Setup
 {
     public class HostClientPair : IDisposable
-    {
+    {      
+        private static int _startPort = 3000;
+
         private readonly IWebHost _host;
 
-        public HostClientPair(int port, FirestormApiTech tech)
+        public HostClientPair(IStartupConfigurer config)
         {
-            var url = "http://localhost:" + port;
+            var url = "http://localhost:" + _startPort++;
 
             _host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 //.UseIISIntegration()
-                .ConfigureServices(s => s.AddSingleton(new StartupTechSettings(tech)))
+                .ConfigureServices(s => s.AddSingleton(config))
                 .UseStartup<Startup>()
                 .UseUrls(url)
                 .Build();
@@ -38,16 +40,6 @@ namespace Firestorm.FunctionalTests.Tests.Setup
         {
             _host.Dispose();
             HttpClient.Dispose();
-        }
-    }
-
-    public class StartupTechSettings
-    {
-        public FirestormApiTech Tech { get; }
-
-        public StartupTechSettings(FirestormApiTech tech)
-        {
-            Tech = tech;
         }
     }
 }
