@@ -9,7 +9,7 @@ namespace Firestorm.FunctionalTests.Setup
 {
     public class HostClientPair : IDisposable
     {      
-        private static int _startPort = 3000;
+        private static int _startPort = 2230;
 
         private readonly IWebHost _host;
 

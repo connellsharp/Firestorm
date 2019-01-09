@@ -7,7 +7,7 @@ namespace Firestorm.Owin.IntegrationTests
     public class OwinTests : BasicIntegrationTestsBase
     {
         public OwinTests()
-            : base(new OwinItegrationSuite<Startup>(1111))
+            : base(new OwinItegrationSuite<Startup>(2221))
         { }
     }
 }
