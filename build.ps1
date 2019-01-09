@@ -32,12 +32,11 @@ exec { & dotnet build Firestorm.sln -c Release --version-suffix=$buildSuffix }
 
 # Test
 
-$unitTests        = (Get-ChildItem -Path tests -Include *.Tests -Directory)
-$integrationTests = (Get-ChildItem -Path tests -Include *.IntegrationTests -Directory)
-$functionalTests  = (Get-ChildItem -Path tests -Include *.FunctionalTests -Directory)
-$allTests = $unitTests + $integrationTests + $functionalTests
+$testDirs  = @(Get-ChildItem -Path tests -Include *.Tests -Directory)
+$testDirs += @(Get-ChildItem -Path tests -Include *.IntegrationTests -Directory)
+$testDirs += @(Get-ChildItem -Path tests -Include *.FunctionalTests -Directory)
 
-ForEach ($folder in $allTests) { 
+ForEach ($folder in $testDirs) { 
     exec { & dotnet test $folder.FullName -c Release --no-build --no-restore }
 }
 
