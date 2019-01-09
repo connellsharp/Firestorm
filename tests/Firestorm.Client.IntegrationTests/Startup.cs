@@ -13,7 +13,7 @@ namespace Firestorm.Client.IntegrationTests
     /// </summary>
     public class Startup
     {  
-        public const int Port = 1113;
+        public const int Port = 2225;
 
         [UsedImplicitly]
         public void ConfigureServices(IServiceCollection services)

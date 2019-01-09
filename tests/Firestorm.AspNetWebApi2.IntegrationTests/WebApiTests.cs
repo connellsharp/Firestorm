@@ -7,7 +7,7 @@ namespace Firestorm.AspNetWebApi2.IntegrationTests
     public class WebApiTests : BasicIntegrationTestsBase
     {
         public WebApiTests()
-            : base(new OwinItegrationSuite<Startup>(1112))
+            : base(new OwinItegrationSuite<Startup>(2222))
         { }
     }
 }

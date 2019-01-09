@@ -124,6 +124,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Testing", "tests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Client.IntegrationTests", "tests\Firestorm.Client.IntegrationTests\Firestorm.Client.IntegrationTests.csproj", "{4BCC6C25-78E6-4429-BCDD-54B8088D8779}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{E0F2909F-4BED-496D-BA68-24814D5CEA4F}"
+ProjectSection(SolutionItems) = preProject
+	appveyor.yml = appveyor.yml
+	build.ps1 = build.ps1
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
