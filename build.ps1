@@ -27,19 +27,23 @@ echo "build: Package version suffix is $suffix"
 echo "build: Build version suffix is $buildSuffix"
 
 # Build
+echo "BUILD"
 
-exec { & dotnet build Firestorm.sln -c Release --version-suffix=$buildSuffix }
+exec { & dotnet build Firestorm.sln -c Release --version-suffix=$buildSuffix -nowarn:618 }
 
 # Test
+echo "TEST"
 
-$testDirs  = @(Get-ChildItem -Path tests -Include *.Tests -Directory)
-$testDirs += @(Get-ChildItem -Path tests -Include *.IntegrationTests -Directory)
-$testDirs += @(Get-ChildItem -Path tests -Include *.FunctionalTests -Directory)
+$testDirs  = @(Get-ChildItem -Path tests -Include "*.Tests" -Directory -Recurse)
+$testDirs += @(Get-ChildItem -Path tests -Include "*.IntegrationTests" -Directory -Recurse)
+$testDirs += @(Get-ChildItem -Path tests -Include "*FunctionalTests" -Directory -Recurse)
 
 ForEach ($folder in $testDirs) { 
+    echo "Testing $folder.FullName"
     exec { & dotnet test $folder.FullName -c Release --no-build --no-restore }
 }
 
 # Pack
+echo "TEST"
 
 exec { & dotnet pack -c Release -o $artifactsPath --include-symbols --no-build $versionSuffix }
