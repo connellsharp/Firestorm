@@ -1,6 +1,6 @@
 # Firestorm
 
-[![Build status](https://ci.appveyor.com/api/projects/status/1bo4yw50e7m7m2cm?svg=true)](https://ci.appveyor.com/project/connellw/firestorm) [![NuGet](https://img.shields.io/nuget/v/Firestorm.svg)](https://www.nuget.org/packages/Firestorm/)
+[![Build status](https://ci.appveyor.com/api/projects/status/1bo4yw50e7m7m2cm?svg=true)](https://ci.appveyor.com/project/connellw/firestorm) [![MyGet](https://img.shields.io/myget/firestorm/v/Firestorm.Endpoints.svg?label=myget)](https://myget.org/gallery/firestorm) [![NuGet](https://img.shields.io/nuget/v/Firestorm.svg)](https://www.nuget.org/packages/Firestorm)
 
 Firestorm is a REST API framework for .NET. The aim is to provide a neat and easy ways to write standardised APIs with more of the leg-work taken care of.
 
