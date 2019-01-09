@@ -1,4 +1,4 @@
-version: 0.9.5-alpha.{build}
+version: 0.9.3-alpha.{build}
 branches:
   only:
   - master
