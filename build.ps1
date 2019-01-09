@@ -1,4 +1,4 @@
-# Taken from https://github.com/jbogard/MediatR and https://github.com/psake/psake
+# Originally taken from https://github.com/jbogard/MediatR and https://github.com/psake/psake
 
 function Exec
 {
@@ -14,7 +14,6 @@ function Exec
 }
 
 $artifactsPath = (Get-Item -Path ".\").FullName + "\artifacts"
-
 if(Test-Path $artifactsPath) { Remove-Item $artifactsPath -Force -Recurse }
 
 $branch = @{ $true = $env:APPVEYOR_REPO_BRANCH; $false = $(git symbolic-ref --short -q HEAD) }[$env:APPVEYOR_REPO_BRANCH -ne $NULL];
@@ -27,10 +26,21 @@ $versionSuffix = @{ $true = "--version-suffix=$($suffix)"; $false = ""}[$suffix 
 echo "build: Package version suffix is $suffix"
 echo "build: Build version suffix is $buildSuffix"
 
+# Build
+
 exec { & dotnet build Firestorm.sln -c Release --version-suffix=$buildSuffix }
 
-ForEach ($folder in (Get-ChildItem -Path tests -Include *Tests -Directory)) { 
+# Test
+
+$unitTests        = (Get-ChildItem -Path tests -Include *.Tests -Directory)
+$integrationTests = (Get-ChildItem -Path tests -Include *.IntegrationTests -Directory)
+$functionalTests  = (Get-ChildItem -Path tests -Include *.FunctionalTests -Directory)
+$allTests = $unitTests + $integrationTests + $functionalTests
+
+ForEach ($folder in $allTests) { 
     exec { & dotnet test $folder.FullName -c Release --no-build --no-restore }
 }
+
+# Pack
 
 exec { & dotnet pack -c Release -o $artifactsPath --include-symbols --no-build $versionSuffix }
