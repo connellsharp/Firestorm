@@ -53,9 +53,17 @@ namespace Firestorm.Endpoints
             return new CollectionBody(collectionData.Items, pageLinks);
         }
 
-        public Task<Options> OptionsAsync()
+        public async Task<Options> OptionsAsync()
         {
-            throw new NotImplementedException();
+            return new Options
+            {
+                Description = "A collection of items",
+                AllowedMethods = new[]
+                {
+                    new OptionsMethod("GET", "Lists the items in the collection"),
+                    new OptionsMethod("POST", "Adds a new item to the collection")
+                }
+            };
         }
 
         public Task<Feedback> UnsafeAsync(UnsafeMethod method, ResourceBody body)

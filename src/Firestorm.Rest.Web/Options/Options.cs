@@ -6,8 +6,8 @@ namespace Firestorm.Rest.Web.Options
     {
         public string Description { get; set; }
 
-        public List<OptionsMethod> AllowedMethods { get; set; }
+        public IEnumerable<OptionsMethod> AllowedMethods { get; set; }
 
-        public List<RestResourceInfo> SubResources { get; set; }
+        public IEnumerable<RestResourceInfo> SubResources { get; set; }
     }
 }

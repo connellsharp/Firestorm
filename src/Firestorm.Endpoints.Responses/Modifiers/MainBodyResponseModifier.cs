@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using Firestorm.Rest.Web;
 using Firestorm.Rest.Web.Options;
@@ -19,7 +20,9 @@ namespace Firestorm.Endpoints.Responses
 
         public void AddOptions(Response response, Options options)
         {
-            throw new System.NotImplementedException("Options response not implemented");
+            response.StatusCode = HttpStatusCode.OK;
+            response.Headers.Add("Access-Control-Allow-Methods", string.Join(", ", options.AllowedMethods.Select(m => m.Verb)));
+            response.ResourceBody = options;
         }
 
         public void AddAcknowledgment(Response response, Acknowledgment acknowledgment)
