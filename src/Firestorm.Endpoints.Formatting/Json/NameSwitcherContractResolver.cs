@@ -14,7 +14,8 @@ namespace Firestorm.Endpoints.Formatting.Json
 
         protected override string ResolvePropertyName(string propertyName)
         {
-            return _namingConventionSwitcher.ConvertCodedToDefault(propertyName);
+            string apiName = _namingConventionSwitcher.ConvertCodedToDefault(propertyName);
+            return string.IsNullOrWhiteSpace(apiName) ? propertyName : apiName;
         }
     }
 }

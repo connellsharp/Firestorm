@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Firestorm.Testing;
+using Firestorm.Rest.Web.Options;
 using Newtonsoft.Json;
 using Xunit;
 
@@ -24,6 +24,16 @@ namespace Firestorm.Testing.Http.Tests
 
             Assert.Equal("artists", arr[0]["name"]);
             Assert.Equal("collection", arr[0]["type"]);
+        }
+
+        [Fact]
+        public async Task RootDirectory_Options_SuccessAndDeserialises()
+        {
+            HttpResponseMessage response = await HttpClient.SendAsync(new HttpRequestMessage(HttpMethod.Options, "/"));
+            ResponseAssert.Success(response);
+
+            string json = await response.Content.ReadAsStringAsync();
+            var options = JsonConvert.DeserializeObject<Options>(json);
         }
 
         [Fact]
@@ -94,6 +104,20 @@ namespace Firestorm.Testing.Http.Tests
 
             string name = obj[0].name;
             Assert.Equal(TestRepositories.ArtistName, name);
+        }
+
+        [Fact]
+        public async Task ArtistsCollection_Options_DeserialisesAndCorrect()
+        {
+            HttpResponseMessage response = await HttpClient.SendAsync(new HttpRequestMessage(HttpMethod.Options, "/artists"));
+            ResponseAssert.Success(response);
+
+            string json = await response.Content.ReadAsStringAsync();
+            dynamic obj = JsonConvert.DeserializeObject(json);
+            Assert.NotNull(obj);
+
+            string description = obj.description;
+            Assert.NotNull(description);
         }
     }
 }

@@ -30,9 +30,18 @@ namespace Firestorm.Endpoints
             return new ScalarBody(value);
         }
 
-        public Task<Options> OptionsAsync()
+        public async Task<Options> OptionsAsync()
         {
-            throw new NotImplementedException();
+            return new Options
+            {
+                Description = "An item",
+                AllowedMethods = new[]
+                {
+                    new OptionsMethod("GET", "Gets the value"),
+                    new OptionsMethod("PUT", "Replaces the value"),
+                    new OptionsMethod("DELETE", "Resets the value back to default")
+                }
+            };
         }
 
         public Task<Feedback> UnsafeAsync(UnsafeMethod method, ResourceBody body)

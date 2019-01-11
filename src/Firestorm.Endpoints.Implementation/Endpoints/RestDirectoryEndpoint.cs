@@ -34,13 +34,17 @@ namespace Firestorm.Endpoints
 
         public async Task<Options> OptionsAsync()
         {
-            var options = new Options();
-
             RestDirectoryInfo info = await Directory.GetInfoAsync();
 
-            options.SubResources.AddRange(info.Resources);
-
-            return options;
+            return new Options
+            {
+                Description = "A directory containing collections",
+                AllowedMethods = new[]
+                {
+                    new OptionsMethod("GET", "Lists the available collections in this directory")
+                },
+                SubResources = info.Resources
+            };
         }
 
         public Task<Feedback> UnsafeAsync(UnsafeMethod method, ResourceBody body)

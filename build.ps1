@@ -44,6 +44,6 @@ ForEach ($folder in $testDirs) {
 }
 
 # Pack
-echo "TEST"
+echo "PACK"
 
 exec { & dotnet pack -c Release -o $artifactsPath --include-symbols --no-build $versionSuffix }

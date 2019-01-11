@@ -30,9 +30,18 @@ namespace Firestorm.Endpoints
             return new ItemBody(item);
         }
 
-        public Task<Options> OptionsAsync()
+        public async Task<Options> OptionsAsync()
         {
-            throw new System.NotImplementedException();
+            return new Options
+            {
+                Description = "An item",
+                AllowedMethods = new[]
+                {
+                    new OptionsMethod("GET", "Gets the item"),
+                    new OptionsMethod("PUT", "Replaces the item"),
+                    new OptionsMethod("DELETE", "Deletes the item")
+                }
+            };
         }
 
         public Task<Feedback> UnsafeAsync(UnsafeMethod method, ResourceBody body)
