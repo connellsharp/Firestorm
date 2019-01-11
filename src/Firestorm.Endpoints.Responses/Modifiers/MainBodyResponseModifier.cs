@@ -21,7 +21,7 @@ namespace Firestorm.Endpoints.Responses
         public void AddOptions(Response response, Options options)
         {
             response.StatusCode = HttpStatusCode.OK;
-            response.Headers.Add("Access-Control-Allow-Methods", string.Join(", ", options.AllowedMethods.Select(m => m.Verb)));
+            response.Headers.Add("Allow", string.Join(", ", options.AllowedMethods.Select(m => m.Verb)));
             response.ResourceBody = options;
         }
 
