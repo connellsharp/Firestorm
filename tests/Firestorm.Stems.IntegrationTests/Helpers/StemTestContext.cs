@@ -9,15 +9,20 @@ using Firestorm.Testing.Models;
 
 namespace Firestorm.Stems.IntegrationTests.Helpers
 {
+    /// <summary>
+    /// Class for getting test collections and directories for Stems integration tests.
+    /// Uses <see cref="ArtistMemoryRepository"/> in Derived Roots.
+    /// </summary>
     internal class StemTestContext
     {
         private IRestDirectory GetDirectoryFromRoots(params Type[] rootTypes)
         {
             TestDependencyResolver.Add(TestRepository);
-            
+
             var stemStartResources = new StemsStartResourceFactory
             {
-                RootResourceFactory = new DerivedRootsResourceFactory {
+                RootResourceFactory = new DerivedRootsResourceFactory
+                {
                     RootTypeGetter = new ManualTypeGetter(rootTypes)
                 },
                 StemConfiguration = new DefaultStemConfiguration
