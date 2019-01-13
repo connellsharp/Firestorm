@@ -2,15 +2,8 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
 
-    <Version>0.9.5-alpha</Version>
     <Description>Starting point where Stems navigate from.</Description>
     <PackageTags>firestorm stems roots</PackageTags>
-
-    <Authors>Connell Watkins</Authors>
-    <Copyright>Copyright © Connell Watkins 2017</Copyright>
-    <PackageProjectUrl>https://github.com/connellw/Firestorm</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/connellw/Firestorm/blob/master/LICENSE.txt</PackageLicenseUrl>
-    <PackageIconUrl>https://github.com/connellw/Firestorm/raw/master/icon.png</PackageIconUrl>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Firestorm.Host\Firestorm.Host.csproj" />
