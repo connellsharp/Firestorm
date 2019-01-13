@@ -16,7 +16,7 @@ function Exec
 $artifactsPath = (Get-Item -Path ".\").FullName + "\artifacts"
 if(Test-Path $artifactsPath) { Remove-Item $artifactsPath -Force -Recurse }
 
-$branch = @{ $true = $env:APPVEYOR_REPO_BRANCH; $false = $(git symbolic-ref --short -q HEAD) }[$env:APPVEYOR_REPO_BRANCH -ne $NULL];
+$branch = @{ $true = $env:APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH; $false = @{ $true = $env:APPVEYOR_REPO_BRANCH; $false = $(git symbolic-ref --short -q HEAD) }[$env:APPVEYOR_REPO_BRANCH -ne $NULL] }[$env:APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH -ne $NULL];
 $revision = @{ $true = "{0:00000}" -f [convert]::ToInt32("0" + $env:APPVEYOR_BUILD_NUMBER, 10); $false = "local" }[$env:APPVEYOR_BUILD_NUMBER -ne $NULL];
 $suffix = @{ $true = ""; $false = "$($branch.Substring(0, [math]::Min(10,$branch.Length)))-$revision"}[$branch -eq "master" -and $revision -ne "local"]
 $commitHash = $(git rev-parse --short HEAD)
@@ -25,6 +25,12 @@ $versionSuffix = @{ $true = "--version-suffix=$($suffix)"; $false = ""}[$suffix 
 
 echo "build: Package version suffix is $suffix"
 echo "build: Build version suffix is $buildSuffix"
+
+# Update Appveyor version
+$props = [xml](Get-Content Directory.Build.props)
+$prefix = $props.Project.PropertyGroup.VersionPrefix
+echo "build: Full version is $prefix$suffix"
+Update-AppveyorBuild -Version $prefix$suffix
 
 # Build
 echo "BUILD"
