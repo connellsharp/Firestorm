@@ -30,7 +30,9 @@ echo "Build: Build version suffix is $buildSuffix"
 if (Test-Path env:APPVEYOR) {
     $props = [xml](Get-Content Directory.Build.props)
     $prefix = $props.Project.PropertyGroup.VersionPrefix
-    $full = @{ $true = "$($prefix)-$($suffix)"; $false = $($prefix) }[$suffix -ne ""]
+    
+    $avSuffix = @{ $true = $($suffix); $false = $props.Project.PropertyGroup.VersionSuffix }[$suffix -ne ""]
+    $full = @{ $true = "$($prefix)-$($avSuffix)"; $false = $($prefix) }[-not ([string]::IsNullOrEmpty($avSuffix))]
     
     echo "Build: Full version is $full"
     Update-AppveyorBuild -Version $full
