@@ -121,7 +121,7 @@ namespace Firestorm.Testing.Http.Tests
         }
 
         [Fact]
-        public async Task ArtistsCollection_AddAndDelete_BothSuccessful()
+        public async Task ArtistsCollection_Add_Successful()
         {
             var content = new JsonContent(new
             {
@@ -131,8 +131,12 @@ namespace Firestorm.Testing.Http.Tests
             
             HttpResponseMessage postResponse = await HttpClient.PostAsync("/artists", content);
             ResponseAssert.Success(postResponse);
+        }
 
-            HttpResponseMessage deleteResponse = await HttpClient.DeleteAsync(postResponse.Headers.Location);
+        [Fact]
+        public async Task ArtistsCollection_Delete_Successful()
+        {
+            HttpResponseMessage deleteResponse = await HttpClient.DeleteAsync("/artists/123");
             ResponseAssert.Success(deleteResponse);
         }
     }
