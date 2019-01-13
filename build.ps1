@@ -27,11 +27,13 @@ echo "Build: Package version suffix is $suffix"
 echo "Build: Build version suffix is $buildSuffix"
 
 # Update Appveyor version
-$props = [xml](Get-Content Directory.Build.props)
-$prefix = $props.Project.PropertyGroup.VersionPrefix
-$full = @{ $true = "$($prefix)-$($suffix)"; $false = $($prefix) }[$suffix -ne ""]
-echo "Build: Full version is $full"
-Update-AppveyorBuild -Version $full
+if (Test-Path env:APPVEYOR) {
+    $props = [xml](Get-Content Directory.Build.props)
+    $prefix = $props.Project.PropertyGroup.VersionPrefix
+    $full = @{ $true = "$($prefix)-$($suffix)"; $false = $($prefix) }[$suffix -ne ""]
+    echo "Build: Full version is $full"
+    Update-AppveyorBuild -Version $full
+}
 
 # Build
 echo "BUILD"
