@@ -82,7 +82,7 @@ namespace Firestorm.Stems.IntegrationTests
         [Fact]
         public async Task NotSoftDeleted_WhenDeleteCollection_RepoMarkDeletedCalledForAllItems()
         {
-            _testDeletedValue.SoftDeleted = true;
+            _testDeletedValue.SoftDeleted = false;
             
             await _restCollection.DeleteAllAsync(null);
 

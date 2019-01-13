@@ -1,7 +1,6 @@
 using System.Linq;
 using Firestorm.Engine.Defaults;
 using Firestorm.Testing.Models;
-using Firestorm.Testing;
 
 namespace Firestorm.Testing.Http.Models
 {

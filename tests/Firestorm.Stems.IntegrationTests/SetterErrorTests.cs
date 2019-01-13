@@ -1,8 +1,9 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Firestorm.Stems.Analysis;
 using Firestorm.Stems.Essentials;
 using Firestorm.Stems.IntegrationTests.Helpers;
-using Firestorm.Testing;
 using Firestorm.Testing.Models;
 using Xunit;
 
@@ -10,14 +11,6 @@ namespace Firestorm.Stems.IntegrationTests
 {
     public class SetterErrorTests
     {
-        private readonly IRestCollection _restCollection;
-
-        public SetterErrorTests()
-        {
-            var testContext = new StemTestContext();
-            _restCollection = testContext.GetArtistsCollection<ArtistsStem>();
-        }
-
         public class ArtistsStem : Stem<Artist>
         {
             [Identifier, Get]
@@ -28,14 +21,18 @@ namespace Firestorm.Stems.IntegrationTests
         }
 
         [Fact]
-        public async Task Item_GetName_CorrectName()
+        public async Task IncorrectSetterExpression_AddAnything_ExceptionContainsEnoughDetail()
         {
-            var ack = await _restCollection.AddAsync(new
+            var testContext = new StemTestContext();
+            
+            Task AddItemAsync()
             {
-                id = 432
-            });
+                var restCollection = testContext.GetArtistsCollection<ArtistsStem>();
+                return restCollection.AddAsync(new {id = 432});
+            }
 
-            Assert.NotNull(ack);
+            var ex = await Assert.ThrowsAsync<StemAttributeSetupException>(AddItemAsync);
+            Assert.Contains("setter", ex.InnerException.Message);
         }
     }
 }

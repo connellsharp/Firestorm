@@ -30,50 +30,97 @@ namespace Firestorm.Stems.Essentials.Factories.Resolvers
             if (FieldDefinition.Getter.GetInstanceMethod != null)
                 return; // handled by the RuntimeMethodDefinitionResolver instead
 
-            // TODO: refactor below - use Expression.ReturnType?
-
             if (FieldDefinition.Getter.Expression != null)
             {
-                Type readerPropertyValueType = ResolverTypeUtility.GetPropertyLambdaReturnType<TItem>(FieldDefinition.Getter.Expression.GetType());
-                
-                var reader = Reflect.Type(typeof(ExpressionFieldReader<,>))
-                    .MakeGeneric(typeof(TItem), readerPropertyValueType)
-                    .CastTo<IFieldReader<TItem>>()
-                    .CreateInstance(FieldDefinition.Getter.Expression);
-                
-                var readerFactory = new SingletonFactory<IFieldReader<TItem>, TItem>(reader);
-                implementations.ReaderFactories.Add(FieldDefinition.FieldName, readerFactory);
-                
-                var collatorFactory = new SingletonFactory<IFieldCollator<TItem>,TItem>(new BasicFieldCollator<TItem>(reader));
-                implementations.CollatorFactories.Add(FieldDefinition.FieldName, collatorFactory);
+                try
+                {
+                    IncludeGetterExpression(implementations);
+                }
+                catch (Exception ex)
+                {
+                    throw new StemAttributeSetupException("Unable create a reader from getter expression "
+                                                          + FieldDefinition.FieldName, ex);
+                }
             }
 
             if (FieldDefinition.Setter.Expression != null)
             {
-                Type writerPropertyValueType = ResolverTypeUtility.GetPropertyLambdaReturnType<TItem>(FieldDefinition.Setter.Expression.GetType());
-                
-                var writer = Reflect.Type(typeof(PropertyExpressionFieldWriter<,>))
-                    .MakeGeneric(typeof(TItem), writerPropertyValueType)
-                    .CastTo<IFieldWriter<TItem>>()
-                    .CreateInstance(FieldDefinition.Setter.Expression);
-                
-                var writerFactory = new SingletonFactory<IFieldWriter<TItem>, TItem>(writer);
-                implementations.WriterFactories.Add(FieldDefinition.FieldName, writerFactory);
+                try
+                {
+                    IncludeSetterExpression(implementations);
+                }
+                catch (Exception ex)
+                {
+                    throw new StemAttributeSetupException("Unable create a writer from setter expression "
+                                                          + FieldDefinition.FieldName, ex);
+                }
             }
 
             if (FieldDefinition.Locator.Expression != null)
             {
-                Type locatorPropertyValueType = ResolverTypeUtility.GetPropertyLambdaReturnType<TItem>(FieldDefinition.Locator.Expression.GetType());
-                Debug.Assert(locatorPropertyValueType == FieldDefinition.FieldType, "FieldType is incorrect");
-                
-                var locator = Reflect.Type(typeof(IdentifierExpressionItemLocator<,>))
-                    .MakeGeneric(typeof(TItem), locatorPropertyValueType)
-                    .CastTo<IItemLocator<TItem>>()
-                    .CreateInstance(FieldDefinition.Locator.Expression);
-                
-                var locatorFactory = new SingletonFactory<IItemLocator<TItem>, TItem>(locator);
-                implementations.LocatorFactories.Add(FieldDefinition.FieldName, locatorFactory);
+                try
+                {
+                    IncludeLocatorExpression(implementations);
+                }
+                catch (Exception ex)
+                {
+                    throw new StemAttributeSetupException("Unable create a locator from expression "
+                                                          + FieldDefinition.FieldName, ex);
+                }
             }
+        }
+
+        // TODO: refactor below - use Expression.ReturnType?
+
+        private void IncludeGetterExpression<TItem>(EngineImplementations<TItem> implementations) 
+            where TItem : class
+        {
+            Type readerPropertyValueType =
+                ResolverTypeUtility.GetPropertyLambdaReturnType<TItem>(
+                    FieldDefinition.Getter.Expression.GetType());
+
+            var reader = Reflect.Type(typeof(ExpressionFieldReader<,>))
+                .MakeGeneric(typeof(TItem), readerPropertyValueType)
+                .CastTo<IFieldReader<TItem>>()
+                .CreateInstance(FieldDefinition.Getter.Expression);
+
+            var readerFactory = new SingletonFactory<IFieldReader<TItem>, TItem>(reader);
+            implementations.ReaderFactories.Add(FieldDefinition.FieldName, readerFactory);
+
+            var collatorFactory =
+                new SingletonFactory<IFieldCollator<TItem>, TItem>(new BasicFieldCollator<TItem>(reader));
+            implementations.CollatorFactories.Add(FieldDefinition.FieldName, collatorFactory);
+        }
+
+        private void IncludeSetterExpression<TItem>(EngineImplementations<TItem> implementations)
+            where TItem : class
+        {
+            Type writerPropertyValueType =
+                ResolverTypeUtility.GetPropertyLambdaReturnType<TItem>(FieldDefinition.Setter.Expression.GetType());
+
+            var writer = Reflect.Type(typeof(PropertyExpressionFieldWriter<,>))
+                .MakeGeneric(typeof(TItem), writerPropertyValueType)
+                .CastTo<IFieldWriter<TItem>>()
+                .CreateInstance(FieldDefinition.Setter.Expression);
+
+            var writerFactory = new SingletonFactory<IFieldWriter<TItem>, TItem>(writer);
+            implementations.WriterFactories.Add(FieldDefinition.FieldName, writerFactory);
+        }
+
+        private void IncludeLocatorExpression<TItem>(EngineImplementations<TItem> implementations)
+            where TItem : class
+        {
+            Type locatorPropertyValueType =
+                ResolverTypeUtility.GetPropertyLambdaReturnType<TItem>(FieldDefinition.Locator.Expression.GetType());
+            Debug.Assert(locatorPropertyValueType == FieldDefinition.FieldType, "FieldType is incorrect");
+
+            var locator = Reflect.Type(typeof(IdentifierExpressionItemLocator<,>))
+                .MakeGeneric(typeof(TItem), locatorPropertyValueType)
+                .CastTo<IItemLocator<TItem>>()
+                .CreateInstance(FieldDefinition.Locator.Expression);
+
+            var locatorFactory = new SingletonFactory<IItemLocator<TItem>, TItem>(locator);
+            implementations.LocatorFactories.Add(FieldDefinition.FieldName, locatorFactory);
         }
     }
 }

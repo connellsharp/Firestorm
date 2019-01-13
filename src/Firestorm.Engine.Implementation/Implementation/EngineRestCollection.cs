@@ -90,7 +90,7 @@ namespace Firestorm.Engine
             var queryBuilder = new ContextQueryBuilder<TItem>(_context, query);
             IQueryable<TItem> items = queryBuilder.BuildQueryable();
 
-            foreach (TItem item in items)
+            foreach (TItem item in items.ToList())
             {
                 var loadedItem = new AlreadyLoadedItem<TItem>(item, string.Empty);
                 
