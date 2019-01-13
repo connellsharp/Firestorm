@@ -119,5 +119,21 @@ namespace Firestorm.Testing.Http.Tests
             string description = obj.description;
             Assert.NotNull(description);
         }
+
+        [Fact]
+        public async Task ArtistsCollection_AddAndDelete_BothSuccessful()
+        {
+            var content = new JsonContent(new
+            {
+                id = 10, 
+                name = "Haken"
+            });
+            
+            HttpResponseMessage postResponse = await HttpClient.PostAsync("/artists", content);
+            ResponseAssert.Success(postResponse);
+
+            HttpResponseMessage deleteResponse = await HttpClient.DeleteAsync(postResponse.Headers.Location);
+            ResponseAssert.Success(deleteResponse);
+        }
     }
 }
