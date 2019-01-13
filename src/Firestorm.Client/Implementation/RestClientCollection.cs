@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Firestorm.Client.Query;
-using JetBrains.Annotations;
 
 namespace Firestorm.Client
 {
@@ -53,6 +51,19 @@ namespace Firestorm.Client
                     throw new InvalidOperationException("REST API did not return status code 201 after creating an item.");
 
                 return created;
+            }
+        }
+
+        public async Task<Acknowledgment> DeleteAllAsync(IRestCollectionQuery query)
+        {
+            using (HttpClient client = HttpClientCreator.Create())
+            {
+                var queryStringBuilder = new CollectionQueryStringBuilder(new CollectionQueryStringConfiguration());
+                string fullUrl = UriUtilities.AppendQueryString(Path, queryStringBuilder.BuildString(query));
+
+                HttpResponseMessage response = await client.DeleteAsync(fullUrl);
+                Acknowledgment acknowledgment = await EnsureSuccessAsync(response);
+                return acknowledgment;
             }
         }
     }

@@ -81,5 +81,28 @@ namespace Firestorm.Engine
             object identifier = _context.Identifiers.GetInfo(null).GetValue(newItem);
             return new CreatedItemAcknowledgment(identifier);
         }
+
+        public async Task<Acknowledgment> DeleteAllAsync(IRestCollectionQuery query)
+        {
+            _context.Transaction.StartTransaction();
+            await _context.Repository.InitializeAsync();
+
+            var queryBuilder = new ContextQueryBuilder<TItem>(_context, query);
+            IQueryable<TItem> items = queryBuilder.BuildQueryable();
+
+            foreach (TItem item in items)
+            {
+                var loadedItem = new AlreadyLoadedItem<TItem>(item, string.Empty);
+                
+                if (!_context.AuthorizationChecker.CanDeleteItem(loadedItem))
+                    throw new NotAuthorizedForItemException(AuthorizableVerb.Delete);
+
+                _context.Repository.MarkDeleted(item);
+            }
+            
+            await _context.Transaction.SaveChangesAsync();
+            
+            return new Acknowledgment();
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace Firestorm.Engine
         private readonly IEngineContext<TItem> _context;
         private readonly QueryablePager<TItem> _pager;
 
-        public ContextQueryBuilder(IEngineContext<TItem> context, IRestCollectionQuery query)
+        public ContextQueryBuilder(IEngineContext<TItem> context, [CanBeNull] IRestCollectionQuery query)
         {
             _query = query;
             _context = context;

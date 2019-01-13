@@ -84,7 +84,7 @@ namespace Firestorm.Stems.IntegrationTests
         {
             _testDeletedValue.SoftDeleted = true;
             
-            await _restCollection.DeleteAllAsync();
+            await _restCollection.DeleteAllAsync(null);
 
             bool artistsInRepo = _testContext.TestRepository.GetAllItems().Any();
             Assert.False(artistsInRepo);
