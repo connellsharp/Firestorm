@@ -3,15 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
 
-    <Version>0.9.5-alpha</Version>
     <Description>ASP.NET Web API 2.0 controller and helpers for Firestorm.</Description>
     <PackageTags>firestorm rest api aspnet webapi2</PackageTags>
-
-    <Authors>Connell Watkins</Authors>
-    <Copyright>Copyright © Connell Watkins 2017</Copyright>
-    <PackageProjectUrl>https://github.com/connellw/Firestorm</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/connellw/Firestorm/blob/master/LICENSE.txt</PackageLicenseUrl>
-    <PackageIconUrl>https://github.com/connellw/Firestorm/raw/master/icon.png</PackageIconUrl>
   </PropertyGroup>
 
   <ItemGroup>

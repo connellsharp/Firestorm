@@ -17,8 +17,8 @@ namespace Firestorm.Stems.FunctionalTests.Web
         private readonly RestEndpointConfiguration _config;
         private readonly Type _testClassType;
 
-        private static readonly Random Random = new Random();
-        private readonly string _url = "http://localhost:" + Random.Next(1200, 1500);
+        private static int _startPort = 2240;
+        private readonly string _url = "http://localhost:" + _startPort++;
 
         public ExampleIntegrationSuite(RestEndpointConfiguration config, Type testClassType)
         {

@@ -3,15 +3,8 @@
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
     <RootNamespace>Firestorm.Engine</RootNamespace>
 
-    <Version>0.9.5-alpha</Version>
     <Description>Main implementation of basic Firestorm.Rest interfaces.</Description>
     <PackageTags>firestorm rest engine linq query sort filter pagination</PackageTags>
-
-    <Authors>Connell Watkins</Authors>
-    <Copyright>Copyright © Connell Watkins 2017</Copyright>
-    <PackageProjectUrl>https://github.com/connellw/Firestorm</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/connellw/Firestorm/blob/master/LICENSE.txt</PackageLicenseUrl>
-    <PackageIconUrl>https://github.com/connellw/Firestorm/raw/master/icon.png</PackageIconUrl>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
