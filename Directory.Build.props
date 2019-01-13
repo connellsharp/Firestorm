@@ -1,6 +1,7 @@
 <Project>
     <PropertyGroup>
         <VersionPrefix>0.9.3</VersionPrefix>
+        
         <Authors>Connell Watkins</Authors>
         <Copyright>Copyright © Connell Watkins 2017</Copyright>
         <PackageProjectUrl>https://github.com/connellw/Firestorm</PackageProjectUrl>

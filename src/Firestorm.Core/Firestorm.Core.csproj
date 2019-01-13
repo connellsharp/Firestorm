@@ -3,7 +3,6 @@
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
     <RootNamespace>Firestorm</RootNamespace>
     
-    <Version>0.9.5-alpha</Version>
     <Description>The eye of the storm.</Description>
     <PackageTags>firestorm</PackageTags>
   </PropertyGroup>

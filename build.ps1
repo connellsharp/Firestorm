@@ -23,14 +23,15 @@ $commitHash = $(git rev-parse --short HEAD)
 $buildSuffix = @{ $true = "$($suffix)-$($commitHash)"; $false = "$($branch)-$($commitHash)" }[$suffix -ne ""]
 $versionSuffix = @{ $true = "--version-suffix=$($suffix)"; $false = ""}[$suffix -ne ""]
 
-echo "build: Package version suffix is $suffix"
-echo "build: Build version suffix is $buildSuffix"
+echo "Build: Package version suffix is $suffix"
+echo "Build: Build version suffix is $buildSuffix"
 
 # Update Appveyor version
 $props = [xml](Get-Content Directory.Build.props)
 $prefix = $props.Project.PropertyGroup.VersionPrefix
-echo "build: Full version is $prefix$suffix"
-Update-AppveyorBuild -Version $prefix$suffix
+$full = @{ $true = "$($prefix)-$($suffix)"; $false = $($prefix) }[$suffix -ne ""]
+echo "Build: Full version is $full"
+Update-AppveyorBuild -Version $full
 
 # Build
 echo "BUILD"
