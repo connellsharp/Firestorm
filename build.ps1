@@ -37,12 +37,12 @@ if (Test-Path env:APPVEYOR) {
 }
 
 # Build
-echo "----- BUILD -----"
+echo "`n`n----- BUILD -----`n"
 
-exec { & dotnet build Firestorm.sln -c Release --version-suffix=$buildSuffix -nowarn:618 -nowarn:1998 }
+exec { & dotnet build Firestorm.sln -c Release --version-suffix=$buildSuffix }
 
 # Test
-echo "----- TEST -----"
+echo "`n`n----- TEST -----`n"
 
 $testDirs  = @(Get-ChildItem -Path tests -Include "*.Tests" -Directory -Recurse)
 $testDirs += @(Get-ChildItem -Path tests -Include "*.IntegrationTests" -Directory -Recurse)
@@ -54,6 +54,6 @@ ForEach ($folder in $testDirs) {
 }
 
 # Pack
-echo "----- PACK -----"
+echo "`n`n----- PACK -----`n"
 
 exec { & dotnet pack -c Release -o $artifactsPath --include-symbols --no-build $versionSuffix }

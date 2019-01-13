@@ -8,5 +8,7 @@
         <PackageProjectUrl>https://github.com/connellw/Firestorm</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/connellw/Firestorm/blob/master/LICENSE.txt</PackageLicenseUrl>
         <PackageIconUrl>https://github.com/connellw/Firestorm/raw/master/icon.png</PackageIconUrl>
+        
+        <NoWarn>618;1998</NoWarn>
     </PropertyGroup>
 </Project>
