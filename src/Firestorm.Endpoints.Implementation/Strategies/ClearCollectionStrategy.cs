@@ -4,7 +4,8 @@ using Firestorm.Rest.Web;
 
 namespace Firestorm.Endpoints.Strategies
 {
-    internal class ClearCollectionStrategy : IUnsafeRequestStrategy<IRestCollection>
+    public class ClearCollectionStrategy : IUnsafeRequestStrategy<IRestCollection>
+        // TODO other strategies are internal but this is part of the public API?
     {
         public async Task<Feedback>  ExecuteAsync(IRestCollection collection, IEndpointContext context, ResourceBody body)
         {
