@@ -31,17 +31,18 @@ if (Test-Path env:APPVEYOR) {
     $props = [xml](Get-Content Directory.Build.props)
     $prefix = $props.Project.PropertyGroup.VersionPrefix
     $full = @{ $true = "$($prefix)-$($suffix)"; $false = $($prefix) }[$suffix -ne ""]
+    
     echo "Build: Full version is $full"
     Update-AppveyorBuild -Version $full
 }
 
 # Build
-echo "BUILD"
+echo "----- BUILD -----"
 
-exec { & dotnet build Firestorm.sln -c Release --version-suffix=$buildSuffix -nowarn:618 }
+exec { & dotnet build Firestorm.sln -c Release --version-suffix=$buildSuffix -nowarn:618 -nowarn:1998 }
 
 # Test
-echo "TEST"
+echo "----- TEST -----"
 
 $testDirs  = @(Get-ChildItem -Path tests -Include "*.Tests" -Directory -Recurse)
 $testDirs += @(Get-ChildItem -Path tests -Include "*.IntegrationTests" -Directory -Recurse)
@@ -53,6 +54,6 @@ ForEach ($folder in $testDirs) {
 }
 
 # Pack
-echo "PACK"
+echo "----- PACK -----"
 
 exec { & dotnet pack -c Release -o $artifactsPath --include-symbols --no-build $versionSuffix }

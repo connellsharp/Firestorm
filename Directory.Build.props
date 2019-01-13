@@ -1,6 +1,7 @@
 <Project>
     <PropertyGroup>
         <VersionPrefix>0.9.3</VersionPrefix>
+        <VersionSuffix>alpha.38</VersionSuffix>
         
         <Authors>Connell Watkins</Authors>
         <Copyright>Copyright © Connell Watkins 2017</Copyright>
