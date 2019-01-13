@@ -10,8 +10,14 @@ namespace Firestorm.Stems.FunctionalTests.Web
 
         public ExampleFixture()
         {
-            _testSuite = new ExampleIntegrationSuite(ExampleConfiguration.EndpointConfiguration, typeof(TTest));
-            _testSuite.Start();
+            _testSuite = Attempt.KeepTrying(
+                () =>
+                {
+                    var suite = new ExampleIntegrationSuite(ExampleConfiguration.EndpointConfiguration, typeof(TTest));
+                    suite.Start();
+                    return suite;
+                },
+                new[] { 1000, 3000, 10000 });
         }
 
         public HttpClient HttpClient => _testSuite.HttpClient;

@@ -128,6 +128,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{E0F2909F
 ProjectSection(SolutionItems) = preProject
 	appveyor.yml = appveyor.yml
 	build.ps1 = build.ps1
+	Directory.Build.props = Directory.Build.props
 EndProjectSection
 EndProject
 Global
