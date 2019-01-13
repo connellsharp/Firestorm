@@ -1,13 +1,14 @@
 ﻿using Firestorm.Testing.Http.Tests;
 using JetBrains.Annotations;
+using Xunit;
 
 namespace Firestorm.Owin.IntegrationTests
 {
     [UsedImplicitly]
-    public class OwinTests : BasicIntegrationTestsBase
+    public class OwinTests : BasicIntegrationTestsBase, IClassFixture<OwinFixture>
     {
-        public OwinTests()
-            : base(new OwinItegrationSuite<Startup>(2221))
+        public OwinTests(OwinFixture fixture)
+            : base(fixture.IntegrationSuite)
         { }
     }
 }
