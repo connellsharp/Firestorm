@@ -10,12 +10,12 @@ namespace Firestorm.Endpoints.Strategies
         public UnsafeRequestStrategies<IRestCollection> ForCollections { get; set; } = new UnsafeRequestStrategies<IRestCollection>
         {
             { UnsafeMethod.Post, new AddToCollectionStrategy() },
-            //{ UnsafeMethod.Delete, new CollectionFilteredDeleteStrategy() }
         };
 
         public UnsafeRequestStrategies<IRestItem> ForItems { get; set; } = new UnsafeRequestStrategies<IRestItem>
         {
-            { UnsafeMethod.Put, new UpdateItemStrategy() },
+            { UnsafeMethod.Put, new PartialUpdateItemStrategy() },
+            { UnsafeMethod.Patch, new PartialUpdateItemStrategy() },
             { UnsafeMethod.Delete, new DeleteItemStrategy() }
         };
 
