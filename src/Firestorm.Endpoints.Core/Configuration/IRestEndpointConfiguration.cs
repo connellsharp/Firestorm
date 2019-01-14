@@ -17,7 +17,7 @@ namespace Firestorm.Endpoints.Configuration
         /// <summary>
         /// Contains 3 sets of strategies (for collection, items and scalars) defining how endpoints behave to unsafe requests.
         /// </summary>
-        public IUnsafeRequestStrategySets RequestStrategies { get; set; }
+        public ICommandStrategySets CommandStrategies { get; set; }
 
         /// <summary>
         /// The options used to build the responses to return to the client.
@@ -33,6 +33,6 @@ namespace Firestorm.Endpoints.Configuration
         /// <summary>
         /// The object used to resolve <see cref="IRestEndpoint"/> instances from a <see cref="IRestResource"/>.
         /// </summary>
-        public IEndpointResolver Resolver { get; set; }
+        public IEndpointResolver EndpointResolver { get; set; }
     }
 }

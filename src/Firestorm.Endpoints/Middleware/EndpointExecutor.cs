@@ -38,7 +38,7 @@ namespace Firestorm.Endpoints
                 case "PUT":
                 case "PATCH":
                 case "DELETE":
-                    return ExecuteUnsafeAsync();
+                    return ExecuteCommandAsync();
 
                 default:
                     _responseBuilder.SetStatusCode(HttpStatusCode.MethodNotAllowed);
@@ -66,7 +66,7 @@ namespace Firestorm.Endpoints
             _responseBuilder.AddOptions(options);
         }
 
-        private async Task ExecuteUnsafeAsync()
+        private async Task ExecuteCommandAsync()
         {
             if (!_endpoint.EvaluatePreconditions(_requestReader.GetPreconditions()))
             {
@@ -76,7 +76,7 @@ namespace Firestorm.Endpoints
 
             var method =  (UnsafeMethod)Enum.Parse(typeof(UnsafeMethod), _requestReader.RequestMethod, true);
             ResourceBody requestBody = _requestReader.GetRequestBody();
-            Feedback feedback = await _endpoint.UnsafeAsync(method, requestBody);
+            Feedback feedback = await _endpoint.CommandAsync(method, requestBody);
 
             _responseBuilder.AddFeedback(feedback);
         }

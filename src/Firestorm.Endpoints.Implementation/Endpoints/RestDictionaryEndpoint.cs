@@ -47,7 +47,7 @@ namespace Firestorm.Endpoints
             throw new NotImplementedException();
         }
 
-        public Task<Feedback> UnsafeAsync(UnsafeMethod method, ResourceBody body)
+        public Task<Feedback> CommandAsync(UnsafeMethod method, ResourceBody body)
         {
             throw new NotImplementedException("Not implemented unsafe strategies on dictionaries yet.");
             // TODO could implement PUTs with multi updates ?

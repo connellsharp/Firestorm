@@ -15,7 +15,7 @@ namespace Firestorm.Endpoints.Tests.Functionality
         public async Task MemoryCollection()
         {
             var endpointContext = new TestEndpointContext();
-            IRestEndpoint endpoint =  endpointContext.Configuration.Resolver.GetFromResource(endpointContext, new ArtistMemoryCollection());
+            IRestEndpoint endpoint =  endpointContext.Configuration.EndpointResolver.GetFromResource(endpointContext, new ArtistMemoryCollection());
             var response = (CollectionBody)(await endpoint.GetAsync(null));
             var firstObj = response.Items.First();
             Assert.Equal(firstObj["Name"], TestRepositories.ArtistName);

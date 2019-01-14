@@ -4,7 +4,7 @@ using Firestorm.Rest.Web;
 
 namespace Firestorm.Endpoints.Strategies
 {
-    public class ClearCollectionStrategy : IUnsafeRequestStrategy<IRestCollection>
+    public class ClearCollectionStrategy : ICommandStrategy<IRestCollection>
     {
         public async Task<Feedback>  ExecuteAsync(IRestCollection collection, IEndpointContext context, ResourceBody body)
         {

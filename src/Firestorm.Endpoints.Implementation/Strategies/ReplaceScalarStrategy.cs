@@ -5,7 +5,7 @@ using Firestorm.Rest.Web;
 
 namespace Firestorm.Endpoints.Strategies
 {
-    public class ReplaceScalarStrategy : IUnsafeRequestStrategy<IRestScalar>
+    public class ReplaceScalarStrategy : ICommandStrategy<IRestScalar>
     {
         public async Task<Feedback> ExecuteAsync(IRestScalar scalar, IEndpointContext context, ResourceBody body)
         {

@@ -126,7 +126,7 @@ namespace Firestorm.AspNetWebApi2
             if (!endpoint.EvaluatePreconditions(GetPreconditions()))
                 return StatusCode(HttpStatusCode.PreconditionFailed);
 
-            Feedback feedback = await endpoint.UnsafeAsync(method, body);
+            Feedback feedback = await endpoint.CommandAsync(method, body);
             return GetResultFromFeedback(feedback);
         }
 

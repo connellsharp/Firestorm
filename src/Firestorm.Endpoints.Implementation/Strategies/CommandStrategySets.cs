@@ -5,21 +5,21 @@ namespace Firestorm.Endpoints.Strategies
     /// <summary>
     /// Contains 3 sets of strategies (for collection, items and scalars) defining how endpoints behave to unsafe requests.
     /// </summary>
-    public class UnsafeRequestStrategySets : IUnsafeRequestStrategySets
+    public class CommandStrategySets : ICommandStrategySets
     {
-        public UnsafeRequestStrategies<IRestCollection> ForCollections { get; set; } = new UnsafeRequestStrategies<IRestCollection>
+        public CommandStrategies<IRestCollection> ForCollections { get; set; } = new CommandStrategies<IRestCollection>
         {
             { UnsafeMethod.Post, new AddToCollectionStrategy() },
         };
 
-        public UnsafeRequestStrategies<IRestItem> ForItems { get; set; } = new UnsafeRequestStrategies<IRestItem>
+        public CommandStrategies<IRestItem> ForItems { get; set; } = new CommandStrategies<IRestItem>
         {
             { UnsafeMethod.Put, new PartialUpdateItemStrategy() },
             { UnsafeMethod.Patch, new PartialUpdateItemStrategy() },
             { UnsafeMethod.Delete, new DeleteItemStrategy() }
         };
 
-        public UnsafeRequestStrategies<IRestScalar> ForScalars { get; set; } = new UnsafeRequestStrategies<IRestScalar>
+        public CommandStrategies<IRestScalar> ForScalars { get; set; } = new CommandStrategies<IRestScalar>
         {
             { UnsafeMethod.Put, new ReplaceScalarStrategy() },
             { UnsafeMethod.Delete, new SetScalarToNullStrategy() }

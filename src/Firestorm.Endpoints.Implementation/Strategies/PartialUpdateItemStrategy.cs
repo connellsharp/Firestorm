@@ -8,7 +8,7 @@ namespace Firestorm.Endpoints.Strategies
     /// Updates only the specified fields on the item and leaves unspecified fields as they are on the server.
     /// This strategy could be used in PATCH or PUT.
     /// </summary>
-    public class PartialUpdateItemStrategy : IUnsafeRequestStrategy<IRestItem>
+    public class PartialUpdateItemStrategy : ICommandStrategy<IRestItem>
     {
         public async Task<Feedback> ExecuteAsync(IRestItem item, IEndpointContext context, ResourceBody body)
         {

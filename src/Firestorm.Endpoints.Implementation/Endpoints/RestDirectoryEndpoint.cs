@@ -23,7 +23,7 @@ namespace Firestorm.Endpoints
             if (resource == null)
                 return null;
 
-            return Context.Configuration.Resolver.GetFromResource(Context, resource);
+            return Context.Configuration.EndpointResolver.GetFromResource(Context, resource);
         }
 
         public async Task<ResourceBody> GetAsync(IRestCollectionQuery query)
@@ -47,7 +47,7 @@ namespace Firestorm.Endpoints
             };
         }
 
-        public Task<Feedback> UnsafeAsync(UnsafeMethod method, ResourceBody body)
+        public Task<Feedback> CommandAsync(UnsafeMethod method, ResourceBody body)
         {
             throw new MethodNotAllowedException("Only safe methods are allowed on the directory.");
         }

@@ -11,9 +11,9 @@ namespace Firestorm.Endpoints
     {
         public DefaultRestEndpointConfiguration()
         {
-            RequestStrategies = new UnsafeRequestStrategySets();
+            CommandStrategies = new CommandStrategySets();
             NamingConventionSwitcher = new DefaultNamingConventionSwitcher();
-            Resolver = new EndpointResolver();
+            EndpointResolver = new EndpointResolver();
         }
     }
 }
