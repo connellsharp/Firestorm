@@ -42,6 +42,8 @@ namespace Firestorm.Endpoints
                 case "POST":
                 case "PUT":
                 case "PATCH":
+                    return ExecuteModifyAsync();
+
                 case "DELETE":
                     return ExecuteCommandAsync();
 
@@ -71,12 +73,18 @@ namespace Firestorm.Endpoints
             _responseBuilder.AddOptions(options);
         }
 
-        private async Task ExecuteCommandAsync()
+        private async Task ExecuteModifyAsync()
+        {
+            var feedback = await ExecuteCommandAsync();
+            await ExecuteReturnAsync(feedback);
+        }
+
+        private async Task<Feedback> ExecuteCommandAsync()
         {
             if (!_endpoint.EvaluatePreconditions(_requestReader.GetPreconditions()))
             {
                 _responseBuilder.SetStatusCode(HttpStatusCode.PreconditionFailed);
-                return;
+                return null;
             }
 
             var method =  (UnsafeMethod)Enum.Parse(typeof(UnsafeMethod), _requestReader.RequestMethod, true);
@@ -84,21 +92,27 @@ namespace Firestorm.Endpoints
             Feedback feedback = await _endpoint.CommandAsync(method, requestBody);
 
             _responseBuilder.AddFeedback(feedback);
-            
-            if (_configuration.ResourceOnSuccessfulCommand)
-            {
-                IRestEndpoint endpoint = _endpoint;
-                
-                if (feedback is AcknowledgmentFeedback ackFeedback
-                 && ackFeedback.Acknowledgment is CreatedItemAcknowledgment created)
-                {
-                    endpoint = _endpoint.Next(new RawNextPath(created.NewIdentifier.ToString()));
-                    Debug.Assert(endpoint != null);
-                }
 
-                ResourceBody resourceBody = await endpoint.GetAsync(_requestReader.GetQuery());
-                _responseBuilder.AddResource(resourceBody);
+            return feedback;
+        }
+
+        private async Task ExecuteReturnAsync(Feedback feedback)
+        {
+            // TODO refactor. try include in strategies?
+            if (!_configuration.ResourceOnSuccessfulCommand)
+                return;
+            
+            IRestEndpoint endpoint = _endpoint;
+
+            if (feedback is AcknowledgmentFeedback ackFeedback
+                && ackFeedback.Acknowledgment is CreatedItemAcknowledgment created)
+            {
+                endpoint = _endpoint.Next(new RawNextPath(created.NewIdentifier.ToString()));
+                Debug.Assert(endpoint != null);
             }
+
+            ResourceBody resourceBody = await endpoint.GetAsync(_requestReader.GetQuery());
+            _responseBuilder.AddResource(resourceBody);
         }
     }
 }
