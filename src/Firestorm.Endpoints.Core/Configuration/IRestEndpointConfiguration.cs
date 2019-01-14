@@ -22,7 +22,7 @@ namespace Firestorm.Endpoints.Configuration
         /// <summary>
         /// The options used to build the responses to return to the client.
         /// </summary>
-        public ResponseConfiguration ResponseConfiguration { get; set; } = new ResponseConfiguration();
+        public ResponseConfiguration Response { get; set; } = new ResponseConfiguration();
         
         /// <summary>
         /// The object used to convert from .NET member naming conventions to client-side API conventions.

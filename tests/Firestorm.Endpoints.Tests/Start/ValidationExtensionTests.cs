@@ -47,7 +47,7 @@ namespace Firestorm.Endpoints.Tests.Start
         {
             var config = new RestEndpointConfiguration
             {
-                ResponseConfiguration = null
+                Response = null
             };
 
             Action ensureValid = () => config.EnsureValid();

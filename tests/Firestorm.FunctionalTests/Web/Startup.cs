@@ -35,10 +35,10 @@ namespace Firestorm.FunctionalTests.Web
             var fsBuilder = services.AddFirestorm()
                 .AddEndpoints(new DefaultRestEndpointConfiguration
                 {
-                    ResponseConfiguration =
+                    Response =
                     {
                         StatusField = ResponseStatusField.StatusCode,
-                        PageConfiguration =
+                        Pagination =
                         {
                             UseLinkHeaders = true
                         },

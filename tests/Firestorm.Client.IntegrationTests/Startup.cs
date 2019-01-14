@@ -22,8 +22,8 @@ namespace Firestorm.Client.IntegrationTests
             services.AddFirestorm()
                 .AddEndpoints(config =>
                 {
-                    config.ResponseConfiguration.ShowDeveloperErrors = true;
-                    config.ResponseConfiguration.StatusField = ResponseStatusField.SuccessBoolean;
+                    config.Response.ShowDeveloperErrors = true;
+                    config.Response.StatusField = ResponseStatusField.SuccessBoolean;
                 })
                 .AddStartResourceFactory(new DoubleTestStartResourceFactory("http://localhost:" + Port));
         }

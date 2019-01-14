@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
+using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Rest.Web;
 using Firestorm.Rest.Web.Options;
@@ -16,12 +17,15 @@ namespace Firestorm.Endpoints
         private readonly IRestEndpoint _endpoint;
         private readonly IRequestReader _requestReader;
         private readonly ResponseBuilder _responseBuilder;
+        private readonly ResponseConfiguration _configuration;
 
-        public EndpointExecutor(IRestEndpoint endpoint, IRequestReader requestReader, ResponseBuilder responseBuilder)
+        public EndpointExecutor(IRestEndpoint endpoint, IRequestReader requestReader,
+                                ResponseBuilder responseBuilder, ResponseConfiguration configuration)
         {
             _endpoint = endpoint;
             _requestReader = requestReader;
             _responseBuilder = responseBuilder;
+            _configuration = configuration;
         }
 
         public Task ExecuteAsync()
@@ -78,7 +82,15 @@ namespace Firestorm.Endpoints
             ResourceBody requestBody = _requestReader.GetRequestBody();
             Feedback feedback = await _endpoint.CommandAsync(method, requestBody);
 
-            _responseBuilder.AddFeedback(feedback);
+            if (_configuration.ResourceOnSuccessfulCommand)
+            {
+                ResourceBody resourceBody = await _endpoint.GetAsync(_requestReader.GetQuery());
+                _responseBuilder.AddResource(resourceBody);
+            }
+            else
+            {
+                _responseBuilder.AddFeedback(feedback);
+            }
         }
     }
 }

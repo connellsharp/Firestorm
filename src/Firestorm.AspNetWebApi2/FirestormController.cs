@@ -61,7 +61,7 @@ namespace Firestorm.AspNetWebApi2
 
         private void Load()
         {
-            var modifiers = new DefaultResponseModifiers(_config.EndpointConfiguration.ResponseConfiguration);
+            var modifiers = new DefaultResponseModifiers(_config.EndpointConfiguration.Response);
             _response = new Response(ResourcePath);
             _responseBuilder = new ResponseBuilder(Response, modifiers);
         }

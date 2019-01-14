@@ -51,7 +51,7 @@ namespace Firestorm.AspNetCore2.IntegrationTests
             Assert.Equal(1, resource.Items.Count());
 
 
-            var modifiers = new DefaultResponseModifiers(endpointContext.Configuration.ResponseConfiguration);
+            var modifiers = new DefaultResponseModifiers(endpointContext.Configuration.Response);
             var builder = new ResponseBuilder(new Response("/"), modifiers);
             builder.AddResource(resource);
         }
