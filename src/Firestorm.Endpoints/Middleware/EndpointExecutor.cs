@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 using System.Threading.Tasks;
 using Firestorm.Endpoints.Configuration;
@@ -82,14 +83,21 @@ namespace Firestorm.Endpoints
             ResourceBody requestBody = _requestReader.GetRequestBody();
             Feedback feedback = await _endpoint.CommandAsync(method, requestBody);
 
+            _responseBuilder.AddFeedback(feedback);
+            
             if (_configuration.ResourceOnSuccessfulCommand)
             {
-                ResourceBody resourceBody = await _endpoint.GetAsync(_requestReader.GetQuery());
+                IRestEndpoint endpoint = _endpoint;
+                
+                if (feedback is AcknowledgmentFeedback ackFeedback
+                 && ackFeedback.Acknowledgment is CreatedItemAcknowledgment created)
+                {
+                    endpoint = _endpoint.Next(new RawNextPath(created.NewIdentifier.ToString()));
+                    Debug.Assert(endpoint != null);
+                }
+
+                ResourceBody resourceBody = await endpoint.GetAsync(_requestReader.GetQuery());
                 _responseBuilder.AddResource(resourceBody);
-            }
-            else
-            {
-                _responseBuilder.AddFeedback(feedback);
             }
         }
     }

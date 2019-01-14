@@ -42,7 +42,7 @@ namespace Firestorm.Endpoints
             {
                 var navigator = new EndpointNavigator(context, _startResourceFactory, _configuration);
                 IRestEndpoint endpoint =  navigator.GetEndpointFromPath(requestReader.ResourcePath);
-
+                
                 var invoker = new EndpointExecutor(endpoint, reader, builder, _configuration.Response);
                 await invoker.ExecuteAsync();
 
