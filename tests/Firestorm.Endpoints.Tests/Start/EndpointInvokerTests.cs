@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using AutoFixture;
 using AutoFixture.AutoMoq;
+using Firestorm.Endpoints.Configuration;
 using Firestorm.Rest.Web;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Testing;
@@ -28,11 +29,12 @@ namespace Firestorm.Endpoints.Tests.Start
         [InlineData("DELETE", HttpStatusCode.PreconditionFailed)]
         [InlineData("PATCH", HttpStatusCode.PreconditionFailed)]
         [InlineData("DESTROY", HttpStatusCode.MethodNotAllowed)]
-        public async Task Invoke_FailsPreconditions_ExpecedStatusCode(string method, HttpStatusCode expectedStatusCode)
+        public async Task Invoke_FailsPreconditions_ExpectedStatusCode(string method, HttpStatusCode expectedStatusCode)
         {
             _fixture.FreezeMock<IRestEndpoint>(m =>
             {
                 m.SetupIgnoreArgs(a => a.EvaluatePreconditions(null)).Returns(false);
+                m.SetupIgnoreArgs(a => a.GetAsync(null)).ReturnsAsync(new ItemBody(null));
             });
 
             var readerMock = _fixture.FreezeMock<IRequestReader>();
@@ -41,11 +43,45 @@ namespace Firestorm.Endpoints.Tests.Start
             var response = new Response("test");
             _fixture.Inject(new ResponseBuilder(response, new PaginationHeadersResponseModifier()));
 
-            var invoker = _fixture.Create<EndpointExecutor>();
-            await invoker.ExecuteAsync();
+            var executor = _fixture.Create<EndpointExecutor>();
+            await executor.ExecuteAsync();
             
             Assert.Equal(expectedStatusCode, response.StatusCode);
             //handlerMock.Verify(a => a.SetStatusCode(expectedStatusCode));
+        }
+
+        [Theory]
+        [InlineData("PUT")]
+        [InlineData("POST")]
+        [InlineData("PATCH")]
+        public async Task ResourceOnSuccessIsTrue_Execute_AddsBody(string method)
+        {
+            _fixture.Inject<ResourceBody>(new ItemBody(null));
+            _fixture.Inject<Feedback>(new AcknowledgmentFeedback(null));
+            
+            _fixture.Inject(new ResponseConfiguration
+            {
+                ResourceOnSuccessfulCommand = true
+            });
+
+            var body = new RestItemData();
+            
+            _fixture.FreezeMock<IRestEndpoint>(m =>
+            {
+                m.SetupIgnoreArgs(a => a.EvaluatePreconditions(null)).Returns(true);
+                m.SetupIgnoreArgs(a => a.GetAsync(null)).ReturnsAsync(new ItemBody(body));
+            });
+
+            var readerMock = _fixture.FreezeMock<IRequestReader>();
+            readerMock.SetupGet(a => a.RequestMethod).Returns(method);
+            
+            var response = new Response("test");
+            _fixture.Inject(new ResponseBuilder(response, new MainBodyResponseModifier()));
+
+            var executor = _fixture.Create<EndpointExecutor>();
+            await executor.ExecuteAsync();
+            
+            Assert.Equal(body, response.ResourceBody);
         }
 
         [Theory]
