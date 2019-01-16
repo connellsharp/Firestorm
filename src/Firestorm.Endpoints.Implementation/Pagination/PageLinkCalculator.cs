@@ -9,11 +9,11 @@ namespace Firestorm.Endpoints.Pagination
     /// </summary>
     internal class PageLinkCalculator
     {
-        private readonly PageConfiguration _configuration;
+        private readonly PaginationConfiguration _configuration;
         private readonly PageInstruction _instruction;
         private readonly PageDetails _details;
 
-        public PageLinkCalculator(PageConfiguration configuration, PageInstruction instruction, PageDetails details)
+        public PageLinkCalculator(PaginationConfiguration configuration, PageInstruction instruction, PageDetails details)
         {
             _configuration = configuration;
             _instruction = instruction;

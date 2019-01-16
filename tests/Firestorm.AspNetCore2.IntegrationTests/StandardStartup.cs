@@ -19,7 +19,7 @@ namespace Firestorm.AspNetCore2.IntegrationTests
             services.AddFirestorm()
                 .AddEndpoints(config =>
                 {
-                    config.ResponseConfiguration.ShowDeveloperErrors = true;
+                    config.Response.ShowDeveloperErrors = true;
                     //
                 })
                 .AddStartResourceFactory(new IntegratedStartResourceFactory());

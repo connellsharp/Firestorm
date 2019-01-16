@@ -23,7 +23,7 @@ namespace Firestorm.Endpoints
             IRestResource startResource = _startResourceFactory.GetStartResource(_requestContext);
 
             var context = new EndpointContext(_requestContext, _configuration);
-            IRestEndpoint startEndpoint = _configuration.Resolver.GetFromResource(context, startResource);
+            IRestEndpoint startEndpoint = _configuration.EndpointResolver.GetFromResource(context, startResource);
 
             var nextAggregator = new NextAggregator(startEndpoint, _configuration.NamingConventionSwitcher ?? new VoidNamingConventionSwitcher());
             IRestEndpoint endpoint = nextAggregator.AggregateNext(resourcePath);

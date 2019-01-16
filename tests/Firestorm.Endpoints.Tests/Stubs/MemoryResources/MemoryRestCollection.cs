@@ -42,5 +42,10 @@ namespace Firestorm.Endpoints.Tests.Stubs.MemoryResources
         {
             throw new NotImplementedException("Test collection not implemented adding.");
         }
+
+        public Task<Acknowledgment> DeleteAllAsync(IRestCollectionQuery query)
+        {
+            throw new NotImplementedException("Test collection not implemented deleting.");
+        }
     }
 }

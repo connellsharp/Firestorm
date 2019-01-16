@@ -9,7 +9,7 @@ namespace Firestorm.Endpoints.Strategies
     /// 
     /// </summary>
     /// <remarks>Not sure what's gonna happen here as we use <see cref="IdentifierInfo"/> to decide if upsert is enabled atm.</remarks>
-    internal class UpdateOrInsertItemStrategy : IUnsafeRequestStrategy<IRestItem>
+    internal class UpdateOrInsertItemStrategy : ICommandStrategy<IRestItem>
     {
         public async Task<Feedback> ExecuteAsync(IRestItem item, IEndpointContext context, ResourceBody body)
         {

@@ -2,10 +2,8 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Firestorm.Stems;
 using Firestorm.Stems.Essentials;
 using Firestorm.Stems.IntegrationTests.Helpers;
-using Firestorm.Testing;
 using Firestorm.Testing.Models;
 using Xunit;
 
@@ -60,7 +58,7 @@ namespace Firestorm.Stems.IntegrationTests
         }
 
         [Fact]
-        public async Task NotSoftDeleted_WhenDeleted_RepoMarkDeletedCalled()
+        public async Task NotSoftDeleted_WhenDeleteItem_RepoMarkDeletedCalled()
         {
             _testDeletedValue.SoftDeleted = false;
             
@@ -71,7 +69,7 @@ namespace Firestorm.Stems.IntegrationTests
         }
 
         [Fact]
-        public async Task SoftDeleted_WhenDeleted_RepoMarkDeletedNotCalled()
+        public async Task SoftDeleted_WhenDeleteItem_RepoMarkDeletedNotCalled()
         {
             _testDeletedValue.SoftDeleted = true;
             
@@ -79,6 +77,17 @@ namespace Firestorm.Stems.IntegrationTests
 
             bool artistInRepo = _testContext.TestRepository.GetAllItems().Any(a => a.ID == 123);
             Assert.True(artistInRepo);
+        }
+
+        [Fact]
+        public async Task NotSoftDeleted_WhenDeleteCollection_RepoMarkDeletedCalledForAllItems()
+        {
+            _testDeletedValue.SoftDeleted = false;
+            
+            await _restCollection.DeleteAllAsync(null);
+
+            bool artistsInRepo = _testContext.TestRepository.GetAllItems().Any();
+            Assert.False(artistsInRepo);
         }
     }
 }

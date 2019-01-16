@@ -2,7 +2,6 @@
 using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Firestorm.Stems.Essentials;
 using Firestorm.Stems.FunctionalTests.Data.Models;
@@ -51,7 +50,7 @@ namespace Firestorm.Stems.FunctionalTests.Basics
         [Fact]
         public async Task ArtistsCollection_PostNew_StatusCreated()
         {
-            HttpResponseMessage response = await HttpClient.PostAsync("/artists", JsonContent(@"{ ""name"": ""Fred"", start_date: ""1990-01-01"" }"));
+            HttpResponseMessage response = await HttpClient.PostAsync("/artists", new JsonContent(@"{ ""name"": ""Fred"", start_date: ""1990-01-01"" }"));
 
             ResponseAssert.Success(response);
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -60,7 +59,7 @@ namespace Firestorm.Stems.FunctionalTests.Basics
         [Fact]
         public async Task ArtistItem_UpdateName_GetIsSame()
         {
-            HttpResponseMessage response1 = await HttpClient.PutAsync("/artists/2", JsonContent(@"{ ""name"": ""Bill"" }"));
+            HttpResponseMessage response1 = await HttpClient.PutAsync("/artists/2", new JsonContent(@"{ ""name"": ""Bill"" }"));
             ResponseAssert.Success(response1);
 
             HttpResponseMessage response2 = await HttpClient.GetAsync("/artists/2");
@@ -73,18 +72,13 @@ namespace Firestorm.Stems.FunctionalTests.Basics
         [Fact]
         public async Task ArtistName_Update_GetIsSame()
         {
-            HttpResponseMessage response1 = await HttpClient.PutAsync("/artists/2/name", JsonContent(@"""Bob"""));
+            HttpResponseMessage response1 = await HttpClient.PutAsync("/artists/2/name", new JsonContent(@"""Bob"""));
             ResponseAssert.Success(response1);
 
             HttpResponseMessage response2 = await HttpClient.GetAsync("/artists/2/name");
             ResponseAssert.Success(response2);
             string json = await response2.Content.ReadAsStringAsync();
             Assert.Equal("\"Bob\"", json);
-        }
-
-        private static HttpContent JsonContent(string json)
-        {
-            return new StringContent(json, Encoding.UTF8, "application/json");
         }
     }
 }

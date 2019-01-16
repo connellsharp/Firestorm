@@ -44,10 +44,10 @@ namespace Firestorm.Endpoints.Responses
             if(responseConfiguration.ShowDeveloperErrors)
                 _list.Add(new DeveloperExceptionInfoResponseModifier());
 
-            if(responseConfiguration.PageConfiguration.UseLinkHeaders)
+            if(responseConfiguration.Pagination.UseLinkHeaders)
                 _list.Add(new PaginationHeadersResponseModifier());
 
-            if(responseConfiguration.PageConfiguration.WrapCollectionResponseBody)
+            if(responseConfiguration.Pagination.WrapCollectionResponseBody)
                 _list.Add(new PagedBodyResponseModifier());
         }
 

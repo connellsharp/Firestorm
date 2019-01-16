@@ -41,7 +41,7 @@ namespace Firestorm.Endpoints.Tests.Responses
         {
             var builder = new DefaultResponseModifiers(new ResponseConfiguration
             {
-                PageConfiguration =
+                Pagination =
                 {
                     WrapCollectionResponseBody = true
                 }

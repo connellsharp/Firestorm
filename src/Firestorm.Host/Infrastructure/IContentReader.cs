@@ -5,7 +5,10 @@ namespace Firestorm.Host.Infrastructure
 {
     public interface IContentReader
     {
-        [CanBeNull] Stream GetContentStream();
-        [CanBeNull] string GetMimeType();
+        [CanBeNull] 
+        Stream GetContentStream();
+        
+        [CanBeNull] 
+        string GetMimeType();
     }
 }

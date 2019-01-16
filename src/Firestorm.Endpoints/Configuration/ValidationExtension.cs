@@ -13,13 +13,13 @@ namespace Firestorm.Endpoints
             if (configuration.QueryStringConfiguration == null)
                 throw new FirestormConfigurationException("EndpointConfiguration.QueryStringConfiguration cannot be null.");
 
-            if (configuration.RequestStrategies == null)
+            if (configuration.CommandStrategies == null)
                 throw new FirestormConfigurationException("EndpointConfiguration.RequestStrategies cannot be null.");
 
-            if (configuration.ResponseConfiguration == null)
+            if (configuration.Response == null)
                 throw new FirestormConfigurationException("EndpointConfiguration.ResponseConfiguration cannot be null.");
 
-            if (configuration.ResponseConfiguration.PageConfiguration == null)
+            if (configuration.Response.Pagination == null)
                 throw new FirestormConfigurationException("EndpointConfiguration.PageConfiguration cannot be null.");
         }
     }

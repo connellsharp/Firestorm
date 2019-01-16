@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Firestorm.Endpoints.Formatting;
 using Firestorm.Endpoints.Tests.Stubs;
 using Firestorm.Host.Infrastructure;
 using Xunit;
@@ -179,6 +178,11 @@ namespace Firestorm.Endpoints.Tests.Start
             {
                 List.Add((string) itemData["Value"]);
                 return new CreatedItemAcknowledgment(123);
+            }
+
+            public Task<Acknowledgment> DeleteAllAsync(IRestCollectionQuery query)
+            {
+                throw new NotImplementedException();
             }
         }
 

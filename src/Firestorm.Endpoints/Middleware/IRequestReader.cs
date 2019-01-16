@@ -1,5 +1,6 @@
 ﻿using Firestorm.Host.Infrastructure;
 using Firestorm.Rest.Web;
+using JetBrains.Annotations;
 
 namespace Firestorm.Endpoints
 {
@@ -12,6 +13,7 @@ namespace Firestorm.Endpoints
 
         IPreconditions GetPreconditions();
 
+        [CanBeNull]
         ResourceBody GetRequestBody();
 
         IRestCollectionQuery GetQuery();

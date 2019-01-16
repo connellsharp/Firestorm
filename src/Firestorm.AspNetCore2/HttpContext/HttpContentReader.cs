@@ -14,6 +14,9 @@ namespace Firestorm.AspNetCore2.HttpContext
 
         public Stream GetContentStream()
         {
+            if (!_httpContext.Request.ContentLength.HasValue)
+                return null;
+
             return _httpContext.Request.Body;
         }
 

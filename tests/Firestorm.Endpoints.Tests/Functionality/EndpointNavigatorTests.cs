@@ -22,7 +22,7 @@ namespace Firestorm.Endpoints.Tests.Functionality
 
             var config = new RestEndpointConfiguration
             {
-                Resolver = new EndpointResolver()
+                EndpointResolver = new EndpointResolver()
             };
             
             _navigator = new EndpointNavigator(new TestRequestContext(), startResourceFactory, config);

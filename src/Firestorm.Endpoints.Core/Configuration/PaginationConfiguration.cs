@@ -3,7 +3,7 @@ namespace Firestorm.Endpoints.Configuration
     /// <summary>
     /// The system-wide configuration defining how pagination can work.
     /// </summary>
-    public class PageConfiguration
+    public class PaginationConfiguration
     {
         public int MaxPageSize { get; set; } = 100;
 

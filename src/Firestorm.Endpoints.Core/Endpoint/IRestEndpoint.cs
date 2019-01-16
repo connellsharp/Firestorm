@@ -32,7 +32,7 @@ namespace Firestorm.Endpoints
         /// Performs an unsafe request i.e. changes the state of the resource on the server.
         /// Request resource body is provided.
         /// </summary>
-        Task<Feedback> UnsafeAsync(UnsafeMethod method, [CanBeNull] ResourceBody body);
+        Task<Feedback> CommandAsync(UnsafeMethod method, [CanBeNull] ResourceBody body);
 
         /// <summary>
         /// Returns true if the preconditions for this endpoint are fulfilled.

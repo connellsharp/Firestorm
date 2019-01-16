@@ -5,7 +5,7 @@ using Firestorm.Rest.Web;
 
 namespace Firestorm.Endpoints.Strategies
 {
-    internal class AddToCollectionStrategy : IUnsafeRequestStrategy<IRestCollection>
+    public class AddToCollectionStrategy : ICommandStrategy<IRestCollection>
     {
         public async Task<Feedback>  ExecuteAsync(IRestCollection collection, IEndpointContext context, ResourceBody body)
         {

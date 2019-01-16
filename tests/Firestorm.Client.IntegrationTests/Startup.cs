@@ -1,5 +1,6 @@
 ﻿using Firestorm.AspNetCore2;
 using Firestorm.Endpoints;
+using Firestorm.Endpoints.Configuration;
 using Firestorm.Host;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
@@ -21,8 +22,8 @@ namespace Firestorm.Client.IntegrationTests
             services.AddFirestorm()
                 .AddEndpoints(config =>
                 {
-                    config.ResponseConfiguration.ShowDeveloperErrors = true;
-                    //
+                    config.Response.ShowDeveloperErrors = true;
+                    config.Response.StatusField = ResponseStatusField.SuccessBoolean;
                 })
                 .AddStartResourceFactory(new DoubleTestStartResourceFactory("http://localhost:" + Port));
         }

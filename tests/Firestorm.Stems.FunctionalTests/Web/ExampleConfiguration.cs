@@ -15,7 +15,7 @@ namespace Firestorm.Stems.FunctionalTests.Web
             {
                 return new DefaultRestEndpointConfiguration
                 {
-                    ResponseConfiguration = new ResponseConfiguration
+                    Response = new ResponseConfiguration
                     {
                         StatusField = ResponseStatusField.StatusCode,
                         ShowDeveloperErrors = true

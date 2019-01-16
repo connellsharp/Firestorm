@@ -15,5 +15,7 @@ namespace Firestorm
         IRestDictionary ToDictionary(string identifierName);
 
         Task<CreatedItemAcknowledgment> AddAsync(RestItemData itemData);
+        
+        Task<Acknowledgment> DeleteAllAsync([CanBeNull] IRestCollectionQuery query);
     }
 }

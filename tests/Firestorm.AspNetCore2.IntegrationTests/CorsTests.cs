@@ -7,10 +7,10 @@ using Xunit;
 namespace Firestorm.AspNetCore2.IntegrationTests
 {
     [UsedImplicitly]
-    public class CorsTests: HttpIntegrationTestsBase
+    public class CorsTests: HttpIntegrationTestsBase, IClassFixture<CorsFixture>
     {
-        public CorsTests()
-        : base(new KestrelIntegrationSuite<CorsStartup>(2225))
+        public CorsTests(CorsFixture fixture)
+            : base(fixture.IntegrationSuite)
         {
         }
 
@@ -28,6 +28,14 @@ namespace Firestorm.AspNetCore2.IntegrationTests
             });
             
             ResponseAssert.Success(response);
+        }
+    }
+
+    public class CorsFixture : HttpFixture<OptionsStartup>
+    {
+        public CorsFixture()
+            : base(2225)
+        {
         }
     }
 }

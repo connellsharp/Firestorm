@@ -20,7 +20,7 @@ namespace Firestorm.AspNetCore2.IntegrationTests
         {
             services.Configure<DefaultRestEndpointConfiguration>(config =>
             {
-                config.ResponseConfiguration.ShowDeveloperErrors = true;
+                config.Response.ShowDeveloperErrors = true;
                 //
             });
             

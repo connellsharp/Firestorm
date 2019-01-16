@@ -3,7 +3,7 @@ using Firestorm.Rest.Web;
 
 namespace Firestorm.Endpoints.Requests
 {
-    public interface IUnsafeRequestStrategy<in TResource>
+    public interface ICommandStrategy<in TResource>
         where TResource : IRestResource
     {
         Task<Feedback> ExecuteAsync(TResource resource, IEndpointContext context, ResourceBody body);

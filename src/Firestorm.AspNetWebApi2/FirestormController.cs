@@ -61,7 +61,7 @@ namespace Firestorm.AspNetWebApi2
 
         private void Load()
         {
-            var modifiers = new DefaultResponseModifiers(_config.EndpointConfiguration.ResponseConfiguration);
+            var modifiers = new DefaultResponseModifiers(_config.EndpointConfiguration.Response);
             _response = new Response(ResourcePath);
             _responseBuilder = new ResponseBuilder(Response, modifiers);
         }
@@ -126,7 +126,7 @@ namespace Firestorm.AspNetWebApi2
             if (!endpoint.EvaluatePreconditions(GetPreconditions()))
                 return StatusCode(HttpStatusCode.PreconditionFailed);
 
-            Feedback feedback = await endpoint.UnsafeAsync(method, body);
+            Feedback feedback = await endpoint.CommandAsync(method, body);
             return GetResultFromFeedback(feedback);
         }
 

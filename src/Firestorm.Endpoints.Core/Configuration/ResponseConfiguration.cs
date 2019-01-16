@@ -28,6 +28,11 @@ namespace Firestorm.Endpoints.Configuration
         /// <summary>
         /// The system-wide configuration defining how pagination can work.
         /// </summary>
-        public PageConfiguration PageConfiguration { get; set; } = new PageConfiguration();
+        public PaginationConfiguration Pagination { get; set; } = new PaginationConfiguration();
+
+        /// <summary>
+        /// If true, a successful command request (e.g. POST or PUT) will respond with the current state of the resource
+        /// </summary>
+        public bool ResourceOnSuccessfulCommand { get; set; } = false;
     }
 }

@@ -33,7 +33,7 @@ namespace Firestorm.Endpoints
 
             var response = new Response(requestReader.ResourcePath);
 
-            var modifiers = new DefaultResponseModifiers(_configuration.ResponseConfiguration);
+            var modifiers = new DefaultResponseModifiers(_configuration.Response);
             var builder = new ResponseBuilder(response, modifiers);
 
             var writer = new ResponseWriter(responder, response, _configuration);
@@ -42,8 +42,8 @@ namespace Firestorm.Endpoints
             {
                 var navigator = new EndpointNavigator(context, _startResourceFactory, _configuration);
                 IRestEndpoint endpoint =  navigator.GetEndpointFromPath(requestReader.ResourcePath);
-
-                var invoker = new EndpointExecutor(endpoint, reader, builder);
+                
+                var invoker = new EndpointExecutor(endpoint, reader, builder, _configuration.Response);
                 await invoker.ExecuteAsync();
 
                 await writer.WriteAsync();

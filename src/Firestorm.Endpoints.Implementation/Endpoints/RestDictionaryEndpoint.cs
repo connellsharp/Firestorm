@@ -36,7 +36,7 @@ namespace Firestorm.Endpoints
 
             RestDictionaryData dictionaryData = await Dictionary.QueryDataAsync(query);
             
-            var linkCalculator = new PageLinkCalculator(Context.Configuration.ResponseConfiguration.PageConfiguration, query?.PageInstruction, dictionaryData.PageDetails);
+            var linkCalculator = new PageLinkCalculator(Context.Configuration.Response.Pagination, query?.PageInstruction, dictionaryData.PageDetails);
             PageLinks pageLinks = linkCalculator.Calculate();
 
             return new DictionaryBody(dictionaryData.Items, pageLinks);
@@ -47,7 +47,7 @@ namespace Firestorm.Endpoints
             throw new NotImplementedException();
         }
 
-        public Task<Feedback> UnsafeAsync(UnsafeMethod method, ResourceBody body)
+        public Task<Feedback> CommandAsync(UnsafeMethod method, ResourceBody body)
         {
             throw new NotImplementedException("Not implemented unsafe strategies on dictionaries yet.");
             // TODO could implement PUTs with multi updates ?

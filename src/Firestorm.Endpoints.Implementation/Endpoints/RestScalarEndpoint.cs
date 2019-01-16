@@ -44,9 +44,9 @@ namespace Firestorm.Endpoints
             };
         }
 
-        public Task<Feedback> UnsafeAsync(UnsafeMethod method, ResourceBody body)
+        public Task<Feedback> CommandAsync(UnsafeMethod method, ResourceBody body)
         {
-            IUnsafeRequestStrategy<IRestScalar> strategy = Context.Configuration.RequestStrategies.ForScalars.GetOrThrow(method);
+            ICommandStrategy<IRestScalar> strategy = Context.Configuration.CommandStrategies.ForScalars.GetOrThrow(method);
             return strategy.ExecuteAsync(Scalar, Context, body);
         }
 
