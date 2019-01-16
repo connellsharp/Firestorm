@@ -10,12 +10,10 @@ _Using [Stems](docs/stems/stems-intro.md) to describe your API_
 public class ArtistsStem : Stem<Artist>
 {
     [Get, Identifier]
-    public static Expression Id
-        => Expression(a => a.Id);
+    public static Expression Id => Expression(a => a.Id);
 
     [Get, Set]
-    public static Expression Name
-        => Expression(a => a.Name);
+    public static Expression Name => Expression(a => a.Name);
 }
 ```
 
