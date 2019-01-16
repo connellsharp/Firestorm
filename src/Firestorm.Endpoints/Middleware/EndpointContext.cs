@@ -5,13 +5,13 @@ namespace Firestorm.Endpoints
 {
     internal class EndpointContext : IEndpointContext
     {
-        public EndpointContext(IRequestContext endpointContext, RestEndpointConfiguration configuration)
+        public EndpointContext(IRequestContext endpointContext, EndpointConfiguration configuration)
         {
             Request = endpointContext;
             Configuration = configuration;
         }
 
-        public RestEndpointConfiguration Configuration { get; }
+        public EndpointConfiguration Configuration { get; }
 
         public IRequestContext Request { get; }
 

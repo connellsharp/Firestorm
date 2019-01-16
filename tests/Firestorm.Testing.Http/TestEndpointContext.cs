@@ -6,7 +6,7 @@ namespace Firestorm.Testing.Http
 {
     public class TestEndpointContext : IEndpointContext
     {
-        public RestEndpointConfiguration Configuration { get; } = new DefaultRestEndpointConfiguration();
+        public EndpointConfiguration Configuration { get; } = new DefaultEndpointConfiguration();
         
         public IRequestContext Request { get; } = new TestRequestContext();
     }

@@ -7,11 +7,11 @@ namespace Firestorm.Endpoints
     /// <summary>
     /// The default options and services required to setup a Firestorm REST API server.
     /// </summary>
-    public class DefaultRestEndpointConfiguration : RestEndpointConfiguration
+    public class DefaultEndpointConfiguration : EndpointConfiguration
     {
-        public DefaultRestEndpointConfiguration()
+        public DefaultEndpointConfiguration()
         {
-            CommandStrategies = new CommandStrategySets();
+            Strategies = new CommandStrategySets();
             NamingConventionSwitcher = new DefaultNamingConventionSwitcher();
             EndpointResolver = new EndpointResolver();
         }

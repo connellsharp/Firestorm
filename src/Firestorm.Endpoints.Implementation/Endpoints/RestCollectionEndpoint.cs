@@ -26,7 +26,7 @@ namespace Firestorm.Endpoints
 
         public IRestEndpoint Next(INextPath path)
         {
-            string dictionaryPrefix = Context.Configuration.QueryStringConfiguration.DictionaryReferencePrefix;
+            string dictionaryPrefix = Context.Configuration.QueryString.DictionaryReferencePrefix;
             if (path.Raw.StartsWith(dictionaryPrefix))
             {
                 string identifierName = path.GetCoded(dictionaryPrefix.Length);
@@ -68,7 +68,7 @@ namespace Firestorm.Endpoints
 
         public Task<Feedback> CommandAsync(UnsafeMethod method, ResourceBody body)
         {
-            ICommandStrategy<IRestCollection> strategy = Context.Configuration.CommandStrategies.ForCollections.GetOrThrow(method);
+            ICommandStrategy<IRestCollection> strategy = Context.Configuration.Strategies.ForCollections.GetOrThrow(method);
             return strategy.ExecuteAsync(Collection, Context, body);
         }
 

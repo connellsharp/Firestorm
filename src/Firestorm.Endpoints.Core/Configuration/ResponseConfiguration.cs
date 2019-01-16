@@ -4,7 +4,7 @@ namespace Firestorm.Endpoints.Configuration
     /// The options used to build the responses to return to the client.
     /// </summary>
     /// <remarks>
-    /// Response builders are built in the <see cref="Firestorm.Endpoints.Responses"/> library, but this config object needs to be in the overall <see cref="RestEndpointConfiguration"/>,
+    /// Response builders are built in the <see cref="Firestorm.Endpoints.Responses"/> library, but this config object needs to be in the overall <see cref="EndpointConfiguration"/>,
     /// so these settings feel like they're defined at the wrong level.
     /// </remarks>
     public class ResponseConfiguration

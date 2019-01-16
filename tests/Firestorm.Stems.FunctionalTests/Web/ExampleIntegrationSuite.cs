@@ -14,13 +14,13 @@ namespace Firestorm.Stems.FunctionalTests.Web
 {
     public class ExampleIntegrationSuite : IHttpIntegrationSuite
     {
-        private readonly RestEndpointConfiguration _config;
+        private readonly EndpointConfiguration _config;
         private readonly Type _testClassType;
 
         private static int _startPort = 2240;
         private readonly string _url = "http://localhost:" + _startPort++;
 
-        public ExampleIntegrationSuite(RestEndpointConfiguration config, Type testClassType)
+        public ExampleIntegrationSuite(EndpointConfiguration config, Type testClassType)
         {
             _config = config;
             _testClassType = testClassType;

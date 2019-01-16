@@ -18,6 +18,6 @@ namespace Firestorm.AspNetWebApi2
         /// <summary>
         /// The configuration describing how to interact with the resources in this API.
         /// </summary>
-        public RestEndpointConfiguration EndpointConfiguration { get; set; }
+        public EndpointConfiguration EndpointConfiguration { get; set; }
     }
 }

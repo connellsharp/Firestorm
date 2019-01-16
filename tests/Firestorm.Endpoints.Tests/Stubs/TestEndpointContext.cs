@@ -10,7 +10,7 @@ namespace Firestorm.Endpoints.Tests.Stubs
     {
         public IRequestContext Request => new TestRequestContext();
 
-        public RestEndpointConfiguration Configuration { get; } = new DefaultRestEndpointConfiguration();
+        public EndpointConfiguration Configuration { get; } = new DefaultEndpointConfiguration();
     }
 
     public class TestRequestContext : IRequestContext, IRestUser

@@ -20,7 +20,7 @@ namespace Firestorm.Endpoints.Tests.Functionality
         {
             var startResourceFactory = new SingletonStartResourceFactory(new TestRestDirectory());
 
-            var config = new RestEndpointConfiguration
+            var config = new EndpointConfiguration
             {
                 EndpointResolver = new EndpointResolver()
             };

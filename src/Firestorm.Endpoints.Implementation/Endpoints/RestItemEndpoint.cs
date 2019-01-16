@@ -46,7 +46,7 @@ namespace Firestorm.Endpoints
 
         public Task<Feedback> CommandAsync(UnsafeMethod method, ResourceBody body)
         {
-            ICommandStrategy<IRestItem> strategy = Context.Configuration.CommandStrategies.ForItems.GetOrThrow(method);
+            ICommandStrategy<IRestItem> strategy = Context.Configuration.Strategies.ForItems.GetOrThrow(method);
             return strategy.ExecuteAsync(Item, Context, body);
         }
 

@@ -11,7 +11,7 @@ namespace Firestorm.Endpoints.Tests.Start
         [Fact]
         public void EnsureValid_DefaultConfiguration_DoesntThrow()
         {
-            var config = new DefaultRestEndpointConfiguration();
+            var config = new DefaultEndpointConfiguration();
 
             config.EnsureValid();
         }
@@ -19,9 +19,9 @@ namespace Firestorm.Endpoints.Tests.Start
         [Fact]
         public void EnsureValid_NullQueryStringConfiguration_Throws()
         {
-            var config = new RestEndpointConfiguration
+            var config = new EndpointConfiguration
             {
-                QueryStringConfiguration = null
+                QueryString = null
             };
 
             Action ensureValid = () => config.EnsureValid();
@@ -32,9 +32,9 @@ namespace Firestorm.Endpoints.Tests.Start
         [Fact]
         public void EnsureValid_NullRequestStrategies_Throws()
         {
-            var config = new RestEndpointConfiguration
+            var config = new EndpointConfiguration
             {
-                CommandStrategies = null
+                Strategies = null
             };
 
             Action ensureValid = () => config.EnsureValid();
@@ -45,7 +45,7 @@ namespace Firestorm.Endpoints.Tests.Start
         [Fact]
         public void EnsureValid_NullResponseConfiguration_Throws()
         {
-            var config = new RestEndpointConfiguration
+            var config = new EndpointConfiguration
             {
                 Response = null
             };

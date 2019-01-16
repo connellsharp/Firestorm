@@ -9,9 +9,9 @@ namespace Firestorm.Endpoints
     {
         private readonly IRequestContext _requestContext;
         private readonly IStartResourceFactory _startResourceFactory;
-        private readonly RestEndpointConfiguration _configuration;
+        private readonly EndpointConfiguration _configuration;
         
-        public EndpointNavigator(IRequestContext requestContext, IStartResourceFactory startResourceFactory, RestEndpointConfiguration configuration)
+        public EndpointNavigator(IRequestContext requestContext, IStartResourceFactory startResourceFactory, EndpointConfiguration configuration)
         {
             _requestContext = requestContext;
             _startResourceFactory = startResourceFactory;

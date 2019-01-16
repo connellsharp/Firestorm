@@ -10,9 +10,9 @@ namespace Firestorm.Endpoints
     internal class RequestReader : IRequestReader
     {
         private readonly IHttpRequestReader _httpReader;
-        private readonly RestEndpointConfiguration _config;
+        private readonly EndpointConfiguration _config;
 
-        public RequestReader(IHttpRequestReader httpReader, RestEndpointConfiguration config)
+        public RequestReader(IHttpRequestReader httpReader, EndpointConfiguration config)
         {
             _httpReader = httpReader;
             _config = config;
@@ -35,7 +35,7 @@ namespace Firestorm.Endpoints
             if (string.IsNullOrEmpty(queryString))
                 return null;
 
-            var query = new QueryStringCollectionQuery(_config.QueryStringConfiguration, queryString);
+            var query = new QueryStringCollectionQuery(_config.QueryString, queryString);
             return NameSwitcherUtility.TryWrapQuery(query, _config.NamingConventionSwitcher);
         }
     }

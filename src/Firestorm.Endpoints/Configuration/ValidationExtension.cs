@@ -5,15 +5,15 @@ namespace Firestorm.Endpoints
 {
     public static class ValidationExtension
     {   
-        public static void EnsureValid([NotNull] this RestEndpointConfiguration configuration)
+        public static void EnsureValid([NotNull] this EndpointConfiguration configuration)
         {
             if (configuration == null)
                 throw new FirestormConfigurationException("EndpointConfiguration cannot be null.");
 
-            if (configuration.QueryStringConfiguration == null)
+            if (configuration.QueryString == null)
                 throw new FirestormConfigurationException("EndpointConfiguration.QueryStringConfiguration cannot be null.");
 
-            if (configuration.CommandStrategies == null)
+            if (configuration.Strategies == null)
                 throw new FirestormConfigurationException("EndpointConfiguration.RequestStrategies cannot be null.");
 
             if (configuration.Response == null)

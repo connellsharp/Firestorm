@@ -63,7 +63,7 @@ namespace Firestorm.AspNetWebApi2
 
             var config = new FirestormConfiguration
             {
-                EndpointConfiguration = serviceProvider.GetService<RestEndpointConfiguration>(),
+                EndpointConfiguration = serviceProvider.GetService<EndpointConfiguration>(),
                 StartResourceFactory = serviceProvider.GetService<IStartResourceFactory>(),
             };
 

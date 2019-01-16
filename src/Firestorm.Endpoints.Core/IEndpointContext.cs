@@ -13,7 +13,7 @@ namespace Firestorm.Endpoints
         /// The global configuration for all endpoints in this API.
         /// </summary>
         [NotNull]
-        RestEndpointConfiguration Configuration { get; }
+        EndpointConfiguration Configuration { get; }
 
         /// <summary>
         /// An object containing information about the request.
