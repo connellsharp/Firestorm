@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Firestorm.Host.Infrastructure;
+using Microsoft.AspNetCore.Http;
 
 namespace Firestorm.AspNetCore2.HttpContext
 {
@@ -14,10 +15,12 @@ namespace Firestorm.AspNetCore2.HttpContext
 
         public Stream GetContentStream()
         {
-            if (!_httpContext.Request.ContentLength.HasValue)
+            HttpRequest request = _httpContext.Request;
+            
+            if (!request.ContentLength.HasValue && string.IsNullOrEmpty(request.ContentType))
                 return null;
 
-            return _httpContext.Request.Body;
+            return request.Body;
         }
 
         public string GetMimeType()
