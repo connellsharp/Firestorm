@@ -2,30 +2,32 @@
 
 Due to the modular design of Firestorm, there are many NuGet packages available to meet your needs. You won't need all of them.
 
-However, to try and simplify installation, it's not separated completely as one package [per assembly](/Documentation/Solution-architecture). Some packages group together mutliple projects that are almost always used together.
-
 See the [Installation tutorial](/Tutorial/Installation) for more of a step-by-step guide.
 
 ##  Core
 
 The eye of the storm.
 
-The `Firestorm.Core` package contains the `Firestorm.Core` and `Firestorm.Core.Web` libraries.
-
-This is rarely used on its own, but is a dependency used by all the other packages.
+The `Firestorm.Core` package contains the core abstractions used by other Firestorm packages.
 
 ## Endpoints
 
-`Firestorm.Endpoints` is the base package for Firestorm Endpoint technologies. It also contains the `Formatting` and `Start` libraries.
+`Firestorm.Endpoints` translates HTTP requests into calls to the Firestorm Core abstractions.
 
-Again, rarely used on its own, unless you're building support for a new Web API Framework. This is used by the `AspNetCore`, `Owin` and `AspNetWebApi`packages.
+It brings together sub-packages such as `Formatting` and `Responses` and allows configuring your APIs default behaviour.
 
-### ASP<span>.</span>NET Core
+## Host
+
+`Firestorm.Host` is the base package for adapting web hosting technologies to use Firestorm Endpoints.
+
+It is rarely used on its own, unless you're building support for a new Web API Framework. This is used by the `AspNetCore2`, `Owin` and `AspNetWebApi2`packages.
+
+### ASP<span>.</span>NET Core 2
 
 ASP<span>.</span>NET Core middleware and helpers.
 
 ```nuget
-Install-Package Firestorm.AspNetCore -prerelease
+Install-Package Firestorm.AspNetCore2
 ```
 
 ### OWIN
@@ -33,7 +35,7 @@ Install-Package Firestorm.AspNetCore -prerelease
 OWIN middleware and helpers
 
 ```nuget
-Install-Package Firestorm.Owin -prerelease
+Install-Package Firestorm.Owin
 ```
 
 ### Web API 2.0
@@ -41,21 +43,25 @@ Install-Package Firestorm.Owin -prerelease
 ASP.NET Web API 2 controller and helpers
 
 ```nuget
-Install-Package Firestorm.AspNetWebApi2 -prerelease
+Install-Package Firestorm.AspNetWebApi2
 ```
+
+## Engine
+
+The Firestorm Engine builds the `IQueryable` objects that are executed by your ORM.
+
+The Engine itself isn't designed to be used directly by your application. It is used by `Stems` and `Fluent` packages.
 
 ## Data
 
-The Firestorm Engine isn't available as a package on it's own. It may be at a later date.
-
-The `Firestorm.Data` package used by the Engine is available though, and is used by two data technologies that you'd reference depending on your preference.
+The `Firestorm.Data` package used by the Engine defined abstractions for your ORM or persistence framework. There are several possible implementations you could use.
 
 ### Entity Framework 6
 
 Use Entity Framework as a data source.
 
 ```nuget
-Install-Package Firestorm.EntityFramework6 -prerelease
+Install-Package Firestorm.EntityFramework6
 ```
 
 ### Entity Framework Core 2
@@ -63,41 +69,55 @@ Install-Package Firestorm.EntityFramework6 -prerelease
 Use Entity Framework Core as a data source.
 
 ```nuget
-Install-Package Firestorm.EntityFrameworkCore2 -prerelease
+Install-Package Firestorm.EntityFrameworkCore2
 ```
 
 ## Stems
 
-The `Firestorm.Stems` package installs `Firestorm.Stems` along with the sub `Attributes` and `Attributes.Basic`.
-
-On its own, this package can be used in a sub-library containing only your `Stem` classes.
+The `Firestorm.Stems` package installs all sub-packages required to use [Stems](../stems/stems-intro.md) in your application.
 
 ```nuget
-Install-Package Firestorm.Stems -prerelease
+Install-Package Firestorm.Stems
 ```
 
-### Stems.All
+### Stems.Essentials
 
-The `Firestorm.Stems.All` package depends on `Firestorm.Stems`, but also adds `Roots.DataSource`, `Roots.Derive` and `Roots.Start`, all of which are also available as separate packages.
+The `Firestorm.Stems.Essentials` package only installs the basic features for Stems, without including `Roots` or any hosting extensions.
 
-The `.All` package just provides a nice-and-easy facade to install in your application.
+This package could be used if your `Stem` classes are defined in a sub-library designed to be referenced by your main host library.
 
 ```nuget
-Install-Package Firestorm.Stems.All -prerelease
+Install-Package Firestorm.Stems.Essentials
 ```
 
 ## Fluent
 
-The `Firestorm.Fluent` package installs only the `Firestorm.Fluent` library. This could be used if your `RestContext` was in a different project.
+The `Firestorm.Fluent` package installs all sub-packages required to use the [Fluent API](../fluent/fluent-intro.md) in your application.
 
 ```nuget
-Install-Package Firestorm.Fluent -prerelease
+Install-Package Firestorm.Fluent
 ```
 
-### Fluent.All
+### Fluent.Fuel
 
-As with Stems, the `.All` package also installs `Firestorm.Fluent.Fuel` and `Firestorm.Fluent.Start`. This would usually be referenced in your application.
+As with Stems, the `.Fuel` package also only installs basic features.
+
+This package could be used if your `ApiContext` is defined in a sub-library.
 
 ```nuget
-Install-Package Firestorm.Fluent.All -prerelease
+Install-Package Firestorm.Fluent.Fuel
+```
+
+## Metapackage
+
+For convinience, the package for the root namespace `Firestorm` is a metapackage that contains a common setup of:
+
+- Endpoints
+- ASP.NET Core 2.0
+- Entity Framework Core 2.0
+- Stems
+- Fluent API
+
+```nuget
+Install-Package Firestorm
 ```

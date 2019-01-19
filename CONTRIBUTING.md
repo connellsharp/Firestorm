@@ -1,6 +1,5 @@
 # Contributing
 
-
 ## In Development
 
 Firestorm is currently in pre-release stage. Until a stable v1.0 is released, the core APIs are subject to change rapidly.

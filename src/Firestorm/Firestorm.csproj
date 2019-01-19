@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <RootNamespace>Firestorm</RootNamespace>
 
         <Description>Firestorm is a REST API framework. This metapackage contains a common Firestorm setup using ASP.NET Core and Entity Framework Core.</Description>
         <PackageTags>firestorm rest api aspnetcore entityframeworkcore</PackageTags>

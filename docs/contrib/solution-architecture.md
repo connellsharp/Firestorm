@@ -1,7 +1,12 @@
 # Solution architecture
 
 ## Core
-At the heart of Firestorm is a small set of interfaces and classes defining the types of resources and what you can do with them.
+At the heart of Firestorm is a basic abstraction of a DI container.
+
+Other packages will provide extensions for `IFirestormServicesBuilder` to allow easy configuration of various Firestorm features.
+
+## Rest
+A fundamental concept is this small set of interfaces and classes defining the types of resources and what you can do with them.
 
 - **Scalars** are single values i.e. strings, numbers, dates and bools.
 - **Items** are a set of unique field names that describe an object mapped to another resource value.
@@ -9,7 +14,7 @@ At the heart of Firestorm is a small set of interfaces and classes defining the 
 - **Dictionaries** are collections that have been grouped by a specific field.
 - **Directories** are sets of named collections, usually used for the root resource.
 
-## Core Web
+## Rest.Web
 Just outside that, another set of classes set-out a common way to describe resource data and actions that are transmitted.
 
 - Resource Body
@@ -18,8 +23,17 @@ Just outside that, another set of classes set-out a common way to describe resou
     - Error states someone went wrong when processing the request.
     - Multi Response is an array of Feedback responses
 
-## Data
+## Host
+Defines an abstraction of a web host and a `IRequestInvoker` interface for each host to call.
 
+There are several implementations for different web frameworks:
+- ASP.NET Core
+- OWIN
+- Web API
+
+The `IStartResourceFactory` is also defined here, which retrieves the first resource in the chain (e.g. a directory).
+
+## Data
 Simply defining a common Repository and Unit of Work pattern.
 
 - Repository
@@ -29,13 +43,17 @@ Simply defining a common Repository and Unit of Work pattern.
 ## Endpoints
 Endpoints are **consumers** of Firestorm Core that expose a RESTful API.
 
+Behaviour is encapsulated by an **implementation** of `Firestorm.Host.IRequestInvoker`.
+
 ![image.png](.attachments/image-51e948ef-b613-4ed5-98ba-f14964c6a91c.png)
 
 Resources are queried and updated using implementations of `IRestEndpoint`, e.g. `RestCollectionEndpoint`, `RestItemEndpoint`, `RestScalarEndpoint`.
 
 `IRestEndpoint` defines a `Next` method, allowing the endpoints to be chained together.
 
-    Root.Next("artists").Next("123").Next("name").GetAsync();
+```c#
+Root.Next("artists").Next("123").Next("name").GetAsync();
+```
 
 #### Formatting
 Serialises and deserialises resource bodies into common web data formats.
@@ -45,17 +63,10 @@ Serialises and deserialises resource bodies into common web data formats.
 - YAML
 - URL Encoded
 
-#### Start
-
-Defines an `IStartResourceFactory` interface to get the first resource in the chain.
-
-There are several implementations for different web frameworks:
-- ASP.NET Core
-- OWIN
-- Web API
+#### Responses
+Defines a set of `Modifiers` that together build a `Response` object to return to the client.
 
 ## Engine
-
 The Engine is an **implementation** of Firestorm Core that uses Expression Trees to build queries for an `IQueryable`. It makes use of deferred execution.
 
 It's also a **consumer** of Firestorm Data.
@@ -94,17 +105,16 @@ Stems provides ways to decorate classes to describe your REST API.
 
 Each `Stem<>` class handles one item type (for example a DTO or auto-generated Entity class) and maps API behaviours to its members.
 
-#### Attributes
-Defines the attributes used to decorate Stem classes and defines ways to analyse them to build Definitions.
-
-- **Basic**: Currently all the attributes. `Get`, `Set`, `Identifier`, `Authorize`, etc.
-
 #### Fuel
 Contains **implementations** of the interfaces used by the Engine, providing a `StemEngineContext` that uses a cached analysis of the Definitions.
 
-Cache is built using factories and resolvers from the `IStemsFeatureSet` objects in the `StemConfiguration`. Feature sets are defined in derived libraries. Additional feature sets can be installed separately.
+Cache is built using factories and resolvers from the `IStemsFeatureSet` objects in the `StemConfiguration`.
 
-- **Essential**: builds the expressions and delegates from the main `Get`, `Set` attributes.
+#### Essentials
+Defines the attributes used to decorate Stem classes and ways to analyse them to build Definitions.
+
+Two feature sets are exposed by default:
+- **Basic**: builds the expressions and delegates from the main `Get`, `Set` and `Identifier` attributes.
 - **Substems**: navigate though sub-collections and sub-items defined with the `Substem` attribute.
 
 #### Roots
@@ -114,9 +124,6 @@ There are two main implementations:
 - **Derive**: Create `Root<>` classes that handle the same type of item as the `Stem<>` class.
 - **DataSource**: Pass in an implementation of `IDataSource` and decorate Stems with the `DataSourceRoot` attribute.
 
-And the top library that ties it all together:
-- **Start**: Defines the `StemsStartResourceFactory` to tie this all into the `Endpoints.Start`.
-
 ## Fluent
 
 The Fluent API is a simpler alternative to Stems. It is not as feature-rich, but more compact and sometimes more familiar.
@@ -125,9 +132,6 @@ The Fluent API is a simpler alternative to Stems. It is not as feature-rich, but
 
 #### Fuel
 Much like `Stems`, contains **implementations** of the interfaces used by the Engine, providing a `FluentEngineContext`.
-
-#### Start
-Defines the `FluentStartResourceFactory` to tie this all into the `Endpoints.Start`.
 
 # Overall
 
