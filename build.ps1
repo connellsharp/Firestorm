@@ -46,13 +46,15 @@ exec { & dotnet build Firestorm.sln -c Release --version-suffix=$buildSuffix }
 # Test
 echo "`n`n----- TEST -----`n"
 
+exec { dotnet tool install --global coverlet.console }
+
 $testDirs  = @(Get-ChildItem -Path tests -Include "*.Tests" -Directory -Recurse)
 $testDirs += @(Get-ChildItem -Path tests -Include "*.IntegrationTests" -Directory -Recurse)
 $testDirs += @(Get-ChildItem -Path tests -Include "*FunctionalTests" -Directory -Recurse)
 
 ForEach ($folder in $testDirs) { 
     echo "Testing $folder.FullName"
-    exec { & dotnet test $folder.FullName -c Release --no-build --no-restore }
+    exec { & dotnet test $folder.FullName -c Release --no-build --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=opencover }
 }
 
 # Pack
