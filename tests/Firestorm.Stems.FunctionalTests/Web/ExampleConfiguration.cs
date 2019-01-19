@@ -9,11 +9,11 @@ namespace Firestorm.Stems.FunctionalTests.Web
         /// <summary>
         /// Gets the example endpoint configuration.
         /// </summary>
-        public static RestEndpointConfiguration EndpointConfiguration
+        public static EndpointConfiguration EndpointConfiguration
         {
             get
             {
-                return new DefaultRestEndpointConfiguration
+                return new DefaultEndpointConfiguration
                 {
                     Response = new ResponseConfiguration
                     {

@@ -1,5 +1,4 @@
-﻿using Firestorm.Testing.Http;
-using Firestorm.Testing.Http.Tests;
+﻿using Firestorm.Testing.Http.Tests;
 using JetBrains.Annotations;
 using Xunit;
 

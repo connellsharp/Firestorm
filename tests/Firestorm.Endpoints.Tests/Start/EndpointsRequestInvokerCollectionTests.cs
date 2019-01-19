@@ -21,7 +21,7 @@ namespace Firestorm.Endpoints.Tests.Start
             _startResource = new MockStartResource();
 
             var startResourceFactory = new SingletonStartResourceFactory(_startResource);
-            _invoker = new EndpointsRequestInvoker(startResourceFactory, new DefaultRestEndpointConfiguration());
+            _invoker = new EndpointsRequestInvoker(startResourceFactory, new DefaultEndpointConfiguration());
         }
 
         [Fact]

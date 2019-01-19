@@ -17,14 +17,14 @@ namespace Firestorm.AspNetCore2.IntegrationTests
         {
             services.AddCors();
             
-            services.Configure<DefaultRestEndpointConfiguration>(config =>
+            services.Configure<DefaultEndpointConfiguration>(config =>
             {
                 config.Response.ShowDeveloperErrors = true;
                 //
             });
             
             services.AddFirestorm()
-                .AddEndpoints(sp => ServiceProviderServiceExtensions.GetService<IOptions<DefaultRestEndpointConfiguration>>(sp).Value)
+                .AddEndpoints(sp => ServiceProviderServiceExtensions.GetService<IOptions<DefaultEndpointConfiguration>>(sp).Value)
                 .AddStartResourceFactory(new IntegratedStartResourceFactory());
         }
 

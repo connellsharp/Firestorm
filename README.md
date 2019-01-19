@@ -1,6 +1,6 @@
 # Firestorm
 
-[![Build status](https://ci.appveyor.com/api/projects/status/1bo4yw50e7m7m2cm?svg=true)](https://ci.appveyor.com/project/connellw/firestorm) [![MyGet](https://img.shields.io/myget/firestorm/v/Firestorm.Endpoints.svg?label=myget)](https://myget.org/gallery/firestorm) [![NuGet](https://img.shields.io/nuget/v/Firestorm.svg)](https://www.nuget.org/packages/Firestorm)
+[![Build status](https://ci.appveyor.com/api/projects/status/1bo4yw50e7m7m2cm?svg=true)](https://ci.appveyor.com/project/connellw/firestorm) [![MyGet](https://img.shields.io/myget/firestorm/v/Firestorm.Endpoints.svg?label=myget)](https://myget.org/gallery/firestorm) [![NuGet](https://img.shields.io/nuget/v/Firestorm.Endpoints.svg)](https://www.nuget.org/packages?q=firestorm)
 
 Firestorm is a REST API framework for .NET. The aim is to provide a neat and easy ways to write standardised APIs with more of the leg-work taken care of.
 
@@ -45,14 +45,14 @@ You can read more in the [documentation](https://firestorm.readthedocs.org), jum
 
 Firestorm is available from the GitHub repository and as NuGet Packages.
 
-While it's still in early stages, packages are available from the [MyGet feed](https://www.myget.org/F/firestorm/api/v3/index.json). Be sure to use the `-prerelease` flag.
-
 ```
-PM> Install-Package Firestorm
+PM> Install-Package Firestorm.Endpoints
 PM> Install-Package Firestorm.Stems
 PM> Install-Package Firestorm.AspNetCore2
 PM> Install-Package Firestorm.EntityFrameworkCore2
 ```
+
+Prerelease packages are available from the [MyGet feed](https://www.myget.org/F/firestorm/api/v3/index.json).
 
 See the [Installation](docs/setup/installation.md) section for more detailed setup information.
 

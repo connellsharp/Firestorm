@@ -10,9 +10,9 @@ namespace Firestorm.Endpoints
     {
         private readonly IHttpRequestResponder _responder;
         private readonly Response _response;
-        private readonly RestEndpointConfiguration _endpointConfig;
+        private readonly EndpointConfiguration _endpointConfig;
 
-        public ResponseWriter(IHttpRequestResponder responder, Response response, RestEndpointConfiguration endpointConfig)
+        public ResponseWriter(IHttpRequestResponder responder, Response response, EndpointConfiguration endpointConfig)
         {
             _responder = responder;
             _response = response;

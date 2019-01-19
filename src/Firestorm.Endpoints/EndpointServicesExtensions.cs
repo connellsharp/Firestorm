@@ -8,7 +8,7 @@ namespace Firestorm.Endpoints
     {
         /// <summary>
         /// Configures Firestorm endpoints.
-        /// Assumes <see cref="RestEndpointConfiguration"/> is already configured elsewhere.
+        /// Assumes <see cref="EndpointConfiguration"/> is already configured elsewhere.
         /// </summary>
         public static IFirestormServicesBuilder AddEndpointsInvoker(this IFirestormServicesBuilder builder)
         {   
@@ -20,11 +20,11 @@ namespace Firestorm.Endpoints
         /// <summary>
         /// Configures Firestorm endpoints.
         /// </summary>
-        public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder, RestEndpointConfiguration config)
+        public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder, EndpointConfiguration config)
         {
             builder.AddEndpointsInvoker();
             
-            builder.Add<RestEndpointConfiguration>(config);
+            builder.Add<EndpointConfiguration>(config);
             
             return builder;
         }
@@ -32,13 +32,13 @@ namespace Firestorm.Endpoints
         /// <summary>
         /// Configures Firestorm endpoints.
         /// </summary>
-        public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder, Action<RestEndpointConfiguration> configureAction)
+        public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder, Action<EndpointConfiguration> configureAction)
         {   
             builder.AddEndpointsInvoker();
             
-            var config = new DefaultRestEndpointConfiguration();
+            var config = new DefaultEndpointConfiguration();
             configureAction(config);
-            builder.Add<RestEndpointConfiguration>(config);
+            builder.Add<EndpointConfiguration>(config);
             
             return builder;
         }
@@ -46,11 +46,11 @@ namespace Firestorm.Endpoints
         /// <summary>
         /// Configures Firestorm endpoints.
         /// </summary>
-        public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder, Func<IServiceProvider, RestEndpointConfiguration> factoryFunction)
+        public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder, Func<IServiceProvider, EndpointConfiguration> factoryFunction)
         {
             builder.AddEndpointsInvoker();
             
-            builder.Add<RestEndpointConfiguration>(factoryFunction);
+            builder.Add<EndpointConfiguration>(factoryFunction);
             
             return builder;
         }
@@ -60,7 +60,7 @@ namespace Firestorm.Endpoints
         /// </summary>
         public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder)
         {
-            builder.AddEndpoints(new DefaultRestEndpointConfiguration());
+            builder.AddEndpoints(new DefaultEndpointConfiguration());
             
             return builder;
         }

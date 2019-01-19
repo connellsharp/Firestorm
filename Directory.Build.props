@@ -1,14 +1,15 @@
 <Project>
     <PropertyGroup>
-        <VersionPrefix>0.9.3</VersionPrefix>
-        <!--VersionSuffix>alpha.38</VersionSuffix-->
+        <VersionPrefix>0.9.4</VersionPrefix>
+        <VersionSuffix>alpha-00001</VersionSuffix>
         
         <Authors>Connell Watkins</Authors>
         <Copyright>Copyright © Connell Watkins 2017</Copyright>
         <PackageProjectUrl>https://github.com/connellw/Firestorm</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/connellw/Firestorm/blob/master/LICENSE.txt</PackageLicenseUrl>
         <PackageIconUrl>https://github.com/connellw/Firestorm/raw/master/icon.png</PackageIconUrl>
-        
+
+        <DefineConstants>JETBRAINS_ANNOTATIONS</DefineConstants>
         <NoWarn>618;1998</NoWarn>
     </PropertyGroup>
 </Project>

@@ -10,9 +10,9 @@ namespace Firestorm.Endpoints
     public class EndpointsRequestInvoker : IRequestInvoker
     {
         private readonly IStartResourceFactory _startResourceFactory;
-        private readonly RestEndpointConfiguration _configuration;
+        private readonly EndpointConfiguration _configuration;
 
-        public EndpointsRequestInvoker(IStartResourceFactory startResourceFactory, RestEndpointConfiguration configuration)
+        public EndpointsRequestInvoker(IStartResourceFactory startResourceFactory, EndpointConfiguration configuration)
         {
             _startResourceFactory = startResourceFactory;
             _configuration = configuration;

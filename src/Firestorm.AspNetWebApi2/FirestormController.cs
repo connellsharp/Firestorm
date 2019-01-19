@@ -82,7 +82,7 @@ namespace Firestorm.AspNetWebApi2
 
         private IRestCollectionQuery GetQuery()
         {
-            var query = new QueryStringCollectionQuery(_config.EndpointConfiguration.QueryStringConfiguration, Request.RequestUri.Query);
+            var query = new QueryStringCollectionQuery(_config.EndpointConfiguration.QueryString, Request.RequestUri.Query);
             return NameSwitcherUtility.TryWrapQuery(query, _config.EndpointConfiguration.NamingConventionSwitcher);
         }
 
