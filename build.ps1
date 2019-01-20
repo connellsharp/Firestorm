@@ -49,14 +49,22 @@ echo "`n`n----- TEST -----`n"
 exec { & dotnet tool install --global coverlet.console }
 
 $testDirs  = @(Get-ChildItem -Path tests -Include "*.Tests" -Directory -Recurse)
-$testDirs += @(Get-ChildItem -Path tests -Include "*.IntegrationTests" -Directory -Recurse)
-$testDirs += @(Get-ChildItem -Path tests -Include "*FunctionalTests" -Directory -Recurse)
+#$testDirs += @(Get-ChildItem -Path tests -Include "*.IntegrationTests" -Directory -Recurse)
+#$testDirs += @(Get-ChildItem -Path tests -Include "*FunctionalTests" -Directory -Recurse)
 
+$i = 0
 ForEach ($folder in $testDirs) { 
     echo "Testing $folder"
-    exec { & dotnet test $folder.FullName -c Release --no-build --no-restore /p:CollectCoverage=true /p:MergeWith='$root\coverage.json' }
+
+    $i++
+    $format = @{ $true = "/p:CoverletOutputFormat=opencover"; $false = ""}[$i -eq $testDirs.Length ]
+
+    exec { & dotnet test $folder.FullName -c Release --no-build --no-restore /p:CollectCoverage=true /p:CoverletOutput=$root\coverage /p:MergeWith=$root\coverage.json $format }
     #exec { & coverlet --target "dotnet" --targetargs "test $folder.FullName --no-build" }
 }
+
+choco install codecov --no-progress
+codecov -f "$root\coverage.opencover.xml"
 
 # Pack
 echo "`n`n----- PACK -----`n"
