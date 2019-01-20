@@ -12,7 +12,8 @@ function Exec {
     }
 }
 
-$artifactsPath = (Get-Item -Path ".\").FullName + "\artifacts"
+$root = (Get-Item -Path ".\").FullName
+$artifactsPath = $root + "\artifacts"
 if(Test-Path $artifactsPath) { Remove-Item $artifactsPath -Force -Recurse }
 
 $branch = @{ $true = $env:APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH; $false = @{ $true = $env:APPVEYOR_REPO_BRANCH; $false = $(git symbolic-ref --short -q HEAD) }[$env:APPVEYOR_REPO_BRANCH -ne $NULL] }[$env:APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH -ne $NULL];
@@ -53,7 +54,7 @@ $testDirs += @(Get-ChildItem -Path tests -Include "*FunctionalTests" -Directory 
 
 ForEach ($folder in $testDirs) { 
     echo "Testing $folder"
-    exec { & dotnet test $folder.FullName -c Release --no-build --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=opencover }
+    exec { & dotnet test $folder.FullName -c Release --no-build --no-restore /p:CollectCoverage=true /p:MergeWith='$root\coverage.json' }
     #exec { & coverlet --target "dotnet" --targetargs "test $folder.FullName --no-build" }
 }
 
