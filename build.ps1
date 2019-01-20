@@ -1,7 +1,6 @@
 # Originally taken from https://github.com/jbogard/MediatR and https://github.com/psake/psake
 
-function Exec
-{
+function Exec {
     [CmdletBinding()]
     param(
         [Parameter(Position=0,Mandatory=1)][scriptblock]$cmd,
@@ -28,7 +27,7 @@ echo "Build: Build version suffix is $buildSuffix"
 
 # Update Appveyor version
 if (Test-Path env:APPVEYOR) {
-    $props = [xml](Get-Content Directory.Build.props)
+    $props = [xml](Get-Content "src\Directory.Build.props")
     $prefix = $props.Project.PropertyGroup.VersionPrefix
     
     $avSuffix = @{ $true = $($suffix); $false = $props.Project.PropertyGroup.VersionSuffix }[$suffix -ne ""]
@@ -46,15 +45,16 @@ exec { & dotnet build Firestorm.sln -c Release --version-suffix=$buildSuffix }
 # Test
 echo "`n`n----- TEST -----`n"
 
-exec { dotnet tool install --global coverlet.console }
+exec { & dotnet tool install --global coverlet.console }
 
 $testDirs  = @(Get-ChildItem -Path tests -Include "*.Tests" -Directory -Recurse)
 $testDirs += @(Get-ChildItem -Path tests -Include "*.IntegrationTests" -Directory -Recurse)
 $testDirs += @(Get-ChildItem -Path tests -Include "*FunctionalTests" -Directory -Recurse)
 
 ForEach ($folder in $testDirs) { 
-    echo "Testing $folder.FullName"
+    echo "Testing $folder"
     exec { & dotnet test $folder.FullName -c Release --no-build --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=opencover }
+    #exec { & coverlet --target "dotnet" --targetargs "test $folder.FullName --no-build" }
 }
 
 # Pack
