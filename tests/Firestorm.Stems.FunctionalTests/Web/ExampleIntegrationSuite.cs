@@ -1,44 +1,40 @@
 ﻿using System;
 using System.Net.Http;
-using Firestorm.Endpoints;
-using Firestorm.Endpoints.Configuration;
-using Firestorm.EntityFramework6;
-using Firestorm.Owin;
-using Firestorm.Stems.FunctionalTests.Data;
-using Firestorm.Stems.Roots;
 using Firestorm.Testing.Http;
-using Microsoft.Owin.Hosting;
-using Owin;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Firestorm.Stems.FunctionalTests.Web
 {
     public class ExampleIntegrationSuite : IHttpIntegrationSuite
     {
-        private readonly EndpointConfiguration _config;
         private readonly Type _testClassType;
 
         private static int _startPort = 2240;
         private readonly string _url = "http://localhost:" + _startPort++;
 
-        public ExampleIntegrationSuite(EndpointConfiguration config, Type testClassType)
+        private IWebHost _host;
+
+        public ExampleIntegrationSuite(Type testClassType)
         {
-            _config = config;
             _testClassType = testClassType;
         }
 
         public void Start()
         {
-            WebApplication = WebApp.Start(_url, delegate(IAppBuilder app)
+            var config = new FunctionalTestConfig
             {
-                app.Use<SpoofUserMiddleware>();
+                TestClassType = _testClassType
+            };
+            
+            _host = new WebHostBuilder()
+                .UseKestrel()
+                .UseUrls(_url)
+                .ConfigureServices(s => s.AddSingleton(config))
+                .UseStartup<Startup>()
+                .Build();
 
-                app.UseFirestorm(c => c
-                    .AddEndpoints(_config)
-                    .AddStems()
-                    .Add<ITypeGetter>(new NestedTypeGetter(_testClassType))
-                    .AddEntityFramework<ExampleDataContext>()
-                );
-            });
+            _host.Start();
 
             HttpClient = new HttpClient
             {
@@ -46,13 +42,11 @@ namespace Firestorm.Stems.FunctionalTests.Web
             };
         }
 
-        public IDisposable WebApplication { get; private set; }
-
         public HttpClient HttpClient { get; private set; }
 
         public void Dispose()
         {
-            WebApplication?.Dispose();
+            _host?.Dispose();
             HttpClient?.Dispose();
         }
     }

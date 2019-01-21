@@ -13,7 +13,7 @@ namespace Firestorm.Stems.FunctionalTests.Web
             _testSuite = Attempt.KeepTrying(
                 () =>
                 {
-                    var suite = new ExampleIntegrationSuite(ExampleConfiguration.EndpointConfiguration, typeof(TTest));
+                    var suite = new ExampleIntegrationSuite(typeof(TTest));
                     suite.Start();
                     return suite;
                 },

@@ -1,15 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using Firestorm.Stems.FunctionalTests.Data.Models;
-using JetBrains.Annotations;
 
 namespace Firestorm.Stems.FunctionalTests.Data
 {
-    [UsedImplicitly]
-    public class ExampleModelInitializer : DropCreateDatabaseAlways<ExampleDataContext>
+    public static class MusicDbInitializer
     {
-        protected override void Seed(ExampleDataContext context)
+        public static void Initialize(MusicDbContext context)
         {
             context.Artists.AddRange(new List<Artist> {
                 new Artist { ArtistID = 1, Name = "Eminem", StartDate = new DateTime(2007, 05, 01) },
