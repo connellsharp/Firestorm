@@ -15,8 +15,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Owin", "src\Firestorm.Owin\Firestorm.Owin.csproj", "{BE5C7EC3-7379-4D87-89EB-F3705182B873}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{C2F6430A-4C2E-495B-9556-7EF1A3A1C2B8}"
+ProjectSection(SolutionItems) = preProject
+	src\Directory.Build.props = src\Directory.Build.props
+EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8F0499A9-8EBD-4C79-9555-F29F29B9A734}"
+ProjectSection(SolutionItems) = preProject
+	tests\Directory.Build.props = tests\Directory.Build.props
+EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firestorm.Client", "src\Firestorm.Client\Firestorm.Client.csproj", "{AD76D2CC-3AEC-424C-B2BE-67084A0EFE43}"
 EndProject
@@ -123,13 +129,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Testing", "tests\Firestorm.Testing\Firestorm.Testing.csproj", "{F86C93FA-558B-4BD7-87BF-1E770DD5FE79}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Client.IntegrationTests", "tests\Firestorm.Client.IntegrationTests\Firestorm.Client.IntegrationTests.csproj", "{4BCC6C25-78E6-4429-BCDD-54B8088D8779}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{E0F2909F-4BED-496D-BA68-24814D5CEA4F}"
-ProjectSection(SolutionItems) = preProject
-	appveyor.yml = appveyor.yml
-	build.ps1 = build.ps1
-	Directory.Build.props = Directory.Build.props
-EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm", "src\Firestorm\Firestorm.csproj", "{C050C32D-E291-404D-9664-4665CB0782B2}"
 EndProject

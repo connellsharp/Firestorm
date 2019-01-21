@@ -1,7 +1,6 @@
 # Originally taken from https://github.com/jbogard/MediatR and https://github.com/psake/psake
 
-function Exec
-{
+function Exec {
     [CmdletBinding()]
     param(
         [Parameter(Position=0,Mandatory=1)][scriptblock]$cmd,
@@ -13,7 +12,8 @@ function Exec
     }
 }
 
-$artifactsPath = (Get-Item -Path ".\").FullName + "\artifacts"
+$root = (Get-Item -Path ".\").FullName
+$artifactsPath = $root + "\artifacts"
 if(Test-Path $artifactsPath) { Remove-Item $artifactsPath -Force -Recurse }
 
 $branch = @{ $true = $env:APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH; $false = @{ $true = $env:APPVEYOR_REPO_BRANCH; $false = $(git symbolic-ref --short -q HEAD) }[$env:APPVEYOR_REPO_BRANCH -ne $NULL] }[$env:APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH -ne $NULL];
@@ -28,7 +28,7 @@ echo "Build: Build version suffix is $buildSuffix"
 
 # Update Appveyor version
 if (Test-Path env:APPVEYOR) {
-    $props = [xml](Get-Content Directory.Build.props)
+    $props = [xml](Get-Content "src\Directory.Build.props")
     $prefix = $props.Project.PropertyGroup.VersionPrefix
     
     $avSuffix = @{ $true = $($suffix); $false = $props.Project.PropertyGroup.VersionSuffix }[$suffix -ne ""]
@@ -46,14 +46,24 @@ exec { & dotnet build Firestorm.sln -c Release --version-suffix=$buildSuffix }
 # Test
 echo "`n`n----- TEST -----`n"
 
+exec { & dotnet tool install --global coverlet.console }
+
 $testDirs  = @(Get-ChildItem -Path tests -Include "*.Tests" -Directory -Recurse)
 $testDirs += @(Get-ChildItem -Path tests -Include "*.IntegrationTests" -Directory -Recurse)
 $testDirs += @(Get-ChildItem -Path tests -Include "*FunctionalTests" -Directory -Recurse)
 
+$i = 0
 ForEach ($folder in $testDirs) { 
-    echo "Testing $folder.FullName"
-    exec { & dotnet test $folder.FullName -c Release --no-build --no-restore }
+    echo "Testing $folder"
+
+    $i++
+    $format = @{ $true = "/p:CoverletOutputFormat=opencover"; $false = ""}[$i -eq $testDirs.Length ]
+
+    exec { & dotnet test $folder.FullName -c Release --no-build --no-restore /p:CollectCoverage=true /p:CoverletOutput=$root\coverage /p:MergeWith=$root\coverage.json /p:Include="[*]Firestorm.*" /p:Exclude="[*]Firestorm.Testing.*" $format }
 }
+
+choco install codecov --no-progress
+exec { & codecov -f "$root\coverage.opencover.xml" }
 
 # Pack
 echo "`n`n----- PACK -----`n"

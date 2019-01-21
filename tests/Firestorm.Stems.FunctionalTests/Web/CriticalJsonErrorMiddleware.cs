@@ -5,7 +5,7 @@ using Firestorm.Testing.Http;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;
 
-namespace Firestorm.FunctionalTests.Web
+namespace Firestorm.Stems.FunctionalTests.Web
 {
     /// <summary>
     /// Middleware for when the Firestorm middleware can't even handle the errors.

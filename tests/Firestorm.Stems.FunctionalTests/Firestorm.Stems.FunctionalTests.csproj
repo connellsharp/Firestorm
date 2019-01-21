@@ -1,15 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsPackable>False</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.2.0" />
-    <PackageReference Include="Microsoft.Owin.Hosting" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Owin.Host.HttpListener" Version="3.1.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0" />
     <PackageReference Include="System.Net.Http.Formatting.Extension" Version="5.2.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="xunit" Version="2.3.1" />
@@ -18,8 +18,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Firestorm.Endpoints\Firestorm.Endpoints.csproj" />
-    <ProjectReference Include="..\..\src\Firestorm.EntityFramework6\Firestorm.EntityFramework6.csproj" />
-    <ProjectReference Include="..\..\src\Firestorm.Owin\Firestorm.Owin.csproj" />
+    <ProjectReference Include="..\..\src\Firestorm.EntityFrameworkCore2\Firestorm.EntityFrameworkCore2.csproj" />
+    <ProjectReference Include="..\..\src\Firestorm.AspNetCore2\Firestorm.AspNetCore2.csproj" />
     <ProjectReference Include="..\..\src\Firestorm.Stems\Firestorm.Stems.csproj" />
     <ProjectReference Include="..\Firestorm.Testing.Data\Firestorm.Testing.Data.csproj" />
     <ProjectReference Include="..\Firestorm.Testing.Http\Firestorm.Testing.Http.csproj" />
