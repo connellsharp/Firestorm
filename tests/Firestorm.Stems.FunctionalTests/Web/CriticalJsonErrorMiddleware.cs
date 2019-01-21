@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Firestorm.Endpoints.Responses;
+using Firestorm.Testing.Http;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;
 
@@ -31,20 +32,9 @@ namespace Firestorm.Stems.FunctionalTests.Web
             {
                 context.Response.StatusCode = 500;
 
-                string json = GetExceptionJson(ex);
+                string json = ExceptionUtility.GetExceptionJson(ex);
                 await context.Response.WriteAsync(json);
             }
-        }
-
-        private static string GetExceptionJson(Exception ex)
-        {
-            return "{" +
-                   "\"error\": \"critical_unhandled_error\"," +
-                   "\"error_description\": \"" + ex.Message + "\"," +
-                   "\"developer_info\": [" +
-                   "{ \"stack_trace\": [ \"" + ex.StackTrace.Replace("\"", "\\\"").Replace("\\", "\\\\").Replace(Environment.NewLine, "\", \"") + "\" ] }" +
-                   "] " +
-                   "}";
         }
     }
 }
