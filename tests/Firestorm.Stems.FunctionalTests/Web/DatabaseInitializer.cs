@@ -18,7 +18,9 @@ namespace Firestorm.Stems.FunctionalTests.Web
 
                 using (var dbContext = app.ApplicationServices.GetService<MusicDbContext>())
                 {
+                    dbContext.Database.EnsureDeleted();
                     dbContext.Database.EnsureCreated();
+                    
                     MusicDbInitializer.Initialize(dbContext);
                 }
 

@@ -4,12 +4,19 @@ using Microsoft.AspNetCore.Http;
 
 namespace Firestorm.Stems.FunctionalTests.Web
 {
-    public class SpoofUserMiddleware : IMiddleware
+    public class SpoofUserMiddleware
     {
-        public Task InvokeAsync(HttpContext context, RequestDelegate next)
+        private readonly RequestDelegate _next;
+
+        public SpoofUserMiddleware(RequestDelegate next)
+        {
+            _next = next;
+        }
+        
+        public Task Invoke(HttpContext context)
         {
             context.User = new GenericPrincipal(new GenericIdentity("Me"), new string[] { });
-            return next.Invoke(context);
+            return _next.Invoke(context);
         }
     }
 }

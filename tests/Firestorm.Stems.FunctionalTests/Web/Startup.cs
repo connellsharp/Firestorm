@@ -43,6 +43,7 @@ namespace Firestorm.Stems.FunctionalTests.Web
         {
             DatabaseInitializer.EnsureInitialized(app);
 
+            app.UseMiddleware<CriticalJsonErrorMiddleware>();
             app.UseMiddleware<SpoofUserMiddleware>();
 
             app.UseFirestorm();
