@@ -32,10 +32,11 @@ if (Test-Path env:APPVEYOR) {
     $prefix = $props.Project.PropertyGroup.VersionPrefix
     
     $avSuffix = @{ $true = $($suffix); $false = $props.Project.PropertyGroup.VersionSuffix }[$suffix -ne ""]
-    $full = @{ $true = "$($prefix)-$($avSuffix)"; $false = $($prefix) }[-not ([string]::IsNullOrEmpty($avSuffix))]
+    $avFull = @{ $true = $($prefix); $false = "$($prefix)-$($avSuffix)" }[([string]::IsNullOrEmpty($avSuffix))]
+    $avWithTag = @{ $true = "$($avFull)-tag"; $false = $($avFull) }[$env.APPVEYOR_REPO_TAG]
     
-    echo "Build: Full version is $full"
-    Update-AppveyorBuild -Version $full
+    echo "Build: Appveyor version is $avWithTag"
+    exec { & Update-AppveyorBuild -Version $avWithTag }
 }
 
 # Build
