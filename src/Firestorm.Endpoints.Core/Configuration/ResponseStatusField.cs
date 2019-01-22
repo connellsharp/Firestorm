@@ -17,7 +17,7 @@ namespace Firestorm.Endpoints.Configuration
         StatusCode,
 
         /// <summary>
-        /// A boolean sucess flag e.g. { "success": true }.
+        /// A boolean success flag e.g. { "success": true }.
         /// </summary>
         SuccessBoolean
     }

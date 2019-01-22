@@ -5,16 +5,17 @@ pages:
     - Home: 'index.md'
     - What is Firestorm?: 'intro/what-is-firestorm.md'
     - Aims: 'intro/aims.md'
-
-- Endpoints:
-    - Querying: 'endpoints/querying.md'
-    - Pagination: 'endpoints/pagination.md'
-    - Write Operations: 'endpoints/write-operations.md'
     
 - Installation and Setup:
     - Installation: 'setup/installation.md'
     - Configuration Object: 'setup/configuration-builder.md'
     - Chosing a Methodology: 'setup/chosing-a-methodology.md'
+
+- Endpoints:
+    - Querying: 'endpoints/querying.md'
+    - Pagination: 'endpoints/pagination.md'
+    - Write Operations: 'endpoints/write-operations.md'
+    - Configuration: 'endpoints/endpoint-config.md'
     
 - Stems: 
     - Introduction: 'stems/stems-intro.md'

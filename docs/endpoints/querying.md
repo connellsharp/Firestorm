@@ -1,6 +1,6 @@
 # Basic Requests
 
-All query examples will use the default parameter names and delimiters. These can be configured in the `EndpointConfiguration.QueryStringConfiguration` property.
+All query examples will use the default parameter names and delimiters. These can be configured in the [`EndpointConfiguration.QueryString` property](endpoint-config.md#querystring).
 
 ## Collections
 

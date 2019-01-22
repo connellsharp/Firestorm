@@ -13,7 +13,7 @@ How to include links to the next and previous pages in the response is configura
 Firestorm can be configured to return a `Link` header that can be followed to get the next page.
 
 ```http
-HTTP/1.1 200 OK
+200 OK
 Link: <https://api.yourapplication.com/people?sort=name+asc&where=name%3EFrank>; rel="next"
 
 [
@@ -28,9 +28,9 @@ Link: <https://api.yourapplication.com/people?sort=name+asc&where=name%3EFrank>;
 You can also configure the response body to include the page info.
 
 ```http
-GET /people?sort=name HTTP/1.1
+GET /people?sort=name
 
-HTTP/1.1 200 OK
+200 OK
 {
     items: [
          { "id": 1, "name": "Aaron" },
