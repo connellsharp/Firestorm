@@ -11,7 +11,7 @@ Your API will be used by humans too. Designing, debugging and maintaining your A
 Firestorm keeps the HTTP request and response concise and understandable.
 
 ```http
-GET /characters/harry-potter/friends HTTP/1.1
+GET /characters/harry-potter/friends
 
 200 OK
 [
@@ -30,7 +30,7 @@ You can customise many aspects of Firestorm to suit your API needs.
 - Naming conventions. `snake_case`, `camelCase` or `PascalCase`
 - Verb strategies. Use `PUT` or `PATCH` for partial updates
 
-These and much more are all enabled by the main [configuration object](setup/configuration-object.md).
+These and much more are all enabled by the main [configuration builder](setup/configuration-builder.md).
 
 ## Clean and concise code
 

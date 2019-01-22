@@ -9,10 +9,19 @@ namespace Firestorm.Endpoints.Formatting.Naming
     /// </summary>
     public class NamingConventionSwitcher : INamingConventionSwitcher
     {
+        /// <summary>
+        /// The case the .NET members use.
+        /// </summary>
         public ICaseConvention CodedCase { get; set; }
 
+        /// <summary>
+        /// The case to be outputted to the API if nothing is specified.
+        /// </summary>
         public ICaseConvention DefaultOutputCase { get; set; }
 
+        /// <summary>
+        /// The cases to allow from the API.
+        /// </summary>
         public IEnumerable<ICaseConvention> AllowedCases { get; set; }
 
         public NamingConventionSwitcher(ICaseConvention codedCase, ICaseConvention defaultOutputCase)
