@@ -6,26 +6,25 @@ Firestorm is a REST API framework for .NET. The aim is to provide a neat and eas
 
 _Using [Stems](docs/stems/stems-intro.md) to describe your API_
 
-```csharp
-public class ArtistsStem : Stem<Artist>
+```c#
+public class CharactersStem : Stem<Character>
 {
     [Get, Identifier]
-    public static Expression Id => Expression(a => a.Id);
+    public static Expression Id => Expression(p => p.Id);
 
-    [Get, Set]
-    public static Expression Name => Expression(a => a.Name);
+    [Get]
+    public static Expression Name => Expression(p => p.FirstName + " " + p.LastName);
 }
 ```
 
 _Exposes [RESTful endpoints](docs/endpoints/querying.md)_
 
 ```http
-GET /artists/123
-```
-```json
+GET /characters/123
+
 {
     "id": 123,
-    "name": "Noisia"
+    "name": "Eddard Stark"
 }
 ```
 
@@ -33,11 +32,26 @@ GET /artists/123
 
 1. **Clean.** Lets you write neat and concise code to describe your API and exposes lightweight, human-readable responses.
 
-2. **Powerful.** Provides querying capabilities that combines database queries and application code.
+```http
+GET /characters/123/birthplace/name
+
+Winterfell
+```
+
+2. **Powerful.** Provides querying capabilities that combine database queries and application code.
+
+```c#
+[Get(Argument = nameof(Dob))]
+public int GetAge(DateTime dob) => Utilities.CalculateAge(dob);
+```
 
 3. **Configurable.** Customise your conventions, response structure, verb strategies to suit your API needs. Integrate with your web host, ORM and IoC to fit nicely in your solution.
 
-4. **Agile.** It's easy to start a basic project with just a few endpoints and grow rapidly as requirements build.
+```c#
+config.Pagination.UseLinkHeaders = true;
+config.QueryString.SelectFieldQueryKeys = new[] { "select", "fields" };
+config.Casing.DefaultOutput = Case.CamelCase;
+```
 
 You can read more in the [documentation](https://firestorm.readthedocs.org), jump straight into the [tutorials](https://github.com/connellw/Firestorm/wiki/Tutorials) or check out the [samples](https://github.com/connellw/FirestormSamples).
 
@@ -45,7 +59,7 @@ You can read more in the [documentation](https://firestorm.readthedocs.org), jum
 
 Firestorm is available from the GitHub repository and as NuGet Packages.
 
-```
+```ps1
 PM> Install-Package Firestorm.Endpoints
 PM> Install-Package Firestorm.Stems
 PM> Install-Package Firestorm.AspNetCore2
