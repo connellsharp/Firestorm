@@ -32,26 +32,20 @@ GET /characters/123
 
 1. **Clean.** Lets you write neat and concise code to describe your API and exposes lightweight, human-readable responses.
 
-```http
-GET /characters/123/birthplace/name
-
-Winterfell
-```
+    - Natural URL paths e.g. `/characters/123/birthplace/name`.
+    - To-the-point [querystrings](docs/endpoints/querying.md) e.g. `?status=alive&sort=name+asc&page=2`.
+    - Uncluttered responses without extra metadata.
 
 2. **Powerful.** Provides querying capabilities that combine database queries and application code.
-
-```c#
-[Get(Argument = nameof(Dob))]
-public int GetAge(DateTime dob) => Utilities.CalculateAge(dob);
-```
+    - Calculate an `age` field from `BirthDate` in your queries.
+    - [Set](docs/stems/stems-basics.md#static-setter-methods) a `name` field by splitting into `FirstName` and `LastName` before saving.
+    - Raise events on a message bus using [dependency injection](docs/stems/dependency-injection.md).
 
 3. **Configurable.** Customise your conventions, response structure, verb strategies to suit your API needs. Integrate with your web host, ORM and IoC to fit nicely in your solution.
 
-```c#
-config.Pagination.UseLinkHeaders = true;
-config.QueryString.SelectFieldQueryKeys = new[] { "select", "fields" };
-config.Casing.DefaultOutput = Case.CamelCase;
-```
+    - Include HTTP `Link` headers in [pagination](docs/endpoints/endpoint-config.md#response) responses.
+    - Configure `PUT` or `PATCH` [strategy](docs/endpoints/endpoint-config.md#strategies) for partial updates.
+    - Allow `camelCase` or `snake_case` [conventions](docs/endpoints/endpoint-config.md#namingconventionswitcher) in your responses.
 
 You can read more in the [documentation](https://firestorm.readthedocs.org), jump straight into the [tutorials](https://github.com/connellw/Firestorm/wiki/Tutorials) or check out the [samples](https://github.com/connellw/FirestormSamples).
 
@@ -77,7 +71,7 @@ Firestorm is a bit of an experiment that grew into something I feel other develo
 It's still in active development. There are a lot of features I want to add!
 
 #### Copyright
-Copyright &copy; 2018 Connell Watkins
+Copyright &copy; 2017-2019 Connell Watkins
 
 #### License
 Firestorm is licensed under MIT. Refer to [LICENSE.txt](LICENSE.txt) for detailed information.
