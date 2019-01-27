@@ -22,4 +22,4 @@ If an exception is thrown, Firestorm derives the `error` value from the exceptio
 }
 ```
 
-If the exception derives from the built-in `RestApiException`, the `StatusCode` property is used to determine the HTTP response status code for this error. For example, you could use `400 Bad Request` for custom validation exceptions.
+If the exception derives from the built-in `RestApiException`, the `StatusCode` property is used to determine the HTTP response status code for this error. For example, you could use `400 Bad Request` for custom validation exceptions. 

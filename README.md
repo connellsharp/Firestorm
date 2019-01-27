@@ -17,7 +17,7 @@ public class CharactersStem : Stem<Character>
 }
 ```
 
-_Exposes [RESTful endpoints](docs/endpoints/querying.md)_
+_Exposes [RESTful endpoints](docs/endpoints/navigation.md)_
 
 ```http
 GET /characters/123
@@ -32,7 +32,7 @@ GET /characters/123
 
 1. **Clean.** Lets you write neat and concise code to describe your API and exposes lightweight, human-readable responses.
 
-    - Natural URL paths e.g. `/characters/123/birthplace/name`.
+    - Natural [URL paths](docs/endpoints/navigation.md) e.g. `/characters/123/birthplace/name`.
     - To-the-point [querystrings](docs/endpoints/querying.md) e.g. `?status=alive&sort=name+asc&page=2`.
     - Uncluttered responses without extra metadata.
 
