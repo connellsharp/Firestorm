@@ -29,22 +29,27 @@ namespace Firestorm.Endpoints
         /// </summary>
         public async Task InvokeAsync(IHttpRequestReader requestReader, IHttpRequestResponder responder, IRequestContext context)
         {            
-            var reader = new RequestReader(requestReader, _configuration);
-
-            var response = new Response(requestReader.ResourcePath);
-
             var modifiers = new DefaultResponseModifiers(_configuration.Response);
+            
+            var response = new Response(requestReader.ResourcePath);
             var builder = new ResponseBuilder(response, modifiers);
 
+            var reader = new RequestReader(requestReader, _configuration);
             var writer = new ResponseWriter(responder, response, _configuration);
             
             try
             {
                 var navigator = new EndpointNavigator(context, _startResourceFactory, _configuration);
                 IRestEndpoint endpoint =  navigator.GetEndpointFromPath(requestReader.ResourcePath);
+
+                IExecutor executor = new EndpointExecutor(endpoint);
                 
-                var invoker = new EndpointExecutor(endpoint, reader, builder, _configuration.Response);
-                await invoker.ExecuteAsync();
+                executor = new PreconditionsExecutor(executor);
+
+                if (_configuration.Response.ResourceOnSuccessfulCommand)
+                    executor = new RequeryExecutor(executor);
+                
+                await executor.ExecuteAsync(reader, builder);
 
                 await writer.WriteAsync();
             }
