@@ -13,9 +13,6 @@ namespace Firestorm.Endpoints
             if (configuration.QueryString == null)
                 throw new FirestormConfigurationException("EndpointConfiguration.QueryStringConfiguration cannot be null.");
 
-            if (configuration.Strategies == null)
-                throw new FirestormConfigurationException("EndpointConfiguration.RequestStrategies cannot be null.");
-
             if (configuration.Response == null)
                 throw new FirestormConfigurationException("EndpointConfiguration.ResponseConfiguration cannot be null.");
 

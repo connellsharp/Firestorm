@@ -13,6 +13,7 @@ namespace Firestorm.Endpoints
         public static IFirestormServicesBuilder AddEndpointsInvoker(this IFirestormServicesBuilder builder)
         {   
             builder.Add<IRequestInvoker, EndpointsRequestInvoker>();
+            builder.Add<IEndpointApplicationFactory, EndpointApplicationFactory>();
             
             return builder;
         }
@@ -36,7 +37,7 @@ namespace Firestorm.Endpoints
         {   
             builder.AddEndpointsInvoker();
             
-            var config = new DefaultEndpointConfiguration();
+            var config = new EndpointConfiguration();
             configureAction(config);
             builder.Add<EndpointConfiguration>(config);
             
@@ -60,7 +61,7 @@ namespace Firestorm.Endpoints
         /// </summary>
         public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder)
         {
-            builder.AddEndpoints(new DefaultEndpointConfiguration());
+            builder.AddEndpoints(new EndpointConfiguration());
             
             return builder;
         }

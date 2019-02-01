@@ -3,9 +3,10 @@ using Firestorm.Endpoints.Responses;
 
 namespace Firestorm.Endpoints
 {
-    internal interface IExecutor
+    public interface IExecutor
     {
         Task<object> ExecuteAsync(IRequestReader reader, ResponseBuilder response);
+        
         IRestEndpoint Endpoint { get; }
     }
 }

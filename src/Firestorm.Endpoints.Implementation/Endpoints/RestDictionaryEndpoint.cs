@@ -35,9 +35,8 @@ namespace Firestorm.Endpoints
             QueryValidationUtility.EnsureValidQuery(query);
 
             RestDictionaryData dictionaryData = await Dictionary.QueryDataAsync(query);
-            
-            var linkCalculator = new PageLinkCalculator(Context.Configuration.Response.Pagination, query?.PageInstruction, dictionaryData.PageDetails);
-            PageLinks pageLinks = linkCalculator.Calculate();
+
+            PageLinks pageLinks =  Context.Services.PageLinkCalculator.Calculate(query?.PageInstruction, dictionaryData.PageDetails);
 
             return new DictionaryBody(dictionaryData.Items, pageLinks);
         }

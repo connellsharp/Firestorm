@@ -1,4 +1,5 @@
 using Firestorm.Endpoints.Configuration;
+using Firestorm.Endpoints.Requests;
 using Firestorm.Host.Infrastructure;
 using JetBrains.Annotations;
 
@@ -10,11 +11,10 @@ namespace Firestorm.Endpoints
     public interface IEndpointContext
     {
         /// <summary>
-        /// The global configuration for all endpoints in this API.
+        /// 
         /// </summary>
-        [NotNull]
-        EndpointConfiguration Configuration { get; }
-
+        IEndpointServices Services { get; }
+        
         /// <summary>
         /// An object containing information about the request.
         /// </summary>

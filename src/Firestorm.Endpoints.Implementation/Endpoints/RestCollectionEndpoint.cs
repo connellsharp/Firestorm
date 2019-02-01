@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using Firestorm.Endpoints.Pagination;
 using Firestorm.Endpoints.Query;
 using Firestorm.Rest.Web;
 using Firestorm.Rest.Web.Options;
@@ -26,7 +25,7 @@ namespace Firestorm.Endpoints
 
         public IRestEndpoint Next(INextPath path)
         {
-            string dictionaryPrefix = Context.Configuration.QueryString.DictionaryReferencePrefix;
+            string dictionaryPrefix = Context.QueryString.DictionaryReferencePrefix;
             if (path.Raw.StartsWith(dictionaryPrefix))
             {
                 string identifierName = path.GetCoded(dictionaryPrefix.Length);
@@ -47,8 +46,7 @@ namespace Firestorm.Endpoints
 
             RestCollectionData collectionData = await Collection.QueryDataAsync(query);
 
-            var linkCalculator = new PageLinkCalculator(Context.Configuration.Response.Pagination, query?.PageInstruction, collectionData.PageDetails);
-            PageLinks pageLinks = linkCalculator.Calculate();
+            PageLinks pageLinks =  Context.Services.PageLinkCalculator.Calculate(query?.PageInstruction, collectionData.PageDetails);
 
             return new CollectionBody(collectionData.Items, pageLinks);
         }
@@ -68,7 +66,7 @@ namespace Firestorm.Endpoints
 
         public Task<Feedback> CommandAsync(UnsafeMethod method, ResourceBody body)
         {
-            ICommandStrategy<IRestCollection> strategy = Context.Configuration.Strategies.ForCollections.GetOrThrow(method);
+            ICommandStrategy<IRestCollection> strategy = Context.Services.Strategies.ForCollections.GetOrThrow(method);
             return strategy.ExecuteAsync(Collection, Context, body);
         }
 
