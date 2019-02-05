@@ -10,30 +10,26 @@ namespace Firestorm
 
         public DefaultServicesBuilder()
         {
-            _dictionary = new Dictionary<Type, Func<IServiceProvider, object>>();
+            _dictionary = new Dictionary<Type, IList<Func<IServiceProvider, object>>>();
         }
 
         public IFirestormServicesBuilder Add<TService>(Func<IServiceProvider, TService> implementationFactory) 
             where TService : class
         {
-            _dictionary.ContainsKey(typeof(TService))
-                ? _dictionary[typeof(TService)]
-                : _dictionary[typeof(TService)] = new List<Func<IServiceProvider, object>>();
-            
-            _dictionary.Add(typeof(TService), implementationFactory);
+            GetFuncs(typeof(TService)).Add(implementationFactory);
             return this;
         }
 
         public IFirestormServicesBuilder Add<TService>(TService implementationInstance) 
             where TService : class
         {
-            _dictionary.Add(typeof(TService), sp => implementationInstance);
+            GetFuncs(typeof(TService)).Add(sp => implementationInstance);
             return this;
         }
 
         public IFirestormServicesBuilder Add(Type abstractType, Type implementationType)
         {
-            _dictionary.Add(abstractType, sp => CreateService(sp, implementationType));
+            GetFuncs(abstractType).Add(sp => CreateService(sp, implementationType));
             return this;
         }
 
@@ -43,6 +39,13 @@ namespace Firestorm
                 .GetConstructor()
                 .FromServiceProvider(serviceProvider)
                 .Invoke();
+        }
+
+        private IList<Func<IServiceProvider, object>> GetFuncs(Type type)
+        {
+            return _dictionary.ContainsKey(type)
+                ? _dictionary[type]
+                : _dictionary[type] = new List<Func<IServiceProvider, object>>();
         }
 
         public IServiceProvider Build()
