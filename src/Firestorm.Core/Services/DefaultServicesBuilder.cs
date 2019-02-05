@@ -1,28 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using Firestorm.Defaults;
 using Reflectious;
 
-namespace Firestorm.Defaults
+namespace Firestorm
 {
     public class DefaultServicesBuilder : IFirestormServicesBuilder
     {
-        private readonly IDictionary<Type, Func<IFirestormServiceProvider, object>> _dictionary;
+        private readonly IDictionary<Type, Func<IServiceProvider, object>> _dictionary;
 
         public DefaultServicesBuilder()
         {
-            _dictionary = new Dictionary<Type, Func<IFirestormServiceProvider, object>>();
+            _dictionary = new Dictionary<Type, Func<IServiceProvider, object>>();
         }
 
-        public IFirestormServicesBuilder Add<TService>(Func<IFirestormServiceProvider, TService> implementationFactory) 
+        public IFirestormServicesBuilder Add<TService>(Func<IServiceProvider, TService> implementationFactory) 
             where TService : class
         {
             _dictionary.Add(typeof(TService), implementationFactory);
             return this;
         }
 
-        public IFirestormServicesBuilder Add(Type serviceType)
+        public IFirestormServicesBuilder Add(Type abstractType, Type implementationType)
         {
-            _dictionary.Add(serviceType, sp => CreateService(sp, serviceType));
+            _dictionary.Add(abstractType, sp => CreateService(sp, implementationType));
             return this;
         }
 
@@ -30,13 +31,6 @@ namespace Firestorm.Defaults
             where TService : class
         {
             _dictionary.Add(typeof(TService), sp => implementationInstance);
-            return this;
-        }
-
-        public IFirestormServicesBuilder Add<TAbstraction, TImplementation>() 
-            where TAbstraction : class where TImplementation : class, TAbstraction
-        {
-            _dictionary.Add(typeof(TAbstraction), sp => CreateService(sp, typeof(TImplementation)));
             return this;
         }
 
@@ -48,7 +42,7 @@ namespace Firestorm.Defaults
                 .Invoke();
         }
 
-        public IFirestormServiceProvider Build()
+        public IServiceProvider Build()
         {
             return new DefaultServicesProvider(_dictionary);
         }

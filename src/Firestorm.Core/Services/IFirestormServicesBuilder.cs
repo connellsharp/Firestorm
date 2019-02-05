@@ -7,16 +7,12 @@ namespace Firestorm
     /// </summary>
     public interface IFirestormServicesBuilder
     {
-        IFirestormServicesBuilder Add<TService>(Func<IFirestormServiceProvider, TService> implementationFactory) 
+        IFirestormServicesBuilder Add<TService>(Func<IServiceProvider, TService> implementationFactory) 
             where TService : class;
         
-        IFirestormServicesBuilder Add(Type serviceType);
+        IFirestormServicesBuilder Add(Type serviceType, Type implementationType);
         
         IFirestormServicesBuilder Add<TService>(TService implementationInstance)
             where TService : class;
-
-        IFirestormServicesBuilder Add<TAbstraction, TImplementation>()
-            where TImplementation : class, TAbstraction
-            where TAbstraction : class;
     }
 }

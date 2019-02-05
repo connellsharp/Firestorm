@@ -32,6 +32,7 @@ namespace Firestorm.AspNetCore2
          private static IServiceCollection AddRequiredFirestormServices(this IServiceCollection services)
          {
              services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+             services.AddSingleton<IRequestServiceProvider, RequestServiceProvider>();
              return services;
          }
      }

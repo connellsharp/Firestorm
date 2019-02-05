@@ -2,7 +2,7 @@
 
 namespace Firestorm.AspNetCore2
 {
-    internal class AspNetCoreServiceProvider : IFirestormServiceProvider
+    internal class AspNetCoreServiceProvider : IServiceProvider
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -14,11 +14,6 @@ namespace Firestorm.AspNetCore2
         public object GetService(Type serviceType)
         {
             return _serviceProvider.GetService(serviceType);
-        }
-
-        public IServiceProvider GetRequestServiceProvider()
-        {
-            return new RequestServiceProvider(_serviceProvider);
         }
     }
 }

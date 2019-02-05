@@ -13,7 +13,8 @@ namespace Firestorm.AspNetCore2
             _services = services;
         }
 
-        public IFirestormServicesBuilder Add<TService>(Func<IFirestormServiceProvider, TService> implementationFactory) where TService : class
+        public IFirestormServicesBuilder Add<TService>(Func<IServiceProvider, TService> implementationFactory) 
+            where TService : class
         {
             _services.AddSingleton<TService>(sp => implementationFactory(new AspNetCoreServiceProvider(sp)));
             return this;
