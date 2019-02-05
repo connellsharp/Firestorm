@@ -2,6 +2,7 @@
 using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Requests;
 using Firestorm.Endpoints.Responses;
+using Firestorm.Host;
 
 namespace Firestorm.Endpoints
 {
@@ -10,6 +11,8 @@ namespace Firestorm.Endpoints
     /// </summary>
     public class EndpointApplication : IEndpointServices
     {
+        public IStartResourceFactory StartResourceFactory { get; set; }
+        
         public IQueryCreator QueryCreator { get; set; }
         
         public IEnumerable<IResponseModifier> Modifiers { get; set; }

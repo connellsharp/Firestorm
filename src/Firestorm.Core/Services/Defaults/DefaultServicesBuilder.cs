@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Firestorm.Defaults;
 using Reflectious;
 
 namespace Firestorm
 {
     public class DefaultServicesBuilder : IFirestormServicesBuilder
     {
-        private readonly IDictionary<Type, Func<IServiceProvider, object>> _dictionary;
+        private readonly IDictionary<Type, IList<Func<IServiceProvider, object>>> _dictionary;
 
         public DefaultServicesBuilder()
         {
@@ -17,13 +16,11 @@ namespace Firestorm
         public IFirestormServicesBuilder Add<TService>(Func<IServiceProvider, TService> implementationFactory) 
             where TService : class
         {
+            _dictionary.ContainsKey(typeof(TService))
+                ? _dictionary[typeof(TService)]
+                : _dictionary[typeof(TService)] = new List<Func<IServiceProvider, object>>();
+            
             _dictionary.Add(typeof(TService), implementationFactory);
-            return this;
-        }
-
-        public IFirestormServicesBuilder Add(Type abstractType, Type implementationType)
-        {
-            _dictionary.Add(abstractType, sp => CreateService(sp, implementationType));
             return this;
         }
 
@@ -31,6 +28,12 @@ namespace Firestorm
             where TService : class
         {
             _dictionary.Add(typeof(TService), sp => implementationInstance);
+            return this;
+        }
+
+        public IFirestormServicesBuilder Add(Type abstractType, Type implementationType)
+        {
+            _dictionary.Add(abstractType, sp => CreateService(sp, implementationType));
             return this;
         }
 

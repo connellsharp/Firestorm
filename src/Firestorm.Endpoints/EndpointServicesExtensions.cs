@@ -1,5 +1,6 @@
 ﻿using System;
 using Firestorm.Endpoints.Configuration;
+using Firestorm.Features;
 using Firestorm.Host;
 
 namespace Firestorm.Endpoints
@@ -11,13 +12,15 @@ namespace Firestorm.Endpoints
         /// Assumes <see cref="EndpointConfiguration"/> is already configured elsewhere.
         /// </summary>
         public static IFirestormServicesBuilder AddEndpointsInvoker(this IFirestormServicesBuilder builder)
-        {   
-            builder.Add<IRequestInvoker, EndpointsRequestInvoker>();
-            builder.Add<IEndpointApplicationFactory, EndpointApplicationFactory>();
-            
+        {
+            builder
+                .Add<IRequestInvoker, EndpointsRequestInvoker>()
+                .EnableFeatures<EndpointApplication>()
+                .AddFeature<EndpointApplication, DefaultEndpointFeature>();
+
             return builder;
         }
-        
+
         /// <summary>
         /// Configures Firestorm endpoints.
         /// </summary>

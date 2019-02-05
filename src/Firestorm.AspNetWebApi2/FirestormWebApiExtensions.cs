@@ -5,7 +5,6 @@ using System.Web.Http.Routing;
 using Firestorm.Endpoints.Formatting.Json;
 using Firestorm.Endpoints.Formatting.Xml;
 using Firestorm.AspNetWebApi2.ErrorHandling;
-using Firestorm.Defaults;
 using Firestorm.Endpoints;
 using Firestorm.Endpoints.Configuration;
 using Firestorm.Host;
