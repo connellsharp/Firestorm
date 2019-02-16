@@ -29,5 +29,10 @@ namespace Firestorm.Endpoints.Configuration
         /// The object used to resolve <see cref="IRestEndpoint"/> instances from a <see cref="IRestResource"/>.
         /// </summary>
         IEndpointResolver EndpointResolver { get; }
+
+        /// <summary>
+        /// Interprets a URL path.
+        /// </summary>
+        IUrlHelper UrlHelper { get; }
     }
 }

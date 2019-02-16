@@ -100,10 +100,5 @@ namespace Firestorm.Endpoints.Query
             { "last", -1 },
             { "end", -1 },
         };
-
-        /// <summary>
-        /// A prefix that when applied to an identifier in the URL can return an <see cref="IRestDictionary"/> rather than a single item.
-        /// </summary>
-        public string DictionaryReferencePrefix { get; set; } = "by_";
     }
 }

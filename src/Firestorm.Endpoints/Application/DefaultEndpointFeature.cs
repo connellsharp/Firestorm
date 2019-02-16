@@ -25,6 +25,7 @@ namespace Firestorm.Endpoints
             services.PageLinkCalculator = new PageLinkCalculator(_configuration.Response.Pagination);
             services.Strategies = new CommandStrategySets();
             services.EndpointResolver = new EndpointResolver();
+            services.UrlHelper = new DefaultUrlHelper(_configuration.Url);
         }
     }
 }

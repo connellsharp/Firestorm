@@ -18,5 +18,10 @@ namespace Firestorm.Endpoints.Configuration
         /// The options used to build the responses to return to the client.
         /// </summary>
         public ResponseConfiguration Response { get; set; } = new ResponseConfiguration();
+
+        /// <summary>
+        /// The options used to configure the URL paths. 
+        /// </summary>
+        public UrlConfiguration Url { get; set; }
     }
 }

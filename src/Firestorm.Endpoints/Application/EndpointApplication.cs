@@ -23,5 +23,7 @@ namespace Firestorm.Endpoints
         public INamingConventionSwitcher NameSwitcher { get; set; }
         
         public IEndpointResolver EndpointResolver { get; set; }
+        
+        public IUrlHelper UrlHelper { get; set; }
     }
 }
