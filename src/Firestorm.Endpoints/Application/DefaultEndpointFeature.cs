@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Firestorm.Endpoints.Configuration;
+﻿using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Formatting.Naming;
 using Firestorm.Endpoints.Pagination;
 using Firestorm.Endpoints.Responses;

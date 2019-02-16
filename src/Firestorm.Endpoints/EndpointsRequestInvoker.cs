@@ -8,16 +8,18 @@ namespace Firestorm.Endpoints
 {
     public class EndpointsRequestInvoker : IRequestInvoker
     {
+        private readonly IStartResourceFactory _startResourceFactory;
         private readonly EndpointApplication _application;
 
-        public EndpointsRequestInvoker(EndpointApplication application)
+        public EndpointsRequestInvoker(IStartResourceFactory startResourceFactory, EndpointApplication application)
         {
+            _startResourceFactory = startResourceFactory;
             _application = application;
         }
         
         public void Initialize()
         {
-            _application.StartResourceFactory.Initialize();
+            _startResourceFactory.Initialize();
         }
 
         /// <summary>
@@ -34,7 +36,7 @@ namespace Firestorm.Endpoints
             
             try
             {
-                var navigator = new EndpointNavigator(context, _application.StartResourceFactory, _application);
+                var navigator = new EndpointNavigator(context, _startResourceFactory, _application);
                 IRestEndpoint endpoint =  navigator.GetEndpointFromPath(requestReader.ResourcePath);
                 IExecutor executor = _application.ExecutorFactory.GetExecutor(endpoint);
                 

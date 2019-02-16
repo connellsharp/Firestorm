@@ -11,4 +11,8 @@
     <ProjectReference Include="..\Firestorm.Endpoints.Core\Firestorm.Endpoints.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Configuration" />
+  </ItemGroup>
+
 </Project>

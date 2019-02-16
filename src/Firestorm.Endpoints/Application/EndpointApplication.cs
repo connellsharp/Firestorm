@@ -2,7 +2,6 @@
 using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Requests;
 using Firestorm.Endpoints.Responses;
-using Firestorm.Host;
 
 namespace Firestorm.Endpoints
 {
@@ -10,9 +9,7 @@ namespace Firestorm.Endpoints
     /// All the services required to run a Firestorm Endpoints application.
     /// </summary>
     public class EndpointApplication : IEndpointServices
-    {
-        public IStartResourceFactory StartResourceFactory { get; set; }
-        
+    {        
         public IQueryCreator QueryCreator { get; set; }
         
         public IEnumerable<IResponseModifier> Modifiers { get; set; }

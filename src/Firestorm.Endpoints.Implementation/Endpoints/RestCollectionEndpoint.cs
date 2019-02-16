@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Firestorm.Endpoints.Query;
 using Firestorm.Rest.Web;
@@ -25,7 +24,7 @@ namespace Firestorm.Endpoints
 
         public IRestEndpoint Next(INextPath path)
         {
-            string dictionaryPrefix = Context.QueryString.DictionaryReferencePrefix;
+            string dictionaryPrefix = Context.UrlHelper.DictionaryPrefix;
             if (path.Raw.StartsWith(dictionaryPrefix))
             {
                 string identifierName = path.GetCoded(dictionaryPrefix.Length);
