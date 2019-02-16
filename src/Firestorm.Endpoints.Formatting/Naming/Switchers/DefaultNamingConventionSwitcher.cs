@@ -4,18 +4,14 @@ namespace Firestorm.Endpoints.Formatting.Naming
 {
     public class DefaultNamingConventionSwitcher : NamingConventionSwitcher
     {
-        public DefaultNamingConventionSwitcher(NamingConventionOptions options)
+        public DefaultNamingConventionSwitcher(NamingConventionConfiguration configuration)
             : base(
-                codedCase: new PascalCaseConvention(options.TwoLetterAcronyms),
+                codedCase: new PascalCaseConvention(configuration.TwoLetterAcronyms),
                 defaultOutputCase: new SnakeCaseConvention(),
-                allowedCases: new ICaseConvention[] { new SnakeCaseConvention(), new PascalCaseConvention(options.TwoLetterAcronyms), new CamelCaseConvention(options.TwoLetterAcronyms), new KebabCaseConvention() }
+                allowedCases: new ICaseConvention[] { new SnakeCaseConvention(), new PascalCaseConvention(configuration.TwoLetterAcronyms), new CamelCaseConvention(configuration.TwoLetterAcronyms), new KebabCaseConvention() }
             )
         {
             
         }
-
-        public DefaultNamingConventionSwitcher()
-            : this(new NamingConventionOptions())
-        { }
     }
 }

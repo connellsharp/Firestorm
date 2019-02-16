@@ -19,6 +19,12 @@ namespace Firestorm.Endpoints
 
             if (configuration.Response.Pagination == null)
                 throw new FirestormConfigurationException("EndpointConfiguration.PageConfiguration cannot be null.");
+
+            if (configuration.NamingConventions == null)
+                throw new FirestormConfigurationException("EndpointConfiguration.NamingConventions cannot be null.");
+
+            if (configuration.Url == null)
+                throw new FirestormConfigurationException("EndpointConfiguration.Url cannot be null.");
         }
     }
 }

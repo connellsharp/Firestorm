@@ -21,10 +21,10 @@ namespace Firestorm.Stems.FunctionalTests.Web
                         StatusField = ResponseStatusField.StatusCode,
                         ShowDeveloperErrors = true
                     },
-                    NamingConventionSwitcher = new DefaultNamingConventionSwitcher(new NamingConventionOptions
+                    NamingConventions = new NamingConventionConfiguration
                     {
                         TwoLetterAcronyms = new[] { "ID" }
-                    }),
+                    }
                 };
             }
         }

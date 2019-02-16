@@ -21,7 +21,7 @@ namespace Firestorm.Endpoints
             services.Modifiers = new DefaultResponseModifiers(_configuration.Response);
             services.QueryCreator = new DefaultQueryCreator(_configuration.QueryString);
             services.ExecutorFactory = new DefaultExecutorFactory(_configuration);
-            services.NameSwitcher = new DefaultNamingConventionSwitcher();
+            services.NameSwitcher = new DefaultNamingConventionSwitcher(_configuration.NamingConventions);
             services.PageLinkCalculator = new PageLinkCalculator(_configuration.Response.Pagination);
             services.Strategies = new CommandStrategySets();
             services.EndpointResolver = new EndpointResolver();

@@ -1,3 +1,4 @@
+using Firestorm.Endpoints.Formatting.Naming;
 using Firestorm.Endpoints.Query;
 using Firestorm.Endpoints.Responses;
 
@@ -22,6 +23,11 @@ namespace Firestorm.Endpoints.Configuration
         /// <summary>
         /// The options used to configure the URL paths. 
         /// </summary>
-        public UrlConfiguration Url { get; set; }
+        public UrlConfiguration Url { get; set; } = new UrlConfiguration();
+
+        /// <summary>
+        /// The options used to configure field and URL naming conventions used in the requests and responses.
+        /// </summary>
+        public NamingConventionConfiguration NamingConventions { get; set; } = new NamingConventionConfiguration();
     }
 }

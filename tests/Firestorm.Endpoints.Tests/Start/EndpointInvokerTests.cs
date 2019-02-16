@@ -1,9 +1,7 @@
-﻿using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using AutoFixture;
 using AutoFixture.AutoMoq;
-using Firestorm.Endpoints.Configuration;
 using Firestorm.Rest.Web;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Testing;
@@ -37,14 +35,14 @@ namespace Firestorm.Endpoints.Tests.Start
                 m.SetupIgnoreArgs(a => a.GetAsync(null)).ReturnsAsync(new ItemBody(null));
             });
 
-            var readerMock = _fixture.FreezeMock<IRequestReader>();
+            var readerMock = new Mock<IRequestReader>();
             readerMock.SetupGet(a => a.RequestMethod).Returns(method);
             
             var response = new Response("test");
-            _fixture.Inject(new ResponseBuilder(response, new PaginationHeadersResponseModifier()));
-
+            var responseBuilder = new ResponseBuilder(response, new MainBodyResponseModifier());
+            
             var executor = _fixture.Create<EndpointExecutor>();
-            await executor.ExecuteAsync();
+            await executor.ExecuteAsync(readerMock.Object, responseBuilder);
             
             Assert.Equal(expectedStatusCode, response.StatusCode);
             //handlerMock.Verify(a => a.SetStatusCode(expectedStatusCode));
@@ -72,14 +70,14 @@ namespace Firestorm.Endpoints.Tests.Start
                 m.SetupIgnoreArgs(a => a.GetAsync(null)).ReturnsAsync(new ItemBody(body));
             });
 
-            var readerMock = _fixture.FreezeMock<IRequestReader>();
+            var readerMock = new Mock<IRequestReader>();
             readerMock.SetupGet(a => a.RequestMethod).Returns(method);
             
             var response = new Response("test");
-            _fixture.Inject(new ResponseBuilder(response, new MainBodyResponseModifier()));
+            var responseBuilder = new ResponseBuilder(response, new MainBodyResponseModifier());
 
             var executor = _fixture.Create<EndpointExecutor>();
-            await executor.ExecuteAsync();
+            await executor.ExecuteAsync(readerMock.Object, responseBuilder);
             
             Assert.Equal(body, response.ResourceBody);
         }
@@ -104,14 +102,14 @@ namespace Firestorm.Endpoints.Tests.Start
                 m.Setup(a => a.GetAsync(It.IsAny<IRestCollectionQuery>())).ReturnsAsync(new CollectionBody(null, pageLinks));
             });
 
-            var readerMock = _fixture.FreezeMock<IRequestReader>();
+            var readerMock = new Mock<IRequestReader>();
             readerMock.SetupGet(a => a.RequestMethod).Returns("GET");
 
             var response = new Response("test");
-            _fixture.Inject(new ResponseBuilder(response, new PaginationHeadersResponseModifier()));
-
-            var invoker = _fixture.Create<EndpointExecutor>();
-            await invoker.ExecuteAsync();
+            var responseBuilder = new ResponseBuilder(response, new MainBodyResponseModifier());
+            
+            var executor = _fixture.Create<EndpointExecutor>();
+            await executor.ExecuteAsync(readerMock.Object, responseBuilder);
             
             Assert.Equal(shouldHaveLinkHeader, response.Headers.ContainsKey("Link"));
             //handlerMock.Verify(a => a.SetResponseHeader("Link", It.IsAny<string>()), Times.Exactly(shouldHaveLinkHeader ? 1 : 0));
