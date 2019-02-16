@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Rest.Web;
-using Firestorm.Endpoints;
-using Firestorm.Host;
 using Firestorm.Endpoints.Tests.Stubs;
 using Firestorm.Testing;
 using Xunit;
@@ -15,7 +13,7 @@ namespace Firestorm.Endpoints.Tests.Functionality
         public async Task MemoryCollection()
         {
             var endpointContext = new TestEndpointContext();
-            IRestEndpoint endpoint =  endpointContext.Configuration.EndpointResolver.GetFromResource(endpointContext, new ArtistMemoryCollection());
+            IRestEndpoint endpoint = endpointContext.Services.EndpointResolver.GetFromResource(endpointContext, new ArtistMemoryCollection());
             var response = (CollectionBody)(await endpoint.GetAsync(null));
             var firstObj = response.Items.First();
             Assert.Equal(firstObj["Name"], TestRepositories.ArtistName);

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Tests.Stubs;
 using Firestorm.Host.Infrastructure;
 using Xunit;
@@ -21,7 +22,7 @@ namespace Firestorm.Endpoints.Tests.Start
             _startResource = new MockStartResource();
 
             var startResourceFactory = new SingletonStartResourceFactory(_startResource);
-            _invoker = new EndpointsRequestInvoker(startResourceFactory, new DefaultEndpointConfiguration());
+            _invoker = new EndpointsRequestInvoker(startResourceFactory, new TestEndpointServices());
         }
 
         [Fact]

@@ -14,7 +14,7 @@ namespace Firestorm.Stems.FunctionalTests.Web
         {
             get
             {
-                return new DefaultEndpointConfiguration
+                return new EndpointConfiguration
                 {
                     Response = new ResponseConfiguration
                     {

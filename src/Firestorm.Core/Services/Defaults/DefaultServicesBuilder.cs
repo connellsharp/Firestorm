@@ -4,6 +4,10 @@ using Reflectious;
 
 namespace Firestorm
 {
+    /// <summary>
+    /// A lightweight <see cref="IFirestormServicesBuilder"/>.
+    /// Used for testing and defaults. A real application would usually use their own DI container.
+    /// </summary>
     public class DefaultServicesBuilder : IFirestormServicesBuilder
     {
         private readonly IDictionary<Type, IList<Func<IServiceProvider, object>>> _dictionary;

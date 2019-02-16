@@ -33,7 +33,7 @@ namespace Firestorm.FunctionalTests.Web
                 });
 
             var fsBuilder = services.AddFirestorm()
-                .AddEndpoints(new DefaultEndpointConfiguration
+                .AddEndpoints(new EndpointConfiguration
                 {
                     Response =
                     {

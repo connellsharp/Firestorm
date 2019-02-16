@@ -1,4 +1,5 @@
 ﻿using Firestorm.Endpoints;
+using Firestorm.Endpoints.Configuration;
 using Firestorm.Host;
 using Firestorm.Testing.Http;
 using JetBrains.Annotations;
@@ -6,7 +7,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using ServiceProviderServiceExtensions = Firestorm.Host.ServiceProviderServiceExtensions;
 
 namespace Firestorm.AspNetCore2.IntegrationTests
 {
@@ -17,14 +17,14 @@ namespace Firestorm.AspNetCore2.IntegrationTests
         {
             services.AddCors();
             
-            services.Configure<DefaultEndpointConfiguration>(config =>
+            services.Configure<EndpointConfiguration>(config =>
             {
                 config.Response.ShowDeveloperErrors = true;
                 //
             });
             
             services.AddFirestorm()
-                .AddEndpoints(sp => ServiceProviderServiceExtensions.GetService<IOptions<DefaultEndpointConfiguration>>(sp).Value)
+                .AddEndpoints(sp => sp.GetService<IOptions<EndpointConfiguration>>().Value)
                 .AddStartResourceFactory(new IntegratedStartResourceFactory());
         }
 

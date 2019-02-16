@@ -19,7 +19,7 @@ namespace Firestorm.AspNetCore2.IntegrationTests
         [Fact]
         public async Task FieldSelector_ManualNext_CorrectName()
         {
-            IEndpointContext endpointContext = new TestEndpointContext();
+            var endpointContext = new TestEndpointContext();
 
             var testQuery = new TestCollectionQuery
             {
@@ -27,8 +27,8 @@ namespace Firestorm.AspNetCore2.IntegrationTests
             };
 
             EngineRestCollection<Artist> artistsCollection = IntegratedRestDirectory.GetArtistCollection(endpointContext.Request);
-            IRestEndpoint endpoint = endpointContext.Configuration.EndpointResolver.GetFromResource(endpointContext, artistsCollection);
-            endpoint = endpoint.Next(new AggregatorNextPath("123", endpointContext.Configuration.NamingConventionSwitcher));
+            IRestEndpoint endpoint = endpointContext.Services.EndpointResolver.GetFromResource(endpointContext, artistsCollection);
+            endpoint = endpoint.Next(new AggregatorNextPath("123", endpointContext.Services.NameSwitcher));
             var response = (ItemBody)(await endpoint.GetAsync(testQuery));
 
             Assert.Equal(response.Item["Name"], TestRepositories.ArtistName);
@@ -37,7 +37,7 @@ namespace Firestorm.AspNetCore2.IntegrationTests
         [Fact]
         public async Task FieldSelector_Collection_DoesntThrow()
         {
-            IEndpointContext endpointContext = new TestEndpointContext();
+            var endpointContext = new TestEndpointContext();
 
             var testQuery = new TestCollectionQuery
             {
@@ -45,14 +45,12 @@ namespace Firestorm.AspNetCore2.IntegrationTests
             };
 
             EngineRestCollection<Artist> artistsCollection = IntegratedRestDirectory.GetArtistCollection(endpointContext.Request);
-            IRestEndpoint endpoint = endpointContext.Configuration.EndpointResolver.GetFromResource(endpointContext, artistsCollection);
+            IRestEndpoint endpoint = endpointContext.Services.EndpointResolver.GetFromResource(endpointContext, artistsCollection);
             var resource = (CollectionBody)(await endpoint.GetAsync(testQuery));
 
             Assert.Equal(1, resource.Items.Count());
 
-
-            var modifiers = new DefaultResponseModifiers(endpointContext.Configuration.Response);
-            var builder = new ResponseBuilder(new Response("/"), modifiers);
+            var builder = new ResponseBuilder(new Response("/"), endpointContext.Modifiers);
             builder.AddResource(resource);
         }
     }
