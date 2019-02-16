@@ -13,7 +13,7 @@ namespace Firestorm.Endpoints
         /// <summary>
         /// 
         /// </summary>
-        IEndpointServices Services { get; }
+        IEndpointCoreServices Services { get; }
         
         /// <summary>
         /// An object containing information about the request.

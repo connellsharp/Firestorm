@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Firestorm.Features
 {
     public static class FeatureServiceBuilderExtensions
@@ -12,7 +10,7 @@ namespace Firestorm.Features
                 {
                     var target = new T();
 
-                    foreach (IFeature<T> feature in sp.GetService<IEnumerable<IFeature<T>>>())
+                    foreach (IFeature<T> feature in sp.GetServices<IFeature<T>>())
                     {
                         feature.AddTo(target);
                     }

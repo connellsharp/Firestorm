@@ -9,12 +9,12 @@ namespace Firestorm.Endpoints
     public class EndpointsRequestInvoker : IRequestInvoker
     {
         private readonly IStartResourceFactory _startResourceFactory;
-        private readonly EndpointApplication _application;
+        private readonly EndpointServices _services;
 
-        public EndpointsRequestInvoker(IStartResourceFactory startResourceFactory, EndpointApplication application)
+        public EndpointsRequestInvoker(IStartResourceFactory startResourceFactory, EndpointServices services)
         {
             _startResourceFactory = startResourceFactory;
-            _application = application;
+            _services = services;
         }
         
         public void Initialize()
@@ -29,16 +29,16 @@ namespace Firestorm.Endpoints
         public async Task InvokeAsync(IHttpRequestReader requestReader, IHttpRequestResponder responder, IRequestContext context)
         {
             var response = new Response(requestReader.ResourcePath);
-            var builder = new ResponseBuilder(response, _application.Modifiers);
+            var builder = new ResponseBuilder(response, _services.Modifiers);
 
-            var reader = new RequestReader(requestReader, _application.NameSwitcher, _application.QueryCreator);
-            var writer = new ResponseWriter(responder, response, _application.NameSwitcher);
+            var reader = new RequestReader(requestReader, _services.NameSwitcher, _services.QueryCreator);
+            var writer = new ResponseWriter(responder, response, _services.NameSwitcher);
             
             try
             {
-                var navigator = new EndpointNavigator(context, _startResourceFactory, _application);
+                var navigator = new EndpointNavigator(context, _startResourceFactory, _services);
                 IRestEndpoint endpoint =  navigator.GetEndpointFromPath(requestReader.ResourcePath);
-                IExecutor executor = _application.ExecutorFactory.GetExecutor(endpoint);
+                IExecutor executor = _services.ExecutorFactory.GetExecutor(endpoint);
                 
                 await executor.ExecuteAsync(reader, builder);
 

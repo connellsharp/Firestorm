@@ -5,19 +5,14 @@ namespace Firestorm.Endpoints
 {
     internal class EndpointContext : IEndpointContext
     {
-        public EndpointContext(IRequestContext endpointContext, IEndpointServices services)
+        public EndpointContext(IRequestContext endpointContext, IEndpointCoreServices services)
         {
             Request = endpointContext;
             Services = services;
         }
 
-        public IEndpointServices Services { get; }
+        public IEndpointCoreServices Services { get; }
 
         public IRequestContext Request { get; }
-
-        public void Dispose()
-        {
-            Request.Dispose();
-        }
     }
 }

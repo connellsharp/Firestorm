@@ -8,7 +8,7 @@ namespace Firestorm.Endpoints
     /// <summary>
     /// All the services required to run a Firestorm Endpoints application.
     /// </summary>
-    public class EndpointApplication : IEndpointServices
+    public class EndpointServices : IEndpointCoreServices
     {        
         public IQueryCreator QueryCreator { get; set; }
         

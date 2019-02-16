@@ -7,7 +7,7 @@ using Firestorm.Features;
 
 namespace Firestorm.Endpoints
 {
-    internal class DefaultEndpointFeature : IFeature<EndpointApplication>
+    internal class DefaultEndpointFeature : IFeature<EndpointServices>
     {
         private readonly EndpointConfiguration _configuration;
 
@@ -16,7 +16,7 @@ namespace Firestorm.Endpoints
             _configuration = configuration;
         }
 
-        public void AddTo(EndpointApplication services)
+        public void AddTo(EndpointServices services)
         {
             services.Modifiers = new DefaultResponseModifiers(_configuration.Response);
             services.QueryCreator = new DefaultQueryCreator(_configuration.QueryString);

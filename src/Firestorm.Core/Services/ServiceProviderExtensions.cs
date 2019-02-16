@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Firestorm
 {
@@ -19,6 +20,11 @@ namespace Firestorm
                 throw new ArgumentNullException(nameof(provider));
 
             return (T) provider.GetService(typeof(T));
+        }
+        
+        public static IEnumerable<T> GetServices<T>(this IServiceProvider provider)
+        {
+            return provider.GetService<IEnumerable<T>>();
         }
 
         public static IRequestServiceProvider GetRequestServiceProvider(this IServiceProvider serviceProvider)

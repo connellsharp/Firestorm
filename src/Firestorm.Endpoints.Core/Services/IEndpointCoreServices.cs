@@ -7,7 +7,7 @@ namespace Firestorm.Endpoints.Configuration
     /// <summary>
     /// The services required to setup a Firestorm REST API server.
     /// </summary>
-    public interface IEndpointServices
+    public interface IEndpointCoreServices
     {
         /// <summary>
         /// Calculates the URLs to the next and previous pages when querying a collection.
