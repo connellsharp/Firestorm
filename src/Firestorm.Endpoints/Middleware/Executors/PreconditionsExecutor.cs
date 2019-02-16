@@ -50,7 +50,6 @@ namespace Firestorm.Endpoints
             
             response.SetStatusCode(HttpStatusCode.NotModified);
             return false;
-
         }
 
         private async Task<bool> CheckModifyAsync(IRequestReader reader, ResponseBuilder response)
@@ -60,7 +59,6 @@ namespace Firestorm.Endpoints
             
             response.SetStatusCode(HttpStatusCode.PreconditionFailed);
             return false;
-
         }
     }
 }

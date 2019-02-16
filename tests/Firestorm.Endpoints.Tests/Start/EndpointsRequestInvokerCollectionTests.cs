@@ -15,7 +15,7 @@ namespace Firestorm.Endpoints.Tests.Start
     public class EndpointsRequestInvokerCollectionTests
     {
         private readonly MockStartResource _startResource;
-        private EndpointsRequestInvoker _invoker;
+        private readonly EndpointsRequestInvoker _invoker;
 
         public EndpointsRequestInvokerCollectionTests()
         {
