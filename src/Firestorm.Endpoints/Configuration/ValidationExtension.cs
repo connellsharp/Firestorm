@@ -5,6 +5,7 @@ namespace Firestorm.Endpoints
 {
     public static class ValidationExtension
     {   
+        // TODO use somewhere
         public static void EnsureValid([NotNull] this EndpointConfiguration configuration)
         {
             if (configuration == null)

@@ -8,9 +8,6 @@ using Firestorm.Rest.Web.Options;
 using Firestorm.Endpoints.Responses;
 using Firestorm.AspNetWebApi2.ErrorHandling;
 using Firestorm.Endpoints;
-using Firestorm.Endpoints.Formatting.Naming;
-using Firestorm.Endpoints.Query;
-using Firestorm.Host;
 using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.AspNetWebApi2
@@ -61,9 +58,8 @@ namespace Firestorm.AspNetWebApi2
 
         private void Load()
         {
-            var modifiers = new DefaultResponseModifiers(_config.EndpointConfiguration.Response);
             _response = new Response(ResourcePath);
-            _responseBuilder = new ResponseBuilder(Response, modifiers);
+            _responseBuilder = new ResponseBuilder(Response, _config.EndpointServices.Modifiers);
         }
 
         [HttpGet]
@@ -74,16 +70,11 @@ namespace Firestorm.AspNetWebApi2
             if (!endpoint.EvaluatePreconditions(GetPreconditions()))
                 return StatusCode(HttpStatusCode.NotModified);
 
-            ResourceBody resourceBody = await endpoint.GetAsync(GetQuery());
+            IRestCollectionQuery query = _config.EndpointServices.QueryCreator.Create(Request.RequestUri.Query);
+            ResourceBody resourceBody = await endpoint.GetAsync(query);
 
             ResponseBuilder.AddResource(resourceBody);
             return Response.ResourceBody; // TODO headers?
-        }
-
-        private IRestCollectionQuery GetQuery()
-        {
-            var query = new QueryStringCollectionQuery(_config.EndpointConfiguration.QueryString, Request.RequestUri.Query);
-            return NameSwitcherUtility.TryWrapQuery(query, _config.EndpointConfiguration.NamingConventionSwitcher);
         }
 
         [HttpOptions]
@@ -166,7 +157,7 @@ namespace Firestorm.AspNetWebApi2
         private IRestEndpoint GetEndpoint()
         {
             _context = new WebApiRequestContext(RequestContext);
-            var navigator = new EndpointNavigator(_context, _config.StartResourceFactory, _config.EndpointConfiguration);
+            var navigator = new EndpointNavigator(_context, _config.StartResourceFactory, _config.EndpointServices);
             return navigator.GetEndpointFromPath(ResourcePath);
         }
 
