@@ -20,7 +20,7 @@ namespace Firestorm.Stems.Roots.DataSource
             _rootBehavior = rootBehavior;
         }
 
-        public IEnumerable<Type> GetStemTypes(IStemConfiguration configuration)
+        public IEnumerable<Type> GetStemTypes(IStemsCoreServices configuration)
         {
             _stemTypeDictionary = new SuffixedNamedTypeDictionary("Stem");
 
@@ -35,7 +35,7 @@ namespace Firestorm.Stems.Roots.DataSource
             return _stemTypeDictionary.GetAllTypes();
         }
 
-        public IRootStartInfo Get(IStemConfiguration configuration, string startResourceName)
+        public IRootStartInfo Get(IStemsCoreServices configuration, string startResourceName)
         {
             return new DataSourceVaseStartInfo(_dataSource, _stemTypeDictionary, startResourceName);
         }

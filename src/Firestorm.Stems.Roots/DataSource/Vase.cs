@@ -10,7 +10,7 @@ namespace Firestorm.Stems.Roots.DataSource
     {
         public IRestUser User { get; set; }
 
-        public IStemConfiguration Configuration { get; set; }
+        public IStemsCoreServices Services { get; set; }
 
         public event EventHandler OnDispose;
 

@@ -7,7 +7,7 @@ namespace Firestorm.Stems
     /// <summary>
     /// Contains the configuration for how an application's Stem objects can be utilised.
     /// </summary>
-    public interface IStemConfiguration
+    public interface IStemsCoreServices
     {
         /// <summary>
         /// Resolves dependencies for constructor parameters on Stem classes.
@@ -21,16 +21,6 @@ namespace Firestorm.Stems
         [CanBeNull] // if no auto mapped properties are used.
         IPropertyAutoMapper AutoPropertyMapper { get; }
 
-        /// <summary>
-        /// Analyzers and Resolvers bundled as configurable feature sets.
-        /// </summary>
-        [NotNull]
-        IEnumerable<IStemsFeatureSet> FeatureSets { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [NotNull]
-        IAnalyzerFactory AnalyzerCache { get; }
+        IImplementationResolver ImplementationResolver { get; set; }
     }
 }

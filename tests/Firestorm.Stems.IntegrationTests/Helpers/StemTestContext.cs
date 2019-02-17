@@ -25,7 +25,7 @@ namespace Firestorm.Stems.IntegrationTests.Helpers
                 {
                     RootTypeGetter = new ManualTypeGetter(rootTypes)
                 },
-                StemConfiguration = new DefaultStemConfiguration
+                StemsServices = new StemsServices
                 {
                     DependencyResolver = TestDependencyResolver
                 }

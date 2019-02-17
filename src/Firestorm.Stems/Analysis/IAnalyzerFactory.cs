@@ -1,5 +1,3 @@
-using System;
-
 namespace Firestorm.Stems
 {
     /// <summary>
@@ -7,7 +5,7 @@ namespace Firestorm.Stems
     /// </summary>
     public interface IAnalyzerFactory
     {
-        TAnalyzer GetAnalyzer<TAnalyzer>(Type stemType, IStemConfiguration configuration)
-            where TAnalyzer : IAnalyzer, new();
+        IAnalyzer<TDestination, TSource> GetAnalyzer<TDestination, TSource>()
+            where TDestination : class;
     }
 }

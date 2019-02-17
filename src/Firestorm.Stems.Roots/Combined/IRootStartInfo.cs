@@ -6,7 +6,7 @@ namespace Firestorm.Stems.Roots.Combined
     public interface IRootStartInfo
     {
         Type GetStemType();
-        IAxis GetAxis(IStemConfiguration configuration, IRestUser user);
+        IAxis GetAxis(IStemsCoreServices configuration, IRestUser user);
         IDataSource GetDataSource();
     }
 }

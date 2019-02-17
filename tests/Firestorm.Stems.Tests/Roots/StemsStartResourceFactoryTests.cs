@@ -10,11 +10,11 @@ namespace Firestorm.Stems.Tests.Roots
         public void GetStartResource_MockRootFactory_CallsGetStartResource()
         {
             var rootFactoryMock = new Mock<IRootResourceFactory>();
-            var stemConfig = new DefaultStemConfiguration();
+            var stemConfig = new StemsServices();
 
             var factory = new StemsStartResourceFactory
             {
-                StemConfiguration = stemConfig,
+                StemsServices = stemConfig,
                 RootResourceFactory = rootFactoryMock.Object
             };
 

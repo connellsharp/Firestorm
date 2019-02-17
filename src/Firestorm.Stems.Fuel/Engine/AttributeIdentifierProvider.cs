@@ -5,6 +5,7 @@ using Firestorm.Engine.Identifiers;
 using Firestorm.Stems.Analysis;
 using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Identifiers;
+using Firestorm.Stems.Fuel.Resolving.Analysis;
 
 namespace Firestorm.Stems.Fuel
 {
@@ -17,12 +18,12 @@ namespace Firestorm.Stems.Fuel
         private readonly Stem<TItem> _stem;
         private readonly StemDefinition _stemDefinition;
 
-        public AttributeIdentifierProvider(Stem<TItem> stem)
+        public AttributeIdentifierProvider(Stem<TItem> stem, EngineImplementations<TItem> implementations)
         {
             _stem = stem;
 
-            var analyzerFactory = stem.Configuration.AnalyzerCache;
-            var analyzer = analyzerFactory.GetAnalyzer<AttributeAnalyzer>(stem.GetType(), stem.Configuration);
+            var analyzerFactory = stem.Services.Analyzers;
+            var analyzer = analyzerFactory.GetAnalyzer<AttributeAnalyzer>(stem.GetType(), stem.Services);
             _stemDefinition = analyzer.Definition;
         }
 

@@ -13,18 +13,15 @@ using Firestorm.Stems.Fuel.Resolving.Factories;
 
 namespace Firestorm.Stems.Essentials.Factories.Resolvers
 {
-    internal class SubstemDefinitionResolver : IFieldDefinitionResolver
+    internal class SubstemDefinitionAnalyzer : IFieldDefinitionAnalyzer
     {
-        public IStemConfiguration Configuration { get; set; }
-        public FieldDefinition FieldDefinition { get; set; }
-
-        public void IncludeDefinition<TItem>(EngineImplementations<TItem> implementations)
+        public void Analyze<TItem>(EngineImplementations<TItem> implementations, FieldDefinition definition) 
             where TItem : class
         {
-            if (FieldDefinition.SubstemType == null)
+            if (definition.SubstemType == null)
                 return;
 
-            LambdaExpression getterExpression = FieldDefinition.Getter.Expression;
+            LambdaExpression getterExpression = definition.Getter.Expression;
 
             if (getterExpression == null)
                 throw new StemAttributeSetupException("Substem types must be on an expression property.");
@@ -32,9 +29,9 @@ namespace Firestorm.Stems.Essentials.Factories.Resolvers
             var typeArgs = new HandlerFactoryTypeArguments();
             typeArgs.LoadExpression<TItem>(getterExpression);
 
-            AddFactory(implementations.FullResourceFactories, HandlerTypes.FullResource, typeArgs);
-            AddFactory(implementations.ReaderFactories, HandlerTypes.Reader, typeArgs);
-            AddFactory(implementations.WriterFactories, HandlerTypes.Writer, typeArgs);
+            AddFactory(implementations.FullResourceFactories, HandlerTypes.FullResource, typeArgs, definition);
+            AddFactory(implementations.ReaderFactories, HandlerTypes.Reader, typeArgs, definition);
+            AddFactory(implementations.WriterFactories, HandlerTypes.Writer, typeArgs, definition);
         }
 
         /// <summary>
@@ -44,7 +41,8 @@ namespace Firestorm.Stems.Essentials.Factories.Resolvers
         (
             IDictionary<string, IFactory<THandler, TItem>> dictionary,
             HandlerTypes handlerType,
-            HandlerFactoryTypeArguments typeArgs
+            HandlerFactoryTypeArguments typeArgs,
+            FieldDefinition definition
         )
             where THandler : IFieldHandler<TItem>
             where TItem : class
@@ -52,13 +50,14 @@ namespace Firestorm.Stems.Essentials.Factories.Resolvers
             try
             {
                 Type typeDefinition = GetFactoryTypeDefinition(handlerType, typeArgs.IsCollection);
-                Type factoryType = typeDefinition.MakeGenericType(GetFactoryTypeArgs<TItem>(typeArgs).ToArray());
+                Type[] typeArguments = GetFactoryTypeArgs<TItem>(typeArgs, definition).ToArray();
+                Type factoryType = typeDefinition.MakeGenericType(typeArguments);
 
-                var autoActivator = new AutoActivator(new SubstemHandlerDependencyResolver(typeArgs.GetterExpression, FieldDefinition));
+                var autoActivator = new AutoActivator(new SubstemHandlerDependencyResolver(typeArgs.GetterExpression, definition));
                 
                 var factory = (IFactory<THandler, TItem>)autoActivator.CreateInstance(factoryType);
 
-                dictionary.Add(FieldDefinition.FieldName, factory);
+                dictionary.Add(definition.FieldName, factory);
             }
             catch(Exception ex)
             {
@@ -87,7 +86,7 @@ namespace Firestorm.Stems.Essentials.Factories.Resolvers
             }
         }
 
-        private IEnumerable<Type> GetFactoryTypeArgs<TItem>(HandlerFactoryTypeArguments typeArgs)
+        private IEnumerable<Type> GetFactoryTypeArgs<TItem>(HandlerFactoryTypeArguments typeArgs, FieldDefinition definition)
         {
             yield return typeof(TItem);
 
@@ -98,7 +97,7 @@ namespace Firestorm.Stems.Essentials.Factories.Resolvers
             if (typeArgs.IsCollection)
                 yield return typeArgs.EnumerableTypeArgument;
 
-            yield return FieldDefinition.SubstemType;
+            yield return definition.SubstemType;
         }
 
         private class SubstemHandlerDependencyResolver : IDependencyResolver

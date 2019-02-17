@@ -34,7 +34,7 @@ namespace Firestorm.Stems
         {
             builder.AddStartResourceFactory(sp => new StemsStartResourceFactory
             {
-                StemConfiguration = new DefaultStemConfiguration
+                StemsServices = new StemsServices
                 {
                     DependencyResolver = new DefaultDependencyResolver(sp.GetRequestServiceProvider()),
                     AutoPropertyMapper = sp.GetService<IPropertyAutoMapper>() ?? new DefaultPropertyAutoMapper()

@@ -6,27 +6,26 @@ using Firestorm.Stems.Fuel.Resolving.Analysis;
 
 namespace Firestorm.Stems.Essentials.Factories.Resolvers
 {
-    internal class DisplayForResolver : IFieldDefinitionResolver
+    internal class DisplayForAnalyzer : IFieldDefinitionAnalyzer
     {
-        public IStemConfiguration Configuration { get; set; }
-        public FieldDefinition FieldDefinition { get; set; }
+        public IStemsCoreServices Configuration { get; set; }
 
-        public void IncludeDefinition<TItem>(EngineImplementations<TItem> implementations)
+        public void Analyze<TItem>(EngineImplementations<TItem> implementations, FieldDefinition definition) 
             where TItem : class
         {
             var defaults = implementations.Defaults;
 
             foreach (Display displayFor in Enum.GetValues(typeof(Display)))
             {
-                var display = FieldDefinition.Display ??
-                              GetDefaultDisplayFromName(typeof(TItem).Name, FieldDefinition.FieldName);
+                var display = definition.Display ??
+                              GetDefaultDisplayFromName(typeof(TItem).Name, definition.FieldName);
                 
                 if (display >= displayFor)
                 {
                     if (!defaults.ContainsKey(displayFor))
                         defaults.Add(displayFor, new List<string>());
 
-                    defaults[displayFor].Add(FieldDefinition.FieldName);
+                    defaults[displayFor].Add(definition.FieldName);
                 }
             }
         }

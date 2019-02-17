@@ -17,13 +17,10 @@ namespace Firestorm.Stems.Fuel
 
         private static readonly IAuthorizationChecker<TItem> AllowAllChecker = new AllowAllAuthorizationChecker<TItem>();
 
-        public StemAuthorizationChecker(Stem<TItem> stem)
+        public StemAuthorizationChecker(Stem<TItem> stem, EngineImplementations<TItem> implementations)
         {
             _stem = stem;
-
-            var analyzerFactory = stem.Configuration.AnalyzerCache;
-            var analyzer = analyzerFactory.GetAnalyzer<FieldDefinitionAnalyzer<TItem>>(stem.GetType(), stem.Configuration);
-            _implementations = analyzer.Implementations;
+            _implementations = implementations;
         }
 
         public virtual IQueryable<TItem> ApplyFilter(IQueryable<TItem> items)

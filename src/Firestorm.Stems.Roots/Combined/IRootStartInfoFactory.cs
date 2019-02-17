@@ -5,8 +5,8 @@ namespace Firestorm.Stems.Roots.Combined
 {
     public interface IRootStartInfoFactory
     {
-        IEnumerable<Type> GetStemTypes(IStemConfiguration stemConfiguration);
-        IRootStartInfo Get(IStemConfiguration stemConfiguration, string startResourceName);
+        IEnumerable<Type> GetStemTypes(IStemsCoreServices stemsServices);
+        IRootStartInfo Get(IStemsCoreServices stemsServices, string startResourceName);
         RestDirectoryInfo CreateDirectoryInfo();
     }
 }

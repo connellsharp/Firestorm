@@ -21,7 +21,7 @@ namespace Firestorm.Stems.Essentials
             return memberName.TrimStart("Set");
         }
 
-        public override IAttributeResolver GetResolver()
+        public override Analysis.IAttributeResolver GetResolver()
         {
             return new SetterAttributeResolver();
         }

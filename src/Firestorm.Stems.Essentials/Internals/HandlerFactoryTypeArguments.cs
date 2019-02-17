@@ -8,7 +8,7 @@ using Reflectious;
 namespace Firestorm.Stems.Essentials
 {
     /// <summary>
-    /// Contains the generic type arguments used to create handler factories in the <see cref="SubstemDefinitionResolver"/>.
+    /// Contains the generic type arguments used to create handler factories in the <see cref="SubstemDefinitionAnalyzer"/>.
     /// </summary>
     internal class HandlerFactoryTypeArguments
     {

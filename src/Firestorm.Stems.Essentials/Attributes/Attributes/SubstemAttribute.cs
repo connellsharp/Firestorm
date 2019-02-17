@@ -13,7 +13,7 @@ namespace Firestorm.Stems.Essentials
 
         public Type SubstemType { get; private set; }
 
-        public override IAttributeResolver GetResolver()
+        public override Analysis.IAttributeResolver GetResolver()
         {
             return new SubstemAttributeResolver(SubstemType);
         }

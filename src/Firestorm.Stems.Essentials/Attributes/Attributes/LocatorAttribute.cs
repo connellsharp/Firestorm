@@ -23,7 +23,7 @@ namespace Firestorm.Stems.Essentials
             return memberName.TrimStart("FindBy");
         }
 
-        public override IAttributeResolver GetResolver()
+        public override Analysis.IAttributeResolver GetResolver()
         {
             return new LocatorAttributeResolver();
         }

@@ -13,16 +13,16 @@ namespace Firestorm.Stems.Roots.Combined
     /// </summary>
     public class RootsDirectory : IRestDirectory
     {
-        private readonly IStemConfiguration _configuration;
+        private readonly IStemsCoreServices _configuration;
         private readonly CollectionCreatorCache _creatorCache;
         private readonly IRootStartInfoFactory _startInfoFactory;
         private readonly IRequestContext _request;
 
-        public RootsDirectory(IStemConfiguration configuration, IRootStartInfoFactory startInfoFactory, IRequestContext request)
+        public RootsDirectory(IStemsCoreServices configuration, IRootStartInfoFactory startInfoFactory, IRequestContext request)
             : this(configuration, startInfoFactory, request, new CollectionCreatorCache())
         { }
 
-        internal RootsDirectory(IStemConfiguration configuration, IRootStartInfoFactory startInfoFactory, IRequestContext request, CollectionCreatorCache creatorCache)
+        internal RootsDirectory(IStemsCoreServices configuration, IRootStartInfoFactory startInfoFactory, IRequestContext request, CollectionCreatorCache creatorCache)
         {
             _configuration = configuration;
             _startInfoFactory = startInfoFactory;

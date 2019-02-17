@@ -20,7 +20,7 @@ namespace Firestorm.Stems.Tests.Roots
             var namedTypedDictionary = new NamedTypeDictionary();
             namedTypedDictionary.AddType(typeof(TestRoot));
 
-            var directory = new RootsDirectory(new DefaultStemConfiguration(), new DerivedRootStartInfoFactory(namedTypedDictionary), new TestRequestContext());
+            var directory = new RootsDirectory(new StemsServices(), new DerivedRootStartInfoFactory(namedTypedDictionary), new TestRequestContext());
 
             var rootCollection = directory.GetCollection("TestRoot"); // normally use the Suffixed type dictionary
 

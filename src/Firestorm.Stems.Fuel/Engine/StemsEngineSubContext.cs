@@ -2,6 +2,7 @@ using Firestorm.Engine;
 using Firestorm.Engine.Identifiers;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Stems.Fuel.Identifiers;
+using Firestorm.Stems.Fuel.Resolving.Analysis;
 using JetBrains.Annotations;
 
 namespace Firestorm.Stems.Fuel
@@ -13,15 +14,14 @@ namespace Firestorm.Stems.Fuel
     public class StemsEngineSubContext<TItem> : IEngineSubContext<TItem>
         where TItem : class
     {
-        private readonly Stem<TItem> _stem;
-
         public StemsEngineSubContext([NotNull] Stem<TItem> stem)
         {
-            _stem = stem;
+            var implementations =
+                stem.Services.ImplementationResolver.Get<EngineImplementations<TItem>>(stem.GetType());
 
-            Identifiers = new AttributeIdentifierProvider<TItem>(stem); //new IdConventionIdentifierInfo<TItem>();
-            Fields = new AttributeFieldProvider<TItem>(stem);
-            AuthorizationChecker = new StemAuthorizationChecker<TItem>(stem);
+            Identifiers = new AttributeIdentifierProvider<TItem>(stem, implementations); //new IdConventionIdentifierInfo<TItem>();
+            Fields = new AttributeFieldProvider<TItem>(stem, implementations);
+            AuthorizationChecker = new StemAuthorizationChecker<TItem>(stem, implementations);
         }
 
         public IIdentifierProvider<TItem> Identifiers { get; }

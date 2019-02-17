@@ -17,7 +17,7 @@ namespace Firestorm.Stems.Analysis
 
         public StemDefinition Definition { protected get; set; }
 
-        public IStemConfiguration Configuration { protected get; set; }
+        public IStemsCoreServices Configuration { protected get; set; }
 
         public StemAttribute Attribute { protected get; set; }
 

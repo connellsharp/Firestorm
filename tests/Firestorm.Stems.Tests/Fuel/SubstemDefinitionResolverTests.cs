@@ -28,8 +28,8 @@ namespace Firestorm.Stems.Tests.Fuel
         {
             var implementations = new EngineImplementations<Person>();
 
-            var resolver = new SubstemDefinitionResolver();
-            resolver.Configuration = new DefaultStemConfiguration();
+            var resolver = new SubstemDefinitionAnalyzer();
+            resolver.Configuration = new StemsServices();
 
             Expression<Func<Person, IEnumerable<Person>>> nameExpr = p => p.Friends;
 
@@ -57,8 +57,8 @@ namespace Firestorm.Stems.Tests.Fuel
         {
             var implementations = new EngineImplementations<Person>();
 
-            var resolver = new SubstemDefinitionResolver();
-            resolver.Configuration = new DefaultStemConfiguration();
+            var resolver = new SubstemDefinitionAnalyzer();
+            resolver.Configuration = new StemsServices();
 
             resolver.FieldDefinition = new FieldDefinition
             {

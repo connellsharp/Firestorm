@@ -11,7 +11,7 @@ namespace Firestorm.Stems.Tests
     {
         public IRestUser User { get; }
 
-        public IStemConfiguration Configuration { get; } = new TestStemConfiguration();
+        public IStemsCoreServices Configuration { get; } = new TestStemsServices();
 
         public event EventHandler OnDispose;
 
@@ -20,7 +20,7 @@ namespace Firestorm.Stems.Tests
             OnDispose?.Invoke(this, EventArgs.Empty);
         }
 
-        private class TestStemConfiguration : IStemConfiguration
+        private class TestStemsServices : IStemsCoreServices
         {
             public IDependencyResolver DependencyResolver { get; }
 

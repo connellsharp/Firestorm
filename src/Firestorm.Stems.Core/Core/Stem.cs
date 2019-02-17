@@ -59,12 +59,12 @@ namespace Firestorm.Stems
 
         public IRestUser User { get; private set; }
 
-        public IStemConfiguration Configuration { get; private set; }
+        public IStemsCoreServices Services { get; private set; }
 
         public void SetParent(IAxis parent)
         {
             User = parent.User;
-            Configuration = parent.Configuration;
+            Services = parent.Services;
             parent.OnDispose += (sender, args) => Dispose();
         }
         

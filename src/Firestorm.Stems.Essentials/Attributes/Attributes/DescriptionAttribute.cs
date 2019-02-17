@@ -14,7 +14,7 @@ namespace Firestorm.Stems.Essentials
 
         public object Example { get; set; }
 
-        public override IAttributeResolver GetResolver()
+        public override Analysis.IAttributeResolver GetResolver()
         {
             return new DescriptionAttributeResolver();
         }
