@@ -21,7 +21,7 @@ namespace Firestorm.Endpoints
         public IRestEndpoint Next(INextPath fieldName)
         {
             IRestResource resource = Item.GetField(fieldName.GetCoded());
-            return Context.Configuration.EndpointResolver.GetFromResource(Context, resource);
+            return Context.Services.EndpointResolver.GetFromResource(Context, resource);
         }
 
         public async Task<ResourceBody> GetAsync(IRestCollectionQuery query)
@@ -46,7 +46,7 @@ namespace Firestorm.Endpoints
 
         public Task<Feedback> CommandAsync(UnsafeMethod method, ResourceBody body)
         {
-            ICommandStrategy<IRestItem> strategy = Context.Configuration.Strategies.ForItems.GetOrThrow(method);
+            ICommandStrategy<IRestItem> strategy = Context.Services.Strategies.ForItems.GetOrThrow(method);
             return strategy.ExecuteAsync(Item, Context, body);
         }
 

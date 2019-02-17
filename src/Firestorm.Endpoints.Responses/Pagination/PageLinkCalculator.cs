@@ -7,22 +7,18 @@ namespace Firestorm.Endpoints.Pagination
     /// <summary>
     /// Calculates the next and previous page links based on application config, request querystring and collection details.
     /// </summary>
-    internal class PageLinkCalculator
+    public class PageLinkCalculator : IPageLinkCalculator
     {
         private readonly PaginationConfiguration _configuration;
-        private readonly PageInstruction _instruction;
-        private readonly PageDetails _details;
 
-        public PageLinkCalculator(PaginationConfiguration configuration, PageInstruction instruction, PageDetails details)
+        public PageLinkCalculator(PaginationConfiguration configuration)
         {
             _configuration = configuration;
-            _instruction = instruction;
-            _details = details;
         }
 
-        public PageLinks Calculate()
+        public PageLinks Calculate(PageInstruction instruction, PageDetails details)
         {
-            if (_details == null || !_details.HasNextPage)
+            if (details == null || !details.HasNextPage)
                 return null;
 
             switch (_configuration.SuggestedNavigationType)
@@ -32,8 +28,8 @@ namespace Firestorm.Endpoints.Pagination
                     {
                         Next = new PageInstruction
                         {
-                            PageNumber = _instruction.PageNumber + 1,
-                            Size = _instruction.Size
+                            PageNumber = instruction.PageNumber + 1,
+                            Size = instruction.Size
                         }
                     };
 
@@ -42,8 +38,8 @@ namespace Firestorm.Endpoints.Pagination
                     {
                         Next = new PageInstruction
                         {
-                            Offset = _instruction.Offset + _instruction.Size,
-                            Size = _instruction.Size
+                            Offset = instruction.Offset + instruction.Size,
+                            Size = instruction.Size
                         }
                     };
 

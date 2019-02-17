@@ -5,7 +5,6 @@ namespace Firestorm.Testing.Http
 {
     public class TestRequestContext : IRequestContext
     {
-
         public IRestUser User { get; } = new TestUser();
 
         public event EventHandler OnDispose;

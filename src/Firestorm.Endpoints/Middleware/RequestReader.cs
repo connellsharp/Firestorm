@@ -1,7 +1,5 @@
 ﻿using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Formatting;
-using Firestorm.Endpoints.Formatting.Naming;
-using Firestorm.Endpoints.Query;
 using Firestorm.Host.Infrastructure;
 using Firestorm.Rest.Web;
 
@@ -10,21 +8,26 @@ namespace Firestorm.Endpoints
     internal class RequestReader : IRequestReader
     {
         private readonly IHttpRequestReader _httpReader;
-        private readonly EndpointConfiguration _config;
-
-        public RequestReader(IHttpRequestReader httpReader, EndpointConfiguration config)
+        private readonly INamingConventionSwitcher _nameSwitcher;
+        private readonly IQueryCreator _queryCreator;
+        
+        public RequestReader(IHttpRequestReader httpReader, INamingConventionSwitcher nameSwitcher, IQueryCreator queryCreator)
         {
             _httpReader = httpReader;
-            _config = config;
+            _nameSwitcher = nameSwitcher;
+            _queryCreator = new NameSwitcherQueryCreator(queryCreator, nameSwitcher);
         }
 
-        public string RequestMethod => _httpReader.RequestMethod;
+        public string RequestMethod
+        {
+            get { return _httpReader.RequestMethod; }
+        }
 
         public IPreconditions GetPreconditions() => _httpReader.GetPreconditions();
 
         public ResourceBody GetRequestBody()
         {
-            var parser = new ContentParser(_httpReader.GetContentReader(), _config.NamingConventionSwitcher);
+            var parser = new ContentParser(_httpReader.GetContentReader(), _nameSwitcher);
             return parser.GetRequestBody();
         }
 
@@ -35,8 +38,7 @@ namespace Firestorm.Endpoints
             if (string.IsNullOrEmpty(queryString))
                 return null;
 
-            var query = new QueryStringCollectionQuery(_config.QueryString, queryString);
-            return NameSwitcherUtility.TryWrapQuery(query, _config.NamingConventionSwitcher);
+            return _queryCreator.Create(queryString);
         }
     }
 }

@@ -17,9 +17,12 @@ namespace Firestorm.Endpoints
 
         public string Raw { get; }
 
-        public string GetCoded(int dictionaryPrefixLength)
+        public string GetCoded(int offset, int? length)
         {
-            string subStrRaw = Raw.Substring(dictionaryPrefixLength);
+            string subStrRaw = length.HasValue
+                ? Raw.Substring(offset, length.Value)
+                : Raw.Substring(offset);
+            
             return _namingConventionSwitcher.ConvertRequestedToCoded(subStrRaw);
         }
     }

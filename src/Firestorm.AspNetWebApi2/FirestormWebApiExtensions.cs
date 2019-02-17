@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Routing;
 using Firestorm.Endpoints.Formatting.Json;
 using Firestorm.Endpoints.Formatting.Xml;
 using Firestorm.AspNetWebApi2.ErrorHandling;
-using Firestorm.Defaults;
 using Firestorm.Endpoints;
-using Firestorm.Endpoints.Configuration;
 using Firestorm.Host;
 using Newtonsoft.Json;
 
@@ -36,8 +33,7 @@ namespace Firestorm.AspNetWebApi2
             //httpConfig.Filters.Add(new RestApiExceptionFilterAttribute()); // global filter
             //config.Services.Replace(typeof(IExceptionHandler), new OopsExceptionHandler()); // global handler
 
-            FirestormController.GlobalConfig.EndpointConfiguration.EnsureValid();
-            var nameSwitcher = FirestormController.GlobalConfig.EndpointConfiguration.NamingConventionSwitcher;
+            var nameSwitcher = FirestormController.GlobalConfig.EndpointServices.NameSwitcher;
 
             httpConfig.Formatters.JsonFormatter.SerializerSettings = new JsonSerializerSettings
             {
@@ -63,7 +59,7 @@ namespace Firestorm.AspNetWebApi2
 
             var config = new FirestormConfiguration
             {
-                EndpointConfiguration = serviceProvider.GetService<EndpointConfiguration>(),
+                EndpointServices = serviceProvider.GetService<EndpointServices>(),
                 StartResourceFactory = serviceProvider.GetService<IStartResourceFactory>(),
             };
 

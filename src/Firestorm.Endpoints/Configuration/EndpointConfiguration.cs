@@ -1,5 +1,6 @@
-using Firestorm.Endpoints.Requests;
-using JetBrains.Annotations;
+using Firestorm.Endpoints.Formatting.Naming;
+using Firestorm.Endpoints.Query;
+using Firestorm.Endpoints.Responses;
 
 namespace Firestorm.Endpoints.Configuration
 {
@@ -15,24 +16,18 @@ namespace Firestorm.Endpoints.Configuration
         public QueryStringConfiguration QueryString { get; set; } = new QueryStringConfiguration();
 
         /// <summary>
-        /// Contains 3 sets of strategies (for collection, items and scalars) defining how endpoints behave to unsafe requests.
-        /// </summary>
-        public ICommandStrategySets Strategies { get; set; }
-
-        /// <summary>
         /// The options used to build the responses to return to the client.
         /// </summary>
         public ResponseConfiguration Response { get; set; } = new ResponseConfiguration();
-        
-        /// <summary>
-        /// The object used to convert from .NET member naming conventions to client-side API conventions.
-        /// </summary>
-        [CanBeNull]
-        public INamingConventionSwitcher NamingConventionSwitcher { get; set; }
 
         /// <summary>
-        /// The object used to resolve <see cref="IRestEndpoint"/> instances from a <see cref="IRestResource"/>.
+        /// The options used to configure the URL paths. 
         /// </summary>
-        public IEndpointResolver EndpointResolver { get; set; }
+        public UrlConfiguration Url { get; set; } = new UrlConfiguration();
+
+        /// <summary>
+        /// The options used to configure field and URL naming conventions used in the requests and responses.
+        /// </summary>
+        public NamingConventionConfiguration NamingConventions { get; set; } = new NamingConventionConfiguration();
     }
 }

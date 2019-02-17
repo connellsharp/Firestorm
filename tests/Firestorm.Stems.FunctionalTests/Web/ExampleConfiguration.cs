@@ -1,6 +1,7 @@
 ﻿using Firestorm.Endpoints;
 using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Formatting.Naming;
+using Firestorm.Endpoints.Responses;
 
 namespace Firestorm.Stems.FunctionalTests.Web
 {
@@ -13,17 +14,17 @@ namespace Firestorm.Stems.FunctionalTests.Web
         {
             get
             {
-                return new DefaultEndpointConfiguration
+                return new EndpointConfiguration
                 {
                     Response = new ResponseConfiguration
                     {
                         StatusField = ResponseStatusField.StatusCode,
                         ShowDeveloperErrors = true
                     },
-                    NamingConventionSwitcher = new DefaultNamingConventionSwitcher(new NamingConventionOptions
+                    NamingConventions = new NamingConventionConfiguration
                     {
                         TwoLetterAcronyms = new[] { "ID" }
-                    }),
+                    }
                 };
             }
         }

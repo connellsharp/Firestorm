@@ -12,9 +12,11 @@ pages:
     - Chosing a Methodology: 'setup/chosing-a-methodology.md'
 
 - Endpoints:
+    - Navigation: 'endpoints/navigation.md'
     - Querying: 'endpoints/querying.md'
     - Pagination: 'endpoints/pagination.md'
     - Write Operations: 'endpoints/write-operations.md'
+    - Errors: 'endpoints/errors.md'
     - Configuration: 'endpoints/endpoint-config.md'
     
 - Stems: 

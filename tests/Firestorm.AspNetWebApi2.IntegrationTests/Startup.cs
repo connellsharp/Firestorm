@@ -20,7 +20,11 @@ namespace Firestorm.AspNetWebApi2.IntegrationTests
 
             config.SetupFirestorm(c =>
             {
-                c.AddEndpoints();
+                c.AddEndpoints(e =>
+                {
+                    e.Response.ShowDeveloperErrors = true;
+                    //
+                });
                 c.AddStartResourceFactory(new IntegratedStartResourceFactory());
             });
 

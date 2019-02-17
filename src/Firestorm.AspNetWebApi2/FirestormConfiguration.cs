@@ -1,5 +1,4 @@
 using Firestorm.Endpoints;
-using Firestorm.Endpoints.Configuration;
 using Firestorm.Host;
 
 namespace Firestorm.AspNetWebApi2
@@ -16,8 +15,8 @@ namespace Firestorm.AspNetWebApi2
         public IStartResourceFactory StartResourceFactory { get; set; }
 
         /// <summary>
-        /// The configuration describing how to interact with the resources in this API.
+        /// The services used to interact with the resources in this API.
         /// </summary>
-        public EndpointConfiguration EndpointConfiguration { get; set; }
+        public EndpointServices EndpointServices { get; set; }
     }
 }

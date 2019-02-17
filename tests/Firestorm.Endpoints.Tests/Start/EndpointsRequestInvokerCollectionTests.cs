@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Tests.Stubs;
 using Firestorm.Host.Infrastructure;
 using Xunit;
@@ -14,14 +15,14 @@ namespace Firestorm.Endpoints.Tests.Start
     public class EndpointsRequestInvokerCollectionTests
     {
         private readonly MockStartResource _startResource;
-        private EndpointsRequestInvoker _invoker;
+        private readonly EndpointsRequestInvoker _invoker;
 
         public EndpointsRequestInvokerCollectionTests()
         {
             _startResource = new MockStartResource();
 
             var startResourceFactory = new SingletonStartResourceFactory(_startResource);
-            _invoker = new EndpointsRequestInvoker(startResourceFactory, new DefaultEndpointConfiguration());
+            _invoker = new EndpointsRequestInvoker(startResourceFactory, new TestEndpointServices());
         }
 
         [Fact]
@@ -176,7 +177,7 @@ namespace Firestorm.Endpoints.Tests.Start
 
             public async Task<CreatedItemAcknowledgment> AddAsync(RestItemData itemData)
             {
-                List.Add((string) itemData["Value"]);
+                List.Add((string) itemData["value"]);
                 return new CreatedItemAcknowledgment(123);
             }
 

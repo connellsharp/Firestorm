@@ -1,6 +1,4 @@
-using System;
 using System.Threading.Tasks;
-using Firestorm.Endpoints.Pagination;
 using Firestorm.Endpoints.Query;
 using Firestorm.Rest.Web;
 using Firestorm.Rest.Web.Options;
@@ -26,17 +24,16 @@ namespace Firestorm.Endpoints
 
         public IRestEndpoint Next(INextPath path)
         {
-            string dictionaryPrefix = Context.Configuration.QueryString.DictionaryReferencePrefix;
-            if (path.Raw.StartsWith(dictionaryPrefix))
+            var identifierInfo = Context.Services.UrlHelper.GetIdentifierInfo(path);
+
+            if (identifierInfo.IsDictionary)
             {
-                string identifierName = path.GetCoded(dictionaryPrefix.Length);
-                IRestDictionary dictionary = Collection.ToDictionary(identifierName);
+                IRestDictionary dictionary = Collection.ToDictionary(identifierInfo.Name);
                 return new RestDictionaryEndpoint(Context, dictionary);
             }
             else
             {
-                // TODO split by = char? see https://stackoverflow.com/a/20386425/369247
-                IRestItem item = Collection.GetItem(path.Raw);
+                IRestItem item = Collection.GetItem(identifierInfo.Value, identifierInfo.Name);
                 return new RestItemEndpoint(Context, item);
             }
         }
@@ -47,8 +44,7 @@ namespace Firestorm.Endpoints
 
             RestCollectionData collectionData = await Collection.QueryDataAsync(query);
 
-            var linkCalculator = new PageLinkCalculator(Context.Configuration.Response.Pagination, query?.PageInstruction, collectionData.PageDetails);
-            PageLinks pageLinks = linkCalculator.Calculate();
+            PageLinks pageLinks =  Context.Services.PageLinkCalculator.Calculate(query?.PageInstruction, collectionData.PageDetails);
 
             return new CollectionBody(collectionData.Items, pageLinks);
         }
@@ -68,7 +64,7 @@ namespace Firestorm.Endpoints
 
         public Task<Feedback> CommandAsync(UnsafeMethod method, ResourceBody body)
         {
-            ICommandStrategy<IRestCollection> strategy = Context.Configuration.Strategies.ForCollections.GetOrThrow(method);
+            ICommandStrategy<IRestCollection> strategy = Context.Services.Strategies.ForCollections.GetOrThrow(method);
             return strategy.ExecuteAsync(Collection, Context, body);
         }
 

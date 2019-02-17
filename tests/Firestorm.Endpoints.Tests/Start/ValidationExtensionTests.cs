@@ -1,7 +1,5 @@
 ﻿using System;
-using Firestorm.Endpoints;
 using Firestorm.Endpoints.Configuration;
-using Firestorm.Endpoints.Tests.Stubs;
 using Xunit;
 
 namespace Firestorm.Endpoints.Tests.Start
@@ -11,7 +9,7 @@ namespace Firestorm.Endpoints.Tests.Start
         [Fact]
         public void EnsureValid_DefaultConfiguration_DoesntThrow()
         {
-            var config = new DefaultEndpointConfiguration();
+            var config = new EndpointConfiguration();
 
             config.EnsureValid();
         }
@@ -30,11 +28,11 @@ namespace Firestorm.Endpoints.Tests.Start
         }
 
         [Fact]
-        public void EnsureValid_NullRequestStrategies_Throws()
+        public void EnsureValid_NullUrlConfiguration_Throws()
         {
             var config = new EndpointConfiguration
             {
-                Strategies = null
+                Url = null
             };
 
             Action ensureValid = () => config.EnsureValid();
@@ -48,6 +46,19 @@ namespace Firestorm.Endpoints.Tests.Start
             var config = new EndpointConfiguration
             {
                 Response = null
+            };
+
+            Action ensureValid = () => config.EnsureValid();
+
+            Assert.Throws<FirestormConfigurationException>(ensureValid);
+        }
+
+        [Fact]
+        public void EnsureValid_NullNamingConventionConfiguration_Throws()
+        {
+            var config = new EndpointConfiguration
+            {
+                NamingConventions = null
             };
 
             Action ensureValid = () => config.EnsureValid();

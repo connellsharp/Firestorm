@@ -23,13 +23,13 @@ namespace Firestorm.Endpoints
             if (resource == null)
                 return null;
 
-            return Context.Configuration.EndpointResolver.GetFromResource(Context, resource);
+            return Context.Services.EndpointResolver.GetFromResource(Context, resource);
         }
 
         public async Task<ResourceBody> GetAsync(IRestCollectionQuery query)
         {
             RestDirectoryInfo directory = await Directory.GetInfoAsync();
-            return new DirectoryBody(directory, Context.Configuration.NamingConventionSwitcher.ConvertCodedToDefault);
+            return new DirectoryBody(directory, Context.Services.NameSwitcher.ConvertCodedToDefault);
         }
 
         public async Task<Options> OptionsAsync()

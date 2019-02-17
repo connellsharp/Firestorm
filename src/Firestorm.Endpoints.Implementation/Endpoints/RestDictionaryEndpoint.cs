@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using Firestorm.Endpoints.Pagination;
 using Firestorm.Endpoints.Query;
 using Firestorm.Rest.Web;
 using Firestorm.Rest.Web.Options;
@@ -35,9 +34,8 @@ namespace Firestorm.Endpoints
             QueryValidationUtility.EnsureValidQuery(query);
 
             RestDictionaryData dictionaryData = await Dictionary.QueryDataAsync(query);
-            
-            var linkCalculator = new PageLinkCalculator(Context.Configuration.Response.Pagination, query?.PageInstruction, dictionaryData.PageDetails);
-            PageLinks pageLinks = linkCalculator.Calculate();
+
+            PageLinks pageLinks =  Context.Services.PageLinkCalculator.Calculate(query?.PageInstruction, dictionaryData.PageDetails);
 
             return new DictionaryBody(dictionaryData.Items, pageLinks);
         }

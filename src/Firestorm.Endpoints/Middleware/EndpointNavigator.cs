@@ -9,23 +9,23 @@ namespace Firestorm.Endpoints
     {
         private readonly IRequestContext _requestContext;
         private readonly IStartResourceFactory _startResourceFactory;
-        private readonly EndpointConfiguration _configuration;
+        private readonly IEndpointCoreServices _services;
         
-        public EndpointNavigator(IRequestContext requestContext, IStartResourceFactory startResourceFactory, EndpointConfiguration configuration)
+        public EndpointNavigator(IRequestContext requestContext, IStartResourceFactory startResourceFactory, IEndpointCoreServices services)
         {
             _requestContext = requestContext;
             _startResourceFactory = startResourceFactory;
-            _configuration = configuration;
+            _services = services;
         }
 
         public IRestEndpoint GetEndpointFromPath(string resourcePath)
         {
             IRestResource startResource = _startResourceFactory.GetStartResource(_requestContext);
 
-            var context = new EndpointContext(_requestContext, _configuration);
-            IRestEndpoint startEndpoint = _configuration.EndpointResolver.GetFromResource(context, startResource);
+            var context = new EndpointContext(_requestContext, _services);
+            IRestEndpoint startEndpoint = _services.EndpointResolver.GetFromResource(context, startResource);
 
-            var nextAggregator = new NextAggregator(startEndpoint, _configuration.NamingConventionSwitcher ?? new VoidNamingConventionSwitcher());
+            var nextAggregator = new NextAggregator(startEndpoint, _services.NameSwitcher ?? new VoidNamingConventionSwitcher());
             IRestEndpoint endpoint = nextAggregator.AggregateNext(resourcePath);
 
             //var wrappedEndpoint = new NamingSwitcherEndpointWrapper(endpoint, namingConventionSwitcher);

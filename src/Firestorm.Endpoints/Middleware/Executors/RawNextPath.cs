@@ -8,10 +8,13 @@
         }
 
         public string Raw { get; }
-        
-        public string GetCoded(int offset = 0)
+
+        public string GetCoded(int offset = 0, int? length = null)
         {
-            return Raw;
+            if (length.HasValue)
+                return Raw.Substring(offset, length.Value);
+            else
+                return Raw.Substring(offset);
         }
     }
 }

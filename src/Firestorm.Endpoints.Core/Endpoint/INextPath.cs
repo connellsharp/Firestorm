@@ -11,6 +11,6 @@ namespace Firestorm.Endpoints
         /// Gets the path segment converted to the coded naming convention.
         /// </summary>
         /// <param name="offset">Removes the length from the <see cref="Raw"/> string before converting case.</param>
-        string GetCoded(int offset = 0);
+        string GetCoded(int offset = 0, int? length = null);
     }
 }

@@ -6,26 +6,25 @@ Firestorm is a REST API framework for .NET. The aim is to provide a neat and eas
 
 _Using [Stems](docs/stems/stems-intro.md) to describe your API_
 
-```csharp
-public class ArtistsStem : Stem<Artist>
+```c#
+public class CharactersStem : Stem<Character>
 {
     [Get, Identifier]
-    public static Expression Id => Expression(a => a.Id);
+    public static Expression Id => Expression(p => p.Id);
 
-    [Get, Set]
-    public static Expression Name => Expression(a => a.Name);
+    [Get]
+    public static Expression Name => Expression(p => p.FirstName + " " + p.LastName);
 }
 ```
 
-_Exposes [RESTful endpoints](docs/endpoints/querying.md)_
+_Exposes [RESTful endpoints](docs/endpoints/navigation.md)_
 
 ```http
-GET /artists/123
-```
-```json
+GET /characters/123
+
 {
     "id": 123,
-    "name": "Noisia"
+    "name": "Eddard Stark"
 }
 ```
 
@@ -33,11 +32,20 @@ GET /artists/123
 
 1. **Clean.** Lets you write neat and concise code to describe your API and exposes lightweight, human-readable responses.
 
-2. **Powerful.** Provides querying capabilities that combines database queries and application code.
+    - Natural [URL paths](docs/endpoints/navigation.md) e.g. `/characters/123/birthplace/name`.
+    - To-the-point [querystrings](docs/endpoints/querying.md) e.g. `?status=alive&sort=name+asc&page=2`.
+    - Uncluttered responses without extra metadata.
+
+2. **Powerful.** Provides querying capabilities that combine database queries and application code.
+    - Calculate an `age` field from `BirthDate` in your queries.
+    - [Set](docs/stems/stems-basics.md#static-setter-methods) a `name` field by splitting into `FirstName` and `LastName` before saving.
+    - Raise events on a message bus using [dependency injection](docs/stems/dependency-injection.md).
 
 3. **Configurable.** Customise your conventions, response structure, verb strategies to suit your API needs. Integrate with your web host, ORM and IoC to fit nicely in your solution.
 
-4. **Agile.** It's easy to start a basic project with just a few endpoints and grow rapidly as requirements build.
+    - Include HTTP `Link` headers in [pagination](docs/endpoints/endpoint-config.md#response) responses.
+    - Configure `PUT` or `PATCH` [strategy](docs/endpoints/endpoint-config.md#strategies) for partial updates.
+    - Allow `camelCase` or `snake_case` [conventions](docs/endpoints/endpoint-config.md#namingconventionswitcher) in your responses.
 
 You can read more in the [documentation](https://firestorm.readthedocs.org), jump straight into the [tutorials](https://github.com/connellw/Firestorm/wiki/Tutorials) or check out the [samples](https://github.com/connellw/FirestormSamples).
 
@@ -45,7 +53,7 @@ You can read more in the [documentation](https://firestorm.readthedocs.org), jum
 
 Firestorm is available from the GitHub repository and as NuGet Packages.
 
-```
+```ps1
 PM> Install-Package Firestorm.Endpoints
 PM> Install-Package Firestorm.Stems
 PM> Install-Package Firestorm.AspNetCore2
@@ -63,7 +71,7 @@ Firestorm is a bit of an experiment that grew into something I feel other develo
 It's still in active development. There are a lot of features I want to add!
 
 #### Copyright
-Copyright &copy; 2018 Connell Watkins
+Copyright &copy; 2017-2019 Connell Watkins
 
 #### License
 Firestorm is licensed under MIT. Refer to [LICENSE.txt](LICENSE.txt) for detailed information.

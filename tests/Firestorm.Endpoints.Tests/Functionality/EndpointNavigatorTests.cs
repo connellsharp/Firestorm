@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Rest.Web;
-using Firestorm.Endpoints;
-using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Tests.Stubs;
 using Firestorm.Testing;
 using Xunit;
@@ -19,13 +17,8 @@ namespace Firestorm.Endpoints.Tests.Functionality
         public EndpointNavigatorTests()
         {
             var startResourceFactory = new SingletonStartResourceFactory(new TestRestDirectory());
-
-            var config = new EndpointConfiguration
-            {
-                EndpointResolver = new EndpointResolver()
-            };
             
-            _navigator = new EndpointNavigator(new TestRequestContext(), startResourceFactory, config);
+            _navigator = new EndpointNavigator(new TestRequestContext(), startResourceFactory, new TestEndpointServices());
         }
 
         [Fact]

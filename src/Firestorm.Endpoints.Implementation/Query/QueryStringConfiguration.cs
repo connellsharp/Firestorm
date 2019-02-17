@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Firestorm.Endpoints.Configuration
+namespace Firestorm.Endpoints.Query
 {
     /// <summary>
     /// The configuration used to build the <see cref="QueryStringCollectionQuery"/> from a requested query string.
@@ -100,10 +100,5 @@ namespace Firestorm.Endpoints.Configuration
             { "last", -1 },
             { "end", -1 },
         };
-
-        /// <summary>
-        /// A prefix that when applied to an identifier in the URL can return an <see cref="IRestDictionary"/> rather than a single item.
-        /// </summary>
-        public string DictionaryReferencePrefix { get; set; } = "by_";
     }
 }

@@ -1,4 +1,6 @@
-namespace Firestorm.Endpoints.Configuration
+using Firestorm.Endpoints.Configuration;
+
+namespace Firestorm.Endpoints.Responses
 {
     /// <summary>
     /// The options used to build the responses to return to the client.

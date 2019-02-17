@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using Firestorm.Data;
 using Firestorm.Host;
 using Firestorm.Stems.AutoMap;
@@ -46,7 +47,7 @@ namespace Firestorm.Stems
             return builder;
         }
 
-        private static IRootResourceFactory CreateRootResourceFactory(IFirestormServiceProvider sp)
+        private static IRootResourceFactory CreateRootResourceFactory(IServiceProvider sp)
         {
             var dataSource = sp.GetService<IDataSource>();
             if (dataSource != null)

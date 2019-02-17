@@ -1,5 +1,4 @@
 ﻿using System;
-using Firestorm.Host;
 using Microsoft.AspNetCore.Http;
 
 namespace Firestorm.AspNetCore2
@@ -7,17 +6,17 @@ namespace Firestorm.AspNetCore2
     /// <summary>
     /// Uses the <see cref="IHttpContextAccessor"/> to get request-scoped services when given a singleton-scoped service provider.
     /// </summary>
-    internal class RequestServiceProvider : IServiceProvider
+    internal class RequestServiceProvider : IRequestServiceProvider
     {
         private readonly IHttpContextAccessor _contextAccessor;
 
         /// <summary>
-        /// Uses the <see cref="IHttpContextAccessor"/> to get request-scoped services from the given <see cref="singletonServiceProvider"/>.
+        /// Uses the <see cref="IHttpContextAccessor"/> to get request-scoped services.
         /// </summary>
-        public RequestServiceProvider(IServiceProvider singletonServiceProvider)
+        public RequestServiceProvider(IHttpContextAccessor contextAccessor)
         {
-            _contextAccessor = singletonServiceProvider.GetService<IHttpContextAccessor>()
-                ?? throw new InvalidOperationException("IHttpContextAccessor is not registered.");
+            _contextAccessor = contextAccessor
+                ?? throw new ArgumentNullException(nameof(contextAccessor), "IHttpContextAccessor must be registered.");
         }
 
         public object GetService(Type serviceType)

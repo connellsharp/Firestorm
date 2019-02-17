@@ -1,5 +1,4 @@
 ﻿using System;
-using Firestorm.Host;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Firestorm.AspNetCore2
@@ -13,15 +12,16 @@ namespace Firestorm.AspNetCore2
             _services = services;
         }
 
-        public IFirestormServicesBuilder Add<TService>(Func<IFirestormServiceProvider, TService> implementationFactory) where TService : class
+        public IFirestormServicesBuilder Add<TService>(Func<IServiceProvider, TService> implementationFactory) 
+            where TService : class
         {
-            _services.AddSingleton<TService>(sp => implementationFactory(new AspNetCoreServiceProvider(sp)));
+            _services.AddSingleton<TService>(implementationFactory);
             return this;
         }
 
-        public IFirestormServicesBuilder Add(Type serviceType)
+        public IFirestormServicesBuilder Add(Type serviceType, Type implementationType)
         {
-            _services.AddSingleton(serviceType);
+            _services.AddSingleton(serviceType, implementationType);
             return this;
         }
 
@@ -29,14 +29,6 @@ namespace Firestorm.AspNetCore2
             where TService : class
         {
             _services.AddSingleton<TService>(implementationInstance);
-            return this;
-        }
-
-        public IFirestormServicesBuilder Add<TAbstraction, TImplementation>() 
-            where TImplementation : class, TAbstraction
-            where TAbstraction : class
-        {
-            _services.AddSingleton<TAbstraction, TImplementation>();
             return this;
         }
     }
