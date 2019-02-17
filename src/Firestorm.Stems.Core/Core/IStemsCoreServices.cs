@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Firestorm.Stems.AutoMap;
 using JetBrains.Annotations;
 
@@ -21,6 +20,9 @@ namespace Firestorm.Stems
         [CanBeNull] // if no auto mapped properties are used.
         IPropertyAutoMapper AutoPropertyMapper { get; }
 
-        IImplementationResolver ImplementationResolver { get; set; }
+        /// <summary>
+        /// Resolves implementations used in 
+        /// </summary>
+        IImplementationResolver ImplementationResolver { get; }
     }
 }

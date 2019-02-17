@@ -43,7 +43,7 @@ namespace Firestorm.Stems.Analysis
             var definitionAnalyzer = new DefinitionAnalyzer<TItem>(_analyzers);
             definitionAnalyzer.Analyze(implementations, stemDefinition);
 
-            implementationCache.Add(stemType, implementations);
+            implementationCache.Add(typeof(EngineImplementations<TItem>), implementations);
         }
 
         private static Type GetStemItemType(Type stemType)

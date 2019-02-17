@@ -1,6 +1,6 @@
 using Firestorm.Engine.Fields;
 
-namespace Firestorm.Stems.Fuel.Resolving.Factories
+namespace Firestorm.Stems.Fuel.Resolving.Analysis
 {
     /// <summary>
     /// A factory that returns the same instance of an <see cref="IFieldHandler{TItem}"/> implementation, regardless of which stem instance is used.

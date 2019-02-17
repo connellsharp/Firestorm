@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
-using Firestorm.Stems;
 using Firestorm.Stems.Analysis;
 using Firestorm.Stems.AutoMap;
-using Firestorm.Stems.Essentials;
 
 namespace Firestorm.Stems.Tests
 {
@@ -11,7 +8,7 @@ namespace Firestorm.Stems.Tests
     {
         public IRestUser User { get; }
 
-        public IStemsCoreServices Configuration { get; } = new TestStemsServices();
+        public IStemsCoreServices Services { get; } = new TestStemsServices();
 
         public event EventHandler OnDispose;
 
@@ -25,10 +22,8 @@ namespace Firestorm.Stems.Tests
             public IDependencyResolver DependencyResolver { get; }
 
             public IPropertyAutoMapper AutoPropertyMapper { get; } = new DefaultPropertyAutoMapper();
-
-            public IEnumerable<IStemsFeatureSet> FeatureSets { get; } = new List<IStemsFeatureSet> { new EssentialFeatureSet(), new SubstemsFeatureSet() };
-
-            public IAnalyzerFactory AnalyzerCache { get; } = new AnalyzerCache();
+            
+            public IImplementationResolver ImplementationResolver { get; } = new ImplementationCache();
         }
     }
 }

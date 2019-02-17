@@ -8,7 +8,6 @@ using Firestorm.Engine.Subs.Handlers;
 using Firestorm.Stems.Analysis;
 using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
-using Firestorm.Stems.Fuel.Resolving.Factories;
 using Reflectious;
 
 namespace Firestorm.Stems.Essentials.Factories.Analyzers

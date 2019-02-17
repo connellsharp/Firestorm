@@ -4,10 +4,9 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Firestorm.Engine.Defaults;
 using Firestorm.Engine.Fields;
-using Firestorm.Stems;
-using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Essentials;
 using Firestorm.Stems.Fuel;
+using Firestorm.Stems.Fuel.Resolving.Analysis;
 using Firestorm.Testing;
 using Firestorm.Testing.Models;
 using Xunit;
@@ -20,7 +19,7 @@ namespace Firestorm.Stems.Tests
         {
             Stem = new TestStem();
             Stem.SetParent(new TestStartAxis());
-            Provider = new AttributeFieldProvider<Artist>(Stem);
+            Provider = CreateProvider(Stem);
             Item = new Artist();
         }
 
@@ -52,8 +51,8 @@ namespace Firestorm.Stems.Tests
         [Fact]
         public void SetWithInstanceMethod()
         {
-            var provider1 = new AttributeFieldProvider<Artist>(new LabelSetterStem("first_"));
-            var provider2 = new AttributeFieldProvider<Artist>(new LabelSetterStem("second_"));
+            var provider1 = CreateProvider(new LabelSetterStem("first_"));
+            var provider2 = CreateProvider(new LabelSetterStem("second_"));
 
             var artist = new Artist();
 
@@ -94,6 +93,12 @@ namespace Firestorm.Stems.Tests
 
             [Get(Display.Hidden)]
             public static Expression<Func<Artist, ICollection<Album>>> Albums { get; } = a => a.Albums;
+        }
+
+        private AttributeFieldProvider<Artist> CreateProvider(Stem stem)
+        {
+            return new AttributeFieldProvider<Artist>(Stem,
+                Stem.Services.ImplementationResolver.Get<EngineImplementations<Artist>>(Stem.GetType()));
         }
     }
 }

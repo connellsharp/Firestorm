@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Identifiers;
 using Firestorm.Engine.Subs.Context;
-using Firestorm.Stems.Fuel.Resolving.Factories;
 
 namespace Firestorm.Stems.Fuel.Resolving.Analysis
 {

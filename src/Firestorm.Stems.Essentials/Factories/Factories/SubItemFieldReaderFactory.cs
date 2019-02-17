@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Subs.Handlers;
 using Firestorm.Stems.Fuel;
-using Firestorm.Stems.Fuel.Resolving.Factories;
+using Firestorm.Stems.Fuel.Resolving.Analysis;
 using JetBrains.Annotations;
 
 namespace Firestorm.Stems.Essentials.Factories.Factories

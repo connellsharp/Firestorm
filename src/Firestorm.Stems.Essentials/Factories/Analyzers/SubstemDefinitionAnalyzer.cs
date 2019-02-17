@@ -9,7 +9,6 @@ using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Essentials.Factories.Factories;
 using Firestorm.Stems.Fuel.Resolving;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
-using Firestorm.Stems.Fuel.Resolving.Factories;
 
 namespace Firestorm.Stems.Essentials.Factories.Analyzers
 {

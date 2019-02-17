@@ -4,7 +4,7 @@ using Firestorm.Engine.Identifiers;
 using Firestorm.Stems.Analysis;
 using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Identifiers;
-using Firestorm.Stems.Fuel.Resolving.Factories;
+using Firestorm.Stems.Fuel.Resolving.Analysis;
 
 namespace Firestorm.Stems.Essentials.Factories.Factories
 {
