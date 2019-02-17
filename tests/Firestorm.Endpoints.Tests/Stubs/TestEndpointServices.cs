@@ -6,7 +6,9 @@ namespace Firestorm.Endpoints.Tests.Stubs
     {
         public TestEndpointServices()
         {
-            new DefaultEndpointFeature(new EndpointConfiguration()).AddTo(this);
+            var config = new EndpointConfiguration();
+            config.NamingConventions.TwoLetterAcronyms = new[] {"ID"};
+            new DefaultEndpointFeature(config).AddTo(this);
         }
     }
 }

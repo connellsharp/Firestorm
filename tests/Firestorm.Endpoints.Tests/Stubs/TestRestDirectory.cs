@@ -8,7 +8,7 @@ namespace Firestorm.Endpoints.Tests.Stubs
         {
             switch (startResourceName)
             {
-                case "artists":
+                case "Artists":
                     return new ArtistMemoryCollection();
 
                 default:

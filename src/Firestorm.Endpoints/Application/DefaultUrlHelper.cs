@@ -20,18 +20,17 @@ namespace Firestorm.Endpoints.Configuration
                     Name = path.GetCoded(_config.DictionaryReferencePrefix.Length)
                 };
             }
-            
-            if(_config.EnableEquals && path.Raw.Contains("="))
+
+            int equalsIndex = path.Raw.IndexOf('=');
+            if(_config.EnableEquals && equalsIndex > 0)
             {
                 // see https://stackoverflow.com/a/20386425/369247
-                
-                string[] split = path.Raw.Split(new[] { '=' }, 2);
-                
+                                
                 return new IdentifierInfo
                 {
                     IsDictionary = false,
-                    Value = split[1],
-                    Name = split[0]
+                    Value = path.GetCoded(equalsIndex + 1),
+                    Name = path.GetCoded(0, equalsIndex)
                 };
             }
 

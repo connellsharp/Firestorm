@@ -21,7 +21,7 @@ namespace Firestorm.Endpoints
         public async Task<object> ExecuteAsync(IRequestReader reader, ResponseBuilder response)
         {
             return await CheckPreconditions(reader, response)
-                ? _executor.ExecuteAsync(reader, response)
+                ? await _executor.ExecuteAsync(reader, response)
                 : null;
         }
 
