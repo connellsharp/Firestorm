@@ -2,9 +2,9 @@ using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Essentials.Factories.Factories;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 
-namespace Firestorm.Stems.Essentials.Factories.Resolvers
+namespace Firestorm.Stems.Essentials.Factories.Analyzers
 {
-    internal class DescriptionAnalyzer : IFieldDefinitionAnalyzer
+    internal class DescriptionAnalyzer : IDefinitionAnalyzer<FieldDefinition>
     {
         public IStemsCoreServices Configuration { get; set; }
 

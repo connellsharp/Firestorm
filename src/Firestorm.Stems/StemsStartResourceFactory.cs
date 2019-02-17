@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Firestorm.Host;
 using Firestorm.Host.Infrastructure;
+using Firestorm.Stems.Analysis;
 using Firestorm.Stems.Roots;
 
 namespace Firestorm.Stems
@@ -28,7 +29,7 @@ namespace Firestorm.Stems
             IEnumerable<Type> stemTypes = RootResourceFactory.GetStemTypes(StemsServices);
 
             var cache = new ImplementationCache();
-            var supremeAnalyzer = new SurpremeAnalyzer(StemsServices.Analyzers);
+            var supremeAnalyzer = new SurpremeAnalyzer(StemsServices.DefinitionAnalyzers);
             supremeAnalyzer.Analyze(cache, stemTypes);
             StemsServices.ImplementationResolver = cache;
 

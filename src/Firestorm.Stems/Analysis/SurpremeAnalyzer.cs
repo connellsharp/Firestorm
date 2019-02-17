@@ -1,21 +1,20 @@
 using System;
 using System.Collections.Generic;
-using Firestorm.Stems.Analysis;
 using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 using Firestorm.Stems.Roots;
 using Reflectious;
 
-namespace Firestorm.Stems
+namespace Firestorm.Stems.Analysis
 {
     /// <summary>
     /// The overall analyzer that builds implementations for all stem types by using other analyzers.
     /// </summary>
-    public class SurpremeAnalyzer : IAnalyzer<ImplementationCache, IEnumerable<Type>>
+    internal class SurpremeAnalyzer : IAnalyzer<ImplementationCache, IEnumerable<Type>>
     {
-        private readonly IEnumerable<IFieldDefinitionAnalyzer> _analyzers;
+        private readonly IDefinitionAnalyzers _analyzers;
 
-        public SurpremeAnalyzer(IEnumerable<IFieldDefinitionAnalyzer> analyzers)
+        public SurpremeAnalyzer(IDefinitionAnalyzers analyzers)
         {
             _analyzers = analyzers;
         }

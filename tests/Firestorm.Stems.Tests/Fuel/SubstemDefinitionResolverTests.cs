@@ -6,7 +6,7 @@ using AutoFixture.AutoMoq;
 using Firestorm.Stems;
 using Firestorm.Stems.Analysis;
 using Firestorm.Stems.Definitions;
-using Firestorm.Stems.Essentials.Factories.Resolvers;
+using Firestorm.Stems.Essentials.Factories.Analyzers;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 using Firestorm.Stems.Roots;
 using Xunit;

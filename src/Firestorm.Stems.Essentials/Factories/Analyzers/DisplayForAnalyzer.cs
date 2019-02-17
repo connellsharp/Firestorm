@@ -4,9 +4,9 @@ using Firestorm.Data;
 using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 
-namespace Firestorm.Stems.Essentials.Factories.Resolvers
+namespace Firestorm.Stems.Essentials.Factories.Analyzers
 {
-    internal class DisplayForAnalyzer : IFieldDefinitionAnalyzer
+    internal class DisplayForAnalyzer : IDefinitionAnalyzer<FieldDefinition>
     {
         public IStemsCoreServices Configuration { get; set; }
 

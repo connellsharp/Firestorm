@@ -1,35 +1,27 @@
-using System.Collections;
 using System.Collections.Generic;
-using Firestorm.Stems.Essentials.Factories.Resolvers;
+using Firestorm.Stems.Definitions;
+using Firestorm.Stems.Essentials.Factories.Analyzers;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 
 namespace Firestorm.Stems.Essentials
 {
-    public class DefaultFieldDefinitionAnalyzers : IEnumerable<IFieldDefinitionAnalyzer>
+    public class DefaultFieldDefinitionAnalyzers : IDefinitionAnalyzers
     {
-        private readonly List<IFieldDefinitionAnalyzer> _list;
-
-        public DefaultFieldDefinitionAnalyzers()
-        {
-            _list = new List<IFieldDefinitionAnalyzer>
+        public IEnumerable<IDefinitionAnalyzer<FieldDefinition>> FieldAnalyzers { get; } =
+            new List<IDefinitionAnalyzer<FieldDefinition>>
             {
                 new ExpressionOnlyDefinitionAnalyzer(),
                 new RuntimeMethodDefinitionAnalyzer(),
                 new AuthorizePredicateAnalyzer(),
                 new DescriptionAnalyzer(),
                 new DisplayForAnalyzer(),
-                new SubstemDefinitionAnalyzer()
+                new SubstemDefinitionAnalyzer(),
             };
-        }
-        
-        public IEnumerator<IFieldDefinitionAnalyzer> GetEnumerator()
-        {
-            return _list.GetEnumerator();
-        }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        public IEnumerable<IDefinitionAnalyzer<IdentifierDefinition>> IdentifierAnalyzers { get; } =
+            new List<IDefinitionAnalyzer<IdentifierDefinition>>
+            {
+                new IdentifierAnalyzer()
+            };
     }
 }

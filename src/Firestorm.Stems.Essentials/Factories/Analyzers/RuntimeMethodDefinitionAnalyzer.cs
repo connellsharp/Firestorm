@@ -6,12 +6,12 @@ using Firestorm.Stems.Fuel.Resolving.Analysis;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 using Reflectious;
 
-namespace Firestorm.Stems.Essentials.Factories.Resolvers
+namespace Firestorm.Stems.Essentials.Factories.Analyzers
 {
     /// <summary>
     /// Resolves factories using delegates created from methods in the Stem classes.
     /// </summary>
-    internal class RuntimeMethodDefinitionAnalyzer : IFieldDefinitionAnalyzer
+    internal class RuntimeMethodDefinitionAnalyzer : IDefinitionAnalyzer<FieldDefinition>
     {
         public void Analyze<TItem>(EngineImplementations<TItem> implementations, FieldDefinition definition) 
             where TItem : class

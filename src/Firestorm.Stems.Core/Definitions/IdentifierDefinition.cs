@@ -6,6 +6,8 @@ namespace Firestorm.Stems.Definitions
 {
     public class IdentifierDefinition
     {
+        public string IdentifierName { get; set; }
+        
         public LambdaExpression GetterExpression { get; set; }
 
         public MethodInfo PredicateMethod { get; set; }

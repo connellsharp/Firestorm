@@ -1,9 +1,9 @@
 using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 
-namespace Firestorm.Stems.Essentials.Factories.Resolvers
+namespace Firestorm.Stems.Essentials.Factories.Analyzers
 {
-    internal class AuthorizePredicateAnalyzer : IFieldDefinitionAnalyzer
+    internal class AuthorizePredicateAnalyzer : IDefinitionAnalyzer<FieldDefinition>
     {
         public void Analyze<TItem>(EngineImplementations<TItem> implementations, FieldDefinition definition) 
             where TItem : class

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Firestorm.Stems.Analysis;
-using Firestorm.Stems.Essentials.Factories.Resolvers;
+using Firestorm.Stems.Essentials.Factories.Analyzers;
 using Reflectious;
 
 namespace Firestorm.Stems.Essentials

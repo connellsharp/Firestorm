@@ -1,4 +1,5 @@
 using Firestorm.Features;
+using Firestorm.Stems.Analysis;
 using Firestorm.Stems.AutoMap;
 using Firestorm.Stems.Essentials;
 
@@ -9,7 +10,7 @@ namespace Firestorm.Stems
         public void AddTo(StemsServices services)
         {
             services.AutoPropertyMapper = new DefaultPropertyAutoMapper();
-            services.Analyzers = new DefaultFieldDefinitionAnalyzers();
+            services.DefinitionAnalyzers = new DefaultFieldDefinitionAnalyzers();
             services.ImplementationResolver = new ImplementationCache();
         }
     }

@@ -1,6 +1,9 @@
-namespace Firestorm.Stems
+namespace Firestorm.Stems.Analysis
 {
-    public interface IAnalyzer<in TDestination, in TSource>
+    /// <summary>
+    /// Interface to ensure analyzer classes follow a common pattern.
+    /// </summary>
+    internal interface IAnalyzer<in TDestination, in TSource>
         where TDestination : class
     {
         void Analyze(TDestination destination, TSource source);

@@ -11,9 +11,9 @@ using Firestorm.Stems.Fuel.Resolving;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 
-namespace Firestorm.Stems.Essentials.Factories.Resolvers
+namespace Firestorm.Stems.Essentials.Factories.Analyzers
 {
-    internal class SubstemDefinitionAnalyzer : IFieldDefinitionAnalyzer
+    internal class SubstemDefinitionAnalyzer : IDefinitionAnalyzer<FieldDefinition>
     {
         public void Analyze<TItem>(EngineImplementations<TItem> implementations, FieldDefinition definition) 
             where TItem : class

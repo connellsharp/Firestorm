@@ -8,7 +8,7 @@ namespace Firestorm.Stems.Analysis
     /// <summary>
     /// Analyzes stem types to build a <see cref="StemDefinition"/> model from members with custom <see cref="StemAttribute"/>s using their <see cref="IAttributeResolver"/> implementations.
     /// </summary>
-    public class AttributeAnalyzer : IAnalyzer<StemDefinition, Type>
+    internal class AttributeAnalyzer : IAnalyzer<StemDefinition, Type>
     {
         public void Analyze(StemDefinition destination, Type stemType)
         {

@@ -11,12 +11,12 @@ using Firestorm.Stems.Fuel.Resolving.Analysis;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 using Reflectious;
 
-namespace Firestorm.Stems.Essentials.Factories.Resolvers
+namespace Firestorm.Stems.Essentials.Factories.Analyzers
 {
     /// <summary>
     /// Resolves reusable expression readers for Stem static expression properties.
     /// </summary>
-    internal class ExpressionOnlyDefinitionAnalyzer : IFieldDefinitionAnalyzer
+    internal class ExpressionOnlyDefinitionAnalyzer : IDefinitionAnalyzer<FieldDefinition>
     {
         public void Analyze<TItem>(EngineImplementations<TItem> implementations, FieldDefinition definition) 
             where TItem : class

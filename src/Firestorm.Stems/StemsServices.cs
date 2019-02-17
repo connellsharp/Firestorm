@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using Firestorm.Stems.AutoMap;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
@@ -13,6 +12,6 @@ namespace Firestorm.Stems
 
         public IImplementationResolver ImplementationResolver { get; set; }
         
-        public IEnumerable<IFieldDefinitionAnalyzer> Analyzers { get; set; } = Enumerable.Empty<IFieldDefinitionAnalyzer>();
+        public IDefinitionAnalyzers DefinitionAnalyzers { get; set; }
     }
 }

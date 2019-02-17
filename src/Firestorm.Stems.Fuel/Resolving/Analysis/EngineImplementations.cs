@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Firestorm.Engine.Fields;
+using Firestorm.Engine.Identifiers;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Stems.Fuel.Resolving.Factories;
 
@@ -18,6 +19,8 @@ namespace Firestorm.Stems.Fuel.Resolving.Analysis
         public Dictionary<string, IFactory<IFieldCollator<TItem>, TItem>> CollatorFactories { get; } = new Dictionary<string, IFactory<IFieldCollator<TItem>, TItem>>();
         public Dictionary<string, IFactory<IFieldWriter<TItem>, TItem>> WriterFactories { get; } = new Dictionary<string, IFactory<IFieldWriter<TItem>, TItem>>();
         public Dictionary<string, IFactory<IItemLocator<TItem>, TItem>> LocatorFactories { get; } = new Dictionary<string, IFactory<IItemLocator<TItem>, TItem>>();
+        
+        public Dictionary<string, IFactory<IIdentifierInfo<TItem>, TItem>> IdentifierFactories { get; } = new Dictionary<string, IFactory<IIdentifierInfo<TItem>, TItem>>();
 
         public Dictionary<string, IFieldDescription> Descriptions { get; } = new Dictionary<string, IFieldDescription>();
         public Dictionary<string, Func<IRestUser, bool>> AuthorizePredicates { get; } = new Dictionary<string, Func<IRestUser, bool>>();

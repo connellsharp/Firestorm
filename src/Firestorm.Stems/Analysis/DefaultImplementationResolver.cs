@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Firestorm.Stems
+namespace Firestorm.Stems.Analysis
 {
     public class ImplementationCache : IImplementationResolver
     {
@@ -13,7 +13,7 @@ namespace Firestorm.Stems
             public Type StemType;
         }
 
-        public ImplementationCache()
+        internal ImplementationCache()
         {
             _dictionary = new Dictionary<CacheKey, object>();
         }
