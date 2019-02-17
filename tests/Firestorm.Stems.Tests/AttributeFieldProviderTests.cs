@@ -98,7 +98,7 @@ namespace Firestorm.Stems.Tests
         private AttributeFieldProvider<Artist> CreateProvider(Stem stem)
         {
             return new AttributeFieldProvider<Artist>(Stem,
-                Stem.Services.ImplementationResolver.Get<EngineImplementations<Artist>>(Stem.GetType()));
+                Stem.Services.ServiceGroup.GetProvider(Stem.GetType()).GetService<EngineImplementations<Artist>>());
         }
     }
 }

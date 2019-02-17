@@ -22,8 +22,8 @@ namespace Firestorm.Stems.Tests
             public IDependencyResolver DependencyResolver { get; }
 
             public IPropertyAutoMapper AutoPropertyMapper { get; } = new DefaultPropertyAutoMapper();
-            
-            public IImplementationResolver ImplementationResolver { get; } = new ImplementationCache();
+
+            public IServiceGroup ServiceGroup { get; } = new ImplementationCache();
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Firestorm.Stems
             var cache = new ImplementationCache();
             var supremeAnalyzer = new SurpremeAnalyzer(StemsServices.DefinitionAnalyzers);
             supremeAnalyzer.Analyze(cache, stemTypes);
-            StemsServices.ImplementationResolver = cache;
+            StemsServices.ServiceGroup = cache;
 
             _initialized = true;
         }

@@ -23,6 +23,6 @@ namespace Firestorm.Stems
         /// <summary>
         /// Resolves implementations used in 
         /// </summary>
-        IImplementationResolver ImplementationResolver { get; }
+        IServiceGroup ServiceGroup { get; }
     }
 }

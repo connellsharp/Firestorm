@@ -9,8 +9,8 @@ namespace Firestorm.Stems
         public IDependencyResolver DependencyResolver { get; set; }
 
         public IPropertyAutoMapper AutoPropertyMapper { get; set; }
-
-        public IImplementationResolver ImplementationResolver { get; set; }
+        
+        public IServiceGroup ServiceGroup { get; set; }
         
         public IDefinitionAnalyzers DefinitionAnalyzers { get; set; }
     }
