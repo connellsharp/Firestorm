@@ -11,9 +11,24 @@ namespace Firestorm.Endpoints.Tests.Naming
         {
             var config = new NamingConventionConfiguration();
             
-            var calculator = new DefaultNamingConventionSwitcher(config);
+            var switcher = new DefaultNamingConventionSwitcher(config);
             
-            Assert.IsType<PascalCaseConvention>(calculator.CodedCase);
+            Assert.IsType<PascalCaseConvention>(switcher.CodedCase);
+        }
+        
+        [Fact]
+        public void GivenTwoLetterAcronym_Construct_CodedCasePascal()
+        {
+            var config = new NamingConventionConfiguration
+            {
+                TwoLetterAcronyms = new[] {"ID"}
+            };
+            
+            var switcher = new DefaultNamingConventionSwitcher(config);
+
+            string coverted = switcher.ConvertRequestedToCoded("artist_id");
+            
+            Assert.Equal("ArtistID", coverted);
         }
     }
 }

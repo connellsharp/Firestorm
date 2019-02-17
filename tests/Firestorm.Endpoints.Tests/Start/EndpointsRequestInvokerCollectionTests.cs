@@ -177,7 +177,7 @@ namespace Firestorm.Endpoints.Tests.Start
 
             public async Task<CreatedItemAcknowledgment> AddAsync(RestItemData itemData)
             {
-                List.Add((string) itemData["Value"]);
+                List.Add((string) itemData["value"]);
                 return new CreatedItemAcknowledgment(123);
             }
 
