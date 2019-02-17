@@ -16,15 +16,27 @@ namespace Firestorm
 
         public object GetService(Type serviceType)
         {
-            if (!_dictionary.ContainsKey(serviceType))
-                return null;
-
-            var factoryFuncs = _dictionary[serviceType];
-
             if (serviceType.IsOfGenericTypeDefinition(typeof(IEnumerable<>)))
-                return factoryFuncs.Select(func => func(this));
+            {
+                Type innerType = serviceType.GenericTypeArguments[0];
 
-            return factoryFuncs.Last().Invoke(this);
+                return Reflect.Instance(this).GetMethod("GetEnumerable").MakeGeneric(innerType).Invoke();
+            }
+
+            if (!_dictionary.ContainsKey(serviceType)) 
+                return null;
+            
+            var factories = _dictionary[serviceType];
+            return factories.Last().Invoke(this);
+        }
+
+        private IEnumerable<T> GetEnumerable<T>()
+        {
+            if (!_dictionary.ContainsKey(typeof(T)))
+                return Enumerable.Empty<T>();
+
+            IList<Func<IServiceProvider, object>> innerFactories = _dictionary[typeof(T)];
+            return innerFactories.Select(func => func(this)).OfType<T>();
         }
     }
 }

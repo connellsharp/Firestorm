@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Firestorm
 {
@@ -24,7 +25,8 @@ namespace Firestorm
         
         public static IEnumerable<T> GetServices<T>(this IServiceProvider provider)
         {
-            return provider.GetService<IEnumerable<T>>();
+            return provider.GetService<IEnumerable<T>>()
+                   ?? Enumerable.Empty<T>();
         }
 
         public static IRequestServiceProvider GetRequestServiceProvider(this IServiceProvider serviceProvider)
