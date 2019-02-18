@@ -10,7 +10,7 @@ namespace Firestorm.Stems.Analysis
     /// <summary>
     /// The overall analyzer that builds implementations for all stem types by using other analyzers.
     /// </summary>
-    internal class SurpremeAnalyzer : IAnalyzer<ImplementationCache, IEnumerable<Type>>
+    internal class SurpremeAnalyzer : IAnalyzer<ServiceCache, IEnumerable<Type>>
     {
         private readonly IDefinitionAnalyzers _analyzers;
 
@@ -19,7 +19,7 @@ namespace Firestorm.Stems.Analysis
             _analyzers = analyzers;
         }
         
-        public void Analyze(ImplementationCache implementationCache, IEnumerable<Type> stemTypes)
+        public void Analyze(ServiceCache serviceCache, IEnumerable<Type> stemTypes)
         {
             foreach (Type stemType in stemTypes)
             {
@@ -27,11 +27,11 @@ namespace Firestorm.Stems.Analysis
                 
                 Reflect.Instance(this).GetMethod(nameof(AnalyzeInternal))
                     .MakeGeneric(itemType)
-                    .Invoke(implementationCache, stemType);
+                    .Invoke(serviceCache, stemType);
             }
         }
 
-        private void AnalyzeInternal<TItem>(ImplementationCache implementationCache, Type stemType) 
+        private void AnalyzeInternal<TItem>(ServiceCache serviceCache, Type stemType) 
             where TItem : class
         {
             var stemDefinition = new StemDefinition();
@@ -40,10 +40,11 @@ namespace Firestorm.Stems.Analysis
             attributeAnalyzer.Analyze(stemDefinition, stemType);
 
             var implementations = new EngineImplementations<TItem>();
+            
             var definitionAnalyzer = new DefinitionAnalyzer<TItem>(_analyzers);
             definitionAnalyzer.Analyze(implementations, stemDefinition);
 
-            implementationCache.Add(typeof(EngineImplementations<TItem>), implementations);
+            serviceCache.Add(stemType, implementations);
         }
 
         private static Type GetStemItemType(Type stemType)

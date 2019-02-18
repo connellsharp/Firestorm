@@ -11,7 +11,5 @@ namespace Firestorm.Stems
         public IPropertyAutoMapper AutoPropertyMapper { get; set; }
         
         public IServiceGroup ServiceGroup { get; set; }
-        
-        public IDefinitionAnalyzers DefinitionAnalyzers { get; set; }
     }
 }

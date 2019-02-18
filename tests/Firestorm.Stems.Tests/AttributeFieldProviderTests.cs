@@ -95,10 +95,10 @@ namespace Firestorm.Stems.Tests
             public static Expression<Func<Artist, ICollection<Album>>> Albums { get; } = a => a.Albums;
         }
 
-        private AttributeFieldProvider<Artist> CreateProvider(Stem stem)
+        private static AttributeFieldProvider<Artist> CreateProvider(Stem<Artist> stem)
         {
-            return new AttributeFieldProvider<Artist>(Stem,
-                Stem.Services.ServiceGroup.GetProvider(Stem.GetType()).GetService<EngineImplementations<Artist>>());
+            return new AttributeFieldProvider<Artist>(stem,
+                stem.Services.ServiceGroup.GetProvider(stem.GetType()).GetService<EngineImplementations<Artist>>());
         }
     }
 }

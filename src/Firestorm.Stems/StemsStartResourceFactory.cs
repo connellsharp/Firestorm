@@ -28,10 +28,7 @@ namespace Firestorm.Stems
         {
             IEnumerable<Type> stemTypes = RootResourceFactory.GetStemTypes(StemsServices);
 
-            var cache = new ImplementationCache();
-            var supremeAnalyzer = new SurpremeAnalyzer(StemsServices.DefinitionAnalyzers);
-            supremeAnalyzer.Analyze(cache, stemTypes);
-            StemsServices.ServiceGroup = cache;
+            StemsServices.ServiceGroup.Preload(stemTypes);
 
             _initialized = true;
         }
