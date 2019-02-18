@@ -28,7 +28,7 @@ namespace Firestorm.Stems
         {
             IEnumerable<Type> stemTypes = RootResourceFactory.GetStemTypes(StemsServices);
 
-            StemsServices.ServiceGroup.Preload(stemTypes);
+            StemsServices.ServiceGroup?.Preload(stemTypes);
 
             _initialized = true;
         }

@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using Firestorm.Stems.AutoMap;
 using Firestorm.Stems.Definitions;
 using Reflectious;
 
@@ -10,6 +11,13 @@ namespace Firestorm.Stems.Analysis
     /// </summary>
     internal class AttributeAnalyzer : IAnalyzer<StemDefinition, Type>
     {
+        private readonly IPropertyAutoMapper _propertyAutoMapper;
+
+        public AttributeAnalyzer(IPropertyAutoMapper propertyAutoMapper)
+        {
+            _propertyAutoMapper = propertyAutoMapper;
+        }
+
         public void Analyze(StemDefinition destination, Type stemType)
         {
             Type stemBaseType = stemType.GetGenericSubclass(typeof(Stem<>))
@@ -26,6 +34,7 @@ namespace Firestorm.Stems.Analysis
                     resolver.Attribute = stemAttribute;
                     resolver.Definition = destination;
                     resolver.ItemType = itemType;
+                    resolver.PropertyAutoMapper = _propertyAutoMapper;
 
                     resolver.IncludeMember(member);
                 }

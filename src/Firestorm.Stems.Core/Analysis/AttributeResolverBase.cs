@@ -17,7 +17,7 @@ namespace Firestorm.Stems.Analysis
 
         public StemDefinition Definition { protected get; set; }
 
-        public IStemsCoreServices Configuration { protected get; set; }
+        public IPropertyAutoMapper PropertyAutoMapper { protected get; set; }
 
         public StemAttribute Attribute { protected get; set; }
 
@@ -78,15 +78,14 @@ namespace Firestorm.Stems.Analysis
 
         private LambdaExpression GetAutoMapExpression(PropertyInfo property)
         {
-            IPropertyAutoMapper autoPropertyMapper = Configuration?.AutoPropertyMapper;
-            if (autoPropertyMapper == null)
+            if (PropertyAutoMapper == null)
                 throw new StemAttributeSetupException("Attribute has been applied to an auto expression property, but no AutoPropertyMapper is set up.");
 
             LambdaExpression expression;
 
             try
             {
-                expression = autoPropertyMapper.MapExpression(property, ItemType);
+                expression = PropertyAutoMapper.MapExpression(property, ItemType);
             }
             catch (Exception ex)
             {

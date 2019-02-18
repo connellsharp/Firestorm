@@ -1,6 +1,4 @@
-using System.Linq;
 using Firestorm.Stems.AutoMap;
-using Firestorm.Stems.Fuel.Resolving.Analysis;
 
 namespace Firestorm.Stems
 {

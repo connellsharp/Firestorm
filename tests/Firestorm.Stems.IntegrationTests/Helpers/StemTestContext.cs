@@ -1,6 +1,8 @@
 ﻿using System;
 using Firestorm.Data;
 using Firestorm.Engine.Defaults;
+using Firestorm.Stems.Analysis;
+using Firestorm.Stems.AutoMap;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.Derive;
 using Firestorm.Testing.Http;
@@ -27,7 +29,9 @@ namespace Firestorm.Stems.IntegrationTests.Helpers
                 },
                 StemsServices = new StemsServices
                 {
-                    DependencyResolver = TestDependencyResolver
+                    DependencyResolver = TestDependencyResolver,
+                    ServiceGroup = new DefaultServiceGroup(),
+                    AutoPropertyMapper = new DefaultPropertyAutoMapper()
                 }
             };
 

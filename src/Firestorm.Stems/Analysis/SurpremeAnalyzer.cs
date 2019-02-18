@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Firestorm.Stems.AutoMap;
 using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
 using Firestorm.Stems.Roots;
@@ -12,10 +13,12 @@ namespace Firestorm.Stems.Analysis
     /// </summary>
     internal class SurpremeAnalyzer : IAnalyzer<ServiceCache, IEnumerable<Type>>
     {
+        private readonly IPropertyAutoMapper _propertyAutoMapper;
         private readonly IDefinitionAnalyzers _analyzers;
 
-        public SurpremeAnalyzer(IDefinitionAnalyzers analyzers)
+        public SurpremeAnalyzer(IPropertyAutoMapper propertyAutoMapper, IDefinitionAnalyzers analyzers)
         {
+            _propertyAutoMapper = propertyAutoMapper;
             _analyzers = analyzers;
         }
         
@@ -36,7 +39,7 @@ namespace Firestorm.Stems.Analysis
         {
             var stemDefinition = new StemDefinition();
 
-            var attributeAnalyzer = new AttributeAnalyzer();
+            var attributeAnalyzer = new AttributeAnalyzer(_propertyAutoMapper);
             attributeAnalyzer.Analyze(stemDefinition, stemType);
 
             var implementations = new EngineImplementations<TItem>();

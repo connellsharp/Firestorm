@@ -1,7 +1,6 @@
 using Firestorm.Features;
 using Firestorm.Stems.Analysis;
 using Firestorm.Stems.AutoMap;
-using Firestorm.Stems.Essentials;
 
 namespace Firestorm.Stems
 {
@@ -18,7 +17,7 @@ namespace Firestorm.Stems
         {
             services.DependencyResolver = new DefaultDependencyResolver(_requestServiceProvider);
             services.AutoPropertyMapper = new DefaultPropertyAutoMapper();
-            services.ServiceGroup = new AnalyzedServiceGroup(new SurpremeAnalyzer(new DefaultFieldDefinitionAnalyzers()));
+            services.ServiceGroup = new DefaultServiceGroup(services.AutoPropertyMapper);
         }
     }
 }

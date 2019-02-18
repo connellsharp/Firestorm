@@ -1,6 +1,5 @@
 using Firestorm.Stems.Analysis;
 using Firestorm.Stems.AutoMap;
-using Firestorm.Stems.Essentials;
 
 namespace Firestorm.Stems.Tests
 {
@@ -9,9 +8,7 @@ namespace Firestorm.Stems.Tests
         public TestStemsServices()
         {
             AutoPropertyMapper = new DefaultPropertyAutoMapper();
-
-            ServiceGroup =
-                new AnalyzedServiceGroup(new SurpremeAnalyzer(new DefaultFieldDefinitionAnalyzers()));
+            ServiceGroup = new DefaultServiceGroup(AutoPropertyMapper);
         }
     }
 }

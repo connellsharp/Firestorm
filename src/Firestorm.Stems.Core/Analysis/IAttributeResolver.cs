@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using Firestorm.Stems.AutoMap;
 using Firestorm.Stems.Definitions;
 
 namespace Firestorm.Stems.Analysis
@@ -14,6 +15,8 @@ namespace Firestorm.Stems.Analysis
         StemDefinition Definition { set; }
 
         StemAttribute Attribute { set; }
+        
+        IPropertyAutoMapper PropertyAutoMapper { set; }
 
         void IncludeMember(MemberInfo member);
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Firestorm.Stems.Analysis
 {
-    internal class AnalyzedServiceGroup : IServiceGroup
+    public class AnalyzedServiceGroup : IServiceGroup
     {
         private readonly ServiceCache _cache;
         private readonly IAnalyzer<ServiceCache, IEnumerable<Type>> _analyzer;
