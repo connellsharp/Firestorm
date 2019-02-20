@@ -14,7 +14,7 @@ namespace Firestorm.Stems.Essentials
                 new RuntimeMethodDefinitionAnalyzer(),
                 new AuthorizePredicateAnalyzer(),
                 new DescriptionAnalyzer(),
-                new DisplayForAnalyzer(),
+                new DisplayNestingAnalyzer(),
                 new SubstemDefinitionAnalyzer(),
             };
 

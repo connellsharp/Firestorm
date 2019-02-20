@@ -6,26 +6,24 @@ using Firestorm.Stems.Fuel.Analysis;
 
 namespace Firestorm.Stems.Essentials.Factories.Analyzers
 {
-    internal class DisplayForAnalyzer : IDefinitionAnalyzer<FieldDefinition>
+    internal class DisplayNestingAnalyzer : IDefinitionAnalyzer<FieldDefinition>
     {
-        public IStemsCoreServices Configuration { get; set; }
-
         public void Analyze<TItem>(EngineImplementations<TItem> implementations, FieldDefinition definition) 
             where TItem : class
         {
-            var defaults = implementations.Defaults;
+            Dictionary<Display, List<string>> defaults = implementations.Defaults;
 
-            foreach (Display displayFor in Enum.GetValues(typeof(Display)))
+            foreach (Display d in Enum.GetValues(typeof(Display)))
             {
-                var display = definition.Display ??
-                              GetDefaultDisplayFromName(typeof(TItem).Name, definition.FieldName);
+                Display display = definition.Display ??
+                                  GetDefaultDisplayFromName(typeof(TItem).Name, definition.FieldName);
                 
-                if (display >= displayFor)
+                if (display >= d)
                 {
-                    if (!defaults.ContainsKey(displayFor))
-                        defaults.Add(displayFor, new List<string>());
+                    if (!defaults.ContainsKey(d))
+                        defaults.Add(d, new List<string>());
 
-                    defaults[displayFor].Add(definition.FieldName);
+                    defaults[d].Add(definition.FieldName);
                 }
             }
         }
