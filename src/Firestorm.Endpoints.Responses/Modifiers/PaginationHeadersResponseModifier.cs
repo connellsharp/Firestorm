@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Firestorm.Endpoints.Responses.Pagination;
 using Firestorm.Rest.Web;
 using Firestorm.Rest.Web.Options;
 

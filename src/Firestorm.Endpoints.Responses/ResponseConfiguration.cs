@@ -1,4 +1,4 @@
-using Firestorm.Endpoints.Configuration;
+using Firestorm.Endpoints.Responses.Pagination;
 
 namespace Firestorm.Endpoints.Responses
 {

@@ -1,7 +1,7 @@
-namespace Firestorm.Endpoints.Configuration
+namespace Firestorm.Endpoints
 {
     public interface IUrlHelper
     {
-        IdentifierInfo GetIdentifierInfo(INextPath path);
+        IdentifierPathInfo GetIdentifierInfo(INextPath path);
     }
 }

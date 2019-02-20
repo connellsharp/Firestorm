@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Formatting;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Host.Infrastructure;

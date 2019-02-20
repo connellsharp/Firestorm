@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Firestorm.Stems.FunctionalTests.Data.Models;
+using Firestorm.Stems.FunctionalTests.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Firestorm.Stems.FunctionalTests.Data

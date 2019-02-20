@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Rest.Web;
 
-namespace Firestorm.Endpoints
+namespace Firestorm.Endpoints.Executors
 {
     /// <summary>
     /// An <see cref="EndpointExecutor"/> that returns the resource on POST, PUT and PATCH.

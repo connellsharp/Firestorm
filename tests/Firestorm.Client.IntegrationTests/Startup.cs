@@ -1,6 +1,6 @@
 ﻿using Firestorm.AspNetCore2;
 using Firestorm.Endpoints;
-using Firestorm.Endpoints.Configuration;
+using Firestorm.Endpoints.Responses;
 using Firestorm.Host;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;

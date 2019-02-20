@@ -5,7 +5,7 @@ using Firestorm.Endpoints.Responses;
 using Firestorm.Rest.Web;
 using Firestorm.Rest.Web.Options;
 
-namespace Firestorm.Endpoints
+namespace Firestorm.Endpoints.Executors
 {
     /// <summary>
     /// Executes the request from the given <see cref="IHttpRequestHandler"/> onto the given <see cref="IRestEndpoint"/>

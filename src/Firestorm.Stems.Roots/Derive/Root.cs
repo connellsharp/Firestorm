@@ -43,7 +43,7 @@ namespace Firestorm.Stems.Roots.Derive
 
         public IRestUser User { get; set; }
 
-        public IStemConfiguration Configuration { get; set; }
+        public IStemsCoreServices Services { get; set; }
 
         public event EventHandler OnDispose;
 

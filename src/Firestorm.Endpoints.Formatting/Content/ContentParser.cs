@@ -1,5 +1,4 @@
 using System.IO;
-using Firestorm.Endpoints.Configuration;
 using Firestorm.Rest.Web;
 using Firestorm.Endpoints.Formatting.Json;
 using Firestorm.Host.Infrastructure;

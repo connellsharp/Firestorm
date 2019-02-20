@@ -13,7 +13,7 @@ namespace Firestorm.Stems
     {
         IRestUser User { get; }
 
-        IStemConfiguration Configuration { get; }
+        IStemsCoreServices Services { get; }
 
         event EventHandler OnDispose;
     }

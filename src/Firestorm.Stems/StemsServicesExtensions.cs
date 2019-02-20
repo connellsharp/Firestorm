@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using Firestorm.Data;
+using Firestorm.Features;
 using Firestorm.Host;
 using Firestorm.Stems.AutoMap;
 using Firestorm.Stems.Roots;
@@ -32,13 +33,12 @@ namespace Firestorm.Stems
         /// </summary>
         public static IFirestormServicesBuilder AddStems(this IFirestormServicesBuilder builder, Assembly assembly, string baseNamespace)
         {
+            builder.EnableFeatures<StemsServices>()
+                .AddFeature<StemsServices, DefaultStemsFeature>();
+            
             builder.AddStartResourceFactory(sp => new StemsStartResourceFactory
             {
-                StemConfiguration = new DefaultStemConfiguration
-                {
-                    DependencyResolver = new DefaultDependencyResolver(sp.GetRequestServiceProvider()),
-                    AutoPropertyMapper = sp.GetService<IPropertyAutoMapper>() ?? new DefaultPropertyAutoMapper()
-                },
+                StemsServices = sp.GetService<StemsServices>(),
                 RootResourceFactory = CreateRootResourceFactory(sp)
             });
 

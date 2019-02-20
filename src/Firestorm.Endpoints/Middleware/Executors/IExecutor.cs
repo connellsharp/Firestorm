@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Firestorm.Endpoints.Responses;
 
-namespace Firestorm.Endpoints
+namespace Firestorm.Endpoints.Executors
 {
     public interface IExecutor
     {

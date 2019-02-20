@@ -6,7 +6,7 @@ using Firestorm.Engine.Additives.Writers;
 using Firestorm.Engine.Deferring;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Subs.Context;
-using Firestorm.Stems.Fuel.Resolving.Analysis;
+using Firestorm.Stems.Fuel.Analysis;
 
 namespace Firestorm.Stems.Fuel
 {
@@ -19,13 +19,10 @@ namespace Firestorm.Stems.Fuel
         private readonly Stem<TItem> _stem;
         private readonly EngineImplementations<TItem> _implementations;
 
-        public AttributeFieldProvider(Stem<TItem> stem)
+        public AttributeFieldProvider(Stem<TItem> stem, EngineImplementations<TItem> implementations)
         {
             _stem = stem;
-
-            var analyzerFactory = stem.Configuration.AnalyzerCache;
-            var definitionAnalyzer = analyzerFactory.GetAnalyzer<FieldDefinitionAnalyzer<TItem>>(stem.GetType(), stem.Configuration);
-            _implementations = definitionAnalyzer.Implementations;
+            _implementations = implementations;
         }
 
         public IEnumerable<string> GetDefaultNames(int nestedBy)

@@ -10,7 +10,7 @@ namespace Firestorm.Stems.Fuel.Identifiers
     /// <summary>
     /// Builds identifier info from <see cref="IdentifierAttribute"/>s placed on properties and predicate methods in a Stem.
     /// </summary>
-    internal class PredicateMethodIdentifierInfo<TItem> : PredicateIdentifierInfo<TItem>
+    public class PredicateMethodIdentifierInfo<TItem> : PredicateIdentifierInfo<TItem>
         where TItem : class
     {
         public PredicateMethodIdentifierInfo(MethodInfo getPredicateMethod, [CanBeNull] Action<TItem, string> setter)

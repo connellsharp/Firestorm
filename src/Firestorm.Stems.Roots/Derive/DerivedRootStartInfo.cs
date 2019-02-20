@@ -18,9 +18,9 @@ namespace Firestorm.Stems.Roots.Derive
             return _root.StartStemType;
         }
 
-        public IAxis GetAxis(IStemConfiguration configuration, IRestUser user)
+        public IAxis GetAxis(IStemsCoreServices configuration, IRestUser user)
         {
-            _root.Configuration = configuration;
+            _root.Services = configuration;
             _root.User = user;
 
             return _root;

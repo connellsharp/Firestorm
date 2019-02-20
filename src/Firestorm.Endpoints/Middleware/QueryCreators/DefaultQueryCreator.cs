@@ -1,7 +1,6 @@
-﻿using Firestorm.Endpoints.Configuration;
-using Firestorm.Endpoints.Query;
+﻿using Firestorm.Endpoints.Query;
 
-namespace Firestorm.Endpoints
+namespace Firestorm.Endpoints.QueryCreators
 {
     internal class DefaultQueryCreator : IQueryCreator
     {

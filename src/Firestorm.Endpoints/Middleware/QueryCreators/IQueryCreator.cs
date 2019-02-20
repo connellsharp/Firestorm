@@ -1,4 +1,4 @@
-﻿namespace Firestorm.Endpoints
+﻿namespace Firestorm.Endpoints.QueryCreators
 {
     public interface IQueryCreator
     {

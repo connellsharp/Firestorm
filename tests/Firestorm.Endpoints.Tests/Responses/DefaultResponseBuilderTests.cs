@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Responses;
 using Xunit;
 

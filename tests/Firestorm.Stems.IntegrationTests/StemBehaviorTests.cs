@@ -1,5 +1,6 @@
 using System;
 using Firestorm.Data;
+using Firestorm.Stems.Analysis;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.Derive;
 using Firestorm.Testing.Http;
@@ -19,6 +20,10 @@ namespace Firestorm.Stems.IntegrationTests
                 RootResourceFactory = new DerivedRootsResourceFactory
                 {
                     RootTypeGetter = new ManualTypeGetter(typeof(DisposableRoot))
+                },
+                StemsServices = new StemsServices
+                {
+                    ServiceGroup = new DefaultServiceGroup()
                 }
             };
             

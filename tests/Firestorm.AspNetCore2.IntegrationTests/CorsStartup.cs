@@ -1,5 +1,4 @@
 ﻿using Firestorm.Endpoints;
-using Firestorm.Endpoints.Configuration;
 using Firestorm.Host;
 using Firestorm.Testing.Http;
 using JetBrains.Annotations;

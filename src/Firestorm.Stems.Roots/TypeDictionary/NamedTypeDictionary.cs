@@ -8,7 +8,7 @@ namespace Firestorm.Stems.Roots
     /// </summary>
     public class NamedTypeDictionary
     {
-        private readonly Dictionary<string, Type> _loadedTypes = new Dictionary<string, Type>(); // todo thread-safe?
+        private readonly IDictionary<string, Type> _loadedTypes = new Dictionary<string, Type>(); // todo thread-safe?
 
         public void AddTypes(IEnumerable<Type> types)
         {

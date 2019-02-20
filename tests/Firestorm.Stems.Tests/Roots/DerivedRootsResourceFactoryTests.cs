@@ -14,7 +14,7 @@ namespace Firestorm.Stems.Tests.Roots
         [Fact]
         public async Task GetStartResource_MockRootFactory_CallsGetStartResource()
         {
-            var stemConfig = new DefaultStemConfiguration();
+            var stemConfig = new StemsServices();
 
             var factory = new DerivedRootsResourceFactory
             {

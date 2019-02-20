@@ -1,46 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using AutoFixture;
-using AutoFixture.AutoMoq;
-using Firestorm.Stems;
 using Firestorm.Stems.Analysis;
 using Firestorm.Stems.Definitions;
-using Firestorm.Stems.Essentials.Factories.Resolvers;
-using Firestorm.Stems.Fuel.Resolving.Analysis;
-using Firestorm.Stems.Roots;
+using Firestorm.Stems.Essentials.Factories.Analyzers;
+using Firestorm.Stems.Fuel.Analysis;
 using Xunit;
 
 namespace Firestorm.Stems.Tests.Fuel
 {
     public class SubstemDefinitionResolverTests
     {
-        private readonly Fixture _fixture;
-
-        public SubstemDefinitionResolverTests()
-        {
-            _fixture = new Fixture();
-            _fixture.Customize(new AutoConfiguredMoqCustomization());
-        }
-
         [Fact]
         public void IncludeDefinition_IncludeGetterExpr_AddsFactories()
         {
             var implementations = new EngineImplementations<Person>();
 
-            var resolver = new SubstemDefinitionResolver();
-            resolver.Configuration = new DefaultStemConfiguration();
+            var analyzer = new SubstemDefinitionAnalyzer();
 
             Expression<Func<Person, IEnumerable<Person>>> nameExpr = p => p.Friends;
 
-            resolver.FieldDefinition = new FieldDefinition
+            var definition = new FieldDefinition
             {
                 FieldName = "friends",
                 SubstemType = typeof(PeopleStem),
                 Getter = { Expression = nameExpr }
             };
 
-            resolver.IncludeDefinition(implementations);
+            analyzer.Analyze(implementations, definition);
 
             Assert.Equal(1, implementations.FullResourceFactories.Count);
             Assert.Equal(1, implementations.ReaderFactories.Count);
@@ -57,17 +44,16 @@ namespace Firestorm.Stems.Tests.Fuel
         {
             var implementations = new EngineImplementations<Person>();
 
-            var resolver = new SubstemDefinitionResolver();
-            resolver.Configuration = new DefaultStemConfiguration();
+            var resolver = new SubstemDefinitionAnalyzer();
 
-            resolver.FieldDefinition = new FieldDefinition
+            var definition = new FieldDefinition
             {
                 SubstemType = typeof(PeopleStem)
             };
 
-            Action include = () => resolver.IncludeDefinition(implementations);
+            Action analyzeMethod = () => resolver.Analyze(implementations, definition);
 
-            Assert.ThrowsAny<StemAttributeSetupException>(include);
+            Assert.ThrowsAny<StemAttributeSetupException>(analyzeMethod);
         }
 
         public class PeopleStem : Stem<Person>

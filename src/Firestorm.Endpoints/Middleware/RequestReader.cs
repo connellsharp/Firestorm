@@ -1,5 +1,5 @@
-﻿using Firestorm.Endpoints.Configuration;
-using Firestorm.Endpoints.Formatting;
+﻿using Firestorm.Endpoints.Formatting;
+using Firestorm.Endpoints.QueryCreators;
 using Firestorm.Host.Infrastructure;
 using Firestorm.Rest.Web;
 

@@ -1,5 +1,3 @@
-using Firestorm.Endpoints.Configuration;
-
 namespace Firestorm.Endpoints
 {
     /// <summary>

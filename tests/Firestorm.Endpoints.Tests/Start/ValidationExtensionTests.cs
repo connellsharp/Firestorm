@@ -1,5 +1,4 @@
 ﻿using System;
-using Firestorm.Endpoints.Configuration;
 using Xunit;
 
 namespace Firestorm.Endpoints.Tests.Start

@@ -1,4 +1,3 @@
-using Firestorm.Endpoints.Configuration;
 using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.Endpoints.Tests.Stubs

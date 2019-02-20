@@ -1,10 +1,7 @@
-using System;
 using System.Linq;
 using Firestorm.Engine.Additives.Identifiers;
 using Firestorm.Engine.Identifiers;
-using Firestorm.Stems.Analysis;
-using Firestorm.Stems.Definitions;
-using Firestorm.Stems.Fuel.Identifiers;
+using Firestorm.Stems.Fuel.Analysis;
 
 namespace Firestorm.Stems.Fuel
 {
@@ -15,50 +12,29 @@ namespace Firestorm.Stems.Fuel
         where TItem : class
     {
         private readonly Stem<TItem> _stem;
-        private readonly StemDefinition _stemDefinition;
+        private readonly EngineImplementations<TItem> _implementations;
 
-        public AttributeIdentifierProvider(Stem<TItem> stem)
+        public AttributeIdentifierProvider(Stem<TItem> stem, EngineImplementations<TItem> implementations)
         {
             _stem = stem;
-
-            var analyzerFactory = stem.Configuration.AnalyzerCache;
-            var analyzer = analyzerFactory.GetAnalyzer<AttributeAnalyzer>(stem.GetType(), stem.Configuration);
-            _stemDefinition = analyzer.Definition;
+            _implementations = implementations;
         }
 
         public IIdentifierInfo<TItem> GetInfo(string identifierName)
         {
             if (identifierName == null)
             {
-                if(_stemDefinition.IdentifierDefinitions.Count == 0)
+                if(_implementations.IdentifierFactories.Count == 0)
                     return new IdConventionIdentifierInfo<TItem>();
 
-                var infos = _stemDefinition.IdentifierDefinitions.Values.Select(GetIdentifierInfoFromDefinition);
+                var infos = _implementations.IdentifierFactories.Values.Select(i => i.Get(_stem));
                 return new CombinedIdentifierInfo<TItem>(infos);
             }
             else
             {
-                IdentifierDefinition definition = _stemDefinition.IdentifierDefinitions[identifierName];
-
-                return GetIdentifierInfoFromDefinition(definition);
+                var info = _implementations.IdentifierFactories[identifierName].Get(_stem);
+                return info;
             }
-        }
-
-        private IIdentifierInfo<TItem> GetIdentifierInfoFromDefinition(IdentifierDefinition definition)
-        {
-            if (definition.GetterMethod != null)
-                return new MethodIdentifierInfo<TItem>(definition.GetterMethod, _stem);
-
-            if (definition.ExactGetterMethod != null && definition.ExactValue != null)
-                return new ExactIdentifierInfo<TItem>(definition.ExactValue, _stem, definition.ExactGetterMethod);
-
-            if (definition.GetterExpression != null)
-                return new ExpressionAndSetterIdentifierInfo<TItem>(definition.GetterExpression, (Action<TItem, string>) definition.SetterAction, definition.IsMultiReference);
-
-            if (definition.PredicateMethod != null)
-                return new PredicateMethodIdentifierInfo<TItem>(definition.PredicateMethod, (Action<TItem, string>) definition.SetterAction);
-
-            throw new StemAttributeSetupException("Identifier attribute definition was setup incorrectly.");
         }
     }
 }

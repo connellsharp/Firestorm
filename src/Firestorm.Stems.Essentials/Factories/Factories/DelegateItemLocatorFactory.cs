@@ -2,7 +2,7 @@ using System;
 using Firestorm.Data;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Stems.Definitions;
-using Firestorm.Stems.Fuel.Resolving.Factories;
+using Firestorm.Stems.Fuel.Analysis;
 
 namespace Firestorm.Stems.Essentials.Factories.Factories
 {

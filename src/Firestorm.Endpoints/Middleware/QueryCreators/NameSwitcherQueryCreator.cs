@@ -1,7 +1,6 @@
-﻿using Firestorm.Endpoints.Configuration;
-using Firestorm.Endpoints.Formatting.Naming;
+﻿using Firestorm.Endpoints.Formatting.Naming;
 
-namespace Firestorm.Endpoints
+namespace Firestorm.Endpoints.QueryCreators
 {
     /// <summary>
     /// Decorates a <see cref="IQueryCreator"/> allowing switching names of fields.

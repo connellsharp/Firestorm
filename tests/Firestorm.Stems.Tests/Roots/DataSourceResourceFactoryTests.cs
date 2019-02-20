@@ -28,11 +28,11 @@ namespace Firestorm.Stems.Tests.Roots
         [Fact]
         public async Task GetStartResource_MockRootFactory_CallsGetStartResource()
         {
-            var stemConfig = new DefaultStemConfiguration();
+            var services = new TestStemsServices();
             
-            _factory.GetStemTypes(stemConfig);
+            _factory.GetStemTypes(services);
 
-            var startResource = _factory.GetStartResource(stemConfig, new TestRequestContext());
+            var startResource = _factory.GetStartResource(services, new TestRequestContext());
 
             var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
             var info = await startDirectory.GetInfoAsync();
@@ -44,7 +44,7 @@ namespace Firestorm.Stems.Tests.Roots
         [Fact]
         public void GetChild_MockRootFactory_CallsGetStartResource()
         {
-            var stemConfig = new DefaultStemConfiguration();
+            var stemConfig = new TestStemsServices();
             
             _factory.GetStemTypes(stemConfig);
 

@@ -12,14 +12,14 @@ namespace Firestorm.Stems.Roots.Combined
 
         protected abstract IRootStartInfoFactory CreateStartInfoFactory();
 
-        public IEnumerable<Type> GetStemTypes(IStemConfiguration configuration)
+        public IEnumerable<Type> GetStemTypes(IStemsCoreServices configuration)
         {
             _startInfoFactory = CreateStartInfoFactory();
 
             return _startInfoFactory.GetStemTypes(configuration);
         }
 
-        public IRestResource GetStartResource(IStemConfiguration configuration, IRequestContext requestContext)
+        public IRestResource GetStartResource(IStemsCoreServices configuration, IRequestContext requestContext)
         {
             return new RootsDirectory(configuration, _startInfoFactory, requestContext, _creators);
         }

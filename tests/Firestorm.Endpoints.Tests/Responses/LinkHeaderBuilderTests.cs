@@ -1,4 +1,5 @@
 ﻿using Firestorm.Endpoints.Responses;
+using Firestorm.Endpoints.Responses.Pagination;
 using Firestorm.Rest.Web;
 using Xunit;
 

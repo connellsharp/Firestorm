@@ -1,4 +1,4 @@
-namespace Firestorm.Endpoints.Configuration
+namespace Firestorm.Endpoints.Responses.Pagination
 {
     /// <summary>
     /// The system-wide configuration defining how pagination can work.

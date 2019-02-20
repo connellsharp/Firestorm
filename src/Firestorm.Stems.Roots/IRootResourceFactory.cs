@@ -10,8 +10,8 @@ namespace Firestorm.Stems.Roots
     /// </summary>
     public interface IRootResourceFactory
     {
-        IEnumerable<Type> GetStemTypes(IStemConfiguration configuration);
+        IEnumerable<Type> GetStemTypes(IStemsCoreServices configuration);
 
-        IRestResource GetStartResource(IStemConfiguration configuration, IRequestContext requestContext);
+        IRestResource GetStartResource(IStemsCoreServices configuration, IRequestContext requestContext);
     }
 }

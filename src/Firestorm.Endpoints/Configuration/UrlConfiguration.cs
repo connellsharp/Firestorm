@@ -1,4 +1,4 @@
-namespace Firestorm.Endpoints.Configuration
+namespace Firestorm.Endpoints
 {
     /// <summary>
     /// The options used to configure the URL paths. 

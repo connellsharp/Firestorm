@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using Firestorm.Engine;
 using Firestorm.Engine.Additives.Authorization;
 using Firestorm.Engine.Deferring;
-using Firestorm.Stems.Fuel.Resolving.Analysis;
+using Firestorm.Stems.Fuel.Analysis;
 using Reflectious;
 
 namespace Firestorm.Stems.Fuel
@@ -17,13 +17,10 @@ namespace Firestorm.Stems.Fuel
 
         private static readonly IAuthorizationChecker<TItem> AllowAllChecker = new AllowAllAuthorizationChecker<TItem>();
 
-        public StemAuthorizationChecker(Stem<TItem> stem)
+        public StemAuthorizationChecker(Stem<TItem> stem, EngineImplementations<TItem> implementations)
         {
             _stem = stem;
-
-            var analyzerFactory = stem.Configuration.AnalyzerCache;
-            var analyzer = analyzerFactory.GetAnalyzer<FieldDefinitionAnalyzer<TItem>>(stem.GetType(), stem.Configuration);
-            _implementations = analyzer.Implementations;
+            _implementations = implementations;
         }
 
         public virtual IQueryable<TItem> ApplyFilter(IQueryable<TItem> items)

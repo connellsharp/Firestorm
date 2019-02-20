@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Firestorm.Endpoints.Configuration;
 using JetBrains.Annotations;
 
 namespace Firestorm.Endpoints.Formatting.Naming

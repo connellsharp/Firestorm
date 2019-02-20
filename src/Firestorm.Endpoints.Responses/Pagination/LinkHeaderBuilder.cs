@@ -2,7 +2,7 @@
 using System.Text;
 using Firestorm.Rest.Web;
 
-namespace Firestorm.Endpoints.Responses
+namespace Firestorm.Endpoints.Responses.Pagination
 {
     internal class LinkHeaderBuilder
     {

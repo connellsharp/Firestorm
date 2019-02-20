@@ -22,11 +22,11 @@ namespace Firestorm.Stems.Roots.DataSource
             return _stemTypeDictionary.GetType(_startResourceName);
         }
 
-        public IAxis GetAxis(IStemConfiguration configuration, IRestUser user)
+        public IAxis GetAxis(IStemsCoreServices configuration, IRestUser user)
         {
             return new Vase
             {
-                Configuration = configuration,
+                Services = configuration,
                 User = user
             };
         }

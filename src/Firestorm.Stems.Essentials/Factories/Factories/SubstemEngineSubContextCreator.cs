@@ -15,7 +15,7 @@ namespace Firestorm.Stems.Essentials.Factories.Factories
         {
             _stem = stem;
 
-            var autoActivator = new AutoActivator(_stem.Configuration.DependencyResolver);
+            var autoActivator = new AutoActivator(_stem.Services.DependencyResolver);
             _substem = autoActivator.CreateInstance<TSubstem>();
             _substem.SetParent(_stem);
         }

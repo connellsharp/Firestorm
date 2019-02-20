@@ -1,4 +1,4 @@
-namespace Firestorm.Endpoints.Configuration
+namespace Firestorm.Endpoints.Responses
 {
     /// <summary>
     /// Behaviour of an additional field added to response bodies to indicate status.

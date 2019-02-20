@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Firestorm.Host;
 using Firestorm.Host.Infrastructure;
+using Firestorm.Stems.Analysis;
 using Firestorm.Stems.Roots;
 
 namespace Firestorm.Stems
@@ -16,7 +17,7 @@ namespace Firestorm.Stems
         /// <summary>
         /// Contains the configuration for how the application's Stem objects can be utilised.
         /// </summary>
-        public IStemConfiguration StemConfiguration { get; set; } = new DefaultStemConfiguration();
+        public StemsServices StemsServices { get; set; } = new StemsServices();
 
         /// <summary>
         /// Defines which Stem <see cref="Type"/>s are used and how to get the start resource.
@@ -25,10 +26,9 @@ namespace Firestorm.Stems
 
         public void Initialize()
         {
-            IEnumerable<Type> stemTypes = RootResourceFactory.GetStemTypes(StemConfiguration);
+            IEnumerable<Type> stemTypes = RootResourceFactory.GetStemTypes(StemsServices);
 
-            var cacheBuilder = new AnalyzerCacheBuilder(StemConfiguration);
-            cacheBuilder.AnalyzeAllStems(stemTypes);
+            StemsServices.ServiceGroup?.Preload(stemTypes);
 
             _initialized = true;
         }
@@ -38,7 +38,7 @@ namespace Firestorm.Stems
             if(!_initialized)
                 Initialize();
 
-            return RootResourceFactory.GetStartResource(StemConfiguration, hostContext);
+            return RootResourceFactory.GetStartResource(StemsServices, hostContext);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Firestorm.Endpoints.Configuration;
-using Firestorm.Endpoints.Formatting.Naming;
+﻿using Firestorm.Endpoints.Formatting.Naming;
 using Firestorm.Host;
 using Firestorm.Host.Infrastructure;
 
