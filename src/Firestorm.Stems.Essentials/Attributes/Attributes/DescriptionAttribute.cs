@@ -10,11 +10,11 @@ namespace Firestorm.Stems.Essentials
             Text = text;
         }
 
-        public string Text { get; private set; }
+        public string Text { get; }
 
         public object Example { get; set; }
 
-        public override Analysis.IAttributeResolver GetResolver()
+        public override IAttributeResolver GetResolver()
         {
             return new DescriptionAttributeResolver();
         }

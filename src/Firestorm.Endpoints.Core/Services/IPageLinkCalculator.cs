@@ -1,6 +1,6 @@
 using Firestorm.Rest.Web;
 
-namespace Firestorm.Endpoints.Configuration
+namespace Firestorm.Endpoints
 {
     public interface IPageLinkCalculator
     {

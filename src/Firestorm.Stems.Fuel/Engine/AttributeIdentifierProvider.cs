@@ -1,7 +1,7 @@
 using System.Linq;
 using Firestorm.Engine.Additives.Identifiers;
 using Firestorm.Engine.Identifiers;
-using Firestorm.Stems.Fuel.Resolving.Analysis;
+using Firestorm.Stems.Fuel.Analysis;
 
 namespace Firestorm.Stems.Fuel
 {

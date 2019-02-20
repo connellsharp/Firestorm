@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using Firestorm.Engine;
 using Firestorm.Engine.Additives.Authorization;
 using Firestorm.Engine.Deferring;
-using Firestorm.Stems.Fuel.Resolving.Analysis;
+using Firestorm.Stems.Fuel.Analysis;
 using Reflectious;
 
 namespace Firestorm.Stems.Fuel

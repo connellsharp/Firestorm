@@ -2,7 +2,7 @@ using System;
 using Firestorm.Engine.Fields;
 using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Essentials.Factories.Factories;
-using Firestorm.Stems.Fuel.Resolving.Analysis;
+using Firestorm.Stems.Fuel.Analysis;
 using Reflectious;
 
 namespace Firestorm.Stems.Essentials.Factories.Analyzers

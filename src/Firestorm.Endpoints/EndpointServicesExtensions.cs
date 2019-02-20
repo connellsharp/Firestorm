@@ -1,10 +1,11 @@
 ﻿using System;
-using Firestorm.Endpoints.Configuration;
 using Firestorm.Features;
 using Firestorm.Host;
+using JetBrains.Annotations;
 
 namespace Firestorm.Endpoints
 {
+    [PublicAPI]
     public static class EndpointServicesExtensions
     {
         /// <summary>

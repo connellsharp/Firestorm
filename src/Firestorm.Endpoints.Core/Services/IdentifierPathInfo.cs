@@ -1,8 +1,11 @@
 using JetBrains.Annotations;
 
-namespace Firestorm.Endpoints.Configuration
+namespace Firestorm.Endpoints
 {
-    public class IdentifierInfo
+    /// <summary>
+    /// A breakdown of information in the identifier directory of a URL path.
+    /// </summary>
+    public class IdentifierPathInfo
     {
         public string Value { get; set; }
         

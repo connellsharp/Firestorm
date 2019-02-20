@@ -4,7 +4,7 @@ using Firestorm.Engine.Fields;
 using Firestorm.Engine.Identifiers;
 using Firestorm.Engine.Subs.Context;
 
-namespace Firestorm.Stems.Fuel.Resolving.Analysis
+namespace Firestorm.Stems.Fuel.Analysis
 {
     /// <summary>
     /// Dictionaries with factories and predicates to be used in the Engine.

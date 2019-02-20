@@ -1,7 +1,7 @@
 using Firestorm.Engine;
 using Firestorm.Engine.Identifiers;
 using Firestorm.Engine.Subs.Context;
-using Firestorm.Stems.Fuel.Resolving.Analysis;
+using Firestorm.Stems.Fuel.Analysis;
 using JetBrains.Annotations;
 
 namespace Firestorm.Stems.Fuel

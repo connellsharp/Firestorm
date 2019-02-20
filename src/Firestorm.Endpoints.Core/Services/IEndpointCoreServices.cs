@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using Firestorm.Endpoints.Requests;
 using JetBrains.Annotations;
 
-namespace Firestorm.Endpoints.Configuration
+namespace Firestorm.Endpoints
 {
     /// <summary>
     /// The services required to setup a Firestorm REST API server.

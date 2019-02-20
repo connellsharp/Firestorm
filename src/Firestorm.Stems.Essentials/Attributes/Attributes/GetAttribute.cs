@@ -42,7 +42,7 @@ namespace Firestorm.Stems.Essentials
             return memberName.TrimStart("Get");
         }
 
-        public override Analysis.IAttributeResolver GetResolver()
+        public override IAttributeResolver GetResolver()
         {
             return new GetterAttributeResolver(Argument, Display);
         }

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Firestorm.Endpoints.Responses;
 
-namespace Firestorm.Endpoints
+namespace Firestorm.Endpoints.Executors
 {
     internal class PreconditionsExecutor : IExecutor
     {

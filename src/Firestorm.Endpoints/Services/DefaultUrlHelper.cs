@@ -1,4 +1,4 @@
-namespace Firestorm.Endpoints.Configuration
+namespace Firestorm.Endpoints
 {
     public class DefaultUrlHelper : IUrlHelper
     {
@@ -9,11 +9,11 @@ namespace Firestorm.Endpoints.Configuration
             _config = config;
         }
         
-        public IdentifierInfo GetIdentifierInfo(INextPath path)
+        public IdentifierPathInfo GetIdentifierInfo(INextPath path)
         {
             if (!string.IsNullOrEmpty(_config.DictionaryReferencePrefix) && path.Raw.StartsWith(_config.DictionaryReferencePrefix))
             {
-                return new IdentifierInfo
+                return new IdentifierPathInfo
                 {
                     IsDictionary = true,
                     Value = null,
@@ -26,7 +26,7 @@ namespace Firestorm.Endpoints.Configuration
             {
                 // see https://stackoverflow.com/a/20386425/369247
                                 
-                return new IdentifierInfo
+                return new IdentifierPathInfo
                 {
                     IsDictionary = false,
                     Value = path.GetCoded(equalsIndex + 1),
@@ -34,7 +34,7 @@ namespace Firestorm.Endpoints.Configuration
                 };
             }
 
-            return new IdentifierInfo
+            return new IdentifierPathInfo
             {
                 IsDictionary = false,
                 Value = path.Raw,

@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using Firestorm.Stems.Analysis;
 using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Essentials.Factories.Analyzers;
-using Firestorm.Stems.Fuel.Resolving.Analysis;
+using Firestorm.Stems.Fuel.Analysis;
 using Xunit;
 
 namespace Firestorm.Stems.Tests.Fuel

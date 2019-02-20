@@ -1,6 +1,5 @@
 ﻿using System.Collections.Specialized;
 using System.Linq;
-using Firestorm.Endpoints.Configuration;
 using Firestorm.Endpoints.Query;
 using Xunit;
 

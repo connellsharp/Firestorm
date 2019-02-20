@@ -16,7 +16,7 @@ namespace Firestorm.Stems.Essentials
             Name = name;
         }
 
-        public override Analysis.IAttributeResolver GetResolver()
+        public override IAttributeResolver GetResolver()
         {
             return new IdentifierAttributeResolver(true);
         }

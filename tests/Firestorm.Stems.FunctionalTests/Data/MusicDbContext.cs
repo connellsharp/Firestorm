@@ -1,4 +1,4 @@
-using Firestorm.Stems.FunctionalTests.Data.Models;
+using Firestorm.Stems.FunctionalTests.Models;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

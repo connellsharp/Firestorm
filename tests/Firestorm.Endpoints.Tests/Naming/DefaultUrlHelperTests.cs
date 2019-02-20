@@ -1,4 +1,4 @@
-using Firestorm.Endpoints.Configuration;
+using Firestorm.Endpoints.Executors;
 using Xunit;
 
 namespace Firestorm.Endpoints.Tests.Naming

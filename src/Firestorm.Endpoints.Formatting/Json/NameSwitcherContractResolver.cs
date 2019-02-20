@@ -1,5 +1,4 @@
-﻿using Firestorm.Endpoints.Configuration;
-using Newtonsoft.Json.Serialization;
+﻿using Newtonsoft.Json.Serialization;
 
 namespace Firestorm.Endpoints.Formatting.Json
 {

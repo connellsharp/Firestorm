@@ -76,7 +76,7 @@ namespace Firestorm.Stems.Essentials
             return split.ToArray();
         }
 
-        public override Analysis.IAttributeResolver GetResolver()
+        public override IAttributeResolver GetResolver()
         {
             return new AuthorizeAttributeResolver(IsAuthorized);
         }

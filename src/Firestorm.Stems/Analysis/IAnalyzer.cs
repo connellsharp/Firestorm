@@ -1,4 +1,4 @@
-using Firestorm.Stems.Fuel.Resolving.Analysis;
+using Firestorm.Stems.Fuel.Analysis;
 
 namespace Firestorm.Stems.Analysis
 {

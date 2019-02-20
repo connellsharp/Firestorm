@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Runtime.ExceptionServices;
 using Firestorm.Stems.AutoMap;
 using Firestorm.Stems.Definitions;
-using Firestorm.Stems.Fuel.Resolving.Analysis;
+using Firestorm.Stems.Fuel.Analysis;
 using Firestorm.Stems.Roots;
 using Reflectious;
 

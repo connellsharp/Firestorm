@@ -7,8 +7,8 @@ using Firestorm.Engine.Fields;
 using Firestorm.Stems.Analysis;
 using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Essentials.Factories.Factories;
+using Firestorm.Stems.Fuel.Analysis;
 using Firestorm.Stems.Fuel.Resolving;
-using Firestorm.Stems.Fuel.Resolving.Analysis;
 
 namespace Firestorm.Stems.Essentials.Factories.Analyzers
 {

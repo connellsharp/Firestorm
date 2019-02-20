@@ -21,7 +21,7 @@ namespace Firestorm.Stems
         IPropertyAutoMapper AutoPropertyMapper { get; }
 
         /// <summary>
-        /// Resolves implementations used in 
+        /// Resolves services for a given Stem type.
         /// </summary>
         IServiceGroup ServiceGroup { get; }
     }

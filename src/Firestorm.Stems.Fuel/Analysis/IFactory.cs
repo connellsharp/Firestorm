@@ -1,6 +1,6 @@
 using Firestorm.Engine.Fields;
 
-namespace Firestorm.Stems.Fuel.Resolving.Analysis
+namespace Firestorm.Stems.Fuel.Analysis
 {
     /// <summary>
     /// Provides a method to get an <see cref="Firestorm.Engine.Fields.IFieldHandler{TItem}"/> object from a <see cref="Stem{TItem}"/>.

@@ -2,7 +2,7 @@ using Firestorm.Endpoints.Formatting.Naming;
 using Firestorm.Endpoints.Query;
 using Firestorm.Endpoints.Responses;
 
-namespace Firestorm.Endpoints.Configuration
+namespace Firestorm.Endpoints
 {
     /// <summary>
     /// The options and services required to setup a Firestorm REST API server.

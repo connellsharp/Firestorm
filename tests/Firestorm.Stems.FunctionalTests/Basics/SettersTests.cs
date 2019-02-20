@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Firestorm.Stems.Essentials;
-using Firestorm.Stems.FunctionalTests.Data.Models;
+using Firestorm.Stems.FunctionalTests.Models;
 using Firestorm.Stems.FunctionalTests.Web;
 using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Testing.Http;

@@ -1,4 +1,4 @@
-namespace Firestorm.Endpoints.Configuration
+namespace Firestorm.Endpoints
 {
     public interface INamingConventionSwitcher
     {

@@ -5,7 +5,7 @@ using Firestorm.Engine.Subs;
 using Firestorm.Engine.Subs.Handlers;
 using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel;
-using Firestorm.Stems.Fuel.Resolving.Analysis;
+using Firestorm.Stems.Fuel.Analysis;
 using JetBrains.Annotations;
 
 namespace Firestorm.Stems.Essentials.Factories.Factories

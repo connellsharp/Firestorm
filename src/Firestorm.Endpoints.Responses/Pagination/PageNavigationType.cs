@@ -1,4 +1,4 @@
-namespace Firestorm.Endpoints.Configuration
+namespace Firestorm.Endpoints.Responses.Pagination
 {
     /// <summary>
     /// The method to generate the next and previous page links used in headers and body.

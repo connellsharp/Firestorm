@@ -1,6 +1,6 @@
 ﻿using Firestorm.Engine.Additives.Readers;
 using Firestorm.Engine.Fields;
-using Firestorm.Stems.Fuel.Resolving.Analysis;
+using Firestorm.Stems.Fuel.Analysis;
 
 namespace Firestorm.Stems.Essentials.Factories.Factories
 {

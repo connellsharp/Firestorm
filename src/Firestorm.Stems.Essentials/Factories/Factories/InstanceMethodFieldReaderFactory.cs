@@ -4,7 +4,7 @@ using Firestorm.Engine.Additives.Readers;
 using Firestorm.Engine.Fields;
 using Firestorm.Stems.Analysis;
 using Firestorm.Stems.Definitions;
-using Firestorm.Stems.Fuel.Resolving.Analysis;
+using Firestorm.Stems.Fuel.Analysis;
 using JetBrains.Annotations;
 
 namespace Firestorm.Stems.Essentials.Factories.Factories

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Firestorm.Endpoints.Configuration;
+using Firestorm.Endpoints.Executors;
+using Firestorm.Endpoints.QueryCreators;
 using Firestorm.Endpoints.Requests;
 using Firestorm.Endpoints.Responses;
 

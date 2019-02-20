@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AutoFixture;
 using AutoFixture.AutoMoq;
+using Firestorm.Endpoints.Executors;
 using Firestorm.Endpoints.Responses;
 using Firestorm.Rest.Web;
 using Firestorm.Testing;

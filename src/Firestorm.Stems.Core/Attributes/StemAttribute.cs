@@ -10,6 +10,6 @@ namespace Firestorm.Stems
     [MeansImplicitUse]
     public abstract class StemAttribute : Attribute
     {
-        public abstract Analysis.IAttributeResolver GetResolver();
+        public abstract IAttributeResolver GetResolver();
     }
 }

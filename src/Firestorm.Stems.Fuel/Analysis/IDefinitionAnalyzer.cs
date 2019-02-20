@@ -1,6 +1,6 @@
 using Firestorm.Stems.Definitions;
 
-namespace Firestorm.Stems.Fuel.Resolving.Analysis
+namespace Firestorm.Stems.Fuel.Analysis
 {   
     /// <summary>
     /// Adds to a <see cref="EngineImplementations{TItem}"/> using information from a definition object, such as <see cref="FieldDefinition"/>.

@@ -1,6 +1,4 @@
-﻿using Firestorm.Endpoints.Configuration;
-
-namespace Firestorm.Endpoints
+﻿namespace Firestorm.Endpoints.Executors
 {
     internal class DefaultExecutorFactory : IExecutorFactory
     {
