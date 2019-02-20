@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Runtime.ExceptionServices;
 using Firestorm.Stems.AutoMap;
 using Firestorm.Stems.Definitions;
 using Firestorm.Stems.Fuel.Resolving.Analysis;
@@ -27,10 +29,19 @@ namespace Firestorm.Stems.Analysis
             foreach (Type stemType in stemTypes)
             {
                 Type itemType = GetStemItemType(stemType);
-                
-                Reflect.Instance(this).GetMethod(nameof(AnalyzeInternal))
-                    .MakeGeneric(itemType)
-                    .Invoke(serviceCache, stemType);
+
+                try
+                {
+                    Reflect.Instance(this).GetMethod(nameof(AnalyzeInternal))
+                        .MakeGeneric(itemType)
+                        .Invoke(serviceCache, stemType);
+                }
+                catch (TargetInvocationException ex)
+                {
+                    // TODO move to Reflectious
+                    ExceptionDispatchInfo.Capture(ex.InnerException).Throw();
+                    throw ex.InnerException;
+                }
             }
         }
 
