@@ -11,6 +11,7 @@ namespace Firestorm.Engine.Defaults
     {
         public void StartTransaction()
         {
+            // Does nothing
         }
 
         public Task SaveChangesAsync()
@@ -25,6 +26,7 @@ namespace Firestorm.Engine.Defaults
 
         public void Dispose()
         {
+            // Nothing to dispose
         }
     }
 }

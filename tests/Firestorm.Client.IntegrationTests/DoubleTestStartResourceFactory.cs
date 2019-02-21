@@ -15,13 +15,14 @@ namespace Firestorm.Client.IntegrationTests
             _selfRestClient = new RestClient(selfBaseAddress);
         }
 
+        public void Initialize()
+        {
+            // All done in constructor
+        }
+
         public IRestResource GetStartResource(IRequestContext requestContext)
         {
             return new DoubleTestDirectory(requestContext, _selfRestClient);
-        }
-
-        public void Initialize()
-        {
         }
     }
 }

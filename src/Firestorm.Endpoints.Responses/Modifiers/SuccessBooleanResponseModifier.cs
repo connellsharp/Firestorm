@@ -17,6 +17,12 @@ namespace Firestorm.Endpoints.Responses
                 response.ExtraBody[SuccessKey] = true;
         }
 
+        public void AddOptions(Response response, Options options)
+        {
+            if (WrapResourceObject)
+                response.ExtraBody[SuccessKey] = true;
+        }
+
         public void AddAcknowledgment(Response response, Acknowledgment acknowledgment)
         {
             response.ExtraBody[SuccessKey] = true;
@@ -36,10 +42,6 @@ namespace Firestorm.Endpoints.Responses
         {
             var looper = new MultiFeedbackLooper(this);
             response.ResourceBody = feedbackItems.Select(looper.GetBodyFromFeedback);
-        }
-
-        public void AddOptions(Response response, Options options)
-        {
         }
     }
 }

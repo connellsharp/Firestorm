@@ -16,6 +16,12 @@ namespace Firestorm.Endpoints.Responses
                 response.ExtraBody[StatusKey] = "ok";
         }
 
+        public void AddOptions(Response response, Options options)
+        {
+            if (WrapResourceObject)
+                response.ExtraBody[StatusKey] = "ok";
+        }
+
         public void AddAcknowledgment(Response response, Acknowledgment acknowledgment)
         {
             if(acknowledgment is CreatedItemAcknowledgment createdItemAcknowledgment)
@@ -39,10 +45,6 @@ namespace Firestorm.Endpoints.Responses
         {
             var looper = new MultiFeedbackLooper(this);
             response.ResourceBody = looper.GetBodyFromMultiFeedback(feedbackItems);
-        }
-
-        public void AddOptions(Response response, Options options)
-        {
         }
     }
 }

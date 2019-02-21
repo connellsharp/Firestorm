@@ -8,10 +8,17 @@ namespace Firestorm.Endpoints.Responses
     {
         public void AddResource(Response response, ResourceBody resourceBody)
         {
+            // No error occurred
+        }
+
+        public void AddOptions(Response response, Options options)
+        {
+            // No error occurred
         }
 
         public void AddAcknowledgment(Response response, Acknowledgment acknowledgment)
         {
+            // No error occurred
         }
 
         public void AddError(Response response, ErrorInfo error)
@@ -22,10 +29,7 @@ namespace Firestorm.Endpoints.Responses
 
         public void AddMultiFeedback(Response response, IEnumerable<Feedback> feedbackItems)
         {
-        }
-
-        public void AddOptions(Response response, Options options)
-        {
+            // TODO add error info
         }
     }
 }

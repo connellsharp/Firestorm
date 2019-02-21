@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Firestorm.Endpoints.Formatting;
 using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.Endpoints.Tests.Start
@@ -56,10 +54,12 @@ namespace Firestorm.Endpoints.Tests.Start
 
         public void SetMimeType(string mimeType)
         {
+            // Not required for these tests
         }
 
         public void SetLength(int bytesLength)
         {
+            // Not required for these tests
         }
 
         public Task WriteBytesAsync(byte[] bytes)

@@ -12,13 +12,14 @@ namespace Firestorm.Endpoints.Tests.Stubs
             _singletonResource = singletonResource;
         }
 
+        public void Initialize()
+        {
+            // No initialisation required
+        }
+
         public IRestResource GetStartResource(IRequestContext endpointContext)
         {
             return _singletonResource;
-        }
-
-        public void Initialize()
-        {
         }
     }
 }
