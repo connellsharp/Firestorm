@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using Firestorm.Rest.Web;
 using Firestorm.Rest.Web.Options;
@@ -52,6 +53,9 @@ namespace Firestorm.Endpoints.Responses
                 case MultiFeedback multiFeedback:
                     _modifier.AddMultiFeedback(_response, multiFeedback.FeedbackItems);
                     break;
+                
+                default:
+                    throw new ArgumentException("Cannot add unknown feedback type to response.", nameof(feedback));
             }
         }
 

@@ -50,9 +50,10 @@ namespace Firestorm.Client
                         throw new InvalidOperationException("REST API did not return a new identifier or an error after creating a new item.");
 
                     return new CreatedItemAcknowledgment(model.NewIdentifier);
+                
+                default:
+                    throw new UnknownSuccessStatusCodeException();
             }
-
-            throw new UnknownSuccessStatusCodeException();
         }
 
         private static bool IsSuccessStatusCode(HttpStatusCode responseStatusCode)

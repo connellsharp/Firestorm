@@ -64,9 +64,10 @@ namespace Firestorm.Endpoints.Formatting.Json
                 case JTokenType.TimeSpan:
                     var obj = jBody.ToObject<object>();
                     return new ScalarBody(obj);
+                
+                default:
+                    throw new FormatException("Cannot convert body type.");
             }
-
-            throw new FormatException("Cannot convert body type.");
         }
     }
 }
