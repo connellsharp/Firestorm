@@ -99,7 +99,10 @@ namespace Firestorm.Engine.Tests.Queryable
                 return _fieldReaderImplementation.GetSelectExpression(itemPram);
             }
 
-            public IFieldValueReplacer<Artist> Replacer => this;
+            public IFieldValueReplacer<Artist> Replacer
+            {
+                get { return this; }
+            }
 
             public Task LoadAsync(IQueryable<Artist> itemsQuery)
             {

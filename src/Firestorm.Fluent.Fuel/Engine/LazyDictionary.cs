@@ -39,9 +39,9 @@ namespace Firestorm.Fluent.Fuel.Engine
             }
         }
 
-        private class LazyDictionaryLoadException : Exception
+        public class LazyDictionaryLoadException : Exception
         {
-            public LazyDictionaryLoadException(Exception innerException)
+            internal LazyDictionaryLoadException(Exception innerException)
                 : base("An error occurred loading the keys for the dictionary.", innerException)
             { }
         }

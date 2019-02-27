@@ -17,8 +17,7 @@ namespace Firestorm.Engine
 
         public EngineRestCollection([NotNull] IEngineContext<TItem> context)
         {
-            if (context == null) throw new ArgumentNullException(nameof(context));
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public async Task<RestCollectionData> QueryDataAsync(IRestCollectionQuery query)

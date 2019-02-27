@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Core;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Core.Objects.DataClasses;
@@ -32,18 +33,12 @@ namespace Firestorm.EntityFramework6
                 object[] attributes = pI.GetCustomAttributes(true);
                 foreach (object attribute in attributes)
                 {
-                    var propertyAttribute = attribute as EdmScalarPropertyAttribute;
-                    if (propertyAttribute != null)
-                    {
-                        if (propertyAttribute.EntityKeyProperty)
-                            return pI;
-                    }
-                    //else // TODO reintroduce System.Data.Linq.Mapping.ColumnAttribute
-                    //{
-                    //    var columnAttribute = attribute as ColumnAttribute;
-                    //    if (columnAttribute != null && columnAttribute.IsPrimaryKey)
-                    //        return pI;
-                    //}
+                    if (attribute is EdmScalarPropertyAttribute propertyAttr && propertyAttr.EntityKeyProperty)
+                        return pI;
+
+                    // TODO reintroduce System.Data.Linq.Mapping.ColumnAttribute
+                    //if (attribute is ColumnAttribute columnAttr && columnAttr.IsPrimaryKey)
+                    //    return pI;
                 }
             }
 
