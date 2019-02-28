@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
+using Firestorm.Endpoints.Tests.Start.Readers;
 using Firestorm.Endpoints.Tests.Stubs;
-using Firestorm.Host.Infrastructure;
 using Xunit;
 
 namespace Firestorm.Endpoints.Tests.Start
@@ -220,39 +218,6 @@ namespace Firestorm.Endpoints.Tests.Start
             {
                 throw new NotImplementedException();
             }
-        }
-    }
-
-    internal class MockJsonReader : IContentReader
-    {
-        private readonly string _json;
-
-        public MockJsonReader(string json)
-        {
-            _json = json;
-        }
-
-        public Stream GetContentStream()
-        {
-            return new MemoryStream(Encoding.Default.GetBytes(_json));
-        }
-
-        public string GetMimeType()
-        {
-            return "application/json";
-        }
-    }
-
-    internal class EmptyReader : IContentReader
-    {
-        public Stream GetContentStream()
-        {
-            return null;
-        }
-
-        public string GetMimeType()
-        {
-            return null;
         }
     }
 }

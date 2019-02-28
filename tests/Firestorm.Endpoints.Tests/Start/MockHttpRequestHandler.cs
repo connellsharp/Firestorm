@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Firestorm.Endpoints.Tests.Start.Readers;
 using Firestorm.Host.Infrastructure;
 
 namespace Firestorm.Endpoints.Tests.Start
