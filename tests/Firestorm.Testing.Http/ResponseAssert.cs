@@ -47,33 +47,40 @@ namespace Firestorm.Testing.Http
             }
             else
             {
-                builder.AppendFormat("Error: {0}\r\n", errorObj.Error);
-                builder.AppendFormat("Description: {0}\r\n", errorObj.ErrorDescription);
-
-                if (errorObj.DeveloperInfo != null)
-                {
-                    foreach (var info in errorObj.DeveloperInfo.Reverse())
-                    {
-                        builder.AppendLine();
-                        builder.AppendFormat("Message: {0}\r\n", info.Message);
-
-                        if (info.StackTrace != null)
-                        {
-                            foreach (string line in info.StackTrace)
-                                builder.AppendLine(line);
-
-                            builder.AppendLine();
-                        }
-                    }
-                }
-                else
-                {
-                    builder.AppendLine();
-                    builder.AppendLine("No developer info was returned in the response.");
-                }
+                builder.AppendError(errorObj);
             }
 
             return builder.ToString();
+        }
+
+        private static void AppendError(this StringBuilder builder, ErrorModel errorObj)
+        {
+            builder.AppendFormat("Error: {0}\r\n", errorObj.Error);
+            builder.AppendFormat("Description: {0}\r\n", errorObj.ErrorDescription);
+
+            if (errorObj.DeveloperInfo != null)
+            {
+                foreach (DevInfo info in errorObj.DeveloperInfo.Reverse())
+                {
+                    builder.AppendLine();
+                    builder.AppendFormat("Message: {0}\r\n", info.Message);
+
+                    if (info.StackTrace == null) 
+                        continue;
+
+                    foreach (string line in info.StackTrace)
+                    {
+                        builder.AppendLine(line);
+                    }
+
+                    builder.AppendLine();
+                }
+            }
+            else
+            {
+                builder.AppendLine();
+                builder.AppendLine("No developer info was returned in the response.");
+            }
         }
 
         /// <remarks>

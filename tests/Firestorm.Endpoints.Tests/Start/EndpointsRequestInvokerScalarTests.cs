@@ -1,20 +1,21 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
+using Firestorm.Endpoints.Tests.Start.Readers;
 using Firestorm.Endpoints.Tests.Stubs;
 using Xunit;
 
 namespace Firestorm.Endpoints.Tests.Start
 {
-    public class EndpointsRequestInvokerTests
+    public class EndpointsRequestInvokerScalarTests
     {
-        private readonly MockStartResource _startResource;
+        private readonly FakeScalar _scalar;
         private readonly EndpointsRequestInvoker _invoker;
 
-        public EndpointsRequestInvokerTests()
+        public EndpointsRequestInvokerScalarTests()
         {
-            _startResource = new MockStartResource();
+            _scalar = new FakeScalar();
 
-            var startResourceFactory = new SingletonStartResourceFactory(_startResource);
+            var startResourceFactory = new SingletonStartResourceFactory(_scalar);
             _invoker = new EndpointsRequestInvoker(startResourceFactory, new TestEndpointServices());
         }
 
@@ -46,7 +47,7 @@ namespace Firestorm.Endpoints.Tests.Start
 
             await _invoker.InvokeAsync(handler, handler, new TestRequestContext());
 
-            Assert.Equal("New value", _startResource.ObjectValue);
+            Assert.Equal("New value", _scalar.ObjectValue);
         }
 
         [Fact]
@@ -60,11 +61,11 @@ namespace Firestorm.Endpoints.Tests.Start
 
             await _invoker.InvokeAsync(handler, handler, new TestRequestContext());
 
-            Assert.Equal(null, _startResource.ObjectValue);
+            Assert.Equal(null, _scalar.ObjectValue);
         }
 
         [Fact]
-        public async Task Invoker_Options_Dunno() // TODO
+        public async Task Invoker_Options_200Ok()
         {
             var handler = new MockHttpRequestHandler
             {
@@ -73,6 +74,8 @@ namespace Firestorm.Endpoints.Tests.Start
             };
 
             await _invoker.InvokeAsync(handler, handler, new TestRequestContext());
+
+            Assert.Equal(HttpStatusCode.OK, handler.ResponseStatusCode);
         }
 
         [Fact]
@@ -89,7 +92,7 @@ namespace Firestorm.Endpoints.Tests.Start
             Assert.Equal(HttpStatusCode.MethodNotAllowed, handler.ResponseStatusCode);
         }
 
-        public class MockStartResource : IRestScalar
+        public class FakeScalar : IRestScalar
         {
             public object ObjectValue { get; set; } = "My value";
 

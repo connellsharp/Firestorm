@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using Firestorm.Client.Content;
 
@@ -24,12 +25,12 @@ namespace Firestorm.Client
 
         public override string ErrorType => _exceptionResponse.Error;
 
-        private class ClientInnerException : Exception
+        public class ClientInnerException : Exception
         {
             private readonly ExceptionDeveloperInfo _devInfo;
 
-            public ClientInnerException(ExceptionDeveloperInfo[] devInfoArr, int index)
-            : base(null, devInfoArr.Length > index+1 ? new ClientInnerException(devInfoArr, index+1) : null)
+            internal ClientInnerException(IReadOnlyList<ExceptionDeveloperInfo> devInfoArr, int index)
+                : base(null, devInfoArr.Count > index + 1 ? new ClientInnerException(devInfoArr, index + 1) : null)
             {
                 _devInfo = devInfoArr[index];
             }

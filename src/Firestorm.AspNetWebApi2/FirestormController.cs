@@ -43,7 +43,9 @@ namespace Firestorm.AspNetWebApi2
         {
             get
             {
-                if (_response == null) Load();
+                if (_response == null) 
+                    Load();
+                
                 return _response;
             }
         }
@@ -52,7 +54,9 @@ namespace Firestorm.AspNetWebApi2
         {
             get
             {
-                if (_responseBuilder == null) Load();
+                if (_responseBuilder == null) 
+                    Load();
+                
                 return _responseBuilder;
             }
         }

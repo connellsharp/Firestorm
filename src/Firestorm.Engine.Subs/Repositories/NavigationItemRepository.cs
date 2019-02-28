@@ -47,6 +47,7 @@ namespace Firestorm.Engine.Subs.Repositories
 
         public void MarkUpdated(TNav item)
         {
+            // Parent item is already marked as updated
         }
 
         public void MarkDeleted(TNav item)

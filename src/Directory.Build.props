@@ -1,7 +1,7 @@
 <Project>
     <PropertyGroup>
         <VersionPrefix>0.9.4</VersionPrefix>
-        <VersionSuffix>alpha-00003</VersionSuffix>
+        <VersionSuffix>alpha-00004</VersionSuffix>
         
         <Authors>Connell Watkins</Authors>
         <Copyright>Copyright © Connell Watkins 2017</Copyright>

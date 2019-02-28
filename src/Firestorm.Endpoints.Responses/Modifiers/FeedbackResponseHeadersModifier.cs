@@ -11,10 +11,12 @@ namespace Firestorm.Endpoints.Responses
     {
         public void AddResource(Response response, ResourceBody resourceBody)
         {
+            // No feedback
         }
 
         public void AddOptions(Response response, Options options)
         {
+            // No feedback
         }
 
         public void AddAcknowledgment(Response response, Acknowledgment acknowledgment)

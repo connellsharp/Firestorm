@@ -27,6 +27,7 @@ namespace Firestorm.Endpoints.Responses
 
         public void AddAcknowledgment(Response response, Acknowledgment acknowledgment)
         {
+            // No main body
         }
 
         public void AddError(Response response, ErrorInfo error)
@@ -37,6 +38,7 @@ namespace Firestorm.Endpoints.Responses
 
         public void AddMultiFeedback(Response response, IEnumerable<Feedback> feedbackItems)
         {
+            // No main body
         }
     }
 }

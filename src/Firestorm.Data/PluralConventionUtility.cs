@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Firestorm.Data
 {
@@ -18,25 +19,40 @@ namespace Firestorm.Data
         {
             const StringComparison comp = StringComparison.InvariantCultureIgnoreCase;
 
-            if (singular.ToLower() == "person")
-                return "People";
+            string singularLower = singular.ToLower();
+            if (SpecialCases.ContainsKey(singularLower))
+            {
+                return SpecialCases[singularLower];
+            }
 
-            if (singular.ToLower() == "tooth")
-                return "Teeth";
-
-            if (singular.EndsWith("y", comp))
-                return singular.Remove(singular.Length - 1, 1) + "ies";
-
-            if (singular.EndsWith("f", comp))
-                return singular.Remove(singular.Length - 1, 1) + "ves";
-
-            if (singular.EndsWith("fe", comp))
-                return singular.Remove(singular.Length - 2, 2) + "ves";
-
-            if (singular.EndsWith("s", comp) || singular.EndsWith("ch", comp) || singular.EndsWith("x", comp) || singular.EndsWith("z", comp) || singular.EndsWith("sh", comp))
-                return singular + "es";
+            foreach (var replacement in EndingReplacements)
+            {
+                if (singular.EndsWith(replacement.Key, comp))
+                {
+                    return singular.Remove(singular.Length - replacement.Key.Length, replacement.Key.Length)
+                           + replacement.Value;
+                }
+            }
 
             return singular + "s";
         }
+
+        private static readonly IDictionary<string, string> SpecialCases = new Dictionary<string, string>
+        {
+            {"person", "People"},
+            {"tooth", "Teeth"},
+        };
+
+        private static readonly IDictionary<string, string> EndingReplacements = new Dictionary<string, string>
+        {
+            {"y", "ies"},
+            {"f", "ves"},
+            {"fe", "ves"},
+            {"s", "ses"},
+            {"ch", "ches"},
+            {"x", "xes"},
+            {"z", "zes"},
+            {"sh", "shes"},
+        };
     }
 }

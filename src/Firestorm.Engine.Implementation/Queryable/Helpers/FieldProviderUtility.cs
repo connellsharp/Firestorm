@@ -12,7 +12,13 @@ namespace Firestorm.Engine.Queryable
     {
         // some similarities here with QueryableFieldSelectorBase
 
-        public static Type GetDynamicType<TItem>(IFieldProvider<TItem> fieldProvider, int nestedBy = 1)
+        public static Type GetDynamicType<TItem>(IFieldProvider<TItem> fieldProvider)
+            where TItem : class
+        {
+            return GetDynamicType(fieldProvider, 1);
+        }
+
+        public static Type GetDynamicType<TItem>(IFieldProvider<TItem> fieldProvider, int nestedBy)
             where TItem : class
         {
             return GetDynamicType(fieldProvider, fieldProvider.GetDefaultNames(nestedBy));
