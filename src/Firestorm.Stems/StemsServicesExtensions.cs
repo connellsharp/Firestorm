@@ -33,7 +33,7 @@ namespace Firestorm.Stems
         /// </summary>
         public static IFirestormServicesBuilder AddStems(this IFirestormServicesBuilder builder, Assembly assembly, string baseNamespace)
         {
-            builder.EnableFeatures<StemsServices>()
+            builder.AddWithFeatures<StemsServices>()
                 .AddFeature<StemsServices, DefaultStemsFeature>();
             
             builder.AddStartResourceFactory(sp => new StemsStartResourceFactory

@@ -1,7 +1,9 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace Firestorm
 {
+    [PublicAPI]
     public static class ServiceBuilderExtensions
     {
         public static IFirestormServicesBuilder Add<TAbstraction, TImplementation>(this IFirestormServicesBuilder builder)
