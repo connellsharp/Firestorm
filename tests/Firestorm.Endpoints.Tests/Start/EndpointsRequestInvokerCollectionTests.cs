@@ -11,14 +11,14 @@ namespace Firestorm.Endpoints.Tests.Start
 {
     public class EndpointsRequestInvokerCollectionTests
     {
-        private readonly MockStartResource _startResource;
+        private readonly FakeCollection _collection;
         private readonly EndpointsRequestInvoker _invoker;
 
         public EndpointsRequestInvokerCollectionTests()
         {
-            _startResource = new MockStartResource();
+            _collection = new FakeCollection();
 
-            var startResourceFactory = new SingletonStartResourceFactory(_startResource);
+            var startResourceFactory = new SingletonStartResourceFactory(_collection);
             _invoker = new EndpointsRequestInvoker(startResourceFactory, new TestEndpointServices());
         }
 
@@ -49,11 +49,11 @@ namespace Firestorm.Endpoints.Tests.Start
                 ResourcePath = ""
             };
             
-            int startCount = _startResource.List.Count;
+            int startCount = _collection.List.Count;
             
             await _invoker.InvokeAsync(handler, handler, new TestRequestContext());
             
-            Assert.Equal(startCount + 1, _startResource.List.Count);
+            Assert.Equal(startCount + 1, _collection.List.Count);
             Assert.Equal(HttpStatusCode.Created, handler.ResponseStatusCode);
         }
 
@@ -102,7 +102,7 @@ namespace Firestorm.Endpoints.Tests.Start
         }
 
         [Fact]
-        public async Task Invoker_Options_Dunno() // TODO
+        public async Task Invoker_Options_200Ok()
         {
             var handler = new MockHttpRequestHandler
             {
@@ -110,8 +110,9 @@ namespace Firestorm.Endpoints.Tests.Start
                 ResourcePath = ""
             };
 
-
             await _invoker.InvokeAsync(handler, handler, new TestRequestContext());
+
+            Assert.Equal(HttpStatusCode.OK, handler.ResponseStatusCode);
         }
 
         [Fact]
@@ -128,7 +129,7 @@ namespace Firestorm.Endpoints.Tests.Start
             Assert.Equal(HttpStatusCode.MethodNotAllowed, handler.ResponseStatusCode);
         }
 
-        public class MockStartResource : IRestCollection
+        private class FakeCollection : IRestCollection
         {
             public List<string> List = new List<string>
             {
@@ -164,7 +165,7 @@ namespace Firestorm.Endpoints.Tests.Start
             public IRestItem GetItem(string identifier, string identifierName = null)
             {
                 int index = int.Parse(identifier);
-                return new MockRestStringItem(index, List[index]);
+                return new FakeStringItem(index, List[index]);
             }
 
             public IRestDictionary ToDictionary(string identifierName)
@@ -184,12 +185,12 @@ namespace Firestorm.Endpoints.Tests.Start
             }
         }
 
-        public class MockRestStringItem : IRestItem
+        private class FakeStringItem : IRestItem
         {
             private readonly int _index;
             private readonly string _value;
 
-            public MockRestStringItem(int index, string value)
+            public FakeStringItem(int index, string value)
             {
                 _index = index;
                 _value = value;
