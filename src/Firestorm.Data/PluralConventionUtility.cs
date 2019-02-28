@@ -29,7 +29,8 @@ namespace Firestorm.Data
             {
                 if (singular.EndsWith(replacement.Key, comp))
                 {
-                    return singular.TrimEnd(replacement.Key) + replacement.Value;
+                    return singular.Remove(singular.Length - replacement.Key.Length, replacement.Key.Length)
+                           + replacement.Value;
                 }
             }
 
