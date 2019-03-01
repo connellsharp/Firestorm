@@ -17,7 +17,7 @@ namespace Firestorm.Endpoints
             _configuration = configuration;
         }
 
-        public EndpointServices AddTo(EndpointServices services)
+        public EndpointServices Apply(EndpointServices services)
         {
             services.Modifiers = new DefaultResponseModifiers(_configuration.Response);
             services.QueryCreator = new DefaultQueryCreator(_configuration.QueryString);

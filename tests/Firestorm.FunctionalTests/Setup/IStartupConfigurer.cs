@@ -2,6 +2,6 @@ namespace Firestorm.FunctionalTests.Setup
 {
     public interface IStartupConfigurer
     {
-        void Configure(IFirestormServicesBuilder builder);
+        void Configure(IServicesBuilder builder);
     }
 }

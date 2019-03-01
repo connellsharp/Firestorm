@@ -5,10 +5,10 @@ using Reflectious;
 namespace Firestorm
 {
     /// <summary>
-    /// A lightweight <see cref="IFirestormServicesBuilder"/>.
+    /// A lightweight <see cref="IServicesBuilder"/>.
     /// Used for testing and defaults. A real application would usually use their own DI container.
     /// </summary>
-    public class DefaultServicesBuilder : IFirestormServicesBuilder
+    public class DefaultServicesBuilder : IServicesBuilder
     {
         private readonly IDictionary<Type, IList<Func<IServiceProvider, object>>> _dictionary;
 
@@ -17,21 +17,21 @@ namespace Firestorm
             _dictionary = new Dictionary<Type, IList<Func<IServiceProvider, object>>>();
         }
 
-        public IFirestormServicesBuilder Add<TService>(Func<IServiceProvider, TService> implementationFactory) 
+        public IServicesBuilder Add<TService>(Func<IServiceProvider, TService> implementationFactory) 
             where TService : class
         {
             GetFuncs(typeof(TService)).Add(implementationFactory);
             return this;
         }
 
-        public IFirestormServicesBuilder Add<TService>(TService implementationInstance) 
+        public IServicesBuilder Add<TService>(TService implementationInstance) 
             where TService : class
         {
             GetFuncs(typeof(TService)).Add(sp => implementationInstance);
             return this;
         }
 
-        public IFirestormServicesBuilder Add(Type abstractType, Type implementationType)
+        public IServicesBuilder Add(Type abstractType, Type implementationType)
         {
             GetFuncs(abstractType).Add(sp => CreateService(sp, implementationType));
             return this;

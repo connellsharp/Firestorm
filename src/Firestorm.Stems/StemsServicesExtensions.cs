@@ -15,7 +15,7 @@ namespace Firestorm.Stems
         /// <summary>
         /// Configures Firestorm Stems using Stem types from the application's entry assembly.
         /// </summary>
-        public static IFirestormServicesBuilder AddStems(this IFirestormServicesBuilder builder)
+        public static IServicesBuilder AddStems(this IServicesBuilder builder)
         {
             return builder.AddStems(Assembly.GetCallingAssembly());
         }
@@ -23,7 +23,7 @@ namespace Firestorm.Stems
         /// <summary>
         /// Configures Firestorm Stems using Stem types from the given <see cref="Assembly"/>.
         /// </summary>
-        public static IFirestormServicesBuilder AddStems(this IFirestormServicesBuilder builder, Assembly assembly)
+        public static IServicesBuilder AddStems(this IServicesBuilder builder, Assembly assembly)
         {
             return builder.AddStems(assembly, assembly.GetName().Name);
         }
@@ -31,7 +31,7 @@ namespace Firestorm.Stems
         /// <summary>
         /// Configures Firestorm Stems using Stem types from the given <see cref="Assembly"/> within the given <see cref="baseNamespace"/>.
         /// </summary>
-        public static IFirestormServicesBuilder AddStems(this IFirestormServicesBuilder builder, Assembly assembly, string baseNamespace)
+        public static IServicesBuilder AddStems(this IServicesBuilder builder, Assembly assembly, string baseNamespace)
         {
             builder.AddWithFeatures<StemsServices>()
                 .AddFeature<StemsServices, DefaultStemsFeature>();

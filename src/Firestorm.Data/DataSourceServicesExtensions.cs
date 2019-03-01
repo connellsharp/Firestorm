@@ -7,7 +7,7 @@ namespace Firestorm.Data
         /// <summary>
         /// Configures the data source for this Firestorm API.
         /// </summary>
-        public static IFirestormServicesBuilder AddDataSource(this IFirestormServicesBuilder builder, IDataSource dataSource)
+        public static IServicesBuilder AddDataSource(this IServicesBuilder builder, IDataSource dataSource)
         {
             //builder.AddDataSourceTypeFinder();
             //builder.AddDataSourceRoots();
@@ -19,7 +19,7 @@ namespace Firestorm.Data
         /// <summary>
         /// Configures the data source for this Firestorm API.
         /// </summary>
-        public static IFirestormServicesBuilder AddDataSource(this IFirestormServicesBuilder builder, Func<IServiceProvider, IDataSource> dataSourceFunc)
+        public static IServicesBuilder AddDataSource(this IServicesBuilder builder, Func<IServiceProvider, IDataSource> dataSourceFunc)
         {
             //builder.AddDataSourceTypeFinder();
             //builder.AddDataSourceRoots();

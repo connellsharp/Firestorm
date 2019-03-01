@@ -16,7 +16,7 @@ namespace Firestorm.FunctionalTests.Setup
     
     public class FluentConfigurer : IStartupConfigurer
     {
-        public void Configure(IFirestormServicesBuilder builder)
+        public void Configure(IServicesBuilder builder)
         {
             builder.AddFluent<FootballApiContext>();
         }

@@ -13,7 +13,7 @@ namespace Firestorm.Stems
             _requestServiceProvider = requestServiceProvider;
         }
         
-        public StemsServices AddTo(StemsServices services)
+        public StemsServices Apply(StemsServices services)
         {
             services.DependencyResolver = new DefaultDependencyResolver(_requestServiceProvider);
             services.AutoPropertyMapper = new DefaultPropertyAutoMapper();

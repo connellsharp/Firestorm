@@ -12,7 +12,7 @@ namespace Firestorm.Stems
         /// <summary>
         /// Configures the <see cref="DataSourceRootResourceFactory"/> for Stems.
         /// </summary>
-        internal static IFirestormServicesBuilder AddDataSourceRoots(this IFirestormServicesBuilder builder)
+        internal static IServicesBuilder AddDataSourceRoots(this IServicesBuilder builder)
         {
             builder.Add<IRootResourceFactory>(sp => new DataSourceRootResourceFactory
             {

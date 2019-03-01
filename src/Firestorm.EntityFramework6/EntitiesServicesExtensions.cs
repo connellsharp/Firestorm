@@ -8,7 +8,7 @@ namespace Firestorm.EntityFramework6
         /// <summary>
         /// Configures a Firestorm Data source for Entity Framework 6.
         /// </summary>
-        public static IFirestormServicesBuilder AddEntityFramework<TDbContext>(this IFirestormServicesBuilder builder)
+        public static IServicesBuilder AddEntityFramework<TDbContext>(this IServicesBuilder builder)
             where TDbContext : DbContext, new()
         {
             builder.AddDataSource(new EntitiesDataSource<TDbContext>());

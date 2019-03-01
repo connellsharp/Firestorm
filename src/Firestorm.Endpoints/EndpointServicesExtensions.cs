@@ -12,7 +12,7 @@ namespace Firestorm.Endpoints
         /// Configures Firestorm endpoints.
         /// Assumes <see cref="EndpointConfiguration"/> is already configured elsewhere.
         /// </summary>
-        public static IFirestormServicesBuilder AddEndpointsInvoker(this IFirestormServicesBuilder builder)
+        public static IServicesBuilder AddEndpointsInvoker(this IServicesBuilder builder)
         {
             builder
                 .Add<IRequestInvoker, EndpointsRequestInvoker>()
@@ -25,7 +25,7 @@ namespace Firestorm.Endpoints
         /// <summary>
         /// Configures Firestorm endpoints.
         /// </summary>
-        public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder, EndpointConfiguration config)
+        public static IServicesBuilder AddEndpoints(this IServicesBuilder builder, EndpointConfiguration config)
         {
             builder.AddEndpointsInvoker();
             
@@ -37,7 +37,7 @@ namespace Firestorm.Endpoints
         /// <summary>
         /// Configures Firestorm endpoints.
         /// </summary>
-        public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder, Action<EndpointConfiguration> configureAction)
+        public static IServicesBuilder AddEndpoints(this IServicesBuilder builder, Action<EndpointConfiguration> configureAction)
         {   
             builder.AddEndpointsInvoker();
             
@@ -51,7 +51,7 @@ namespace Firestorm.Endpoints
         /// <summary>
         /// Configures Firestorm endpoints.
         /// </summary>
-        public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder, Func<IServiceProvider, EndpointConfiguration> factoryFunction)
+        public static IServicesBuilder AddEndpoints(this IServicesBuilder builder, Func<IServiceProvider, EndpointConfiguration> factoryFunction)
         {
             builder.AddEndpointsInvoker();
             
@@ -63,7 +63,7 @@ namespace Firestorm.Endpoints
         /// <summary>
         /// Configures Firestorm endpoints with the default settings.
         /// </summary>
-        public static IFirestormServicesBuilder AddEndpoints(this IFirestormServicesBuilder builder)
+        public static IServicesBuilder AddEndpoints(this IServicesBuilder builder)
         {
             builder.AddEndpoints(new EndpointConfiguration());
             
