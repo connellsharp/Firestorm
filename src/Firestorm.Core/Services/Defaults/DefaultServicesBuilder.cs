@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Reflectious;
 
 namespace Firestorm
@@ -10,30 +9,30 @@ namespace Firestorm
     /// </summary>
     public class DefaultServicesBuilder : IServicesBuilder
     {
-        private readonly IDictionary<Type, IList<Func<IServiceProvider, object>>> _dictionary;
+        private readonly ServiceFactoryDictionary _dictionary;
 
         public DefaultServicesBuilder()
         {
-            _dictionary = new Dictionary<Type, IList<Func<IServiceProvider, object>>>();
+            _dictionary = new ServiceFactoryDictionary();
         }
 
         public IServicesBuilder Add<TService>(Func<IServiceProvider, TService> implementationFactory) 
             where TService : class
         {
-            GetFuncs(typeof(TService)).Add(implementationFactory);
+            _dictionary.AddFactory(typeof(TService), implementationFactory);
             return this;
         }
 
         public IServicesBuilder Add<TService>(TService implementationInstance) 
             where TService : class
         {
-            GetFuncs(typeof(TService)).Add(sp => implementationInstance);
+            _dictionary.AddFactory(typeof(TService), sp => implementationInstance);
             return this;
         }
 
         public IServicesBuilder Add(Type abstractType, Type implementationType)
         {
-            GetFuncs(abstractType).Add(sp => CreateService(sp, implementationType));
+            _dictionary.AddFactory(abstractType, sp => CreateService(sp, implementationType));
             return this;
         }
 
@@ -43,13 +42,6 @@ namespace Firestorm
                 .GetConstructor()
                 .FromServiceProvider(serviceProvider)
                 .Invoke();
-        }
-
-        private IList<Func<IServiceProvider, object>> GetFuncs(Type type)
-        {
-            return _dictionary.ContainsKey(type)
-                ? _dictionary[type]
-                : _dictionary[type] = new List<Func<IServiceProvider, object>>();
         }
 
         public IServiceProvider Build()

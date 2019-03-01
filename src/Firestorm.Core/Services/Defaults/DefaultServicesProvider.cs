@@ -7,9 +7,9 @@ namespace Firestorm
 {
     public class DefaultServicesProvider : IServiceProvider
     {
-        private readonly IDictionary<Type, IList<Func<IServiceProvider, object>>> _dictionary;
+        private readonly ServiceFactoryDictionary _dictionary;
 
-        public DefaultServicesProvider(IDictionary<Type, IList<Func<IServiceProvider, object>>> dictionary)
+        internal DefaultServicesProvider(ServiceFactoryDictionary dictionary)
         {
             _dictionary = dictionary;
         }
@@ -20,14 +20,14 @@ namespace Firestorm
             {
                 Type innerType = serviceType.GenericTypeArguments[0];
 
-                return Reflect.Instance(this).GetMethod("GetEnumerable").MakeGeneric(innerType).Invoke();
+                return Reflect.Instance(this).GetMethod(nameof(GetEnumerable)).MakeGeneric(innerType).Invoke();
             }
 
             if (!_dictionary.ContainsKey(serviceType)) 
                 return null;
             
-            var factories = _dictionary[serviceType];
-            return factories.Last().Invoke(this);
+            var factories = _dictionary.GetFactories(serviceType);
+            return factories.Last().Get(this);
         }
 
         private IEnumerable<T> GetEnumerable<T>()
@@ -35,8 +35,8 @@ namespace Firestorm
             if (!_dictionary.ContainsKey(typeof(T)))
                 return Enumerable.Empty<T>();
 
-            IList<Func<IServiceProvider, object>> innerFactories = _dictionary[typeof(T)];
-            return innerFactories.Select(func => func(this)).OfType<T>();
+            IEnumerable<IServiceFactory> innerFactories = _dictionary.GetFactories(typeof(T));
+            return innerFactories.Select(f => f.Get(this)).OfType<T>();
         }
     }
 }
