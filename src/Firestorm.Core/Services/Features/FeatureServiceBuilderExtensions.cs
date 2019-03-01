@@ -1,3 +1,4 @@
+using System;
 using JetBrains.Annotations;
 
 namespace Firestorm.Features
@@ -11,37 +12,45 @@ namespace Firestorm.Features
         public static IFirestormServicesBuilder AddWithFeatures<T>(this IFirestormServicesBuilder builder)
             where T : class, new()
         {
-            return builder.AddWithFeatures(new T());
+            return builder.AddWithFeatures<T>(sp => new T());
         }
-        
+
         /// <summary>
         /// Registers a <see cref="T"/> type, enabling Features to extend this type.
         /// </summary>
         public static IFirestormServicesBuilder AddWithFeatures<T>(this IFirestormServicesBuilder builder, T instance)
             where T : class
         {
-            return builder.AddWithFeatures<T, T>(instance);
+            return builder.AddWithFeatures<T>(sp => instance);
         }
-        
+
         /// <summary>
         /// Registers a <see cref="TAbstraction"/> type, enabling Features to extend this type.
         /// </summary>
-        public static IFirestormServicesBuilder AddWithFeatures<TAbstraction, TImplementation>(this IFirestormServicesBuilder builder, TImplementation instance)
+        public static IFirestormServicesBuilder AddWithFeatures<TAbstraction, TImplementation>(this IFirestormServicesBuilder builder)
             where TAbstraction : class
-            where TImplementation : TAbstraction
+            where TImplementation : TAbstraction, new()
         {
-            return builder
-                .Add<TAbstraction>(sp =>
+            return builder.AddWithFeatures<TAbstraction>(sp => new TImplementation());
+        }
+
+        /// <summary>
+        /// Registers a <see cref="T"/> type, enabling Features to extend this type.
+        /// </summary>
+        public static IFirestormServicesBuilder AddWithFeatures<T>(this IFirestormServicesBuilder builder, Func<IServiceProvider, T> initialFactory)
+            where T : class
+        {
+            return builder.Add<T>(sp =>
+            {
+                T target = initialFactory.Invoke(sp);
+
+                foreach (IFeature<T> feature in sp.GetServices<IFeature<T>>())
                 {
-                    TAbstraction target = instance;
+                    target = feature.AddTo(target);
+                }
 
-                    foreach (IFeature<TAbstraction> feature in sp.GetServices<IFeature<TAbstraction>>())
-                    {
-                        target = feature.AddTo(target);
-                    }
-
-                    return target;
-                });
+                return target;
+            });
         }
 
         /// <summary>
@@ -60,6 +69,15 @@ namespace Firestorm.Features
             where TFeature : class, IFeature<T>
         {
             return builder.Add<IFeature<T>>(feature);
+        }
+
+        /// <summary>
+        /// Registers a Feature to extend the <see cref="T"/> type.
+        /// </summary>
+        public static IFirestormServicesBuilder AddFeature<T, TFeature>(this IFirestormServicesBuilder builder, Func<IServiceProvider, TFeature> featureFactory)
+            where TFeature : class, IFeature<T>
+        {
+            return builder.Add<IFeature<T>>(featureFactory);
         }
     }
 }
