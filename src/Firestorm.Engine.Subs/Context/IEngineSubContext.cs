@@ -1,3 +1,4 @@
+using Firestorm.Data;
 using Firestorm.Engine.Identifiers;
 
 namespace Firestorm.Engine.Subs.Context
@@ -10,5 +11,7 @@ namespace Firestorm.Engine.Subs.Context
         ILocatableFieldProvider<TItem> Fields { get; }
 
         IAuthorizationChecker<TItem> AuthorizationChecker { get; }
+
+        IEngineContext<TItem> CreateFullContext(IDataTransaction transaction, IEngineRepository<TItem> repository);
     }
 }

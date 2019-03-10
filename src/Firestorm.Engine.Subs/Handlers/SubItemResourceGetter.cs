@@ -1,9 +1,10 @@
+using System;
 using System.Linq;
+using System.Linq.Expressions;
 using Firestorm.Data;
 using Firestorm.Engine.Deferring;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Engine.Subs.Repositories;
-using Firestorm.Engine.Subs.Wrapping;
 
 namespace Firestorm.Engine.Subs.Handlers
 {
@@ -11,27 +12,25 @@ namespace Firestorm.Engine.Subs.Handlers
         where TItem : class
         where TNav : class, new()
     {
-        private readonly SubWriterTools<TItem, TNav, TNav> _navTools;
+        private readonly Expression<Func<TItem, TNav>> _expression;
         private readonly IEngineSubContext<TNav> _engineSubContext;
 
         public SubItemResourceGetter(SubWriterTools<TItem, TNav, TNav> navTools, IEngineSubContext<TNav> engineSubContext)
         {
-            _navTools = navTools;
+            _expression = navTools.NavExpression; // TODO just expression
             _engineSubContext = engineSubContext;
         }
 
         public IRestResource GetFullResource(IDeferredItem<TItem> item, IDataTransaction dataTransaction)
         {
-            //TNav navItem = _navTools.NavExpression.Compile().Invoke(item.LoadedItem);
+            //TNav navItem = _expression.Compile().Invoke(item.LoadedItem);
             //var itemRepository = new LoadedItemRepository<TNav>(navItem);
-            IQueryableSingle<TNav> navigationQuery = item.Query.Select(_navTools.NavExpression).SingleDefferred();
+            IQueryableSingle<TNav> navigationQuery = item.Query.Select(_expression).SingleDefferred();
             var itemRepository = new QueryableSingleRepository<TNav>(navigationQuery);
-
-            var eventWrapper = new DataEventWrapper<TNav>(dataTransaction, itemRepository);
-            eventWrapper.TryWrapEvents(_navTools.RepoEvents);
-
-            var context = new FullEngineContext<TNav>(eventWrapper.Transaction, eventWrapper.Repository, _engineSubContext);
             var deferredNavItem = new RepositoryDeferredItem<TNav>(itemRepository);
+
+            var context = _engineSubContext.CreateFullContext(dataTransaction, itemRepository);
+            
             return new EngineRestItem<TNav>(context, deferredNavItem);
         }
     }

@@ -32,7 +32,7 @@ namespace Firestorm.Engine.Subs.Handlers
             IEngineRepository<TNav> navRepository = new NavigationCollectionRepository<TItem, TCollection, TNav>(item, _navTools.NavExpression, _navTools.Setter);
 
             IDataTransaction transaction = new VoidTransaction(); // we commit the transaction in the parent. TODO optional save-as-you-go ?
-            var navContext = new FullEngineContext<TNav>(transaction, navRepository, _subContext);
+            var navContext = _subContext.CreateFullContext(transaction, navRepository);
 
             var navLocatorCreator = new NavigationItemLocatorCreator<TNav>(_subContext);
 

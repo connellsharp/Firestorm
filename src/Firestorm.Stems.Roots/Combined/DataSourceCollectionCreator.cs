@@ -30,11 +30,8 @@ namespace Firestorm.Stems.Roots.Combined
 
             IEngineRepository<TItem> repository = _dataSource.GetRepository<TItem>(transaction);
 
-            var wrapper = new DataEventWrapper<TItem>(transaction, repository);
-            wrapper.TryWrapEvents(new StemDataChangeEvents<TItem>(stem));
-
             var subContext = new StemsEngineSubContext<TItem>(stem);
-            var context = new FullEngineContext<TItem>(wrapper.Transaction, wrapper.Repository, subContext);
+            var context = subContext.CreateFullContext(transaction, repository);
 
             return new EngineRestCollection<TItem>(context);
         }

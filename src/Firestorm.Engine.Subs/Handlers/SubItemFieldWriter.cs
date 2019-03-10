@@ -33,7 +33,7 @@ namespace Firestorm.Engine.Subs.Handlers
             try
             {
                 IDataTransaction transaction = new VoidTransaction(); // we commit the transaction in the parent. TODO optional save-as-you-go ?
-                var navContext = new FullEngineContext<TNav>(transaction, navRepository, _subContext);
+                var navContext = _subContext.CreateFullContext(transaction, navRepository);
                 var navEngineItem = new EngineRestItem<TNav>(navContext, deferredItem);
                 Acknowledgment acknowledgment = await navEngineItem.EditAsync(itemData);
             }

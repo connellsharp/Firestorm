@@ -1,6 +1,9 @@
+using Firestorm.Data;
 using Firestorm.Engine;
 using Firestorm.Engine.Identifiers;
+using Firestorm.Engine.Subs;
 using Firestorm.Engine.Subs.Context;
+using Firestorm.Engine.Subs.Wrapping;
 using Firestorm.Stems.Fuel.Analysis;
 using JetBrains.Annotations;
 
@@ -13,6 +16,8 @@ namespace Firestorm.Stems.Fuel
     public class StemsEngineSubContext<TItem> : IEngineSubContext<TItem>
         where TItem : class
     {
+        private readonly IDataChangeEvents<TItem> _events;
+
         public StemsEngineSubContext([NotNull] Stem<TItem> stem)
         {
             var implementations = stem.Services.ServiceGroup
@@ -22,6 +27,8 @@ namespace Firestorm.Stems.Fuel
             Identifiers = new AttributeIdentifierProvider<TItem>(stem, implementations);
             Fields = new AttributeFieldProvider<TItem>(stem, implementations);
             AuthorizationChecker = new StemAuthorizationChecker<TItem>(stem, implementations);
+
+            _events = new StemDataChangeEvents<TItem>(stem);
         }
 
         public IIdentifierProvider<TItem> Identifiers { get; }
@@ -29,5 +36,13 @@ namespace Firestorm.Stems.Fuel
         public ILocatableFieldProvider<TItem> Fields { get; }
 
         public IAuthorizationChecker<TItem> AuthorizationChecker { get; }
+        
+        public IEngineContext<TItem> CreateFullContext(IDataTransaction transaction, IEngineRepository<TItem> repository)
+        {
+            var eventWrapper = new DataEventWrapper<TItem>(transaction, repository);
+            eventWrapper.TryWrapEvents(_events);
+
+            return new FullEngineContext<TItem>(eventWrapper.Transaction, eventWrapper.Repository, this);
+        }
     }
 }

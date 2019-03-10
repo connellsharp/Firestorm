@@ -25,10 +25,7 @@ namespace Firestorm.Engine.Subs.Handlers
         {
             IEngineRepository<TNav> navRepository = new NavigationCollectionRepository<TItem, TCollection, TNav>(item, _navTools.NavExpression, _navTools.Setter);
 
-            var eventWrapper = new DataEventWrapper<TNav>(dataTransaction, navRepository);
-            eventWrapper.TryWrapEvents(_navTools.RepoEvents);
-
-            var context = new FullEngineContext<TNav>(eventWrapper.Transaction, eventWrapper.Repository, _subContext);
+            var context = _subContext.CreateFullContext(dataTransaction, navRepository);
 
             return new EngineRestCollection<TNav>(context);
         }
