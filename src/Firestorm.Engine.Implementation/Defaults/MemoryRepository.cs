@@ -42,10 +42,5 @@ namespace Firestorm.Engine.Defaults
             _collection.Add(item);
             return item;
         }
-
-        public Task ForEachAsync<T>(IQueryable<T> query, Action<T> action)
-        {
-            return ItemQueryHelper.DefaultForEachAsync(query, action);
-        }
     }
 }

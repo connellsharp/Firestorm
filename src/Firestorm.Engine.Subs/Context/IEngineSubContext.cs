@@ -12,6 +12,6 @@ namespace Firestorm.Engine.Subs.Context
 
         IAuthorizationChecker<TItem> AuthorizationChecker { get; }
 
-        IEngineContext<TItem> CreateFullContext(IDataTransaction transaction, IEngineRepository<TItem> repository);
+        IEngineContext<TItem> CreateFullContext(IDataContext<TItem> dataContext);
     }
 }

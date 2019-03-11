@@ -24,12 +24,10 @@ namespace Firestorm.Fluent.Fuel.Sources
 
         public IRestCollection GetRestCollection()
         {
-            IDataTransaction transaction = _dataSource.CreateTransaction();
+            IDataContext<TItem> dataContext = _dataSource.CreateContext<TItem>();
             // TODO setup disposing of transaction
 
-            IEngineRepository<TItem> repository = _dataSource.GetRepository<TItem>(transaction);
-
-            IEngineContext<TItem> context = _subContext.CreateFullContext(transaction, repository);
+            IEngineContext<TItem> context = _subContext.CreateFullContext(dataContext);
 
             return new EngineRestCollection<TItem>(context);
         }

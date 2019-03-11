@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace Firestorm.Data
 {
     /// <summary>
-    /// Contains a method to perform asyncronous queries on an <see cref="IQueryable{T}"/> implementation.
+    /// Contains a method to perform asynchronous queries on an <see cref="IQueryable{T}"/> implementation.
     /// </summary>
     public interface IAsyncQueryer
     {

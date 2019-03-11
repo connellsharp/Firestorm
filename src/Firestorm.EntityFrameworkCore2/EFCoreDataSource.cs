@@ -1,44 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Firestorm.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Firestorm.EntityFrameworkCore2
 {
-    public class EFCoreDataSource<TDbContext> : IDiscoverableDataSource
+    public class EFCoreDataSource<TDbContext> : IDataSource
         where TDbContext : DbContext
     {
         private readonly IDbContextFactory<TDbContext> _dbContextFactory;
+        private readonly EFCoreAsyncQueryer _asyncQueryer;
 
         internal EFCoreDataSource(IDbContextFactory<TDbContext> dbContextFactory)
         {
             _dbContextFactory = dbContextFactory;
+            _asyncQueryer = new EFCoreAsyncQueryer();
         }
 
-        public IDataTransaction CreateTransaction()
-        {
-            TDbContext database = _dbContextFactory.Create();
-            return new EFCoreDataTransaction<TDbContext>(database);
-        }
-
-        public IEngineRepository<TEntity> GetRepository<TEntity>(IDataTransaction transaction)
-            where TEntity : class, new()
-        {
-            if (!(transaction is EFCoreDataTransaction<TDbContext> entitiesTransaction))
-                throw new ArgumentException("Entity Framework Core data source was given a transaction for the wrong data source type or context.");
-
-            TDbContext database = entitiesTransaction.DbContext;
-            DbSet<TEntity> repo = database.Set<TEntity>();
-            return new EFCoreRepository<TEntity>(repo);
-        }
-
-        public IEnumerable<Type> FindRepositoryTypes()
+        public IEnumerable<Type> FindEntityTypes()
         {
             using (TDbContext database = _dbContextFactory.Create())
             {
                 return database.Model.GetEntityTypes().Select(t => t.ClrType).ToList();
             }
+        }
+
+        public IDataContext<TEntity> CreateContext<TEntity>() 
+            where TEntity : class, new()
+        {
+            TDbContext database = _dbContextFactory.Create();            
+            DbSet<TEntity> dbSet = database.Set<TEntity>();
+
+            return new DataContext<TEntity>
+            {
+                Transaction = new EFCoreDataTransaction<TDbContext>(database),
+                Repository = new EFCoreRepository<TEntity>(dbSet),
+                AsyncQueryer = _asyncQueryer
+            };
+        }
+    }
+
+    public class EFCoreAsyncQueryer : IAsyncQueryer
+    {
+        public Task ForEachAsync<T>(IQueryable<T> query, Action<T> action)
+        {
+            return query.ForEachAsync(action);
         }
     }
 }

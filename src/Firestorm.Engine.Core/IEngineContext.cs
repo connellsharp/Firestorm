@@ -11,14 +11,9 @@ namespace Firestorm.Engine
         where TItem : class
     {
         /// <summary>
-        /// Manages the data transaction lifetime for an <see cref="IEngineRepository{TItem}"/>.
+        /// Contains the services used to manage entities in a database.
         /// </summary>
-        IDataTransaction Transaction { get; }
-
-        /// <summary>
-        /// Manages data storage.
-        /// </summary>
-        IEngineRepository<TItem> Repository { get; }
+        IDataContext<TItem> Data { get; }
 
         /// <summary>
         /// Provides data about URL paths used to identify items within a collection.

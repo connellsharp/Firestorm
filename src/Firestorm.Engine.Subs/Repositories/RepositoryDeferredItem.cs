@@ -9,8 +9,8 @@ namespace Firestorm.Engine.Subs.Repositories
     internal class RepositoryDeferredItem<TItem> : DeferredItemBase<TItem>
         where TItem : class
     {
-        public RepositoryDeferredItem(IEngineRepository<TItem> repositoryWithSingleItem)
-            : base(null, repositoryWithSingleItem)
+        public RepositoryDeferredItem(IEngineRepository<TItem> repositoryWithSingleItem, IAsyncQueryer asyncQueryer)
+            : base(null, asyncQueryer)
         {
             RepositoryWithSingleItem = repositoryWithSingleItem;
             Query = repositoryWithSingleItem.GetAllItems().SingleDefferred();

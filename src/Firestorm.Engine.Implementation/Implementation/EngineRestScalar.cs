@@ -28,7 +28,7 @@ namespace Firestorm.Engine
             if (!_context.AuthorizationChecker.CanGetField(_item, _field))
                 throw new NotAuthorizedForFieldException(AuthorizableVerb.Get, _field.Name);
 
-            return await ScalarFieldHelper.LoadScalarValueAsync(_field.Reader, _item.Query, _context.Repository.ForEachAsync);
+            return await ScalarFieldHelper.LoadScalarValueAsync(_field.Reader, _item.Query, _context.Data.AsyncQueryer.ForEachAsync);
         }
 
         public async Task<Acknowledgment> EditAsync(object value)
@@ -38,11 +38,11 @@ namespace Firestorm.Engine
 
             await _item.LoadAsync(); // TODO: is this necessary?
 
-            await _field.Writer.SetValueAsync(_item, value, _context.Transaction);
+            await _field.Writer.SetValueAsync(_item, value, _context.Data.Transaction);
             
-            _context.Repository.MarkUpdated(_item.LoadedItem);
+            _context.Data.Repository.MarkUpdated(_item.LoadedItem);
 
-            await _context.Transaction.SaveChangesAsync();
+            await _context.Data.Transaction.SaveChangesAsync();
 
             return new Acknowledgment();
         }

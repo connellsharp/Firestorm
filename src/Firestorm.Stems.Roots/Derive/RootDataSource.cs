@@ -1,5 +1,6 @@
+using System;
+using System.Collections.Generic;
 using Firestorm.Data;
-using Firestorm.Stems.Roots.Combined;
 
 namespace Firestorm.Stems.Roots.Derive
 {
@@ -12,15 +13,19 @@ namespace Firestorm.Stems.Roots.Derive
             _root = root;
         }
 
-        public IDataTransaction CreateTransaction()
+        public IEnumerable<Type> FindEntityTypes()
         {
-            return new RootDataTransaction(_root);
+            throw new NotSupportedException("Cannot find data types for Roots.");
         }
 
-        public IEngineRepository<TEntity> GetRepository<TEntity>(IDataTransaction transaction)
-            where TEntity : class, new()
+        public IDataContext<TEntity> CreateContext<TEntity>() where TEntity : class, new()
         {
-            return new RootEngineRepository<TEntity>((Root<TEntity>)_root);
+            return new DataContext<TEntity>
+            {
+                Transaction = new RootDataTransaction(_root),
+                Repository = new RootEngineRepository<TEntity>((Root<TEntity>) _root),
+                AsyncQueryer = new RootAsyncQueryer(_root)
+            };
         }
     }
 }

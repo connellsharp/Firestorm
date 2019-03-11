@@ -9,11 +9,11 @@ namespace Firestorm.EntityFramework6
     /// Entity Framework transaction object that creates and disposes of the database context.
     /// </summary>
     public class EntitiesDataTransaction<TDatabase> : IDataTransaction
-        where TDatabase : DbContext, new()
+        where TDatabase : DbContext
     {
-        public EntitiesDataTransaction()
+        public EntitiesDataTransaction(TDatabase dbContext)
         {
-            DbContext = new TDatabase();
+            DbContext = dbContext;
         }
 
         public TDatabase DbContext { get; }

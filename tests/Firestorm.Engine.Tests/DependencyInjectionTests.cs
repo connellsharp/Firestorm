@@ -26,6 +26,7 @@ namespace Firestorm.Engine.Tests
 
             kernel.Bind(typeof(IDataTransaction)).To(typeof(VoidTransaction));
             kernel.Bind(typeof(IEngineRepository<Artist>)).To(typeof(ArtistMemoryRepository));
+            kernel.Bind(typeof(IAsyncQueryer)).To(typeof(MemoryAsyncQueryer));
 
             kernel.Bind(typeof(IAuthorizationChecker<>)).To(typeof(AllowAllAuthorizationChecker<>));
 

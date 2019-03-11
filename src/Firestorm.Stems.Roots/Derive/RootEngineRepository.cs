@@ -1,8 +1,6 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Data;
-using Firestorm.Stems.Roots.Combined;
 
 namespace Firestorm.Stems.Roots.Derive
 {
@@ -14,11 +12,6 @@ namespace Firestorm.Stems.Roots.Derive
         public RootEngineRepository(Root<TItem> root)
         {
             _root = root;
-        }
-
-        public Task ForEachAsync<T>(IQueryable<T> query, Action<T> action)
-        {
-            return _root.ForEachAsync(query, action);
         }
 
         public Task InitializeAsync()

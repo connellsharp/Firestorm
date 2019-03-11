@@ -12,8 +12,8 @@ namespace Firestorm.Engine.Subs.Repositories
     {
         private readonly IEngineRepository<TItem> _navRepository;
 
-        public CreatableItem(IEngineRepository<TItem> navRepository)
-            : base(null, navRepository)
+        public CreatableItem(IEngineRepository<TItem> navRepository, IAsyncQueryer asyncQueryer)
+            : base(null, asyncQueryer)
         {
             _navRepository = navRepository;
 

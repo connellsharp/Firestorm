@@ -30,12 +30,10 @@ namespace Firestorm.Fluent.Fuel.Engine
 
         public IAuthorizationChecker<TItem> AuthorizationChecker { get; }
         
-        public IEngineContext<TItem> CreateFullContext(IDataTransaction transaction, IEngineRepository<TItem> repository)
+        public IEngineContext<TItem> CreateFullContext(IDataContext<TItem> dataContext)
         {
-            var eventWrapper = new DataEventWrapper<TItem>(transaction, repository);
-            eventWrapper.TryWrapEvents(_events);
-
-            return new FullEngineContext<TItem>(eventWrapper.Transaction, eventWrapper.Repository, this);
+            var eventDataContext = new EventTriggeringDataContext<TItem>(dataContext, _events);
+            return new FullEngineContext<TItem>(eventDataContext, this);
         }
     }
 }

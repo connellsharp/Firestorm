@@ -8,31 +8,35 @@ using Firestorm.Data;
 
 namespace Firestorm.EntityFramework6
 {
-    public class EntitiesDataSource<TDbContext> : IDiscoverableDataSource
+    public class EntitiesDataSource<TDbContext> : IDataSource
         where TDbContext : DbContext, new()
     {
-        public IDataTransaction CreateTransaction()
+        private readonly IAsyncQueryer _asyncQueryer;
+
+        public EntitiesDataSource()
         {
-            return new EntitiesDataTransaction<TDbContext>();
+            _asyncQueryer = new EntitiesAsyncQueryer();
         }
 
-        public IEngineRepository<TEntity> GetRepository<TEntity>(IDataTransaction transaction)
-            where TEntity : class, new()
-        {
-            if(!(transaction is EntitiesDataTransaction<TDbContext> entitiesTransaction))
-                throw new ArgumentException("Entity Framework data source was given a transaction for the wrong data source type or context.");
-
-            TDbContext database = entitiesTransaction.DbContext;
-            DbSet<TEntity> repo = database.Set<TEntity>();
-            return new EntitiesRepository<TEntity>(repo);
-        }
-
-        public IEnumerable<Type> FindRepositoryTypes()
+        public IEnumerable<Type> FindEntityTypes()
         {
             using (var context = new TDbContext())
             {
                 return IterateEntityClrTypes(context).ToList();
             }
+        }
+
+        public IDataContext<TEntity> CreateContext<TEntity>() where TEntity : class, new()
+        {
+            var dbContext = new TDbContext();
+            DbSet<TEntity> dbSet = dbContext.Set<TEntity>();
+
+            return new DataContext<TEntity>
+            {
+                Transaction = new EntitiesDataTransaction<TDbContext>(dbContext),
+                Repository = new EntitiesRepository<TEntity>(dbSet),
+                AsyncQueryer = _asyncQueryer
+            };
         }
 
         /// <remarks>

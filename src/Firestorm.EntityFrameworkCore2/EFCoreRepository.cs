@@ -77,10 +77,5 @@ namespace Firestorm.EntityFrameworkCore2
         {
             get { return entity => true; }
         }
-
-        public Task ForEachAsync<T>(IQueryable<T> query, Action<T> action)
-        {
-            return query.ForEachAsync(action);
-        }
     }
 }

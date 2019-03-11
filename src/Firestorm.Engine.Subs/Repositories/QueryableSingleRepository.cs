@@ -46,10 +46,5 @@ namespace Firestorm.Engine.Subs.Repositories
         {
             throw new NotSupportedException("Cannot delete items from a single item repository.");
         }
-
-        public Task ForEachAsync<T>(IQueryable<T> query, Action<T> action)
-        {
-            return ItemQueryHelper.DefaultForEachAsync(query, action);
-        }
     }
 }

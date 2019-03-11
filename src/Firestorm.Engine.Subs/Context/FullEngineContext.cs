@@ -8,19 +8,16 @@ namespace Firestorm.Engine.Subs.Context
     public class FullEngineContext<TItem> : IEngineContext<TItem>
         where TItem : class
     {
+        private readonly IDataContext<TItem> _dataContext;
         private readonly IEngineSubContext<TItem> _subContext;
 
-        public FullEngineContext(IDataTransaction transaction, IEngineRepository<TItem> repository, [NotNull] IEngineSubContext<TItem> subContext)
+        public FullEngineContext([NotNull] IDataContext<TItem> dataContext, [NotNull] IEngineSubContext<TItem> subContext)
         {
-            Transaction = transaction;
-            Repository = repository;
-
+            _dataContext = dataContext;
             _subContext = subContext;
         }
 
-        public IDataTransaction Transaction { get; }
-
-        public IEngineRepository<TItem> Repository { get; }
+        public IDataContext<TItem> Data => _dataContext;
 
         public IIdentifierProvider<TItem> Identifiers => _subContext.Identifiers;
 

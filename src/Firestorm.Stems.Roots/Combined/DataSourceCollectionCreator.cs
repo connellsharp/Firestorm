@@ -1,9 +1,5 @@
-using System.Threading.Tasks;
 using Firestorm.Data;
 using Firestorm.Engine;
-using Firestorm.Engine.Subs.Context;
-using Firestorm.Engine.Subs.Repositories;
-using Firestorm.Engine.Subs.Wrapping;
 using Firestorm.Stems.Fuel;
 
 namespace Firestorm.Stems.Roots.Combined
@@ -25,13 +21,11 @@ namespace Firestorm.Stems.Roots.Combined
 
         public IRestCollection GetRestCollection(Stem<TItem> stem)
         {
-            IDataTransaction transaction = _dataSource.CreateTransaction();
-            stem.OnDispose += delegate { transaction.Dispose(); };
-
-            IEngineRepository<TItem> repository = _dataSource.GetRepository<TItem>(transaction);
+            IDataContext<TItem> dataContext = _dataSource.CreateContext<TItem>();
+            stem.OnDispose += delegate { dataContext.Transaction.Dispose(); };
 
             var subContext = new StemsEngineSubContext<TItem>(stem);
-            var context = subContext.CreateFullContext(transaction, repository);
+            var context = subContext.CreateFullContext(dataContext);
 
             return new EngineRestCollection<TItem>(context);
         }

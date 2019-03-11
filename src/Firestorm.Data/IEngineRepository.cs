@@ -6,7 +6,7 @@ namespace Firestorm.Data
     /// <summary>
     /// Interface to manage CRUD operations of engine items.
     /// </summary>
-    public interface IEngineRepository<TItem> : IAsyncQueryer
+    public interface IEngineRepository<TItem>
         where TItem : class
     {
         Task InitializeAsync();

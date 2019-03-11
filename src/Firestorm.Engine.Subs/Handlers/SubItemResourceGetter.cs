@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using Firestorm.Data;
+using Firestorm.Engine.Defaults;
 using Firestorm.Engine.Deferring;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Engine.Subs.Repositories;
@@ -27,7 +28,7 @@ namespace Firestorm.Engine.Subs.Handlers
             //var itemRepository = new LoadedItemRepository<TNav>(navItem);
             IQueryableSingle<TNav> navigationQuery = item.Query.Select(_expression).SingleDefferred();
             var itemRepository = new QueryableSingleRepository<TNav>(navigationQuery);
-            var deferredNavItem = new RepositoryDeferredItem<TNav>(itemRepository);
+            var deferredNavItem = new RepositoryDeferredItem<TNav>(itemRepository, new MemoryAsyncQueryer());
 
             var context = _engineSubContext.CreateFullContext(dataTransaction, itemRepository);
             
