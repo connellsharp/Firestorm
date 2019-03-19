@@ -94,13 +94,5 @@ namespace Firestorm.Engine.Subs.Repositories
 
             return navCollection;
         }
-
-        /// <summary>
-        /// This is used because entity framework does not support async enumerating on navigation collections.
-        /// </summary>
-        public Task ForEachAsync<T>(IQueryable<T> query, Action<T> action)
-        {
-            return ItemQueryHelper.DefaultForEachAsync(query, action);
-        }
     }
 }

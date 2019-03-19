@@ -30,7 +30,12 @@ namespace Firestorm.Engine.Subs.Handlers
             var itemRepository = new QueryableSingleRepository<TNav>(navigationQuery);
             var deferredNavItem = new RepositoryDeferredItem<TNav>(itemRepository, new MemoryAsyncQueryer());
 
-            var context = _engineSubContext.CreateFullContext(dataTransaction, itemRepository);
+            var context = _engineSubContext.CreateFullContext(new DataContext<TNav>
+            {
+                Repository = itemRepository,
+                AsyncQueryer = new MemoryAsyncQueryer(),
+                Transaction = dataTransaction
+            });
             
             return new EngineRestItem<TNav>(context, deferredNavItem);
         }

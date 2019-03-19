@@ -20,7 +20,7 @@ namespace Firestorm.Engine.Tests.Implementation
         {
             _context = new CodedArtistEntityContext(null);
             var idInfo = new IdConventionIdentifierInfo<Artist>();
-            _item = new EngineRestItem<Artist>(_context, new IdentifiedItem<Artist>("123", _context.Repository, idInfo));
+            _item = new EngineRestItem<Artist>(_context, new IdentifiedItem<Artist>("123", _context.Repository, idInfo, TODO));
             _actualItem = _context.Repository.GetAllItems().SingleOrDefault();
         }
 

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Firestorm.Data;
+using Firestorm.Engine.Defaults;
 using Firestorm.Engine.Deferring;
 using Firestorm.Engine.Subs.Context;
 using Firestorm.Engine.Subs.Repositories;
-using Firestorm.Engine.Subs.Wrapping;
 
 namespace Firestorm.Engine.Subs.Handlers
 {
@@ -25,7 +25,12 @@ namespace Firestorm.Engine.Subs.Handlers
         {
             IEngineRepository<TNav> navRepository = new NavigationCollectionRepository<TItem, TCollection, TNav>(item, _navTools.NavExpression, _navTools.Setter);
 
-            var context = _subContext.CreateFullContext(dataTransaction, navRepository);
+            var context = _subContext.CreateFullContext(new DataContext<TNav>
+            {
+                Repository = navRepository,
+                AsyncQueryer = new MemoryAsyncQueryer(), // because entity framework does not support async enumerating on navigation collections
+                Transaction = dataTransaction
+            });
 
             return new EngineRestCollection<TNav>(context);
         }
