@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ namespace Firestorm.Data
     public interface IEngineRepository<TItem>
         where TItem : class
     {
+        [Obsolete("Only used in NavigationCollectionRepository. Possibly move that functionality.")]
         Task InitializeAsync();
 
         IQueryable<TItem> GetAllItems();

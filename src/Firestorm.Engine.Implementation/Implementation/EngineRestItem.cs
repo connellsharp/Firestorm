@@ -32,7 +32,7 @@ namespace Firestorm.Engine
             if (!_context.AuthorizationChecker.CanGetField(_item, namedField))
                 throw new NotAuthorizedForFieldException(AuthorizableVerb.Get, fieldName);
 
-            IRestResource fullResource = _context.Fields.GetFullResource(fieldName, _item, _context.Transaction);
+            IRestResource fullResource = _context.Fields.GetFullResource(fieldName, _item, _context.Data.Transaction);
             if (fullResource != null)
                 return fullResource;
             
@@ -51,9 +51,9 @@ namespace Firestorm.Engine
             await setter.SetMappedValuesAsync(_item, itemData);
 
             await _item.LoadAsync();
-            _context.Repository.MarkUpdated(_item.LoadedItem);
+            _context.Data.Repository.MarkUpdated(_item.LoadedItem);
 
-            await _context.Transaction.SaveChangesAsync();
+            await _context.Data.Transaction.SaveChangesAsync();
             
             if(_item.WasCreated)
                 return new CreatedItemAcknowledgment(_item.Identifier);
@@ -67,9 +67,9 @@ namespace Firestorm.Engine
                 throw new NotAuthorizedForItemException(AuthorizableVerb.Delete);
 
             await _item.LoadAsync();
-            _context.Repository.MarkDeleted(_item.LoadedItem);
+            _context.Data.Repository.MarkDeleted(_item.LoadedItem);
 
-            await _context.Transaction.SaveChangesAsync();
+            await _context.Data.Transaction.SaveChangesAsync();
 
             return new Acknowledgment();
         }
@@ -80,7 +80,7 @@ namespace Firestorm.Engine
             IEnumerable<string> fields = fieldAuth.GetOrEnsureFields(fieldNames, 0);
 
             var selector = new QueryableFieldSelector<TItem>(_context.Fields, fields);
-            var loadedObjects = await selector.SelectFieldsOnlyAsync(_item.Query, _context.Repository.ForEachAsync);
+            var loadedObjects = await selector.SelectFieldsOnlyAsync(_item.Query, _context.Data.AsyncQueryer);
             RestItemData loadedObject = ItemQueryHelper.SingleOrThrow(loadedObjects);
             return loadedObject;
         }

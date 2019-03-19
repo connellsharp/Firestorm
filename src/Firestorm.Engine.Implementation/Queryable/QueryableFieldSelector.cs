@@ -43,14 +43,14 @@ namespace Firestorm.Engine.Queryable
         /// <summary>
         /// Executes a query that selects only the desired fields from an <see cref="IQueryable{TItem}"/>.
         /// </summary>
-        public async Task<QueriedDataIterator> SelectFieldsOnlyAsync(IQueryable<TItem> items, ForEachAsyncDelegate<object> forEachAsync)
+        public async Task<QueriedDataIterator> SelectFieldsOnlyAsync(IQueryable<TItem> items, IAsyncQueryer asyncQueryer)
         {
             Type dynamicType = GetDynamicRuntimeType();
             IQueryable dynamicQueryable = GetDynamicQueryable(items, dynamicType);
 
             var replacementProcessor = new FieldReplacementProcessor<TItem>(_fieldReaders);
             await replacementProcessor.LoadAllAsync(items);
-            List<object> dynamicObjects = await ExecuteWithReplacementsAsync(replacementProcessor, dynamicQueryable, forEachAsync);
+            List<object> dynamicObjects = await ExecuteWithReplacementsAsync(replacementProcessor, dynamicQueryable, asyncQueryer);
 
             return new QueriedDataIterator(dynamicObjects);
         }
@@ -96,7 +96,7 @@ namespace Firestorm.Engine.Queryable
             return dynamicObj;
         }
 
-        private static async Task<List<object>> ExecuteWithReplacementsAsync(FieldReplacementProcessor<TItem> replacementProcessor, IQueryable dynamicQueryable, ForEachAsyncDelegate<object> forEachAsync)
+        private static async Task<List<object>> ExecuteWithReplacementsAsync(FieldReplacementProcessor<TItem> replacementProcessor, IQueryable dynamicQueryable, IAsyncQueryer asyncQueryer)
         {
             var dynamicType = dynamicQueryable.ElementType;
             var returnObjects = new List<object>();
@@ -104,7 +104,7 @@ namespace Firestorm.Engine.Queryable
             if (dynamicQueryable.IsInMemory())
                 await ItemQueryHelper.DefaultForEachAsync(dynamicQueryable, AddObjectToList);
             else
-                await forEachAsync(dynamicQueryable.AsObjects(), AddObjectToList);
+                await asyncQueryer.ForEachAsync(dynamicQueryable.AsObjects(), AddObjectToList);
 
             void AddObjectToList(object dynamicObj)
             {

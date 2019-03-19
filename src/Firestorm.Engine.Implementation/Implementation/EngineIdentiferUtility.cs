@@ -1,5 +1,4 @@
 using Firestorm.Engine.Deferring;
-using Firestorm.Engine.Fields;
 using Firestorm.Engine.Identifiers;
 
 namespace Firestorm.Engine
@@ -13,7 +12,7 @@ namespace Firestorm.Engine
             if (alreadyLoadedItem != null)
                 return new AlreadyLoadedItem<TItem>(alreadyLoadedItem, identifier);
 
-            return new IdentifiedItem<TItem>(identifier, engineContext.Repository, identifierInfo);
+            return new IdentifiedItem<TItem>(identifier, engineContext.Data.Repository, identifierInfo, engineContext.Data.AsyncQueryer);
         }
     }
 }
