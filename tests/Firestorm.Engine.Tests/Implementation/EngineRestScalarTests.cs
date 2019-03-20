@@ -4,6 +4,7 @@ using AutoFixture.AutoMoq;
 using Firestorm.Data;
 using Firestorm.Engine.Additives.Readers;
 using Firestorm.Engine.Additives.Writers;
+using Firestorm.Engine.Defaults;
 using Firestorm.Engine.Deferring;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Subs.Repositories;
@@ -52,6 +53,7 @@ namespace Firestorm.Engine.Tests.Implementation
             _fixture.Inject(new[] { person }.SingleDefferred());
 
             _fixture.Relay<IEngineRepository<Person>, QueryableSingleRepository<Person>>();
+            _fixture.Relay<IAsyncQueryer, MemoryAsyncQueryer>();
 
             var scalar = _fixture.Create<EngineRestScalar<Person>>();
 

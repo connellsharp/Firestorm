@@ -14,15 +14,18 @@ namespace Firestorm.Engine.Tests.Models
     {
         public CodedArtistEntityContext(IRestUser user)
         {
-            Transaction = new VoidTransaction();
-            Repository = new ArtistMemoryRepository();
+            Data = new DataContext<Artist>
+            {
+                Transaction = new VoidTransaction(),
+                Repository = new ArtistMemoryRepository(),
+                AsyncQueryer = new MemoryAsyncQueryer()
+            };
+            
             AuthorizationChecker = new AllowAllAuthorizationChecker<Artist>();
         }
 
-        public IDataTransaction Transaction { get; }
-
-        public IEngineRepository<Artist> Repository { get; }
-
+        public IDataContext<Artist> Data { get; }
+        
         public IIdentifierProvider<Artist> Identifiers { get; } = new SingleIdentifierProvider<Artist>(new ExpressionIdentifierInfo<Artist, int>(a => a.ID));
 
         public IFieldProvider<Artist> Fields => StaticFieldProvider;

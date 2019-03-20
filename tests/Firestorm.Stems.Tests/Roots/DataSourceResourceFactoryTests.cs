@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Data;
-using Firestorm.Stems;
 using Firestorm.Stems.Roots;
 using Xunit;
 using Firestorm.Stems.Roots.DataSource;
@@ -17,6 +16,10 @@ namespace Firestorm.Stems.Tests.Roots
         public DataSourceResourceFactoryTests()
         {
             var dataSourceMock = new Mock<IDataSource>();
+            
+            dataSourceMock
+                .Setup(d => d.CreateContext<TestStem>())
+                .Returns(new DataContext<TestStem>());
 
             _factory = new DataSourceRootResourceFactory
             {
