@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Firestorm.Data;
 using Firestorm.Stems.Roots;
+using Firestorm.Stems.Roots.Combined;
 using Xunit;
 using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Testing.Models;
@@ -9,11 +10,11 @@ using Moq;
 
 namespace Firestorm.Stems.Tests.Roots
 {
-    public class DataSourceResourceFactoryTests
+    public class DataSourceVaseStartInfoFactoryTests
     {
-        private readonly DataSourceRootResourceFactory _factory;
+        private readonly DataSourceVaseStartInfoFactory _sut;
 
-        public DataSourceResourceFactoryTests()
+        public DataSourceVaseStartInfoFactoryTests()
         {
             var dataSourceMock = new Mock<IDataSource>();
             
@@ -21,11 +22,10 @@ namespace Firestorm.Stems.Tests.Roots
                 .Setup(d => d.CreateContext<TestStem>())
                 .Returns(new DataContext<TestStem>());
 
-            _factory = new DataSourceRootResourceFactory
-            {
-                StemTypeGetter = new ManualTypeGetter(typeof(TestStem)),
-                DataSource = dataSourceMock.Object
-            };
+            var typeGetter = new ManualTypeGetter(typeof(TestStem));
+
+            _sut = new DataSourceVaseStartInfoFactory(dataSourceMock.Object, typeGetter,
+                DataSourceRootAttributeBehavior.UseAllStemsExceptDisallowed);
         }
 
         [Fact]
@@ -33,9 +33,9 @@ namespace Firestorm.Stems.Tests.Roots
         {
             var services = new TestStemsServices();
             
-            _factory.GetStemTypes(services);
+            _sut.GetStemTypes(services);
 
-            var startResource = _factory.GetStartResource(services, new TestRequestContext());
+            IRootStartInfo startInfo = _sut.Get(services, "TestString");
 
             var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
             var info = await startDirectory.GetInfoAsync();
@@ -49,9 +49,9 @@ namespace Firestorm.Stems.Tests.Roots
         {
             var stemConfig = new TestStemsServices();
             
-            _factory.GetStemTypes(stemConfig);
+            _sut.GetStemTypes(stemConfig);
 
-            var startResource = _factory.GetStartResource(stemConfig, new TestRequestContext());
+            var startResource = _sut.Get(stemConfig, "TestString");
 
             var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
             var resource = startDirectory.GetChild("Test");

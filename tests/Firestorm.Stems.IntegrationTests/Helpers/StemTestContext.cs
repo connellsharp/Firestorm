@@ -4,6 +4,7 @@ using Firestorm.Engine.Defaults;
 using Firestorm.Stems.Analysis;
 using Firestorm.Stems.AutoMap;
 using Firestorm.Stems.Roots;
+using Firestorm.Stems.Roots.Combined;
 using Firestorm.Stems.Roots.Derive;
 using Firestorm.Testing.Http;
 using Firestorm.Testing.Http.Models;
@@ -21,19 +22,16 @@ namespace Firestorm.Stems.IntegrationTests.Helpers
         {
             TestDependencyResolver.Add(TestRepository);
 
-            var stemStartResources = new StemsStartResourceFactory
+            var testServices = new StemsServices
             {
-                RootResourceFactory = new DerivedRootsResourceFactory
-                {
-                    RootTypeGetter = new ManualTypeGetter(rootTypes)
-                },
-                StemsServices = new StemsServices
-                {
-                    DependencyResolver = TestDependencyResolver,
-                    ServiceGroup = new DefaultServiceGroup(),
-                    AutoPropertyMapper = new DefaultPropertyAutoMapper()
-                }
+                DependencyResolver = TestDependencyResolver,
+                ServiceGroup = new DefaultServiceGroup(),
+                AutoPropertyMapper = new DefaultPropertyAutoMapper()
             };
+
+            var startInfoFactory = new DerivedRootStartInfoFactory(new ManualTypeGetter(rootTypes));
+            
+            var stemStartResources = new StemsStartResourceFactory(testServices, startInfoFactory);
 
             stemStartResources.Initialize();
 

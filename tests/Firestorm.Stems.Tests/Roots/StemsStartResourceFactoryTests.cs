@@ -1,4 +1,4 @@
-﻿using Firestorm.Stems.Roots;
+﻿using Firestorm.Stems.Roots.Combined;
 using Moq;
 using Xunit;
 
@@ -7,22 +7,19 @@ namespace Firestorm.Stems.Tests.Roots
     public class StemsStartResourceFactoryTests
     {
         [Fact]
-        public void GetStartResource_MockRootFactory_CallsGetStartResource()
+        public void GetStartResource_GetChildResourceByName_PassesNameToStartInfoFactory()
         {
-            var rootFactoryMock = new Mock<IRootResourceFactory>();
+            var factoryMock = new Mock<IRootStartInfoFactory>();
             var services = new TestStemsServices();
 
-            var factory = new StemsStartResourceFactory
-            {
-                StemsServices = services,
-                RootResourceFactory = rootFactoryMock.Object
-            };
+            var factory = new StemsStartResourceFactory(services, factoryMock.Object);
 
             var context = new TestRequestContext();
 
-            var startResource = factory.GetStartResource(context);
+            var startResource = (IRestDirectory)factory.GetStartResource(context);
+            var testResource = startResource.GetChild("TestName");
 
-            rootFactoryMock.Verify(f => f.GetStartResource(services, context));
+            factoryMock.Verify(f => f.Get(services, "TestName"));
         }
     }
 }

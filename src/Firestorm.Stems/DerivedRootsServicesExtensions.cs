@@ -30,22 +30,7 @@ namespace Firestorm.Stems
         /// </summary>
         public static IServicesBuilder AddRoots(this IServicesBuilder builder, Assembly assembly, string baseNamespace)
         {
-            builder.AddDerivedRoots();       
-
             builder.Add(new AxisTypesLocation<Root>(assembly, baseNamespace));
-            return builder;
-        }
-
-        /// <summary>
-        /// Configures the <see cref="DerivedRootsResourceFactory"/>.
-        /// </summary>
-        private static IServicesBuilder AddDerivedRoots(this IServicesBuilder builder)
-        {
-            builder.Add<IRootResourceFactory>(sp => new DerivedRootsResourceFactory
-            {
-                RootTypeGetter = sp.GetService<AxisTypesLocation<Root>>().GetTypeGetter()
-            });
-            
             return builder;
         }
     }

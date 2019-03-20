@@ -21,5 +21,15 @@ namespace Firestorm.Host
             builder.Add<IStartResourceFactory>(startResourceFactoryFunc);
             return builder;
         }
+
+        /// <summary>
+        /// Configures the start resource for this Firestorm API.
+        /// </summary>
+        public static IServicesBuilder AddStartResourceFactory<TFactory>(this IServicesBuilder builder)
+            where TFactory : class, IStartResourceFactory
+        {
+            builder.Add<IStartResourceFactory, TFactory>();
+            return builder;
+        }
     }
 }
