@@ -6,6 +6,7 @@
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="AutoFixture.AutoMoq" Version="4.0.1" />
+        <PackageReference Include="FluentAssertions" Version="5.6.0" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\src\Firestorm.Engine\Firestorm.Engine.csproj" />

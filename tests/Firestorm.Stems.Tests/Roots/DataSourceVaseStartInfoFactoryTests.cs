@@ -1,11 +1,11 @@
-﻿using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
 using Firestorm.Data;
 using Firestorm.Stems.Roots;
-using Firestorm.Stems.Roots.Combined;
 using Xunit;
 using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Testing.Models;
+using FluentAssertions;
 using Moq;
 
 namespace Firestorm.Stems.Tests.Roots
@@ -13,54 +13,69 @@ namespace Firestorm.Stems.Tests.Roots
     public class DataSourceVaseStartInfoFactoryTests
     {
         private readonly DataSourceVaseStartInfoFactory _sut;
+        private readonly Mock<IDataSource> _dataSourceMock;
 
         public DataSourceVaseStartInfoFactoryTests()
         {
-            var dataSourceMock = new Mock<IDataSource>();
-            
-            dataSourceMock
-                .Setup(d => d.CreateContext<TestStem>())
-                .Returns(new DataContext<TestStem>());
+            _dataSourceMock = new Mock<IDataSource>();
 
-            var typeGetter = new ManualTypeGetter(typeof(TestStem));
+            var typeGetter = new NestedTypeGetter(GetType());
 
-            _sut = new DataSourceVaseStartInfoFactory(dataSourceMock.Object, typeGetter,
+            _sut = new DataSourceVaseStartInfoFactory(_dataSourceMock.Object, typeGetter,
                 DataSourceRootAttributeBehavior.UseAllStemsExceptDisallowed);
         }
 
         [Fact]
-        public async Task GetStartResource_MockRootFactory_CallsGetStartResource()
+        public async Task GetStemTypes_ContainsValidStemTypes()
         {
-            var services = new TestStemsServices();
-            
-            _sut.GetStemTypes(services);
+            var types = _sut.GetStemTypes(new TestStemsServices());
 
-            IRootStartInfo startInfo = _sut.Get(services, "TestString");
-
-            var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
-            var info = await startDirectory.GetInfoAsync();
-
-            Assert.Single(info.Resources);
-            Assert.Equal("Test", info.Resources.Single().Name);
+            types.Should().Contain(new[] {typeof(TestStem)});
         }
 
         [Fact]
-        public void GetChild_MockRootFactory_CallsGetStartResource()
+        public async Task GetStemTypes_DoesNotContainInvalidStemTypes()
         {
-            var stemConfig = new TestStemsServices();
-            
-            _sut.GetStemTypes(stemConfig);
+            var types = _sut.GetStemTypes(new TestStemsServices());
 
-            var startResource = _sut.Get(stemConfig, "TestString");
-
-            var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
-            var resource = startDirectory.GetChild("Test");
-            var collection = Assert.IsAssignableFrom<IRestCollection>(resource);
-
+            types.Should().NotContain(new[] {typeof(StemNamedIncorrectly), typeof(JustCalledAStem), typeof(DisallowedStem)});
         }
 
-        [DataSourceRoot]
+        [Fact]
+        public async Task ValidTestStemTypeString_GetType_TestStem()
+        {
+            var services = new TestStemsServices();
+
+            _sut.GetStemTypes(new TestStemsServices());
+            var type = _sut.Get(services, "Test").GetStemType();
+
+            type.Should().Be<TestStem>();
+        }
+
+        [Fact]
+        public async Task GetDataSource_ReturnsDataSourceFromFactory()
+        {
+            var services = new TestStemsServices();
+
+            var dataSource = _sut.Get(services, "Test").GetDataSource();
+            
+            dataSource.Should().Be(_dataSourceMock.Object);
+        }
+
         public class TestStem : Stem<Artist>
+        {
+        }
+
+        [NoDataSourceRoot]
+        public class DisallowedStem : Stem<Artist>
+        {
+        }
+
+        public class StemNamedIncorrectly : Stem<Artist>
+        {
+        }
+
+        public class JustCalledAStem
         {
         }
     }
