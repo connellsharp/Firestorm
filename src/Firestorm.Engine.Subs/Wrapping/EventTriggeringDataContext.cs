@@ -17,15 +17,15 @@ namespace Firestorm.Engine.Subs.Wrapping
         {
             if (events == null || !events.HasAnyEvent)
             {
+                Transaction = underlyingContext.Transaction;
+                Repository = underlyingContext.Repository;
+            }
+            else
+            {
                 var wrappedRepo = new EventWrappedRepository<TItem>(underlyingContext.Repository, events);
 
                 Transaction = new EventWrappedTransaction(underlyingContext.Transaction, wrappedRepo);
                 Repository = wrappedRepo;
-            }
-            else
-            {
-                Transaction = underlyingContext.Transaction;
-                Repository = underlyingContext.Repository;
             }
 
             AsyncQueryer = underlyingContext.AsyncQueryer;
