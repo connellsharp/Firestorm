@@ -16,8 +16,8 @@ namespace Firestorm.Endpoints
         {
             builder
                 .Add<IRequestInvoker, EndpointsRequestInvoker>()
-                .AddWithFeatures<EndpointServices>()
-                .AddFeature<EndpointServices, DefaultEndpointFeature>();
+                .AddCustomizable<EndpointServices>()
+                .AddCustomization<EndpointServices, DefaultEndpointCustomization>();
 
             return builder;
         }

@@ -8,11 +8,11 @@ using Firestorm.Features;
 
 namespace Firestorm.Endpoints
 {
-    internal class DefaultEndpointFeature : IFeature<EndpointServices>
+    internal class DefaultEndpointCustomization : ICustomization<EndpointServices>
     {
         private readonly EndpointConfiguration _configuration;
 
-        public DefaultEndpointFeature(EndpointConfiguration configuration)
+        public DefaultEndpointCustomization(EndpointConfiguration configuration)
         {
             _configuration = configuration;
         }

@@ -45,8 +45,8 @@ namespace Firestorm.Stems
         /// </summary>
         public static IServicesBuilder AddStems(this IServicesBuilder builder, StemsConfiguration configuration)
         {
-            builder.AddWithFeatures<StemsServices>()
-                .AddFeature<StemsServices, DefaultStemsFeature>();
+            builder.AddCustomizable<StemsServices>()
+                .AddCustomization<StemsServices, DefaultStemsCustomization>();
             
             builder.Add<IRootStartInfoFactory>(CreateRootResourceFactory);
             builder.Add(new AxisTypesLocation<Stem>(configuration.Assembly, configuration.BaseNamespace));

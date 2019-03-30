@@ -4,11 +4,11 @@ using Firestorm.Stems.AutoMap;
 
 namespace Firestorm.Stems
 {
-    public class DefaultStemsFeature : IFeature<StemsServices>
+    public class DefaultStemsCustomization : ICustomization<StemsServices>
     {
         private readonly IRequestServiceProvider _requestServiceProvider;
 
-        public DefaultStemsFeature(IRequestServiceProvider requestServiceProvider)
+        public DefaultStemsCustomization(IRequestServiceProvider requestServiceProvider)
         {
             _requestServiceProvider = requestServiceProvider;
         }

@@ -8,7 +8,7 @@ namespace Firestorm.Endpoints.Tests.Stubs
         {
             var config = new EndpointConfiguration();
             //config.NamingConventions.TwoLetterAcronyms = new[] {"ID"};
-            new DefaultEndpointFeature(config).Apply(this);
+            new DefaultEndpointCustomization(config).Apply(this);
 
             NameSwitcher = new VoidNamingConventionSwitcher();
         }
