@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Firestorm.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,14 +38,6 @@ namespace Firestorm.EntityFrameworkCore2
                 Repository = new EFCoreRepository<TEntity>(dbSet),
                 AsyncQueryer = _asyncQueryer
             };
-        }
-    }
-
-    public class EFCoreAsyncQueryer : IAsyncQueryer
-    {
-        public Task ForEachAsync<T>(IQueryable<T> query, Action<T> action)
-        {
-            return query.ForEachAsync(action);
         }
     }
 }
