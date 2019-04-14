@@ -132,6 +132,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.Client.Integratio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm", "src\Firestorm\Firestorm.csproj", "{C050C32D-E291-404D-9664-4665CB0782B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firestorm.FluentValidation", "src\Firestorm.FluentValidation\Firestorm.FluentValidation.csproj", "{9463BD16-BC79-490B-872E-0D60C0EDF357}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -330,6 +332,10 @@ Global
 		{C050C32D-E291-404D-9664-4665CB0782B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C050C32D-E291-404D-9664-4665CB0782B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C050C32D-E291-404D-9664-4665CB0782B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9463BD16-BC79-490B-872E-0D60C0EDF357}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9463BD16-BC79-490B-872E-0D60C0EDF357}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9463BD16-BC79-490B-872E-0D60C0EDF357}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9463BD16-BC79-490B-872E-0D60C0EDF357}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -395,6 +401,7 @@ Global
 		{F86C93FA-558B-4BD7-87BF-1E770DD5FE79} = {33A230CD-37B2-455D-AE98-F8917AD6F158}
 		{4BCC6C25-78E6-4429-BCDD-54B8088D8779} = {1A353687-93AC-4112-87CF-42CFE6E2F84C}
 		{C050C32D-E291-404D-9664-4665CB0782B2} = {C2F6430A-4C2E-495B-9556-7EF1A3A1C2B8}
+		{9463BD16-BC79-490B-872E-0D60C0EDF357} = {C2F6430A-4C2E-495B-9556-7EF1A3A1C2B8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E07ED662-9390-431F-B4D6-BDA65FE4169A}
