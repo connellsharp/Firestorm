@@ -4,20 +4,22 @@ using Firestorm.Stems.AutoMap;
 
 namespace Firestorm.Stems
 {
-    public class DefaultStemsFeature : IFeature<StemsServices>
+    public class DefaultStemsCustomization : ICustomization<StemsServices>
     {
         private readonly IRequestServiceProvider _requestServiceProvider;
 
-        public DefaultStemsFeature(IRequestServiceProvider requestServiceProvider)
+        public DefaultStemsCustomization(IRequestServiceProvider requestServiceProvider)
         {
             _requestServiceProvider = requestServiceProvider;
         }
         
-        public void AddTo(StemsServices services)
+        public StemsServices Apply(StemsServices services)
         {
             services.DependencyResolver = new DefaultDependencyResolver(_requestServiceProvider);
             services.AutoPropertyMapper = new DefaultPropertyAutoMapper();
             services.ServiceGroup = new DefaultServiceGroup(services.AutoPropertyMapper);
+
+            return services;
         }
     }
 }

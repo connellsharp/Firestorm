@@ -23,14 +23,15 @@ namespace Firestorm.Engine.Subs.Handlers
         /// <summary>
         /// Attempts to locate the item to modify using the modification request data.
         /// </summary>
-        internal async Task<DeferredItemBase<TNav>> LocateOrCreateItemAsync(IEngineRepository<TNav> navRepository, RestItemData itemData, Func<Task> loadParentAsync)
+        internal async Task<DeferredItemBase<TNav>> LocateOrCreateItemAsync(IEngineRepository<TNav> navRepository,
+            RestItemData itemData, Func<Task> loadParentAsync, IAsyncQueryer queryer)
         {
             var locatedItem = LocateItem(navRepository, itemData);
             if (locatedItem != null)
                 return locatedItem;
 
             await loadParentAsync();
-            return new CreatableItem<TNav>(navRepository);
+            return new CreatableItem<TNav>(navRepository, queryer);
         }
 
         /// <summary>
@@ -75,7 +76,7 @@ namespace Firestorm.Engine.Subs.Handlers
                 if (locator == null)
                     continue;
 
-                string findValue = itemData[fieldName].ToString(); // todo currently converts from int only to be parsed back later
+                string findValue = itemData[fieldName].ToString(); // TODO currently converts from int only to be parsed back later
                 yield return new FilterInstruction(fieldName, FilterComparisonOperator.Equals, findValue);
             }
         }

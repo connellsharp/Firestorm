@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Firestorm.Engine;
 using Firestorm.Engine.Additives.Identifiers;
 using Firestorm.Engine.Deferring;
 using Firestorm.Engine.Tests.Models;
@@ -20,8 +19,8 @@ namespace Firestorm.Engine.Tests.Implementation
         {
             _context = new CodedArtistEntityContext(null);
             var idInfo = new IdConventionIdentifierInfo<Artist>();
-            _item = new EngineRestItem<Artist>(_context, new IdentifiedItem<Artist>("123", _context.Repository, idInfo));
-            _actualItem = _context.Repository.GetAllItems().SingleOrDefault();
+            _item = new EngineRestItem<Artist>(_context, new IdentifiedItem<Artist>("123", _context.Data.Repository, idInfo, _context.Data.AsyncQueryer));
+            _actualItem = _context.Data.Repository.GetAllItems().SingleOrDefault();
         }
 
         [Fact]
@@ -44,7 +43,7 @@ namespace Firestorm.Engine.Tests.Implementation
         public async Task DeleteAsyncTest()
         {
             var ack = await _item.DeleteAsync();
-            Assert.Equal(0, _context.Repository.GetAllItems().Count());
+            Assert.Equal(0, _context.Data.Repository.GetAllItems().Count());
         }
 
         [Fact]

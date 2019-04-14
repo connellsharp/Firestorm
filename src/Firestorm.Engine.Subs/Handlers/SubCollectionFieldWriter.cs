@@ -30,9 +30,14 @@ namespace Firestorm.Engine.Subs.Handlers
         public async Task SetValueAsync(IDeferredItem<TItem> item, object deserializedValue, IDataTransaction dataTransaction)
         {
             IEngineRepository<TNav> navRepository = new NavigationCollectionRepository<TItem, TCollection, TNav>(item, _navTools.NavExpression, _navTools.Setter);
+            var queryer = new MemoryAsyncQueryer(); // because entity framework does not support async enumerating on navigation collections
 
-            IDataTransaction transaction = new VoidTransaction(); // we commit the transaction in the parent. TODO optional save-as-you-go ?
-            var navContext = new FullEngineContext<TNav>(transaction, navRepository, _subContext);
+            IEngineContext<TNav> navContext = _subContext.CreateFullContext(new DataContext<TNav>
+            {
+                Repository = navRepository,
+                AsyncQueryer = queryer,
+                Transaction = new VoidTransaction() // we commit the transaction in the parent. TODO optional save-as-you-go ?
+            });
 
             var navLocatorCreator = new NavigationItemLocatorCreator<TNav>(_subContext);
 
@@ -42,7 +47,7 @@ namespace Firestorm.Engine.Subs.Handlers
             {
                 var itemData = new RestItemData(deserializedItem);
                 
-                DeferredItemBase<TNav> deferredItem = await navLocatorCreator.LocateOrCreateItemAsync(navRepository, itemData, item.LoadAsync);
+                DeferredItemBase<TNav> deferredItem = await navLocatorCreator.LocateOrCreateItemAsync(navRepository, itemData, item.LoadAsync, queryer);
 
                 var navEngineItem = new EngineRestItem<TNav>(navContext, deferredItem);
                 Acknowledgment acknowledgment = await navEngineItem.EditAsync(itemData);

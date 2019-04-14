@@ -25,7 +25,7 @@ namespace Firestorm.Engine
 
         public IQueryable<TItem> BuildQueryable()
         {
-            IQueryable<TItem> items = _context.Repository.GetAllItems();
+            IQueryable<TItem> items = _context.Data.Repository.GetAllItems();
 
             items = _context.AuthorizationChecker.ApplyFilter(items);
 

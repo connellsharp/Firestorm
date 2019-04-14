@@ -3,33 +3,38 @@ using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Stems.Roots;
 using Firestorm.Stems.Roots.Derive;
+using Firestorm.Stems.Tests.Attributes;
 using Firestorm.Testing.Models;
+using FluentAssertions;
 using Moq;
 using Xunit;
 
 namespace Firestorm.Stems.Tests.Roots
 {
-    public class DerivedRootsResourceFactoryTests
+    public class DerivedRootStartInfoFactoryTests
     {
         [Fact]
-        public async Task GetStartResource_MockRootFactory_CallsGetStartResource()
+        public async Task GetRootStartInfo_StemType_Expected()
         {
-            var stemConfig = new StemsServices();
+            var stemsServices = new StemsServices();
 
-            var factory = new DerivedRootsResourceFactory
-            {
-                RootTypeGetter = new NestedTypeGetter(GetType())
-            };
+            var factory = new DerivedRootStartInfoFactory(new NestedTypeGetter(GetType()));
 
-            factory.GetStemTypes(stemConfig);
+            var startInfo = factory.Get(stemsServices, "Test");
 
-            var startResource = factory.GetStartResource(stemConfig, new TestRequestContext());
+            startInfo.GetStemType().Should().Be<TestStem>();
+        }
+        
+        [Fact]
+        public async Task GetStemTypes_ContainsExpected()
+        {
+            var stemsServices = new StemsServices();
 
-            var startDirectory = Assert.IsAssignableFrom<IRestDirectory>(startResource);
-            var info = await startDirectory.GetInfoAsync();
+            var sut = new DerivedRootStartInfoFactory(new NestedTypeGetter(GetType()));
 
-            Assert.Equal(1, info.Resources.Count());
-            Assert.Equal("Test", info.Resources.Single().Name);
+            var stemTypes = sut.GetStemTypes(stemsServices);
+
+            stemTypes.Should().ContainSingle().Which.Should().Be<TestStem>();
         }
 
         public class TestRoot : Root<Artist>

@@ -12,6 +12,7 @@ namespace Firestorm.Data
         /// <summary>
         /// Starts a transaction.
         /// </summary>
+        [Obsolete("Not actually needed (yet?)")]
         void StartTransaction();
 
         /// <summary>
@@ -22,6 +23,7 @@ namespace Firestorm.Data
         /// <summary>
         /// Undos any local changes and forgets them.
         /// </summary>
+        [Obsolete("Not actually needed (yet?)")]
         Task RollbackAsync();
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Firestorm.AspNetCore2
 {
-    internal class AspNetCoreServicesBuilder : IFirestormServicesBuilder
+    internal class AspNetCoreServicesBuilder : IServicesBuilder
     {
         private readonly IServiceCollection _services;
 
@@ -12,20 +12,20 @@ namespace Firestorm.AspNetCore2
             _services = services;
         }
 
-        public IFirestormServicesBuilder Add<TService>(Func<IServiceProvider, TService> implementationFactory) 
+        public IServicesBuilder Add<TService>(Func<IServiceProvider, TService> implementationFactory) 
             where TService : class
         {
             _services.AddSingleton<TService>(implementationFactory);
             return this;
         }
 
-        public IFirestormServicesBuilder Add(Type serviceType, Type implementationType)
+        public IServicesBuilder Add(Type serviceType, Type implementationType)
         {
             _services.AddSingleton(serviceType, implementationType);
             return this;
         }
 
-        public IFirestormServicesBuilder Add<TService>(TService implementationInstance) 
+        public IServicesBuilder Add<TService>(TService implementationInstance) 
             where TService : class
         {
             _services.AddSingleton<TService>(implementationInstance);

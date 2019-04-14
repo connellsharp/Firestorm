@@ -6,7 +6,7 @@ namespace Firestorm.Owin
 {
     public static class FirestormMiddlewareExtensions
     {   
-        public static IAppBuilder UseFirestorm(this IAppBuilder app, Action<IFirestormServicesBuilder> configureAction)
+        public static IAppBuilder UseFirestorm(this IAppBuilder app, Action<IServicesBuilder> configureAction)
         {
             var servicesBuilder = new DefaultServicesBuilder();
             configureAction(servicesBuilder);

@@ -22,7 +22,7 @@ namespace Firestorm.Engine
 
         public async Task<RestCollectionData> QueryDataAsync(IRestCollectionQuery query)
         {
-            await _context.Repository.InitializeAsync();
+            await _context.Data.Repository.InitializeAsync();
             
             var fieldAuth = new FieldAuthChecker<TItem>(_context.Fields, _context.AuthorizationChecker, null);
             IEnumerable<string> fields = fieldAuth.GetOrEnsureFields(query?.SelectFields, 1);
@@ -31,7 +31,7 @@ namespace Firestorm.Engine
             var queryBuilder = new ContextQueryBuilder<TItem>(_context, query);
             IQueryable<TItem> items = queryBuilder.BuildQueryable();
 
-            QueriedDataIterator queriedData = await selector.SelectFieldsOnlyAsync(items, _context.Repository.ForEachAsync);
+            QueriedDataIterator queriedData = await selector.SelectFieldsOnlyAsync(items, _context.Data.AsyncQueryer);
             PageDetails pageDetails = queryBuilder.GetPageDetails(queriedData);
 
             return new RestCollectionData(queriedData, pageDetails);
@@ -39,7 +39,7 @@ namespace Firestorm.Engine
 
         public IRestItem GetItem(string identifier, string identifierName = null)
         {
-            _context.Transaction.StartTransaction();
+            _context.Data.Transaction.StartTransaction();
 
             IIdentifierInfo<TItem> identifierInfo = _context.Identifiers.GetInfo(identifierName);
             if (identifierInfo == null)
@@ -67,15 +67,15 @@ namespace Firestorm.Engine
             if (!_context.AuthorizationChecker.CanAddItem())
                 throw new NotAuthorizedForItemException(AuthorizableVerb.Add);
 
-            _context.Transaction.StartTransaction();
-            await _context.Repository.InitializeAsync();
+            _context.Data.Transaction.StartTransaction();
+            await _context.Data.Repository.InitializeAsync();
 
-            TItem newItem = _context.Repository.CreateAndAttachItem();
+            TItem newItem = _context.Data.Repository.CreateAndAttachItem();
 
             var setter = new QueryableFieldSetter<TItem>(_context);
             await setter.SetMappedValuesAsync(new PostedNewItem<TItem>(newItem), itemData);
 
-            await _context.Transaction.SaveChangesAsync();
+            await _context.Data.Transaction.SaveChangesAsync();
 
             object identifier = _context.Identifiers.GetInfo(null).GetValue(newItem);
             return new CreatedItemAcknowledgment(identifier);
@@ -83,8 +83,8 @@ namespace Firestorm.Engine
 
         public async Task<Acknowledgment> DeleteAllAsync(IRestCollectionQuery query)
         {
-            _context.Transaction.StartTransaction();
-            await _context.Repository.InitializeAsync();
+            _context.Data.Transaction.StartTransaction();
+            await _context.Data.Repository.InitializeAsync();
 
             var queryBuilder = new ContextQueryBuilder<TItem>(_context, query);
             IQueryable<TItem> items = queryBuilder.BuildQueryable();
@@ -96,10 +96,10 @@ namespace Firestorm.Engine
                 if (!_context.AuthorizationChecker.CanDeleteItem(loadedItem))
                     throw new NotAuthorizedForItemException(AuthorizableVerb.Delete);
 
-                _context.Repository.MarkDeleted(item);
+                _context.Data.Repository.MarkDeleted(item);
             }
             
-            await _context.Transaction.SaveChangesAsync();
+            await _context.Data.Transaction.SaveChangesAsync();
             
             return new Acknowledgment();
         }

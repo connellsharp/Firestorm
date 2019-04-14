@@ -15,7 +15,7 @@ namespace Firestorm.FunctionalTests.Setup
     
     public class StemsConfigurer : IStartupConfigurer
     {
-        public void Configure(IFirestormServicesBuilder builder)
+        public void Configure(IServicesBuilder builder)
         {
             builder.AddStems();
         }

@@ -5,11 +5,10 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoFixture;
-using Firestorm.Engine;
 using Firestorm.Engine.Additives.Readers;
+using Firestorm.Engine.Defaults;
 using Firestorm.Engine.Fields;
 using Firestorm.Engine.Queryable;
-using Moq;
 using Xunit;
 
 namespace Firestorm.Engine.Tests.Queryable
@@ -58,7 +57,7 @@ namespace Firestorm.Engine.Tests.Queryable
                 { "name", new PropertyInfoFieldReader<Artist>(NameProperty) }
             });
 
-            var selectedItemData = await selector.SelectFieldsOnlyAsync(artists.AsQueryable(), ItemQueryHelper.DefaultForEachAsync);
+            var selectedItemData = await selector.SelectFieldsOnlyAsync(artists.AsQueryable(), new MemoryAsyncQueryer());
             var firstSelection = selectedItemData.First();
 
             Assert.Equal(artists[0].Name, firstSelection["name"]);
@@ -74,7 +73,7 @@ namespace Firestorm.Engine.Tests.Queryable
                 { "name", new ReplacerFieldReader(new PropertyInfoFieldReader<Artist>(NameProperty)) }
             });
 
-            var selectedItemData = await selector.SelectFieldsOnlyAsync(artists.AsQueryable(), ItemQueryHelper.DefaultForEachAsync);
+            var selectedItemData = await selector.SelectFieldsOnlyAsync(artists.AsQueryable(), new MemoryAsyncQueryer());
             var firstSelection = selectedItemData.First();
 
             Assert.Equal("replaced", firstSelection["name"]);

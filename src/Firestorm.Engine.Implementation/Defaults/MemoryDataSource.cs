@@ -6,21 +6,9 @@ using Firestorm.Data;
 
 namespace Firestorm.Engine.Defaults
 {
-    public class MemoryDataSource : IDiscoverableDataSource, IEnumerable<IList>
+    public class MemoryDataSource : IDataSource, IEnumerable<IList>
     {
         private readonly ConcurrentDictionary<Type, IList> _lists = new ConcurrentDictionary<Type, IList>();
-
-        public IDataTransaction CreateTransaction()
-        {
-            return new VoidTransaction();
-        }
-
-        public IEngineRepository<TItem> GetRepository<TItem>(IDataTransaction transaction)
-            where TItem : class, new()
-        {
-            IList<TItem> list = GetList<TItem>();
-            return new MemoryRepository<TItem>(list);
-        }
 
         public void Add<TItem>(IEnumerable<TItem> items)
         {
@@ -33,9 +21,21 @@ namespace Firestorm.Engine.Defaults
             return (List<TEntity>)_lists.GetOrAdd(typeof(TEntity), t => new List<TEntity>());
         }
 
-        public IEnumerable<Type> FindRepositoryTypes()
+        public IEnumerable<Type> FindEntityTypes()
         {
             return _lists.Keys;
+        }
+
+        public IDataContext<TEntity> CreateContext<TEntity>() where TEntity : class, new()
+        {
+            IList<TEntity> list = GetList<TEntity>();
+            
+            return new DataContext<TEntity>
+            {
+                Transaction = new VoidTransaction(),
+                Repository = new MemoryRepository<TEntity>(list),
+                AsyncQueryer = new MemoryAsyncQueryer()
+            };
         }
 
         IEnumerator<IList> IEnumerable<IList>.GetEnumerator()

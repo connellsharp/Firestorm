@@ -14,11 +14,6 @@ namespace Firestorm.Stems.Roots.Derive
     {
         public abstract IQueryable<TItem> GetAllItems();
 
-        public virtual Task ForEachAsync<T>(IQueryable<T> query, Action<T> action)
-        {
-            return ItemQueryHelper.DefaultForEachAsync(query, action);
-        }
-
         public abstract TItem CreateAndAttachItem();
 
         public abstract void MarkUpdated(TItem item);
@@ -38,6 +33,10 @@ namespace Firestorm.Stems.Roots.Derive
         internal Root()
         { }
         
+        public virtual Task ForEachAsync<T>(IQueryable<T> query, Action<T> action)
+        {
+            return ItemQueryHelper.DefaultForEachAsync(query, action);
+        }
 
         public abstract Type StartStemType { get; }
 

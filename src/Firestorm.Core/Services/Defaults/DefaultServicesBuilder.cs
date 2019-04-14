@@ -1,39 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
 using Reflectious;
 
 namespace Firestorm
 {
     /// <summary>
-    /// A lightweight <see cref="IFirestormServicesBuilder"/>.
+    /// A lightweight <see cref="IServicesBuilder"/>.
     /// Used for testing and defaults. A real application would usually use their own DI container.
     /// </summary>
-    public class DefaultServicesBuilder : IFirestormServicesBuilder
+    public class DefaultServicesBuilder : IServicesBuilder
     {
-        private readonly IDictionary<Type, IList<Func<IServiceProvider, object>>> _dictionary;
+        private readonly ServiceFactoryDictionary _dictionary;
 
         public DefaultServicesBuilder()
         {
-            _dictionary = new Dictionary<Type, IList<Func<IServiceProvider, object>>>();
+            _dictionary = new ServiceFactoryDictionary();
         }
 
-        public IFirestormServicesBuilder Add<TService>(Func<IServiceProvider, TService> implementationFactory) 
+        public IServicesBuilder Add<TService>(Func<IServiceProvider, TService> implementationFactory) 
             where TService : class
         {
-            GetFuncs(typeof(TService)).Add(implementationFactory);
+            _dictionary.AddFactory(typeof(TService), implementationFactory);
             return this;
         }
 
-        public IFirestormServicesBuilder Add<TService>(TService implementationInstance) 
+        public IServicesBuilder Add<TService>(TService implementationInstance) 
             where TService : class
         {
-            GetFuncs(typeof(TService)).Add(sp => implementationInstance);
+            _dictionary.AddFactory(typeof(TService), sp => implementationInstance);
             return this;
         }
 
-        public IFirestormServicesBuilder Add(Type abstractType, Type implementationType)
+        public IServicesBuilder Add(Type abstractType, Type implementationType)
         {
-            GetFuncs(abstractType).Add(sp => CreateService(sp, implementationType));
+            _dictionary.AddFactory(abstractType, sp => CreateService(sp, implementationType));
             return this;
         }
 
@@ -43,13 +42,6 @@ namespace Firestorm
                 .GetConstructor()
                 .FromServiceProvider(serviceProvider)
                 .Invoke();
-        }
-
-        private IList<Func<IServiceProvider, object>> GetFuncs(Type type)
-        {
-            return _dictionary.ContainsKey(type)
-                ? _dictionary[type]
-                : _dictionary[type] = new List<Func<IServiceProvider, object>>();
         }
 
         public IServiceProvider Build()

@@ -16,7 +16,7 @@ namespace Firestorm.AspNetWebApi2
         /// <returns>A reference to the mapped route.</returns>
         /// <param name="httpConfig">The Web API configuration.</param>
         /// <param name="configureAction">The Firestorm configuration.</param>
-        public static void SetupFirestorm(this HttpConfiguration httpConfig, Action<IFirestormServicesBuilder> configureAction)
+        public static void SetupFirestorm(this HttpConfiguration httpConfig, Action<IServicesBuilder> configureAction)
         {
             SetupFirestorm(httpConfig, null, configureAction);
         }
@@ -26,7 +26,7 @@ namespace Firestorm.AspNetWebApi2
         /// <param name="httpConfig">The Web API configuration.</param>
         /// <param name="directory">The starting directory of the REST API.</param>
         /// <param name="configureAction">The Firestorm configuration.</param>
-        public static void SetupFirestorm(this HttpConfiguration httpConfig, string directory, Action<IFirestormServicesBuilder> configureAction)
+        public static void SetupFirestorm(this HttpConfiguration httpConfig, string directory, Action<IServicesBuilder> configureAction)
         {
             httpConfig.Routes.MapFirestorm(directory, configureAction);
 
@@ -51,7 +51,7 @@ namespace Firestorm.AspNetWebApi2
         /// <param name="routes">A collection of routes for the application.</param>
         /// <param name="directory">The starting directory of the REST API.</param>
         /// <param name="configureAction">The Firestorm configuration.</param>
-        public static IHttpRoute MapFirestorm(this HttpRouteCollection routes, string directory, Action<IFirestormServicesBuilder> configureAction)
+        public static IHttpRoute MapFirestorm(this HttpRouteCollection routes, string directory, Action<IServicesBuilder> configureAction)
         {
             var servicesBuilder = new DefaultServicesBuilder();
             configureAction(servicesBuilder);

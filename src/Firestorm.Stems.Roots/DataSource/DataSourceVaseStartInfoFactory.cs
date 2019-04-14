@@ -20,13 +20,14 @@ namespace Firestorm.Stems.Roots.DataSource
             _rootBehavior = rootBehavior;
         }
 
-        public IEnumerable<Type> GetStemTypes(IStemsCoreServices configuration)
+        public IEnumerable<Type> GetStemTypes(IStemsCoreServices services) // TODO do we need param?
         {
             _stemTypeDictionary = new SuffixedNamedTypeDictionary("Stem");
 
             var validator = new AggregateTypeValidator(
                 GetAttributedTypeValidator(),
-                new DerivedTypeValidator(typeof(Stem))
+                new DerivedTypeValidator(typeof(Stem)),
+                new SuffixValidator("Stem")
             );
 
             var populator = new TypeDictionaryPopulator(_stemTypeDictionary, validator);

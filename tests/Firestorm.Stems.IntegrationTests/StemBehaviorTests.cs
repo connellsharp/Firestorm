@@ -2,6 +2,7 @@ using System;
 using Firestorm.Data;
 using Firestorm.Stems.Analysis;
 using Firestorm.Stems.Roots;
+using Firestorm.Stems.Roots.Combined;
 using Firestorm.Stems.Roots.Derive;
 using Firestorm.Testing.Http;
 using Firestorm.Testing.Models;
@@ -15,17 +16,15 @@ namespace Firestorm.Stems.IntegrationTests
         public void DisposeEndpointContextDisposesStem()
         {
             var endpointContext = new TestRequestContext();
-            var stemStartResources = new StemsStartResourceFactory
+            
+            var stemsServices = new StemsServices
             {
-                RootResourceFactory = new DerivedRootsResourceFactory
-                {
-                    RootTypeGetter = new ManualTypeGetter(typeof(DisposableRoot))
-                },
-                StemsServices = new StemsServices
-                {
-                    ServiceGroup = new DefaultServiceGroup()
-                }
+                ServiceGroup = new DefaultServiceGroup()
             };
+
+            var startInfoFactory = new DerivedRootStartInfoFactory(new ManualTypeGetter(typeof(DisposableRoot)));
+            
+            var stemStartResources = new StemsStartResourceFactory(stemsServices, startInfoFactory);
             
             var directory = (IRestDirectory)stemStartResources.GetStartResource(endpointContext);
             var collection = directory.GetChild("Disposable");

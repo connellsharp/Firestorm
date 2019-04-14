@@ -15,8 +15,8 @@ namespace Firestorm.Engine.Deferring
         private readonly IEngineRepository<TItem> _repository;
         private readonly IIdentifierInfo<TItem> _identifierInfo;
 
-        public IdentifiedItem(string identifier, IEngineRepository<TItem> repository, IIdentifierInfo<TItem> identifierInfo)
-            : base(identifier, repository)
+        public IdentifiedItem(string identifier, IEngineRepository<TItem> repository, IIdentifierInfo<TItem> identifierInfo, IAsyncQueryer asyncQueryer)
+            : base(identifier, asyncQueryer)
         {
             _repository = repository;
             _identifierInfo = identifierInfo;

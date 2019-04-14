@@ -1,4 +1,7 @@
-﻿namespace Firestorm.Data
+﻿using System;
+using System.Collections.Generic;
+
+namespace Firestorm.Data
 {
     /// <summary>
     /// Provides a simple source interface to create data transactions and get repositories used in the Engine.
@@ -8,9 +11,15 @@
     /// </remarks>
     public interface IDataSource
     {
-        IDataTransaction CreateTransaction();
-
-        IEngineRepository<TEntity> GetRepository<TEntity>(IDataTransaction transaction)
+        /// <summary>
+        /// Finds all entity types that can be used in <see cref="CreateContext{TEntity}"/>.
+        /// </summary>
+        IEnumerable<Type> FindEntityTypes();
+        
+        /// <summary>
+        /// Creates a new <see cref="IDataContext{TEntity}"/> for a new request.
+        /// </summary>
+        IDataContext<TEntity> CreateContext<TEntity>()
             where TEntity : class, new();
     }
 }

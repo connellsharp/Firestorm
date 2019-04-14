@@ -16,7 +16,7 @@ namespace Firestorm.Engine.Queryable
         private readonly IAuthorizationChecker<TItem> _authChecker;
 
         internal QueryableFieldSetter([NotNull] IEngineContext<TItem> context)
-            : this(context.Transaction, context.Fields, context.AuthorizationChecker)
+            : this(context.Data.Transaction, context.Fields, context.AuthorizationChecker)
         { }
 
         public QueryableFieldSetter([NotNull] IDataTransaction dataTransaction, [NotNull] IFieldProvider<TItem> fieldProvider, [NotNull] IAuthorizationChecker<TItem> authChecker)

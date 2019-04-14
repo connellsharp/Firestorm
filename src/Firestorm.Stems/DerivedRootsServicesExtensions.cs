@@ -12,7 +12,7 @@ namespace Firestorm.Stems
         /// <summary>
         /// Configures Firestorm Stems using Stem types from the application's entry assembly.
         /// </summary>
-        public static IFirestormServicesBuilder AddRoots(this IFirestormServicesBuilder builder)
+        public static IServicesBuilder AddRoots(this IServicesBuilder builder)
         {
             return builder.AddRoots(Assembly.GetCallingAssembly());
         }
@@ -20,7 +20,7 @@ namespace Firestorm.Stems
         /// <summary>
         /// Configures Firestorm Stems using Stem types from the given <see cref="Assembly"/>.
         /// </summary>
-        public static IFirestormServicesBuilder AddRoots(this IFirestormServicesBuilder builder, Assembly assembly)
+        public static IServicesBuilder AddRoots(this IServicesBuilder builder, Assembly assembly)
         {
             return builder.AddRoots(assembly, assembly.GetName().Name);
         }
@@ -28,24 +28,9 @@ namespace Firestorm.Stems
         /// <summary>
         /// Configures Firestorm Stems using Stem types from the given <see cref="Assembly"/> within the given <see cref="baseNamespace"/>.
         /// </summary>
-        public static IFirestormServicesBuilder AddRoots(this IFirestormServicesBuilder builder, Assembly assembly, string baseNamespace)
+        public static IServicesBuilder AddRoots(this IServicesBuilder builder, Assembly assembly, string baseNamespace)
         {
-            builder.AddDerivedRoots();       
-
             builder.Add(new AxisTypesLocation<Root>(assembly, baseNamespace));
-            return builder;
-        }
-
-        /// <summary>
-        /// Configures the <see cref="DerivedRootsResourceFactory"/>.
-        /// </summary>
-        private static IFirestormServicesBuilder AddDerivedRoots(this IFirestormServicesBuilder builder)
-        {
-            builder.Add<IRootResourceFactory>(sp => new DerivedRootsResourceFactory
-            {
-                RootTypeGetter = sp.GetService<AxisTypesLocation<Root>>().GetTypeGetter()
-            });
-            
             return builder;
         }
     }

@@ -8,16 +8,16 @@ using Firestorm.Features;
 
 namespace Firestorm.Endpoints
 {
-    internal class DefaultEndpointFeature : IFeature<EndpointServices>
+    internal class DefaultEndpointCustomization : ICustomization<EndpointServices>
     {
         private readonly EndpointConfiguration _configuration;
 
-        public DefaultEndpointFeature(EndpointConfiguration configuration)
+        public DefaultEndpointCustomization(EndpointConfiguration configuration)
         {
             _configuration = configuration;
         }
 
-        public void AddTo(EndpointServices services)
+        public EndpointServices Apply(EndpointServices services)
         {
             services.Modifiers = new DefaultResponseModifiers(_configuration.Response);
             services.QueryCreator = new DefaultQueryCreator(_configuration.QueryString);
@@ -27,6 +27,8 @@ namespace Firestorm.Endpoints
             services.Strategies = new CommandStrategySets();
             services.EndpointResolver = new EndpointResolver();
             services.UrlHelper = new DefaultUrlHelper(_configuration.Url);
+
+            return services;
         }
     }
 }

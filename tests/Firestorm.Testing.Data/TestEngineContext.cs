@@ -14,14 +14,16 @@ namespace Firestorm.Testing.Data
     {
         public TestEngineContext(IDataTransaction transaction, IEngineRepository<Artist> repository)
         {
-            Transaction = transaction;
-            Repository = repository;
+            Data = new DataContext<Artist>
+            {
+                Transaction = transaction,
+                Repository = repository,
+                AsyncQueryer = new MemoryAsyncQueryer()
+            };
         }
 
-        public IDataTransaction Transaction { get; }
-
-        public IEngineRepository<Artist> Repository { get; }
-
+        public IDataContext<Artist> Data { get; }
+        
         public IIdentifierProvider<Artist> Identifiers { get; } = new SingleIdentifierProvider<Artist>(new ExpressionIdentifierInfo<Artist,int>(a => a.ID));
 
         public IFieldProvider<Artist> Fields { get; } = new ExpressionListFieldProvider<Artist>

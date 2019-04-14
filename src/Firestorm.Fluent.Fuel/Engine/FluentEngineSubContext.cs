@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Firestorm.Data;
 using Firestorm.Engine;
 using Firestorm.Engine.Additives.Authorization;
 using Firestorm.Engine.Identifiers;
+using Firestorm.Engine.Subs;
 using Firestorm.Engine.Subs.Context;
+using Firestorm.Engine.Subs.Wrapping;
 using Firestorm.Fluent.Fuel.Models;
 
 namespace Firestorm.Fluent.Fuel.Engine
@@ -11,12 +12,16 @@ namespace Firestorm.Fluent.Fuel.Engine
     internal class FluentEngineSubContext<TItem> : IEngineSubContext<TItem>
         where TItem : class, new()
     {
+        private readonly IDataChangeEvents<TItem> _events;
+
         internal FluentEngineSubContext(ApiItemModel<TItem> itemModel)
         {
             Identifiers = new FluentIdentifierProvider<TItem>(itemModel.Identifiers);
             Fields = new FluentFieldProvider<TItem>(itemModel.Fields);
             
             AuthorizationChecker = new AllowAllAuthorizationChecker<TItem>(); // TODO
+
+            _events = itemModel.Events;
         }
 
         public IIdentifierProvider<TItem> Identifiers { get; }
@@ -24,5 +29,11 @@ namespace Firestorm.Fluent.Fuel.Engine
         public ILocatableFieldProvider<TItem> Fields { get; }
 
         public IAuthorizationChecker<TItem> AuthorizationChecker { get; }
+        
+        public IEngineContext<TItem> CreateFullContext(IDataContext<TItem> dataContext)
+        {
+            var eventDataContext = new EventTriggeringDataContext<TItem>(dataContext, _events);
+            return new FullEngineContext<TItem>(eventDataContext, this);
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Firestorm.Engine.Additives.Identifiers;
+using Firestorm.Engine.Defaults;
 using Firestorm.Engine.Deferring;
 using Firestorm.Engine.Tests.Models;
 using Firestorm.Testing.Models;
@@ -27,7 +28,7 @@ namespace Firestorm.Engine.Tests
             Artist artist = repo.GetAllItems().FirstOrDefault(a => a.ID == testID);
             Assert.Null(artist);
 
-            var postedNewItem = new IdentifiedItem<Artist>(testID.ToString(), repo, new IdConventionIdentifierInfo<Artist>());
+            var postedNewItem = new IdentifiedItem<Artist>(testID.ToString(), repo, new IdConventionIdentifierInfo<Artist>(), new MemoryAsyncQueryer());
             await postedNewItem.LoadAsync();
 
             Assert.Equal(LazyState.Created, postedNewItem.LazyState);
@@ -43,7 +44,7 @@ namespace Firestorm.Engine.Tests
             Artist artist = repo.GetAllItems().FirstOrDefault(a => a.ID == testID);
             Assert.NotNull(artist);
 
-            var postedNewItem = new IdentifiedItem<Artist>(testID.ToString(), repo, new IdConventionIdentifierInfo<Artist>());
+            var postedNewItem = new IdentifiedItem<Artist>(testID.ToString(), repo, new IdConventionIdentifierInfo<Artist>(), new MemoryAsyncQueryer());
             await postedNewItem.LoadAsync();
 
             Assert.Equal(LazyState.LoadedItem, postedNewItem.LazyState);

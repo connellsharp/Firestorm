@@ -26,7 +26,7 @@ namespace Firestorm.Engine
 
         public async Task<RestDictionaryData> QueryDataAsync(IRestCollectionQuery query)
         {
-            await _context.Repository.InitializeAsync();
+            await _context.Data.Repository.InitializeAsync();
 
             var queryBuilder = new ContextQueryBuilder<TItem>(_context, query);
             IQueryable<TItem> items = queryBuilder.BuildQueryable();
@@ -38,7 +38,7 @@ namespace Firestorm.Engine
             readers.Add(IDENTIFIER_FIELD_NAME, new IdentifierFieldReader<TItem>(_namedReferenceInfo));
             var selector = new QueryableFieldSelector<TItem>(readers);
 
-            QueriedDataIterator queriedData = await selector.SelectFieldsOnlyAsync(items, _context.Repository.ForEachAsync);
+            QueriedDataIterator queriedData = await selector.SelectFieldsOnlyAsync(items, _context.Data.AsyncQueryer);
             PageDetails pageDetails = queryBuilder.GetPageDetails(queriedData);
 
             var dictionaryData = GetKeys(queriedData).ToDictionary(k => k.Key, v => (object)v.Value);
@@ -58,7 +58,7 @@ namespace Firestorm.Engine
 
         public IRestItem GetItem(string identifier)
         {
-            _context.Transaction.StartTransaction();
+            _context.Data.Transaction.StartTransaction();
 
             // create item using only the identifier info given to the dictionary.
             IDeferredItem<TItem> item = EngineIdentiferUtility.GetIdentifiedItem(_context, _namedReferenceInfo, identifier);

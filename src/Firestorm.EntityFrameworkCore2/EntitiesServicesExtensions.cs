@@ -9,7 +9,7 @@ namespace Firestorm.EntityFrameworkCore2
         /// <summary>
         /// Configures a Firestorm Data source for Entity Framework Core.
         /// </summary>
-        public static IFirestormServicesBuilder AddEntityFramework<TDbContext>(this IFirestormServicesBuilder builder)
+        public static IServicesBuilder AddEntityFramework<TDbContext>(this IServicesBuilder builder)
             where TDbContext : DbContext
         {
             return builder.AddEntityFramework<TDbContext>(new FirestormEntityOptions());
@@ -18,7 +18,7 @@ namespace Firestorm.EntityFrameworkCore2
         /// <summary>
         /// Configures a Firestorm Data source for Entity Framework Core.
         /// </summary>
-        public static IFirestormServicesBuilder AddEntityFramework<TDbContext>(this IFirestormServicesBuilder builder, Action<FirestormEntityOptions> configureAction)
+        public static IServicesBuilder AddEntityFramework<TDbContext>(this IServicesBuilder builder, Action<FirestormEntityOptions> configureAction)
             where TDbContext : DbContext
         {
             var options = new FirestormEntityOptions();
@@ -29,7 +29,7 @@ namespace Firestorm.EntityFrameworkCore2
         /// <summary>
         /// Configures a Firestorm Data source for Entity Framework Core.
         /// </summary>
-        public static IFirestormServicesBuilder AddEntityFramework<TDbContext>(this IFirestormServicesBuilder builder, FirestormEntityOptions options)
+        public static IServicesBuilder AddEntityFramework<TDbContext>(this IServicesBuilder builder, FirestormEntityOptions options)
             where TDbContext : DbContext
         {
             builder.AddDataSource(sp =>

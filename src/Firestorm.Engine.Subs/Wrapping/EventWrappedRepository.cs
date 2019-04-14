@@ -23,11 +23,6 @@ namespace Firestorm.Engine.Subs.Wrapping
             _savableItems = new List<TItem>();
         }
 
-        public Task ForEachAsync<T>(IQueryable<T> query, Action<T> action)
-        {
-            return _repository.ForEachAsync(query, action);
-        }
-
         public Task InitializeAsync()
         {
             return _repository.InitializeAsync();

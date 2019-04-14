@@ -7,19 +7,16 @@ namespace Firestorm.Fluent
 {
     internal class DataSourceTypeFinder : IItemTypeFinder
     {
-        private readonly IDiscoverableDataSource _discoverableDataSource;
+        private readonly IDataSource _dataSource;
 
         public DataSourceTypeFinder([NotNull] IDataSource dataSource)
         {
-            if (!(dataSource is IDiscoverableDataSource discoverableDataSource))
-                throw new ArgumentException("Data source cannot automatically find the item types.", nameof(dataSource));
-            
-            _discoverableDataSource = discoverableDataSource;
+            _dataSource = dataSource;
         }
 
         public IEnumerable<Type> FindItemTypes()
         {
-            return _discoverableDataSource.FindRepositoryTypes();
+            return _dataSource.FindEntityTypes();
         }
     }
 }

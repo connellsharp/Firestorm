@@ -3,8 +3,8 @@ using System.Reflection;
 using Firestorm.Data;
 using Firestorm.Features;
 using Firestorm.Host;
-using Firestorm.Stems.AutoMap;
 using Firestorm.Stems.Roots;
+using Firestorm.Stems.Roots.Combined;
 using Firestorm.Stems.Roots.DataSource;
 using Firestorm.Stems.Roots.Derive;
 
@@ -15,7 +15,7 @@ namespace Firestorm.Stems
         /// <summary>
         /// Configures Firestorm Stems using Stem types from the application's entry assembly.
         /// </summary>
-        public static IFirestormServicesBuilder AddStems(this IFirestormServicesBuilder builder)
+        public static IServicesBuilder AddStems(this IServicesBuilder builder)
         {
             return builder.AddStems(Assembly.GetCallingAssembly());
         }
@@ -23,7 +23,7 @@ namespace Firestorm.Stems
         /// <summary>
         /// Configures Firestorm Stems using Stem types from the given <see cref="Assembly"/>.
         /// </summary>
-        public static IFirestormServicesBuilder AddStems(this IFirestormServicesBuilder builder, Assembly assembly)
+        public static IServicesBuilder AddStems(this IServicesBuilder builder, Assembly assembly)
         {
             return builder.AddStems(assembly, assembly.GetName().Name);
         }
@@ -31,41 +31,49 @@ namespace Firestorm.Stems
         /// <summary>
         /// Configures Firestorm Stems using Stem types from the given <see cref="Assembly"/> within the given <see cref="baseNamespace"/>.
         /// </summary>
-        public static IFirestormServicesBuilder AddStems(this IFirestormServicesBuilder builder, Assembly assembly, string baseNamespace)
+        public static IServicesBuilder AddStems(this IServicesBuilder builder, Assembly assembly, string baseNamespace)
         {
-            builder.EnableFeatures<StemsServices>()
-                .AddFeature<StemsServices, DefaultStemsFeature>();
-            
-            builder.AddStartResourceFactory(sp => new StemsStartResourceFactory
+            return builder.AddStems(new StemsConfiguration
             {
-                StemsServices = sp.GetService<StemsServices>(),
-                RootResourceFactory = CreateRootResourceFactory(sp)
+                Assembly = assembly,
+                BaseNamespace = baseNamespace
             });
+        }
 
-            builder.Add(new AxisTypesLocation<Stem>(assembly, baseNamespace));
+        /// <summary>
+        /// Configures Firestorm Stems using the given <see cref="StemsConfiguration"/>.
+        /// </summary>
+        public static IServicesBuilder AddStems(this IServicesBuilder builder, StemsConfiguration configuration)
+        {
+            builder.AddCustomizable<StemsServices>()
+                .AddCustomization<StemsServices, DefaultStemsCustomization>();
+            
+            builder.Add<IRootStartInfoFactory>(CreateRootResourceFactory);
+            builder.Add(new AxisTypesLocation<Stem>(configuration.Assembly, configuration.BaseNamespace));
+            
+            builder.AddStartResourceFactory(sp => new StemsStartResourceFactory(sp.GetService<StemsServices>(), sp.GetService<IRootStartInfoFactory>()));
 
             return builder;
         }
 
-        private static IRootResourceFactory CreateRootResourceFactory(IServiceProvider sp)
+        private static IRootStartInfoFactory CreateRootResourceFactory(IServiceProvider sp)
         {
             var dataSource = sp.GetService<IDataSource>();
             if (dataSource != null)
             {
-                return new DataSourceRootResourceFactory
-                {
-                    StemTypeGetter = sp.GetService<ITypeGetter>()
-                                  ?? sp.GetService<AxisTypesLocation<Stem>>().GetTypeGetter(),
-                    DataSource = dataSource,
-                    RootBehavior = DataSourceRootAttributeBehavior.UseAllStemsExceptDisallowed // TODO support option
-                };
+                var typeGetter = sp.GetService<ITypeGetter>()
+                                 ?? sp.GetService<AxisTypesLocation<Stem>>().GetTypeGetter();
+
+                var rootBehaviour = DataSourceRootAttributeBehavior.UseAllStemsExceptDisallowed; // TODO support option
+                
+                return new DataSourceVaseStartInfoFactory(dataSource, typeGetter, rootBehaviour);
             }
             else
             {
-                return new DerivedRootsResourceFactory
-                {
-                    RootTypeGetter = sp.GetService<AxisTypesLocation<Root>>().GetTypeGetter()
-                };
+                ITypeGetter rootTypeGetter = sp.GetService<AxisTypesLocation<Root>>()?.GetTypeGetter() ??
+                                             sp.GetService<AxisTypesLocation<Stem>>().GetTypeGetter();
+
+                return new DerivedRootStartInfoFactory(rootTypeGetter);
             }
         }
     }

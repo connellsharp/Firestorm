@@ -13,6 +13,7 @@ namespace Firestorm.Engine.Defaults
         where TItem : class
     {
         public InjectedEngineContext([NotNull] IDataTransaction transaction, [NotNull] IEngineRepository<TItem> repository,
+            [NotNull] IAsyncQueryer asyncQueryer,
             [NotNull] IIdentifierProvider<TItem> identifiers, [NotNull] IFieldProvider<TItem> fields,
             [NotNull] IAuthorizationChecker<TItem> authorizationChecker)
         {
@@ -20,17 +21,20 @@ namespace Firestorm.Engine.Defaults
             if (fields == null) throw new ArgumentNullException(nameof(fields));
             if (authorizationChecker == null) throw new ArgumentNullException(nameof(authorizationChecker));
 
-            Repository = repository;
+            Data = new DataContext<TItem>
+            {
+                Transaction = transaction,
+                Repository = repository,
+                AsyncQueryer = asyncQueryer
+            };
+            
             Identifiers = identifiers;
             Fields = fields;
             AuthorizationChecker = authorizationChecker;
-            Transaction = transaction;
         }
 
-        public IDataTransaction Transaction { get; }
-
-        public IEngineRepository<TItem> Repository { get; }
-
+        public IDataContext<TItem> Data { get; }
+        
         public IIdentifierProvider<TItem> Identifiers { get; }
 
         public IFieldProvider<TItem> Fields { get; }

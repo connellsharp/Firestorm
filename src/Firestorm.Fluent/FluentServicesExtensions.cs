@@ -9,7 +9,7 @@ namespace Firestorm.Fluent
         /// <summary>
         /// Configures Firestorm Fluent API using the given context type.
         /// </summary>
-        public static IFirestormServicesBuilder AddFluent<TApiContext>(this IFirestormServicesBuilder builder)
+        public static IServicesBuilder AddFluent<TApiContext>(this IServicesBuilder builder)
             where TApiContext : ApiContext, new()
         {
             var context = new TApiContext();
@@ -19,7 +19,7 @@ namespace Firestorm.Fluent
         /// <summary>
         /// Configures Firestorm Fluent API using a <see cref="buildAction"/> delegate.
         /// </summary>
-        public static IFirestormServicesBuilder AddFluent(this IFirestormServicesBuilder builder, Action<IApiBuilder> buildAction)
+        public static IServicesBuilder AddFluent(this IServicesBuilder builder, Action<IApiBuilder> buildAction)
         {
             var context = new DelegateApiContext(buildAction);
             return builder.AddFluent(context);
@@ -28,7 +28,7 @@ namespace Firestorm.Fluent
         /// <summary>
         /// Configures Firestorm Fluent API using the registered service for <see cref="IApiContext"/>.
         /// </summary>
-        public static IFirestormServicesBuilder AddFluent(this IFirestormServicesBuilder builder)
+        public static IServicesBuilder AddFluent(this IServicesBuilder builder)
         {
             builder.AddStartResourceFactory(sp => new FluentStartResourceFactory
             {
@@ -42,7 +42,7 @@ namespace Firestorm.Fluent
         /// <summary>
         /// Configures Firestorm Fluent API by automatically finding the root item types and automatically configuring them.
         /// </summary>
-        public static IFirestormServicesBuilder AddFluent(this IFirestormServicesBuilder builder, AutoConfiguration configuration)
+        public static IServicesBuilder AddFluent(this IServicesBuilder builder, AutoConfiguration configuration)
         {
             builder.AddDataSourceTypeFinder();
             
@@ -58,7 +58,7 @@ namespace Firestorm.Fluent
         /// <summary>
         /// Configures Firestorm Fluent API using a <see cref="apiContext"/>.
         /// </summary>
-        public static IFirestormServicesBuilder AddFluent(this IFirestormServicesBuilder builder, IApiContext apiContext)
+        public static IServicesBuilder AddFluent(this IServicesBuilder builder, IApiContext apiContext)
         {
             builder.AddStartResourceFactory(sp => new FluentStartResourceFactory
             {
